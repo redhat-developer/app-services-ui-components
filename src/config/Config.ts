@@ -18,7 +18,7 @@ export type Config = {
         clientId: string,
         realm: string
     }
-    kafka: {}
+    kafka: undefined,
     federatedModules: {
         kafka: FederatedModuleConfig
         kas: FederatedModuleConfig

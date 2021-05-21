@@ -10,7 +10,7 @@
     "prepublish": "npm run clean && npm run package",
     "clean": "rimraf dist",
     "lint": "npm run eslint",
-    "eslint": "eslint --ext .tsx,.js ./src/"
+    "eslint": "eslint --ext .tsx,.js,.ts ./src/"
   },
   "repository": {
     "type": "git",
