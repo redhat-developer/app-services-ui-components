@@ -1,26 +1,27 @@
-import React from "react";
+import React, { useContext } from "react";
 
 export type Config = {
     serviceDown: boolean
-    resources: {
+    guides: {
         showDrafts: boolean
     }
-    controlPlane: {
-        serviceApiBasePath: string,
-        amsBasePath: string,
+    ams: {
+        apiBasePath: string,
         eventCode: string,
         siteCode: string
     }
-    dataPlane: {
-        keycloak: {
-            authServerUrl: string,
-            clientId: string,
-            realm: string
-        }
+    kas: {
+        apiBasePath: string,
     }
+    masSso: {
+        authServerUrl: string,
+        clientId: string,
+        realm: string
+    }
+    kafka: {}
     federatedModules: {
-        strimziUI: FederatedModuleConfig
-        mkUiFrontend: FederatedModuleConfig
+        kafka: FederatedModuleConfig
+        kas: FederatedModuleConfig
         guides: FederatedModuleConfig
     }
 };
@@ -31,4 +32,6 @@ export type FederatedModuleConfig = {
     entryPoint: string
 }
 
-export const ConfigContext = React.createContext<Config | undefined>(undefined);
+export const ConfigContext: React.Context<Config | undefined> = React.createContext<Config | undefined>(undefined);
+
+export const useConfig = (): Config => useContext(ConfigContext);

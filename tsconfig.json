@@ -17,7 +17,8 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "importHelpers": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "declaration": true
   },
   "include": [
     "src/**/*.ts",

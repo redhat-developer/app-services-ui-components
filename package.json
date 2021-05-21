@@ -1,12 +1,13 @@
 {
-  "name": "ui-shared",
-  "version": "0.0.1",
+  "name": "@bf2/ui-shared",
+  "version": "0.0.13",
   "description": "UI Shared contains a number of type definitions for shared data structures for the UI.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsc",
-    "package": "npm run build && copyfiles package.json dist",
-    "publish": "npm run clean && npm run package && npm publish --access public dist",
+    "package": "npm run build",
+    "prepublish": "npm run clean && npm run package",
     "clean": "rimraf dist"
   },
   "repository": {
@@ -14,8 +15,7 @@
     "url": "git+https://github.com/bf2fc6cc711aee1a0c2a/ui-shared.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/bf2fc6cc711aee1a0c2a/ui-shared/issues"
   },

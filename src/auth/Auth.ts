@@ -1,7 +1,18 @@
-import React from "react";
+import React, {useContext} from "react";
 
 export type Auth = {
-    getToken: () => Promise<string>
+    getUsername: () => Promise<string>
+    kas: {
+        getToken: () => Promise<string>
+    }
+    ams: {
+        getToken: () => Promise<string>
+    }
+    kafka: {
+        getToken: () => Promise<string>
+    }
 }
 
-export const AuthContext = React.createContext<Auth | undefined>();
+export const AuthContext: React.Context<Auth | undefined> = React.createContext<Auth | undefined>(undefined);
+
+export const useAuth = (): Auth => useContext(AuthContext);
