@@ -9,7 +9,8 @@
     "package": "npm run build",
     "prepublish": "npm run clean && npm run package",
     "clean": "rimraf dist",
-    "lint": "npm run eslint"
+    "lint": "npm run eslint",
+    "eslint": "eslint --ext .tsx,.js ./src/"
   },
   "repository": {
     "type": "git",
