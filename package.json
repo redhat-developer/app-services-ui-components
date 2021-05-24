@@ -7,7 +7,7 @@
   "scripts": {
     "build": "tsc",
     "package": "npm run build",
-    "prepublish": "npm run clean && npm run package",
+    "prepare": "npm run clean && npm run package",
     "clean": "rimraf dist",
     "lint": "npm run eslint",
     "eslint": "eslint --ext .tsx,.js,.ts ./src/"
