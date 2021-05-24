@@ -29,7 +29,7 @@ export type Config = {
 
 export type FederatedModuleConfig = {
     basePath: string
-    entryPoint: string
+    fallbackBasePath: string
 }
 
 export const ConfigContext: React.Context<Config | undefined> = React.createContext<Config | undefined>(undefined);
