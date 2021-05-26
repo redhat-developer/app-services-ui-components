@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 export enum AlertVariant {
     success = 'success',
@@ -10,7 +10,9 @@ export enum AlertVariant {
 
 
 export type Alert = {
-    addAlert: (message: string, variant?: AlertVariant) => void
+    addAlert: (title: string, variant?: AlertVariant, message?: string | React.ReactElement,
+        dataTestId?: string,
+        skipAutoClose?: boolean) => void
 }
 
 export const AlertContext: React.Context<Alert | undefined> = React.createContext<Alert | undefined>(undefined);
