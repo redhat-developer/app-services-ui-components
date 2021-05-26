@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 /**
  * The AlertVariant corresponds to the Patternfly AlertVariant but is redeclared here to avoid a hard dependency.
@@ -17,10 +17,15 @@ export enum AlertVariant {
 export type Alert = {
     /**
      * addAlert allows an alert an alert to be added
-     * @param message the title of the message
+     * @param title the title of the alert   
      * @param variant the type of the alert
+     * @param message the title of the message
+     * @param dataTestId the data-testid attribute of the alert
+     * @param skipAutoClose the flag to skip auto close of the alert
      */
-    addAlert: (message: string, variant?: AlertVariant) => void
+    addAlert: (title: string, variant?: AlertVariant, message?: string | React.ReactElement,
+        dataTestId?: string,
+        skipAutoClose?: boolean) => void
 }
 
 /**
