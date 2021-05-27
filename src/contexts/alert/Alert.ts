@@ -11,21 +11,60 @@ export enum AlertVariant {
     default = 'default'
 }
 
+export type AlertProps = {
+    /**
+    * Flag to automatically call `onDismiss` after `dismissDelay` runs out.
+    */
+    autoDismiss?: boolean,
+    /**
+     * Flag to show/hide notification close button.
+     */
+    dismissable?: boolean,
+    /**
+     * Alert variant
+     */
+    variant: AlertVariant,
+    /**
+     * Alert title
+     */
+    title: string,
+    /**
+     * Alert description
+     */
+    description?: string | React.ReactElement,
+    /**
+     * Time period after which `onDismiss` is called.
+     */
+    dismissDelay?: number,
+    /**
+     * Unique request ID.
+     */
+    requestId?: string,
+    /**
+     * Unique sentry error ID.
+     */
+    sentryId?: string,
+    /**
+     * data-testid attribute
+     */
+    dataTestId?: string
+}
+
 /**
  * The Alert interface allows alerts to be added to the notification system
  */
 export type Alert = {
-    /**
-     * addAlert allows an alert an alert to be added
-     * @param title the title of the alert   
-     * @param variant the type of the alert
-     * @param message the title of the message
-     * @param dataTestId the data-testid attribute of the alert
-     * @param skipAutoClose the flag to skip auto close of the alert
-     */
-    addAlert: (title: string, variant?: AlertVariant, message?: string | React.ReactElement,
-        dataTestId?: string,
-        skipAutoClose?: boolean) => void
+    addAlert: ({
+        title,
+        variant,
+        description,
+        dataTestId,
+        autoDismiss,
+        dismissable,
+        dismissDelay,
+        requestId,
+        sentryId
+    }: AlertProps) => void
 }
 
 /**
