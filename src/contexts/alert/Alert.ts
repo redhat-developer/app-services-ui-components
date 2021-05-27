@@ -13,6 +13,10 @@ export enum AlertVariant {
 
 export type AlertProps = {
     /**
+     * Unique key
+     */
+    id?: string;
+    /**
     * Flag to automatically call `onDismiss` after `dismissDelay` runs out.
     */
     autoDismiss?: boolean,
@@ -55,6 +59,7 @@ export type AlertProps = {
  */
 export type Alert = {
     addAlert: ({
+        id,
         title,
         variant,
         description,
