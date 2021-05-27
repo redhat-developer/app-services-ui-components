@@ -2,7 +2,7 @@
   "name": "@bf2/ui-shared",
   "version": "0.0.13",
   "description": "UI Shared contains a number of type definitions for shared data structures for the UI.",
-  "main": "./dist/cjs/index.js ",
+  "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
   "files": [
