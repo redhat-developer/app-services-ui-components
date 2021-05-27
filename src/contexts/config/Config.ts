@@ -65,6 +65,10 @@ export type Config = {
      */
     kafka: undefined,
     /**
+     * sr provides configuration with the Service Registry instance
+     */
+    sr: undefined,
+    /**
      * federatedModules defines how we load all the federated modules in the UI
      */
     federatedModules: {
@@ -80,6 +84,10 @@ export type Config = {
          * guides defines how we load the guides
          */
         guides: FederatedModuleConfig
+        /**
+         * sr defines how we load the federated module(s)
+         */
+        sr: FederatedModuleConfig
     }
 };
 
