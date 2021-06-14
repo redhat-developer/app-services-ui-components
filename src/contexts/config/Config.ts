@@ -67,7 +67,12 @@ export type Config = {
     /**
      * sr provides configuration with the Service Registry instance
      */
-    sr: undefined,
+    srs: {
+        /**
+         * apiBasePath is the base path for accessing SRS Fleet Manager
+         */
+        apiBasePath: string,
+    },
     /**
      * federatedModules defines how we load all the federated modules in the UI
      */
@@ -87,7 +92,7 @@ export type Config = {
         /**
          * sr defines how we load the federated module(s)
          */
-        sr: FederatedModuleConfig
+        srs: FederatedModuleConfig
     }
 };
 
