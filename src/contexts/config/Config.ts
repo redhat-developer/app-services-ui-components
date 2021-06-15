@@ -67,6 +67,15 @@ export type Config = {
     /**
      * sr provides configuration with the Service Registry instance
      */
+    sr: {
+        /**
+         * apiBasePath is the base path for accessing service registry data plane
+         */
+        apiBasePath: string,
+    },
+    /**
+    * srs provides configuration with the Service Registry control plane
+    */
     srs: {
         /**
          * apiBasePath is the base path for accessing SRS Fleet Manager
@@ -91,6 +100,10 @@ export type Config = {
         guides: FederatedModuleConfig
         /**
          * sr defines how we load the federated module(s)
+         */
+        sr: FederatedModuleConfig
+        /**
+         * srs defines how we load the federated module(s)
          */
         srs: FederatedModuleConfig
     }
