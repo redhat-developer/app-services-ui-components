@@ -65,9 +65,9 @@ export type Config = {
      */
     kafka: undefined,
     /**
-     * apircurio_registry provides configuration with the Service Registry instance
+     * apicurio_registry provides configuration with the Service Registry instance
      */
-    apircurio_registry: {
+    apicurio_registry: {
         /**
          * apiBasePath is the base path for accessing service registry data plane
          */
@@ -99,9 +99,9 @@ export type Config = {
          */
         guides: FederatedModuleConfig
         /**
-         * apircurio_registry defines how we load the federated module(s)
+         * apicurio_registry defines how we load the federated module(s)
          */
-        apircurio_registry: FederatedModuleConfig
+        apicurio_registry: FederatedModuleConfig
         /**
          * srs defines how we load the federated module(s)
          */

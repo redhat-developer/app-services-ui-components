@@ -32,7 +32,7 @@ export type Auth = {
          */
         getToken: () => Promise<string>
     },
-    apircurio_registry: {
+    apicurio_registry: {
         /**
          * Get the token for accessing the service registry data plane
          */
