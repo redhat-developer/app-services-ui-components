@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 
 /**
  * The Auth object provides information about the authenticated user
@@ -23,6 +23,18 @@ export type Auth = {
     kafka: {
         /**
          * Get the token for access the Kafka instance
+         */
+        getToken: () => Promise<string>
+    }
+    srs: {
+        /**
+         * Get the token for accessing the SRS Fleet Manager
+         */
+        getToken: () => Promise<string>
+    },
+    apircurio_registry: {
+        /**
+         * Get the token for accessing the service registry data plane
          */
         getToken: () => Promise<string>
     }
