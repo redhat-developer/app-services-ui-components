@@ -82,6 +82,13 @@ export type Config = {
          */
         apiBasePath: string,
     },
+    cos: {
+        /**
+         * apiBasePath is the base path for accessing COS apis
+         */
+        apiBasePath: string,
+        configurators: Record<string, unknown>
+    },
     /**
      * federatedModules defines how we load all the federated modules in the UI
      */
@@ -106,6 +113,10 @@ export type Config = {
          * srs defines how we load the federated module(s)
          */
         srs: FederatedModuleConfig
+        /**
+         * cos defines how we load cos-ui
+         */
+        cos: FederatedModuleConfig
     }
 };
 
