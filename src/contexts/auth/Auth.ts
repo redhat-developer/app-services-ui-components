@@ -11,7 +11,7 @@ export type Auth = {
     /**
      * Get the is_org_admin of the authenticated user
      */
-    getIsOrgAdmin: () => Promise<boolean>
+    isOrgAdmin: () => Promise<boolean>
     kas: {
         /**
          * Get the token for accessing the KAS Fleet Manager
