@@ -8,6 +8,10 @@ export type Auth = {
      * Get the username of the authenticated user
      */
     getUsername: () => Promise<string>
+    /**
+     * Get the is_org_admin of the authenticated user
+     */
+    isOrgAdmin: () => Promise<boolean>
     kas: {
         /**
          * Get the token for accessing the KAS Fleet Manager
