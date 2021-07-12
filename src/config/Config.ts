@@ -8,7 +8,8 @@ export type Config = {
     ams: {
         apiBasePath: string,
         eventCode: string,
-        siteCode: string
+        siteCode: string,
+        quotaId: string
     }
     kas: {
         apiBasePath: string,
