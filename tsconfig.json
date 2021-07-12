@@ -2,8 +2,8 @@
   "compilerOptions": {
     "baseUrl": ".",
     "rootDir": "./src",
-    "outDir": "dist",
-    "module": "esnext",
+    "outDir": "dist/esm",
+    "module": "es2015",
     "target": "es5",
     "lib": ["es6", "dom"],
     "sourceMap": true,
@@ -18,7 +18,12 @@
     "strict": true,
     "importHelpers": true,
     "skipLibCheck": true,
-    "declaration": true
+    "declaration": true,
+    "declarationMap": true,
+    "isolatedModules": true,
+    "plugins": [
+      { "transform": "transformer-cjs-imports" }
+    ]
   },
   "include": [
     "src/**/*.ts",
