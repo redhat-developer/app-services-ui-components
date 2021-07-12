@@ -33,6 +33,10 @@ export type Config = {
          * siteCode is the "site code" we pass to the terms_review endpoint
          */
         siteCode: string
+        /**
+         * quotaId is the "quota id" we pass to the filter quota cost
+         */
+        quotaId: string
     }
     /**
      * kas provides configuration for our integration with the KAS Fleet Manager
