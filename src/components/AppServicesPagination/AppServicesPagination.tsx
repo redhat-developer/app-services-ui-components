@@ -8,7 +8,7 @@ import {
 
 export type PaginationProps = Omit<PFPaginationProps, "children" | "ref">;
 
-const MASPagination: FunctionComponent<PaginationProps> = ({
+const AppServicesPagination: FunctionComponent<PaginationProps> = ({
   page,
   perPage = 10,
   itemCount,
@@ -64,4 +64,4 @@ const MASPagination: FunctionComponent<PaginationProps> = ({
   );
 };
 
-export { MASPagination };
+export { AppServicesPagination };

@@ -48,19 +48,19 @@ export type Config = {
         apiBasePath: string,
     }
     /**
-     * masSSO provides configuration for our integration with MASSSO
+     * appServicesSSO provides configuration for our integration with AppServicesSSO
      */
-    masSso: {
+    appServicesSso: {
         /**
          * authServerUrl is the URL of the SSO server
          */
         authServerUrl: string,
         /**
-         * clientId is the OpenID Connect client ID the UI uses to talk to MASSSO
+         * clientId is the OpenID Connect client ID the UI uses to talk to AppServicesSSO
          */
         clientId: string,
         /**
-         * realm is the realm the service uses on MASSSO
+         * realm is the realm the service uses on AppServicesSSO
          */
         realm: string
     }

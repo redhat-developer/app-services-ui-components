@@ -1,4 +1,4 @@
-.mas--table-view__table {
+.appServices--table-view__table {
   --pf-c-table-row__item--m-selected--ZIndex: var(--pf-global--ZIndex--xs);
   --pf-c-table-row__item--m-selected--BoxShadow: var(
       --pf-global--BoxShadow--sm-top

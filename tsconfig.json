@@ -22,7 +22,7 @@
     "declarationMap": true,
     "isolatedModules": true,
     "paths": {
-      "@mas/*": ["src/*"]
+      "@appServices/*": ["src/*"]
     },
     "plugins": [
       { "transform": "transformer-cjs-imports" }

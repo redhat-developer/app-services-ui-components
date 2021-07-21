@@ -12,14 +12,14 @@ import {
 export type ToolbarItemProps = Omit<PFToolbarItemProps, "children"> & {
   item: React.ReactElement;
 };
-export type MASToolbarProps = {
+export type AppServicesToolbarProps = {
   toolbarProps: Omit<ToolbarProps, "children" | "ref">;
   toggleGroupProps?: Omit<ToolbarToggleGroupProps, "children">;
   toggleGroupItems?: any;
   toolbarItems?: ToolbarItemProps[];
 };
 
-const MASToolbar: React.FunctionComponent<MASToolbarProps> = ({
+const AppServicesToolbar: React.FunctionComponent<AppServicesToolbarProps> = ({
   toolbarProps,
   toggleGroupProps,
   toolbarItems,
@@ -53,7 +53,7 @@ const MASToolbar: React.FunctionComponent<MASToolbarProps> = ({
           )}
           {toolbarItems?.map((toolbarItem, index) => {
             const {
-              key = "mas",
+              key = "appServices",
               variant,
               className,
               id,
@@ -80,4 +80,4 @@ const MASToolbar: React.FunctionComponent<MASToolbarProps> = ({
   );
 };
 
-export { MASToolbar };
+export { AppServicesToolbar };

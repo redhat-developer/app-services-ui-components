@@ -1,14 +1,14 @@
 /* These styles override text content defaults */
-.kafka-ui-mas-drawer__top-label {
+.kafka-ui-appServices-drawer__top-label {
     margin-bottom: 0 !important;
 }
 
-.kafka-ui-mas-drawer__title {
+.kafka-ui-appServices-drawer__title {
     margin-top: 0 !important;
 }
 
 /* the drawer content body should be flex column in case there is >1 child */
-.kafka-ui-mas-drawer__drawer-content-body {
+.kafka-ui-appServices-drawer__drawer-content-body {
     display: flex;
     flex-direction: column;
 }

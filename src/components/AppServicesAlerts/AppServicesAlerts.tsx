@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { MASAlertToastGroup } from './MASAlertToastGroup';
-import { AlertContext, AlertProps } from '@mas/contexts';
+import { AppServicesAlertToastGroup } from './AppServicesAlertToastGroup';
+import { AlertContext, AlertProps } from '@appServices/contexts';
 
 type TimeOut = {
   key: string | undefined;
@@ -38,7 +38,7 @@ export const AlertProvider: React.FunctionComponent = ({ children }) => {
 
   return (
     <AlertContext.Provider value={{ addAlert }}>
-      <MASAlertToastGroup alerts={alerts} onCloseAlert={hideAlert} />
+      <AppServicesAlertToastGroup alerts={alerts} onCloseAlert={hideAlert} />
       {children}
     </AlertContext.Provider>
   );

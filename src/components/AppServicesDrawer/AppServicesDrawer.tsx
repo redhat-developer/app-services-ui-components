@@ -18,10 +18,10 @@ import {
   TitleProps,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { MASLoading } from "@mas/components";
-import "./MASDrawer.css";
+import { AppServicesLoading } from "@appServices/components";
+import "./AppServicesDrawer.css";
 
-export type MASDrawerProps = DrawerProps & {
+export type AppServicesDrawerProps = DrawerProps & {
   children: React.ReactNode;
   panelBodyContent?: React.ReactNode;
   onClose: () => void;
@@ -41,7 +41,7 @@ export type MASDrawerProps = DrawerProps & {
   inlineAlertMessage?: React.ReactNode;
 };
 
-export const MASDrawer: React.FC<MASDrawerProps> = ({
+export const AppServicesDrawer: React.FC<AppServicesDrawerProps> = ({
   onClose,
   isLoading = false,
   drawerPanelContentProps,
@@ -53,7 +53,7 @@ export const MASDrawer: React.FC<MASDrawerProps> = ({
   notRequiredDrawerContentBackground,
   "data-ouia-app-id": dataOuiaAppId,
   inlineAlertMessage,
-}: MASDrawerProps) => {
+}: AppServicesDrawerProps) => {
   const { widths, ...restDrawerPanelContentProps } =
     drawerPanelContentProps || {};
   const { text, title } = drawerHeaderProps || {};
@@ -64,7 +64,7 @@ export const MASDrawer: React.FC<MASDrawerProps> = ({
       {...restDrawerPanelContentProps}
     >
       {isLoading ? (
-        <MASLoading />
+        <AppServicesLoading />
       ) : (
         <>
           <DrawerHead>
@@ -72,7 +72,7 @@ export const MASDrawer: React.FC<MASDrawerProps> = ({
               {text?.label && (
                 <Text
                   component={text?.component || TextVariants.small}
-                  className={text?.className || "kafka-ui-mas-drawer__top-label"}
+                  className={text?.className || "kafka-ui-appServices-drawer__top-label"}
                 >
                   {text?.label}
                 </Text>
@@ -81,7 +81,7 @@ export const MASDrawer: React.FC<MASDrawerProps> = ({
                 <Title
                   headingLevel={title?.headingLevel || "h2"}
                   size={title?.size || TitleSizes["xl"]}
-                  className={title?.className || "kafka-ui-mas-drawer__title"}
+                  className={title?.className || "kafka-ui-appServices-drawer__title"}
                 >
                   {title?.value}
                 </Title>
@@ -112,7 +112,7 @@ export const MASDrawer: React.FC<MASDrawerProps> = ({
           notRequiredDrawerContentBackground ? "pf-m-no-background" : ""
         }
       >
-        <DrawerContentBody className="kafka-ui-mas-drawer__drawer-content-body">
+        <DrawerContentBody className="kafka-ui-appServices-drawer__drawer-content-body">
           {children}
         </DrawerContentBody>
       </DrawerContent>

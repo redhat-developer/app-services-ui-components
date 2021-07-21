@@ -1,15 +1,15 @@
 import React from 'react';
 import { Bullseye, BullseyeProps, Spinner, SpinnerProps } from '@patternfly/react-core';
 
-export type MASLoadingProps = {
+export type AppServicesLoadingProps = {
   bullseyeProps?: Omit<BullseyeProps, 'children'>;
   spinnerProps?: SpinnerProps;
 };
 
-export const MASLoading: React.FunctionComponent<MASLoadingProps> = ({
+export const AppServicesLoading: React.FunctionComponent<AppServicesLoadingProps> = ({
   bullseyeProps,
   spinnerProps,
-}: MASLoadingProps) => (
+}: AppServicesLoadingProps) => (
   <Bullseye {...bullseyeProps}>
     <Spinner {...spinnerProps} />
   </Bullseye>

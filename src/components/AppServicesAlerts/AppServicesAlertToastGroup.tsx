@@ -1,5 +1,5 @@
 import React from 'react';
-import { AlertProps } from '@mas/contexts';
+import { AlertProps } from '@appServices/contexts';
 import { AlertGroup, Alert, AlertActionCloseButton, AlertVariant } from '@patternfly/react-core';
 
 type AlertToastGroupProps = {
@@ -7,7 +7,7 @@ type AlertToastGroupProps = {
   onCloseAlert: (key: string | undefined) => void;
 };
 
-export const MASAlertToastGroup: React.FunctionComponent<AlertToastGroupProps> = ({
+export const AppServicesAlertToastGroup: React.FunctionComponent<AlertToastGroupProps> = ({
   alerts,
   onCloseAlert,
 }: AlertToastGroupProps) => {

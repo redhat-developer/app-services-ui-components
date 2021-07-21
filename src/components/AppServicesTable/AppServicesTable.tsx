@@ -14,7 +14,7 @@ import {
   CustomRowWrapperContextProps,
 } from "./CustomRowWrapper";
 
-export type MASTableProps = CustomRowWrapperContextProps & {
+export type AppServicesTableProps = CustomRowWrapperContextProps & {
   tableProps: Omit<PFTableProps, "children"> & {
     shouldDefaultCustomRowWrapper?: boolean;
   };
@@ -23,7 +23,7 @@ export type MASTableProps = CustomRowWrapperContextProps & {
   children?: React.ReactNode;
 };
 
-const MASTable: FunctionComponent<MASTableProps> = ({
+const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
   tableProps,
   tableHeaderProps,
   tableBodyProps,
@@ -64,7 +64,7 @@ const MASTable: FunctionComponent<MASTableProps> = ({
     >
       <PFTable
         className={css(
-          shouldDefaultCustomRowWrapper && "mas--table-view__table",
+          shouldDefaultCustomRowWrapper && "appServices--table-view__table",
           className
         )}
         cells={cells}
@@ -84,4 +84,4 @@ const MASTable: FunctionComponent<MASTableProps> = ({
   );
 };
 
-export { MASTable };
+export { AppServicesTable };
