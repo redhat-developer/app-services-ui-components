@@ -1,0 +1,14 @@
+/* These styles override text content defaults */
+.kafka-ui-appServices-drawer__top-label {
+    margin-bottom: 0 !important;
+}
+
+.kafka-ui-appServices-drawer__title {
+    margin-top: 0 !important;
+}
+
+/* the drawer content body should be flex column in case there is >1 child */
+.kafka-ui-appServices-drawer__drawer-content-body {
+    display: flex;
+    flex-direction: column;
+}

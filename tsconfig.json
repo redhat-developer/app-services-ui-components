@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
-    "rootDir": "./src",
     "outDir": "dist/esm",
     "module": "es2015",
     "target": "es5",
@@ -15,19 +14,22 @@
     "allowJs": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "strict": true,
     "importHelpers": true,
     "skipLibCheck": true,
     "declaration": true,
     "declarationMap": true,
     "isolatedModules": true,
+    "paths": {
+      "@appServices/*": ["src/*"]
+    },
     "plugins": [
       { "transform": "transformer-cjs-imports" }
     ]
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.js"
+    "src/**/*"
   ],
   "exclude": ["node_modules"]
 }
