@@ -36,7 +36,11 @@ export type Config = {
         /**
          * quotaId is the "quota id" we pass to the filter quota cost
          */
-        quotaId: string
+        quotaId: string,
+        /**
+         * trialQuotaId is the "quota id" we pass to the filter quota cost for trial instances
+         */
+        trialQuotaId: string
     }
     /**
      * kas provides configuration for our integration with the KAS Fleet Manager
