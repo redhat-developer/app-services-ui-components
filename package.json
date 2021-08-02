@@ -35,6 +35,6 @@
     "typescript": "4.3.5"
   },
   "dependencies": {
-    "react": "17.0.1"
+    "react": "17.0.2"
   }
 }
