@@ -18,4 +18,4 @@ export const AssetsContext: React.Context<Assets | undefined> = React.createCont
 /**
  * useAssets is a custom hook that is a shorthand for useContext(AssetsContext)
  */
-export const useAssets = (): Assets => useContext(AssetsContext);
+export const useAssets = (): Assets | undefined => useContext(AssetsContext);

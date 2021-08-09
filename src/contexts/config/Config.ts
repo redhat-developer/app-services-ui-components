@@ -148,4 +148,4 @@ export const ConfigContext: React.Context<Config | undefined> = React.createCont
 /**
  * useConfig is a custom hook that is a shorthand for useContext(ConfigContext)
  */
-export const useConfig = (): Config => useContext(ConfigContext);
+export const useConfig = (): Config | undefined => useContext(ConfigContext);
