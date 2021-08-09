@@ -34,4 +34,4 @@ export const QuotaContext: React.Context<QuotaProps | undefined> = React.createC
 /**
  * useQuota is a custom hook that is a shorthand for useContext(QuotaContext)
  */
-export const useQuota = (): QuotaProps => useContext(QuotaContext);
+export const useQuota = (): QuotaProps | undefined => useContext(QuotaContext);
