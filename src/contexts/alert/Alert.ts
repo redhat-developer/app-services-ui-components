@@ -81,4 +81,4 @@ export const AlertContext: React.Context<Alert | undefined> = React.createContex
 /**
  * useAlert is a custom hook that is a shorthand for useContext(AlertContext)
  */
-export const useAlert = (): Alert => useContext(AlertContext);
+export const useAlert = (): Alert | undefined => useContext(AlertContext);

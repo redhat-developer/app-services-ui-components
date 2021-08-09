@@ -52,4 +52,4 @@ export const AuthContext: React.Context<Auth | undefined> = React.createContext<
 /**
  * useAuth is a custom hook that is a shorthand for useContext(AuthContext)
  */
-export const useAuth = (): Auth => useContext(AuthContext);
+export const useAuth = (): Auth | undefined => useContext(AuthContext);

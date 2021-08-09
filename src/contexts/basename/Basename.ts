@@ -18,4 +18,4 @@ export const BasenameContext: React.Context<Basename | undefined> = React.create
 /**
  * useBasename is a custom hook that is a shorthand for useContext(BasenameContext)
  */
-export const useBasename = (): Basename => useContext(BasenameContext);
+export const useBasename = (): Basename | undefined => useContext(BasenameContext);
