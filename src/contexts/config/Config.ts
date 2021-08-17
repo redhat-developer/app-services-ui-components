@@ -51,6 +51,9 @@ export type Config = {
          */
         apiBasePath: string,
     }
+    rbac: {
+        basePath: string
+    }
     /**
      * masSSO provides configuration for our integration with MASSSO
      */
