@@ -27,8 +27,8 @@
   },
   "homepage": "https://github.com/bf2fc6cc711aee1a0c2a/ui-shared#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.29.3",
-    "@typescript-eslint/parser": "4.29.3",
+    "@typescript-eslint/eslint-plugin": "4.30.0",
+    "@typescript-eslint/parser": "4.30.0",
     "copyfiles": "2.4.1",
     "eslint": "7.32.0",
     "rimraf": "3.0.2",
