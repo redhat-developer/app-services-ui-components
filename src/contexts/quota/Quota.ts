@@ -9,6 +9,8 @@ export type QuotaValue = {
 export enum QuotaType {
     kas = 'kas',
     kasTrial = 'kas-trial',
+    srs = 'srs',
+    srsTrial = 'srs-trial'
 }
 
 export enum ProductType {
