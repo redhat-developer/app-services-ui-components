@@ -34,13 +34,21 @@ export type Config = {
          */
         siteCode: string
         /**
-         * quotaId is the "quota id" we pass to the filter quota cost
+         * kasQuotaId is the "quota id" we pass to the filter quota cost for kafka
          */
-        quotaId: string,
+        kasQuotaId: string,
         /**
-         * trialQuotaId is the "quota id" we pass to the filter quota cost for trial instances
+         * kasTrialQuotaId is the "quota id" we pass to the filter quota cost for trial instances for kafka
          */
-        trialQuotaId: string
+        kasTrialQuotaId: string
+          /**
+         * srsQuotaId is the "quota id" we pass to the filter quota cost for service registry
+         */
+        srsQuotaId: string,
+        /**
+         * srsTrialQuotaId is the "quota id" we pass to the filter quota cost for trial instances for service registry
+         */
+        srsTrialQuotaId: string
     }
     /**
      * kas provides configuration for our integration with the KAS Fleet Manager
