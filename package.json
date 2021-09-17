@@ -10,6 +10,10 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
+    "postbuild": "npm run copy-files",
+    "copy-files": "npm run copy-files-esm && npm run copy-files-cjs",
+    "copy-files-esm": "copyfiles -u 1 src/**/*.css dist/esm",
+    "copy-files-cjs": "copyfiles -u 1 src/**/*.css dist/cjs",
     "package": "npm run build",
     "prepare": "npm run clean && npm run package",
     "clean": "rimraf dist",
