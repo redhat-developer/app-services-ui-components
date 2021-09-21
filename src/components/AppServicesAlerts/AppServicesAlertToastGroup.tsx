@@ -1,6 +1,6 @@
 import React from 'react';
-import { AlertProps } from '../../contexts';
 import { AlertGroup, Alert, AlertActionCloseButton, AlertVariant } from '@patternfly/react-core';
+import {AlertProps} from "@rhoas/app-services-ui-shared";
 
 type AlertToastGroupProps = {
   alerts: AlertProps[];

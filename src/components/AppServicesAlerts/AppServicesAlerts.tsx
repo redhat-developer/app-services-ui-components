@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { AppServicesAlertToastGroup } from './AppServicesAlertToastGroup';
-import { AlertContext, AlertProps } from '../../contexts';
+import {AlertContext, AlertProps} from "@rhoas/app-services-ui-shared";
 
 type TimeOut = {
   key: string | undefined;

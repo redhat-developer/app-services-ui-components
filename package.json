@@ -1,6 +1,6 @@
 {
-  "name": "@rhoas/app-services-ui-shared",
-  "version": "0.10.0",
+  "name": "@rhoas/app-services-ui-components",
+  "version": "0.0.0",
   "description": "UI Shared contains a number of type definitions for shared data structures and components for the application services UI.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -22,14 +22,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/redhat-developer/app-services-ui-shared.git"
+    "url": "git+https://github.com/redhat-developer/app-services-ui-components.git"
   },
   "keywords": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/redhat-developer/app-services-ui-shared/issues"
+    "url": "https://github.com/redhat-developer/app-services-ui-components/issues"
   },
-  "homepage": "https://github.com/redhat-developer/app-services-ui-shared#readme",
+  "homepage": "https://github.com/redhat-developer/app-services-ui-components#readme",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "4.30.0",
     "@typescript-eslint/parser": "4.30.0",
@@ -41,8 +41,9 @@
   "dependencies": {
     "@patternfly/patternfly": "4.132.2",
     "@patternfly/react-core": "4.152.4",
-    "@patternfly/react-table": "4.29.58",
     "@patternfly/react-icons": "4.11.14",
+    "@patternfly/react-table": "4.29.58",
+    "@rhoas/app-services-ui-shared": "^0.12.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-router-dom": "5.2.1",
