@@ -4,3 +4,4 @@ export * from './AppServicesLoading';
 export * from './AppServicesPagination';
 export * from './AppServicesTable';
 export * from './AppServicesToolbar';
+export * from './AppServicesModalProvider';
