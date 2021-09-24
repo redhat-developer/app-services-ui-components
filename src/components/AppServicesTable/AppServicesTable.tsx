@@ -46,13 +46,6 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
     ...restProps
   } = tableProps;
 
-  /**
-   * Handle CustomRowWrapper
-   */
-  if (shouldDefaultCustomRowWrapper) {
-    restProps["rowWrapper"] = CustomRowWrapper;
-  }
-
   return (
     <CustomRowWrapperProvider
       value={{
@@ -74,6 +67,11 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
         actionResolver={actionResolver}
         onSort={onSort}
         sortBy={sortBy}
+        rowWrapper={
+          shouldDefaultCustomRowWrapper
+            ? (props) => <CustomRowWrapper {...props} />
+            : undefined
+        }
         {...restProps}
       >
         <TableHeader {...tableHeaderProps} />

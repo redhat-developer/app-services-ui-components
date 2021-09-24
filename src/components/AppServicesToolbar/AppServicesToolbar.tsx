@@ -44,10 +44,7 @@ const AppServicesToolbar: React.FunctionComponent<AppServicesToolbarProps> = ({
       >
         <ToolbarContent>
           {toggleGroupProps && (
-            <ToolbarToggleGroup
-              toggleIcon={toggleGroupProps.toggleIcon}
-              {...toggleGroupProps}
-            >
+            <ToolbarToggleGroup {...toggleGroupProps}>
               {toggleGroupItems}
             </ToolbarToggleGroup>
           )}
