@@ -19,7 +19,7 @@ export function useTopicsMetrics() {
   );
   const {
     selectedTopic,
-    timeDuration,
+    duration,
     kafkaTopics,
     metricsTopics,
     bytesIncoming,
@@ -63,7 +63,7 @@ export function useTopicsMetrics() {
     isDataUnavailable,
     topics: mergedTopics,
     selectedTopic,
-    timeDuration,
+    duration,
     bytesIncoming,
     bytesOutgoing,
     bytesPerPartition,

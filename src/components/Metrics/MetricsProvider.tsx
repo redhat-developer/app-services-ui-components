@@ -11,7 +11,8 @@ import {
   GetTopicsMetricsResponse,
   GetDiskSpaceMetricsResponse,
 } from "./machines";
-import { timeIntervalsMapping } from "./types";
+import { DurationOptions } from "./types";
+import { timeIntervalsMapping } from "./consts";
 
 export const MetricsContext = createContext<{
   topicsMetricsMachineService: InterpreterFrom<TopicsMetricsMachineType>;
@@ -44,8 +45,8 @@ export const MetricsProvider: FunctionComponent<MetricsProviderProps> = ({
 };
 
 type GetTopicsMetricsOptions = {
-  timeDuration: number;
-  timeInterval: number;
+  duration: DurationOptions;
+  interval: number;
   selectedTopic: string | undefined;
 };
 type UseTopicsMetricsMachineServiceOptions = {
@@ -63,8 +64,8 @@ function useTopicsMetricsMachineService({
           return (callback) => {
             getTopicsMetrics({
               selectedTopic: context.selectedTopic,
-              timeDuration: context.timeDuration,
-              timeInterval: timeIntervalsMapping[context.timeDuration],
+              duration: context.duration,
+              interval: timeIntervalsMapping[context.duration].interval,
             })
               .then((results) =>
                 callback(TopicsMetricsModel.events.fetchSuccess(results))
@@ -84,8 +85,8 @@ function useTopicsMetricsMachineService({
 }
 
 type GetDiskSpaceMetricsOptions = {
-  timeDuration: number;
-  timeInterval: number;
+  duration: DurationOptions;
+  interval: number;
 };
 type UseDiskSpaceMetricsMachineServiceOptions = {
   getDiskSpaceMetrics: (
@@ -101,8 +102,8 @@ function useDiskSpaceMetricsMachineService({
         api: (context) => {
           return (callback) => {
             getDiskSpaceMetrics({
-              timeDuration: context.timeDuration,
-              timeInterval: timeIntervalsMapping[context.timeDuration],
+              duration: context.duration,
+              interval: timeIntervalsMapping[context.duration].interval,
             })
               .then((results) =>
                 callback(DiskSpaceMetricsModel.events.fetchSuccess(results))

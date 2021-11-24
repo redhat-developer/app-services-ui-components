@@ -57,7 +57,7 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
     isRefreshing,
     isDataUnavailable,
     isFailed,
-    timeDuration,
+    duration,
     metrics,
     onDurationChange,
     onRefresh,
@@ -66,12 +66,12 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
   return (
     <CardUsedDiskSpace
       metrics={metrics}
-      timeDuration={timeDuration}
+      duration={duration}
       metricsDataUnavailable={isDataUnavailable || isFailed}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
       onRefresh={onRefresh}
-      onTimeDuration={onDurationChange}
+      onDurationChange={onDurationChange}
     />
   );
 };
@@ -88,7 +88,7 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
     isFailed,
     isDataUnavailable,
     selectedTopic,
-    timeDuration,
+    duration,
     topics,
     bytesIncoming,
     bytesOutgoing,
@@ -106,13 +106,13 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
       incomingTopicsData={bytesIncoming}
       outgoingTopicsData={bytesOutgoing}
       partitions={bytesPerPartition}
-      timeDuration={timeDuration}
+      duration={duration}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
       selectedTopic={selectedTopic}
       onRefresh={onRefresh}
       onSelectedTopic={onTopicChange}
-      onTimeDuration={onDurationChange}
+      onDurationChange={onDurationChange}
       onCreateTopic={onCreateTopic}
     />
   );

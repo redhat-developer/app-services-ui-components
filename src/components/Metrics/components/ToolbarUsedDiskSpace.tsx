@@ -17,7 +17,7 @@ type ToolbarUsedDiskSpaceProps = {
   title: string;
   isDisabled: boolean;
   isRefreshing: boolean;
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
   onSetTimeDuration: (value: DurationOptions) => void;
   onRefresh: () => void;
 };
@@ -25,7 +25,7 @@ export const ToolbarUsedDiskSpace: FunctionComponent<ToolbarUsedDiskSpaceProps> 
   title,
   isDisabled,
   isRefreshing,
-  timeDuration,
+  duration,
   onSetTimeDuration,
   onRefresh,
 }) => {
@@ -37,7 +37,7 @@ export const ToolbarUsedDiskSpace: FunctionComponent<ToolbarUsedDiskSpaceProps> 
           <Toolbar>
             <ToolbarContent>
               <FilterByTime
-                timeDuration={timeDuration}
+                duration={duration}
                 onDurationChange={onSetTimeDuration}
                 keyText={"kafka-metrics-time-filter"}
                 disableToolbar={isDisabled}

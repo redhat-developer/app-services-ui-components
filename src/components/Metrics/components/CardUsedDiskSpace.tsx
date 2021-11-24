@@ -10,22 +10,22 @@ import { ToolbarUsedDiskSpace } from "./ToolbarUsedDiskSpace";
 
 type CardUsedDiskSpaceProps = {
   metrics: TotalBytesMetrics;
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
   metricsDataUnavailable: boolean;
   isLoading: boolean;
   isRefreshing: boolean;
   onRefresh: () => void;
-  onTimeDuration: (duration: DurationOptions) => void;
+  onDurationChange: (duration: DurationOptions) => void;
 };
 
 export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
   metrics,
-  timeDuration,
+  duration,
   metricsDataUnavailable,
   isLoading,
   isRefreshing,
   onRefresh,
-  onTimeDuration,
+  onDurationChange,
 }) => {
   const { t } = useTranslation();
 
@@ -33,8 +33,8 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
     <Card>
       <ToolbarUsedDiskSpace
         title={t("metrics.kafka_instance_metrics")}
-        timeDuration={timeDuration}
-        onSetTimeDuration={onTimeDuration}
+        duration={duration}
+        onSetTimeDuration={onDurationChange}
         isDisabled={metricsDataUnavailable}
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
@@ -61,10 +61,7 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
               <>
                 <UsedDiskSpaceTitle />
                 <CardBody>
-                  <ChartUsedDiskSpace
-                    metrics={metrics}
-                    timeDuration={timeDuration}
-                  />
+                  <ChartUsedDiskSpace metrics={metrics} duration={duration} />
                 </CardBody>
               </>
             );

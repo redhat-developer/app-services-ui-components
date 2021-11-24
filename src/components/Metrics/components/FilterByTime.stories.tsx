@@ -9,7 +9,7 @@ export default {
   args: {
     keyText: "string",
     disableToolbar: false,
-    timeDuration: 60,
+    duration: 60,
   },
   parameters: {
     i18n: MetricsI18n,

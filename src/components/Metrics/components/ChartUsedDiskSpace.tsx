@@ -10,14 +10,12 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
+import sub from "date-fns/sub";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { TotalBytesMetrics, DurationOptions, SupportedSizes } from "../types";
-import {
-  dateToChartValue,
-  shouldShowDate,
-  convertToSpecifiedByte,
-} from "../utils";
+import { timeIntervalsMapping } from "../consts";
+import { TotalBytesMetrics, DurationOptions } from "../types";
+import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
 
 type ChartData = {
   areaColor: string;
@@ -28,7 +26,7 @@ type ChartData = {
 
 type BrokerChartData = {
   name: string;
-  x: string;
+  x: number;
   y: number;
 };
 
@@ -42,17 +40,17 @@ type LegendData = {
 
 type ChartUsedDiskSpaceProps = {
   metrics: TotalBytesMetrics;
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
 };
 
 export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
   metrics,
-  timeDuration,
+  duration,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const [width, setWidth] = useState<number>();
-  const usageLimit = 1000; // Replace with limit from API
+  const usageLimit = 1000 * 1024 ** 3; // Replace with limit from API
 
   const handleResize = () =>
     containerRef.current && setWidth(containerRef.current.clientWidth);
@@ -63,9 +61,9 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
     window.addEventListener("resize", handleResize);
   }, [width]);
 
-  const { chartData, legendData, largestByteSize } = getChartData(
+  const { chartData, legendData, tickValues } = getChartData(
     metrics,
-    timeDuration,
+    duration,
     usageLimit,
     t("Used disk space"),
     t("Limit")
@@ -77,7 +75,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
         ariaTitle={t("metrics.used_disk_space")}
         containerComponent={
           <ChartVoronoiContainer
-            labels={({ datum }) => `${datum.name}: ${datum.y}`}
+            labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
             constrainToVisibleArea
           />
         }
@@ -92,20 +90,27 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
         height={350}
         padding={{
           bottom: 110, // Adjusted to accomodate legend
-          left: 90,
-          right: 60,
-          top: 25,
+          left: 120,
+          right: 40,
+          top: 0,
         }}
         themeColor={ChartThemeColor.multiUnordered}
         width={width}
-        minDomain={{ y: 0 }}
         legendAllowWrap={true}
       >
-        <ChartAxis label={"\n" + "Time"} tickCount={6} />
         <ChartAxis
-          label={"\n\n\n" + "Used disk space"}
+          label={"\n" + "Time"}
+          tickValues={tickValues}
+          tickFormat={(d) =>
+            dateToChartValue(new Date(d), {
+              showDate: shouldShowDate(duration),
+            })
+          }
+        />
+        <ChartAxis
+          label={"\n\n\n\n\n" + "Used disk space"}
           dependentAxis
-          tickFormat={(t) => `${Math.round(t)} ${largestByteSize}`}
+          tickFormat={formatBytes}
           tickCount={4}
         />
         <ChartGroup>
@@ -139,14 +144,14 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
 
 function getChartData(
   metrics: TotalBytesMetrics,
-  timeDuration: number,
+  duration: number,
   usageLimit: number,
   lineLabel: string,
   limitLabel: string
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
-  largestByteSize: SupportedSizes;
+  tickValues: number[];
 } {
   const legendData: Array<LegendData> = [
     {
@@ -161,23 +166,30 @@ function getChartData(
   const chartData: Array<ChartData> = [];
   const area: Array<BrokerChartData> = [];
   const softLimit: Array<BrokerChartData> = [];
-  const largestByteSize = "GiB"; // Hard code GiB as the largest byte size because there will always be a 20 GiB limit.
 
   Object.entries(metrics).map(([timestamp, bytes]) => {
-    const date = new Date(parseInt(timestamp));
-    const time = dateToChartValue(date, {
-      showDate: shouldShowDate(timeDuration),
+    area.push({ name: lineLabel, x: parseInt(timestamp, 10), y: bytes });
+    softLimit.push({
+      name: limitLabel,
+      x: parseInt(timestamp, 10),
+      y: usageLimit,
     });
-
-    const convertedBytes = convertToSpecifiedByte(bytes, largestByteSize);
-    area.push({ name: lineLabel, x: time, y: convertedBytes });
-    softLimit.push({ name: limitLabel, x: time, y: usageLimit });
   });
   chartData.push({ areaColor, softLimitColor, area, softLimit });
+
+  const allTimestamps = Object.keys(metrics);
+  const mostRecentTs = parseInt(allTimestamps[0]);
+  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
+    .fill(mostRecentTs)
+    .map((d, index) =>
+      sub(new Date(d), {
+        seconds: timeIntervalsMapping[duration].interval * index,
+      }).getTime()
+    );
 
   return {
     legendData,
     chartData,
-    largestByteSize,
+    tickValues,
   };
 }

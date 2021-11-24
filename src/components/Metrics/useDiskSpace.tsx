@@ -21,7 +21,7 @@ export function useDiskSpace() {
   );
   const {
     metrics,
-    timeDuration,
+    duration,
     isLoading,
     isRefreshing,
     isDataUnavailable,
@@ -45,7 +45,7 @@ export function useDiskSpace() {
     isRefreshing,
     isFailed,
     isDataUnavailable,
-    timeDuration,
+    duration,
     onDurationChange,
     onRefresh,
   };

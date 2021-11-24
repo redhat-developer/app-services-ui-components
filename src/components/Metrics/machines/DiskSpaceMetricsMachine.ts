@@ -10,7 +10,7 @@ export type GetDiskSpaceMetricsResponse = {
 export const DiskSpaceMetricsModel = createModel(
   {
     // from the UI elements
-    timeDuration: 60 as DurationOptions,
+    duration: 60 as DurationOptions,
 
     // from the api
     metrics: {} as TotalBytesMetrics,
@@ -32,7 +32,7 @@ export const DiskSpaceMetricsModel = createModel(
         selectedTopic: topic,
       }),
       selectDuration: (duration: DurationOptions) => ({
-        timeDuration: duration,
+        duration: duration,
       }),
     },
   }
@@ -61,7 +61,7 @@ const resetRetries = DiskSpaceMetricsModel.assign(
 
 const setDuration = DiskSpaceMetricsModel.assign(
   {
-    timeDuration: (_, event) => event.timeDuration,
+    duration: (_, event) => event.duration,
   },
   "selectDuration"
 );

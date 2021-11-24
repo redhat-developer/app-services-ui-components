@@ -30,7 +30,7 @@ type CardTopicsMetricsProps = {
   incomingTopicsData: TotalBytesMetrics;
   outgoingTopicsData: TotalBytesMetrics;
   partitions: PartitionBytesMetric;
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
   backendUnavailable: boolean;
   metricsDataUnavailable: boolean;
   isLoading: boolean;
@@ -39,7 +39,7 @@ type CardTopicsMetricsProps = {
   onCreateTopic: () => void;
   onRefresh: () => void;
   onSelectedTopic: (topic: string | undefined) => void;
-  onTimeDuration: (duration: DurationOptions) => void;
+  onDurationChange: (duration: DurationOptions) => void;
 };
 
 export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
@@ -47,7 +47,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   incomingTopicsData,
   outgoingTopicsData,
   selectedTopic,
-  timeDuration,
+  duration,
   partitions,
   backendUnavailable,
   metricsDataUnavailable,
@@ -56,7 +56,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   onCreateTopic,
   onRefresh,
   onSelectedTopic,
-  onTimeDuration,
+  onDurationChange,
 }) => {
   const { t } = useTranslation();
   const noTopics = topics.length === 0;
@@ -65,8 +65,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
     <Card>
       <ToolbarTopicsMetrics
         title={t("metrics.topic_metrics")}
-        timeDuration={timeDuration}
-        onSetTimeDuration={onTimeDuration}
+        duration={duration}
+        onSetTimeDuration={onDurationChange}
         isDisabled={backendUnavailable || noTopics}
         isRefreshing={isRefreshing}
         selectedTopic={selectedTopic}
@@ -127,7 +127,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     incomingTopicsData={incomingTopicsData}
                     outgoingTopicsData={outgoingTopicsData}
                     selectedTopic={selectedTopic}
-                    timeDuration={timeDuration}
+                    duration={duration}
                   />
                 </CardBody>
                 <Divider />
@@ -136,7 +136,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <CardBody>
                   <ChartLogSizePerPartition
                     partitions={partitions}
-                    timeDuration={timeDuration}
+                    duration={duration}
                   />
                 </CardBody>
               </>
@@ -151,7 +151,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     incomingTopicsData={incomingTopicsData}
                     outgoingTopicsData={outgoingTopicsData}
                     selectedTopic={selectedTopic}
-                    timeDuration={timeDuration}
+                    duration={duration}
                   />
                 </CardBody>
                 <Divider />

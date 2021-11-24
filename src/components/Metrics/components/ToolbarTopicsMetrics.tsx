@@ -18,7 +18,7 @@ type ToolbarTopicsMetricsProps = {
   title: string;
   selectedTopic: string | undefined;
   topicList: string[];
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
   isDisabled: boolean;
   isRefreshing: boolean;
   onSetTimeDuration: (value: DurationOptions) => void;
@@ -29,7 +29,7 @@ export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> 
   title,
   selectedTopic,
   topicList,
-  timeDuration,
+  duration,
   isDisabled,
   isRefreshing,
   onSetTimeDuration,
@@ -50,7 +50,7 @@ export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> 
                 disableToolbar={isDisabled}
               />
               <FilterByTime
-                timeDuration={timeDuration}
+                duration={duration}
                 onDurationChange={onSetTimeDuration}
                 disableToolbar={isDisabled}
                 keyText={"topic-metrics-time-filter"}

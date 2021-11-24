@@ -9,28 +9,28 @@ import {
 } from "@patternfly/react-core";
 import { DurationOptions } from "../types";
 
-export const DurationOptionsMap: { [duration: DurationOptions]: string } = {
-  5: "Last 5 minutes",
-  15: "Last 15 minutes",
-  30: "Last 30 minutes",
-  60: "Last 1 hour",
-  180: "Last 3 hours",
-  360: "Last 6 hours",
-  720: "Last 12 hours",
-  1400: "Last 24 hours",
-  2800: "Last 2 days",
-  100080: "Last 7 days",
+export const DurationOptionsMap = {
+  [DurationOptions.Last5minutes]: "Last 5 minutes",
+  [DurationOptions.Last15minutes]: "Last 15 minutes",
+  [DurationOptions.Last30minutes]: "Last 30 minutes",
+  [DurationOptions.Last1hour]: "Last 1 hour",
+  [DurationOptions.Last3hours]: "Last 3 hours",
+  [DurationOptions.Last6hours]: "Last 6 hours",
+  [DurationOptions.Last12hours]: "Last 12 hours",
+  [DurationOptions.Last24hours]: "Last 24 hours",
+  [DurationOptions.Last2days]: "Last 2 days",
+  [DurationOptions.Last7days]: "Last 7 days",
 } as const;
 
 type FilterByTimeProps = {
-  timeDuration: DurationOptions;
+  duration: DurationOptions;
   onDurationChange: (value: DurationOptions) => void;
   keyText: string;
   disableToolbar: boolean;
 };
 
 export const FilterByTime: VoidFunctionComponent<FilterByTimeProps> = ({
-  timeDuration,
+  duration,
   keyText,
   disableToolbar,
   onDurationChange,
@@ -66,7 +66,7 @@ export const FilterByTime: VoidFunctionComponent<FilterByTimeProps> = ({
         aria-label="Select Input"
         onToggle={onTimeToggle}
         onSelect={onTimeSelect}
-        selections={DurationOptionsMap[timeDuration]}
+        selections={DurationOptionsMap[duration]}
         isOpen={isTimeSelectOpen}
         isDisabled={disableToolbar}
         placeholderText="Last 6 hours"

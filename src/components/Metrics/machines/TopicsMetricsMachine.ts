@@ -19,7 +19,7 @@ export const TopicsMetricsModel = createModel(
   {
     // from the UI elements
     selectedTopic: undefined as string | undefined,
-    timeDuration: 60 as DurationOptions,
+    duration: 60 as DurationOptions,
 
     // from the api
     kafkaTopics: [] as string[],
@@ -46,7 +46,7 @@ export const TopicsMetricsModel = createModel(
         selectedTopic: topic,
       }),
       selectDuration: (duration: DurationOptions) => ({
-        timeDuration: duration,
+        duration: duration,
       }),
     },
   }
@@ -92,7 +92,7 @@ const setTopic = TopicsMetricsModel.assign(
 
 const setDuration = TopicsMetricsModel.assign(
   {
-    timeDuration: (_, event) => event.timeDuration,
+    duration: (_, event) => event.duration,
   },
   "selectDuration"
 );

@@ -1,4 +1,4 @@
-import { PartitionBytesMetric, SupportedSizes } from "../types";
+import { PartitionBytesMetric } from "../types";
 import {
   Chart,
   ChartArea,
@@ -12,12 +12,9 @@ import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_b
 import chart_color_green_300 from "@patternfly/react-tokens/dist/js/chart_color_green_300";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  getLargestByteSize,
-  dateToChartValue,
-  shouldShowDate,
-  convertToSpecifiedByte,
-} from "../utils";
+import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
+import { timeIntervalsMapping } from "../consts";
+import sub from "date-fns/sub";
 
 const colors = [chart_color_green_300.value, chart_color_blue_300.value];
 
@@ -28,7 +25,7 @@ type ChartData = {
 
 type PartitionChartData = {
   name: string;
-  x: string;
+  x: number;
   y: number;
 };
 
@@ -38,11 +35,11 @@ type LegendData = {
 
 export type ChartLogSizePerPartitionProps = {
   partitions: PartitionBytesMetric;
-  timeDuration: number;
+  duration: number;
 };
 export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitionProps> = ({
   partitions,
-  timeDuration,
+  duration,
 }) => {
   const { t } = useTranslation();
 
@@ -58,11 +55,10 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
     window.addEventListener("resize", handleResize);
   }, [width]);
 
-  const {
-    chartData,
-    largestByteSize,
-    legendData,
-  } = getLogSizePerPartitionChartData(partitions, timeDuration);
+  const { chartData, legendData, tickValues } = getChartData(
+    partitions,
+    duration
+  );
 
   return (
     <div ref={containerRef}>
@@ -70,7 +66,7 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
         ariaTitle={t("metrics.log_size_per_partition")}
         containerComponent={
           <ChartVoronoiContainer
-            labels={({ datum }) => `${datum.name}: ${datum.y}`}
+            labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
             constrainToVisibleArea
           />
         }
@@ -81,19 +77,27 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
         height={350}
         padding={{
           bottom: 110,
-          left: 90,
-          right: 30,
-          top: 25,
+          left: 120,
+          right: 40,
+          top: 0,
         }}
         themeColor={ChartThemeColor.multiUnordered}
         width={width}
         legendAllowWrap={true}
       >
-        <ChartAxis label={"\n" + "Time"} tickCount={6} />
         <ChartAxis
-          label={"\n\n" + "Bytes"}
+          label={"\n" + "Time"}
+          tickValues={tickValues}
+          tickFormat={(d) =>
+            dateToChartValue(new Date(d), {
+              showDate: shouldShowDate(duration),
+            })
+          }
+        />
+        <ChartAxis
+          label={"\n\n\n\n\n" + "Bytes"}
           dependentAxis
-          tickFormat={(t) => `${Math.round(t)} ${largestByteSize}`}
+          tickFormat={formatBytes}
         />
         <ChartGroup>
           {chartData.map((value, index) => (
@@ -109,60 +113,44 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
   );
 };
 
-export function getLogSizePerPartitionChartData(
+export function getChartData(
   partitions: PartitionBytesMetric,
-  timeDuration: number
+  duration: number
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
-  largestByteSize: SupportedSizes;
+  tickValues: number[];
 } {
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
-  const largestByteSize = getLargestByteSize(
-    Object.values(partitions).flatMap((p) => Object.values(p))
-  );
   Object.entries(partitions).map(([name, dataMap], index) => {
-    const timestamps = Object.keys(dataMap).map((s) => parseInt(s, 10));
     const color = colors[index];
     legendData.push({
       name,
     });
     const area: Array<PartitionChartData> = [];
 
-    const getCurrentLengthOfData = () => {
-      const timestampDiff = timestamps[timestamps.length - 1] - timestamps[0];
-      const minutes = timestampDiff / 1000 / 60;
-      return minutes;
-    };
-    const lengthOfData = 6 * 60 - getCurrentLengthOfData();
-    const lengthOfDataPer5Mins = (6 * 60 - getCurrentLengthOfData()) / 5;
-
-    if (lengthOfData <= 360 && timeDuration >= 6) {
-      for (let i = 0; i < lengthOfDataPer5Mins; i = i + 1) {
-        const newtimestamp =
-          timestamps[0] - (lengthOfDataPer5Mins - i) * (5 * 60000);
-        const date = new Date(newtimestamp);
-        const time = dateToChartValue(date, {
-          showDate: shouldShowDate(timeDuration),
-        });
-        area.push({ name, x: time, y: 0 });
-      }
-    }
-
     Object.entries(dataMap).map(([timestamp, value]) => {
-      const date = new Date(parseInt(timestamp, 10));
-      const time = dateToChartValue(date, {
-        showDate: shouldShowDate(timeDuration),
-      });
-      const bytes = convertToSpecifiedByte(value, largestByteSize);
-      area.push({ name, x: time, y: bytes });
+      area.push({ name, x: parseInt(timestamp, 10), y: value });
     });
     chartData.push({ color, area });
   });
+
+  const allTimestamps = Object.values(partitions).flatMap((m) =>
+    Object.keys(m)
+  );
+  const mostRecentTs = parseInt(allTimestamps[0]);
+  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
+    .fill(mostRecentTs)
+    .map((d, index) =>
+      sub(new Date(d), {
+        seconds: timeIntervalsMapping[duration].interval * index,
+      }).getTime()
+    );
+
   return {
     legendData,
     chartData,
-    largestByteSize,
+    tickValues,
   };
 }

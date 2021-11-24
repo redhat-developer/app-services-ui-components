@@ -1,4 +1,5 @@
-import { SupportedSizes, TotalBytesMetrics } from "../types";
+import { TotalBytesMetrics } from "../types";
+import { timeIntervalsMapping } from "../consts";
 
 import {
   Chart,
@@ -13,12 +14,8 @@ import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_b
 import chart_color_orange_300 from "@patternfly/react-tokens/dist/js/chart_color_orange_300";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  getLargestByteSize,
-  dateToChartValue,
-  shouldShowDate,
-  convertToSpecifiedByte,
-} from "../utils";
+import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
+import sub from "date-fns/sub";
 
 type ChartData = {
   color: string;
@@ -27,7 +24,7 @@ type ChartData = {
 
 type TopicChartData = {
   name: string;
-  x: string;
+  x: number;
   y: number;
 };
 
@@ -43,13 +40,13 @@ type ChartTotalBytesProps = {
   incomingTopicsData: TotalBytesMetrics;
   outgoingTopicsData: TotalBytesMetrics;
   selectedTopic: string | undefined;
-  timeDuration: number;
+  duration: number;
 };
 export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
   incomingTopicsData,
   outgoingTopicsData,
   selectedTopic,
-  timeDuration,
+  duration,
 }) => {
   const { t } = useTranslation();
 
@@ -65,10 +62,10 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
     window.addEventListener("resize", handleResize);
   }, [width]);
 
-  const { chartData, legendData, largestByteSize } = getBytesChartData(
+  const { chartData, legendData, tickValues } = getBytesChartData(
     incomingTopicsData,
     outgoingTopicsData,
-    timeDuration,
+    duration,
     t("{{topic}} incoming bytes", { topic: selectedTopic || t("Total") }),
     t("{{topic}} outgoing bytes", { topic: selectedTopic || t("Total") })
   );
@@ -79,7 +76,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
         ariaTitle={t("metrics.total_bytes")}
         containerComponent={
           <ChartVoronoiContainer
-            labels={({ datum }) => `${datum.name}: ${datum.y}`}
+            labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
             constrainToVisibleArea
           />
         }
@@ -91,20 +88,27 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
         height={300}
         padding={{
           bottom: 110,
-          left: 90,
-          right: 30,
-          top: 25,
+          left: 120,
+          right: 40,
+          top: 0,
         }}
         themeColor={ChartThemeColor.multiUnordered}
         width={width}
       >
-        <ChartAxis label={"\n" + "Time"} tickCount={6} />
         <ChartAxis
-          label={"\n\n\n" + "Bytes"}
+          label={"\n" + "Time"}
+          tickValues={tickValues}
+          tickCount={timeIntervalsMapping[duration].ticks}
+          tickFormat={(d) =>
+            dateToChartValue(new Date(d), {
+              showDate: shouldShowDate(duration),
+            })
+          }
+        />
+        <ChartAxis
+          label={"\n\n\n\n\n" + "Bytes"}
           dependentAxis
-          tickFormat={(t) => `${Math.round(t)} ${largestByteSize}`}
-          tickCount={4}
-          minDomain={{ y: 0 }}
+          tickFormat={formatBytes}
         />
         <ChartGroup>
           {chartData.map((value, index) => (
@@ -127,27 +131,18 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
 export function getBytesChartData(
   incomingTopic: TotalBytesMetrics,
   outgoingTopic: TotalBytesMetrics,
-  timeDuration: number,
+  duration: number,
   incomingTopicName: string,
   outgoingTopicName: string
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
-  largestByteSize: SupportedSizes;
+  tickValues: number[];
 } {
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
-  const largestByteSize = getLargestByteSize([
-    ...Object.values(incomingTopic),
-    ...Object.values(outgoingTopic),
-  ]);
 
-  const incomingLine = metricsToLine(
-    incomingTopic,
-    timeDuration,
-    incomingTopicName,
-    largestByteSize
-  );
+  const incomingLine = metricsToLine(incomingTopic, incomingTopicName);
   if (incomingLine) {
     const color = chart_color_blue_300.value;
     chartData.push({ color, line: incomingLine });
@@ -159,12 +154,7 @@ export function getBytesChartData(
     });
   }
 
-  const outgoingLine = metricsToLine(
-    outgoingTopic,
-    timeDuration,
-    outgoingTopicName,
-    largestByteSize
-  );
+  const outgoingLine = metricsToLine(outgoingTopic, outgoingTopicName);
   if (outgoingLine) {
     const color = chart_color_orange_300.value;
     chartData.push({ color, line: outgoingLine });
@@ -175,32 +165,35 @@ export function getBytesChartData(
       },
     });
   }
+  const allTimestamps = [
+    ...Object.keys(incomingTopic),
+    ...Object.keys(outgoingTopic),
+  ];
+  allTimestamps.sort();
+  const mostRecentTs = parseInt(allTimestamps[allTimestamps.length - 1]);
+  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
+    .fill(mostRecentTs)
+    .map((d, index) =>
+      sub(new Date(d), {
+        seconds: timeIntervalsMapping[duration].interval * index,
+      }).getTime()
+    );
+
   return {
     legendData,
     chartData,
-    largestByteSize,
+    tickValues,
   };
 }
 
-function metricsToLine(
+export function metricsToLine(
   metrics: TotalBytesMetrics,
-  timeDuration: number,
-  name: string,
-  largestByteSize: SupportedSizes
-) {
-  const timestamps = Object.keys(metrics).map((ts) => parseInt(ts, 10));
-  if (timestamps.length > 0) {
-    const line: Array<TopicChartData> = [];
+  name: string
+): Array<TopicChartData> {
+  const line: Array<TopicChartData> = [];
 
-    Object.entries(metrics).map(([timestamp, bytes]) => {
-      const date = new Date(parseInt(timestamp, 10));
-      const time = dateToChartValue(date, {
-        showDate: shouldShowDate(timeDuration),
-      });
-      const convertedBytes = convertToSpecifiedByte(bytes, largestByteSize);
-      line.push({ name, x: time, y: convertedBytes });
-    });
-    return line;
-  }
-  return undefined;
+  Object.entries(metrics).map(([timestamp, bytes]) => {
+    line.push({ name, x: parseInt(timestamp, 10), y: bytes });
+  });
+  return line;
 }

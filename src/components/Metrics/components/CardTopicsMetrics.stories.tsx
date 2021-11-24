@@ -11,7 +11,7 @@ export default {
     incomingTopicsData: {},
     outgoingTopicsData: {},
     partitions: {},
-    timeDuration: 15,
+    duration: 15,
     backendUnavailable: false,
     metricsDataUnavailable: false,
     isLoading: false,

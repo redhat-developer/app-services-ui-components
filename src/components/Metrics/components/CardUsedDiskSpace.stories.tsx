@@ -8,7 +8,7 @@ export default {
   component: CardUsedDiskSpace,
   args: {
     metrics: {},
-    timeDuration: 5,
+    duration: 5,
     metricsDataUnavailable: false,
     isLoading: false,
     isRefreshing: false,
