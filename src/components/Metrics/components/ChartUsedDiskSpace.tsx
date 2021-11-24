@@ -103,6 +103,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
       >
         <ChartAxis label={"\n" + "Time"} tickCount={6} />
         <ChartAxis
+          label={"\n\n\n" + "Used disk space"}
           dependentAxis
           tickFormat={(t) => `${Math.round(t)} ${largestByteSize}`}
           tickCount={4}
