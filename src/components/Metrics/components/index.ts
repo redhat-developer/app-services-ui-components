@@ -11,5 +11,5 @@ export * from './MetricsLayout';
 export * from './ToolbarTopicsMetrics';
 export * from './CardTopicsMetrics';
 export * from './ChartTotalBytes';
-export * from './KafkaInstanceMetrics';
+export * from './ChartKafkaInstanceMetrics';
 export * from './ToolbarUsedDiskSpace';

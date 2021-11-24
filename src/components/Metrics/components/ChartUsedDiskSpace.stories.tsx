@@ -1,21 +1,21 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 import React from 'react'
-import { KafkaInstanceMetrics } from './KafkaInstanceMetrics'
+import { ChartKafkaInstanceMetrics } from './ChartKafkaInstanceMetrics'
 import MetricsI18n from '../Metrics-i18n.json'
 
 export default {
-  title: 'Metrics/Components/KafkaInstanceMetrics',
-  component: KafkaInstanceMetrics,
+  title: 'Metrics/Components/ChartKafkaInstanceMetrics',
+  component: ChartKafkaInstanceMetrics,
   args: {
     duration: 5,
   },
   parameters: {
     i18n: MetricsI18n,
   },
-} as ComponentMeta<typeof KafkaInstanceMetrics>
+} as ComponentMeta<typeof ChartKafkaInstanceMetrics>
 
-const Template: ComponentStory<typeof KafkaInstanceMetrics> = (args) => (
-  <KafkaInstanceMetrics {...args} />
+const Template: ComponentStory<typeof ChartKafkaInstanceMetrics> = (args) => (
+  <ChartKafkaInstanceMetrics {...args} />
 )
 
 export const UnderLimits = Template.bind({})

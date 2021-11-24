@@ -38,13 +38,13 @@ type LegendData = {
   }
 }
 
-type KafkaInstanceMetricsProps = {
+type ChartKafkaInstanceMetricsProps = {
   metrics: TotalBytesMetrics
   duration: DurationOptions
   chartName: string
 }
 
-export const KafkaInstanceMetrics: FunctionComponent<KafkaInstanceMetricsProps> = ({
+export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetricsProps> = ({
   metrics,
   duration,
   chartName,

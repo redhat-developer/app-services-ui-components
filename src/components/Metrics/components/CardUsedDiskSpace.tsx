@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { DurationOptions, TotalBytesMetrics } from '../types'
 import { ChartLoading } from './ChartLoading'
 import { ChartPopover } from './ChartPopover'
-import { KafkaInstanceMetrics } from './KafkaInstanceMetrics'
+import { ChartKafkaInstanceMetrics } from './ChartKafkaInstanceMetrics'
 import { EmptyStateMetricsUnavailable } from './EmptyStateMetricsUnavailable'
 import { ToolbarUsedDiskSpace } from './ToolbarUsedDiskSpace'
 
@@ -73,7 +73,7 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                   helperText={'used_disk_space_help_text'}
                 />
                 <CardBody>
-                  <KafkaInstanceMetrics
+                  <ChartKafkaInstanceMetrics
                     chartName={'used_disk_space'}
                     metrics={metrics}
                     duration={duration}
@@ -85,7 +85,7 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                   helperText="connection_attempt_rate_help_text"
                 />
                 <CardBody>
-                  <KafkaInstanceMetrics
+                  <ChartKafkaInstanceMetrics
                     chartName={'connection_attempt_rate'}
                     metrics={connectionAttemptRateMetrics}
                     duration={duration}
