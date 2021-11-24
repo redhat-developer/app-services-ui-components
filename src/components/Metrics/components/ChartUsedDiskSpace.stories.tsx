@@ -1,24 +1,24 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
-import { ChartUsedDiskSpace } from "./ChartUsedDiskSpace";
-import MetricsI18n from "../Metrics-i18n.json";
+import { ComponentStory, ComponentMeta } from '@storybook/react'
+import React from 'react'
+import { KafkaInstanceMetrics } from './KafkaInstanceMetrics'
+import MetricsI18n from '../Metrics-i18n.json'
 
 export default {
-  title: "Metrics/Components/ChartUsedDiskSpace",
-  component: ChartUsedDiskSpace,
+  title: 'Metrics/Components/KafkaInstanceMetrics',
+  component: KafkaInstanceMetrics,
   args: {
     duration: 5,
   },
   parameters: {
     i18n: MetricsI18n,
   },
-} as ComponentMeta<typeof ChartUsedDiskSpace>;
+} as ComponentMeta<typeof KafkaInstanceMetrics>
 
-const Template: ComponentStory<typeof ChartUsedDiskSpace> = (args) => (
-  <ChartUsedDiskSpace {...args} />
-);
+const Template: ComponentStory<typeof KafkaInstanceMetrics> = (args) => (
+  <KafkaInstanceMetrics {...args} />
+)
 
-export const UnderLimits = Template.bind({});
+export const UnderLimits = Template.bind({})
 UnderLimits.args = {
   metrics: {
     1636546066048: 74297344789,
@@ -27,9 +27,9 @@ UnderLimits.args = {
     1636546366048: 119948608789,
     1636546466048: 75231232789,
   },
-};
+}
 
-export const OverLimits = Template.bind({});
+export const OverLimits = Template.bind({})
 OverLimits.args = {
   metrics: {
     1636546066048: 74297344789,
@@ -38,4 +38,4 @@ OverLimits.args = {
     1636546366048: 119948608789,
     1636546466048: 75231232789,
   },
-};
+}

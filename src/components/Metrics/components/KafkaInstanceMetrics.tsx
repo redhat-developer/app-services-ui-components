@@ -38,14 +38,16 @@ type LegendData = {
   }
 }
 
-type ChartUsedDiskSpaceProps = {
+type KafkaInstanceMetricsProps = {
   metrics: TotalBytesMetrics
   duration: DurationOptions
+  chartName: string
 }
 
-export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
+export const KafkaInstanceMetrics: FunctionComponent<KafkaInstanceMetricsProps> = ({
   metrics,
   duration,
+  chartName,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null)
   const { t } = useTranslation()
@@ -65,7 +67,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
     metrics,
     duration,
     usageLimit,
-    t('Used disk space'),
+    t(`metrics.${chartName}`),
     t('Limit'),
   )
 
@@ -108,7 +110,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
           }
         />
         <ChartAxis
-          label={'\n\n\n\n\n' + 'Used disk space'}
+          label={'\n\n\n' + t(`metrics.${chartName}`)}
           dependentAxis
           tickFormat={formatBytes}
           tickCount={4}
