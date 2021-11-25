@@ -8,10 +8,12 @@ import {
   TopicsMetricsModel,
   KafkaInstanceMetricsMachineType,
   KafkaInstanceMetricsModel,
-  GetTopicsMetricsResponse,
-  GetKafkaInstanceMetricsResponse,
 } from "./machines";
-import { DurationOptions } from "./types";
+import {
+  DurationOptions,
+  GetKafkaInstanceMetricsResponse,
+  GetTopicsMetricsResponse,
+} from "./types";
 import { timeIntervalsMapping } from "./consts";
 
 export const MetricsContext = createContext<{
@@ -20,10 +22,10 @@ export const MetricsContext = createContext<{
 }>(null!);
 
 export type MetricsProviderProps = UseTopicsMetricsMachineServiceOptions &
-  UseDiskSpaceMetricsMachineServiceOptions;
+  UseKafkaInstanceMetricsMachineServiceOptions;
 export const MetricsProvider: FunctionComponent<MetricsProviderProps> = ({
   children,
-  getDiskSpaceMetrics,
+  getKafkaInstanceMetrics: getDiskSpaceMetrics,
   getTopicsMetrics,
 }) => {
   const topicsMetricsMachineService = useTopicsMetricsMachineService({
@@ -31,7 +33,7 @@ export const MetricsProvider: FunctionComponent<MetricsProviderProps> = ({
   });
   const kafkaInstanceMetricsMachineService = useKafkaInstanceMetricsMachineService(
     {
-      getDiskSpaceMetrics,
+      getKafkaInstanceMetrics: getDiskSpaceMetrics,
     }
   );
   return (
@@ -46,15 +48,12 @@ export const MetricsProvider: FunctionComponent<MetricsProviderProps> = ({
   );
 };
 
-type GetTopicsMetricsOptions = {
-  duration: DurationOptions;
-  interval: number;
-  selectedTopic: string | undefined;
-};
 type UseTopicsMetricsMachineServiceOptions = {
-  getTopicsMetrics: (
-    options: GetTopicsMetricsOptions
-  ) => Promise<GetTopicsMetricsResponse>;
+  getTopicsMetrics: (options: {
+    duration: DurationOptions;
+    interval: number;
+    selectedTopic: string | undefined;
+  }) => Promise<GetTopicsMetricsResponse>;
 };
 function useTopicsMetricsMachineService({
   getTopicsMetrics,
@@ -86,24 +85,21 @@ function useTopicsMetricsMachineService({
   );
 }
 
-type GetDiskSpaceMetricsOptions = {
-  duration: DurationOptions;
-  interval: number;
-};
-type UseDiskSpaceMetricsMachineServiceOptions = {
-  getDiskSpaceMetrics: (
-    options: GetDiskSpaceMetricsOptions
-  ) => Promise<GetKafkaInstanceMetricsResponse>;
+type UseKafkaInstanceMetricsMachineServiceOptions = {
+  getKafkaInstanceMetrics: (options: {
+    duration: DurationOptions;
+    interval: number;
+  }) => Promise<GetKafkaInstanceMetricsResponse>;
 };
 function useKafkaInstanceMetricsMachineService({
-  getDiskSpaceMetrics,
-}: UseDiskSpaceMetricsMachineServiceOptions) {
+  getKafkaInstanceMetrics,
+}: UseKafkaInstanceMetricsMachineServiceOptions) {
   return useInterpret(
     KafkaInstanceMetricsMachine.withConfig({
       services: {
         api: (context) => {
           return (callback) => {
-            getDiskSpaceMetrics({
+            getKafkaInstanceMetrics({
               duration: context.duration,
               interval: timeIntervalsMapping[context.duration].interval,
             })

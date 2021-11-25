@@ -3,18 +3,10 @@ import {
   DurationOptions,
   TimeSeriesMetrics,
   PartitionBytesMetric,
+  GetTopicsMetricsResponse,
 } from "../types";
 
 const MAX_RETRIES = 3;
-
-export type GetTopicsMetricsResponse = {
-  kafkaTopics: string[];
-  metricsTopics: string[];
-  bytesOutgoing: TimeSeriesMetrics;
-  bytesIncoming: TimeSeriesMetrics;
-  bytesPerPartition: PartitionBytesMetric;
-  incomingMessageRate: TimeSeriesMetrics;
-};
 
 export const TopicsMetricsModel = createModel(
   {
