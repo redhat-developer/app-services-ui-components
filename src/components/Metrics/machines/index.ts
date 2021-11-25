@@ -1,2 +1,2 @@
-export * from './DiskSpaceMetricsMachine';
-export * from './TopicsMetricsMachine';
+export * from "./KafkaInstanceMetricsMachine";
+export * from "./TopicsMetricsMachine";

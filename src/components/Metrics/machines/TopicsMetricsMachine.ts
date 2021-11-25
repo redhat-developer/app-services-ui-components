@@ -1,7 +1,7 @@
 import { createModel } from "xstate/lib/model";
 import {
   DurationOptions,
-  TotalBytesMetrics,
+  TimeSeriesMetrics,
   PartitionBytesMetric,
 } from "../types";
 
@@ -10,9 +10,10 @@ const MAX_RETRIES = 3;
 export type GetTopicsMetricsResponse = {
   kafkaTopics: string[];
   metricsTopics: string[];
-  bytesOutgoing: TotalBytesMetrics;
-  bytesIncoming: TotalBytesMetrics;
+  bytesOutgoing: TimeSeriesMetrics;
+  bytesIncoming: TimeSeriesMetrics;
   bytesPerPartition: PartitionBytesMetric;
+  incomingMessageRate: TimeSeriesMetrics;
 };
 
 export const TopicsMetricsModel = createModel(
@@ -24,9 +25,10 @@ export const TopicsMetricsModel = createModel(
     // from the api
     kafkaTopics: [] as string[],
     metricsTopics: [] as string[],
-    bytesOutgoing: {} as TotalBytesMetrics,
-    bytesIncoming: {} as TotalBytesMetrics,
+    bytesOutgoing: {} as TimeSeriesMetrics,
+    bytesIncoming: {} as TimeSeriesMetrics,
     bytesPerPartition: {} as PartitionBytesMetric,
+    incomingMessageRate: {} as TimeSeriesMetrics,
 
     // how many time did we try a fetch (that combines more api)
     fetchFailures: 0 as number,
@@ -59,6 +61,7 @@ const setMetrics = TopicsMetricsModel.assign((_, event) => {
     bytesPerPartition,
     bytesIncoming,
     bytesOutgoing,
+    incomingMessageRate,
   } = event;
   return {
     kafkaTopics,
@@ -66,6 +69,7 @@ const setMetrics = TopicsMetricsModel.assign((_, event) => {
     bytesPerPartition,
     bytesIncoming,
     bytesOutgoing,
+    incomingMessageRate,
   };
 }, "fetchSuccess");
 

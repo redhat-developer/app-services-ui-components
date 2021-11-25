@@ -9,7 +9,7 @@ import {
 import {
   DurationOptions,
   PartitionBytesMetric,
-  TotalBytesMetrics,
+  TimeSeriesMetrics,
 } from "../types";
 import {
   Bullseye,
@@ -27,8 +27,8 @@ import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
 
 type CardTopicsMetricsProps = {
   topics: string[];
-  incomingTopicsData: TotalBytesMetrics;
-  outgoingTopicsData: TotalBytesMetrics;
+  incomingTopicsData: TimeSeriesMetrics;
+  outgoingTopicsData: TimeSeriesMetrics;
   partitions: PartitionBytesMetric;
   duration: DurationOptions;
   backendUnavailable: boolean;
@@ -185,11 +185,10 @@ const PartitionSizeTitle: FunctionComponent = () => {
   return (
     <CardTitle component="h3">
       {t("metrics.topic_partition_size")}{" "}
-      <ChartPopover title={t("metrics.topic_partition_size_popover_header")}
-        description={t("metrics.topic_partition_size_help_text")} />
-
-
+      <ChartPopover
+        title={t("metrics.topic_partition_size_popover_header")}
+        description={t("metrics.topic_partition_size_help_text")}
+      />
     </CardTitle>
-
   );
 };

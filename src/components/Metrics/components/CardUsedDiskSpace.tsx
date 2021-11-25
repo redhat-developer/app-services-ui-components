@@ -1,7 +1,7 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { DurationOptions, TotalBytesMetrics } from "../types";
+import { DurationOptions, TimeSeriesMetrics } from "../types";
 import { ChartLoading } from "./ChartLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
@@ -10,8 +10,8 @@ import { ToolbarUsedDiskSpace } from "./ToolbarUsedDiskSpace";
 import { formatBytes } from "./utils";
 
 type CardUsedDiskSpaceProps = {
-  usedDiskMetrics: TotalBytesMetrics;
-  connectionAttemptRateMetrics: TotalBytesMetrics;
+  usedDiskMetrics: TimeSeriesMetrics;
+  connectionAttemptRateMetrics: TimeSeriesMetrics;
   duration: DurationOptions;
   metricsDataUnavailable: boolean;
   isLoading: boolean;

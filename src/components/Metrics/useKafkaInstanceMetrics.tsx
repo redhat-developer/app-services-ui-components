@@ -1,11 +1,11 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
-import { DiskSpaceMetricsModel } from "./machines";
+import { KafkaInstanceMetricsModel } from "./machines";
 import { MetricsContext } from "./MetricsProvider";
 import { DurationOptions } from "./types";
 
-export function useDiskSpace() {
-  const { diskSpaceMetricsMachineService: service } = useContext(
+export function useKafkaInstanceMetrics() {
+  const { kafkaInstanceMetricsMachineService: service } = useContext(
     MetricsContext
   );
 
@@ -31,12 +31,12 @@ export function useDiskSpace() {
 
   const onDurationChange = useCallback(
     (duration: DurationOptions) =>
-      service.send(DiskSpaceMetricsModel.events.selectDuration(duration)),
+      service.send(KafkaInstanceMetricsModel.events.selectDuration(duration)),
     [service]
   );
 
   const onRefresh = useCallback(
-    () => service.send(DiskSpaceMetricsModel.events.refresh()),
+    () => service.send(KafkaInstanceMetricsModel.events.refresh()),
     [service]
   );
 

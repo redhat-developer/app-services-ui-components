@@ -14,7 +14,7 @@ import sub from "date-fns/sub";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { timeIntervalsMapping } from "../consts";
-import { TotalBytesMetrics, DurationOptions } from "../types";
+import { TimeSeriesMetrics, DurationOptions } from "../types";
 import { dateToChartValue, shouldShowDate } from "./utils";
 
 type ChartData = {
@@ -39,7 +39,7 @@ type LegendData = {
 };
 
 type ChartLinearWithOptionalLimitProps = {
-  metrics: TotalBytesMetrics;
+  metrics: TimeSeriesMetrics;
   duration: DurationOptions;
   chartName: string;
   usageLimit?: number;
@@ -147,7 +147,7 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
 };
 
 function getChartData(
-  metrics: TotalBytesMetrics,
+  metrics: TimeSeriesMetrics,
   duration: number,
   lineLabel: string,
   limitLabel: string,

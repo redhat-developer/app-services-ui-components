@@ -4,7 +4,7 @@ import React from "react";
 import Prando from "prando";
 import { Metrics } from "./Metrics";
 import MetricsI18n from "./Metrics-i18n.json";
-import { DurationOptions, TotalBytesMetrics } from "./types";
+import { DurationOptions, TimeSeriesMetrics } from "./types";
 import { timeIntervalsMapping } from "./consts";
 
 export default {
@@ -35,6 +35,7 @@ JustCreated.args = {
   getDiskSpaceMetrics: () =>
     Promise.resolve({
       usedDiskSpaceMetrics: {},
+      clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: {},
     }),
   getTopicsMetrics: () =>
@@ -43,6 +44,7 @@ JustCreated.args = {
       metricsTopics: [],
       bytesIncoming: {},
       bytesOutgoing: {},
+      incomingMessageRate: {},
       bytesPerPartition: {},
     }),
 };
@@ -53,6 +55,7 @@ NoTopics.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: () =>
@@ -61,6 +64,7 @@ NoTopics.args = {
       metricsTopics: [],
       bytesIncoming: {},
       bytesOutgoing: {},
+      incomingMessageRate: {},
       bytesPerPartition: {},
     }),
 };
@@ -71,6 +75,7 @@ TopicsJustCreated.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: () =>
@@ -79,6 +84,7 @@ TopicsJustCreated.args = {
       metricsTopics: [],
       bytesIncoming: {},
       bytesOutgoing: {},
+      incomingMessageRate: {},
       bytesPerPartition: {},
     }),
 };
@@ -89,6 +95,7 @@ TopicsRecentlyCreated.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
@@ -97,6 +104,7 @@ TopicsRecentlyCreated.args = {
       metricsTopics: ["lorem"],
       bytesIncoming: makeMetrics(duration, 0, 2, 10 ** 7, 3),
       bytesOutgoing: makeMetrics(duration, 2, 10, 10 ** 7, 3),
+      incomingMessageRate: makeMetrics(duration, 2, 10, 10, 3),
       bytesPerPartition: {
         "lorem partition 1": makeMetrics(duration, 0, 2, 10 ** 7, 3),
         "lorem partition 2": makeMetrics(duration, 0, 4, 10 ** 7, 3),
@@ -111,6 +119,7 @@ Story4.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
@@ -119,6 +128,7 @@ Story4.args = {
       metricsTopics: ["lorem"],
       bytesIncoming: makeMetrics(duration, 0, 2, 10 ** 7),
       bytesOutgoing: makeMetrics(duration, 2, 10, 10 ** 7),
+      incomingMessageRate: makeMetrics(duration, 2, 10, 10),
       bytesPerPartition: {
         "lorem partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
         "lorem partition 2": makeMetrics(duration, 0, 4, 10 ** 7),
@@ -133,6 +143,7 @@ Story5.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
+      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
@@ -141,6 +152,7 @@ Story5.args = {
       metricsTopics: ["lorem"],
       bytesIncoming: makeMetrics(duration, 1, 4, 10 ** 7),
       bytesOutgoing: makeMetrics(duration, 3, 8, 10 ** 7),
+      incomingMessageRate: makeMetrics(duration, 3, 8, 10),
       bytesPerPartition: {
         "lorem partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
         "lorem partition 2": makeMetrics(duration, 0, 4, 10 ** 7),
@@ -157,7 +169,7 @@ export function makeMetrics(
   max: number,
   exp: number,
   offset = 0
-): TotalBytesMetrics {
+): TimeSeriesMetrics {
   const rng = new Prando(duration + min + max); // make the number deterministing to make visual regression testing on Chromatic work
   const ticks = timeIntervalsMapping[duration].ticks;
   const entries = new Array(ticks - offset).fill(now).map((d, index) => [

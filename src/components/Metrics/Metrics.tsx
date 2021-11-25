@@ -7,7 +7,7 @@ import React, { FunctionComponent } from "react";
 import { MetricsLayout } from "./components";
 import { CardUsedDiskSpace } from "./components/CardUsedDiskSpace";
 import { MetricsProvider, MetricsProviderProps } from "./MetricsProvider";
-import { useDiskSpace } from "./useDiskSpace";
+import { useKafkaInstanceMetrics } from "./useKafkaInstanceMetrics";
 import { useTopicsMetrics } from "./useTopicsMetrics";
 
 export type MetricsProps = {
@@ -35,7 +35,7 @@ type ConnectedMetricsProps = {
 const ConnectedMetrics: FunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
 }) => {
-  const { isLoading, isFailed } = useDiskSpace();
+  const { isLoading, isFailed } = useKafkaInstanceMetrics();
 
   switch (true) {
     case isLoading:
@@ -62,7 +62,7 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
     connectionAttemptRateMetrics,
     onDurationChange,
     onRefresh,
-  } = useDiskSpace();
+  } = useKafkaInstanceMetrics();
 
   return (
     <CardUsedDiskSpace

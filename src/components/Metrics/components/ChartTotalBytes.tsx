@@ -1,4 +1,4 @@
-import { TotalBytesMetrics } from "../types";
+import { TimeSeriesMetrics } from "../types";
 import { timeIntervalsMapping } from "../consts";
 
 import {
@@ -37,8 +37,8 @@ type LegendData = {
 };
 
 type ChartTotalBytesProps = {
-  incomingTopicsData: TotalBytesMetrics;
-  outgoingTopicsData: TotalBytesMetrics;
+  incomingTopicsData: TimeSeriesMetrics;
+  outgoingTopicsData: TimeSeriesMetrics;
   selectedTopic: string | undefined;
   duration: number;
 };
@@ -129,8 +129,8 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
 };
 
 export function getBytesChartData(
-  incomingTopic: TotalBytesMetrics,
-  outgoingTopic: TotalBytesMetrics,
+  incomingTopic: TimeSeriesMetrics,
+  outgoingTopic: TimeSeriesMetrics,
   duration: number,
   incomingTopicName: string,
   outgoingTopicName: string
@@ -187,7 +187,7 @@ export function getBytesChartData(
 }
 
 export function metricsToLine(
-  metrics: TotalBytesMetrics,
+  metrics: TimeSeriesMetrics,
   name: string
 ): Array<TopicChartData> {
   const line: Array<TopicChartData> = [];

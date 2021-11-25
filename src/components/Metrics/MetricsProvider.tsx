@@ -2,21 +2,21 @@ import { useInterpret } from "@xstate/react";
 import React, { createContext, FunctionComponent } from "react";
 import { InterpreterFrom } from "xstate";
 import {
-  DiskSpaceMetricsMachine,
+  KafkaInstanceMetricsMachine,
   TopicsMetricsMachineType,
   TopicsMetricsMachine,
   TopicsMetricsModel,
-  DiskSpaceMachineType,
-  DiskSpaceMetricsModel,
+  KafkaInstanceMetricsMachineType,
+  KafkaInstanceMetricsModel,
   GetTopicsMetricsResponse,
-  GetDiskSpaceMetricsResponse,
+  GetKafkaInstanceMetricsResponse,
 } from "./machines";
 import { DurationOptions } from "./types";
 import { timeIntervalsMapping } from "./consts";
 
 export const MetricsContext = createContext<{
   topicsMetricsMachineService: InterpreterFrom<TopicsMetricsMachineType>;
-  diskSpaceMetricsMachineService: InterpreterFrom<DiskSpaceMachineType>;
+  kafkaInstanceMetricsMachineService: InterpreterFrom<KafkaInstanceMetricsMachineType>;
 }>(null!);
 
 export type MetricsProviderProps = UseTopicsMetricsMachineServiceOptions &
@@ -29,13 +29,15 @@ export const MetricsProvider: FunctionComponent<MetricsProviderProps> = ({
   const topicsMetricsMachineService = useTopicsMetricsMachineService({
     getTopicsMetrics,
   });
-  const diskSpaceMetricsMachineService = useDiskSpaceMetricsMachineService({
-    getDiskSpaceMetrics,
-  });
+  const kafkaInstanceMetricsMachineService = useKafkaInstanceMetricsMachineService(
+    {
+      getDiskSpaceMetrics,
+    }
+  );
   return (
     <MetricsContext.Provider
       value={{
-        diskSpaceMetricsMachineService,
+        kafkaInstanceMetricsMachineService,
         topicsMetricsMachineService,
       }}
     >
@@ -91,13 +93,13 @@ type GetDiskSpaceMetricsOptions = {
 type UseDiskSpaceMetricsMachineServiceOptions = {
   getDiskSpaceMetrics: (
     options: GetDiskSpaceMetricsOptions
-  ) => Promise<GetDiskSpaceMetricsResponse>;
+  ) => Promise<GetKafkaInstanceMetricsResponse>;
 };
-function useDiskSpaceMetricsMachineService({
+function useKafkaInstanceMetricsMachineService({
   getDiskSpaceMetrics,
 }: UseDiskSpaceMetricsMachineServiceOptions) {
   return useInterpret(
-    DiskSpaceMetricsMachine.withConfig({
+    KafkaInstanceMetricsMachine.withConfig({
       services: {
         api: (context) => {
           return (callback) => {
@@ -106,11 +108,11 @@ function useDiskSpaceMetricsMachineService({
               interval: timeIntervalsMapping[context.duration].interval,
             })
               .then((results) =>
-                callback(DiskSpaceMetricsModel.events.fetchSuccess(results))
+                callback(KafkaInstanceMetricsModel.events.fetchSuccess(results))
               )
               .catch((e) => {
                 console.error("Failed fetching data", e);
-                callback(DiskSpaceMetricsModel.events.fetchFail());
+                callback(KafkaInstanceMetricsModel.events.fetchFail());
               });
           };
         },

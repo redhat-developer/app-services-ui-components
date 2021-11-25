@@ -1,5 +1,5 @@
-export type TotalBytesMetrics = { [timestamp: number]: number };
-export type PartitionBytesMetric = { [partition: string]: TotalBytesMetrics };
+export type TimeSeriesMetrics = { [timestamp: number]: number };
+export type PartitionBytesMetric = { [partition: string]: TimeSeriesMetrics };
 
 export enum DurationOptions {
   Last5minutes = 5,

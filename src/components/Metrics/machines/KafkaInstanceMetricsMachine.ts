@@ -1,21 +1,23 @@
 import { createModel } from "xstate/lib/model";
-import { DurationOptions, TotalBytesMetrics } from "../types";
+import { DurationOptions, TimeSeriesMetrics } from "../types";
 
 const MAX_RETRIES = 3;
 
-export type GetDiskSpaceMetricsResponse = {
-  usedDiskSpaceMetrics: TotalBytesMetrics;
-  connectionAttemptRateMetrics: TotalBytesMetrics;
+export type GetKafkaInstanceMetricsResponse = {
+  usedDiskSpaceMetrics: TimeSeriesMetrics;
+  clientConnectionsMetrics: TimeSeriesMetrics;
+  connectionAttemptRateMetrics: TimeSeriesMetrics;
 };
 
-export const DiskSpaceMetricsModel = createModel(
+export const KafkaInstanceMetricsModel = createModel(
   {
     // from the UI elements
     duration: 60 as DurationOptions,
 
     // from the api
-    usedDiskSpaceMetrics: {} as TotalBytesMetrics,
-    connectionAttemptRateMetrics: {} as TotalBytesMetrics,
+    usedDiskSpaceMetrics: {} as TimeSeriesMetrics,
+    clientConnectionsMetrics: {} as TimeSeriesMetrics,
+    connectionAttemptRateMetrics: {} as TimeSeriesMetrics,
     // how many time did we try a fetch (that combines more api)
     fetchFailures: 0 as number,
   },
@@ -23,7 +25,7 @@ export const DiskSpaceMetricsModel = createModel(
     events: {
       // called when a new kafka id has been specified
       fetch: () => ({}),
-      fetchSuccess: (value: GetDiskSpaceMetricsResponse) => ({ ...value }),
+      fetchSuccess: (value: GetKafkaInstanceMetricsResponse) => ({ ...value }),
       fetchFail: () => ({}),
 
       // to refresh the data
@@ -40,39 +42,44 @@ export const DiskSpaceMetricsModel = createModel(
   }
 );
 
-const setMetrics = DiskSpaceMetricsModel.assign((_, event) => {
-  const { usedDiskSpaceMetrics, connectionAttemptRateMetrics } = event;
+const setMetrics = KafkaInstanceMetricsModel.assign((_, event) => {
+  const {
+    usedDiskSpaceMetrics,
+    clientConnectionsMetrics,
+    connectionAttemptRateMetrics,
+  } = event;
   return {
     usedDiskSpaceMetrics,
+    clientConnectionsMetrics,
     connectionAttemptRateMetrics,
   };
 }, "fetchSuccess");
 
-const incrementRetries = DiskSpaceMetricsModel.assign(
+const incrementRetries = KafkaInstanceMetricsModel.assign(
   {
     fetchFailures: (context) => context.fetchFailures + 1,
   },
   "fetchFail"
 );
 
-const resetRetries = DiskSpaceMetricsModel.assign(
+const resetRetries = KafkaInstanceMetricsModel.assign(
   {
     fetchFailures: () => 0,
   },
   "refresh"
 );
 
-const setDuration = DiskSpaceMetricsModel.assign(
+const setDuration = KafkaInstanceMetricsModel.assign(
   {
     duration: (_, event) => event.duration,
   },
   "selectDuration"
 );
 
-export const DiskSpaceMetricsMachine = DiskSpaceMetricsModel.createMachine(
+export const KafkaInstanceMetricsMachine = KafkaInstanceMetricsModel.createMachine(
   {
     id: "diskSpace",
-    context: DiskSpaceMetricsModel.initialContext,
+    context: KafkaInstanceMetricsModel.initialContext,
     initial: "callApi",
     states: {
       callApi: {
@@ -171,4 +178,4 @@ export const DiskSpaceMetricsMachine = DiskSpaceMetricsModel.createMachine(
   }
 );
 
-export type DiskSpaceMachineType = typeof DiskSpaceMetricsMachine;
+export type KafkaInstanceMetricsMachineType = typeof KafkaInstanceMetricsMachine;
