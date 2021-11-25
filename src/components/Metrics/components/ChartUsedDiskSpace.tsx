@@ -7,72 +7,72 @@ import {
   ChartThemeColor,
   ChartThreshold,
   ChartVoronoiContainer,
-} from '@patternfly/react-charts'
-import chart_color_black_500 from '@patternfly/react-tokens/dist/js/chart_color_black_500'
-import chart_color_blue_300 from '@patternfly/react-tokens/dist/js/chart_color_blue_300'
-import sub from 'date-fns/sub'
-import React, { FunctionComponent, useEffect, useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { timeIntervalsMapping } from '../consts'
-import { TotalBytesMetrics, DurationOptions } from '../types'
-import { dateToChartValue, shouldShowDate, formatBytes } from './utils'
+} from "@patternfly/react-charts";
+import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
+import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
+import sub from "date-fns/sub";
+import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { timeIntervalsMapping } from "../consts";
+import { TotalBytesMetrics, DurationOptions } from "../types";
+import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
 
 type ChartData = {
-  areaColor: string
-  softLimitColor: string
-  area: BrokerChartData[]
-  softLimit: BrokerChartData[]
-}
+  areaColor: string;
+  softLimitColor: string;
+  area: BrokerChartData[];
+  softLimit: BrokerChartData[];
+};
 
 type BrokerChartData = {
-  name: string
-  x: number
-  y: number
-}
+  name: string;
+  x: number;
+  y: number;
+};
 
 type LegendData = {
-  name: string
+  name: string;
   symbol?: {
-    fill?: string
-    type?: string
-  }
-}
+    fill?: string;
+    type?: string;
+  };
+};
 
 type ChartUsedDiskSpaceProps = {
-  metrics: TotalBytesMetrics
-  duration: DurationOptions
-}
+  metrics: TotalBytesMetrics;
+  duration: DurationOptions;
+};
 
 export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
   metrics,
   duration,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const { t } = useTranslation()
-  const [width, setWidth] = useState<number>()
-  const usageLimit = 1000 * 1024 ** 3 // Replace with limit from API
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { t } = useTranslation();
+  const [width, setWidth] = useState<number>();
+  const usageLimit = 1000 * 1024 ** 3; // Replace with limit from API
 
   const handleResize = () =>
-    containerRef.current && setWidth(containerRef.current.clientWidth)
-  const itemsPerRow = width && width > 650 ? 6 : 3
+    containerRef.current && setWidth(containerRef.current.clientWidth);
+  const itemsPerRow = width && width > 650 ? 6 : 3;
 
   useEffect(() => {
-    handleResize()
-    window.addEventListener('resize', handleResize)
-  }, [width])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+  }, [width]);
 
   const { chartData, legendData, tickValues } = getChartData(
     metrics,
     duration,
     usageLimit,
-    t('Used disk space'),
-    t('Limit'),
-  )
+    t("Used disk space"),
+    t("Limit")
+  );
 
   return (
     <div ref={containerRef}>
       <Chart
-        ariaTitle={t('metrics.used_disk_space')}
+        ariaTitle={t("metrics.used_disk_space")}
         containerComponent={
           <ChartVoronoiContainer
             labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
@@ -82,7 +82,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
         legendPosition="bottom-left"
         legendComponent={
           <ChartLegend
-            orientation={'horizontal'}
+            orientation={"horizontal"}
             data={legendData}
             itemsPerRow={itemsPerRow}
           />
@@ -92,14 +92,14 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
           bottom: 110, // Adjusted to accomodate legend
           left: 120,
           right: 40,
-          top: 0,
+          top: 40,
         }}
         themeColor={ChartThemeColor.multiUnordered}
         width={width}
         legendAllowWrap={true}
       >
         <ChartAxis
-          label={'\n' + 'Time'}
+          label={"\n" + "Time"}
           tickValues={tickValues}
           tickFormat={(d) =>
             dateToChartValue(new Date(d), {
@@ -108,7 +108,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
           }
         />
         <ChartAxis
-          label={'\n\n\n\n\n' + 'Used disk space'}
+          label={"\n\n\n\n\n" + "Used disk space"}
           dependentAxis
           tickFormat={formatBytes}
           tickCount={4}
@@ -139,57 +139,57 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
         />
       </Chart>
     </div>
-  )
-}
+  );
+};
 
 function getChartData(
   metrics: TotalBytesMetrics,
   duration: number,
   usageLimit: number,
   lineLabel: string,
-  limitLabel: string,
+  limitLabel: string
 ): {
-  legendData: Array<LegendData>
-  chartData: Array<ChartData>
-  tickValues: number[]
+  legendData: Array<LegendData>;
+  chartData: Array<ChartData>;
+  tickValues: number[];
 } {
   const legendData: Array<LegendData> = [
     {
       name: limitLabel,
-      symbol: { fill: chart_color_black_500.value, type: 'threshold' },
+      symbol: { fill: chart_color_black_500.value, type: "threshold" },
     },
     { name: lineLabel, symbol: { fill: chart_color_blue_300.value } },
-  ]
+  ];
 
-  const areaColor = chart_color_blue_300.value
-  const softLimitColor = chart_color_black_500.value
-  const chartData: Array<ChartData> = []
-  const area: Array<BrokerChartData> = []
-  const softLimit: Array<BrokerChartData> = []
+  const areaColor = chart_color_blue_300.value;
+  const softLimitColor = chart_color_black_500.value;
+  const chartData: Array<ChartData> = [];
+  const area: Array<BrokerChartData> = [];
+  const softLimit: Array<BrokerChartData> = [];
 
   Object.entries(metrics).map(([timestamp, bytes]) => {
-    area.push({ name: lineLabel, x: parseInt(timestamp, 10), y: bytes })
+    area.push({ name: lineLabel, x: parseInt(timestamp, 10), y: bytes });
     softLimit.push({
       name: limitLabel,
       x: parseInt(timestamp, 10),
       y: usageLimit,
-    })
-  })
-  chartData.push({ areaColor, softLimitColor, area, softLimit })
+    });
+  });
+  chartData.push({ areaColor, softLimitColor, area, softLimit });
 
-  const allTimestamps = Object.keys(metrics)
-  const mostRecentTs = parseInt(allTimestamps[0])
+  const allTimestamps = Object.keys(metrics);
+  const mostRecentTs = parseInt(allTimestamps[0]);
   const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
     .fill(mostRecentTs)
     .map((d, index) =>
       sub(new Date(d), {
         seconds: timeIntervalsMapping[duration].interval * index,
-      }).getTime(),
-    )
+      }).getTime()
+    );
 
   return {
     legendData,
     chartData,
     tickValues,
-  }
+  };
 }

@@ -79,7 +79,7 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
           bottom: 110,
           left: 120,
           right: 40,
-          top: 0,
+          top: 40,
         }}
         themeColor={ChartThemeColor.multiUnordered}
         width={width}
