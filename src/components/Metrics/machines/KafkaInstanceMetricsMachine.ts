@@ -1,13 +1,11 @@
 import { createModel } from "xstate/lib/model";
-import { DurationOptions, TimeSeriesMetrics } from "../types";
+import {
+  DurationOptions,
+  GetKafkaInstanceMetricsResponse,
+  TimeSeriesMetrics,
+} from "../types";
 
 const MAX_RETRIES = 3;
-
-export type GetKafkaInstanceMetricsResponse = {
-  usedDiskSpaceMetrics: TimeSeriesMetrics;
-  clientConnectionsMetrics: TimeSeriesMetrics;
-  connectionAttemptRateMetrics: TimeSeriesMetrics;
-};
 
 export const KafkaInstanceMetricsModel = createModel(
   {

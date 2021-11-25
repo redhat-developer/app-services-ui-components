@@ -13,3 +13,18 @@ export enum DurationOptions {
   Last2days = 2 * 24 * 60,
   Last7days = 7 * 24 * 60,
 }
+
+export type GetTopicsMetricsResponse = {
+  kafkaTopics: string[];
+  metricsTopics: string[];
+  bytesOutgoing: TimeSeriesMetrics;
+  bytesIncoming: TimeSeriesMetrics;
+  bytesPerPartition: PartitionBytesMetric;
+  incomingMessageRate: TimeSeriesMetrics;
+};
+
+export type GetKafkaInstanceMetricsResponse = {
+  usedDiskSpaceMetrics: TimeSeriesMetrics;
+  clientConnectionsMetrics: TimeSeriesMetrics;
+  connectionAttemptRateMetrics: TimeSeriesMetrics;
+};
