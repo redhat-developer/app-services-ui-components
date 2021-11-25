@@ -1,11 +1,11 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext, useMemo } from "react";
 import { TopicsMetricsModel } from "./machines";
-import { MetricsContext } from "./MetricsProvider";
 import { DurationOptions } from "./types";
+import { TopicsMetricsContext } from "./TopicsMetricsProvider";
 
 export function useTopicsMetrics() {
-  const { topicsMetricsMachineService: service } = useContext(MetricsContext);
+  const { service } = useContext(TopicsMetricsContext);
 
   const selector = useCallback(
     (state: typeof service.state) => ({

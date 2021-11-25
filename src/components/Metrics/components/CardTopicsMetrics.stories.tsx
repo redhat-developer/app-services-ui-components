@@ -13,7 +13,7 @@ export default {
     incomingTopicsData: {},
     outgoingTopicsData: {},
     partitions: {},
-    duration: 15,
+    duration: DurationOptions.Last12hours,
     backendUnavailable: false,
     metricsDataUnavailable: false,
     isLoading: false,
