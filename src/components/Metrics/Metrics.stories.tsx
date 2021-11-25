@@ -26,14 +26,14 @@ const Template: ComponentStory<typeof Metrics> = (args) => (
 
 export const ApiError = Template.bind({});
 ApiError.args = {
-  getDiskSpaceMetrics: () => Promise.reject(),
+  getKafkaInstanceMetrics: () => Promise.reject(),
   getTopicsMetrics: () => Promise.reject(),
 };
 ApiError.storyName = "Api error";
 
 export const JustCreated = Template.bind({});
 JustCreated.args = {
-  getDiskSpaceMetrics: () =>
+  getKafkaInstanceMetrics: () =>
     Promise.resolve({
       usedDiskSpaceMetrics: {},
       clientConnectionsMetrics: {},
@@ -53,7 +53,7 @@ JustCreated.storyName = "Kafka just created";
 
 export const NoTopics = Template.bind({});
 NoTopics.args = {
-  getDiskSpaceMetrics: ({ duration }) =>
+  getKafkaInstanceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
@@ -73,7 +73,7 @@ NoTopics.storyName = "Kafka exists but no topics created";
 
 export const TopicsJustCreated = Template.bind({});
 TopicsJustCreated.args = {
-  getDiskSpaceMetrics: ({ duration }) =>
+  getKafkaInstanceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
@@ -93,7 +93,7 @@ TopicsJustCreated.storyName = "Topics just created (no metrics)";
 
 export const TopicsRecentlyCreated = Template.bind({});
 TopicsRecentlyCreated.args = {
-  getDiskSpaceMetrics: ({ duration }) =>
+  getKafkaInstanceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
@@ -117,7 +117,7 @@ TopicsRecentlyCreated.storyName = "Topics recently created (partial metrics)";
 
 export const Story4 = Template.bind({});
 Story4.args = {
-  getDiskSpaceMetrics: ({ duration }) =>
+  getKafkaInstanceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
@@ -141,7 +141,7 @@ Story4.storyName = "Kafka and topics exist and are in use";
 
 export const Story5 = Template.bind({});
 Story5.args = {
-  getDiskSpaceMetrics: ({ duration }) =>
+  getKafkaInstanceMetrics: ({ duration }) =>
     Promise.resolve({
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),

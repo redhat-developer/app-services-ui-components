@@ -15,13 +15,13 @@ export type MetricsProps = {
 } & MetricsProviderProps;
 
 export const Metrics: FunctionComponent<MetricsProps> = ({
-  getKafkaInstanceMetrics: getDiskSpaceMetrics,
+  getKafkaInstanceMetrics,
   getTopicsMetrics,
   onCreateTopic,
 }) => {
   return (
     <MetricsProvider
-      getKafkaInstanceMetrics={getDiskSpaceMetrics}
+      getKafkaInstanceMetrics={getKafkaInstanceMetrics}
       getTopicsMetrics={getTopicsMetrics}
     >
       <ConnectedMetrics onCreateTopic={onCreateTopic} />
