@@ -10,7 +10,7 @@ export default {
   component: ChartTotalBytes,
   args: {
     incomingTopicsData: makeMetrics(DurationOptions.Last12hours, 1, 4, 10 ** 7),
-    outgoingTopicsData: makeMetrics(DurationOptions.Last12hours, 1, 4, 10 ** 7),
+    outgoingTopicsData: makeMetrics(DurationOptions.Last12hours, 4, 8, 10 ** 7),
     duration: DurationOptions.Last12hours,
   },
   parameters: {

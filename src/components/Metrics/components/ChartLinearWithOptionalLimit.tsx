@@ -10,12 +10,10 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
-import sub from "date-fns/sub";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { timeIntervalsMapping } from "../consts";
 import { TimeSeriesMetrics, DurationOptions } from "../types";
-import { dateToChartValue, shouldShowDate } from "./utils";
+import { dateToChartValue, shouldShowDate, timestampsToTicks } from "./utils";
 
 type ChartData = {
   areaColor: string;
@@ -185,15 +183,7 @@ function getChartData(
   });
   chartData.push({ areaColor, softLimitColor, area, softLimit });
 
-  const allTimestamps = Object.keys(metrics);
-  const mostRecentTs = parseInt(allTimestamps[0]);
-  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
-    .fill(mostRecentTs)
-    .map((d, index) =>
-      sub(new Date(d), {
-        seconds: timeIntervalsMapping[duration].interval * index,
-      }).getTime()
-    );
+  const tickValues = timestampsToTicks(Object.keys(metrics), duration);
 
   return {
     legendData,

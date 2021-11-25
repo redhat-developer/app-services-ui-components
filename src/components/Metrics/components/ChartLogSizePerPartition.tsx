@@ -12,9 +12,12 @@ import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_b
 import chart_color_green_300 from "@patternfly/react-tokens/dist/js/chart_color_green_300";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
-import { timeIntervalsMapping } from "../consts";
-import sub from "date-fns/sub";
+import {
+  dateToChartValue,
+  shouldShowDate,
+  formatBytes,
+  timestampsToTicks,
+} from "./utils";
 
 const colors = [chart_color_green_300.value, chart_color_blue_300.value];
 
@@ -136,17 +139,10 @@ export function getChartData(
     chartData.push({ color, area });
   });
 
-  const allTimestamps = Object.values(partitions).flatMap((m) =>
-    Object.keys(m)
+  const allTimestamps = Array.from(
+    new Set(Object.values(partitions).flatMap((m) => Object.keys(m)))
   );
-  const mostRecentTs = parseInt(allTimestamps[0]);
-  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
-    .fill(mostRecentTs)
-    .map((d, index) =>
-      sub(new Date(d), {
-        seconds: timeIntervalsMapping[duration].interval * index,
-      }).getTime()
-    );
+  const tickValues = timestampsToTicks(allTimestamps, duration);
 
   return {
     legendData,
