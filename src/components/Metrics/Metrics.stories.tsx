@@ -34,7 +34,8 @@ export const JustCreated = Template.bind({});
 JustCreated.args = {
   getDiskSpaceMetrics: () =>
     Promise.resolve({
-      metrics: {},
+      usedDiskSpaceMetrics: {},
+      connectionAttemptRateMetrics: {},
     }),
   getTopicsMetrics: () =>
     Promise.resolve({
@@ -51,7 +52,8 @@ export const NoTopics = Template.bind({});
 NoTopics.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      metrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: () =>
     Promise.resolve({
@@ -68,7 +70,8 @@ export const TopicsJustCreated = Template.bind({});
 TopicsJustCreated.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      metrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: () =>
     Promise.resolve({
@@ -85,7 +88,8 @@ export const TopicsRecentlyCreated = Template.bind({});
 TopicsRecentlyCreated.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      metrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
     Promise.resolve({
@@ -106,7 +110,8 @@ export const Story4 = Template.bind({});
 Story4.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      metrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
     Promise.resolve({
@@ -127,7 +132,8 @@ export const Story5 = Template.bind({});
 Story5.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      metrics: makeMetrics(duration, 900, 1100, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
+      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
   getTopicsMetrics: ({ duration }) =>
     Promise.resolve({
@@ -145,7 +151,7 @@ Story5.args = {
 Story5.storyName = "Limits have been reached ";
 
 const now = new Date(2012, 1, 29, 11, 45, 5, 123);
-function makeMetrics(
+export function makeMetrics(
   duration: DurationOptions,
   min: number,
   max: number,

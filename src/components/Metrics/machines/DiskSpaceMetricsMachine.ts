@@ -4,7 +4,8 @@ import { DurationOptions, TotalBytesMetrics } from "../types";
 const MAX_RETRIES = 3;
 
 export type GetDiskSpaceMetricsResponse = {
-  metrics: TotalBytesMetrics;
+  usedDiskSpaceMetrics: TotalBytesMetrics;
+  connectionAttemptRateMetrics: TotalBytesMetrics;
 };
 
 export const DiskSpaceMetricsModel = createModel(
@@ -13,7 +14,8 @@ export const DiskSpaceMetricsModel = createModel(
     duration: 60 as DurationOptions,
 
     // from the api
-    metrics: {} as TotalBytesMetrics,
+    usedDiskSpaceMetrics: {} as TotalBytesMetrics,
+    connectionAttemptRateMetrics: {} as TotalBytesMetrics,
     // how many time did we try a fetch (that combines more api)
     fetchFailures: 0 as number,
   },
@@ -39,9 +41,10 @@ export const DiskSpaceMetricsModel = createModel(
 );
 
 const setMetrics = DiskSpaceMetricsModel.assign((_, event) => {
-  const { metrics } = event;
+  const { usedDiskSpaceMetrics, connectionAttemptRateMetrics } = event;
   return {
-    metrics,
+    usedDiskSpaceMetrics,
+    connectionAttemptRateMetrics,
   };
 }, "fetchSuccess");
 
@@ -162,7 +165,8 @@ export const DiskSpaceMetricsMachine = DiskSpaceMetricsModel.createMachine(
   {
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
-      hasMetrics: (context) => Object.keys(context.metrics).length > 0,
+      hasMetrics: (context) =>
+        Object.keys(context.usedDiskSpaceMetrics).length > 0,
     },
   }
 );

@@ -15,7 +15,7 @@ import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { timeIntervalsMapping } from "../consts";
 import { TotalBytesMetrics, DurationOptions } from "../types";
-import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
+import { dateToChartValue, shouldShowDate } from "./utils";
 
 type ChartData = {
   areaColor: string;
@@ -38,21 +38,24 @@ type LegendData = {
   };
 };
 
-type ChartKafkaInstanceMetricsProps = {
+type ChartLinearWithOptionalLimitProps = {
   metrics: TotalBytesMetrics;
   duration: DurationOptions;
   chartName: string;
+  usageLimit?: number;
+  formatValue?: (d: number) => string;
 };
 
-export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetricsProps> = ({
+export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOptionalLimitProps> = ({
   metrics,
   duration,
   chartName,
+  usageLimit,
+  formatValue = (d) => `${d}`,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
   const [width, setWidth] = useState<number>();
-  const usageLimit = 1000 * 1024 ** 3; // Replace with limit from API
 
   const handleResize = () =>
     containerRef.current && setWidth(containerRef.current.clientWidth);
@@ -66,9 +69,9 @@ export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetr
   const { chartData, legendData, tickValues } = getChartData(
     metrics,
     duration,
-    usageLimit,
-    t(`metrics.${chartName}`),
-    t("Limit")
+    chartName,
+    t("Limit"),
+    usageLimit
   );
 
   return (
@@ -77,7 +80,7 @@ export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetr
         ariaTitle={t("metrics.used_disk_space")}
         containerComponent={
           <ChartVoronoiContainer
-            labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
+            labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
             constrainToVisibleArea
           />
         }
@@ -110,10 +113,9 @@ export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetr
           }
         />
         <ChartAxis
-          label={"\n\n\n\n\n" + t(`metrics.${chartName}`)}
+          label={"\n\n\n\n\n" + chartName}
           dependentAxis
-          tickFormat={formatBytes}
-          tickCount={4}
+          tickFormat={formatValue}
         />
         <ChartGroup>
           {chartData.map((value, index) => (
@@ -147,21 +149,23 @@ export const ChartKafkaInstanceMetrics: FunctionComponent<ChartKafkaInstanceMetr
 function getChartData(
   metrics: TotalBytesMetrics,
   duration: number,
-  usageLimit: number,
   lineLabel: string,
-  limitLabel: string
+  limitLabel: string,
+  usageLimit?: number
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
   tickValues: number[];
 } {
-  const legendData: Array<LegendData> = [
-    {
-      name: limitLabel,
-      symbol: { fill: chart_color_black_500.value, type: "threshold" },
-    },
+  const legendData = [
+    usageLimit
+      ? {
+          name: limitLabel,
+          symbol: { fill: chart_color_black_500.value, type: "threshold" },
+        }
+      : undefined,
     { name: lineLabel, symbol: { fill: chart_color_blue_300.value } },
-  ];
+  ].filter((d) => !!d) as Array<LegendData>;
 
   const areaColor = chart_color_blue_300.value;
   const softLimitColor = chart_color_black_500.value;
@@ -171,11 +175,13 @@ function getChartData(
 
   Object.entries(metrics).map(([timestamp, bytes]) => {
     area.push({ name: lineLabel, x: parseInt(timestamp, 10), y: bytes });
-    softLimit.push({
-      name: limitLabel,
-      x: parseInt(timestamp, 10),
-      y: usageLimit,
-    });
+    if (usageLimit) {
+      softLimit.push({
+        name: limitLabel,
+        x: parseInt(timestamp, 10),
+        y: usageLimit,
+      });
+    }
   });
   chartData.push({ areaColor, softLimitColor, area, softLimit });
 

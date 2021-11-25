@@ -20,7 +20,8 @@ export function useDiskSpace() {
     []
   );
   const {
-    metrics,
+    usedDiskSpaceMetrics,
+    connectionAttemptRateMetrics,
     duration,
     isLoading,
     isRefreshing,
@@ -40,7 +41,8 @@ export function useDiskSpace() {
   );
 
   return {
-    metrics,
+    usedDiskSpaceMetrics,
+    connectionAttemptRateMetrics,
     isLoading,
     isRefreshing,
     isFailed,

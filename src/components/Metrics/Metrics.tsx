@@ -2,17 +2,17 @@ import {
   CardTopicsMetrics,
   EmptyStateInitialLoading,
   EmptyStateMetricsUnavailable,
-} from './components'
-import React, { FunctionComponent } from 'react'
-import { MetricsLayout } from './components'
-import { CardUsedDiskSpace } from './components/CardUsedDiskSpace'
-import { MetricsProvider, MetricsProviderProps } from './MetricsProvider'
-import { useDiskSpace } from './useDiskSpace'
-import { useTopicsMetrics } from './useTopicsMetrics'
+} from "./components";
+import React, { FunctionComponent } from "react";
+import { MetricsLayout } from "./components";
+import { CardUsedDiskSpace } from "./components/CardUsedDiskSpace";
+import { MetricsProvider, MetricsProviderProps } from "./MetricsProvider";
+import { useDiskSpace } from "./useDiskSpace";
+import { useTopicsMetrics } from "./useTopicsMetrics";
 
 export type MetricsProps = {
-  onCreateTopic: () => void
-} & MetricsProviderProps
+  onCreateTopic: () => void;
+} & MetricsProviderProps;
 
 export const Metrics: FunctionComponent<MetricsProps> = ({
   getDiskSpaceMetrics,
@@ -26,30 +26,30 @@ export const Metrics: FunctionComponent<MetricsProps> = ({
     >
       <ConnectedMetrics onCreateTopic={onCreateTopic} />
     </MetricsProvider>
-  )
-}
+  );
+};
 
 type ConnectedMetricsProps = {
-  onCreateTopic: () => void
-}
+  onCreateTopic: () => void;
+};
 const ConnectedMetrics: FunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
 }) => {
-  const { isLoading, isFailed } = useDiskSpace()
+  const { isLoading, isFailed } = useDiskSpace();
 
   switch (true) {
     case isLoading:
-      return <EmptyStateInitialLoading />
+      return <EmptyStateInitialLoading />;
     case isFailed:
-      return <EmptyStateMetricsUnavailable />
+      return <EmptyStateMetricsUnavailable />;
   }
   return (
     <MetricsLayout
       diskSpaceMetrics={<ConnectedDiskMetrics />}
       topicMetrics={<ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />}
     />
-  )
-}
+  );
+};
 
 const ConnectedDiskMetrics: FunctionComponent = () => {
   const {
@@ -58,28 +58,29 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
     isDataUnavailable,
     isFailed,
     duration,
-    metrics,
+    usedDiskSpaceMetrics,
+    connectionAttemptRateMetrics,
     onDurationChange,
     onRefresh,
-  } = useDiskSpace()
+  } = useDiskSpace();
 
   return (
     <CardUsedDiskSpace
-      metrics={metrics}
+      usedDiskMetrics={usedDiskSpaceMetrics}
+      connectionAttemptRateMetrics={connectionAttemptRateMetrics}
       duration={duration}
       metricsDataUnavailable={isDataUnavailable || isFailed}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
       onRefresh={onRefresh}
       onDurationChange={onDurationChange}
-      connectionAttemptRateMetrics={metrics}
     />
-  )
-}
+  );
+};
 
 type ConnectedTopicsMetricsProps = {
-  onCreateTopic: () => void
-}
+  onCreateTopic: () => void;
+};
 const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = ({
   onCreateTopic,
 }) => {
@@ -97,7 +98,7 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
     onDurationChange,
     onTopicChange,
     onRefresh,
-  } = useTopicsMetrics()
+  } = useTopicsMetrics();
 
   return (
     <CardTopicsMetrics
@@ -116,5 +117,5 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
       onDurationChange={onDurationChange}
       onCreateTopic={onCreateTopic}
     />
-  )
-}
+  );
+};
