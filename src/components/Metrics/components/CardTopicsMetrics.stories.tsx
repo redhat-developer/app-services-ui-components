@@ -2,6 +2,8 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { CardTopicsMetrics } from "./CardTopicsMetrics";
 import MetricsI18n from "../Metrics-i18n.json";
+import { makeMetrics } from "../Metrics.stories";
+import { DurationOptions } from "../types";
 
 export default {
   title: "Metrics/Components/CardTopicsMetrics",
@@ -20,6 +22,11 @@ export default {
   },
   parameters: {
     i18n: MetricsI18n,
+  },
+  argTypes: {
+    duration: {
+      type: null,
+    },
   },
 } as ComponentMeta<typeof CardTopicsMetrics>;
 
@@ -52,20 +59,18 @@ NoMetricsWithTopics.args = {
   metricsDataUnavailable: true,
 };
 
-const sampleIncomingData = {
-  1636546066048: 70,
-  1636546166048: 920,
-  1636546266048: 23,
-  1636546366048: 510,
-  1636546466048: 361,
-};
-const sampleOutgoingData = {
-  1636546066048: 230,
-  1636546166048: 102,
-  1636546266048: 41,
-  1636546366048: 476,
-  1636546466048: 276,
-};
+const sampleIncomingData = makeMetrics(
+  DurationOptions.Last12hours,
+  0,
+  999 * 10 ** 7,
+  1
+);
+const sampleOutgoingData = makeMetrics(
+  DurationOptions.Last12hours,
+  0,
+  999 * 10 ** 8,
+  1
+);
 
 export const SampleData = Template.bind({});
 SampleData.args = {
@@ -88,23 +93,23 @@ SampleDataWithSelectedTopic.args = {
   incomingTopicsData: sampleIncomingData,
   outgoingTopicsData: sampleOutgoingData,
   partitions: {
-    "dolor partition 1": {
-      1636546066048: 3,
-      1636546166048: 1,
-      1636546266048: 1,
-      1636546366048: 9,
-    },
-    "dolor partition 2": {
-      1636546066048: 7,
-      1636546166048: 4,
-      1636546266048: 8,
-      1636546366048: 3,
-    },
-    "dolor partition 3": {
-      1636546066048: 2,
-      1636546166048: 6,
-      1636546266048: 5,
-      1636546366048: 4,
-    },
+    "dolor partition 1": makeMetrics(
+      DurationOptions.Last12hours,
+      0,
+      999 * 10 ** 4,
+      1
+    ),
+    "dolor partition 2": makeMetrics(
+      DurationOptions.Last12hours,
+      0,
+      999 * 10 ** 5,
+      1
+    ),
+    "dolor partition 3": makeMetrics(
+      DurationOptions.Last12hours,
+      0,
+      999 * 10 ** 6,
+      1
+    ),
   },
 };

@@ -15,6 +15,11 @@ export default {
   parameters: {
     i18n: MetricsI18n,
   },
+  argTypes: {
+    duration: {
+      type: null,
+    },
+  },
 } as ComponentMeta<typeof ChartLinearWithOptionalLimit>;
 
 const Template: ComponentStory<typeof ChartLinearWithOptionalLimit> = (
