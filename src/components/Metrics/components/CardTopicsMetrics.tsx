@@ -173,7 +173,7 @@ const TotalBytesTitle: FunctionComponent = () => {
     <CardTitle component="h3">
       {t("metrics.total_bytes")}{" "}
       <ChartPopover
-        title={t("metrics.total_bytes")}
+        title={t("metrics.total_bytes_popover_header")}
         description={t("metrics.topic_metrics_help_text")}
       />
     </CardTitle>
@@ -183,6 +183,13 @@ const TotalBytesTitle: FunctionComponent = () => {
 const PartitionSizeTitle: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
-    <CardTitle component="h3">{t("metrics.topic_partition_size")}</CardTitle>
+    <CardTitle component="h3">
+      {t("metrics.topic_partition_size")}{" "}
+      <ChartPopover title={t("metrics.topic_partition_size_popover_header")}
+        description={t("metrics.topic_partition_size_help_text")} />
+
+
+    </CardTitle>
+
   );
 };
