@@ -14,8 +14,12 @@ import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_b
 import chart_color_orange_300 from "@patternfly/react-tokens/dist/js/chart_color_orange_300";
 import React, { FunctionComponent, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { dateToChartValue, shouldShowDate, formatBytes } from "./utils";
-import sub from "date-fns/sub";
+import {
+  dateToChartValue,
+  shouldShowDate,
+  formatBytes,
+  timestampsToTicks,
+} from "./utils";
 
 type ChartData = {
   color: string;
@@ -165,19 +169,10 @@ export function getBytesChartData(
       },
     });
   }
-  const allTimestamps = [
-    ...Object.keys(incomingTopic),
-    ...Object.keys(outgoingTopic),
-  ];
-  allTimestamps.sort();
-  const mostRecentTs = parseInt(allTimestamps[allTimestamps.length - 1]);
-  const tickValues: number[] = new Array(timeIntervalsMapping[duration].ticks)
-    .fill(mostRecentTs)
-    .map((d, index) =>
-      sub(new Date(d), {
-        seconds: timeIntervalsMapping[duration].interval * index,
-      }).getTime()
-    );
+  const allTimestamps = Array.from(
+    new Set([...Object.keys(incomingTopic), ...Object.keys(outgoingTopic)])
+  );
+  const tickValues = timestampsToTicks(allTimestamps, duration);
 
   return {
     legendData,
