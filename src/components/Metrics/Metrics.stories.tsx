@@ -17,6 +17,7 @@ export default {
     // this option is passed to the devTools instance to use a different inspector
     inspectUrl: "https://stately.ai/viz?inspect",
   },
+  excludeStories: /makeMetrics/,
 } as ComponentMeta<typeof Metrics>;
 
 const Template: ComponentStory<typeof Metrics> = (args) => (
