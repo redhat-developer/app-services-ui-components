@@ -6,26 +6,35 @@ import {
 import React, { FunctionComponent } from "react";
 import { MetricsLayout } from "./components";
 import { CardUsedDiskSpace } from "./components/CardUsedDiskSpace";
-import { MetricsProvider, MetricsProviderProps } from "./MetricsProvider";
+import {
+  KafkaInstanceMetricsProvider,
+  KafkaInstanceMetricsProviderProps,
+} from "./KafkaInstanceMetricsProvider";
 import { useKafkaInstanceMetrics } from "./useKafkaInstanceMetrics";
 import { useTopicsMetrics } from "./useTopicsMetrics";
+import {
+  TopicsMetricsProvider,
+  TopicsMetricsProviderProps,
+} from "./TopicsMetricsProvider";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
-} & MetricsProviderProps;
+} & KafkaInstanceMetricsProviderProps &
+  TopicsMetricsProviderProps;
 
 export const Metrics: FunctionComponent<MetricsProps> = ({
-  getKafkaInstanceMetrics: getDiskSpaceMetrics,
+  getKafkaInstanceMetrics,
   getTopicsMetrics,
   onCreateTopic,
 }) => {
   return (
-    <MetricsProvider
-      getKafkaInstanceMetrics={getDiskSpaceMetrics}
-      getTopicsMetrics={getTopicsMetrics}
-    >
-      <ConnectedMetrics onCreateTopic={onCreateTopic} />
-    </MetricsProvider>
+    <TopicsMetricsProvider getTopicsMetrics={getTopicsMetrics}>
+      <KafkaInstanceMetricsProvider
+        getKafkaInstanceMetrics={getKafkaInstanceMetrics}
+      >
+        <ConnectedMetrics onCreateTopic={onCreateTopic} />
+      </KafkaInstanceMetricsProvider>
+    </TopicsMetricsProvider>
   );
 };
 
