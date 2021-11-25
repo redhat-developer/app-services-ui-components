@@ -55,7 +55,7 @@ export const NoTopics = Template.bind({});
 NoTopics.args = {
   getDiskSpaceMetrics: ({ duration }) =>
     Promise.resolve({
-      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      usedDiskSpaceMetrics: makeMetrics(duration, 0, 999, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
     }),
