@@ -35,6 +35,7 @@
   "homepage": "https://github.com/redhat-developer/app-services-ui-components#readme",
   "devDependencies": {
     "@babel/core": "7.16.0",
+    "@storybook/addon-a11y": "^6.3.12",
     "@storybook/addon-actions": "6.3.12",
     "@storybook/addon-essentials": "6.3.12",
     "@storybook/addon-links": "6.3.12",

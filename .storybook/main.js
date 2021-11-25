@@ -5,5 +5,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "storybook-xstate-addon/preset",
     "storybook-i18n/preset",
+    "@storybook/addon-a11y",
   ],
 };
