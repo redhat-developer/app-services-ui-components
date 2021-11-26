@@ -98,7 +98,6 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                   />
                 </CardBody>
                 <Divider />
-                <Divider />
                 <ChartTitle
                   title="connection_attempt_rate"
                   helperText="connection_attempt_rate_help_text"
