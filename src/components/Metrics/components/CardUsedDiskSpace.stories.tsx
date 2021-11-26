@@ -10,6 +10,7 @@ export default {
   component: CardUsedDiskSpace,
   args: {
     usedDiskMetrics: {},
+    clientConnectionsMetrics: {},
     connectionAttemptRateMetrics: {},
     duration: DurationOptions.Last12hours,
     metricsDataUnavailable: false,
@@ -48,6 +49,12 @@ SampleData.args = {
     999 * 10 ** 9,
     1
   ),
+  clientConnectionsMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    0,
+    100,
+    1
+  ),
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     0,
@@ -59,6 +66,12 @@ SampleData.args = {
 export const OverLimits = Template.bind({});
 OverLimits.args = {
   usedDiskMetrics: makeMetrics(DurationOptions.Last12hours, 90, 1250, 10 ** 9),
+  clientConnectionsMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    20,
+    120,
+    1
+  ),
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     20,
