@@ -11,6 +11,7 @@ import { formatBytes } from "./utils";
 
 type CardUsedDiskSpaceProps = {
   usedDiskMetrics: TimeSeriesMetrics;
+  clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
   duration: DurationOptions;
   metricsDataUnavailable: boolean;
@@ -26,6 +27,7 @@ type ChartTitleProps = {
 
 export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
   usedDiskMetrics,
+  clientConnectionsMetrics,
   connectionAttemptRateMetrics,
   duration,
   metricsDataUnavailable,
@@ -80,6 +82,19 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                     duration={duration}
                     formatValue={formatBytes}
                     usageLimit={1000 * 1024 ** 3}
+                  />
+                </CardBody>
+                <Divider />
+                <ChartTitle
+                  title="client_connections"
+                  helperText="client_connections_helper_text"
+                />
+                <CardBody>
+                  <ChartLinearWithOptionalLimit
+                    chartName={t("metrics.client_connections")}
+                    metrics={clientConnectionsMetrics}
+                    duration={duration}
+                    usageLimit={100}
                   />
                 </CardBody>
                 <Divider />

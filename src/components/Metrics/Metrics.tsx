@@ -68,6 +68,7 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
     isFailed,
     duration,
     usedDiskSpaceMetrics,
+    clientConnectionsMetrics,
     connectionAttemptRateMetrics,
     onDurationChange,
     onRefresh,
@@ -76,6 +77,7 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
   return (
     <CardUsedDiskSpace
       usedDiskMetrics={usedDiskSpaceMetrics}
+      clientConnectionsMetrics={clientConnectionsMetrics}
       connectionAttemptRateMetrics={connectionAttemptRateMetrics}
       duration={duration}
       metricsDataUnavailable={isDataUnavailable || isFailed}
