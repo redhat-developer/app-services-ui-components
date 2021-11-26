@@ -19,6 +19,7 @@ export function useKafkaInstanceMetrics() {
   );
   const {
     usedDiskSpaceMetrics,
+    clientConnectionsMetrics,
     connectionAttemptRateMetrics,
     duration,
     isLoading,
@@ -40,6 +41,7 @@ export function useKafkaInstanceMetrics() {
 
   return {
     usedDiskSpaceMetrics,
+    clientConnectionsMetrics,
     connectionAttemptRateMetrics,
     isLoading,
     isRefreshing,

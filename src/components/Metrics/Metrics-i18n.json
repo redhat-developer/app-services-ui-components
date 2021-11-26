@@ -3,6 +3,8 @@
     "used_disk_space": "Used disk space",
     "used_disk_space_popover_header": "Used disk space chart",
     "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed.",
+    "client_connections": "Client connections",
+    "client_connections_helper_text":"Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",
     "connection_attempt_rate": "Connection attempt rate",
     "connection_attempt_rate_help_text": "Connection attempt rate is the number of attempted client connections per second for the Kafka instance over time. This metric enables you to review client activity spikes in the instance and to assess available connections per second relative to the limit.",
     "log_size_per_partition": "Log size per partition",
