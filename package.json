@@ -21,7 +21,7 @@
     "eslint": "eslint --ext .tsx,.js,.ts ./src/",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic --project-token=233963c78c8a"
+    "chromatic": "chromatic"
   },
   "repository": {
     "type": "git",
@@ -37,8 +37,11 @@
     "@babel/core": "7.16.0",
     "@storybook/addon-actions": "6.4.0",
     "@storybook/addon-essentials": "6.4.0",
+    "@storybook/addon-interactions": "6.4.0",
     "@storybook/addon-links": "6.4.0",
+    "@storybook/jest": "^0.0.5",
     "@storybook/react": "6.4.0",
+    "@storybook/testing-library": "0.0.7",
     "@types/byte-size": "8.1.0",
     "@types/react": "17.0.37",
     "@types/react-dom": "17.0.11",

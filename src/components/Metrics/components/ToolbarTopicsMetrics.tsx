@@ -10,6 +10,7 @@ import {
 } from "@patternfly/react-core";
 import SyncIcon from "@patternfly/react-icons/dist/js/icons/sync-icon";
 import React, { FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import { DurationOptions } from "../types";
 import { FilterByTime } from "./FilterByTime";
 import { FilterByTopic } from "./FilterByTopic";
@@ -36,6 +37,7 @@ export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> 
   onRefresh,
   onSetSelectedTopic,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <CardHeader>
@@ -44,12 +46,14 @@ export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> 
           <Toolbar>
             <ToolbarContent>
               <FilterByTopic
+                ariaLabel={t("metrics.topics_filter_by_topic")}
                 selectedTopic={selectedTopic}
                 onSetSelectedTopic={onSetSelectedTopic}
                 topicList={topicList}
                 disableToolbar={isDisabled}
               />
               <FilterByTime
+                ariaLabel={t("metrics.topics_filter_by_time")}
                 duration={duration}
                 onDurationChange={onSetTimeDuration}
                 disableToolbar={isDisabled}

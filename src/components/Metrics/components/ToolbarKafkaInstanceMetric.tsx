@@ -12,8 +12,9 @@ import {
 import SyncIcon from "@patternfly/react-icons/dist/js/icons/sync-icon";
 import { FilterByTime } from "./FilterByTime";
 import { DurationOptions } from "../types";
+import { useTranslation } from "react-i18next";
 
-type ToolbarUsedDiskSpaceProps = {
+type ToolbarKafkaInstanceMetricProps = {
   title: string;
   isDisabled: boolean;
   isRefreshing: boolean;
@@ -21,7 +22,7 @@ type ToolbarUsedDiskSpaceProps = {
   onSetTimeDuration: (value: DurationOptions) => void;
   onRefresh: () => void;
 };
-export const ToolbarUsedDiskSpace: FunctionComponent<ToolbarUsedDiskSpaceProps> = ({
+export const ToolbarKafkaInstanceMetric: FunctionComponent<ToolbarKafkaInstanceMetricProps> = ({
   title,
   isDisabled,
   isRefreshing,
@@ -29,6 +30,7 @@ export const ToolbarUsedDiskSpace: FunctionComponent<ToolbarUsedDiskSpaceProps> 
   onSetTimeDuration,
   onRefresh,
 }) => {
+  const { t } = useTranslation();
   return (
     <>
       <CardHeader>
@@ -37,6 +39,7 @@ export const ToolbarUsedDiskSpace: FunctionComponent<ToolbarUsedDiskSpaceProps> 
           <Toolbar>
             <ToolbarContent>
               <FilterByTime
+                ariaLabel={t("metrics.kafka_instance_filter_by_time")}
                 duration={duration}
                 onDurationChange={onSetTimeDuration}
                 keyText={"kafka-metrics-time-filter"}

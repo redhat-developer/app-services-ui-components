@@ -93,41 +93,43 @@ const setDuration = TopicsMetricsModel.assign(
   "selectDuration"
 );
 
-export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
-  {
-    id: "topics",
-    context: TopicsMetricsModel.initialContext,
-    initial: "callApi",
-    states: {
-      callApi: {
-        tags: "loading",
-        initial: "loading",
-        states: {
-          loading: {
-            invoke: {
-              src: "api",
-            },
-            on: {
-              fetchSuccess: {
-                actions: setMetrics,
-                target: "#topics.verifyData",
-              },
-              fetchFail: {
-                actions: incrementRetries,
-                target: "failure",
-              },
-            },
-          },
-          failure: {
-            after: {
-              1000: [
-                { cond: "canRetryFetching", target: "loading" },
-                { target: "#topics.criticalFail" },
-              ],
-            },
-          },
+const apiState = {
+  initial: "loading",
+  states: {
+    loading: {
+      invoke: {
+        src: "api",
+      },
+      on: {
+        fetchSuccess: {
+          actions: setMetrics,
+          target: "#topicsMetrics.withResponse",
+        },
+        fetchFail: {
+          actions: incrementRetries,
+          target: "failure",
         },
       },
+    },
+    failure: {
+      after: {
+        1000: [
+          { cond: "canRetryFetching", target: "loading" },
+          { target: "#topicsMetrics.criticalFail" },
+        ],
+      },
+    },
+  },
+};
+
+export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
+  {
+    id: "topicsMetrics",
+    context: TopicsMetricsModel.initialContext,
+    initial: "initialLoading",
+    states: {
+      initialLoading: { ...apiState, tags: "initialLoading" },
+      callApi: { ...apiState, tags: "loading" },
       criticalFail: {
         tags: "failed",
         on: {
@@ -137,14 +139,8 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
           },
         },
       },
-      verifyData: {
-        always: [
-          { cond: "hasMetrics", target: "withTopics" },
-          { target: "noData" },
-        ],
-      },
-      noData: {
-        tags: "no-data",
+      withResponse: {
+        tags: "withResponse",
         initial: "idle",
         states: {
           idle: {},
@@ -156,61 +152,26 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
             on: {
               fetchSuccess: {
                 actions: setMetrics,
-                target: "#topics.verifyData",
+                target: "#topicsMetrics.withResponse",
               },
               fetchFail: {
                 // 👀 we silently ignore this happened
-                target: "#topics.noData",
+                target: "#topicsMetrics.withResponse",
               },
             },
           },
         },
         on: {
           refresh: {
-            target: "#topics.noData.refreshing",
+            target: "#topicsMetrics.withResponse.refreshing",
           },
           selectTopic: {
             actions: setTopic,
-            target: "#topics.noData.refreshing",
+            target: "callApi",
           },
           selectDuration: {
             actions: setDuration,
-            target: "#topics.noData.refreshing",
-          },
-        },
-      },
-      withTopics: {
-        initial: "idle",
-        states: {
-          idle: {},
-          refreshing: {
-            tags: "refreshing",
-            invoke: {
-              src: "api",
-            },
-            on: {
-              fetchSuccess: {
-                actions: setMetrics,
-                target: "#topics.verifyData",
-              },
-              fetchFail: {
-                // 👀 we silently ignore this happened
-                target: "#topics.withTopics",
-              },
-            },
-          },
-        },
-        on: {
-          refresh: {
-            target: "#topics.withTopics.refreshing",
-          },
-          selectTopic: {
-            actions: setTopic,
-            target: "#topics.withTopics.refreshing",
-          },
-          selectDuration: {
-            actions: setDuration,
-            target: "#topics.withTopics.refreshing",
+            target: "callApi",
           },
         },
       },
@@ -219,14 +180,6 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
   {
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
-      hasMetrics: (context) => {
-        const hasSomeTopics =
-          context.kafkaTopics.length > 0 || context.metricsTopics.length > 0;
-        const hasSomeMetrics =
-          Object.keys(context.bytesIncoming).length > 0 ||
-          Object.keys(context.bytesOutgoing).length > 0;
-        return hasSomeTopics && hasSomeMetrics;
-      },
     },
   }
 );

@@ -2,19 +2,21 @@ import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { DurationOptions, TimeSeriesMetrics } from "../types";
-import { ChartLoading } from "./ChartLoading";
+import { CardBodyLoading } from "./CardBodyLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
-import { ToolbarUsedDiskSpace } from "./ToolbarUsedDiskSpace";
+import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
 import { formatBytes } from "./utils";
+import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 
-type CardUsedDiskSpaceProps = {
+type CardKafkaInstanceMetricsProps = {
   usedDiskMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
   duration: DurationOptions;
-  metricsDataUnavailable: boolean;
+  backendUnavailable: boolean;
+  isInitialLoading: boolean;
   isLoading: boolean;
   isRefreshing: boolean;
   onRefresh: () => void;
@@ -25,12 +27,13 @@ type ChartTitleProps = {
   helperText: string;
 };
 
-export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
+export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetricsProps> = ({
   usedDiskMetrics,
   clientConnectionsMetrics,
   connectionAttemptRateMetrics,
   duration,
-  metricsDataUnavailable,
+  backendUnavailable,
+  isInitialLoading,
   isLoading,
   isRefreshing,
   onRefresh,
@@ -39,29 +42,21 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
   const { t } = useTranslation();
 
   return (
-    <Card>
-      <ToolbarUsedDiskSpace
+    <Card data-testid={"metrics-kafka-instance"}>
+      <ToolbarKafkaInstanceMetric
         title={t("metrics.kafka_instance_metrics")}
         duration={duration}
         onSetTimeDuration={onDurationChange}
-        isDisabled={metricsDataUnavailable}
+        isDisabled={backendUnavailable}
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
       />
       {(() => {
         switch (true) {
-          case isLoading:
-            return (
-              <>
-                <ChartTitle
-                  title="used_disk_space"
-                  helperText={"used_disk_space_help_text"}
-                />
-                <ChartLoading />
-              </>
-            );
+          case isInitialLoading:
+            return <CardBodyLoading />;
 
-          case metricsDataUnavailable:
+          case backendUnavailable:
             return (
               <CardBody>
                 <EmptyStateMetricsUnavailable />
@@ -82,6 +77,8 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                     duration={duration}
                     formatValue={formatBytes}
                     usageLimit={1000 * 1024 ** 3}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoMetricsData />}
                   />
                 </CardBody>
                 <Divider />
@@ -95,6 +92,8 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                     metrics={clientConnectionsMetrics}
                     duration={duration}
                     usageLimit={100}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoMetricsData />}
                   />
                 </CardBody>
                 <Divider />
@@ -109,6 +108,8 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                     metrics={connectionAttemptRateMetrics}
                     duration={duration}
                     usageLimit={100}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoMetricsData />}
                   />
                 </CardBody>
               </>

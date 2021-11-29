@@ -2,7 +2,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { CardTopicsMetrics } from "./CardTopicsMetrics";
 import MetricsI18n from "../Metrics-i18n.json";
-import { makeMetrics } from "../Metrics.stories";
+import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
 export default {
@@ -17,6 +17,7 @@ export default {
     duration: DurationOptions.Last12hours,
     backendUnavailable: false,
     metricsDataUnavailable: false,
+    isInitialLoading: false,
     isLoading: false,
     isRefreshing: false,
     selectedTopic: undefined,
@@ -37,17 +38,11 @@ const Template: ComponentStory<typeof CardTopicsMetrics> = (args) => (
 
 export const InitialLoading = Template.bind({});
 InitialLoading.args = {
-  isLoading: true,
+  isInitialLoading: true,
 };
 
 export const NoBackend = Template.bind({});
 NoBackend.args = {
-  backendUnavailable: true,
-};
-
-export const NoBackendWithTopics = Template.bind({});
-NoBackendWithTopics.args = {
-  topics: ["lorem"],
   backendUnavailable: true,
 };
 
@@ -58,6 +53,13 @@ export const NoMetricsWithTopics = Template.bind({});
 NoMetricsWithTopics.args = {
   topics: ["lorem"],
   metricsDataUnavailable: true,
+};
+
+export const LoadingMetricsForSelectedTopic = Template.bind({});
+LoadingMetricsForSelectedTopic.args = {
+  topics: ["lorem", "dolor"],
+  selectedTopic: "dolor",
+  isLoading: true,
 };
 
 const sampleIncomingData = makeMetrics(
@@ -91,7 +93,7 @@ SampleData.args = {
 export const LoadingSelectedTopic = Template.bind({});
 LoadingSelectedTopic.args = {
   topics: ["lorem", "dolor", "ipsum"],
-  selectedTopic: "lorem",
+  selectedTopic: "dolor",
   isLoading: true,
 };
 

@@ -10,6 +10,7 @@ export * from "./ChartLogSizePerPartition";
 export * from "./MetricsLayout";
 export * from "./ToolbarTopicsMetrics";
 export * from "./CardTopicsMetrics";
+export * from "./CardKafkaInstanceMetrics";
 export * from "./ChartTotalBytes";
 export * from "./ChartLinearWithOptionalLimit";
-export * from "./ToolbarUsedDiskSpace";
+export * from "./ToolbarKafkaInstanceMetric";
