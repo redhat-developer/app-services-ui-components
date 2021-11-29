@@ -105,6 +105,7 @@ export const CardUsedDiskSpace: FunctionComponent<CardUsedDiskSpaceProps> = ({
                 <CardBody>
                   <ChartLinearWithOptionalLimit
                     chartName={t("metrics.connection_attempt_rate")}
+                    yLabel={t("metrics.connection_attempt_rate_yaxis")}
                     metrics={connectionAttemptRateMetrics}
                     duration={duration}
                     usageLimit={100}

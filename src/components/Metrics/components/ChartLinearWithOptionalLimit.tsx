@@ -40,6 +40,8 @@ type ChartLinearWithOptionalLimitProps = {
   metrics: TimeSeriesMetrics;
   duration: DurationOptions;
   chartName: string;
+  xLabel?: string;
+  yLabel?: string;
   usageLimit?: number;
   formatValue?: (d: number) => string;
 };
@@ -48,6 +50,8 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
   metrics,
   duration,
   chartName,
+  xLabel,
+  yLabel,
   usageLimit,
   formatValue = (d) => `${d}`,
 }) => {
@@ -102,7 +106,7 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
         legendAllowWrap={true}
       >
         <ChartAxis
-          label={"\n" + "Time"}
+          label={"\n" + (xLabel || t("metrics.axis-label-time"))}
           tickValues={tickValues}
           tickFormat={(d) =>
             dateToChartValue(new Date(d), {
@@ -111,7 +115,7 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
           }
         />
         <ChartAxis
-          label={"\n\n\n\n\n" + chartName}
+          label={"\n\n\n\n\n" + (yLabel || chartName)}
           dependentAxis
           tickFormat={formatValue}
         />
@@ -173,17 +177,20 @@ function getChartData(
 
   Object.entries(metrics).map(([timestamp, bytes]) => {
     area.push({ name: lineLabel, x: parseInt(timestamp, 10), y: bytes });
-    if (usageLimit) {
-      softLimit.push({
-        name: limitLabel,
-        x: parseInt(timestamp, 10),
-        y: usageLimit,
-      });
-    }
   });
   chartData.push({ areaColor, softLimitColor, area, softLimit });
 
   const tickValues = timestampsToTicks(Object.keys(metrics), duration);
+
+  if (usageLimit) {
+    tickValues.forEach((timestamp) =>
+      softLimit.push({
+        name: limitLabel,
+        x: timestamp,
+        y: usageLimit,
+      })
+    );
+  }
 
   return {
     legendData,
