@@ -5,6 +5,7 @@ import {
   EmptyStateNoTopicData,
   EmptyStateNoTopicSelected,
   ToolbarTopicsMetrics,
+  ChartIncomingMessage,
 } from ".";
 import {
   DurationOptions,
@@ -30,6 +31,7 @@ type CardTopicsMetricsProps = {
   incomingTopicsData: TimeSeriesMetrics;
   outgoingTopicsData: TimeSeriesMetrics;
   partitions: PartitionBytesMetric;
+  incomingMessageRate: TimeSeriesMetrics;
   duration: DurationOptions;
   backendUnavailable: boolean;
   metricsDataUnavailable: boolean;
@@ -46,6 +48,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   topics,
   incomingTopicsData,
   outgoingTopicsData,
+  incomingMessageRate,
   selectedTopic,
   duration,
   partitions,
@@ -91,7 +94,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <TotalBytesTitle />
                 <ChartLoading />
                 <Divider />
-
+                <IncomingMessageRate />
+                <Divider />
                 <PartitionSizeTitle />
                 <ChartLoading />
               </>
@@ -131,7 +135,13 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                   />
                 </CardBody>
                 <Divider />
-
+                <IncomingMessageRate />
+                <CardBody>
+                  <ChartIncomingMessage
+                    incomingMessageRate={incomingMessageRate}
+                    duration={duration} />
+                </CardBody>
+                <Divider />
                 <PartitionSizeTitle />
                 <CardBody>
                   <ChartLogSizePerPartition
@@ -153,6 +163,13 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     selectedTopic={selectedTopic}
                     duration={duration}
                   />
+                </CardBody>
+                <Divider />
+                <IncomingMessageRate />
+                <CardBody>
+                  <ChartIncomingMessage
+                    incomingMessageRate={incomingMessageRate}
+                    duration={duration} />
                 </CardBody>
                 <Divider />
                 <PartitionSizeTitle />
@@ -192,3 +209,16 @@ const PartitionSizeTitle: FunctionComponent = () => {
     </CardTitle>
   );
 };
+
+const IncomingMessageRate: FunctionComponent = () => {
+  const { t } = useTranslation();
+  return (
+    <CardTitle component="h3">
+      {t("metrics.topic_incoming_message_rate")}{" "}
+      <ChartPopover
+        title={t("metrics.topic_incoming_message_rate_popover_header")}
+        description={t("metrics.topic_incoming_message_rate_help_text")}
+      />
+    </CardTitle>
+  )
+}

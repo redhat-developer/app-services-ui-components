@@ -13,6 +13,7 @@ export default {
     incomingTopicsData: {},
     outgoingTopicsData: {},
     partitions: {},
+    incomingMessageRate: {},
     duration: DurationOptions.Last12hours,
     backendUnavailable: false,
     metricsDataUnavailable: false,
@@ -72,11 +73,19 @@ const sampleOutgoingData = makeMetrics(
   1
 );
 
+const sampleIncomingMessageRate = makeMetrics(
+  DurationOptions.Last12hours,
+  50,
+  250,
+  1
+);
+
 export const SampleData = Template.bind({});
 SampleData.args = {
   topics: ["lorem", "dolor", "ipsum"],
   incomingTopicsData: sampleIncomingData,
   outgoingTopicsData: sampleOutgoingData,
+  incomingMessageRate: sampleIncomingMessageRate,
 };
 
 export const LoadingSelectedTopic = Template.bind({});
@@ -92,6 +101,7 @@ SampleDataWithSelectedTopic.args = {
   selectedTopic: "lorem",
   incomingTopicsData: sampleIncomingData,
   outgoingTopicsData: sampleOutgoingData,
+  incomingMessageRate: sampleIncomingMessageRate,
   partitions: {
     "dolor partition 1": makeMetrics(
       DurationOptions.Last12hours,

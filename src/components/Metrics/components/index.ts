@@ -13,3 +13,4 @@ export * from "./CardTopicsMetrics";
 export * from "./ChartTotalBytes";
 export * from "./ChartLinearWithOptionalLimit";
 export * from "./ToolbarUsedDiskSpace";
+export * from "./ChartIncomingMessage";
