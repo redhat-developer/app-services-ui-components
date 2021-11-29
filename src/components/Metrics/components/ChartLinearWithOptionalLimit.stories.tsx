@@ -32,6 +32,12 @@ UnderLimits.args = {
   usageLimit: 1500,
 };
 
+export const PartialData = Template.bind({});
+PartialData.args = {
+  metrics: makeMetrics(DurationOptions.Last12hours, 0, 999, 1, 3),
+  usageLimit: 1500,
+};
+
 export const OverLimits = Template.bind({});
 OverLimits.args = {
   metrics: makeMetrics(DurationOptions.Last12hours, 1000, 2000, 1),
@@ -41,4 +47,11 @@ OverLimits.args = {
 export const NoLimit = Template.bind({});
 NoLimit.args = {
   metrics: makeMetrics(DurationOptions.Last12hours, 1000, 2000, 1),
+};
+
+export const CustomLabels = Template.bind({});
+CustomLabels.args = {
+  metrics: makeMetrics(DurationOptions.Last12hours, 1000, 2000, 1),
+  xLabel: "Custom X label",
+  yLabel: "Custom Y label",
 };

@@ -7,6 +7,7 @@
     "client_connections_helper_text":"Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",
     "connection_attempt_rate": "Connection attempt rate",
     "connection_attempt_rate_help_text": "Connection attempt rate is the number of attempted client connections per second for the Kafka instance over time. This metric enables you to review client activity spikes in the instance and to assess available connections per second relative to the limit.",
+    "connection_attempt_rate_yaxis": "Connections/second",
     "log_size_per_partition": "Log size per partition",
     "log_size_per_partition_help_text": "Topic partition size is the log size for each partition in a selected topic. This metric enables you to assess the amount of data used in one or more topic partitions. To reduce the topic partition size, you can decrease the retention time or the retention size, or modify the cleanup policy as needed. You can also increase the number of partitions for the topic.",
     "incoming_bytes_per_topic": "Incoming bytes per topic",

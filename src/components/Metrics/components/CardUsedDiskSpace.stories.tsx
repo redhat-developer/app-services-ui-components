@@ -11,6 +11,7 @@ export default {
   args: {
     usedDiskMetrics: {},
     connectionAttemptRateMetrics: {},
+    clientConnectionsMetrics: {},
     duration: DurationOptions.Last12hours,
     metricsDataUnavailable: false,
     isLoading: false,
@@ -54,6 +55,12 @@ SampleData.args = {
     100,
     1
   ),
+  clientConnectionsMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    50,
+    250,
+    1
+  ),
 };
 
 export const OverLimits = Template.bind({});
@@ -63,6 +70,12 @@ OverLimits.args = {
     DurationOptions.Last12hours,
     20,
     120,
+    1
+  ),
+  clientConnectionsMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    50,
+    250,
     1
   ),
 };
