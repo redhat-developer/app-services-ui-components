@@ -21,7 +21,7 @@
     "eslint": "eslint --ext .tsx,.js,.ts ./src/",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "chromatic": "npx chromatic"
+    "chromatic": "npx chromatic --project-token=233963c78c8a"
   },
   "repository": {
     "type": "git",
