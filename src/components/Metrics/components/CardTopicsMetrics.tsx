@@ -24,12 +24,14 @@ import { useTranslation } from "react-i18next";
 import { ChartLoading } from "./ChartLoading";
 import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
+import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 
 type CardTopicsMetricsProps = {
   topics: string[];
   incomingTopicsData: TimeSeriesMetrics;
   outgoingTopicsData: TimeSeriesMetrics;
   partitions: PartitionBytesMetric;
+  incomingMessageRate: TimeSeriesMetrics;
   duration: DurationOptions;
   backendUnavailable: boolean;
   metricsDataUnavailable: boolean;
@@ -46,6 +48,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   topics,
   incomingTopicsData,
   outgoingTopicsData,
+  incomingMessageRate,
   selectedTopic,
   duration,
   partitions,
@@ -91,7 +94,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <TotalBytesTitle />
                 <ChartLoading />
                 <Divider />
-
+                <IncomingMessageRate />
+                <Divider />
                 <PartitionSizeTitle />
                 <ChartLoading />
               </>
@@ -131,7 +135,16 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                   />
                 </CardBody>
                 <Divider />
-
+                <IncomingMessageRate />
+                <CardBody>
+                  <ChartLinearWithOptionalLimit
+                    chartName={t("metrics.topic_incoming_message_rate")}
+                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    metrics={incomingMessageRate}
+                    duration={duration}
+                  />
+                </CardBody>
+                <Divider />
                 <PartitionSizeTitle />
                 <CardBody>
                   <ChartLogSizePerPartition
@@ -151,6 +164,16 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     incomingTopicsData={incomingTopicsData}
                     outgoingTopicsData={outgoingTopicsData}
                     selectedTopic={selectedTopic}
+                    duration={duration}
+                  />
+                </CardBody>
+                <Divider />
+                <IncomingMessageRate />
+                <CardBody>
+                  <ChartLinearWithOptionalLimit
+                    chartName={t("metrics.topic_incoming_message_rate")}
+                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    metrics={incomingMessageRate}
                     duration={duration}
                   />
                 </CardBody>
@@ -192,3 +215,16 @@ const PartitionSizeTitle: FunctionComponent = () => {
     </CardTitle>
   );
 };
+
+const IncomingMessageRate: FunctionComponent = () => {
+  const { t } = useTranslation();
+  return (
+    <CardTitle component="h3">
+      {t("metrics.topic_incoming_message_rate")}{" "}
+      <ChartPopover
+        title={t("metrics.topic_incoming_message_rate_popover_header")}
+        description={t("metrics.topic_incoming_message_rate_help_text")}
+      />
+    </CardTitle>
+  )
+}

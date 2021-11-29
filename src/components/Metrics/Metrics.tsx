@@ -106,6 +106,7 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
     bytesIncoming,
     bytesOutgoing,
     bytesPerPartition,
+    incomingMessageRate,
     onDurationChange,
     onTopicChange,
     onRefresh,
@@ -119,6 +120,7 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
       incomingTopicsData={bytesIncoming}
       outgoingTopicsData={bytesOutgoing}
       partitions={bytesPerPartition}
+      incomingMessageRate={incomingMessageRate}
       duration={duration}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
