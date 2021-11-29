@@ -5,7 +5,6 @@ import {
   EmptyStateNoTopicData,
   EmptyStateNoTopicSelected,
   ToolbarTopicsMetrics,
-  ChartIncomingMessage,
 } from ".";
 import {
   DurationOptions,
@@ -25,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import { ChartLoading } from "./ChartLoading";
 import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
+import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 
 type CardTopicsMetricsProps = {
   topics: string[];
@@ -137,9 +137,12 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <Divider />
                 <IncomingMessageRate />
                 <CardBody>
-                  <ChartIncomingMessage
-                    incomingMessageRate={incomingMessageRate}
-                    duration={duration} />
+                  <ChartLinearWithOptionalLimit
+                    chartName={t("metrics.topic_incoming_message_rate")}
+                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    metrics={incomingMessageRate}
+                    duration={duration}
+                  />
                 </CardBody>
                 <Divider />
                 <PartitionSizeTitle />
@@ -167,9 +170,12 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <Divider />
                 <IncomingMessageRate />
                 <CardBody>
-                  <ChartIncomingMessage
-                    incomingMessageRate={incomingMessageRate}
-                    duration={duration} />
+                  <ChartLinearWithOptionalLimit
+                    chartName={t("metrics.topic_incoming_message_rate")}
+                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    metrics={incomingMessageRate}
+                    duration={duration}
+                  />
                 </CardBody>
                 <Divider />
                 <PartitionSizeTitle />
