@@ -4,7 +4,7 @@ import { FilterByTime } from "./FilterByTime";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Components/FilterByTime",
+  title: "Components/Metrics/FilterByTime",
   component: FilterByTime,
   args: {
     keyText: "string",

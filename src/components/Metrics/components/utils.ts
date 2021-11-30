@@ -2,6 +2,8 @@ import byteSize from "byte-size";
 import sub from "date-fns/sub";
 import { timeIntervalsMapping } from "../consts";
 import { DurationOptions } from "../types";
+import fromUnixTime from "date-fns/fromUnixTime";
+import { format, utcToZonedTime } from "date-fns-tz";
 
 export function formatBytes(bytes: number): string {
   return byteSize(bytes, { units: "iec" }).toString();
@@ -12,13 +14,14 @@ export const shouldShowDate = (timeDuration: DurationOptions): boolean => {
 };
 
 export const dateToChartValue = (
-  date: Date,
+  timestamp: number,
   { showDate }: { showDate: boolean } = { showDate: false }
 ): string => {
-  const [dateValue, timeValue] = date.toISOString().split("T");
-  return showDate
-    ? timeValue.slice(0, 5) + "\n" + dateValue
-    : timeValue.slice(0, 5);
+  const date = fromUnixTime(timestamp / 1000);
+  return format(
+    utcToZonedTime(date, "utc"),
+    showDate ? "HH:mm'\n'MM/dd" : "HH:mm"
+  );
 };
 
 export function timestampsToTicks(

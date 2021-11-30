@@ -4,7 +4,7 @@ import { ChartPopover } from "./ChartPopover";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Components/ChartPopover",
+  title: "Components/Metrics/ChartPopover",
   component: ChartPopover,
   args: {
     title: "Sample title",

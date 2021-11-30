@@ -4,7 +4,6 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-xstate-addon/preset",
     "storybook-i18n/preset",
   ],
   features: {

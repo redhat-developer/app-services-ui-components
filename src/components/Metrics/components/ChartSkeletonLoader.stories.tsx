@@ -4,7 +4,7 @@ import React from "react";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 
 export default {
-  title: "Metrics/Components/ChartSkeletonLoader",
+  title: "Components/Metrics/ChartSkeletonLoader",
   component: ChartSkeletonLoader,
   args: {},
   parameters: {

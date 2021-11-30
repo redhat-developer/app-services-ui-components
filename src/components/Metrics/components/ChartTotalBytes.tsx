@@ -12,13 +12,7 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
 import chart_color_orange_300 from "@patternfly/react-tokens/dist/js/chart_color_orange_300";
-import React, {
-  FunctionComponent,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
 import {
@@ -28,6 +22,7 @@ import {
   timestampsToTicks,
 } from "./utils";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
+import { useChartWidth } from "./useChartWidth";
 
 type ChartData = {
   color: string;
@@ -65,30 +60,27 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
   emptyState,
 }) => {
   const { t } = useTranslation();
+  const [containerRef, width] = useChartWidth();
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [width, setWidth] = useState<number>();
-
-  const handleResize = () =>
-    containerRef.current && setWidth(containerRef.current.clientWidth);
   const itemsPerRow = width && width > 650 ? 6 : 3;
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-  }, [width]);
 
   const { chartData, legendData, tickValues } = getBytesChartData(
     incomingTopicsData,
     outgoingTopicsData,
     duration,
-    t("{{topic}} incoming bytes", { topic: selectedTopic || t("Total") }),
-    t("{{topic}} outgoing bytes", { topic: selectedTopic || t("Total") })
+    t("metrics.incoming_bytes", {
+      topic: selectedTopic || t("metrics.all_topics"),
+    }),
+    t("metrics.outgoing_bytes", {
+      topic: selectedTopic || t("metrics.all_topics"),
+    })
   );
 
   const hasMetrics =
     Object.keys(incomingTopicsData).length > 0 ||
     Object.keys(outgoingTopicsData).length > 0;
+
+  const showDate = shouldShowDate(duration);
 
   switch (true) {
     case isLoading:
@@ -117,17 +109,22 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
             width={width}
           >
             <ChartAxis
-              label={"\n" + "Time"}
+              label={
+                "\n" +
+                (showDate
+                  ? t("metrics.axis-label-time-full")
+                  : t("metrics.axis-label-time"))
+              }
               tickValues={tickValues}
               tickCount={timeIntervalsMapping[duration].ticks}
               tickFormat={(d) =>
-                dateToChartValue(new Date(d), {
-                  showDate: shouldShowDate(duration),
+                dateToChartValue(d, {
+                  showDate,
                 })
               }
             />
             <ChartAxis
-              label={"\n\n\n\n\n" + "Bytes"}
+              label={"\n\n\n\n\n" + t("metrics.axis-label-bytes")}
               dependentAxis
               tickFormat={formatBytes}
             />

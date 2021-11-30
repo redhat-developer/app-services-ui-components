@@ -9,6 +9,8 @@ const MAX_RETRIES = 3;
 
 export const KafkaInstanceMetricsModel = createModel(
   {
+    lastUpdated: undefined as Date | undefined,
+
     // from the UI elements
     duration: 60 as DurationOptions,
 
@@ -22,7 +24,6 @@ export const KafkaInstanceMetricsModel = createModel(
   {
     events: {
       // called when a new kafka id has been specified
-      fetch: () => ({}),
       fetchSuccess: (value: GetKafkaInstanceMetricsResponse) => ({ ...value }),
       fetchFail: () => ({}),
 
@@ -39,6 +40,10 @@ export const KafkaInstanceMetricsModel = createModel(
     },
   }
 );
+
+const setFetchTimestamp = KafkaInstanceMetricsModel.assign({
+  lastUpdated: () => new Date(),
+});
 
 const setMetrics = KafkaInstanceMetricsModel.assign((_, event) => {
   const {
@@ -85,10 +90,6 @@ const apiState = {
         src: "api",
       },
       on: {
-        fetchSuccess: {
-          actions: setMetrics,
-          target: "#diskSpace.withResponse",
-        },
         fetchFail: {
           actions: incrementRetries,
           target: "failure",
@@ -99,7 +100,7 @@ const apiState = {
       after: {
         1000: [
           { cond: "canRetryFetching", target: "loading" },
-          { target: "#diskSpace.criticalFail" },
+          { target: "#kafkaInstanceMetrics.criticalFail" },
         ],
       },
     },
@@ -108,18 +109,50 @@ const apiState = {
 
 export const KafkaInstanceMetricsMachine = KafkaInstanceMetricsModel.createMachine(
   {
-    id: "diskSpace",
+    id: "kafkaInstanceMetrics",
     context: KafkaInstanceMetricsModel.initialContext,
     initial: "initialLoading",
     states: {
-      initialLoading: { ...apiState, tags: "initialLoading" },
-      callApi: { ...apiState, tags: "loading" },
+      initialLoading: {
+        ...apiState,
+        tags: "initialLoading",
+        entry: setFetchTimestamp,
+        on: {
+          fetchSuccess: [
+            {
+              cond: "isJustCreated",
+              actions: setMetrics,
+              target: "#kafkaInstanceMetrics.withResponse",
+            },
+            { actions: setMetrics, target: "justCreated" },
+          ],
+        },
+      },
+      callApi: {
+        ...apiState,
+        tags: "loading",
+        entry: setFetchTimestamp,
+        on: {
+          fetchSuccess: {
+            actions: setMetrics,
+            target: "#kafkaInstanceMetrics.withResponse",
+          },
+        },
+      },
       criticalFail: {
         tags: "failed",
         on: {
           refresh: {
             actions: resetRetries,
             target: "callApi",
+          },
+        },
+      },
+      justCreated: {
+        tags: "justCreated",
+        on: {
+          refresh: {
+            target: "initialLoading",
           },
         },
       },
@@ -137,6 +170,7 @@ export const KafkaInstanceMetricsMachine = KafkaInstanceMetricsModel.createMachi
       },
       refreshing: {
         tags: "refreshing",
+        entry: setFetchTimestamp,
         invoke: {
           src: "api",
         },
@@ -157,6 +191,16 @@ export const KafkaInstanceMetricsMachine = KafkaInstanceMetricsModel.createMachi
   {
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
+      isJustCreated: (_, event) => {
+        if (event.type === "fetchSuccess") {
+          return (
+            Object.keys(event.clientConnectionsMetrics).length > 0 ||
+            Object.keys(event.connectionAttemptRateMetrics).length > 0 ||
+            Object.keys(event.usedDiskSpaceMetrics).length > 0
+          );
+        }
+        return false;
+      },
     },
   }
 );

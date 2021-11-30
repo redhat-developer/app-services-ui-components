@@ -4,7 +4,7 @@ import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Empty states/No metrics data",
+  title: "Empty States/Metrics/No metrics data",
   component: EmptyStateNoMetricsData,
   args: {},
   parameters: {

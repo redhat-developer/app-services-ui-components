@@ -6,7 +6,7 @@ import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
 export default {
-  title: "Metrics/Components/ChartLogSizePerPartition",
+  title: "Components/Metrics/ChartLogSizePerPartition",
   component: ChartLogSizePerPartition,
   args: {
     partitions: {
@@ -29,6 +29,7 @@ export default {
         1
       ),
     },
+    topic: "foo",
     duration: DurationOptions.Last12hours,
     isLoading: false,
     emptyState: <div>this is the empty state</div>,

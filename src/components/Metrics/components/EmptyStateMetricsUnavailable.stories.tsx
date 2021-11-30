@@ -4,7 +4,7 @@ import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Empty states/Metrics unavailable",
+  title: "Empty States/Metrics/Metrics unavailable",
   component: EmptyStateMetricsUnavailable,
   args: {},
   parameters: {

@@ -4,7 +4,7 @@ import { FilterByTopic } from "./FilterByTopic";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Components/FilterByTopic",
+  title: "Components/Metrics/FilterByTopic",
   component: FilterByTopic,
   args: {
     selectedTopic: undefined,

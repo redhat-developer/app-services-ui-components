@@ -6,7 +6,7 @@ import { DurationOptions } from "../types";
 import { makeMetrics } from "../makeMetrics";
 
 export default {
-  title: "Metrics/Components/CardKafkaInstanceMetrics",
+  title: "Components/Metrics/CardKafkaInstanceMetrics",
   component: CardKafkaInstanceMetrics,
   args: {
     usedDiskMetrics: {},
@@ -17,6 +17,7 @@ export default {
     isInitialLoading: false,
     isLoading: false,
     isRefreshing: false,
+    isJustCreated: false,
   },
   parameters: {
     i18n: MetricsI18n,
@@ -42,9 +43,9 @@ LoadingData.args = {
   isLoading: true,
 };
 
-export const NoMetrics = Template.bind({});
-NoMetrics.args = {
-  metricsDataUnavailable: true,
+export const JustCreated = Template.bind({});
+JustCreated.args = {
+  isJustCreated: true,
 };
 
 export const SampleData = Template.bind({});

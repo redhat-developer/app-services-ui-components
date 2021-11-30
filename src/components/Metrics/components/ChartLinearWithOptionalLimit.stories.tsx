@@ -6,7 +6,7 @@ import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
 export default {
-  title: "Metrics/Components/ChartLinearWithOptionalLimit",
+  title: "Components/Metrics/ChartLinearWithOptionalLimit",
   component: ChartLinearWithOptionalLimit,
   args: {
     metrics: {},

@@ -9,19 +9,20 @@ import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
 import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
+import { ToolbarRefreshProps } from "./ToolbarRefresh";
 
 type CardKafkaInstanceMetricsProps = {
   usedDiskMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
   duration: DurationOptions;
+  lastUpdated: Date | undefined;
   backendUnavailable: boolean;
   isInitialLoading: boolean;
   isLoading: boolean;
-  isRefreshing: boolean;
-  onRefresh: () => void;
+  isJustCreated: boolean;
   onDurationChange: (duration: DurationOptions) => void;
-};
+} & ToolbarRefreshProps;
 type ChartTitleProps = {
   title: string;
   helperText: string;
@@ -32,10 +33,12 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
   clientConnectionsMetrics,
   connectionAttemptRateMetrics,
   duration,
+  lastUpdated,
   backendUnavailable,
   isInitialLoading,
   isLoading,
   isRefreshing,
+  isJustCreated,
   onRefresh,
   onDurationChange,
 }) => {
@@ -46,8 +49,9 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
       <ToolbarKafkaInstanceMetric
         title={t("metrics.kafka_instance_metrics")}
         duration={duration}
+        lastUpdated={lastUpdated}
         onSetTimeDuration={onDurationChange}
-        isDisabled={backendUnavailable}
+        isDisabled={backendUnavailable || isJustCreated || isLoading}
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
       />
@@ -57,6 +61,13 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
             return <CardBodyLoading />;
 
           case backendUnavailable:
+            return (
+              <CardBody>
+                <EmptyStateNoMetricsData />
+              </CardBody>
+            );
+
+          case isJustCreated:
             return (
               <CardBody>
                 <EmptyStateMetricsUnavailable />
@@ -73,6 +84,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
                 <CardBody>
                   <ChartLinearWithOptionalLimit
                     chartName={t("metrics.used_disk_space")}
+                    yLabel={t("metrics.axis-label-bytes")}
                     metrics={usedDiskMetrics}
                     duration={duration}
                     formatValue={formatBytes}
@@ -89,6 +101,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
                 <CardBody>
                   <ChartLinearWithOptionalLimit
                     chartName={t("metrics.client_connections")}
+                    yLabel={t("metrics.client_connections_y_axis")}
                     metrics={clientConnectionsMetrics}
                     duration={duration}
                     usageLimit={100}

@@ -5,11 +5,21 @@ import "@patternfly/patternfly/utilities/Display/display.css";
 import "@patternfly/patternfly/utilities/Flex/flex.css";
 import "@patternfly/patternfly/utilities/Sizing/sizing.css";
 import "@patternfly/patternfly/utilities/Spacing/spacing.css";
+import "@patternfly/patternfly/utilities/Text/text.css";
 import { useGlobals } from "@storybook/client-api";
+import { inspect } from "@xstate/inspect";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter as Router } from "react-router-dom";
 import { initI18N } from "./i18n";
+
+if (process.env.NODE_ENV === "development") {
+  inspect({
+    // options
+    url: "https://stately.ai/viz?inspect", // (default)
+    iframe: false, // open in new window
+  });
+}
 
 export const parameters = {
   locale: "en_US",

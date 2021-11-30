@@ -6,7 +6,7 @@ import { DurationOptions } from "../types";
 import { makeMetrics } from "../makeMetrics";
 
 export default {
-  title: "Metrics/Components/ChartTotalBytes",
+  title: "Components/Metrics/ChartTotalBytes",
   component: ChartTotalBytes,
   args: {
     incomingTopicsData: makeMetrics(DurationOptions.Last12hours, 1, 4, 10 ** 7),

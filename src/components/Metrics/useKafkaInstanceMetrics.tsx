@@ -14,6 +14,7 @@ export function useKafkaInstanceMetrics() {
       isRefreshing: state.hasTag("refreshing"),
       isLoading: state.hasTag("loading"),
       isFailed: state.hasTag("failed"),
+      isJustCreated: state.hasTag("justCreated"),
     }),
     []
   );
@@ -22,10 +23,12 @@ export function useKafkaInstanceMetrics() {
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
     duration,
+    lastUpdated,
     isInitialLoading,
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
   } = useSelector(service, selector);
 
   const onDurationChange = useCallback(
@@ -43,10 +46,12 @@ export function useKafkaInstanceMetrics() {
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
+    lastUpdated,
     isInitialLoading,
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
     duration,
     onDurationChange,
     onRefresh,
