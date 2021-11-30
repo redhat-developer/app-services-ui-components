@@ -39,7 +39,7 @@
     "@storybook/addon-essentials": "6.4.0",
     "@storybook/addon-interactions": "6.4.0",
     "@storybook/addon-links": "6.4.0",
-    "@storybook/jest": "^0.0.5",
+    "@storybook/jest": "0.0.5",
     "@storybook/react": "6.4.0",
     "@storybook/testing-library": "0.0.7",
     "@types/byte-size": "8.1.0",
