@@ -23,6 +23,7 @@ type FilterByTopicProps = {
   selectedTopic: string | undefined;
   topicList: string[];
   disableToolbar: boolean;
+  ariaLabel: string;
   onSetSelectedTopic: (value: string | undefined) => void;
 };
 
@@ -30,6 +31,7 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
   selectedTopic,
   topicList = [],
   disableToolbar,
+  ariaLabel,
   onSetSelectedTopic,
 }) => {
   const { t } = useTranslation();
@@ -45,6 +47,7 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
     selection !== "All topics"
       ? onSetSelectedTopic(selection as string)
       : onSetSelectedTopic(undefined);
+    setIsTopicSelectOpen(false);
   };
 
   const onTopicFilter = (_: unknown, textInput: string) => {
@@ -63,9 +66,13 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
   ];
 
   const isDisabled = disableToolbar || topicList.length === 0;
+  const ariaId = `filter-by-topic-${Date.now()}`;
 
   return (
     <ToolbarItem widths={widths}>
+      <label hidden id={ariaId}>
+        {ariaLabel}
+      </label>
       <Select
         variant={SelectVariant.single}
         onToggle={onTopicToggle}
@@ -77,7 +84,7 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
             <FilterIcon /> All topics
           </>
         }
-        aria-label={t("Select a topic")}
+        aria-labelledby={ariaId}
         onFilter={onTopicFilter}
         isGrouped
         hasInlineFilter

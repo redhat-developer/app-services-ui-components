@@ -11,20 +11,13 @@ import {
   PartitionBytesMetric,
   TimeSeriesMetrics,
 } from "../types";
-import {
-  Bullseye,
-  Card,
-  CardBody,
-  CardTitle,
-  Divider,
-  Spinner,
-} from "@patternfly/react-core";
+import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ChartLoading } from "./ChartLoading";
 import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
+import { CardBodyLoading } from "./CardBodyLoading";
 
 type CardTopicsMetricsProps = {
   topics: string[];
@@ -34,7 +27,7 @@ type CardTopicsMetricsProps = {
   incomingMessageRate: TimeSeriesMetrics;
   duration: DurationOptions;
   backendUnavailable: boolean;
-  metricsDataUnavailable: boolean;
+  isInitialLoading: boolean;
   isLoading: boolean;
   isRefreshing: boolean;
   selectedTopic: string | undefined;
@@ -53,7 +46,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   duration,
   partitions,
   backendUnavailable,
-  metricsDataUnavailable,
+  isInitialLoading,
   isLoading,
   isRefreshing,
   onCreateTopic,
@@ -65,7 +58,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   const noTopics = topics.length === 0;
 
   return (
-    <Card>
+    <Card data-testid={"metrics-topics"}>
       <ToolbarTopicsMetrics
         title={t("metrics.topic_metrics")}
         duration={duration}
@@ -79,39 +72,13 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
       />
       {(() => {
         switch (true) {
-          case isLoading && selectedTopic === undefined:
-            return (
-              <CardBody>
-                <Bullseye>
-                  <Spinner isSVG />
-                </Bullseye>
-              </CardBody>
-            );
-
-          case isLoading:
-            return (
-              <>
-                <TotalBytesTitle />
-                <ChartLoading />
-                <Divider />
-                <IncomingMessageRate />
-                <Divider />
-                <PartitionSizeTitle />
-                <ChartLoading />
-              </>
-            );
+          case isInitialLoading:
+            return <CardBodyLoading />;
 
           case backendUnavailable:
             return (
               <CardBody>
                 <EmptyStateMetricsUnavailable />
-              </CardBody>
-            );
-
-          case metricsDataUnavailable:
-            return (
-              <CardBody>
-                <EmptyStateNoTopicData />
               </CardBody>
             );
 
@@ -132,6 +99,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     outgoingTopicsData={outgoingTopicsData}
                     selectedTopic={selectedTopic}
                     duration={duration}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoTopicData />}
                   />
                 </CardBody>
                 <Divider />
@@ -142,6 +111,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
                     metrics={incomingMessageRate}
                     duration={duration}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoTopicData />}
                   />
                 </CardBody>
                 <Divider />
@@ -150,6 +121,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                   <ChartLogSizePerPartition
                     partitions={partitions}
                     duration={duration}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoTopicData />}
                   />
                 </CardBody>
               </>
@@ -165,6 +138,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     outgoingTopicsData={outgoingTopicsData}
                     selectedTopic={selectedTopic}
                     duration={duration}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoTopicData />}
                   />
                 </CardBody>
                 <Divider />
@@ -175,6 +150,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
                     metrics={incomingMessageRate}
                     duration={duration}
+                    isLoading={isLoading}
+                    emptyState={<EmptyStateNoTopicData />}
                   />
                 </CardBody>
                 <Divider />
@@ -226,5 +203,5 @@ const IncomingMessageRate: FunctionComponent = () => {
         description={t("metrics.topic_incoming_message_rate_help_text")}
       />
     </CardTitle>
-  )
-}
+  );
+};

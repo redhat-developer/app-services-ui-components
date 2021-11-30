@@ -26,12 +26,14 @@ type FilterByTimeProps = {
   duration: DurationOptions;
   onDurationChange: (value: DurationOptions) => void;
   keyText: string;
+  ariaLabel: string;
   disableToolbar: boolean;
 };
 
 export const FilterByTime: VoidFunctionComponent<FilterByTimeProps> = ({
   duration,
   keyText,
+  ariaLabel,
   disableToolbar,
   onDurationChange,
 }) => {
@@ -59,17 +61,20 @@ export const FilterByTime: VoidFunctionComponent<FilterByTimeProps> = ({
       ))}
     </SelectGroup>,
   ];
+  const ariaId = `filter-by-time-${Date.now()}`;
   return (
     <ToolbarItem>
+      <label hidden id={ariaId}>
+        {ariaLabel}
+      </label>
       <Select
         variant={SelectVariant.single}
-        aria-label="Select Input"
+        aria-labelledby={ariaId}
         onToggle={onTimeToggle}
         onSelect={onTimeSelect}
         selections={DurationOptionsMap[duration]}
         isOpen={isTimeSelectOpen}
         isDisabled={disableToolbar}
-        placeholderText="Last 6 hours"
       >
         {timeOptions(keyText)}
       </Select>

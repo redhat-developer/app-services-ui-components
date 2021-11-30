@@ -48,3 +48,11 @@ export const timeIntervalsMapping = {
     showDate: true,
   },
 } as const;
+
+export const chartHeight = 350;
+export const chartPadding = {
+  bottom: 110, // Adjusted to accomodate legend
+  left: 120,
+  right: 40,
+  top: 10,
+};

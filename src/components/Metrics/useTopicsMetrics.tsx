@@ -10,10 +10,10 @@ export function useTopicsMetrics() {
   const selector = useCallback(
     (state: typeof service.state) => ({
       ...state.context,
+      isInitialLoading: state.hasTag("initialLoading"),
       isRefreshing: state.hasTag("refreshing"),
       isLoading: state.hasTag("loading"),
       isFailed: state.hasTag("failed"),
-      isDataUnavailable: state.hasTag("no-data"),
     }),
     []
   );
@@ -26,9 +26,9 @@ export function useTopicsMetrics() {
     bytesOutgoing,
     bytesPerPartition,
     incomingMessageRate,
+    isInitialLoading,
     isLoading,
     isRefreshing,
-    isDataUnavailable,
     isFailed,
   } = useSelector(service, selector);
 
@@ -58,10 +58,10 @@ export function useTopicsMetrics() {
   }, [kafkaTopics, metricsTopics]);
 
   return {
+    isInitialLoading,
     isLoading,
     isRefreshing,
     isFailed,
-    isDataUnavailable,
     topics: mergedTopics,
     selectedTopic,
     duration,

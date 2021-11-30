@@ -9,6 +9,7 @@ export default {
   args: {
     keyText: "string",
     disableToolbar: false,
+    ariaLabel: "the aria label",
     duration: 60,
   },
   parameters: {

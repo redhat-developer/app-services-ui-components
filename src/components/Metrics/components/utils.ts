@@ -27,7 +27,8 @@ export function timestampsToTicks(
 ): number[] {
   const allTimestamps = [...timestamps];
   allTimestamps.sort();
-  const mostRecentTs = parseInt(allTimestamps[allTimestamps.length - 1]);
+  const mostRecentTs =
+    parseInt(allTimestamps[allTimestamps.length - 1]) || Date.now();
   const tickValues: number[] = new Array(
     Math.max(timeIntervalsMapping[duration].ticks, allTimestamps.length)
   )

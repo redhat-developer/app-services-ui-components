@@ -1,19 +1,20 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { CardUsedDiskSpace } from "./CardUsedDiskSpace";
+import { CardKafkaInstanceMetrics } from "./CardKafkaInstanceMetrics";
 import MetricsI18n from "../Metrics-i18n.json";
 import { DurationOptions } from "../types";
-import { makeMetrics } from "../Metrics.stories";
+import { makeMetrics } from "../makeMetrics";
 
 export default {
-  title: "Metrics/Components/CardUsedDiskSpace",
-  component: CardUsedDiskSpace,
+  title: "Metrics/Components/CardKafkaInstanceMetrics",
+  component: CardKafkaInstanceMetrics,
   args: {
     usedDiskMetrics: {},
     connectionAttemptRateMetrics: {},
     clientConnectionsMetrics: {},
     duration: DurationOptions.Last12hours,
     metricsDataUnavailable: false,
+    isInitialLoading: false,
     isLoading: false,
     isRefreshing: false,
   },
@@ -25,14 +26,19 @@ export default {
       type: null,
     },
   },
-} as ComponentMeta<typeof CardUsedDiskSpace>;
+} as ComponentMeta<typeof CardKafkaInstanceMetrics>;
 
-const Template: ComponentStory<typeof CardUsedDiskSpace> = (args) => (
-  <CardUsedDiskSpace {...args} />
+const Template: ComponentStory<typeof CardKafkaInstanceMetrics> = (args) => (
+  <CardKafkaInstanceMetrics {...args} />
 );
 
 export const InitialLoading = Template.bind({});
 InitialLoading.args = {
+  isInitialLoading: true,
+};
+
+export const LoadingData = Template.bind({});
+LoadingData.args = {
   isLoading: true,
 };
 

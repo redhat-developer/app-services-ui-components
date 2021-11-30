@@ -9,7 +9,7 @@ import { AppServicesLoading } from "../..";
 export const EmptyStateInitialLoading: VoidFunctionComponent = () => {
   return (
     <EmptyState variant={EmptyStateVariant.xs}>
-      <EmptyStateBody>
+      <EmptyStateBody data-chromatic="ignore">
         <AppServicesLoading />
       </EmptyStateBody>
     </EmptyState>

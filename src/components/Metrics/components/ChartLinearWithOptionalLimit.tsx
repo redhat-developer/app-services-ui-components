@@ -10,9 +10,17 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
-import React, { FunctionComponent, useEffect, useRef, useState } from "react";
+import React, {
+  VoidFunctionComponent,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { useTranslation } from "react-i18next";
+import { chartHeight, chartPadding } from "../consts";
 import { TimeSeriesMetrics, DurationOptions } from "../types";
+import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { dateToChartValue, shouldShowDate, timestampsToTicks } from "./utils";
 
 type ChartData = {
@@ -44,9 +52,11 @@ type ChartLinearWithOptionalLimitProps = {
   yLabel?: string;
   usageLimit?: number;
   formatValue?: (d: number) => string;
+  isLoading: boolean;
+  emptyState: ReactElement;
 };
 
-export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOptionalLimitProps> = ({
+export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWithOptionalLimitProps> = ({
   metrics,
   duration,
   chartName,
@@ -54,6 +64,8 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
   yLabel,
   usageLimit,
   formatValue = (d) => `${d}`,
+  isLoading,
+  emptyState,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
@@ -76,76 +88,81 @@ export const ChartLinearWithOptionalLimit: FunctionComponent<ChartLinearWithOpti
     usageLimit
   );
 
-  return (
-    <div ref={containerRef}>
-      <Chart
-        ariaTitle={t("metrics.used_disk_space")}
-        containerComponent={
-          <ChartVoronoiContainer
-            labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
-            constrainToVisibleArea
-          />
-        }
-        legendPosition="bottom-left"
-        legendComponent={
-          <ChartLegend
-            orientation={"horizontal"}
-            data={legendData}
-            itemsPerRow={itemsPerRow}
-          />
-        }
-        height={350}
-        padding={{
-          bottom: 110, // Adjusted to accomodate legend
-          left: 120,
-          right: 40,
-          top: 40,
-        }}
-        themeColor={ChartThemeColor.multiUnordered}
-        width={width}
-        legendAllowWrap={true}
-      >
-        <ChartAxis
-          label={"\n" + (xLabel || t("metrics.axis-label-time"))}
-          tickValues={tickValues}
-          tickFormat={(d) =>
-            dateToChartValue(new Date(d), {
-              showDate: shouldShowDate(duration),
-            })
-          }
-        />
-        <ChartAxis
-          label={"\n\n\n\n\n" + (yLabel || chartName)}
-          dependentAxis
-          tickFormat={formatValue}
-        />
-        <ChartGroup>
-          {chartData.map((value, index) => (
-            <ChartArea
-              key={`chart-area-${index}`}
-              data={value.area}
-              interpolation="monotoneX"
+  const hasMetrics = Object.keys(metrics).length > 0;
+
+  switch (true) {
+    case isLoading:
+      return <ChartSkeletonLoader />;
+    case !hasMetrics:
+      return emptyState;
+    default:
+      return (
+        <div ref={containerRef}>
+          <Chart
+            ariaTitle={t("metrics.used_disk_space")}
+            containerComponent={
+              <ChartVoronoiContainer
+                labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
+                constrainToVisibleArea
+              />
+            }
+            legendPosition="bottom-left"
+            legendComponent={
+              <ChartLegend
+                orientation={"horizontal"}
+                data={legendData}
+                itemsPerRow={itemsPerRow}
+              />
+            }
+            height={chartHeight}
+            padding={chartPadding}
+            themeColor={ChartThemeColor.multiUnordered}
+            width={width}
+            legendAllowWrap={true}
+          >
+            <ChartAxis
+              label={"\n" + (xLabel || t("metrics.axis-label-time"))}
+              tickValues={tickValues}
+              tickFormat={(d) =>
+                dateToChartValue(new Date(d), {
+                  showDate: shouldShowDate(duration),
+                })
+              }
+            />
+            <ChartAxis
+              label={"\n\n\n\n\n" + (yLabel || chartName)}
+              dependentAxis
+              tickFormat={formatValue}
+            />
+            <ChartGroup>
+              {chartData.map((value, index) => (
+                <ChartArea
+                  key={`chart-area-${index}`}
+                  data={value.area}
+                  interpolation="monotoneX"
+                  style={{
+                    data: {
+                      // TODO: check if this is needed
+                      // stroke: value.color,
+                    },
+                  }}
+                />
+              ))}
+            </ChartGroup>
+            <ChartThreshold
+              key={`chart-softlimit`}
+              data={chartData[0].softLimit}
               style={{
                 data: {
-                  // TODO: check if this is needed
-                  // stroke: value.color,
+                  stroke: chartData[0].softLimitColor,
                 },
               }}
             />
-          ))}
-        </ChartGroup>
-        <ChartThreshold
-          key={`chart-softlimit`}
-          data={chartData[0].softLimit}
-          style={{
-            data: {
-              stroke: chartData[0].softLimitColor,
-            },
-          }}
-        />
-      </Chart>
-    </div>
-  );
+          </Chart>
+        </div>
+      );
+  }
+  return null;
 };
 
 function getChartData(

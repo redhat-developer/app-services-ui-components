@@ -2,18 +2,24 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 import MetricsI18n from "../Metrics-i18n.json";
-import { makeMetrics } from "../Metrics.stories";
+import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
 export default {
   title: "Metrics/Components/ChartLinearWithOptionalLimit",
   component: ChartLinearWithOptionalLimit,
   args: {
+    metrics: {},
     duration: DurationOptions.Last12hours,
     chartName: "Sample name",
+    isLoading: false,
+    emptyState: <div>this is the empty state</div>,
   },
   parameters: {
     i18n: MetricsI18n,
+    backgrounds: {
+      default: "Background color 100",
+    },
   },
   argTypes: {
     duration: {
@@ -54,4 +60,14 @@ CustomLabels.args = {
   metrics: makeMetrics(DurationOptions.Last12hours, 1000, 2000, 1),
   xLabel: "Custom X label",
   yLabel: "Custom Y label",
+};
+
+export const NoData = Template.bind({});
+NoData.args = {
+  metrics: {},
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  isLoading: true,
 };

@@ -2,10 +2,10 @@ import {
   CardTopicsMetrics,
   EmptyStateInitialLoading,
   EmptyStateMetricsUnavailable,
+  MetricsLayout,
+  CardKafkaInstanceMetrics,
 } from "./components";
 import React, { FunctionComponent } from "react";
-import { MetricsLayout } from "./components";
-import { CardUsedDiskSpace } from "./components/CardUsedDiskSpace";
 import {
   KafkaInstanceMetricsProvider,
   KafkaInstanceMetricsProviderProps,
@@ -44,27 +44,27 @@ type ConnectedMetricsProps = {
 const ConnectedMetrics: FunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
 }) => {
-  const { isLoading, isFailed } = useKafkaInstanceMetrics();
+  const { isInitialLoading, isFailed } = useKafkaInstanceMetrics();
 
   switch (true) {
-    case isLoading:
+    case isInitialLoading:
       return <EmptyStateInitialLoading />;
     case isFailed:
       return <EmptyStateMetricsUnavailable />;
   }
   return (
     <MetricsLayout
-      diskSpaceMetrics={<ConnectedDiskMetrics />}
+      diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
       topicMetrics={<ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />}
     />
   );
 };
 
-const ConnectedDiskMetrics: FunctionComponent = () => {
+const ConnectedKafkaInstanceMetrics: FunctionComponent = () => {
   const {
+    isInitialLoading,
     isLoading,
     isRefreshing,
-    isDataUnavailable,
     isFailed,
     duration,
     usedDiskSpaceMetrics,
@@ -75,12 +75,13 @@ const ConnectedDiskMetrics: FunctionComponent = () => {
   } = useKafkaInstanceMetrics();
 
   return (
-    <CardUsedDiskSpace
+    <CardKafkaInstanceMetrics
       usedDiskMetrics={usedDiskSpaceMetrics}
       clientConnectionsMetrics={clientConnectionsMetrics}
       connectionAttemptRateMetrics={connectionAttemptRateMetrics}
       duration={duration}
-      metricsDataUnavailable={isDataUnavailable || isFailed}
+      backendUnavailable={isFailed}
+      isInitialLoading={isInitialLoading}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
       onRefresh={onRefresh}
@@ -96,10 +97,10 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
   onCreateTopic,
 }) => {
   const {
+    isInitialLoading,
     isLoading,
     isRefreshing,
     isFailed,
-    isDataUnavailable,
     selectedTopic,
     duration,
     topics,
@@ -115,13 +116,13 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
   return (
     <CardTopicsMetrics
       backendUnavailable={isFailed}
-      metricsDataUnavailable={isDataUnavailable}
       topics={topics}
       incomingTopicsData={bytesIncoming}
       outgoingTopicsData={bytesOutgoing}
       partitions={bytesPerPartition}
       incomingMessageRate={incomingMessageRate}
       duration={duration}
+      isInitialLoading={isInitialLoading}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
       selectedTopic={selectedTopic}
