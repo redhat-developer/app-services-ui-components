@@ -22,6 +22,13 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const parameters = {
+  options: {
+    storySort: {
+      order: ["Intro", "Pages", "Components", "Empty states", "*"],
+    },
+  },
+  viewMode: "docs",
+  previewTabs: { "storybook/docs/panel": { index: -1 } },
   locale: "en_US",
   locales: {
     en_US: "English (US)",

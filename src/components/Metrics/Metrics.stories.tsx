@@ -16,7 +16,6 @@ export default {
     i18n: MetricsI18n,
     // this option is passed to the devTools instance to use a different inspector
     chromatic: { disableSnapshot: true },
-    viewMode: "docs",
     docs: {},
   },
   excludeStories: /makeMetrics/,
