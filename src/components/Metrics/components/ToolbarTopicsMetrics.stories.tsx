@@ -4,7 +4,7 @@ import { ToolbarTopicsMetrics } from "./ToolbarTopicsMetrics";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Components/ToolbarTopicsMetrics",
+  title: "Components/Metrics/ToolbarTopicsMetrics",
   component: ToolbarTopicsMetrics,
   controls: {},
   args: {

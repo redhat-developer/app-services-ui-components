@@ -14,6 +14,7 @@ export function useTopicsMetrics() {
       isRefreshing: state.hasTag("refreshing"),
       isLoading: state.hasTag("loading"),
       isFailed: state.hasTag("failed"),
+      isJustCreated: state.hasTag("justCreated"),
     }),
     []
   );
@@ -30,6 +31,8 @@ export function useTopicsMetrics() {
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
+    lastUpdated,
   } = useSelector(service, selector);
 
   const onTopicChange = useCallback(
@@ -62,6 +65,8 @@ export function useTopicsMetrics() {
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
+    lastUpdated,
     topics: mergedTopics,
     selectedTopic,
     duration,

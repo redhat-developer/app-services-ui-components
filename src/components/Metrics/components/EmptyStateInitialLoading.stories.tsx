@@ -4,7 +4,7 @@ import { EmptyStateInitialLoading } from "./EmptyStateInitialLoading";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Empty states/Initial loading screen",
+  title: "Empty States/Metrics/Initial loading screen",
   component: EmptyStateInitialLoading,
   parameters: {
     i18n: MetricsI18n,

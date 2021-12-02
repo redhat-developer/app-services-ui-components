@@ -1,9 +1,13 @@
 import { Card, CardBody, CardTitle, TextContent } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
+import { CardKpi } from "./CardKpi";
 import { MetricsLayout } from "./MetricsLayout";
 import MetricsI18n from "../Metrics-i18n.json";
 
+const SampleKpi = (
+  <CardKpi metric={123} isLoading={false} name="Metric" popover="Lorem" />
+);
 const SampleCard = (
   <Card>
     <CardTitle>Lorem dolor</CardTitle>
@@ -21,7 +25,7 @@ const SampleCard = (
 );
 
 export default {
-  title: "Metrics/Components/MetricsLayout",
+  title: "Components/Metrics/MetricsLayout",
   component: MetricsLayout,
   args: {},
   parameters: {
@@ -35,6 +39,9 @@ const Template: ComponentStory<typeof MetricsLayout> = (args) => (
 
 export const Layout = Template.bind({});
 Layout.args = {
+  topicsKpi: SampleKpi,
+  topicPartitionsKpi: SampleKpi,
+  consumerGroupKpi: SampleKpi,
   diskSpaceMetrics: SampleCard,
   topicMetrics: SampleCard,
 };

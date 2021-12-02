@@ -6,7 +6,7 @@ import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
 export default {
-  title: "Metrics/Components/CardTopicsMetrics",
+  title: "Components/Metrics/CardTopicsMetrics",
   component: CardTopicsMetrics,
   args: {
     topics: [],
@@ -16,7 +16,7 @@ export default {
     incomingMessageRate: {},
     duration: DurationOptions.Last12hours,
     backendUnavailable: false,
-    metricsDataUnavailable: false,
+    isJustCreated: false,
     isInitialLoading: false,
     isLoading: false,
     isRefreshing: false,
@@ -46,13 +46,17 @@ NoBackend.args = {
   backendUnavailable: true,
 };
 
+export const JustCreated = Template.bind({});
+JustCreated.args = {
+  isJustCreated: true,
+};
+
 export const NoTopics = Template.bind({});
 NoTopics.args = {};
 
 export const NoMetricsWithTopics = Template.bind({});
 NoMetricsWithTopics.args = {
   topics: ["lorem"],
-  metricsDataUnavailable: true,
 };
 
 export const LoadingMetricsForSelectedTopic = Template.bind({});

@@ -10,17 +10,12 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
-import React, {
-  VoidFunctionComponent,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { ReactElement, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
-import { TimeSeriesMetrics, DurationOptions } from "../types";
+import { DurationOptions, TimeSeriesMetrics } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
+import { useChartWidth } from "./useChartWidth";
 import { dateToChartValue, shouldShowDate, timestampsToTicks } from "./utils";
 
 type ChartData = {
@@ -67,18 +62,10 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
   isLoading,
   emptyState,
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  const [width, setWidth] = useState<number>();
+  const [containerRef, width] = useChartWidth();
 
-  const handleResize = () =>
-    containerRef.current && setWidth(containerRef.current.clientWidth);
   const itemsPerRow = width && width > 650 ? 6 : 3;
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-  }, [width]);
 
   const { chartData, legendData, tickValues } = getChartData(
     metrics,
@@ -89,6 +76,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
   );
 
   const hasMetrics = Object.keys(metrics).length > 0;
+  const showDate = shouldShowDate(duration);
 
   switch (true) {
     case isLoading:
@@ -121,11 +109,16 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
             legendAllowWrap={true}
           >
             <ChartAxis
-              label={"\n" + (xLabel || t("metrics.axis-label-time"))}
+              label={
+                "\n" +
+                (xLabel || showDate
+                  ? t("metrics.axis-label-time-full")
+                  : t("metrics.axis-label-time"))
+              }
               tickValues={tickValues}
               tickFormat={(d) =>
-                dateToChartValue(new Date(d), {
-                  showDate: shouldShowDate(duration),
+                dateToChartValue(d, {
+                  showDate,
                 })
               }
             />
@@ -139,7 +132,6 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
                 <ChartArea
                   key={`chart-area-${index}`}
                   data={value.area}
-                  interpolation="monotoneX"
                   style={{
                     data: {
                       // TODO: check if this is needed

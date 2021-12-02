@@ -28,3 +28,9 @@ export type GetKafkaInstanceMetricsResponse = {
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
 };
+
+export type GetMetricsKpiResponse = {
+  topics: number;
+  topicPartitions: number;
+  consumerGroups: number;
+};

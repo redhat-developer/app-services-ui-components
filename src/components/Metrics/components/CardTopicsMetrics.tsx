@@ -1,23 +1,22 @@
-import {
-  ChartLogSizePerPartition,
-  ChartPopover,
-  ChartTotalBytes,
-  EmptyStateNoTopicData,
-  EmptyStateNoTopicSelected,
-  ToolbarTopicsMetrics,
-} from ".";
+import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
+import React, { FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import {
   DurationOptions,
   PartitionBytesMetric,
   TimeSeriesMetrics,
 } from "../types";
-import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
-import React, { FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
-import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
-import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
-import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 import { CardBodyLoading } from "./CardBodyLoading";
+import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
+import { ChartLogSizePerPartition } from "./ChartLogSizePerPartition";
+import { ChartPopover } from "./ChartPopover";
+import { ChartTotalBytes } from "./ChartTotalBytes";
+import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
+import { EmptyStateNoMetricsDataForSelection } from "./EmptyStateNoMetricsDataForSelection";
+import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
+import { EmptyStateNoTopicSelected } from "./EmptyStateNoTopicSelected";
+import { ToolbarRefreshProps } from "./ToolbarRefresh";
+import { ToolbarTopicsMetrics } from "./ToolbarTopicsMetrics";
 
 type CardTopicsMetricsProps = {
   topics: string[];
@@ -29,13 +28,12 @@ type CardTopicsMetricsProps = {
   backendUnavailable: boolean;
   isInitialLoading: boolean;
   isLoading: boolean;
-  isRefreshing: boolean;
+  isJustCreated: boolean;
   selectedTopic: string | undefined;
   onCreateTopic: () => void;
-  onRefresh: () => void;
   onSelectedTopic: (topic: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
-};
+} & ToolbarRefreshProps;
 
 export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   topics,
@@ -49,6 +47,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   isInitialLoading,
   isLoading,
   isRefreshing,
+  isJustCreated,
+  lastUpdated,
   onCreateTopic,
   onRefresh,
   onSelectedTopic,
@@ -56,19 +56,29 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
 }) => {
   const { t } = useTranslation();
   const noTopics = topics.length === 0;
-
+  const selectedTopicNotInList =
+    selectedTopic !== undefined &&
+    topics.find((t) => t === selectedTopic) === undefined;
+  const chartEmptyState = selectedTopicNotInList ? (
+    <EmptyStateNoMetricsDataForSelection />
+  ) : (
+    <EmptyStateNoMetricsData />
+  );
   return (
     <Card data-testid={"metrics-topics"}>
       <ToolbarTopicsMetrics
         title={t("metrics.topic_metrics")}
         duration={duration}
         onSetTimeDuration={onDurationChange}
-        isDisabled={backendUnavailable || noTopics}
+        isDisabled={
+          backendUnavailable || isJustCreated || noTopics || isLoading
+        }
         isRefreshing={isRefreshing}
         selectedTopic={selectedTopic}
         onSetSelectedTopic={onSelectedTopic}
         onRefresh={onRefresh}
         topicList={topics}
+        lastUpdated={lastUpdated}
       />
       {(() => {
         switch (true) {
@@ -78,11 +88,18 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
           case backendUnavailable:
             return (
               <CardBody>
-                <EmptyStateMetricsUnavailable />
+                <EmptyStateNoMetricsData />
               </CardBody>
             );
 
-          case noTopics:
+          case isJustCreated && noTopics === false:
+            return (
+              <CardBody>
+                <EmptyStateNoTopics />
+              </CardBody>
+            );
+
+          case isJustCreated && noTopics === true:
             return (
               <CardBody>
                 <EmptyStateNoTopics onCreateTopic={onCreateTopic} />
@@ -100,7 +117,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     selectedTopic={selectedTopic}
                     duration={duration}
                     isLoading={isLoading}
-                    emptyState={<EmptyStateNoTopicData />}
+                    emptyState={chartEmptyState}
                   />
                 </CardBody>
                 <Divider />
@@ -112,7 +129,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     metrics={incomingMessageRate}
                     duration={duration}
                     isLoading={isLoading}
-                    emptyState={<EmptyStateNoTopicData />}
+                    emptyState={chartEmptyState}
                   />
                 </CardBody>
                 <Divider />
@@ -120,9 +137,10 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <CardBody>
                   <ChartLogSizePerPartition
                     partitions={partitions}
+                    topic={selectedTopic!}
                     duration={duration}
                     isLoading={isLoading}
-                    emptyState={<EmptyStateNoTopicData />}
+                    emptyState={chartEmptyState}
                   />
                 </CardBody>
               </>
@@ -139,7 +157,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     selectedTopic={selectedTopic}
                     duration={duration}
                     isLoading={isLoading}
-                    emptyState={<EmptyStateNoTopicData />}
+                    emptyState={chartEmptyState}
                   />
                 </CardBody>
                 <Divider />
@@ -151,7 +169,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     metrics={incomingMessageRate}
                     duration={duration}
                     isLoading={isLoading}
-                    emptyState={<EmptyStateNoTopicData />}
+                    emptyState={chartEmptyState}
                   />
                 </CardBody>
                 <Divider />

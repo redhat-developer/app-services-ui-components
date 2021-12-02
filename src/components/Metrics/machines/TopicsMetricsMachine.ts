@@ -10,6 +10,8 @@ const MAX_RETRIES = 3;
 
 export const TopicsMetricsModel = createModel(
   {
+    lastUpdated: undefined as Date | undefined,
+
     // from the UI elements
     selectedTopic: undefined as string | undefined,
     duration: 60 as DurationOptions,
@@ -28,7 +30,6 @@ export const TopicsMetricsModel = createModel(
   {
     events: {
       // called when a new kafka id has been specified
-      fetch: () => ({}),
       fetchSuccess: (value: GetTopicsMetricsResponse) => ({ ...value }),
       fetchFail: () => ({}),
 
@@ -45,6 +46,10 @@ export const TopicsMetricsModel = createModel(
     },
   }
 );
+
+const setFetchTimestamp = TopicsMetricsModel.assign({
+  lastUpdated: () => new Date(),
+});
 
 const setMetrics = TopicsMetricsModel.assign((_, event) => {
   const {
@@ -101,10 +106,6 @@ const apiState = {
         src: "api",
       },
       on: {
-        fetchSuccess: {
-          actions: setMetrics,
-          target: "#topicsMetrics.withResponse",
-        },
         fetchFail: {
           actions: incrementRetries,
           target: "failure",
@@ -128,14 +129,46 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
     context: TopicsMetricsModel.initialContext,
     initial: "initialLoading",
     states: {
-      initialLoading: { ...apiState, tags: "initialLoading" },
-      callApi: { ...apiState, tags: "loading" },
+      initialLoading: {
+        ...apiState,
+        tags: "initialLoading",
+        entry: setFetchTimestamp,
+        on: {
+          fetchSuccess: [
+            {
+              cond: "isJustCreated",
+              actions: setMetrics,
+              target: "#topicsMetrics.withResponse",
+            },
+            { actions: setMetrics, target: "justCreated" },
+          ],
+        },
+      },
+      callApi: {
+        ...apiState,
+        tags: "loading",
+        entry: setFetchTimestamp,
+        on: {
+          fetchSuccess: {
+            actions: setMetrics,
+            target: "#topicsMetrics.withResponse",
+          },
+        },
+      },
       criticalFail: {
         tags: "failed",
         on: {
           refresh: {
             actions: resetRetries,
             target: "callApi",
+          },
+        },
+      },
+      justCreated: {
+        tags: "justCreated",
+        on: {
+          refresh: {
+            target: "initialLoading",
           },
         },
       },
@@ -146,6 +179,7 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
           idle: {},
           refreshing: {
             tags: "refreshing",
+            entry: setFetchTimestamp,
             invoke: {
               src: "api",
             },
@@ -180,6 +214,17 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
   {
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
+      isJustCreated: (_, event) => {
+        if (event.type === "fetchSuccess") {
+          return (
+            Object.keys(event.bytesIncoming).length > 0 ||
+            Object.keys(event.bytesOutgoing).length > 0 ||
+            Object.keys(event.bytesPerPartition).length > 0 ||
+            Object.keys(event.incomingMessageRate).length > 0
+          );
+        }
+        return false;
+      },
     },
   }
 );

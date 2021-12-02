@@ -4,7 +4,7 @@ import { EmptyStateNoTopicSelected } from "./EmptyStateNoTopicSelected";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Empty states/No topic selected",
+  title: "Empty States/Metrics/No topic selected",
   component: EmptyStateNoTopicSelected,
   parameters: {
     i18n: MetricsI18n,

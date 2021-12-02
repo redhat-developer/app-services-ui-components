@@ -4,7 +4,7 @@ import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
 import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
-  title: "Metrics/Empty states/No topics",
+  title: "Empty States/Metrics/No topics",
   component: EmptyStateNoTopics,
   args: {},
   parameters: {
@@ -16,6 +16,10 @@ const Template: ComponentStory<typeof EmptyStateNoTopics> = (args) => (
   <EmptyStateNoTopics {...args} />
 );
 
-export const Story = Template.bind({});
-Story.args = {};
-Story.storyName = "No topics";
+export const WithCTA = Template.bind({});
+WithCTA.args = {
+  onCreateTopic: () => false,
+};
+
+export const WithNoCTA = Template.bind({});
+WithNoCTA.args = {};

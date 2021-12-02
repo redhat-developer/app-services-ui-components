@@ -1,4 +1,4 @@
-import React, { useState, VoidFunctionComponent } from "react";
+import React, { useEffect, useState, VoidFunctionComponent } from "react";
 import {
   ToolbarItem,
   Select,
@@ -11,12 +11,12 @@ import FilterIcon from "@patternfly/react-icons/dist/js/icons/filter-icon";
 import { useTranslation } from "react-i18next";
 
 const widths = {
-  default: "100px",
-  sm: "80px",
+  default: "150px",
+  sm: "150px",
   md: "150px",
   lg: "200px",
-  xl: "250px",
-  "2xl": "300px",
+  xl: "200px",
+  "2xl": "200px",
 };
 
 type FilterByTopicProps = {
@@ -36,6 +36,9 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isTopicSelectOpen, setIsTopicSelectOpen] = useState<boolean>(false);
+  const [selectKey, setSelectKey] = useState(Math.random());
+
+  useEffect(() => setSelectKey(Math.random()), [topicList]);
 
   const allTopicsLabel = t("All topics");
 
@@ -74,6 +77,7 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
         {ariaLabel}
       </label>
       <Select
+        key={selectKey}
         variant={SelectVariant.single}
         onToggle={onTopicToggle}
         onSelect={onTopicSelect}

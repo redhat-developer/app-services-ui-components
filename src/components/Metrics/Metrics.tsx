@@ -5,7 +5,7 @@ import {
   MetricsLayout,
   CardKafkaInstanceMetrics,
 } from "./components";
-import React, { FunctionComponent } from "react";
+import React, { VoidFunctionComponent } from "react";
 import {
   KafkaInstanceMetricsProvider,
   KafkaInstanceMetricsProviderProps,
@@ -16,15 +16,24 @@ import {
   TopicsMetricsProvider,
   TopicsMetricsProviderProps,
 } from "./TopicsMetricsProvider";
+import { CardKpi } from "./components/CardKpi";
+import { useTranslation } from "react-i18next";
+import {
+  MetricsKpiProvider,
+  MetricsKpiProviderProps,
+} from "./MetricsKpiProvider";
+import { useMetricsKpi } from "./useMetricsKpi";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
 } & KafkaInstanceMetricsProviderProps &
-  TopicsMetricsProviderProps;
+  TopicsMetricsProviderProps &
+  MetricsKpiProviderProps;
 
-export const Metrics: FunctionComponent<MetricsProps> = ({
+export const Metrics: VoidFunctionComponent<MetricsProps> = ({
   getKafkaInstanceMetrics,
   getTopicsMetrics,
+  getMetricsKpi,
   onCreateTopic,
 }) => {
   return (
@@ -32,7 +41,9 @@ export const Metrics: FunctionComponent<MetricsProps> = ({
       <KafkaInstanceMetricsProvider
         getKafkaInstanceMetrics={getKafkaInstanceMetrics}
       >
-        <ConnectedMetrics onCreateTopic={onCreateTopic} />
+        <MetricsKpiProvider getMetricsKpi={getMetricsKpi}>
+          <ConnectedMetrics onCreateTopic={onCreateTopic} />
+        </MetricsKpiProvider>
       </KafkaInstanceMetricsProvider>
     </TopicsMetricsProvider>
   );
@@ -41,32 +52,71 @@ export const Metrics: FunctionComponent<MetricsProps> = ({
 type ConnectedMetricsProps = {
   onCreateTopic: () => void;
 };
-const ConnectedMetrics: FunctionComponent<ConnectedMetricsProps> = ({
+const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
 }) => {
-  const { isInitialLoading, isFailed } = useKafkaInstanceMetrics();
+  const { t } = useTranslation();
+  const kafkaInstanceMetrics = useKafkaInstanceMetrics();
+  const topicsMetrics = useTopicsMetrics();
+  const metricsKpi = useMetricsKpi();
 
   switch (true) {
-    case isInitialLoading:
+    case kafkaInstanceMetrics.isInitialLoading ||
+      topicsMetrics.isInitialLoading ||
+      metricsKpi.isInitialLoading:
       return <EmptyStateInitialLoading />;
-    case isFailed:
+    case kafkaInstanceMetrics.isFailed &&
+      topicsMetrics.isFailed &&
+      topicsMetrics.isFailed:
+    case kafkaInstanceMetrics.isJustCreated &&
+      topicsMetrics.isJustCreated &&
+      metricsKpi.isJustCreated:
       return <EmptyStateMetricsUnavailable />;
+    default:
+      return (
+        <MetricsLayout
+          topicsKpi={
+            <CardKpi
+              metric={metricsKpi.topics}
+              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
+              name={t("metrics.metric_kpi_topics_name")}
+              popover={t("metrics.metric_kpi_topics_description")}
+            />
+          }
+          topicPartitionsKpi={
+            <CardKpi
+              metric={metricsKpi.topicPartitions}
+              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
+              name={t("metrics.metric_kpi_topicPartitions_name")}
+              popover={t("metrics.metric_kpi_topicPartitions_description")}
+            />
+          }
+          consumerGroupKpi={
+            <CardKpi
+              metric={metricsKpi.consumerGroups}
+              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
+              name={t("metrics.metric_kpi_consumerGroup_name")}
+              popover={t("metrics.metric_kpi_consumerGroup_description")}
+            />
+          }
+          diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
+          topicMetrics={
+            <ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />
+          }
+        />
+      );
   }
-  return (
-    <MetricsLayout
-      diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
-      topicMetrics={<ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />}
-    />
-  );
 };
 
-const ConnectedKafkaInstanceMetrics: FunctionComponent = () => {
+const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
   const {
     isInitialLoading,
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
     duration,
+    lastUpdated,
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
@@ -84,6 +134,8 @@ const ConnectedKafkaInstanceMetrics: FunctionComponent = () => {
       isInitialLoading={isInitialLoading}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
+      isJustCreated={isJustCreated}
+      lastUpdated={lastUpdated}
       onRefresh={onRefresh}
       onDurationChange={onDurationChange}
     />
@@ -93,7 +145,7 @@ const ConnectedKafkaInstanceMetrics: FunctionComponent = () => {
 type ConnectedTopicsMetricsProps = {
   onCreateTopic: () => void;
 };
-const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = ({
+const ConnectedTopicsMetrics: VoidFunctionComponent<ConnectedTopicsMetricsProps> = ({
   onCreateTopic,
 }) => {
   const {
@@ -101,6 +153,8 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
     isLoading,
     isRefreshing,
     isFailed,
+    isJustCreated,
+    lastUpdated,
     selectedTopic,
     duration,
     topics,
@@ -125,6 +179,8 @@ const ConnectedTopicsMetrics: FunctionComponent<ConnectedTopicsMetricsProps> = (
       isInitialLoading={isInitialLoading}
       isLoading={isLoading}
       isRefreshing={isRefreshing}
+      isJustCreated={isJustCreated}
+      lastUpdated={lastUpdated}
       selectedTopic={selectedTopic}
       onRefresh={onRefresh}
       onSelectedTopic={onTopicChange}

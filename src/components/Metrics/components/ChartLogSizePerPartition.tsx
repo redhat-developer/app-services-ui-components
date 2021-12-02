@@ -1,4 +1,3 @@
-import { PartitionBytesMetric } from "../types";
 import {
   Chart,
   ChartArea,
@@ -10,22 +9,18 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
 import chart_color_green_300 from "@patternfly/react-tokens/dist/js/chart_color_green_300";
-import React, {
-  FunctionComponent,
-  ReactElement,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
+import { PartitionBytesMetric } from "../types";
+import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
+import { useChartWidth } from "./useChartWidth";
 import {
   dateToChartValue,
-  shouldShowDate,
   formatBytes,
+  shouldShowDate,
   timestampsToTicks,
 } from "./utils";
-import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 
 const colors = [chart_color_green_300.value, chart_color_blue_300.value];
 
@@ -46,36 +41,32 @@ type LegendData = {
 
 export type ChartLogSizePerPartitionProps = {
   partitions: PartitionBytesMetric;
+  topic: string;
   duration: number;
   isLoading: boolean;
   emptyState: ReactElement;
 };
 export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitionProps> = ({
   partitions,
+  topic,
   duration,
   isLoading,
   emptyState,
 }) => {
   const { t } = useTranslation();
+  const [containerRef, width] = useChartWidth();
 
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const [width, setWidth] = useState<number>();
-
-  const handleResize = () =>
-    containerRef.current && setWidth(containerRef.current.clientWidth);
   const itemsPerRow = width && width > 650 ? 6 : 3;
-
-  useEffect(() => {
-    handleResize();
-    window.addEventListener("resize", handleResize);
-  }, [width]);
 
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
+    topic,
     duration
   );
 
   const hasMetrics = Object.keys(partitions).length > 0;
+
+  const showDate = shouldShowDate(duration);
 
   switch (true) {
     case isLoading:
@@ -104,37 +95,38 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
             legendAllowWrap={true}
           >
             <ChartAxis
-              label={"\n" + "Time"}
+              label={
+                "\n" +
+                (showDate
+                  ? t("metrics.axis-label-time-full")
+                  : t("metrics.axis-label-time"))
+              }
               tickValues={tickValues}
               tickFormat={(d) =>
-                dateToChartValue(new Date(d), {
-                  showDate: shouldShowDate(duration),
+                dateToChartValue(d, {
+                  showDate,
                 })
               }
             />
             <ChartAxis
-              label={"\n\n\n\n\n" + "Bytes"}
+              label={"\n\n\n\n\n" + t("metrics.axis-label-bytes")}
               dependentAxis
               tickFormat={formatBytes}
             />
             <ChartGroup>
               {chartData.map((value, index) => (
-                <ChartArea
-                  key={`chart-area-${index}`}
-                  data={value.area}
-                  interpolation="monotoneX"
-                />
+                <ChartArea key={`chart-area-${index}`} data={value.area} />
               ))}
             </ChartGroup>
           </Chart>
         </div>
       );
   }
-  return null;
 };
 
 export function getChartData(
   partitions: PartitionBytesMetric,
+  topic: string,
   duration: number
 ): {
   legendData: Array<LegendData>;
@@ -143,7 +135,8 @@ export function getChartData(
 } {
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
-  Object.entries(partitions).map(([name, dataMap], index) => {
+  Object.entries(partitions).map(([partition, dataMap], index) => {
+    const name = `${topic}: ${partition}`;
     const color = colors[index];
     legendData.push({
       name,
