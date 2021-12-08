@@ -1,4 +1,4 @@
-.appServices--table-view__table {
+.appServices-table-view__table {
   --pf-c-table-row__item--m-selected--ZIndex: var(--pf-global--ZIndex--xs);
   --pf-c-table-row__item--m-selected--BoxShadow: var(
       --pf-global--BoxShadow--sm-top
@@ -42,7 +42,7 @@
     bottom: 0;
     left: 0;
     width: var(--pf-c-table-row__item--before--Width);
-    content: "";
+    content: '';
     background-color: var(--pf-c-table-row__item--before--BackgroundColor);
     transition: var(--pf-c-table-row__item--before--Transition);
   }
