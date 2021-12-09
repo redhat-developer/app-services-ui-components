@@ -69,6 +69,7 @@
     "@patternfly/react-icons": "4.11.14",
     "@patternfly/react-table": "4.29.58",
     "@rhoas/app-services-ui-shared": "0.15.2",
+    "@rhoas/kafka-management-sdk": "^0.18.0",
     "@xstate/react": "1.6.3",
     "byte-size": "8.1.0",
     "date-fns": "2.27.0",
