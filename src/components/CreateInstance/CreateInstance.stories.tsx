@@ -72,9 +72,6 @@ AllReady.args = {
     userHasTrialInstance:false,
     loadingQuota:false,
     title:'Create a kafka instance',
-    hideModal: () => {
-        //no-op
-      },
     isCreationInProgress:false,
     kafkaRequest:{
         "cloud_provider": {
@@ -91,17 +88,9 @@ AllReady.args = {
         }
       },
     formSubmitted:false,
-    submit:(event)=>{},
-    setName:(name:string)=>{},
-    selectAz:(selected:boolean)=>{},
-    selectCloudProvider:(cloudProvider)=>{},
-    selectCloudRegion:(region: string) => {},
     FORM_ID : 'create_instance_-form',
     cloudRegions:cloudRegions,
     getModalAppendTo:getModalAppendTo,
-    alertProps: {variant: 'info',
-    titleKey: 'Your instance will expire after 48 hours.',
-    messageKey: ''},
 };
 AllReady.storyName = "Ready to create a trial instance";
 
@@ -116,9 +105,6 @@ QuotaLoading.args = {
     userHasTrialInstance:false,
     loadingQuota:true,
     title:'Create a kafka instance',
-    hideModal: () => {
-        //no-op
-      },
     isCreationInProgress:false,
     kafkaRequest:{
         "cloud_provider": {
@@ -135,17 +121,9 @@ QuotaLoading.args = {
         }
       },
     formSubmitted:false,
-    submit:(event)=>{},
-    setName:(name:string)=>{},
-    selectAz:(selected:boolean)=>{},
-    selectCloudProvider:(cloudProvider)=>{},
-    selectCloudRegion:(region: string) => {},
     FORM_ID : 'create_instance_-form',
     cloudRegions:cloudRegions,
     getModalAppendTo:getModalAppendTo,
-    alertProps: {variant: 'info',
-    titleKey: 'Your instane will expire after 48 hours',
-    messageKey: ''},
 };
 QuotaLoading.storyName = "Checking quota for instance";
 
@@ -160,9 +138,6 @@ CreationInProgress.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:true,
   kafkaRequest:{
       "cloud_provider": {
@@ -179,17 +154,9 @@ CreationInProgress.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
-  alertProps: {variant: 'info',
-  titleKey: 'Your instane will expire after 48 hours',
-  messageKey: ''},
 };
 CreationInProgress.storyName = "Creation in progress";
 
@@ -204,9 +171,6 @@ InstanceCreationFailed.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -223,11 +187,6 @@ InstanceCreationFailed.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -245,9 +204,6 @@ ServiceDown.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -264,11 +220,6 @@ ServiceDown.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -286,9 +237,6 @@ TrialInstanceRunning.args = {
   userHasTrialInstance:true,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -305,11 +253,6 @@ TrialInstanceRunning.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -327,9 +270,6 @@ NoQuota.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -346,11 +286,6 @@ NoQuota.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -368,9 +303,6 @@ NoStandardQuota.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -387,11 +319,6 @@ NoStandardQuota.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -409,9 +336,6 @@ AlreadyProvisioned.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -428,11 +352,6 @@ AlreadyProvisioned.args = {
       }
     },
   formSubmitted:false,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
@@ -450,9 +369,6 @@ FormErrors.args = {
   userHasTrialInstance:false,
   loadingQuota:false,
   title:'Create a kafka instance',
-  hideModal: () => {
-      //no-op
-    },
   isCreationInProgress:false,
   kafkaRequest:{
       "cloud_provider": {
@@ -473,11 +389,6 @@ FormErrors.args = {
       }
     },
   formSubmitted:true,
-  submit:(event)=>{},
-  setName:(name:string)=>{},
-  selectAz:(selected:boolean)=>{},
-  selectCloudProvider:(cloudProvider)=>{},
-  selectCloudRegion:(region: string) => {},
   FORM_ID : 'create_instance_-form',
   cloudRegions:cloudRegions,
   getModalAppendTo:getModalAppendTo,
