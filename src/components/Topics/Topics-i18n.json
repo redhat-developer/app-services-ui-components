@@ -1,0 +1,10 @@
+{
+    "topic": {
+        "empty_topics_title": "No topics yet",
+        "empty_topics_body": "Create a topic by clicking the button below to get started.",
+        "create_topic": "create_topic",
+        "search": "Search",
+        "topic_search_input": "Topic search input",
+        "topic_search": "Search topics button"
+    }
+}
