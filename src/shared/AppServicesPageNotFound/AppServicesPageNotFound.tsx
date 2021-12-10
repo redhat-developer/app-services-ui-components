@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import {
   AppServicesEmptyState,
   AppServicesEmptyStateVariant,
-} from "../../components";
+} from "..";
 
 const AppServicesPageNotFound: React.FunctionComponent = () => {
   const { t } = useTranslation();

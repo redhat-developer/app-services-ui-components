@@ -5,7 +5,7 @@ import { PageSection, Button } from "@patternfly/react-core";
 import {
   AppServicesEmptyState,
   AppServicesEmptyStateVariant,
-} from "../../components";
+} from "..";
 import "./AppServicesErrorBoundary.css";
 
 type Props = WithTranslation &

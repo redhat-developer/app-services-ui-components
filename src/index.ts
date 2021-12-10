@@ -1,4 +1,2 @@
-export * from './components';
-export * from './kas';
-export * from './kafka';
-export * from './service-registry';
+export * from './shared';
+export * from './Metrics';

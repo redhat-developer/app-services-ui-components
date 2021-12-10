@@ -11,7 +11,6 @@ import {
   TextInputProps,
   TextProps,
 } from "@patternfly/react-core";
-import { getModalAppendTo } from "../../utils";
 import "./AppServicesDeleteModal.css";
 
 export type ConfirmButtonProps<T> = Omit<
@@ -54,6 +53,7 @@ export type AppServicesDeleteModalProps<T> = {
   cancelButtonProps?: CancelButtonProps;
   textProps?: NestedTextProps;
   textInputProps?: NestedTextInputProps;
+  getModalAppendTo:()=>HTMLElement;
 };
 
 export const AppServicesDeleteModal = <T,>({
@@ -67,6 +67,7 @@ export const AppServicesDeleteModal = <T,>({
   children,
   selectedItemData,
   textInputProps,
+  getModalAppendTo
 }: AppServicesDeleteModalProps<T>): React.ReactElement => {
   const {
     variant = ModalVariant.small,

@@ -18,7 +18,7 @@ import {
   TitleProps,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { AppServicesLoading } from "../../components";
+import { AppServicesLoading } from "..";
 import "./AppServicesDrawer.css";
 
 export type AppServicesDrawerProps = DrawerProps & {
