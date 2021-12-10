@@ -6,7 +6,7 @@ import {
 } from "./AppServicesEmptyState";
 
 export default {
-  title: "Shared Components/EmptyState",
+  title: "Empty States/App Services",
   component: AppServicesEmptyState,
   parameters: {
   },
