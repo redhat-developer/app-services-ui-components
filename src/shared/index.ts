@@ -5,4 +5,7 @@ export * from './AppServicesModalProvider';
 export * from './AppServicesPagination';
 export * from './AppServicesTable';
 export * from './AppServicesToolbar';
-export * from './Metrics';
+export * from './AppServicesDeleteModal';
+export * from './AppServicesEmptyState';
+export * from './AppServicesErrorBoundary';
+export * from './AppServicesPageNotFound';

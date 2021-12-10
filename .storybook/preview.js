@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "development") {
 export const parameters = {
   options: {
     storySort: {
-      order: ["Intro", "Pages", "Components", "Empty states", "*"],
+      order: ["Intro", "Shared Components", "Pages", "Components", "Empty states", "*"],
     },
   },
   viewMode: "docs",

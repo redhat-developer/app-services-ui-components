@@ -1,29 +1,29 @@
-import React, { FunctionComponent } from "react";
+import React, { ReactElement } from "react";
 import {
-  TableHeader,
+  HeaderProps,
   Table as PFTable,
   TableBody,
-  TableProps as PFTableProps,
-  HeaderProps,
   TableBodyProps,
+  TableHeader,
+  TableProps as PFTableProps,
 } from "@patternfly/react-table";
 import { css } from "@patternfly/react-styles";
 import {
   CustomRowWrapper,
-  CustomRowWrapperProvider,
   CustomRowWrapperContextProps,
+  CustomRowWrapperProvider,
 } from "./CustomRowWrapper";
 
-export type AppServicesTableProps = CustomRowWrapperContextProps & {
+export type AppServicesTableProps<T> = CustomRowWrapperContextProps<T> & {
   tableProps: Omit<PFTableProps, "children"> & {
-    shouldDefaultCustomRowWrapper?: boolean;
+    hasDefaultCustomRowWrapper?: boolean;
   };
   tableHeaderProps?: Omit<HeaderProps, "children">;
   tableBodyProps?: Omit<TableBodyProps, "children">;
   children?: React.ReactNode;
 };
 
-const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
+const AppServicesTable = <T,>({
   tableProps,
   tableHeaderProps,
   tableBodyProps,
@@ -32,7 +32,7 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
   onRowClick,
   rowDataTestId,
   loggedInUser,
-}) => {
+}: AppServicesTableProps<T>): ReactElement<any, any> => {
   const {
     cells,
     rows,
@@ -42,9 +42,16 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
     "aria-label": ariaLabel,
     variant,
     className,
-    shouldDefaultCustomRowWrapper = false,
+    hasDefaultCustomRowWrapper = false,
     ...restProps
   } = tableProps;
+
+  /**
+   * Handle CustomRowWrapper
+   */
+  if (hasDefaultCustomRowWrapper) {
+    restProps["rowWrapper"] = CustomRowWrapper;
+  }
 
   return (
     <CustomRowWrapperProvider
@@ -57,7 +64,7 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
     >
       <PFTable
         className={css(
-          shouldDefaultCustomRowWrapper && "appServices--table-view__table",
+          hasDefaultCustomRowWrapper && "appServices-table-view__table",
           className
         )}
         cells={cells}
@@ -67,11 +74,6 @@ const AppServicesTable: FunctionComponent<AppServicesTableProps> = ({
         actionResolver={actionResolver}
         onSort={onSort}
         sortBy={sortBy}
-        rowWrapper={
-          shouldDefaultCustomRowWrapper
-            ? (props) => <CustomRowWrapper {...props} />
-            : undefined
-        }
         {...restProps}
       >
         <TableHeader {...tableHeaderProps} />
