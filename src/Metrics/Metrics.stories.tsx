@@ -3,7 +3,7 @@ import React from "react";
 import { within, fireEvent, findByTestId } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { Metrics } from "./Metrics";
-import MetricsI18n from "./Metrics-i18n.json.js";
+import MetricsI18n from "./Metrics-i18n.json";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import { DurationOptions } from "./types";
 
@@ -215,7 +215,7 @@ The toolbar is disabled, but the refresh button can be clicked.
 
 export const TopicsRecentlyCreated = Template.bind({});
 TopicsRecentlyCreated.args = {
-  getMetricsKpi: () =>fakeApi
+  getMetricsKpi: () =>
     fakeApi({ topics: 1, topicPartitions: 3, consumerGroups: 0 }),
   getKafkaInstanceMetrics: (props) =>
     getKafkaInstanceMetrics({ ...props, offset: 3 }),
