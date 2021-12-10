@@ -8,7 +8,7 @@ import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import { DurationOptions } from "./types";
 
 export default {
-  title: "Pages/Metrics",
+  title: "Features/Metrics",
   component: Metrics,
   args: {},
   parameters: {
