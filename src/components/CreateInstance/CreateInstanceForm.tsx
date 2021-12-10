@@ -14,7 +14,23 @@ import { CloudRegionSelect } from'./CloudRegionsSelect';
 import {
   CloudProvidersTiles,
 } from './CloudProviderTiles';
-import { CreateInstanceFormProps,isKafkaRequestInvalid } from './utils';
+import { isKafkaRequestInvalid,CloudProvidersTileProps,NewKafkaRequestPayload,CloudProvider,CloudRegion } from './utils';
+
+export type CreateInstanceFormProps = Pick<
+  CloudProvidersTileProps,
+  'cloudProviders'
+> & {
+  kafkaRequest: NewKafkaRequestPayload;
+  id: string;
+  submit: (event: any) => void
+  formSubmitted:boolean
+  setName: (name: string) => void
+  selectCloudProvider: (cloudProvider: CloudProvider) => void
+  selectCloudRegion: (region: string) => void
+  selectAz: (selected: boolean) => void
+  cloudRegions?:CloudRegion[]
+
+};
 
 
 

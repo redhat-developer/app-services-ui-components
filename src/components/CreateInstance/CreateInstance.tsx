@@ -7,13 +7,48 @@ import {
   FlexItem,
   Modal,
   ModalVariant,
+  AlertVariant
 } from '@patternfly/react-core'
+import { QuotaValue,Quota } from "@rhoas/app-services-ui-shared";
 import './CreateInstance.css'
 import { InstanceInfo } from './InstanceInfo'
-import { CreateInstanceProps, isKafkaRequestInvalid } from './utils'
+import {  isKafkaRequestInvalid,NewKafkaRequestPayload,CloudProvider,CloudRegion } from './utils'
 import { QuotaAlert } from './QuotaAlert'
 import { CreateInstanceForm } from './CreateInstanceForm'
 
+type QuotaAlert = {
+  titleKey: string;
+  messageKey: string;
+  variant: AlertVariant;
+};
+
+export type CreateInstanceProps={
+  hideModal: () => void;
+  title?: string;
+  variant?: 'small' | 'medium' | 'large' | 'default';
+  isCreationInProgress:boolean
+  kafkaRequest:NewKafkaRequestPayload;
+  loadingQuota:boolean
+  userHasTrialInstance?:boolean
+  hasKafkaCreationFailed:boolean
+  kasQuota?: QuotaValue 
+  kasTrial?: QuotaValue
+  quota:Quota
+  cloudProviders?:CloudProvider[]
+  isKasTrial:boolean
+  getModalAppendTo: () => HTMLElement
+  formSubmitted:boolean;
+  submit: (event: any) => void;
+  setName: (name: string) => void;
+  selectCloudProvider: (cloudProvider: CloudProvider) => void
+  selectCloudRegion: (region: string) => void
+  selectAz: (selected: boolean) => void
+  cloudRegions?: CloudRegion[] | undefined
+  alertProps?: QuotaAlert
+  FORM_ID:string
+  onClickQuickStart: () => void
+
+}
 
 export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
   isKasTrial,
@@ -36,7 +71,8 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
   selectCloudRegion,
   cloudRegions,
   getModalAppendTo,
-  FORM_ID
+  FORM_ID,
+  onClickQuickStart
 }) => {
   const { t } = useTranslation()
   const handleModalToggle = () => {
@@ -111,7 +147,7 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
           flex={{ default: 'flex_1' }}
           className="mk--create-instance-modal__sidebar--content"
         >
-          <InstanceInfo isKasTrial={isKasTrial} />
+          <InstanceInfo isKasTrial={isKasTrial} onClickQuickStart={onClickQuickStart} />
         </FlexItem>
       </Flex>
     </Modal>

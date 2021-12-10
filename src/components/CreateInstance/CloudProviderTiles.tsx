@@ -1,4 +1,4 @@
-import { CloudProvider } from '@rhoas/kafka-management-sdk';
+import { CloudProvider } from './utils';
 import { CloudProvidersTileProps } from './utils';
 import React from 'react';
 import AwsIcon from '@patternfly/react-icons/dist/js/icons/aws-icon';

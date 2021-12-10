@@ -13,20 +13,15 @@ import {
   Button,
   ButtonVariant,
 } from '@patternfly/react-core';
-import {
-  QuickStartContext,
-  QuickStartContextValues,
-} from '@patternfly/quickstarts';
 
 export type InstanceInfoProps = {
   isKasTrial?: boolean;
+  onClickQuickStart: () => void
 };
 
-const InstanceInfo: React.FC<InstanceInfoProps> = ({ isKasTrial }) => {
+const InstanceInfo: React.FC<InstanceInfoProps> = ({ isKasTrial,onClickQuickStart }) => {
   const { t } = useTranslation();
-  const qsContext: QuickStartContextValues =
-    React.useContext(QuickStartContext);
-
+  
   return (
     <TextContent>
       <Text component={TextVariants.h3}>
@@ -98,10 +93,7 @@ const InstanceInfo: React.FC<InstanceInfoProps> = ({ isKasTrial }) => {
           isInline
           variant={ButtonVariant.link}
           style={{ marginTop: '20px' }}
-          onClick={() =>
-            qsContext.setActiveQuickStart &&
-            qsContext.setActiveQuickStart('getting-started')
-          }
+          onClick={onClickQuickStart}
         >
           {t('common.quick_start_guide_message')}
         </Button>

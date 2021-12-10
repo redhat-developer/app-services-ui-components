@@ -1,5 +1,5 @@
 import { NewKafkaRequestPayload } from './utils';
-import { CloudRegion } from '@rhoas/kafka-management-sdk';
+import { CloudRegion } from './utils';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FormSelect, FormSelectOption } from '@patternfly/react-core';
