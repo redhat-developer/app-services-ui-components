@@ -1,5 +1,6 @@
+import { Button } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
+import React,{useState} from "react";
 import { CreateInstance } from "./CreateInstance";
 import CreateInstanceI18n from "./CreateInstance-i18n.json";
 
@@ -13,42 +14,52 @@ export default {
 } as ComponentMeta<typeof CreateInstance>;
 
 const Template: ComponentStory<typeof CreateInstance> = (args, { id }) => {
+  const[isModalOpen,setIsModalOpen]=useState<boolean>(true)
+  const onCloseModal=()=>{
+    setIsModalOpen(false)
+  
+  }
+  const onOpenModal=()=>{
+    setIsModalOpen(true)
+  }
   return (
     <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
       <CreateInstance
         {...args}
         getModalAppendTo={() => document.getElementById(id)}
+        isModalOpen={isModalOpen}
+        hideModal={onCloseModal}
+        disableFocusTrap={true}
+
       />
+      <div>
+        <Button onClick={() => onOpenModal()}>
+          Open modal
+          </Button>
+      </div>
     </div>
   );
 };
 
 const cloudProviders = [
   {
-    kind: "CloudProvider",
-    id: "aws",
     display_name: "Amazon Web Services",
     name: "aws",
-    enabled: true,
   },
 ];
 
 const cloudRegions = [
   {
-    kind: "CloudRegion",
     id: "eu-west-1",
     display_name: "EU, Ireland",
-    enabled: true,
-    supported_instance_types: ["standard", "eval"],
   },
   {
-    kind: "CloudRegion",
     id: "us-east-1",
     display_name: "US East, N. Virginia",
-    enabled: true,
-    supported_instance_types: ["standard", "eval"],
   },
 ];
+
+
 
 export const AllReady = Template.bind({});
 AllReady.args = {
@@ -60,7 +71,6 @@ AllReady.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -77,7 +87,6 @@ AllReady.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
 };
 AllReady.storyName = "Ready to create a trial instance";
@@ -92,7 +101,6 @@ QuotaLoading.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: true,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -109,8 +117,9 @@ QuotaLoading.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+ // hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 QuotaLoading.storyName = "Checking quota for instance";
 
@@ -124,7 +133,6 @@ CreationInProgress.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: true,
   kafkaRequest: {
     cloud_provider: {
@@ -141,8 +149,9 @@ CreationInProgress.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 CreationInProgress.storyName = "Creation in progress";
 
@@ -156,7 +165,6 @@ InstanceCreationFailed.args = {
   hasKafkaCreationFailed: true,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -173,8 +181,9 @@ InstanceCreationFailed.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 InstanceCreationFailed.storyName = "Instance creation failed";
 
@@ -188,7 +197,6 @@ ServiceDown.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -205,8 +213,9 @@ ServiceDown.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 ServiceDown.storyName = "Service Down";
 
@@ -220,7 +229,6 @@ TrialInstanceRunning.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: true,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -237,8 +245,9 @@ TrialInstanceRunning.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 TrialInstanceRunning.storyName =
   "User has no standard quota and a trial instance is already running";
@@ -253,7 +262,6 @@ NoQuota.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -270,8 +278,9 @@ NoQuota.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 NoQuota.storyName = "User has no standard quota and no trial quota";
 
@@ -285,7 +294,6 @@ NoStandardQuota.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -302,8 +310,9 @@ NoStandardQuota.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 NoStandardQuota.storyName =
   "User has no standard quota but trial quota is available";
@@ -318,7 +327,6 @@ AlreadyProvisioned.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -335,8 +343,9 @@ AlreadyProvisioned.args = {
     },
   },
   formSubmitted: false,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
+  //hideModal:onCloseModal(),
+  //isModalOpen:isModalOpen
 };
 AlreadyProvisioned.storyName =
   " User has standard quota but all allowed instances are already provisioned";
@@ -351,7 +360,6 @@ FormErrors.args = {
   hasKafkaCreationFailed: false,
   userHasTrialInstance: false,
   loadingQuota: false,
-  title: "Create a kafka instance",
   isCreationInProgress: false,
   kafkaRequest: {
     cloud_provider: {
@@ -372,7 +380,6 @@ FormErrors.args = {
     },
   },
   formSubmitted: true,
-  FORM_ID: "create_instance_-form",
   cloudRegions: cloudRegions,
 };
 FormErrors.storyName = " Form has one or more errors";

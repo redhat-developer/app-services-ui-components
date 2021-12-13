@@ -24,8 +24,6 @@ type QuotaAlert = {
 
 export type CreateInstanceProps={
   hideModal: () => void;
-  title?: string;
-  variant?: 'small' | 'medium' | 'large' | 'default';
   isCreationInProgress:boolean
   kafkaRequest:NewKafkaRequestPayload;
   loadingQuota:boolean
@@ -44,9 +42,9 @@ export type CreateInstanceProps={
   selectCloudRegion: (region: string) => void
   selectAz: (selected: boolean) => void
   cloudRegions?: CloudRegion[] | undefined
-  alertProps?: QuotaAlert
-  FORM_ID:string
   onClickQuickStart: () => void
+  isModalOpen:boolean
+  disableFocusTrap?:boolean
 
 }
 
@@ -59,7 +57,6 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
   hasKafkaCreationFailed,
   userHasTrialInstance,
   loadingQuota,
-  title,
   hideModal,
   isCreationInProgress,
   kafkaRequest,
@@ -71,9 +68,11 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
   selectCloudRegion,
   cloudRegions,
   getModalAppendTo,
-  FORM_ID,
-  onClickQuickStart
+  onClickQuickStart,
+  isModalOpen,
+  disableFocusTrap
 }) => {
+  const FORM_ID = 'create_instance_-form';
   const { t } = useTranslation()
   const handleModalToggle = () => {
     hideModal()
@@ -83,8 +82,9 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
     <Modal
       id="modalCreateKafka"
       variant={ModalVariant.medium}
-      title={title}
-      isOpen={true}
+      title={'create_instance_title'}
+      disableFocusTrap={disableFocusTrap}
+      isOpen={isModalOpen}
       onClose={handleModalToggle}
       appendTo={getModalAppendTo}
       actions={[

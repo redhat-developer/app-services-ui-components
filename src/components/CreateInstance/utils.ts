@@ -1,18 +1,12 @@
 
   export type CloudProvider= {
-    kind?: string;
-    id?: string;
     display_name?: string;
     name?: string;
-    enabled: boolean;
 }
 
 export type CloudRegion= {
-  kind?: string;
   id?: string;
   display_name?: string;
-  enabled: boolean;
-  supported_instance_types: Array<string>;
 }
 
 export type Validated<T> = {
