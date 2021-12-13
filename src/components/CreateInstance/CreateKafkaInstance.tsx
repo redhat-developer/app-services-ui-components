@@ -22,18 +22,16 @@ type QuotaAlert = {
   variant: AlertVariant;
 };
 
-export type CreateInstanceProps={
+export type CreateKafkaInstanceProps={
   hideModal: () => void;
   isCreationInProgress:boolean
   kafkaRequest:NewKafkaRequestPayload;
-  loadingQuota:boolean
   userHasTrialInstance?:boolean
   hasKafkaCreationFailed:boolean
   kasQuota?: QuotaValue 
   kasTrial?: QuotaValue
   quota:Quota
   cloudProviders?:CloudProvider[]
-  isKasTrial:boolean
   getModalAppendTo: () => HTMLElement
   formSubmitted:boolean;
   submit: (event: any) => void;
@@ -48,15 +46,13 @@ export type CreateInstanceProps={
 
 }
 
-export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
-  isKasTrial,
+export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstanceProps> = ({
   cloudProviders,
   quota,
   kasQuota,
   kasTrial,
   hasKafkaCreationFailed,
   userHasTrialInstance,
-  loadingQuota,
   hideModal,
   isCreationInProgress,
   kafkaRequest,
@@ -77,6 +73,8 @@ export const CreateInstance: React.FunctionComponent<CreateInstanceProps> = ({
   const handleModalToggle = () => {
     hideModal()
   }
+  const loadingQuota = quota?.loading === undefined ? true : quota?.loading;
+  const isKasTrial = kasTrial && !kasQuota;
 
   return (
     <Modal
