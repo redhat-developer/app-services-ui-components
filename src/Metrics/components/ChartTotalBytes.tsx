@@ -68,12 +68,16 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
     incomingTopicsData,
     outgoingTopicsData,
     duration,
-    t("metrics:incoming_bytes", {
-      topic: selectedTopic || t("metrics:all_topics"),
-    }),
-    t("metrics:outgoing_bytes", {
-      topic: selectedTopic || t("metrics:all_topics"),
-    })
+    selectedTopic
+      ? t("metrics:incoming_bytes", {
+          topic: selectedTopic,
+        })
+      : t("metrics:incoming_bytes_all_topics"),
+    selectedTopic
+      ? t("metrics:outgoing_bytes", {
+          topic: selectedTopic,
+        })
+      : t("metrics:outgoing_bytes_all_topics")
   );
 
   const hasMetrics =

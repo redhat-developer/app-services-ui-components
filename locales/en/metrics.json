@@ -1,5 +1,5 @@
 {
-  "all_topics": "all topics",
+  "all_topics": "All topics",
   "axis-label-bytes": "Bytes",
   "axis-label-time": "Time",
   "axis-label-time-full": "Time (HH:mm MM/dd)",
@@ -19,6 +19,7 @@
   "empty_state_no_topics_create_topic": "Create topic",
   "empty_state_no_topics_title": "No topic data",
   "incoming_bytes": "Incoming bytes ({{topic}})",
+  "incoming_bytes_all_topics": "Incoming bytes (all topics)",
   "kafka_instance_filter_by_time": "Filter $t(common:kafka) instance metrics by time range",
   "kafka_instance_metrics": "$t(common:kafka) instance metrics",
   "last-refresh": "Last update",
@@ -33,6 +34,7 @@
   "metric_kpi_topics_name": "Topics",
   "metric_not_available": "Data unavailable",
   "outgoing_bytes": "Outgoing bytes ({{topic}})",
+  "outgoing_bytes_all_topics": "Outgoing bytes (all topics)",
   "refreshing": "Getting data",
   "topic_incoming_message_rate": "Incoming message rate",
   "topic_incoming_message_rate_help_text": "Incoming message rate is the number of messages per second received by one or more topics in the $t(common:kafka) instance over time. This metric enables you to verify that messages are produced to topics and that producers are functioning properly. To modify the incoming messages per topic, you can adjust the corresponding producer as needed.",
