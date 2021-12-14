@@ -6,7 +6,6 @@ import "@patternfly/patternfly/utilities/Flex/flex.css";
 import "@patternfly/patternfly/utilities/Sizing/sizing.css";
 import "@patternfly/patternfly/utilities/Spacing/spacing.css";
 import "@patternfly/patternfly/utilities/Text/text.css";
-import { useGlobals } from "@storybook/client-api";
 import { inspect } from "@xstate/inspect";
 import React from "react";
 import { I18nextProvider } from "react-i18next";
@@ -31,11 +30,6 @@ export const parameters = {
   viewMode: "docs",
   previewTabs: { "storybook/docs/panel": { index: -1 } },
   locale: "en_US",
-  locales: {
-    en_US: "English (US)",
-    pseudo: "Pseudo localization",
-    cimode: "Show translation keys",
-  },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -104,14 +98,28 @@ export const parameters = {
   },
 };
 
-export const decorators = [
-  (Story, { parameters }) => {
-    const [{ locale }] = useGlobals();
+export const globalTypes = {
+  locale: {
+    name: "Locale",
+    description: "Internationalization locale",
+    defaultValue: "en_US",
+    toolbar: {
+      icon: "globe",
+      items: [
+        { value: "en_US", right: "🇺🇸", title: "English" },
+        { value: "pseudo", right: "🤪", title: "Pseudo localization" },
+        { value: "cimode", right: "🤓", title: "Show translation keys" },
+      ],
+    },
+  },
+};
 
+export const decorators = [
+  (Story, { parameters, globals }) => {
     return (
       <Router>
         <I18nextProvider
-          value={initI18N(locale, {
+          value={initI18N(globals.locale, {
             en: {
               public: {
                 ...parameters.i18n,
