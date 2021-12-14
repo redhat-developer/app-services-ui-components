@@ -1,37 +1,44 @@
-import i18n, { Resource } from "i18next";
+import i18next, { i18n, ResourceLanguage } from "i18next";
 import { initReactI18next } from "react-i18next";
-import Pseudo from "i18next-pseudo";
+import MarkdownPostprocessor from "i18next-markdown-postprocessor";
 import dayjs from "dayjs";
+import AsyncBackend from "./AsyncBackend";
 
-export const initI18N = (lng: string, resources: Resource) => {
-  const pseudolocalizationEnabled = lng === "pseudo";
-
-  const kasi18n = i18n.createInstance();
-
-  kasi18n
-    .use(new Pseudo({ enabled: pseudolocalizationEnabled, wrapped: true }))
+export function initI18next(
+  lng: string,
+  resources: {
+    [language: string]: {
+      [namespace: string]: () => Promise<ResourceLanguage>;
+    };
+  }
+): i18n {
+  const instance = i18next.createInstance();
+  const languages = Object.keys(resources);
+  const namespaces = Object.keys(resources[lng] || resources[languages[0]]);
+  instance
+    .use(MarkdownPostprocessor)
     // pass the i18n instance to react-i18next.
+    .use(AsyncBackend)
     .use(initReactI18next)
     // init i18next
     // for all options read: https://www.i18next.com/overview/configuration-options
     .init(
       {
-        resources,
-        lng: !pseudolocalizationEnabled && lng,
+        lng,
         fallbackLng: "en",
-        load: "all",
+        load: "languageOnly",
+        backend: { resources },
         debug: process.env.NODE_ENV === "development",
         detection: { caches: [] },
         contextSeparator: "~",
-        // add any namespaces you're using here for loading purposes
-        ns: ["public"],
-        defaultNS: "public",
+        ns: namespaces,
+        partialBundledLanguages: true,
+        appendNamespaceToCIMode: true,
         nsSeparator: ":",
         keySeparator: ".",
-        postProcess: ["pseudo"],
+        postProcess: [`markdownPostprocessor`],
         interpolation: {
-          format: function (value, format, lng, options) {
-            options = options || {};
+          format: function (value, format, lng) {
             if (format === "number") {
               // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat#Browser_compatibility
               return new Intl.NumberFormat(lng).format(value);
@@ -49,7 +56,7 @@ export const initI18N = (lng: string, resources: Resource) => {
         react: {
           useSuspense: true,
         },
-        saveMissing: true,
+        saveMissing: false,
         // missingKeyHandler: function (lng, ns, key) {
         //   // window.windowError = `Missing i18n key "${key}" in namespace "${ns}" and language "${lng}."`;
         //   // eslint-disable-next-line no-console
@@ -57,13 +64,13 @@ export const initI18N = (lng: string, resources: Resource) => {
         // },
       },
       () => {
-        dayjs.locale(i18n.language);
+        dayjs.locale(i18next.language);
       }
     );
 
-  kasi18n.on("languageChanged", function (lng) {
+  instance.on("languageChanged", function (lng) {
     dayjs.locale(lng);
   });
 
-  return kasi18n;
-};
+  return instance;
+}

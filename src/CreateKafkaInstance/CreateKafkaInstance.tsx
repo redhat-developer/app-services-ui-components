@@ -1,5 +1,5 @@
-import React from 'react'
-import { useTranslation } from 'react-i18next'
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Button,
   Divider,
@@ -7,14 +7,17 @@ import {
   FlexItem,
   Modal,
   ModalVariant,
-  AlertVariant
-} from '@patternfly/react-core'
-import { QuotaValue,Quota } from "@rhoas/app-services-ui-shared";
-import './CreateInstance.css'
-import { InstanceInfo } from './InstanceInfo'
-import {  isKafkaRequestInvalid,NewKafkaRequestPayload,CloudProvider,CloudRegion } from './utils'
-import { QuotaAlert } from './QuotaAlert'
-import { CreateInstanceForm } from './CreateInstanceForm'
+  AlertVariant,
+} from "@patternfly/react-core";
+import { QuotaValue, Quota } from "@rhoas/app-services-ui-shared";
+import "./CreateKafkaInstance.css";
+import {
+  isKafkaRequestInvalid,
+  NewKafkaRequestPayload,
+  CloudProvider,
+  CloudRegion,
+} from "./components";
+import { CreateInstanceForm, InstanceInfo, QuotaAlert } from "./components";
 
 type QuotaAlert = {
   titleKey: string;
@@ -22,29 +25,28 @@ type QuotaAlert = {
   variant: AlertVariant;
 };
 
-export type CreateKafkaInstanceProps={
+export type CreateKafkaInstanceProps = {
   hideModal: () => void;
-  isCreationInProgress:boolean
-  kafkaRequest:NewKafkaRequestPayload;
-  userHasTrialInstance?:boolean
-  hasKafkaCreationFailed:boolean
-  kasQuota?: QuotaValue 
-  kasTrial?: QuotaValue
-  quota:Quota
-  cloudProviders?:CloudProvider[]
-  getModalAppendTo: () => HTMLElement
-  formSubmitted:boolean;
+  isCreationInProgress: boolean;
+  kafkaRequest: NewKafkaRequestPayload;
+  userHasTrialInstance?: boolean;
+  hasKafkaCreationFailed: boolean;
+  kasQuota?: QuotaValue;
+  kasTrial?: QuotaValue;
+  quota: Quota;
+  cloudProviders?: CloudProvider[];
+  getModalAppendTo: () => HTMLElement;
+  formSubmitted: boolean;
   submit: (event: any) => void;
   setName: (name: string) => void;
-  selectCloudProvider: (cloudProvider: CloudProvider) => void
-  selectCloudRegion: (region: string) => void
-  selectAz: (selected: boolean) => void
-  cloudRegions?: CloudRegion[] | undefined
-  onClickQuickStart: () => void
-  isModalOpen:boolean
-  disableFocusTrap?:boolean
-
-}
+  selectCloudProvider: (cloudProvider: CloudProvider) => void;
+  selectCloudRegion: (region: string) => void;
+  selectAz: (selected: boolean) => void;
+  cloudRegions?: CloudRegion[] | undefined;
+  onClickQuickStart: () => void;
+  isModalOpen: boolean;
+  disableFocusTrap?: boolean;
+};
 
 export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstanceProps> = ({
   cloudProviders,
@@ -66,13 +68,13 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
   getModalAppendTo,
   onClickQuickStart,
   isModalOpen,
-  disableFocusTrap
+  disableFocusTrap,
 }) => {
-  const FORM_ID = 'create_instance_-form';
-  const { t } = useTranslation()
+  const FORM_ID = "create_instance_-form";
+  const { t } = useTranslation();
   const handleModalToggle = () => {
-    hideModal()
-  }
+    hideModal();
+  };
   const loadingQuota = quota?.loading === undefined ? true : quota?.loading;
   const isKasTrial = kasTrial && !kasQuota;
 
@@ -80,7 +82,7 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
     <Modal
       id="modalCreateKafka"
       variant={ModalVariant.medium}
-      title={'create_instance_title'}
+      title={t("create-kafka-instance:create_instance")}
       disableFocusTrap={disableFocusTrap}
       isOpen={isModalOpen}
       onClose={handleModalToggle}
@@ -100,11 +102,11 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
             (kasQuota && kasQuota?.remaining === 0) ||
             (!kasQuota && !kasTrial)
           }
-          spinnerAriaValueText={t('submitting_request')}
+          spinnerAriaValueText={t("common:submitting_request")}
           isLoading={isCreationInProgress}
           data-testid="modalCreateKafka-buttonSubmit"
         >
-          {t('create_instance')}
+          {t("create-kafka-instance:create_instance")}
         </Button>,
         <Button
           key="cancel"
@@ -112,7 +114,7 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
           onClick={handleModalToggle}
           data-testid="modalCreateKafka-buttonCancel"
         >
-          {t('cancel')}
+          {t("common:cancel")}
         </Button>,
       ]}
     >
@@ -122,10 +124,9 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
         hasKafkaCreationFailed={hasKafkaCreationFailed}
         kasTrial={kasTrial}
         kasQuota={kasQuota}
-        
       />
-      <Flex direction={{ default: 'column', lg: 'row' }}>
-        <FlexItem flex={{ default: 'flex_2' }}>
+      <Flex direction={{ default: "column", lg: "row" }}>
+        <FlexItem flex={{ default: "flex_2" }}>
           <CreateInstanceForm
             kafkaRequest={kafkaRequest}
             cloudProviders={cloudProviders}
@@ -137,17 +138,19 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
             selectCloudRegion={selectCloudRegion}
             selectAz={selectAz}
             cloudRegions={cloudRegions}
-
           />
         </FlexItem>
         <Divider isVertical />
         <FlexItem
-          flex={{ default: 'flex_1' }}
+          flex={{ default: "flex_1" }}
           className="mk--create-instance-modal__sidebar--content"
         >
-          <InstanceInfo isKasTrial={isKasTrial} onClickQuickStart={onClickQuickStart} />
+          <InstanceInfo
+            isKasTrial={isKasTrial}
+            onClickQuickStart={onClickQuickStart}
+          />
         </FlexItem>
       </Flex>
     </Modal>
-  )
-}
+  );
+};

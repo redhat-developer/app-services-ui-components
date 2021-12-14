@@ -15,9 +15,9 @@ export const EmptyStateNoTopicSelected: VoidFunctionComponent = () => {
     <EmptyState variant={EmptyStateVariant.xs}>
       <EmptyStateIcon icon={FilterIcon} />
       <Title headingLevel="h3" size="lg">
-        {t("metrics.empty_state_no_filter_title")}
+        {t("metrics:empty_state_no_filter_title")}
       </Title>
-      <EmptyStateBody>{t("metrics.empty_state_no_filter_body")}</EmptyStateBody>
+      <EmptyStateBody>{t("metrics:empty_state_no_filter_body")}</EmptyStateBody>
     </EmptyState>
   );
 };

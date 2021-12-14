@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Components/Metrics/ToolbarKafkaInstanceMetric",
@@ -11,9 +10,6 @@ export default {
     title: "Sample title",
     topicList: ["lorem", "dolor", "ipsum"],
     isDisabled: false,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof ToolbarKafkaInstanceMetric>;
 

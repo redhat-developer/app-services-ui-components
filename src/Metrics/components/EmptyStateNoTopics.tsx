@@ -21,12 +21,12 @@ export const EmptyStateNoTopics: FunctionComponent<EmptyStateNoTopicsProps> = ({
     <EmptyState variant={EmptyStateVariant.xs}>
       <EmptyStateIcon icon={WrenchIcon} />
       <Title headingLevel="h3" size="lg">
-        {t("metrics.empty_state_no_topics_title")}
+        {t("metrics:empty_state_no_topics_title")}
       </Title>
-      <EmptyStateBody>{t("metrics.empty_state_no_topics_body")}</EmptyStateBody>
+      <EmptyStateBody>{t("metrics:empty_state_no_topics_body")}</EmptyStateBody>
       {onCreateTopic && (
         <Button variant="primary" onClick={onCreateTopic}>
-          {t("metrics.empty_state_no_topics_create_topic")}
+          {t("metrics:empty_state_no_topics_create_topic")}
         </Button>
       )}
     </EmptyState>

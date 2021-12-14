@@ -43,14 +43,14 @@ export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> 
       <Toolbar>
         <ToolbarContent>
           <FilterByTopic
-            ariaLabel={t("metrics.topics_filter_by_topic")}
+            ariaLabel={t("metrics:topics_filter_by_topic")}
             selectedTopic={selectedTopic}
             onSetSelectedTopic={onSetSelectedTopic}
             topicList={topicList}
             disableToolbar={isDisabled}
           />
           <FilterByTime
-            ariaLabel={t("metrics.topics_filter_by_time")}
+            ariaLabel={t("metrics:topics_filter_by_time")}
             duration={duration}
             onDurationChange={onSetTimeDuration}
             disableToolbar={isDisabled}

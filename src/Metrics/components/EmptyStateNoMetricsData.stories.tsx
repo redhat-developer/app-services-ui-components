@@ -1,15 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Empty States/Metrics/No metrics data",
   component: EmptyStateNoMetricsData,
   args: {},
-  parameters: {
-    i18n: MetricsI18n,
-  },
 } as ComponentMeta<typeof EmptyStateNoMetricsData>;
 
 const Template: ComponentStory<typeof EmptyStateNoMetricsData> = (args) => (

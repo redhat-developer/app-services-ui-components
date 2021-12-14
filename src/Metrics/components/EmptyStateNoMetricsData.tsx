@@ -17,7 +17,7 @@ export const EmptyStateNoMetricsData: FunctionComponent = () => {
         color="var(--pf-global--warning-color--100)"
       />
       <Title headingLevel="h3" size="md">
-        {t("metrics.metric_not_available")}
+        {t("metrics:metric_not_available")}
       </Title>
     </EmptyState>
   );

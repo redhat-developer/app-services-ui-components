@@ -67,7 +67,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   return (
     <Card data-testid={"metrics-topics"}>
       <ToolbarTopicsMetrics
-        title={t("metrics.topic_metrics")}
+        title={t("metrics:topic_metrics")}
         duration={duration}
         onSetTimeDuration={onDurationChange}
         isDisabled={
@@ -124,8 +124,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <IncomingMessageRate />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
-                    chartName={t("metrics.topic_incoming_message_rate")}
-                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    chartName={t("metrics:topic_incoming_message_rate")}
+                    yLabel={t("metrics:topic_incoming_message_rate_y_axis")}
                     metrics={incomingMessageRate}
                     duration={duration}
                     isLoading={isLoading}
@@ -164,8 +164,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <IncomingMessageRate />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
-                    chartName={t("metrics.topic_incoming_message_rate")}
-                    yLabel={t("metrics.topic_incoming_message_rate_y_axis")}
+                    chartName={t("metrics:topic_incoming_message_rate")}
+                    yLabel={t("metrics:topic_incoming_message_rate_y_axis")}
                     metrics={incomingMessageRate}
                     duration={duration}
                     isLoading={isLoading}
@@ -189,10 +189,10 @@ const TotalBytesTitle: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t("metrics.total_bytes")}{" "}
+      {t("metrics:total_bytes")}{" "}
       <ChartPopover
-        title={t("metrics.total_bytes_popover_header")}
-        description={t("metrics.topic_metrics_help_text")}
+        title={t("metrics:total_bytes_popover_header")}
+        description={t("metrics:topic_metrics_help_text")}
       />
     </CardTitle>
   );
@@ -202,10 +202,10 @@ const PartitionSizeTitle: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t("metrics.topic_partition_size")}{" "}
+      {t("metrics:topic_partition_size")}{" "}
       <ChartPopover
-        title={t("metrics.topic_partition_size_popover_header")}
-        description={t("metrics.topic_partition_size_help_text")}
+        title={t("metrics:topic_partition_size_popover_header")}
+        description={t("metrics:topic_partition_size_help_text")}
       />
     </CardTitle>
   );
@@ -215,10 +215,10 @@ const IncomingMessageRate: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t("metrics.topic_incoming_message_rate")}{" "}
+      {t("metrics:topic_incoming_message_rate")}{" "}
       <ChartPopover
-        title={t("metrics.topic_incoming_message_rate_popover_header")}
-        description={t("metrics.topic_incoming_message_rate_help_text")}
+        title={t("metrics:topic_incoming_message_rate_popover_header")}
+        description={t("metrics:topic_incoming_message_rate_help_text")}
       />
     </CardTitle>
   );

@@ -71,7 +71,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
     metrics,
     duration,
     chartName,
-    t("Limit"),
+    t("metrics:limit"),
     usageLimit
   );
 
@@ -87,7 +87,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
       return (
         <div ref={containerRef}>
           <Chart
-            ariaTitle={t("metrics.used_disk_space")}
+            ariaTitle={t("metrics:used_disk_space")}
             containerComponent={
               <ChartVoronoiContainer
                 labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
@@ -112,8 +112,8 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
               label={
                 "\n" +
                 (xLabel || showDate
-                  ? t("metrics.axis-label-time-full")
-                  : t("metrics.axis-label-time"))
+                  ? t("metrics:axis-label-time-full")
+                  : t("metrics:axis-label-time"))
               }
               tickValues={tickValues}
               tickFormat={(d) =>

@@ -8,10 +8,8 @@ import "@patternfly/patternfly/utilities/Spacing/spacing.css";
 import "@patternfly/patternfly/utilities/Text/text.css";
 import { inspect } from "@xstate/inspect";
 import React from "react";
-import { I18nextProvider } from "react-i18next";
 import { BrowserRouter as Router } from "react-router-dom";
-import { initI18N } from "./i18n";
-import CommonI18n from "../src/common-i18en.json";
+import { AppServicesLoading, I18nProvider } from "../src";
 
 if (process.env.NODE_ENV === "development") {
   inspect({
@@ -27,7 +25,6 @@ export const parameters = {
       order: ["Intro", "Features", "Components", "Empty states", "*"],
     },
   },
-  viewMode: "docs",
   previewTabs: { "storybook/docs/panel": { index: -1 } },
   locale: "en_US",
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -102,12 +99,17 @@ export const globalTypes = {
   locale: {
     name: "Locale",
     description: "Internationalization locale",
-    defaultValue: "en_US",
+    defaultValue: "en-US",
     toolbar: {
       icon: "globe",
       items: [
-        { value: "en_US", right: "🇺🇸", title: "English" },
-        { value: "pseudo", right: "🤪", title: "Pseudo localization" },
+        { value: "en-US", right: "🇺🇸", title: "English (US)" },
+        { value: "en-GB", right: "🇬🇧", title: "English (GB)" },
+        {
+          value: "it-IT",
+          right: "🇮🇹",
+          title: "Italian - only <Delete> is translated, fallbacks to English",
+        },
         { value: "cimode", right: "🤓", title: "Show translation keys" },
       ],
     },
@@ -115,23 +117,28 @@ export const globalTypes = {
 };
 
 export const decorators = [
-  (Story, { parameters, globals }) => {
+  (Story, { globals }) => {
     return (
       <Router>
-        <I18nextProvider
-          value={initI18N(globals.locale, {
+        <I18nProvider
+          lng={globals.locale}
+          resources={{
             en: {
-              public: {
-                ...parameters.i18n,
-                ...CommonI18n,
-              },
+              common: () => import("../locales/en/common.json"),
+              "create-kafka-instance": () =>
+                import("../locales/en/create-kafka-instance.json"),
+              kafka: () => import("../locales/en/kafka.json"),
+              metrics: () => import("../locales/en/metrics.json"),
             },
-          })}
+            it: {
+              common: () => Promise.resolve({ delete: "Elimina" }),
+            },
+          }}
         >
-          <React.Suspense fallback={null}>
+          <React.Suspense fallback={<AppServicesLoading />}>
             <Story />
           </React.Suspense>
-        </I18nextProvider>
+        </I18nProvider>
       </Router>
     );
   },

@@ -162,7 +162,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
           isLoading={isDeleting}
           ouiaId={"delete"}
         >
-          {t("common.delete")}
+          {t("common:delete")}
         </Button>,
         <Button
           key={"cancel__button"}
@@ -171,7 +171,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
           isDisabled={isDeleting}
           ouiaId={"cancel"}
         >
-          {t("common.cancel")}
+          {t("common:cancel")}
         </Button>,
       ]}
     >
@@ -226,7 +226,7 @@ export const DeleteModalConfirmation: VoidFunctionComponent<DeleteModalConfirmat
   return (
     <Form>
       <FormGroup
-        label={t("common.type_value_to_confirm", {
+        label={t("common:type_value_to_confirm", {
           value: requiredConfirmationValue,
         })}
         fieldId={id}

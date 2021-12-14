@@ -79,24 +79,24 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
             <CardKpi
               metric={metricsKpi.topics}
               isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics.metric_kpi_topics_name")}
-              popover={t("metrics.metric_kpi_topics_description")}
+              name={t("metrics:metric_kpi_topics_name")}
+              popover={t("metrics:metric_kpi_topics_description")}
             />
           }
           topicPartitionsKpi={
             <CardKpi
               metric={metricsKpi.topicPartitions}
               isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics.metric_kpi_topicPartitions_name")}
-              popover={t("metrics.metric_kpi_topicPartitions_description")}
+              name={t("metrics:metric_kpi_topicPartitions_name")}
+              popover={t("metrics:metric_kpi_topicPartitions_description")}
             />
           }
           consumerGroupKpi={
             <CardKpi
               metric={metricsKpi.consumerGroups}
               isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics.metric_kpi_consumerGroup_name")}
-              popover={t("metrics.metric_kpi_consumerGroup_description")}
+              name={t("metrics:metric_kpi_consumerGroup_name")}
+              popover={t("metrics:metric_kpi_consumerGroup_description")}
             />
           }
           diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}

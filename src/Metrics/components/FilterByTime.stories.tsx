@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { FilterByTime } from "./FilterByTime";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Components/Metrics/FilterByTime",
@@ -11,9 +10,6 @@ export default {
     disableToolbar: false,
     ariaLabel: "the aria label",
     duration: 60,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof FilterByTime>;
 

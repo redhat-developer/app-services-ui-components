@@ -2,10 +2,7 @@ import React, { Component, ErrorInfo, ReactNode } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { PageSection, Button } from "@patternfly/react-core";
-import {
-  AppServicesEmptyState,
-  AppServicesEmptyStateVariant,
-} from "..";
+import { AppServicesEmptyState, AppServicesEmptyStateVariant } from "..";
 import "./AppServicesErrorBoundary.css";
 
 type Props = WithTranslation &
@@ -52,14 +49,14 @@ class AppServicesErrorBoundary extends Component<Props, State> {
               className: "icon-color",
             }}
             titleProps={{
-              title: t("common.something_went_wrong"),
+              title: t("common:something_went_wrong"),
             }}
             emptyStateBodyProps={{
-              body: t("unexpected_error"),
+              body: t("common:unexpected_error"),
             }}
           >
             <Button onClick={this.onClickButton}>
-              {t("go_to_kafka_instances")}
+              {t("common:go_to_kafka_instances")}
             </Button>
           </AppServicesEmptyState>
         </PageSection>

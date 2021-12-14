@@ -1,14 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { EmptyStateNoTopicSelected } from "./EmptyStateNoTopicSelected";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Empty States/Metrics/No topic selected",
   component: EmptyStateNoTopicSelected,
-  parameters: {
-    i18n: MetricsI18n,
-  },
 } as ComponentMeta<typeof EmptyStateNoTopicSelected>;
 
 const Template: ComponentStory<typeof EmptyStateNoTopicSelected> = () => (

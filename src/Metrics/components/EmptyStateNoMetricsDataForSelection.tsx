@@ -15,10 +15,10 @@ export const EmptyStateNoMetricsDataForSelection: FunctionComponent = () => {
     <EmptyState variant={EmptyStateVariant.xs}>
       <EmptyStateIcon icon={SearchIcon} />
       <Title headingLevel="h3" size="lg">
-        {t("metrics.empty_state_no_metrics_data_title")}
+        {t("metrics:empty_state_no_metrics_data_title")}
       </Title>
       <EmptyStateBody>
-        {t("metrics.empty_state_no_metrics_data_body")}
+        {t("metrics:empty_state_no_metrics_data_body")}
       </EmptyStateBody>
     </EmptyState>
   );

@@ -44,12 +44,12 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
       >
         <div className="pf-u-font-size-xs">
           {isRefreshing ? (
-            t("metrics.refreshing")
+            t("metrics:refreshing")
           ) : (
             <>
-              {t("metrics.last-refresh")}
+              {t("metrics:last-refresh")}
               <br />
-              {t("metrics.last-refresh-distance", {
+              {t("metrics:last-refresh-distance", {
                 distance,
               })}
             </>

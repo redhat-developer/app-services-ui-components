@@ -40,14 +40,14 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
 
   useEffect(() => setSelectKey(Math.random()), [topicList]);
 
-  const allTopicsLabel = t("All topics");
+  const allTopicsLabel = t("metrics:all_topics");
 
   const onTopicToggle = (isTopicSelectOpen: boolean) => {
     setIsTopicSelectOpen(isTopicSelectOpen);
   };
 
   const onTopicSelect: SelectProps["onSelect"] = (_, selection) => {
-    selection !== "All topics"
+    selection !== allTopicsLabel
       ? onSetSelectedTopic(selection as string)
       : onSetSelectedTopic(undefined);
     setIsTopicSelectOpen(false);
@@ -85,7 +85,7 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
         isOpen={isTopicSelectOpen}
         placeholderText={
           <>
-            <FilterIcon /> All topics
+            <FilterIcon /> {allTopicsLabel}
           </>
         }
         aria-labelledby={ariaId}

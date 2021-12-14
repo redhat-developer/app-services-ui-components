@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
-import MetricsI18n from "../Metrics-i18n.json";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
 
@@ -16,7 +15,6 @@ export default {
     emptyState: <div>this is the empty state</div>,
   },
   parameters: {
-    i18n: MetricsI18n,
     backgrounds: {
       default: "Background color 100",
     },

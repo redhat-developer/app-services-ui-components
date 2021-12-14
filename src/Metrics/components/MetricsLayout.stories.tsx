@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { CardKpi } from "./CardKpi";
 import { MetricsLayout } from "./MetricsLayout";
-import MetricsI18n from "../Metrics-i18n.json";
 
 const SampleKpi = (
   <CardKpi metric={123} isLoading={false} name="Metric" popover="Lorem" />
@@ -28,9 +27,6 @@ export default {
   title: "Components/Metrics/MetricsLayout",
   component: MetricsLayout,
   args: {},
-  parameters: {
-    i18n: MetricsI18n,
-  },
 } as ComponentMeta<typeof MetricsLayout>;
 
 const Template: ComponentStory<typeof MetricsLayout> = (args) => (

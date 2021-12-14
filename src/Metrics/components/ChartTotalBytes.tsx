@@ -68,11 +68,11 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
     incomingTopicsData,
     outgoingTopicsData,
     duration,
-    t("metrics.incoming_bytes", {
-      topic: selectedTopic || t("metrics.all_topics"),
+    t("metrics:incoming_bytes", {
+      topic: selectedTopic || t("metrics:all_topics"),
     }),
-    t("metrics.outgoing_bytes", {
-      topic: selectedTopic || t("metrics.all_topics"),
+    t("metrics:outgoing_bytes", {
+      topic: selectedTopic || t("metrics:all_topics"),
     })
   );
 
@@ -91,7 +91,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
       return (
         <div ref={containerRef}>
           <Chart
-            ariaTitle={t("metrics.total_bytes")}
+            ariaTitle={t("metrics:total_bytes")}
             containerComponent={
               <ChartVoronoiContainer
                 labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
@@ -112,8 +112,8 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
               label={
                 "\n" +
                 (showDate
-                  ? t("metrics.axis-label-time-full")
-                  : t("metrics.axis-label-time"))
+                  ? t("metrics:axis-label-time-full")
+                  : t("metrics:axis-label-time"))
               }
               tickValues={tickValues}
               tickCount={timeIntervalsMapping[duration].ticks}
@@ -124,7 +124,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
               }
             />
             <ChartAxis
-              label={"\n\n\n\n\n" + t("metrics.axis-label-bytes")}
+              label={"\n\n\n\n\n" + t("metrics:axis-label-bytes")}
               dependentAxis
               tickFormat={formatBytes}
             />
