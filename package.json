@@ -60,7 +60,7 @@
     "prando": "6.0.1",
     "rimraf": "3.0.2",
     "storybook-i18n": "1.0.6",
-    "typescript": "4.5.3"
+    "typescript": "4.5.4"
   },
   "dependencies": {
     "@patternfly/patternfly": "4.132.2",
