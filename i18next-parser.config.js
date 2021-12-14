@@ -7,5 +7,7 @@ module.exports = {
   createOldCatalogs: false,
   keepRemoved: true,
   failOnWarnings: true,
-  failOnUpdate: process.env.CI !== undefined,
+
+  // disabled for the moment: https://github.com/i18next/i18next-parser/issues/489
+  // failOnUpdate: process.env.CI !== undefined,
 };
