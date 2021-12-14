@@ -12,6 +12,7 @@ import React from "react";
 import { I18nextProvider } from "react-i18next";
 import { BrowserRouter as Router } from "react-router-dom";
 import { initI18N } from "./i18n";
+import CommonI18n from "../src/common-i18en.json";
 
 if (process.env.NODE_ENV === "development") {
   inspect({
@@ -110,7 +111,14 @@ export const decorators = [
     return (
       <Router>
         <I18nextProvider
-          value={initI18N(locale, { en: { public: parameters.i18n } })}
+          value={initI18N(locale, {
+            en: {
+              public: {
+                ...parameters.i18n,
+                ...CommonI18n,
+              },
+            },
+          })}
         >
           <React.Suspense fallback={null}>
             <Story />
