@@ -2,7 +2,10 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { PageSection, Button } from "@patternfly/react-core";
 import { useHistory } from "react-router-dom";
-import { AppServicesEmptyState, AppServicesEmptyStateVariant } from "..";
+import {
+  AppServicesEmptyState,
+  AppServicesEmptyStateVariant,
+} from "../AppServicesEmptyState";
 
 const AppServicesPageNotFound: React.FunctionComponent = () => {
   const { t } = useTranslation();

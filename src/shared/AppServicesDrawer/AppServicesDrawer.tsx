@@ -18,7 +18,7 @@ import {
   TitleProps,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { AppServicesLoading } from "..";
+import { AppServicesLoading } from "../AppServicesLoading";
 import "./AppServicesDrawer.css";
 
 export type AppServicesDrawerProps = DrawerProps & {
@@ -72,7 +72,9 @@ export const AppServicesDrawer: React.FC<AppServicesDrawerProps> = ({
               {text?.label && (
                 <Text
                   component={text?.component || TextVariants.small}
-                  className={text?.className || "kafka-ui-appServices-drawer__top-label"}
+                  className={
+                    text?.className || "kafka-ui-appServices-drawer__top-label"
+                  }
                 >
                   {text?.label}
                 </Text>
@@ -81,7 +83,9 @@ export const AppServicesDrawer: React.FC<AppServicesDrawerProps> = ({
                 <Title
                   headingLevel={title?.headingLevel || "h2"}
                   size={title?.size || TitleSizes["xl"]}
-                  className={title?.className || "kafka-ui-appServices-drawer__title"}
+                  className={
+                    title?.className || "kafka-ui-appServices-drawer__title"
+                  }
                 >
                   {title?.value}
                 </Title>

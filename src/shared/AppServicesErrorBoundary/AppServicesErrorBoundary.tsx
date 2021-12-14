@@ -2,7 +2,10 @@ import React, { Component, ErrorInfo, ReactNode } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { withTranslation, WithTranslation } from "react-i18next";
 import { PageSection, Button } from "@patternfly/react-core";
-import { AppServicesEmptyState, AppServicesEmptyStateVariant } from "..";
+import {
+  AppServicesEmptyState,
+  AppServicesEmptyStateVariant,
+} from "../AppServicesEmptyState";
 import "./AppServicesErrorBoundary.css";
 
 type Props = WithTranslation &
