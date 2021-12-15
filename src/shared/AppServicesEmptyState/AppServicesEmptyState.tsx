@@ -14,11 +14,11 @@ import {
   ButtonVariant,
   EmptyStateVariant,
 } from "@patternfly/react-core";
-import PlusCircleIcon from "@patternfly/react-icons/dist/js/icons/plus-circle-icon";
-import SpaceShuttleIcon from "@patternfly/react-icons/dist/js/icons/space-shuttle-icon";
-import LockIcon from "@patternfly/react-icons/dist/js/icons/lock-icon";
-import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
+import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
+import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shuttle-icon";
+import LockIcon from "@patternfly/react-icons/dist/esm/icons/lock-icon";
+import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
+import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
 import NotFoundIcon from "../../images/NotFound-Icon.svg";
 import { css } from "@patternfly/react-styles";
 import "./AppServicesEmptyState.css";

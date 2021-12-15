@@ -1,9 +1,9 @@
 import byteSize from "byte-size";
+import { format, utcToZonedTime } from "date-fns-tz";
+import fromUnixTime from "date-fns/fromUnixTime";
 import sub from "date-fns/sub";
 import { timeIntervalsMapping } from "../consts";
 import { DurationOptions } from "../types";
-import fromUnixTime from "date-fns/fromUnixTime";
-import { format, utcToZonedTime } from "date-fns-tz";
 
 export function formatBytes(bytes: number): string {
   return byteSize(bytes, { units: "iec" }).toString();

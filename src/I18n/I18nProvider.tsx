@@ -10,13 +10,15 @@ export type I18nProviderProps = {
       [namespace: string]: () => Promise<ResourceLanguage>;
     };
   };
+  debug?: boolean;
 };
 export const I18nProvider: FunctionComponent<I18nProviderProps> = ({
   lng,
   resources,
+  debug,
   children,
 }) => (
-  <I18nextProvider i18n={initI18next(lng, resources)}>
+  <I18nextProvider i18n={initI18next(lng, resources, debug)}>
     {children}
   </I18nextProvider>
 );

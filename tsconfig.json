@@ -7,7 +7,6 @@
     "importHelpers": true,
     "declaration": true,
     "declarationDir": "types",
-    "emitDeclarationOnly": true,
     "sourceMap": true,   
     "strict": true,
     "noUnusedLocals": true,

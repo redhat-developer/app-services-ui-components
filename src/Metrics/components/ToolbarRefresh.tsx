@@ -1,6 +1,6 @@
 import { ToolbarItem, Button, Spinner } from "@patternfly/react-core";
-import { SyncAltIcon } from "@patternfly/react-icons";
-import { formatDistanceToNow } from "date-fns";
+import SyncAltIcon from "@patternfly/react-icons/dist/esm/icons/sync-alt-icon";
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import React, { useEffect, useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -15,7 +15,7 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
   lastUpdated = Date.now(),
   onRefresh,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["metrics"]);
   const [distance, setDistance] = useState<string>("");
   useEffect(() => {
     function updateDistance() {

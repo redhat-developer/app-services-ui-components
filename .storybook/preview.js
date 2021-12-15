@@ -134,6 +134,7 @@ export const decorators = [
               common: () => Promise.resolve({ delete: "Elimina" }),
             },
           }}
+          debug={true}
         >
           <React.Suspense fallback={<AppServicesLoading />}>
             <Story />

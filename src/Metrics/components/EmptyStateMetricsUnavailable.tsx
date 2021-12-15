@@ -5,7 +5,7 @@ import {
   Title,
   EmptyStateBody,
 } from "@patternfly/react-core";
-import { TachometerAltIcon } from "@patternfly/react-icons";
+import TachometerAltIcon from "@patternfly/react-icons/dist/esm/icons/tachometer-alt-icon";
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 

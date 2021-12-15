@@ -5,7 +5,7 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import { SearchIcon } from "@patternfly/react-icons";
+import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
 import React, { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
