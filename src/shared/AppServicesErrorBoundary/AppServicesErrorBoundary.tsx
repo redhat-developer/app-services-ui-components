@@ -5,7 +5,7 @@ import { PageSection, Button } from "@patternfly/react-core";
 import {
   AppServicesEmptyState,
   AppServicesEmptyStateVariant,
-} from "..";
+} from "../AppServicesEmptyState";
 import "./AppServicesErrorBoundary.css";
 
 type Props = WithTranslation &
@@ -52,14 +52,14 @@ class AppServicesErrorBoundary extends Component<Props, State> {
               className: "icon-color",
             }}
             titleProps={{
-              title: t("common.something_went_wrong"),
+              title: t("common:something_went_wrong"),
             }}
             emptyStateBodyProps={{
-              body: t("unexpected_error"),
+              body: t("common:unexpected_error"),
             }}
           >
             <Button onClick={this.onClickButton}>
-              {t("go_to_kafka_instances")}
+              {t("common:go_to_kafka_instances")}
             </Button>
           </AppServicesEmptyState>
         </PageSection>

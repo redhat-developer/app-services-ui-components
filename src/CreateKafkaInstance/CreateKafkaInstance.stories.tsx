@@ -1,8 +1,7 @@
 import { Button } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { CreateKafkaInstance } from "./CreateKafkaInstance";
-import CreateInstanceI18n from "./CreateInstance-i18n.json";
 
 const cloudProviders = [
   {
@@ -24,8 +23,10 @@ const cloudRegions = [
 export default {
   title: "Features/Create Kafka instance dialog",
   component: CreateKafkaInstance,
-  args: {cloudProviders: cloudProviders,cloudRegions:cloudRegions,
-    userHasTrialInstance:false,
+  args: {
+    cloudProviders: cloudProviders,
+    cloudRegions: cloudRegions,
+    userHasTrialInstance: false,
     kafkaRequest: {
       cloud_provider: {
         value: "aws",
@@ -40,25 +41,21 @@ export default {
         value: "",
       },
     },
-  formSubmitted:false,
-  hasKafkaCreationFailed:false,
-  isCreationInProgress:false,
-  quota: { data: undefined, loading: false, isServiceDown: false },
-},
-  parameters: {
-    i18n: CreateInstanceI18n,
+    formSubmitted: false,
+    hasKafkaCreationFailed: false,
+    isCreationInProgress: false,
+    quota: { data: undefined, loading: false, isServiceDown: false },
   },
 } as ComponentMeta<typeof CreateKafkaInstance>;
 
 const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
-  const[isModalOpen,setIsModalOpen]=useState<boolean>(true)
-  const onCloseModal=()=>{
-    setIsModalOpen(false)
-  
-  }
-  const onOpenModal=()=>{
-    setIsModalOpen(true)
-  }
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+  const onCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const onOpenModal = () => {
+    setIsModalOpen(true);
+  };
   return (
     <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
       <CreateKafkaInstance
@@ -67,22 +64,13 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
         isModalOpen={isModalOpen}
         hideModal={onCloseModal}
         disableFocusTrap={true}
-
       />
       <div>
-        <Button onClick={() => onOpenModal()}>
-          Open modal
-          </Button>
+        <Button onClick={() => onOpenModal()}>Open modal</Button>
       </div>
     </div>
   );
 };
-
-
-
-
-
-
 
 export const AllReady = Template.bind({});
 AllReady.args = {
@@ -147,7 +135,6 @@ ServiceDown.args = {
   quota: { data: undefined, loading: false, isServiceDown: true },
   kasQuota: { allowed: 60, consumed: 20, remaining: 40 },
   kasTrial: { allowed: 60, consumed: 20, remaining: 40 },
-
 };
 ServiceDown.storyName = "Service Down";
 
@@ -155,11 +142,10 @@ export const TrialInstanceRunning = Template.bind({});
 TrialInstanceRunning.args = {
   kasTrial: { allowed: 1, consumed: 1, remaining: 1 },
   userHasTrialInstance: true,
- 
 };
 TrialInstanceRunning.storyName =
   "User has no standard quota and a trial instance is already running";
-// No quota error displayed when kasQuota and kasTrial are undefined 
+// No quota error displayed when kasQuota and kasTrial are undefined
 export const NoQuota = Template.bind({});
 NoQuota.args = {};
 NoQuota.storyName = "User has no standard quota and no trial quota";

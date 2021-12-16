@@ -7,8 +7,8 @@ import {
   ChartThemeColor,
   ChartVoronoiContainer,
 } from "@patternfly/react-charts";
-import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
-import chart_color_green_300 from "@patternfly/react-tokens/dist/js/chart_color_green_300";
+import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_blue_300";
+import chart_color_green_300 from "@patternfly/react-tokens/dist/esm/chart_color_green_300";
 import React, { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
@@ -77,7 +77,7 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
       return (
         <div ref={containerRef}>
           <Chart
-            ariaTitle={t("metrics.log_size_per_partition")}
+            ariaTitle={t("metrics:log_size_per_partition")}
             containerComponent={
               <ChartVoronoiContainer
                 labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
@@ -98,8 +98,8 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
               label={
                 "\n" +
                 (showDate
-                  ? t("metrics.axis-label-time-full")
-                  : t("metrics.axis-label-time"))
+                  ? t("metrics:axis-label-time-full")
+                  : t("metrics:axis-label-time"))
               }
               tickValues={tickValues}
               tickFormat={(d) =>
@@ -109,7 +109,7 @@ export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitio
               }
             />
             <ChartAxis
-              label={"\n\n\n\n\n" + t("metrics.axis-label-bytes")}
+              label={"\n\n\n\n\n" + t("metrics:axis-label-bytes")}
               dependentAxis
               tickFormat={formatBytes}
             />

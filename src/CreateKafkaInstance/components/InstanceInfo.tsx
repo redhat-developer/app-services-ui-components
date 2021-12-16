@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   TextContent,
   Text,
@@ -12,79 +12,82 @@ import {
   GridItem,
   Button,
   ButtonVariant,
-} from '@patternfly/react-core';
+} from "@patternfly/react-core";
 
 export type InstanceInfoProps = {
   isKasTrial?: boolean;
-  onClickQuickStart: () => void
+  onClickQuickStart: () => void;
 };
 
-const InstanceInfo: React.FC<InstanceInfoProps> = ({ isKasTrial,onClickQuickStart }) => {
+const InstanceInfo: React.FC<InstanceInfoProps> = ({
+  isKasTrial,
+  onClickQuickStart,
+}) => {
   const { t } = useTranslation();
-  
+
   return (
     <TextContent>
       <Text component={TextVariants.h3}>
-        {t('common.instance_information')}
+        {t("create-kafka-instance:instance_information")}
       </Text>
       <TextList component={TextListVariants.dl}>
         <Grid sm={6} lg={12} hasGutter>
           {isKasTrial && (
             <GridItem>
               <TextListItem component={TextListItemVariants.dt}>
-                {t('common.duration')}
+                {t("kafka:duration")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t('common.duration_value')}
+                {t("kafka:duration_value")}
               </TextListItem>
             </GridItem>
           )}
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.ingress_egress')}
+              {t("kafka:ingress_egress")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.ingress_egress_value')}
+              {t("kafka:ingress_egress_value")}
             </TextListItem>
           </GridItem>
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.storage')}
+              {t("kafka:storage")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.storage_value')}
+              {t("kafka:storage_value")}
             </TextListItem>
           </GridItem>
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.partitions')}
+              {t("kafka:partitions")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.partitions_value')}
+              {t("kafka:partitions_value")}
             </TextListItem>
           </GridItem>
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.client_connections')}
+              {t("kafka:client_connections")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.client_connections_value')}
+              {t("kafka:client_connections_value")}
             </TextListItem>
           </GridItem>
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.connection_rate')}
+              {t("kafka:connection_rate")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.connection_rate_value')}
+              {t("kafka:connection_rate_value")}
             </TextListItem>
           </GridItem>
           <GridItem>
             <TextListItem component={TextListItemVariants.dt}>
-              {t('common.message_size')}
+              {t("kafka:message_size")}
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
-              {t('common.message_size_value')}
+              {t("kafka:message_size_value")}
             </TextListItem>
           </GridItem>
         </Grid>
@@ -92,10 +95,10 @@ const InstanceInfo: React.FC<InstanceInfoProps> = ({ isKasTrial,onClickQuickStar
           isSmall
           isInline
           variant={ButtonVariant.link}
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: "20px" }}
           onClick={onClickQuickStart}
         >
-          {t('common.quick_start_guide_message')}
+          {t("create-kafka-instance:quick_start_guide_message")}
         </Button>
       </TextList>
     </TextContent>

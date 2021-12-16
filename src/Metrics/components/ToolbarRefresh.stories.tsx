@@ -2,7 +2,6 @@ import { Toolbar, ToolbarContent } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import sub from "date-fns/sub";
 import React from "react";
-import MetricsI18n from "../Metrics-i18n.json";
 
 import { ToolbarRefresh } from "./ToolbarRefresh";
 
@@ -12,9 +11,6 @@ export default {
   args: {
     isRefreshing: false,
     lastUpdated: sub(new Date(), { minutes: 3 }),
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof ToolbarRefresh>;
 

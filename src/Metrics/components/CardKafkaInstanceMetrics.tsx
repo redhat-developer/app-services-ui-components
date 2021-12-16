@@ -42,12 +42,12 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
   onRefresh,
   onDurationChange,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("metrics");
 
   return (
     <Card data-testid={"metrics-kafka-instance"}>
       <ToolbarKafkaInstanceMetric
-        title={t("metrics.kafka_instance_metrics")}
+        title={t("kafka_instance_metrics")}
         duration={duration}
         lastUpdated={lastUpdated}
         onSetTimeDuration={onDurationChange}
@@ -78,13 +78,13 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
             return (
               <>
                 <ChartTitle
-                  title="used_disk_space"
+                  title={t("used_disk_space")}
                   helperText={"used_disk_space_help_text"}
                 />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
-                    chartName={t("metrics.used_disk_space")}
-                    yLabel={t("metrics.axis-label-bytes")}
+                    chartName={t("used_disk_space")}
+                    yLabel={t("axis-label-bytes")}
                     metrics={usedDiskMetrics}
                     duration={duration}
                     formatValue={formatBytes}
@@ -95,13 +95,13 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
                 </CardBody>
                 <Divider />
                 <ChartTitle
-                  title="client_connections"
-                  helperText="client_connections_helper_text"
+                  title={t("client_connections")}
+                  helperText={t("client_connections_helper_text")}
                 />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
-                    chartName={t("metrics.client_connections")}
-                    yLabel={t("metrics.client_connections_y_axis")}
+                    chartName={t("client_connections")}
+                    yLabel={t("client_connections_y_axis")}
                     metrics={clientConnectionsMetrics}
                     duration={duration}
                     usageLimit={100}
@@ -111,13 +111,13 @@ export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetric
                 </CardBody>
                 <Divider />
                 <ChartTitle
-                  title="connection_attempt_rate"
-                  helperText="connection_attempt_rate_help_text"
+                  title={t("connection_attempt_rate")}
+                  helperText={t("connection_attempt_rate_help_text")}
                 />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
-                    chartName={t("metrics.connection_attempt_rate")}
-                    yLabel={t("metrics.connection_attempt_rate_yaxis")}
+                    chartName={t("connection_attempt_rate")}
+                    yLabel={t("connection_attempt_rate_yaxis")}
                     metrics={connectionAttemptRateMetrics}
                     duration={duration}
                     usageLimit={100}
@@ -137,14 +137,9 @@ export const ChartTitle: FunctionComponent<ChartTitleProps> = ({
   title,
   helperText,
 }) => {
-  const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t(`metrics.${title}`)}{" "}
-      <ChartPopover
-        title={t(`metrics.${title}`)}
-        description={t(`metrics.${helperText}`)}
-      />
+      {title} <ChartPopover title={title} description={helperText} />
     </CardTitle>
   );
 };

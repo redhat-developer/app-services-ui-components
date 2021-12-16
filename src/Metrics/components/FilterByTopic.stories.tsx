@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { FilterByTopic } from "./FilterByTopic";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Components/Metrics/FilterByTopic",
@@ -10,9 +9,6 @@ export default {
     selectedTopic: undefined,
     topicList: ["lorem", "dolor", "ipsum"],
     disableToolbar: false,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof FilterByTopic>;
 

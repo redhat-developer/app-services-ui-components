@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import { ToolbarTopicsMetrics } from "./ToolbarTopicsMetrics";
-import MetricsI18n from "../Metrics-i18n.json";
 
 export default {
   title: "Components/Metrics/ToolbarTopicsMetrics",
@@ -12,9 +11,6 @@ export default {
     topicList: ["lorem", "dolor", "ipsum"],
     isDisabled: false,
     isRefreshing: false,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof ToolbarTopicsMetrics>;
 

@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { CardKafkaInstanceMetrics } from "./CardKafkaInstanceMetrics";
-import MetricsI18n from "../Metrics-i18n.json";
 import { DurationOptions } from "../types";
 import { makeMetrics } from "../makeMetrics";
 
@@ -18,9 +17,6 @@ export default {
     isLoading: false,
     isRefreshing: false,
     isJustCreated: false,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
   argTypes: {
     duration: {

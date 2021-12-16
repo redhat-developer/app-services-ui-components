@@ -1,7 +1,7 @@
-import sub from "date-fns/sub";
 import Prando from "prando";
 import { DurationOptions, TimeSeriesMetrics } from "./types";
 import { timeIntervalsMapping } from "./consts";
+import sub from "date-fns/sub";
 
 const now = new Date(2021, 1, 29, 11, 45, 0, 0);
 

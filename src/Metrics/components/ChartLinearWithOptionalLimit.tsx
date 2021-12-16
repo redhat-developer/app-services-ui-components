@@ -8,8 +8,8 @@ import {
   ChartThreshold,
   ChartVoronoiContainer,
 } from "@patternfly/react-charts";
-import chart_color_black_500 from "@patternfly/react-tokens/dist/js/chart_color_black_500";
-import chart_color_blue_300 from "@patternfly/react-tokens/dist/js/chart_color_blue_300";
+import chart_color_black_500 from "@patternfly/react-tokens/dist/esm/chart_color_black_500";
+import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_blue_300";
 import React, { ReactElement, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
@@ -71,7 +71,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
     metrics,
     duration,
     chartName,
-    t("Limit"),
+    t("metrics:limit"),
     usageLimit
   );
 
@@ -87,7 +87,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
       return (
         <div ref={containerRef}>
           <Chart
-            ariaTitle={t("metrics.used_disk_space")}
+            ariaTitle={t("metrics:used_disk_space")}
             containerComponent={
               <ChartVoronoiContainer
                 labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
@@ -112,8 +112,8 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWith
               label={
                 "\n" +
                 (xLabel || showDate
-                  ? t("metrics.axis-label-time-full")
-                  : t("metrics.axis-label-time"))
+                  ? t("metrics:axis-label-time-full")
+                  : t("metrics:axis-label-time"))
               }
               tickValues={tickValues}
               tickFormat={(d) =>

@@ -6,6 +6,7 @@
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     "declaration": true,
+    "declarationDir": "types",
     "sourceMap": true,   
     "strict": true,
     "noUnusedLocals": true,
@@ -18,7 +19,6 @@
     "target": "es6",
     "noImplicitAny": true,
     "skipLibCheck": true,
-    "outDir": "dist/esm",
   },
   "include": ["src"],
   "exclude": [

@@ -3,7 +3,6 @@ import React from "react";
 import { within, fireEvent, findByTestId } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { Metrics } from "./Metrics";
-import MetricsI18n from "./Metrics-i18n.json";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import { DurationOptions } from "./types";
 
@@ -13,7 +12,6 @@ export default {
   args: {},
   parameters: {
     previewHeight: 1600,
-    i18n: MetricsI18n,
     // this option is passed to the devTools instance to use a different inspector
     chromatic: { disableSnapshot: true },
     docs: {},
@@ -288,7 +286,7 @@ SomeMissingMetricsButApiOk.parameters = {
     description: {
       story: `
 In case the APIs are working ok but some metrics are missing from the system, a 
-_Data unavailable_ empty state is shown in place of the charts with missing metrics.
+_Data unavailable_ empty state is shown in place of the charts with missing 
       `,
     },
   },

@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import MetricsI18n from "../Metrics-i18n.json";
 import { CardKpi } from "./CardKpi";
 
 export default {
@@ -11,9 +10,6 @@ export default {
     name: "KPI name",
     popover: "Lorem dolor ipsum",
     isLoading: false,
-  },
-  parameters: {
-    i18n: MetricsI18n,
   },
 } as ComponentMeta<typeof CardKpi>;
 

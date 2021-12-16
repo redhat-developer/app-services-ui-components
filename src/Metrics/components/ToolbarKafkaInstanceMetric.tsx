@@ -36,7 +36,7 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<ToolbarKafkaInstanceM
       <Toolbar>
         <ToolbarContent>
           <FilterByTime
-            ariaLabel={t("metrics.kafka_instance_filter_by_time")}
+            ariaLabel={t("metrics:kafka_instance_filter_by_time")}
             duration={duration}
             onDurationChange={onSetTimeDuration}
             keyText={"kafka-metrics-time-filter"}
