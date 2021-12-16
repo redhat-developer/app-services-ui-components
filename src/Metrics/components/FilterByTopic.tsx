@@ -9,6 +9,7 @@ import {
 } from "@patternfly/react-core";
 import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 import { useTranslation } from "react-i18next";
+import "./FilterByTopic.css";
 
 const widths = {
   default: "150px",
@@ -63,7 +64,11 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
     <SelectOption key={"topic-filter-0"} value={allTopicsLabel} />,
     <SelectGroup label="Filter by topic" key="topic-filter-group">
       {topicList.map((topic, index) => (
-        <SelectOption key={`topic-filter-${index + 1}`} value={topic} />
+        <SelectOption
+          key={`topic-filter-${index + 1}`}
+          value={topic}
+          title={topic}
+        />
       ))}
     </SelectGroup>,
   ];
@@ -93,7 +98,8 @@ export const FilterByTopic: VoidFunctionComponent<FilterByTopicProps> = ({
         isGrouped
         hasInlineFilter
         isDisabled={isDisabled}
-        style={{ width: "100%" }}
+        position="left"
+        className={"appserv-metrics-filterbytopic"}
       >
         {topicOptions(topicList)}
       </Select>

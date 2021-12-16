@@ -1,0 +1,10 @@
+.appserv-metrics-filterbytopic .pf-c-select__menu-wrapper {
+  max-width: min(100vw, 300px);
+}
+.appserv-metrics-filterbytopic .pf-c-select__menu-item {
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
