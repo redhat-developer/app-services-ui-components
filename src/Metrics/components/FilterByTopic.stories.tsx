@@ -12,8 +12,13 @@ export default {
   },
 } as ComponentMeta<typeof FilterByTopic>;
 
-const Template: ComponentStory<typeof FilterByTopic> = (args) => (
-  <FilterByTopic {...args} />
+const Template: ComponentStory<typeof FilterByTopic> = (
+  args,
+  { parameters }
+) => (
+  <div style={parameters.style}>
+    <FilterByTopic {...args} />
+  </div>
 );
 
 export const Default = Template.bind({});
@@ -32,4 +37,20 @@ NoTopics.args = {
 export const MultipleTopicsWithCommonWords = Template.bind({});
 MultipleTopicsWithCommonWords.args = {
   topicList: ["lorem dolor", "lorem ipsum", "lorem foo", "dolor", "ipsum"],
+};
+
+export const DoesNotBreakWithLongWords = Template.bind({});
+DoesNotBreakWithLongWords.args = {
+  topicList: [
+    "lorem dolor lorem dolor lorem dolor lorem dolor lorem dolor lorem dolor",
+    "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ",
+    "lorem foo",
+    "dolor",
+    "ipsum",
+  ],
+};
+DoesNotBreakWithLongWords.parameters = {
+  style: {
+    width: "200px",
+  },
 };
