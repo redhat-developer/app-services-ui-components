@@ -1,6 +1,5 @@
 import i18next, { i18n, ResourceLanguage } from "i18next";
 import { initReactI18next } from "react-i18next";
-import MarkdownPostprocessor from "i18next-markdown-postprocessor";
 import AsyncBackend from "./AsyncBackend";
 
 export function initI18next(
@@ -16,7 +15,6 @@ export function initI18next(
   const languages = Object.keys(resources);
   const namespaces = Object.keys(resources[lng] || resources[languages[0]]);
   instance
-    .use(MarkdownPostprocessor)
     // pass the i18n instance to react-i18next.
     .use(AsyncBackend)
     .use(initReactI18next)

@@ -18,7 +18,7 @@ import React, {
   useState,
   VoidFunctionComponent,
 } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 const ModalContext = createContext<{
   isDeleteEnabled: boolean;
@@ -197,10 +197,9 @@ type DeleteModalConfirmationProps = {
    */
   requiredConfirmationValue: string;
 };
-export const DeleteModalConfirmation: VoidFunctionComponent<DeleteModalConfirmationProps> = ({
-  requiredConfirmationValue,
-}) => {
-  const { t } = useTranslation();
+export const DeleteModalConfirmation: VoidFunctionComponent<
+  DeleteModalConfirmationProps
+> = ({ requiredConfirmationValue }) => {
   const [value, setValue] = useState("");
   const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
 
@@ -226,9 +225,14 @@ export const DeleteModalConfirmation: VoidFunctionComponent<DeleteModalConfirmat
   return (
     <Form>
       <FormGroup
-        label={t("common:type_value_to_confirm", {
-          value: requiredConfirmationValue,
-        })}
+        label={
+          <Trans
+            i18nKey={"common:type_value_to_confirm"}
+            values={{
+              value: requiredConfirmationValue,
+            }}
+          />
+        }
         fieldId={id}
       >
         <TextInput
