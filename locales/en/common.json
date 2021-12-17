@@ -10,7 +10,7 @@
   "return_to_home_page": "Return to home page",
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
-  "type_value_to_confirm": "Type *{{value}}* to confirm",
+  "type_value_to_confirm": "Type <i>{{value}}</i> to confirm",
   "unexpected_error": "There was a problem processing the request. Please try again.",
   "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for."
 }
