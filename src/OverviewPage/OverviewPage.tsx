@@ -29,41 +29,21 @@ import './OverviewPage.css'
 
 import { useTranslation } from 'react-i18next';
 
-import { useHistory } from 'react-router-dom';
+export type OverviewPageProps = {
+    onClickKafkainstance: (event: any) => void;
+    getKafkaHref: string;
+    onClickServiceRegistry: (event: any) => void;
+    getServiceRegistryHref: string;
 
-export const OverviewPage: React.FunctionComponent = () => {
+}
+
+export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
+    onClickKafkainstance,
+    getKafkaHref,
+    onClickServiceRegistry,
+    getServiceRegistryHref,
+}) => {
     const { t } = useTranslation();
-
-    const history = useHistory();
-
-    const beta = location.pathname.startsWith('/beta');
-
-    const onClickKafkainstance = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.preventDefault();
-        history.push(`/streams/kafkas`);
-    };
-
-    const getKafkaHref = () => {
-        return history.createHref({
-            pathname: '/streams/kafkas',
-        });
-    };
-
-    const onClickServiceRegistry = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        if (beta) {
-            event.preventDefault();
-            history.push(`/service-registry`);
-        }
-    };
-
-    const getServiceRegistryHref = () => {
-        if (beta) {
-            history.createHref({
-                pathname: '/service-registry',
-            });
-        }
-        return '/beta/application-services/service-registry';
-    };
 
     return (
         <>
@@ -87,7 +67,7 @@ export const OverviewPage: React.FunctionComponent = () => {
                             isLarge
                             component="a"
                             data-testid="hero-buttonTryKafka"
-                            href={getKafkaHref()}
+                            href={getKafkaHref}
                             onClick={onClickKafkainstance}
                         >
                             {t('overview.heroCallToActionButton')}
@@ -267,7 +247,7 @@ export const OverviewPage: React.FunctionComponent = () => {
                                 data-testid="cardRHOSAK-buttonCreateKafka"
                                 variant={ButtonVariant.secondary}
                                 component="a"
-                                href={getKafkaHref()}
+                                href={getKafkaHref}
                                 onClick={onClickKafkainstance}
                             >
                                 {t('overview.rhosakCallToActionButton')}
