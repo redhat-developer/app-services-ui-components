@@ -1,4 +1,5 @@
 import "@patternfly/patternfly/patternfly.css";
+import "@patternfly/react-core/dist/styles/base.css";
 import "@patternfly/patternfly/utilities/Accessibility/accessibility.css";
 import "@patternfly/patternfly/utilities/BackgroundColor/BackgroundColor.css";
 import "@patternfly/patternfly/utilities/Display/display.css";
@@ -6,8 +7,9 @@ import "@patternfly/patternfly/utilities/Flex/flex.css";
 import "@patternfly/patternfly/utilities/Sizing/sizing.css";
 import "@patternfly/patternfly/utilities/Spacing/spacing.css";
 import "@patternfly/patternfly/utilities/Text/text.css";
+import "./ouia-helper.css";
 import { inspect } from "@xstate/inspect";
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppServicesLoading, I18nProvider } from "../src";
 
@@ -26,6 +28,7 @@ export const parameters = {
     },
   },
   previewTabs: { "storybook/docs/panel": { index: -1 } },
+  ouia: "false",
   locale: "en_US",
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
@@ -114,10 +117,25 @@ export const globalTypes = {
       ],
     },
   },
+  ouia: {
+    name: "OUIA",
+    description: "Show OUIA ids used in the component",
+    defaultValue: "false",
+    toolbar: {
+      items: [
+        { value: "true", title: "Show OUIA ids" },
+        { value: "false", title: "Hide OUIA ids" },
+      ],
+      showName: true,
+    },
+  },
 };
 
 export const decorators = [
   (Story, { globals }) => {
+    useEffect(() => {
+      document.body.classList.toggle("show-ouia", JSON.parse(globals.ouia));
+    }, [globals.ouia]);
     return (
       <Router>
         <I18nProvider

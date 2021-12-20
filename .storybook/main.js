@@ -9,6 +9,7 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
+    "./ouia-addon/preset",
   ],
   features: {
     interactionsDebugger: true,
