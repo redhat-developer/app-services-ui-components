@@ -1,0 +1,118 @@
+.pf-c-page__main-section.app-services-ui--banner {
+  --app-services-ui--banner--before--GridTemplateColumns: 1fr;
+  --app-services-ui--banner--ColumnGap: var(--pf-global--spacer--2xl);
+  --app-services-ui--banner__tagline--Color: var(--pf-global--Color--light-300);
+  --app-services-ui--banner--Padding: var(--pf-global--spacer--lg);
+  --app-services-ui--banner--PaddingTop: var(
+    --app-services-ui--banner--Padding
+  );
+  --app-services-ui--banner--PaddingRight: var(
+    --app-services-ui--banner--Padding
+  );
+  --app-services-ui--banner--PaddingBottom: var(
+    --app-services-ui--banner--Padding
+  );
+  --app-services-ui--banner--PaddingLeft: var(
+    --app-services-ui--banner--Padding
+  );
+  --app-services-ui--banner--before--BackgroundSize: pf-size-prem(678px);
+  --app-services-ui--banner--before--BackgroundSize--rhoam: pf-size-prem(480px);
+  --app-services-ui--banner--before--BackgroundSize--rhods: pf-size-prem(480px);
+  --app-services-ui--banner--before--Offset--top: calc(
+    var(--app-services-ui--banner--PaddingTop) * -1
+  );
+  --app-services-ui--banner--before--Offset--bottom: calc(
+    var(--app-services-ui--banner--PaddingBottom) * -1
+  );
+  --app-services-ui--banner--before--Offset--right: calc(
+    var(--app-services-ui--banner--PaddingRight) * -1
+  );
+  --app-services-ui--banner--before--Offset--left: calc(
+    var(--app-services-ui--banner--PaddingLeft) * -1
+  );
+  display: grid;
+  grid-template-columns: var(
+    --app-services-ui--banner--before--GridTemplateColumns
+  );
+  grid-template-areas: content;
+  grid-gap: var(--app-services-ui--banner--ColumnGap);
+  padding-top: var(--app-services-ui--banner--PaddingTop);
+  padding-right: var(--app-services-ui--banner--PaddingRight);
+  padding-bottom: var(--app-services-ui--banner--PaddingBottom);
+  padding-left: var(--app-services-ui--banner--PaddingLeft);
+}
+
+@media screen and (min-width: pf-global--breakpoint--md) {
+  .pf-c-page__main-section.app-services-ui--banner {
+    --app-services-ui--banner--Padding: var(--pf-global--spacer--2xl);
+    --app-services-ui--banner--before--Opacity: 0.65;
+    --app-services-ui--banner--before--GridTemplateColumns: 2fr 1fr;
+    grid-template-areas: "content graphic";
+  }
+}
+
+@media screen and (min-width: pf-global--breakpoint--lg) {
+  .pf-c-page__main-section.app-services-ui--banner {
+    --app-services-ui--banner--before--GridTemplateColumns: 2fr 1fr;
+  }
+}
+
+@media screen and (min-width: pf-global--breakpoint--xl) {
+  .pf-c-page__main-section.app-services-ui--banner {
+    --app-services-ui--banner--before--Opacity: 1;
+  }
+}
+
+.pf-c-page__main-section.app-services-ui--banner:before {
+  content: "";
+  grid-area: graphic;
+  margin-top: var(--app-services-ui--banner--before--Offset--top);
+  margin-right: var(--app-services-ui--banner--before--Offset--right);
+  margin-bottom: var(--app-services-ui--banner--before--Offset--bottom);
+  background-image: var(--app-services-ui--banner--before--BackgroundImage);
+  background-size: var(--app-services-ui--banner--before--BackgroundSize);
+  opacity: var(--app-services-ui--banner--before--Opacity);
+}
+
+.pf-c-page__main-section.app-services-ui--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary {
+  color: var(--pf-global--primary-color-100);
+  background-color: var(--pf-global--palette--blue-400);
+}
+
+.pf-c-page__main-section.app-services-ui--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:hover,
+.pf-c-page__main-section.app-services-ui--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:focus,
+.pf-c-page__main-section.app-services-ui--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:active {
+  color: var(--pf-global--primary-color-100);
+  background-color: var(--pf-global--palette--blue-500);
+}
+
+.app-services-ui--banner--text-only {
+  font-size: var(--pf-global--FontSize--xl);
+  text-align: center;
+  max-width: 800px;
+}
+
+.app-services-ui--page-section--marketing,
+.app-services-ui--page-section--video {
+  --pf-c-page__main-section--PaddingTop: var(--pf-global--spacer--xl);
+  --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--lg);
+  --pf-c-page__main-section--PaddingBottom: var(--pf-global--spacer--xl);
+  --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--lg);
+}
+
+.app-services-ui--page-section--marketing .pf-l-grid.pf-m-gutter,
+.app-services-ui--page-section--video .pf-l-grid.pf-m-gutter {
+  --pf-l-grid--m-gutter--GridGap: var(--pf-global--spacer--lg);
+}
+
+@media screen and (min-width: pf-global--breakpoint--md) {
+  .app-services-ui--page-section--marketing,
+  .app-services-ui--page-section--video {
+    --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--2xl);
+    --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--2xl);
+  }
+}
