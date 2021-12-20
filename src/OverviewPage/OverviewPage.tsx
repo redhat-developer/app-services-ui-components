@@ -212,7 +212,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
                                 data-testid="cardRHOSR-buttonCTA"
                                 variant={ButtonVariant.secondary}
                                 component="a"
-                                href={getServiceRegistryHref()}
+                                href={getServiceRegistryHref}
                                 onClick={onClickServiceRegistry}
                             >
                                 {t('overview.rhosrCallToActionButton')}
