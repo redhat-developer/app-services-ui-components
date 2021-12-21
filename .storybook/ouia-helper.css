@@ -1,0 +1,31 @@
+.show-ouia [data-ouia-component-id] {
+  outline: 1px solid var(--pf-global--palette--cyan-50);
+}
+
+.show-ouia [data-ouia-component-id]::before {
+  content: attr(data-ouia-component-id);
+  position: absolute;
+  font-size: 0.75rem;
+  font-weight: normal;
+  display: inline-flex;
+  align-items: center;
+  background: var(--pf-global--palette--cyan-50);
+  color: var(--pf-global--default-color--300);
+  display: inline-flex;
+  padding-top: var(--pf-global--spacer--xs);
+  padding-right: var(--pf-global--spacer--sm);
+  padding-bottom: var(--pf-global--spacer--xs);
+  padding-left: var(--pf-global--spacer--sm);
+  border-radius: var(--pf-global--BorderRadius--lg);
+  border: 1px solid ;
+  border-radius: 30em;
+  z-index: 100;
+}
+
+.show-ouia [data-ouia-component-id*=OUIA-Generated] {
+  outline-color: rgb(201, 25, 11);
+}
+.show-ouia [data-ouia-component-id*=OUIA-Generated]::before {
+  background: var(--pf-global--palette--red-50);
+  border-color: rgb(201, 25, 11);
+}
