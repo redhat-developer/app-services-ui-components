@@ -147,6 +147,7 @@ export const decorators = [
                 import("../locales/en/create-kafka-instance.json"),
               kafka: () => import("../locales/en/kafka.json"),
               metrics: () => import("../locales/en/metrics.json"),
+              overview: () => import("../locales/en/overview.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),
