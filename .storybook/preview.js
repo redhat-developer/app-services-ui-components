@@ -148,6 +148,7 @@ export const decorators = [
               kafka: () => import("../locales/en/kafka.json"),
               metrics: () => import("../locales/en/metrics.json"),
               overview: () => import("../locales/en/overview.json"),
+              datascienceoverview: () => import("../locales/en/datascienceoverview.json")
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),

@@ -15,9 +15,9 @@
   --app-services-ui--banner--PaddingLeft: var(
     --app-services-ui--banner--Padding
   );
-  --app-services-ui--banner--before--BackgroundImage: url('../../static/images/AppServicesOverview-IconPattern.svg');
-  --app-services-ui--banner--before--BackgroundImage--rhoam: url('../../static/images/APIManagement_MECH_API_FullColor_Pink.svg');
-  --app-services-ui--banner--before--BackgroundImage--rhods: url('../../static/images/RHODS-ML-Technology.svg');
+  --app-services-ui--banner--before--BackgroundImage: url("./static/images/AppServicesOverview-IconPattern.svg");
+  --app-services-ui--banner--before--BackgroundImage--rhoam: url("./static/images/APIManagement_MECH_API_FullColor_Pink.svg");
+  --app-services-ui--banner--before--BackgroundImage--rhods: url("./static/images/RHODS-ML-Technology.svg");
   --app-services-ui--banner--before--BackgroundSize: 678px;
   --app-services-ui--banner--before--BackgroundSize--rhoam: 480px;
   --app-services-ui--banner--before--BackgroundSize--rhods: 480px;
@@ -118,4 +118,35 @@
     --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--2xl);
     --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--2xl);
   }
+}
+
+.app-services-ui--banner--rhods:before {
+  --app-services-ui--banner--before--BackgroundImage: var(
+    --app-services-ui--banner--before--BackgroundImage--rhods
+  );
+  --app-services-ui--banner--before--BackgroundSize: var(
+    --app-services-ui--banner--before--BackgroundSize--rhods
+  );
+  background-repeat: no-repeat;
+}
+
+.app-services-ui--banner__tagline {
+  color: var(--app-services-ui--banner__tagline--Color);
+  font-size: var(--pf-global--FontSize--lg);
+  margin-bottom: var(--pf-global--spacer--lg);
+}
+
+.app-services-ui--card--video {
+  position: relative;
+  /* important only because somehow PF styles are coming in again after */
+  padding-bottom: 56.25% !important; /* 16:9 */
+  height: 0;
+}
+
+.app-services-ui--card--video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
