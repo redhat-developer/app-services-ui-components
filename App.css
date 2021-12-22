@@ -150,3 +150,14 @@
   width: 100%;
   height: 100%;
 }
+
+.app-services-ui--banner--rhoam:before {
+  --app-services-ui--banner--before--BackgroundImage: var(
+    --app-services-ui--banner--before--BackgroundImage--rhoam
+  );
+  --app-services-ui--banner--before--BackgroundSize: var(
+    --app-services-ui--banner--before--BackgroundSize--rhoam
+  );
+  background-position-y: -99px;
+  background-repeat: no-repeat;
+}
