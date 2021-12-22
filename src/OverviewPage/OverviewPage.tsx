@@ -29,7 +29,7 @@ import {
   LogoRedHatOpenShiftServiceRegistryAStandardRgb,
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbPng,
 } from "../images";
-import "./OverviewPage.css";
+import '../../App.css'
 
 export type OverviewPageProps = {
   toKafkaHref: string;
