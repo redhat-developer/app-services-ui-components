@@ -7,3 +7,4 @@ export * from "./shared";
 export * from "./utils";
 export * from "./images";
 export * from "./DataSciencePage";
+export * from "./APIManagement";
