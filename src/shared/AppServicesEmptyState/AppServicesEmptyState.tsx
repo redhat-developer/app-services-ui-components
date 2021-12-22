@@ -19,9 +19,9 @@ import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shutt
 import LockIcon from "@patternfly/react-icons/dist/esm/icons/lock-icon";
 import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import NotFoundIcon from "../../images/NotFound-Icon.svg";
 import { css } from "@patternfly/react-styles";
 import "./AppServicesEmptyState.css";
+import { NotFoundIcon } from "../../images";
 
 export enum AppServicesEmptyStateVariant {
   GettingStarted = "GettingStarted",
