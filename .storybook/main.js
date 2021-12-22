@@ -14,4 +14,7 @@ module.exports = {
   features: {
     interactionsDebugger: true,
   },
+  core: {
+    builder: "webpack5",
+  },
 };

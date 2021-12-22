@@ -6,8 +6,8 @@ import autoExternals from "rollup-plugin-auto-external";
 import renameNodeModules from "rollup-plugin-rename-node-modules";
 import postcss from "rollup-plugin-postcss";
 import replace from "rollup-plugin-replace";
-import svg from "rollup-plugin-svg";
 import json from "@rollup/plugin-json";
+import { importMetaAssets } from "@web/rollup-plugin-import-meta-assets";
 import path from "path";
 
 import packageJson from "./package.json";
@@ -43,13 +43,13 @@ export default {
     replace({
       "process.env.NODE_ENV": JSON.stringify("production"),
     }),
-    svg(),
     json(),
     typescript(),
     postcss({
       extract: true,
       minimize: true,
     }),
+    importMetaAssets(),
     terser(),
   ],
 };
