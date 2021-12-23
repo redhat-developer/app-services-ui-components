@@ -24,7 +24,14 @@ if (process.env.NODE_ENV === "development") {
 export const parameters = {
   options: {
     storySort: {
-      order: ["Intro", "Features", "Components", "Empty states", "*"],
+      order: [
+        "Intro",
+        "Features",
+        "Marketing pages",
+        "Empty states",
+        "Components",
+        "*",
+      ],
     },
   },
   previewTabs: { "storybook/docs/panel": { index: -1 } },
@@ -148,8 +155,10 @@ export const decorators = [
               kafka: () => import("../locales/en/kafka.json"),
               metrics: () => import("../locales/en/metrics.json"),
               overview: () => import("../locales/en/overview.json"),
-              datascienceoverview: () => import("../locales/en/datascienceoverview.json"),
-              apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
+              datascienceoverview: () =>
+                import("../locales/en/datascienceoverview.json"),
+              apimgmtoverview: () =>
+                import("../locales/en/apimgmtoverview.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),
