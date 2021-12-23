@@ -1,5 +1,4 @@
 import {
-  Bullseye,
   Button,
   ButtonVariant,
   Card,
@@ -10,12 +9,8 @@ import {
   CardTitle,
   Grid,
   Label,
-  PageSection,
-  PageSectionVariants,
   Stack,
   StackItem,
-  Text,
-  TextVariants,
   Title,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons";
@@ -23,13 +18,18 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
+  AppServicesOverviewIconPattern,
   LogoRedHatDataServicesAStandardRgb,
   LogoRedHatOpenShiftApiManagementAStandardRgb,
   LogoRedHatOpenShiftDataScienceAStandardRgb,
   LogoRedHatOpenShiftServiceRegistryAStandardRgb,
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbPng,
 } from "../images";
-import '../../App.css'
+import {
+  MarketingPageBanner,
+  MarketingPageHero,
+  MarketingPageSection,
+} from "../shared";
 
 export type OverviewPageProps = {
   toKafkaHref: string;
@@ -43,62 +43,32 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
   const { t } = useTranslation();
   return (
     <>
-      {/* Hero banner with graphic */}
-      <PageSection
-        className="app-services-ui--page-section--marketing app-services-ui--banner pf-t-dark pf-u-background-color-dark-100"
-        variant={PageSectionVariants.dark}
-      >
-        <Stack hasGutter>
-          <Title headingLevel="h1" size="2xl">
-            {t("overview:heroTitle")}
-          </Title>
-          <Text className="app-services-ui--banner__tagline">
-            {t("overview:heroTagline")}
-          </Text>
-          <Text component={TextVariants.p}>
-            {t("overview:heroDescription")}
-          </Text>
-          <Text component={TextVariants.p} className="pf-u-mt-md">
-            {t("overview:heroDescription2")}
-          </Text>
-          <StackItem>
-            <Button
-              variant={ButtonVariant.primary}
-              isLarge
-              component={(props) => (
-                <Link
-                  {...props}
-                  data-testid="hero-buttonTryKafka"
-                  to={toKafkaHref}
-                />
-              )}
-            >
-              {t("overview:heroCallToActionButton")}
-            </Button>
-          </StackItem>
-        </Stack>
-      </PageSection>
-
-      {/* Banner with just text */}
-      <PageSection
-        variant={PageSectionVariants.light}
-        className="app-services-ui--page-section--marketing pf-u-background-color-100"
-      >
-        <Bullseye>
-          <Text
-            component={TextVariants.p}
-            className="app-services-ui--banner--text-only"
+      <MarketingPageHero
+        title={t("overview:heroTitle")}
+        tagLine={t("overview:heroTagline")}
+        description={t("overview:heroDescription")}
+        description2={t("overview:heroDescription2")}
+        heroImage={AppServicesOverviewIconPattern}
+        heroImageSize={678}
+        cta={
+          <Button
+            variant={ButtonVariant.primary}
+            isLarge
+            component={(props) => (
+              <Link
+                {...props}
+                data-testid="hero-buttonTryKafka"
+                to={toKafkaHref}
+              />
+            )}
           >
-            {t("overview:banner")}
-          </Text>
-        </Bullseye>
-      </PageSection>
-
-      {/* Cards */}
-      <PageSection
-        isWidthLimited
-        className="app-services-ui--page-section--marketing"
-      >
+            {t("overview:heroCallToActionButton")}
+          </Button>
+        }
+        variant="dark"
+      />
+      <MarketingPageBanner>{t("overview:banner")}</MarketingPageBanner>
+      <MarketingPageSection>
         <Grid md={6} lg={3} hasGutter>
           {/* API Management card */}
           <Card>
@@ -337,7 +307,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
             </CardFooter>
           </Card>
         </Grid>
-      </PageSection>
+      </MarketingPageSection>
     </>
   );
 };

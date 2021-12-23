@@ -1,66 +1,66 @@
-import React from 'react';
 import {
   Button,
   ButtonVariant,
-  Card,
   Grid,
   GridItem,
-  PageSection,
-  PageSectionVariants,
   Stack,
   StackItem,
   Text,
   TextContent,
-  TextVariants,
   Title,
   TitleSizes,
-} from '@patternfly/react-core';
-import { ExternalLinkAltIcon } from '@patternfly/react-icons/dist/js/icons/external-link-alt-icon';
-
-import { useTranslation } from 'react-i18next';
-
-import '../../App.css'
+} from "@patternfly/react-core";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import {
+  MarketingPageHero,
+  MarketingPageSection,
+  MarketingPageVideoCard,
+} from "../shared";
+import { RhodsMlTechnology } from "../images";
 
 export const DataSciencePage: React.FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <>
-      <PageSection
-        className="app-services-ui--banner app-services-ui--banner--rhods pf-u-background-color-100"
-        variant={PageSectionVariants.light}
-      >
-        <Stack hasGutter>
-          <Title headingLevel="h1" size="2xl">
-            {t('datascienceoverview:heroTitle')}
-          </Title>
-          <Title headingLevel="h2" size="lg" className="app-services-ui--banner__tagline pf-u-color-200">
-            {t('datascienceoverview:heroTagline')}
-          </Title>
-          <Text component={TextVariants.p}>{t('datascienceoverview:heroDescription')}</Text>
-          <StackItem>
-            <Button
-              data-testid="hero-buttonLearnMore"
-              variant={ButtonVariant.secondary}
-              component="a"
-              href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
-              target="_blank"
-            >
-              {t('datascienceoverview:heroCallToActionButton')} <ExternalLinkAltIcon className="pf-u-ml-sm" />
-            </Button>
-          </StackItem>
-        </Stack>
-      </PageSection>
-
-      <PageSection className="app-services-ui--page-section--marketing" isWidthLimited>
+      <MarketingPageHero
+        title={t("datascienceoverview:heroTitle")}
+        tagLine={t("datascienceoverview:heroTagline")}
+        description={t("datascienceoverview:heroDescription")}
+        cta={
+          <Button
+            data-testid="hero-buttonLearnMore"
+            variant={ButtonVariant.secondary}
+            component="a"
+            href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
+            target="_blank"
+          >
+            {t("datascienceoverview:heroCallToActionButton")}{" "}
+            <ExternalLinkAltIcon className="pf-u-ml-sm" />
+          </Button>
+        }
+        heroImage={RhodsMlTechnology}
+        heroImageSize={478}
+        heroImageCanRepeat={false}
+        heroImagePositionY={-99}
+      />
+      <MarketingPageSection>
         <Grid hasGutter>
           <GridItem md={5}>
             <Stack hasGutter>
               <StackItem>
                 <TextContent>
-                  <Title size={TitleSizes.xl} headingLevel="h3" className="pf-u-mb-lg">
-                    {t('datascienceoverview:videoSectionTitle')}
+                  <Title
+                    size={TitleSizes.xl}
+                    headingLevel="h3"
+                    className="pf-u-mb-lg"
+                  >
+                    {t("datascienceoverview:videoSectionTitle")}
                   </Title>
-                  <Text className="pf-u-mr-md">{t('datascienceoverview:videoSectionInThisVideo')}</Text>
+                  <Text className="pf-u-mr-md">
+                    {t("datascienceoverview:videoSectionInThisVideo")}
+                  </Text>
                 </TextContent>
               </StackItem>
               <StackItem>
@@ -71,27 +71,20 @@ export const DataSciencePage: React.FunctionComponent = () => {
                   href="http://www.openshift.com/DataScienceVideoDemo"
                   target="_blank"
                 >
-                  {t('datascienceoverview:heroViewDemo')} <ExternalLinkAltIcon className="pf-u-ml-sm" />
+                  {t("datascienceoverview:heroViewDemo")}{" "}
+                  <ExternalLinkAltIcon className="pf-u-ml-sm" />
                 </Button>
               </StackItem>
             </Stack>
           </GridItem>
           <GridItem md={7}>
-            <Card className="app-services-ui--card--video">
-              <div className="app-services-ui--video-wrapper">
-                <iframe
-                  src="https://www.youtube.com/embed/joK89xYeuUY"
-                  title={t('datascienceoverview:videoSectionTitle')}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </Card>
+            <MarketingPageVideoCard
+              src={"https://www.youtube.com/embed/joK89xYeuUY"}
+              title={t("datascienceoverview:videoSectionTitle")}
+            />
           </GridItem>
         </Grid>
-      </PageSection>
+      </MarketingPageSection>
     </>
-  )
-
-}
+  );
+};
