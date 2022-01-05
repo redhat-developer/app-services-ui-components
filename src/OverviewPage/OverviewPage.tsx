@@ -219,7 +219,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
           </Card>
 
           {/* Kafka card */}
-          <Card>
+          <Card ouiaId='card-rhosak'>
             <CardHeader>
               <CardHeaderMain>
                 <img
@@ -247,6 +247,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
                 data-testid="cardRHOSAK-buttonCreateKafka"
                 variant={ButtonVariant.secondary}
                 component={(props) => <Link {...props} to={toKafkaHref} />}
+                ouiaId="button-create"
               >
                 {t("overview:rhosakCallToActionButton")}
               </Button>
