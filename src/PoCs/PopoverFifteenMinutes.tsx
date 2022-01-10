@@ -44,7 +44,7 @@ type KafkaStatusPopoverProps = {
     return (
       <div>
         <Alert variant="warning" isInline isPlain title="This is taking longer than expected." />
-        <p>In the mean time you can create a Service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
+        <p>In the meantime you can create a Service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
         <br></br>
         <p> {currentStep} of 4 steps completed</p>
         <ProgressStepper isVertical>
