@@ -52,7 +52,7 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
         <ProgressStep
           variant={currentStep === 0 ? "info" : "success"}
           isCurrent={currentState === "pending"}
-          description="Passed quota check and awaiting creation."
+          description="Passed quota check and awaiting creation"
           id="vertical-desc-step1"
           titleId="vertical-desc-step1-title"
           aria-label=""
@@ -64,7 +64,7 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
             currentStep === 1 ? "info" : currentStep > 1 ? "success" : "default"
           }
           isCurrent={currentState === "provisioning"}
-          description="Creating Kafka instance."
+          description="Creating Kafka instance"
           id="vertical-desc-step2"
           titleId="vertical-desc-step2-title"
           aria-label=""
@@ -76,7 +76,7 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
             currentStep === 2 ? "info" : currentStep > 2 ? "success" : "default"
           }
           isCurrent={currentState === "preparing"}
-          description="Creating prerequisite resources."
+          description="Creating prerequisite resources"
           id="vertical-desc-step3"
           titleId="vertical-desc-step3-title"
           aria-label=""
@@ -88,7 +88,7 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
             currentStep === 3 ? "success" : "default"
           }
           isCurrent={currentState === "ready"}
-          description="Kafka instace is ready for use."
+          description="Ready for use"
           id="vertical-desc-step4"
           titleId="vertical-desc-step4-title"
           aria-label=""
