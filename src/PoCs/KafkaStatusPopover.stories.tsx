@@ -22,7 +22,7 @@ export default {
 } as ComponentMeta<typeof KafkaStatusPopover>;
 
 const Template: ComponentStory<typeof KafkaStatusPopover> = (args) => (
-  <div style={{ paddingTop: 280, height: 600  } }>
+  <div style={{ paddingTop: 280, height: 600  } }> 
     <KafkaStatusPopover {...args} />
   </div>
 );
@@ -32,7 +32,6 @@ Pending.args = {
   currentState: "pending",
 };
 Pending.parameters = {
-  previewHeight: 600,
   docs: {
     description: {
       story: `
@@ -47,7 +46,6 @@ Provisioning.args = {
   currentState: "provisioning",
 };
 Provisioning.parameters = {
-  previewHeight: 600,
   docs: {
     description: {
       story: `
@@ -63,7 +61,6 @@ Preparing.args = {
   currentState: "preparing",
 };
 Preparing.parameters = {
-  previewHeight: 600,
   docs: {
     description: {
       story: `
@@ -79,7 +76,6 @@ Ready.args = {
   currentState: "ready",
 };
 Ready.parameters = {
-  previewHeight: 600,
   docs: {
     description: {
       story: `

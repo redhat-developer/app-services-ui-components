@@ -29,7 +29,6 @@ OverFifteenMinutes.args = {
   currentState: "pending",
 }; 
 OverFifteenMinutes.parameters = {
-  previewHeight: 600,
   docs: {
     description: {
       story: `

@@ -24,6 +24,8 @@ type KafkaStatusPopoverProps = {
         isVisible={isVisible}
         shouldOpen={() => setIsVisible(true)}
         shouldClose={() => setIsVisible(false)}
+        position={'right'}
+        enableFlip={false}
       >
         {children}
       </Popover>

@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof KafkaStatusPopover>;
 
 const Template: ComponentStory<typeof KafkaStatusPopover> = (args) => (
-    <div style={{ paddingTop: 280 }}>
+    <div style={{ paddingTop: 280, height: 600 }}>
         <KafkaStatusPopover {...args} />
     </div>
 );
