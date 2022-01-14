@@ -1,4 +1,4 @@
-import { Popover, ProgressStep, ProgressStepper, Button } from "@patternfly/react-core";
+import { Popover, ProgressStep, ProgressStepper, Button, } from "@patternfly/react-core";
 import React, {
   FunctionComponent,
   useState,
@@ -23,7 +23,10 @@ export const KafkaStatusPopover: FunctionComponent<KafkaStatusPopoverProps> = ({
       isVisible={isVisible}
       shouldOpen={() => setIsVisible(true)}
       shouldClose={() => setIsVisible(false)}
+      position={'right'}
+      enableFlip={false}
     >
+    
       {children}
     </Popover>
   );

@@ -43,8 +43,9 @@ type KafkaStatusPopoverProps = {
     console.log(currentStep);
     return (
       <div>
-        <Alert variant="warning" isInline isPlain title="This is taking longer than expected." />
+        <Alert variant="warning" isInline isPlain title="This is taking longer than expected.">
         <p>In the meantime you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
+        </Alert>
         <br></br>
         <p> {currentStep} of 4 steps completed</p>
         <ProgressStepper isVertical>
