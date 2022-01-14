@@ -47,7 +47,6 @@ type KafkaStatusPopoverProps = {
         <p>In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
         </Alert>
         <br></br>
-        <p> {currentStep} of 4 steps completed</p>
         <ProgressStepper isVertical>
           <ProgressStep
             variant={currentStep === 0 ? "info" : "success"}
