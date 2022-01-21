@@ -53,6 +53,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
         cta={
           <Button
             variant={ButtonVariant.primary}
+            ouiaId="button-primary"
             isLarge
             component={(props) => (
               <Link

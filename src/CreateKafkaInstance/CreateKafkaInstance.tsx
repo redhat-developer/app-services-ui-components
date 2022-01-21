@@ -87,6 +87,7 @@ export const CreateKafkaInstance: React.FunctionComponent<CreateKafkaInstancePro
       isOpen={isModalOpen}
       onClose={handleModalToggle}
       appendTo={getModalAppendTo}
+      ouiaId="modal-create-kafka"
       actions={[
         <Button
           key="submit"
