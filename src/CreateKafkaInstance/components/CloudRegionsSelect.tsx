@@ -1,30 +1,37 @@
-import { NewKafkaRequestPayload } from "./utils";
-import { CloudRegion } from "./utils";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FormSelect, FormSelectOption } from "@patternfly/react-core";
+import {
+  FormSelect,
+  FormSelectOption,
+  SelectProps,
+} from "@patternfly/react-core";
+import { Region, RegionInfo } from "../machines";
 
 export type CloudRegionProps = {
-  kafkaRequest: NewKafkaRequestPayload;
-  selectCloudRegion: (region: string) => void;
-  cloudRegions: CloudRegion[] | undefined;
+  value: Region | undefined;
+  regions: RegionInfo[];
+  isDisabled?: boolean;
+  onChange: (region: Region) => void;
+  validated?: SelectProps["validated"];
 };
 
 export const CloudRegionSelect: React.FunctionComponent<CloudRegionProps> = ({
-  kafkaRequest,
-  selectCloudRegion,
-  cloudRegions,
+  value,
+  regions,
+  isDisabled,
+  validated,
+  onChange,
 }) => {
   const { t } = useTranslation();
 
   return (
     <FormSelect
-      validated={kafkaRequest.region.validated}
-      value={kafkaRequest.region.value}
-      onChange={selectCloudRegion}
+      validated={validated}
+      value={value}
+      onChange={onChange}
       id="form-cloud-region-option"
       name="cloud-region"
-      isDisabled={cloudRegions === undefined}
+      isDisabled={isDisabled}
     >
       {[
         <FormSelectOption
@@ -32,9 +39,9 @@ export const CloudRegionSelect: React.FunctionComponent<CloudRegionProps> = ({
           key="placeholder"
           label={t("create-kafka-instance:select_region")}
         />,
-        (cloudRegions || []).map(({ id, display_name }: CloudRegion, index) => {
+        (regions || []).map(({ id, displayName }, index) => {
           return (
-            <FormSelectOption key={index} value={id} label={display_name} />
+            <FormSelectOption key={index} value={id} label={displayName} />
           );
         }),
       ]}
