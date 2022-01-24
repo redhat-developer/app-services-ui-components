@@ -6,11 +6,11 @@ import React, {
 } from "react";
 
 
-type KafkaStatusPopover2Props = {
+type KafkaStatusPopover3Props = {
     shouldStartOpen?: boolean;
-  } & KafkaStatusPopoverBody2Props;
+  } & KafkaStatusPopoverBody3Props;
   
-  export const KafkaStatusPopover2: FunctionComponent<KafkaStatusPopover2Props> = ({
+  export const KafkaStatusPopover3: FunctionComponent<KafkaStatusPopover3Props> = ({
     shouldStartOpen = false,
     currentState,
     children,
@@ -20,7 +20,7 @@ type KafkaStatusPopover2Props = {
     return (
       <Popover
         headerContent="Creating instance"
-        bodyContent={<KafkaStatusPopoverBody2 currentState={currentState} />}
+        bodyContent={<KafkaStatusPopoverBody3 currentState={currentState} />}
         isVisible={isVisible}
         shouldOpen={() => setIsVisible(true)}
         shouldClose={() => setIsVisible(false)}
@@ -34,19 +34,19 @@ type KafkaStatusPopover2Props = {
   
   type States = "pending" | "provisioning" | "preparing" | "ready" ;
 
-  type KafkaStatusPopoverBody2Props = {
+  type KafkaStatusPopoverBody3Props = {
     currentState: States;
   };
-  export const KafkaStatusPopoverBody2: VoidFunctionComponent<
-    KafkaStatusPopoverBody2Props
+  export const KafkaStatusPopoverBody3: VoidFunctionComponent<
+    KafkaStatusPopoverBody3Props
   > = ({ currentState }) => {
     const order: States[] = ["pending", "provisioning", "preparing", "ready"];
     const currentStep = order.findIndex((v) => v === currentState);
     console.log(currentStep);
     return (
       <div>
-        <Alert variant="warning" isInline isPlain title="This is taking longer than expected.">
-        <p>In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
+         <Alert variant="danger" isInline isPlain title="This is taking longer than expected.">
+        <p>In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab. </a>If your Kafka instance continues to take longer than expected,<a href="http://www.google.com/"> open a support case.</a> </p>
         </Alert>
         <br></br>
         <p>{currentStep} of 3 steps completed</p>

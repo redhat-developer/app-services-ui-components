@@ -2,6 +2,8 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
 import { KafkaStatusPopover, KafkaStatusPopoverBody, } from './threeStepPopover';
+import { KafkaStatusPopover2, KafkaStatusPopoverBody2 } from './threeStepWarning';
+import { KafkaStatusPopover3, KafkaStatusPopoverBody3 } from './threeStepError';
 
 export default {
   title: 'ThreeSteps/KafkaStatusPopover',
@@ -55,3 +57,39 @@ Preparing.parameters = {
   },
 };
 
+const newTemplate: ComponentStory<typeof KafkaStatusPopover2> = (args) => (
+  <div style={{ paddingTop: 280, height: 600 }}>
+      <KafkaStatusPopover2 {...args} />
+  </div>
+);
+
+export const warning = newTemplate.bind({});
+warning.args = {
+currentState: "pending",
+};
+warning.parameters = {
+  docs: {
+    description: {
+      story: 'Instance creation is in progress and started more than 15 minutes ago. A warning is given as the instance’s creation is taking longer than expected.',
+    },
+  },
+};
+
+
+const newestTemplate: ComponentStory<typeof KafkaStatusPopover3> = (args) => (
+  <div style={{ paddingTop: 280, height: 600 }}>
+      <KafkaStatusPopover3 {...args} />
+  </div>
+);
+
+export const error = newestTemplate.bind({});
+error.args = {
+currentState: "pending",
+};
+error.parameters = {
+  docs: {
+    description: {
+      story: 'Instance creation is in progress and started more than 30 minutes ago. An error is given because the instance’s creation is taking significantly longer than expected. If the user is on a subscription they are invited to open a support case at this point.',
+    },
+  },
+};
