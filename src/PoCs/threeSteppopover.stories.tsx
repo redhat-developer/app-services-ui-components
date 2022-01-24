@@ -1,12 +1,11 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
-
 import { KafkaStatusPopover, KafkaStatusPopoverBody, } from './threeStepPopover';
 import { KafkaStatusPopover2, KafkaStatusPopoverBody2 } from './threeStepWarning';
 import { KafkaStatusPopover3, KafkaStatusPopoverBody3 } from './threeStepError';
 
 export default {
-  title: 'ThreeSteps/KafkaStatusPopover',
+  title: 'PoCs/KafkaStatusPopover',
   component: KafkaStatusPopover,
   subcomponents: { KafkaStatusPopoverBody },
   args: {
@@ -62,7 +61,6 @@ const newTemplate: ComponentStory<typeof KafkaStatusPopover2> = (args) => (
       <KafkaStatusPopover2 {...args} />
   </div>
 );
-
 export const warning = newTemplate.bind({});
 warning.args = {
 currentState: "pending",
@@ -74,8 +72,6 @@ warning.parameters = {
     },
   },
 };
-
-
 const newestTemplate: ComponentStory<typeof KafkaStatusPopover3> = (args) => (
   <div style={{ paddingTop: 280, height: 600 }}>
       <KafkaStatusPopover3 {...args} />
