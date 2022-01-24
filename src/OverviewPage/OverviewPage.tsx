@@ -193,9 +193,6 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <Label>{t("overview:developmentPreview")}</Label>
-                </StackItem>
                 <StackItem>{t("overview:rhosrMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview:rhosrSecondaryText")}
