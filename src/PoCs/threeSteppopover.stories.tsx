@@ -26,9 +26,7 @@ Pending.args = {
 Pending.parameters = {
   docs: {
     description: {
-      story: `
-      A user has just selected to create a Kafka Instance. The creation of their instance is pending.
-      `,
+      story: 'A user has just selected to create a Kafka Instance. The creation of their instance is pending.',
     },
   },
 };
