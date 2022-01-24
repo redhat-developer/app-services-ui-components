@@ -46,6 +46,7 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
     <div>
         <p>This will be ready shortly. In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
         <br></br>
+        <p> {currentStep} of 3 steps completed</p>
         <ProgressStepper isVertical>
             <ProgressStep
             variant={currentStep === 0 ? "info" : "success"}
