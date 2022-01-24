@@ -1,21 +1,21 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { KafkaStatusPopover, KafkaStatusPopoverBody, } from './threeStepWarning';
+import { KafkaStatusPopover2, KafkaStatusPopoverBody2, } from './threeStepWarning';
 
 export default {
   title: 'ThreeSteps/KafkaStatusPopoverWarning',
-  component: KafkaStatusPopover,
-  subcomponents: { KafkaStatusPopoverBody },
+  component: KafkaStatusPopover2,
+  subcomponents: { KafkaStatusPopoverBody2 },
   args: {
     children: <a>Creating</a>,
     shouldStartOpen: true,
   }, 
-} as ComponentMeta<typeof KafkaStatusPopover>;
+} as ComponentMeta<typeof KafkaStatusPopover2>;
 
-const Template: ComponentStory<typeof KafkaStatusPopover> = (args) => (
+const Template: ComponentStory<typeof KafkaStatusPopover2> = (args) => (
     <div style={{ paddingTop: 280, height: 600 }}>
-        <KafkaStatusPopover {...args} />
+        <KafkaStatusPopover2 {...args} />
     </div>
 );
 

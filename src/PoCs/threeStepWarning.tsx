@@ -6,11 +6,11 @@ import React, {
 } from "react";
 
 
-type KafkaStatusPopoverProps = {
+type KafkaStatusPopover2Props = {
     shouldStartOpen?: boolean;
-  } & KafkaStatusPopoverBodyProps;
+  } & KafkaStatusPopoverBody2Props;
   
-  export const KafkaStatusPopover: FunctionComponent<KafkaStatusPopoverProps> = ({
+  export const KafkaStatusPopover2: FunctionComponent<KafkaStatusPopover2Props> = ({
     shouldStartOpen = false,
     currentState,
     children,
@@ -20,7 +20,7 @@ type KafkaStatusPopoverProps = {
     return (
       <Popover
         headerContent="Creating instance"
-        bodyContent={<KafkaStatusPopoverBody currentState={currentState} />}
+        bodyContent={<KafkaStatusPopoverBody2 currentState={currentState} />}
         isVisible={isVisible}
         shouldOpen={() => setIsVisible(true)}
         shouldClose={() => setIsVisible(false)}
@@ -34,11 +34,11 @@ type KafkaStatusPopoverProps = {
   
   type States = "pending" | "provisioning" | "preparing" | "ready" ;
   
-  type KafkaStatusPopoverBodyProps = {
+  type KafkaStatusPopoverBody2Props = {
     currentState: States;
   };
-  export const KafkaStatusPopoverBody: VoidFunctionComponent<
-    KafkaStatusPopoverBodyProps
+  export const KafkaStatusPopoverBody2: VoidFunctionComponent<
+    KafkaStatusPopoverBody2Props
   > = ({ currentState }) => {
     const order: States[] = ["pending", "provisioning", "preparing", "ready"];
     const currentStep = order.findIndex((v) => v === currentState);
