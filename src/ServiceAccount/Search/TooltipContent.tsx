@@ -10,7 +10,7 @@ export const TooltipContent = (
         return <div>{t('kafka:max_filter_message')}</div>;
     }
     if (fieldName === 'owner') {
-        return <div>{t('owner_field_invalid_message', { name: fieldName })}</div>;
+        return <div>{t('kafka:owner_field_invalid_message', { name: fieldName })}</div>;
     }
     return <div>{t('kafka:input_field_invalid_message', { name: fieldName })}</div>;
 }

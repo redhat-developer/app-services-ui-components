@@ -161,15 +161,15 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               onDeleteChip={onDeleteChip}
               onDeleteChipGroup={onDeleteChipGroup}
               removeFilterValue={removeFilteredValue} />
+            <ClientIDFilter
+              isMaxFilter={isMaxFilter}
+              filterSelected={filterSelected}
+              getSelectionForFilter={getSelectionForFilter}
+              updateFilter={updateFilter}
+              onDeleteChip={onDeleteChip}
+              onDeleteChipGroup={onDeleteChipGroup}
+              removeFilterValue={removeFilteredValue} />
           </ToolbarGroup>
-          <ClientIDFilter
-            isMaxFilter={isMaxFilter}
-            filterSelected={filterSelected}
-            getSelectionForFilter={getSelectionForFilter}
-            updateFilter={updateFilter}
-            onDeleteChip={onDeleteChip}
-            onDeleteChipGroup={onDeleteChipGroup}
-            removeFilterValue={removeFilteredValue} />
         </ToolbarToggleGroup>
       </ToolbarContent>
     </Toolbar >

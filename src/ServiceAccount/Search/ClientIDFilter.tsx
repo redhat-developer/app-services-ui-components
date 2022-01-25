@@ -107,7 +107,7 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
       chips={getSelectionForFilter('clientid')}
       deleteChip={(_category, chip) => onDeleteChip('clientid', chip)}
       deleteChipGroup={() => onDeleteChipGroup('clientid')}
-      categoryName={t('clientid')}
+      categoryName={t('kafka:clientID')}
       showToolbarItem={filterSelected?.toLowerCase() === 'clientid'}
     >
       {renderClientInput()}

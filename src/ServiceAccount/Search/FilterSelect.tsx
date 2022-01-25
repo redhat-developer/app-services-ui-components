@@ -34,7 +34,7 @@ export const FilterSelect: React.FunctionComponent<FilterSelectProps> = ({
 
   const options = [
     { label: t('kafka:short_description'), value: 'description', disabled: false },
-    { label: t('kafka:clientID'), value: 'clientid', disabled: false },
+    { label: t('kafka:clientID'), value: 'clientID', disabled: false },
     { label: t('kafka:owner'), value: 'owner', disabled: false },
   ];
 

@@ -23,7 +23,9 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
   isMaxFilter,
   updateFilter,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(
+
+  );
   const inputRef = useRef<HTMLInputElement>(null);
   const tooltipContent = TooltipContent(isMaxFilter, 'owner');
 
@@ -107,7 +109,7 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
       chips={getSelectionForFilter('owner')}
       deleteChip={(_category, chip) => onDeleteChip('owner', chip)}
       deleteChipGroup={() => onDeleteChipGroup('owner')}
-      categoryName={t('owner')}
+      categoryName={t('kafak:owner')}
       showToolbarItem={filterSelected?.toLowerCase() === 'owner'}
     >
       {renderOwnerInput()}

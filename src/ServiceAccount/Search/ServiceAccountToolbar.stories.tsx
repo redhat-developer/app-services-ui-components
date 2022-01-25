@@ -6,8 +6,7 @@ export default {
     component: ServiceAccountToolbar,
     args: {
         filterSelected: 'description',
-        filteredValue: [{ filterKey: 'owner', filterValue: [{ value: 'Hema', isExact: true }, { value: 'Suaysh', isExact: true }] }, { filterKey: 'description', filterValue: [{ value: 'Hema', isExact: false }] },
-        { filterKey: 'clientid', filterValue: [{ value: 'srvc_acc', isExact: true }] }]
+        filteredValue: []
     },
 } as ComponentMeta<typeof ServiceAccountToolbar>;
 
@@ -15,4 +14,18 @@ const Template: ComponentStory<typeof ServiceAccountToolbar> = (args) => (
     <ServiceAccountToolbar {...args} />
 );
 
-export const Toolbar = Template.bind({});
+export const ToolbarFilter = Template.bind({});
+
+
+export const FilterValue = Template.bind({});
+FilterValue.args = {
+    filterSelected: 'owner',
+    filteredValue: [{ filterKey: 'owner', filterValue: [{ value: 'Hema', isExact: true }] }, { filterKey: 'description', filterValue: [{ value: 'Hema', isExact: false }] },
+    { filterKey: 'clientid', filterValue: [{ value: 'srvc_acc', isExact: true }] }]
+}
+
+export const MaxfilterOn = Template.bind({})
+MaxfilterOn.args = {
+    filterSelected: 'owner',
+    isMaxFilter: true
+}

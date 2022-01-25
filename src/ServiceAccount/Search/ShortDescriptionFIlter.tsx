@@ -107,7 +107,7 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
       chips={getSelectionForFilter('description')}
       deleteChip={(_category, chip) => onDeleteChip('description', chip)}
       deleteChipGroup={() => onDeleteChipGroup('description')}
-      categoryName={t('description')}
+      categoryName={t('kafka:short_description')}
       showToolbarItem={filterSelected?.toLowerCase() === 'description'}
     >
       {renderShortDescriptionInput()}
