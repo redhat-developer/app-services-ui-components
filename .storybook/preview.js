@@ -13,14 +13,6 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { AppServicesLoading, I18nProvider } from "../src";
 
-if (process.env.NODE_ENV === "development") {
-  inspect({
-    // options
-    url: "https://stately.ai/viz?inspect", // (default)
-    iframe: false, // open in new window
-  });
-}
-
 export const parameters = {
   options: {
     storySort: {
@@ -136,6 +128,18 @@ export const globalTypes = {
       showName: true,
     },
   },
+  xstate: {
+    name: "XState",
+    description: "Open the XState inspector",
+    defaultValue: "false",
+    toolbar: {
+      items: [
+        { value: "true", title: "Enabled" },
+        { value: "false", title: "Disabled" },
+      ],
+      showName: true,
+    },
+  },
 };
 
 export const decorators = [
@@ -143,6 +147,23 @@ export const decorators = [
     useEffect(() => {
       document.body.classList.toggle("show-ouia", JSON.parse(globals.ouia));
     }, [globals.ouia]);
+    useEffect(() => {
+      let inspector;
+
+      if (JSON.parse(globals.xstate) === true) {
+        inspector = inspect({
+          // options
+          url: "https://stately.ai/viz?inspect", // (default)
+          iframe: false, // open in new window
+        });
+      }
+      return () => {
+        if (inspector) {
+          inspector.disconnect();
+          inspector = undefined;
+        }
+      };
+    }, [globals.xstate]);
     return (
       <Router>
         <I18nProvider
