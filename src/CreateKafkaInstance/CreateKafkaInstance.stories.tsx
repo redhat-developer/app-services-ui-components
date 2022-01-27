@@ -1,50 +1,64 @@
 import { Button } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
 import React, { useState } from "react";
-import { CreateKafkaInstance } from "./CreateKafkaInstance";
+import {
+  CreateKafkaInstance,
+  CreateKafkaInstanceProps,
+} from "./CreateKafkaInstance";
+import {
+  AZ,
+  CreateKafkaInitializationData,
+  InstanceAvailability,
+  Provider,
+  ProviderInfo,
+  Providers,
+} from "./machines";
 
-const cloudProviders = [
-  {
-    display_name: "Amazon Web Services",
-    name: "aws",
+const AWS: ProviderInfo = {
+  id: "aws",
+  displayName: "Amazon Web Services",
+  regions: [
+    { id: "eu-west-1", displayName: "EU, Ireland" },
+    {
+      id: "us-east-1",
+      displayName: "US East, N. Virginia",
+    },
+  ],
+  AZ: {
+    multi: true,
+    single: false,
   },
-];
-const cloudRegions = [
-  {
-    id: "eu-west-1",
-    display_name: "EU, Ireland",
+};
+
+const AZURE: ProviderInfo = {
+  id: "azure",
+  displayName: "Microsoft Azure",
+  regions: [
+    {
+      id: "australiaeast",
+      displayName: "Australia East",
+    },
+  ],
+  AZ: {
+    multi: true,
+    single: false,
   },
-  {
-    id: "us-east-1",
-    display_name: "US East, N. Virginia",
-  },
-];
+};
+
+const PROVIDERS: Providers = [AWS, AZURE];
 
 export default {
   title: "Features/Create Kafka instance dialog",
   component: CreateKafkaInstance,
   args: {
-    cloudProviders: cloudProviders,
-    cloudRegions: cloudRegions,
-    userHasTrialInstance: false,
-    kafkaRequest: {
-      cloud_provider: {
-        value: "aws",
-      },
-      multi_az: {
-        value: true,
-      },
-      region: {
-        value: "",
-      },
-      name: {
-        value: "",
-      },
-    },
-    formSubmitted: false,
-    hasKafkaCreationFailed: false,
-    isCreationInProgress: false,
-    quota: { data: undefined, loading: false, isServiceDown: false },
+    getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+      instanceAvailability: "quota",
+      defaultAZ: "multi",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+    }),
+    onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
 } as ComponentMeta<typeof CreateKafkaInstance>;
 
@@ -56,13 +70,25 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
   const onOpenModal = () => {
     setIsModalOpen(true);
   };
+  const onCreate = (data, onSuccess, onFailure) => {
+    args.onCreate(
+      data,
+      () => {
+        onSuccess();
+        onCloseModal();
+      },
+      onFailure
+    );
+  };
+
   return (
     <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
       <CreateKafkaInstance
         {...args}
-        getModalAppendTo={() => document.getElementById(id)}
+        appendTo={() => document.getElementById(id)}
         isModalOpen={isModalOpen}
-        hideModal={onCloseModal}
+        onCancel={onCloseModal}
+        onCreate={onCreate}
         disableFocusTrap={true}
       />
       <div>
@@ -72,120 +98,238 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
   );
 };
 
-export const AllReady = Template.bind({});
-AllReady.args = {
-  kasTrial: { allowed: 0, consumed: 0, remaining: 0 },
+export const Default = Template.bind({});
+Default.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    defaultProvider: "aws",
+    providers: ["aws"],
+    instanceAvailability: "quota",
+    defaultAZ: "multi",
+  }),
 };
-AllReady.storyName = "Ready to create a trial instance";
 
-export const QuotaLoading = Template.bind({});
-QuotaLoading.args = {
-  quota: { data: undefined, loading: true, isServiceDown: false },
-  kasQuota: { allowed: 60, consumed: 20, remaining: 40 },
-  kasTrial: { allowed: 60, consumed: 20, remaining: 40 },
-};
-QuotaLoading.storyName = "Checking quota for instance";
+export const LoadingData = Template.bind({});
+LoadingData.args = {
+  getAvailableProvidersAndDefaults: async () => {
+    return new Promise(() => {
+      // never resolve to simulate loading
+    });
+  },
+} as CreateKafkaInstanceProps;
+
+export const QuotaAvailableOnFormLoad = Template.bind({});
+
+export const TrialAvailableOnFormLoad = Template.bind({});
+TrialAvailableOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial",
+    defaultAZ: "multi",
+    defaultProvider: "",
+    providers: ["aws", "azure"],
+  }),
+} as CreateKafkaInstanceProps;
+
+export const OverQuotaOnFormLoad = Template.bind({});
+OverQuotaOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "over-quota",
+    defaultAZ: "multi",
+    defaultProvider: "",
+    providers: ["aws", "azure"],
+  }),
+} as CreateKafkaInstanceProps;
+
+export const OverQuotaOnFormSubmit = Template.bind({});
+OverQuotaOnFormSubmit.args = {
+  onCreate: (_data, _onSuccess, onError) => onError("over-quota"),
+} as CreateKafkaInstanceProps;
+OverQuotaOnFormSubmit.play = sampleSubmit;
+
+export const TrialUnavailableOnFormLoad = Template.bind({});
+TrialUnavailableOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial-unavailable",
+    defaultAZ: "multi",
+    defaultProvider: "",
+    providers: ["aws", "azure"],
+  }),
+} as CreateKafkaInstanceProps;
+
+export const TrialUnavailableOnFormSubmit = Template.bind({});
+TrialUnavailableOnFormSubmit.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial",
+    defaultAZ: "multi",
+    defaultProvider: "aws",
+    providers: ["aws", "azure"],
+  }),
+  onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
+} as CreateKafkaInstanceProps;
+TrialUnavailableOnFormSubmit.play = sampleSubmit;
+
+export const TrialUsedOnFormLoad = Template.bind({});
+TrialUsedOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial-used",
+    defaultAZ: "multi",
+    defaultProvider: "",
+    providers: ["aws", "azure"],
+  }),
+} as CreateKafkaInstanceProps;
+
+export const ErrorOnFormLoad = Template.bind({});
+ErrorOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: async () => {
+    return Promise.reject();
+  },
+} as CreateKafkaInstanceProps;
 
 export const CreationInProgress = Template.bind({});
 CreationInProgress.args = {
-  kasQuota: { allowed: 60, consumed: 20, remaining: 40 },
-  kasTrial: { allowed: 60, consumed: 20, remaining: 40 },
-  isCreationInProgress: true,
-  kafkaRequest: {
-    cloud_provider: {
-      value: "aws",
-    },
-    multi_az: {
-      value: true,
-    },
-    region: {
-      value: "",
-    },
-    name: {
-      value: "suyash-test",
-    },
+  onCreate: () => {
+    // Doing nothing to showcase the loading
   },
 };
-CreationInProgress.storyName = "Creation in progress";
+CreationInProgress.play = sampleSubmit;
 
-export const InstanceCreationFailed = Template.bind({});
-InstanceCreationFailed.args = {
-  kasQuota: { allowed: 60, consumed: 20, remaining: 40 },
-  kasTrial: { allowed: 60, consumed: 20, remaining: 40 },
-  hasKafkaCreationFailed: true,
-  kafkaRequest: {
-    cloud_provider: {
-      value: "aws",
+export const NameTakenOnFormSubmit = Template.bind({});
+NameTakenOnFormSubmit.args = {
+  onCreate: (_data, _onSuccess, onError) => onError("name-taken"),
+} as CreateKafkaInstanceProps;
+NameTakenOnFormSubmit.play = sampleSubmit;
+
+export const GenericErrorOnFormSubmit = Template.bind({});
+GenericErrorOnFormSubmit.args = {
+  onCreate: (_data, _onSuccess, onError) => onError("unknown"),
+} as CreateKafkaInstanceProps;
+GenericErrorOnFormSubmit.play = sampleSubmit;
+
+export const FormErrorsCantSubmit = Template.bind({});
+FormErrorsCantSubmit.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    defaultProvider: undefined,
+    defaultAZ: undefined,
+    instanceAvailability: "quota",
+    providers: ["aws", "azure"],
+  }),
+};
+FormErrorsCantSubmit.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  userEvent.type(await canvas.findByLabelText("Name *"), "%3-foo-;");
+  userEvent.selectOptions(await canvas.findByLabelText("Cloud region *"), "");
+  userEvent.click(await canvas.findByTestId("modalCreateKafka-buttonSubmit"));
+};
+
+export const VariantCanCustomizeDefaultProvider = Template.bind({});
+VariantCanCustomizeDefaultProvider.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    defaultProvider: "azure",
+    instanceAvailability: "trial",
+    defaultAZ: "multi",
+    providers: ["aws", "azure"],
+  }),
+} as CreateKafkaInstanceProps;
+
+export const VariantSingleProvider = Template.bind({});
+VariantSingleProvider.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    defaultProvider: "aws",
+    providers: ["aws"],
+    instanceAvailability: "quota",
+    defaultAZ: "multi",
+  }),
+} as CreateKafkaInstanceProps;
+
+export const VariantBothAvailabilityZonesEnabledWithNoTooltip = Template.bind(
+  {}
+);
+VariantBothAvailabilityZonesEnabledWithNoTooltip.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      defaultProvider: "aws",
+      providers: ["aws"],
+      instanceAvailability: "quota",
+      defaultAZ: "multi",
     },
-    multi_az: {
-      value: true,
+    PROVIDERS.map((p) => ({ ...p, AZ: { multi: true, single: true } }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const VariantOnlySingleAZEnabledWithRightTooltip = Template.bind({});
+VariantOnlySingleAZEnabledWithRightTooltip.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      defaultProvider: "aws",
+      providers: ["aws"],
+      instanceAvailability: "quota",
+      defaultAZ: "single",
     },
-    region: {
-      value: "us-east-1",
+    PROVIDERS.map((p) => ({ ...p, AZ: { multi: false, single: true } }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const VariantBothAZEnabledWithRightTooltip = Template.bind({});
+VariantBothAZEnabledWithRightTooltip.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      defaultProvider: "aws",
+      providers: ["aws"],
+      instanceAvailability: "quota",
+      defaultAZ: "single",
     },
-    name: {
-      value: "suyash-test",
+    PROVIDERS.map((p) => ({ ...p, AZ: { multi: true, single: true } }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const VariantNoDefaultsRequired = Template.bind({});
+VariantNoDefaultsRequired.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      defaultProvider: undefined,
+      defaultAZ: undefined,
+      instanceAvailability: "quota",
+      providers: ["aws", "azure"],
     },
+    PROVIDERS.map((p, idx) => ({
+      ...p,
+      AZ: { multi: idx % 2 === 0, single: idx % 2 !== 0 },
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+
+function makeAvailableProvidersAndDefaults(
+  options: {
+    instanceAvailability: InstanceAvailability;
+    defaultAZ: AZ | undefined;
+    defaultProvider: Provider | undefined;
+    providers: string[];
   },
-};
-InstanceCreationFailed.storyName = "Instance creation failed";
+  allProviders = PROVIDERS
+): () => Promise<CreateKafkaInitializationData> {
+  const { instanceAvailability, defaultProvider, defaultAZ, providers } =
+    options;
+  const availableProviders = allProviders.filter((p) =>
+    providers.includes(p.id)
+  );
 
-export const ServiceDown = Template.bind({});
-ServiceDown.args = {
-  quota: { data: undefined, loading: false, isServiceDown: true },
-  kasQuota: { allowed: 60, consumed: 20, remaining: 40 },
-  kasTrial: { allowed: 60, consumed: 20, remaining: 40 },
-};
-ServiceDown.storyName = "Service Down";
+  return async (): Promise<CreateKafkaInitializationData> => {
+    return {
+      defaultProvider,
+      defaultAZ,
+      availableProviders,
+      instanceAvailability,
+    };
+  };
+}
 
-export const TrialInstanceRunning = Template.bind({});
-TrialInstanceRunning.args = {
-  kasTrial: { allowed: 1, consumed: 1, remaining: 1 },
-  userHasTrialInstance: true,
-};
-TrialInstanceRunning.storyName =
-  "User has no standard quota and a trial instance is already running";
-// No quota error displayed when kasQuota and kasTrial are undefined
-export const NoQuota = Template.bind({});
-NoQuota.args = {};
-NoQuota.storyName = "User has no standard quota and no trial quota";
+async function sampleSubmit({ canvasElement }) {
+  const canvas = within(canvasElement);
 
-export const NoStandardQuota = Template.bind({});
-NoStandardQuota.args = {
-  kasTrial: { allowed: 1, consumed: 1, remaining: 1 },
-};
-NoStandardQuota.storyName =
-  "User has no standard quota but trial quota is available";
-
-export const AlreadyProvisioned = Template.bind({});
-AlreadyProvisioned.args = {
-  kasQuota: { allowed: 0, consumed: 0, remaining: 0 },
-};
-AlreadyProvisioned.storyName =
-  " User has standard quota but all allowed instances are already provisioned";
-
-export const FormErrors = Template.bind({});
-FormErrors.args = {
-  kasQuota: { allowed: 1, consumed: 1, remaining: 1 },
-  kasTrial: { allowed: 1, consumed: 1, remaining: 1 },
-  kafkaRequest: {
-    cloud_provider: {
-      value: "aws",
-    },
-    multi_az: {
-      value: true,
-    },
-    region: {
-      value: "",
-      validated: "error",
-      errorMessage: "Required",
-    },
-    name: {
-      value: "",
-      validated: "error",
-      errorMessage: "Required",
-    },
-  },
-  formSubmitted: true,
-};
-FormErrors.storyName = " Form has one or more errors";
+  userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
+  userEvent.selectOptions(
+    await canvas.findByLabelText("Cloud region *"),
+    "eu-west-1"
+  );
+  userEvent.click(await canvas.findByTestId("modalCreateKafka-buttonSubmit"));
+}
