@@ -1,4 +1,4 @@
-import { Popover, ProgressStep, ProgressStepper, Button } from "@patternfly/react-core";
+import { Popover, ProgressStep, ProgressStepper, Button, Stack, StackItem } from "@patternfly/react-core";
 import React, {
   FunctionComponent,
   useState,
@@ -61,9 +61,14 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
   console.log(currentStep);
   return (
     <div>
+      <Stack hasGutter>
+      <StackItem>
         <p>This will be ready shortly. In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
-        <br></br>
+      </StackItem>
+      <StackItem>
         <p>{currentStep} of 3 steps completed</p>
+      </StackItem>
+      <StackItem>
         <ProgressStepper isVertical>
             <ProgressStep
             variant={currentStep === 0 ? "info" : "success"}
@@ -100,6 +105,8 @@ export const KafkaStatusPopoverBody: VoidFunctionComponent<
             Preparing
             </ProgressStep>
         </ProgressStepper>
-        </div>
+      </StackItem>
+      </Stack>
+      </div>
     );
-    };   
+    };    

@@ -1,4 +1,4 @@
-import { Popover, ProgressStep, ProgressStepper, Button, Alert } from "@patternfly/react-core";
+import { Popover, ProgressStep, ProgressStepper, Button, Alert, Stack, StackItem } from "@patternfly/react-core";
 import React, {
   FunctionComponent,
   useState,
@@ -45,11 +45,16 @@ type KafkaStatusPopover2Props = {
     console.log(currentStep);
     return (
       <div>
+      <Stack hasGutter>
+      <StackItem>
         <Alert variant="warning" isInline isPlain title="This is taking longer than expected.">
         <p>In the meantime, you can create a service account under the <a href="http://www.google.com/">Connections tab.</a> </p>
         </Alert>
-        <br></br>
+      </StackItem>
+      <StackItem>
         <p>{currentStep} of 3 steps completed</p>
+      </StackItem>
+      <StackItem>
           <ProgressStepper isVertical>
               <ProgressStep
               variant={currentStep === 0 ? "info" : "success"}
@@ -86,6 +91,8 @@ type KafkaStatusPopover2Props = {
               Preparing
               </ProgressStep>
           </ProgressStepper>
+        </StackItem>
+        </Stack>
           </div>
       );
       };   
