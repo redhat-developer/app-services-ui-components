@@ -23,8 +23,8 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
   isMaxFilter,
   updateFilter,
   value,
-  valid,
-  setValid,
+  //valid,
+  //setValid,
   setValue
 }) => {
   const { t } = useTranslation();
@@ -40,8 +40,6 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
       if (validate(value)) {
         updateFilter('clientid', { value: value, isExact: false }, false);
         setValue('');
-      } else {
-        setValid(false);
       }
     }
   };
@@ -54,18 +52,17 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
 
   const onChange = (input: string) => {
     setValue(input);
-    !valid && setValid(true);
   };
 
   const renderClientInput = () => {
     if (filterSelected?.toLowerCase() === 'clientid') {
-      const v = !valid || isMaxFilter;
+      const v = !validate(value) || isMaxFilter;
 
       const FilterTooltip: React.FunctionComponent = () => {
         if (v) {
           return (
             <Tooltip
-              isVisible={isMaxFilter || !valid}
+              isVisible={v}
               content={tooltipContent}
               reference={inputRef}
             />

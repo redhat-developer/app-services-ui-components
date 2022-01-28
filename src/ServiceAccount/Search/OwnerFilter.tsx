@@ -23,8 +23,6 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
   isMaxFilter,
   updateFilter,
   value,
-  valid,
-  setValid,
   setValue
 }) => {
   const { t } = useTranslation(
@@ -42,8 +40,6 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
       if (validate(value)) {
         updateFilter('owner', { value: value, isExact: false }, false);
         setValue('');
-      } else {
-        setValid(false);
       }
     }
   };
@@ -56,18 +52,17 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
 
   const onChange = (input: string) => {
     setValue(input);
-    !valid && setValid(true);
   };
 
   const renderOwnerInput = () => {
     if (filterSelected?.toLowerCase() === 'owner') {
-      const v = !valid || isMaxFilter;
+      const v = !validate(value) || isMaxFilter;
 
       const FilterTooltip: React.FunctionComponent = () => {
         if (v) {
           return (
             <Tooltip
-              isVisible={isMaxFilter || !valid}
+              isVisible={isMaxFilter || !validate(value)}
               content={tooltipContent}
               reference={inputRef}
             />

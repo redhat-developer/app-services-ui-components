@@ -15,9 +15,7 @@ export type ServiceAccountToolbarProps = {
   filterSelected?: string;
   setFilterSelected: (value: string) => void;
   value: string,
-  valid: boolean,
   setValue: (value: string) => void;
-  setValid: (valid: boolean) => void;
 }
 
 export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolbarProps> = ({
@@ -27,9 +25,7 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
   filterSelected,
   setFilterSelected,
   value,
-  valid,
   setValue,
-  setValid
 }) => {
 
   const getSelectionForFilter = (key: string) => {
@@ -161,9 +157,7 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               onDeleteChipGroup={onDeleteChipGroup}
               removeFilterValue={removeFilteredValue}
               value={value}
-              valid={valid}
               setValue={setValue}
-              setValid={setValid}
             />
             <ShortDescriptionFilter
               isMaxFilter={isMaxFilter}
@@ -174,9 +168,7 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               onDeleteChipGroup={onDeleteChipGroup}
               removeFilterValue={removeFilteredValue}
               value={value}
-              valid={valid}
               setValue={setValue}
-              setValid={setValid}
             />
             <ClientIDFilter
               isMaxFilter={isMaxFilter}
@@ -187,9 +179,8 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               onDeleteChipGroup={onDeleteChipGroup}
               removeFilterValue={removeFilteredValue}
               value={value}
-              valid={valid}
               setValue={setValue}
-              setValid={setValid} />
+            />
           </ToolbarGroup>
         </ToolbarToggleGroup>
       </ToolbarContent>

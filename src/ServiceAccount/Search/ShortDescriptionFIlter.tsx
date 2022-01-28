@@ -23,8 +23,6 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
   isMaxFilter,
   updateFilter,
   value,
-  valid = true,
-  setValid,
   setValue
 }) => {
   const { t } = useTranslation();
@@ -34,7 +32,6 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
 
   const change = (input: string) => {
     setValue(input);
-    !valid && setValid(true);
   };
 
   const validate = (value?: string) => {
@@ -54,19 +51,17 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
       if (validate(value)) {
         updateFilter('description', { value: value, isExact: false }, false);
         setValue('');
-      } else {
-        setValid(false);
       }
     }
   };
 
   const renderShortDescriptionInput = () => {
-    const v = !valid || isMaxFilter;
+    const v = !validate(value) || isMaxFilter;
     const FilterTooltip: React.FunctionComponent = () => {
       if (v) {
         return (
           <Tooltip
-            isVisible={isMaxFilter || !valid}
+            isVisible={v}
             content={tooltipContent}
             reference={inputRef}
           />
@@ -92,7 +87,7 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
           />
           <Button
             variant={ButtonVariant.control}
-            isDisabled={!valid || isMaxFilter}
+            isDisabled={v}
             onClick={() => onFilter()}
             aria-label='Search instances'
           >
