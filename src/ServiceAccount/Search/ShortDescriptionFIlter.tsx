@@ -22,14 +22,17 @@ export const ShortDescriptionFilter: React.FunctionComponent<ShortDescriptionFil
   filterSelected,
   isMaxFilter,
   updateFilter,
+  value,
+  valid = true,
+  setValid,
+  setValue
 }) => {
   const { t } = useTranslation();
-  const [valid, setValid] = useState<boolean>(true);
-  const [value, setValue] = useState<string | undefined>();
+
   const inputRef = useRef<HTMLInputElement>(null);
   const tooltipContent = TooltipContent(isMaxFilter, 'description');
 
-  const change = (input?: string) => {
+  const change = (input: string) => {
     setValue(input);
     !valid && setValid(true);
   };

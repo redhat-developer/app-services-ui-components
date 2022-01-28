@@ -16,6 +16,10 @@ export type FilterProps = {
         removeIfPresent: boolean
     ) => void;
     removeFilterValue: (value: string) => void;
+    value: string,
+    valid: boolean,
+    setValue: (value: string) => void;
+    setValid: (valid: boolean) => void;
 }
 
 export type FilterValue = {

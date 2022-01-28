@@ -22,15 +22,16 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
   filterSelected,
   isMaxFilter,
   updateFilter,
+  value,
+  valid,
+  setValid,
+  setValue
 }) => {
   const { t } = useTranslation(
 
   );
   const inputRef = useRef<HTMLInputElement>(null);
   const tooltipContent = TooltipContent(isMaxFilter, 'owner');
-
-  const [value, setValue] = useState<string | undefined>();
-  const [valid, setValid] = useState<boolean>(true);
 
   const validate = (value?: string) => {
     return value ? !/["$^<>|+%/;:,\s*=~#()]/.test(value.trim()) : true;
@@ -53,7 +54,7 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
     }
   };
 
-  const onChange = (input?: string) => {
+  const onChange = (input: string) => {
     setValue(input);
     !valid && setValid(true);
   };
@@ -109,7 +110,7 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
       chips={getSelectionForFilter('owner')}
       deleteChip={(_category, chip) => onDeleteChip('owner', chip)}
       deleteChipGroup={() => onDeleteChipGroup('owner')}
-      categoryName={t('kafak:owner')}
+      categoryName={t('kafka:owner')}
       showToolbarItem={filterSelected?.toLowerCase() === 'owner'}
     >
       {renderOwnerInput()}

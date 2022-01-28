@@ -16,10 +16,10 @@
   "message_size": "Message size",
   "message_size_value": "up to 1 MiB",
   "owner": "Owner",
+  "owner_field_invalid_message": "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )",
   "partitions": "Partitions",
   "partitions_value": "up to 500",
   "short_description": "Short Description",
   "storage": "Storage",
-  "storage_value": "up to 1000 GiB",
-  "owner_field_invalid_message": "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )"
+  "storage_value": "up to 1000 GiB"
 }

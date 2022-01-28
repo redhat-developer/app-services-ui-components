@@ -14,6 +14,10 @@ export type ServiceAccountToolbarProps = {
   setFilteredValue: (filteredValue: Array<FilterType>) => void;
   filterSelected?: string;
   setFilterSelected: (value: string) => void;
+  value: string,
+  valid: boolean,
+  setValue: (value: string) => void;
+  setValid: (valid: boolean) => void;
 }
 
 export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolbarProps> = ({
@@ -22,6 +26,10 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
   setFilteredValue,
   filterSelected,
   setFilterSelected,
+  value,
+  valid,
+  setValue,
+  setValid
 }) => {
 
   const getSelectionForFilter = (key: string) => {
@@ -152,6 +160,10 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               onDeleteChip={onDeleteChip}
               onDeleteChipGroup={onDeleteChipGroup}
               removeFilterValue={removeFilteredValue}
+              value={value}
+              valid={valid}
+              setValue={setValue}
+              setValid={setValid}
             />
             <ShortDescriptionFilter
               isMaxFilter={isMaxFilter}
@@ -160,7 +172,12 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               updateFilter={updateFilter}
               onDeleteChip={onDeleteChip}
               onDeleteChipGroup={onDeleteChipGroup}
-              removeFilterValue={removeFilteredValue} />
+              removeFilterValue={removeFilteredValue}
+              value={value}
+              valid={valid}
+              setValue={setValue}
+              setValid={setValid}
+            />
             <ClientIDFilter
               isMaxFilter={isMaxFilter}
               filterSelected={filterSelected}
@@ -168,7 +185,11 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
               updateFilter={updateFilter}
               onDeleteChip={onDeleteChip}
               onDeleteChipGroup={onDeleteChipGroup}
-              removeFilterValue={removeFilteredValue} />
+              removeFilterValue={removeFilteredValue}
+              value={value}
+              valid={valid}
+              setValue={setValue}
+              setValid={setValid} />
           </ToolbarGroup>
         </ToolbarToggleGroup>
       </ToolbarContent>
