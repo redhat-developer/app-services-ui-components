@@ -9,4 +9,5 @@ export * from './AppServicesPagination';
 export * from './AppServicesTable';
 export * from './AppServicesToolbar';
 export * from './DeleteModal';
+export * from './DistanceFromNow';
 export * from './MarketingPage';
