@@ -180,6 +180,8 @@ export const decorators = [
                 import("../locales/en/datascienceoverview.json"),
               apimgmtoverview: () =>
                 import("../locales/en/apimgmtoverview.json"),
+              "manage-kafka-permissions": () =>
+                import("../locales/en/manage-kafka-permissions.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),
