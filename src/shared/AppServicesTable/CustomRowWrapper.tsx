@@ -1,5 +1,4 @@
 import React, { createContext, LegacyRef, useContext } from "react";
-import { InstanceStatus } from "../../utils";
 import { css } from "@patternfly/react-styles";
 import "./CustomRowWrapper.css";
 import { IRow, RowWrapperProps } from "@patternfly/react-table";
@@ -13,6 +12,7 @@ export type CustomRowWrapperContextProps<T> = {
   ) => void;
   rowDataTestId?: string;
   loggedInUser?: string;
+  isRowDeleted?: (row?: IRow) => boolean;
 };
 
 const CustomRowWrapperContext = createContext<
@@ -30,15 +30,12 @@ export const CustomRowWrapperProvider = CustomRowWrapperContext.Provider;
 export const CustomRowWrapper = (
   rowWrapperProps: RowWrapperProps
 ): JSX.Element => {
-  const { activeRow, onRowClick, rowDataTestId, loggedInUser } = useContext(
-    CustomRowWrapperContext
-  );
+  const { activeRow, onRowClick, rowDataTestId, loggedInUser, isRowDeleted } =
+    useContext(CustomRowWrapperContext);
   const { trRef, className, rowProps, row, ...props } = rowWrapperProps || {};
-  const isRowDeleted =
-    row?.originalData?.status === InstanceStatus.DEPROVISION ||
-    row?.originalData?.status === InstanceStatus.DELETED;
   const isLoggedInUserOwner = loggedInUser === row?.originalData?.owner;
-  const isRowDisabled = isRowDeleted || !isLoggedInUserOwner;
+  const isDeleted = isRowDeleted && isRowDeleted(row);
+  const isRowDisabled = isDeleted || !isLoggedInUserOwner;
 
   const ref =
     trRef === undefined ? undefined : (trRef as LegacyRef<HTMLTableRowElement>);
@@ -51,9 +48,7 @@ export const CustomRowWrapper = (
       className={css(
         className,
         "pf-c-table-row__item",
-        isRowDeleted
-          ? "pf-m-disabled"
-          : isLoggedInUserOwner && "pf-m-selectable",
+        isDeleted ? "pf-m-disabled" : isLoggedInUserOwner && "pf-m-selectable",
         !isRowDisabled &&
           activeRow &&
           activeRow === row?.originalData?.name &&
