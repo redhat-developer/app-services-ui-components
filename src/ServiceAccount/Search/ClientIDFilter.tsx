@@ -23,8 +23,6 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
   isMaxFilter,
   updateFilter,
   value,
-  //valid,
-  //setValid,
   setValue
 }) => {
   const { t } = useTranslation();
@@ -74,7 +72,7 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
       return (
         <InputGroup>
           <TextInput
-            name='Client ID'
+            name='clientID'
             id='filterClient'
             type='search'
             aria-label='Search filter input'
@@ -89,7 +87,7 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
             isDisabled={v}
             variant={ButtonVariant.control}
             onClick={onFilter}
-            aria-label='Search clientid'
+            aria-label='Search clientID'
           >
             <SearchIcon />
           </Button>

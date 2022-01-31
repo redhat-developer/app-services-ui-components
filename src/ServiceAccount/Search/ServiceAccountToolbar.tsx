@@ -2,11 +2,10 @@ import { Toolbar, ToolbarChip, ToolbarContent, ToolbarGroup, ToolbarToggleGroup 
 import { FilterIcon } from "@patternfly/react-icons";
 import React from "react";
 import { ClientIDFilter } from "./ClientIDFilter";
-//import { ClientIDSearch } from "./ClientIDSearch";
 import { FilterType, FilterValue } from "./FilterProps";
 import { FilterSelect } from "./FilterSelect";
 import { OwnerFilter } from "./OwnerFilter";
-import { ShortDescriptionFilter } from "./ShortDescriptionFIlter";
+import { ShortDescriptionFilter } from "./ShortDescriptionFilter";
 
 export type ServiceAccountToolbarProps = {
   isMaxFilter: boolean;
@@ -22,7 +21,7 @@ export const ServiceAccountToolbar: React.FunctionComponent<ServiceAccountToolba
   isMaxFilter,
   filteredValue,
   setFilteredValue,
-  filterSelected,
+  filterSelected = 'description',
   setFilterSelected,
   value,
   setValue,

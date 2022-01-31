@@ -2,30 +2,46 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ServiceAccountToolbar } from './ServiceAccountToolbar';
 
 export default {
-    title: "Components/ServiceAccount/Search",
-    component: ServiceAccountToolbar,
-    args: {
-        filterSelected: 'description',
-        filteredValue: []
-    },
+  title: "Components/ServiceAccount/Search",
+  component: ServiceAccountToolbar,
+  args: {
+    filteredValue: []
+  },
 } as ComponentMeta<typeof ServiceAccountToolbar>;
 
 const Template: ComponentStory<typeof ServiceAccountToolbar> = (args) => (
-    <ServiceAccountToolbar {...args} />
+  <ServiceAccountToolbar {...args} />
 );
 
-export const ToolbarFilter = Template.bind({});
+export const ServiceAccountToolbarFilter = Template.bind({});
+ServiceAccountToolbarFilter.parameters = {
+  docs: {
+    description: {
+      story: `
+ToolbarFilter for ServiceAccount Search/filter functionality
+        `,
+    },
+  },
+};
 
+export const InvalidClientIdInput = Template.bind({});
+InvalidClientIdInput.args = {
+  filterSelected: 'clientID',
+  value: 'Hema HG',
+  filteredValue: []
+};
+InvalidClientIdInput.storyName = 'Invalid Input error message when the filter selected is clientID';
 
-export const FilterValue = Template.bind({});
-FilterValue.args = {
-    filterSelected: 'owner',
-    filteredValue: [{ filterKey: 'owner', filterValue: [{ value: 'Hema', isExact: true }] }, { filterKey: 'description', filterValue: [{ value: 'Hema', isExact: false }] },
-    { filterKey: 'clientid', filterValue: [{ value: 'srvc_acc', isExact: true }] }]
-}
+export const InvalidOwnerInput = Template.bind({})
+InvalidOwnerInput.args = {
+  filterSelected: 'owner',
+  value: 'Hema HG',
+  filteredValue: []
+};
+InvalidOwnerInput.storyName = 'Invalid Input error message when the filter selected is owner';
 
-export const MaxfilterOn = Template.bind({})
-MaxfilterOn.args = {
-    filterSelected: 'owner',
-    isMaxFilter: true
-}
+export const MaxFilterMessage = Template.bind({})
+MaxFilterMessage.args = {
+  isMaxFilter: true
+};
+MaxFilterMessage.storyName = 'Error message when maximum filter search is reached';
