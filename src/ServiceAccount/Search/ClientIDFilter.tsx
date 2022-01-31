@@ -1,5 +1,5 @@
 import { FilterProps } from './FilterProps';
-import React, { useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipContent } from './TooltipContent'
 import {
@@ -56,18 +56,20 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
     if (filterSelected?.toLowerCase() === 'clientid') {
       const v = !validate(value) || isMaxFilter;
 
-      const FilterTooltip: React.FunctionComponent = () => {
-        if (v) {
-          return (
-            <Tooltip
-              isVisible={v}
-              content={tooltipContent}
-              reference={inputRef}
-            />
-          );
-        }
-        return <></>;
-      };
+      const FilterTooltip = useCallback(
+        () => {
+          if (v) {
+            return (
+              <Tooltip
+                isVisible={isMaxFilter || !validate(value)}
+                content={tooltipContent}
+                reference={inputRef}
+              />
+            );
+          }
+          return <></>;
+        }, [v]
+      )
 
       return (
         <InputGroup>
@@ -91,7 +93,7 @@ export const ClientIDFilter: React.FunctionComponent<ClientIDFilterProps> = ({
           >
             <SearchIcon />
           </Button>
-          <FilterTooltip />
+          {FilterTooltip()}
         </InputGroup>
       );
     }
