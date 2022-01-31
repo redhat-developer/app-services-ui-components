@@ -1,5 +1,5 @@
 import { FilterProps } from './FilterProps';
-import React, { useCallback, useRef } from 'react';
+import React, { useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipContent } from './TooltipContent'
 import {
@@ -53,10 +53,6 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
   const onChange = (input: string) => {
     setValue(input);
   };
-
-
-
-
 
   const renderOwnerInput = () => {
     if (filterSelected?.toLowerCase() === 'owner') {
