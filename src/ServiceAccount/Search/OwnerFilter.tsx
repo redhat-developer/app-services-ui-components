@@ -1,5 +1,5 @@
 import { FilterProps } from './FilterProps';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TooltipContent } from './TooltipContent'
 import {
@@ -54,23 +54,19 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
     setValue(input);
   };
 
+
+
+
+
   const renderOwnerInput = () => {
     if (filterSelected?.toLowerCase() === 'owner') {
       const v = !validate(value) || isMaxFilter;
 
-      const FilterTooltip = useCallback(
-        () => {
-          if (v) {
-            return (
-              <Tooltip
-                isVisible={isMaxFilter || !validate(value)}
-                content={tooltipContent}
-                reference={inputRef}
-              />
-            );
-          }
-          return <></>;
-        }, [v]
+      const FilterTooltip = v && (
+        <Tooltip
+          isVisible={v}
+          content={tooltipContent}
+          reference={inputRef} />
       )
 
       return (
@@ -95,7 +91,7 @@ export const OwnerFilter: React.FunctionComponent<OwnerFilterProps> = ({
           >
             <SearchIcon />
           </Button>
-          {FilterTooltip()}
+          {FilterTooltip}
         </InputGroup>
       );
     }

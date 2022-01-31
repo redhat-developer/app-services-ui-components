@@ -31,6 +31,16 @@ InvalidClientIdInput.args = {
   filteredValue: []
 };
 InvalidClientIdInput.storyName = 'Invalid Input error message when the filter selected is clientID';
+InvalidClientIdInput.parameters = {
+  docs: {
+    description: {
+      story: `
+When the clienttID filter is selected if the input filed is not valid Input Invalid error message 
+will be displayed and the search icon button is disabled
+        `,
+    },
+  },
+};
 
 export const InvalidOwnerInput = Template.bind({})
 InvalidOwnerInput.args = {
@@ -39,9 +49,30 @@ InvalidOwnerInput.args = {
   filteredValue: []
 };
 InvalidOwnerInput.storyName = 'Invalid Input error message when the filter selected is owner';
+InvalidOwnerInput.parameters = {
+  docs: {
+    description: {
+      story: `
+When the Owner filter is selected if the input filed is not valid Input Invalid error message 
+will be displayed and the search icon button is disabled 
+        `,
+    },
+  },
+};
+
 
 export const MaxFilterMessage = Template.bind({})
 MaxFilterMessage.args = {
   isMaxFilter: true
 };
 MaxFilterMessage.storyName = 'Error message when maximum filter search is reached';
+MaxFilterMessage.parameters = {
+  docs: {
+    description: {
+      story: `
+When the Filter reaches the Maximum limit, Maximum limit error message will be displayed 
+and the search icon button is disabled 
+        `,
+    },
+  },
+};
