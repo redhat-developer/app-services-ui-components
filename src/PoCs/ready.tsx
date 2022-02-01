@@ -6,10 +6,10 @@ export const ReadyForUse: VoidFunctionComponent  = () => {
     return (
         <div>
             <Flex>
-                <Flex>
-                <FlexItem><CheckCircleIcon style={{ color: "#3E8635" }}/></FlexItem>
+            <Flex>
+                <FlexItem spacer={{ default: 'spacerSm' }}><CheckCircleIcon style={{ color: "#3E8635" }}/></FlexItem>
                 <FlexItem>Ready</FlexItem>
-                </Flex>
+            </Flex>
             </Flex>
         </div>
     );

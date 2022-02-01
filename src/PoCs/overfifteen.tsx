@@ -1,11 +1,26 @@
-import { Button, Spinner, Alert } from "@patternfly/react-core";
+import { Button, Spinner, Alert, Flex, FlexItem } from "@patternfly/react-core";
 import React, {VoidFunctionComponent } from "react";
 
 export const Warning: VoidFunctionComponent  = () => {
     return (
         <div>
-            <Spinner isSVG size="md"/>Creating
-            <Alert variant="warning" isInline isPlain title="This is taking longer than expected." />
+            <Flex direction={{ default: 'column' }}>
+            <Flex spacer={{ default: 'spacerXs' }}>
+                <FlexItem spacer={{ default: 'spacerSm' }}>
+                    <Spinner isSVG size="md"/>
+                </FlexItem>
+                <FlexItem>
+                    <Button variant="link" isInline>
+                        Creating                      
+                    </Button>
+                    <Flex>
+                        <FlexItem>
+                            <Alert variant="warning" isInline isPlain title="This is taking longer than expected." />
+                        </FlexItem>
+                    </Flex> 
+                </FlexItem>
+            </Flex> 
+            </Flex>           
         </div>
     );
 }; 
