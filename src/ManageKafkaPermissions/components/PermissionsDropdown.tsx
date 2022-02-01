@@ -1,12 +1,14 @@
 import {
   Divider,
+  Dropdown,
+  DropdownToggle,
+  DropdownToggleAction,
   Menu,
   MenuContent,
   MenuGroup,
   MenuItem,
   MenuList,
   MenuProps,
-  MenuToggle,
   Popper,
 } from "@patternfly/react-core";
 import React, {
@@ -81,24 +83,22 @@ export const PermissionsDropdown: VoidFunctionComponent<PermissionsDropdownProps
       };
     }, [handleClickOutside, handleMenuKeys, isOpen, menuRef]);
 
-    const onToggleClick = useCallback(
-      (ev: React.MouseEvent) => {
-        ev.stopPropagation(); // Stop handleClickOutside from handling
-        setTimeout(() => {
-          if (menuRef.current) {
-            const firstElement = menuRef.current.querySelector(
-              "li > button,input:not(:disabled)"
-            ) as HTMLElement | null;
-            firstElement && firstElement.focus();
-          }
-        }, 0);
-        setIsOpen(!isOpen);
-      },
-      [isOpen]
-    );
+    const onToggleClick = useCallback((open: boolean, ev: React.MouseEvent) => {
+      ev.stopPropagation(); // Stop handleClickOutside from handling
+      setTimeout(() => {
+        if (menuRef.current) {
+          const firstElement = menuRef.current.querySelector(
+            "li > button,input:not(:disabled)"
+          ) as HTMLElement | null;
+          firstElement && firstElement.focus();
+        }
+      }, 0);
+      setIsOpen(open);
+    }, []);
 
     const handleSelect: MenuProps["onSelect"] = useCallback(
       (_event, itemId) => {
+        setIsOpen(false);
         switch (itemId) {
           case "add_permission":
             onAddPermission();
@@ -181,9 +181,26 @@ export const PermissionsDropdown: VoidFunctionComponent<PermissionsDropdownProps
     );
 
     const toggle = (
-      <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen}>
-        {t("manage_permissions_dialog.assign_permissions.add_permission")}
-      </MenuToggle>
+      <Dropdown
+        toggle={
+          <DropdownToggle
+            ref={toggleRef}
+            splitButtonItems={[
+              <DropdownToggleAction
+                key="cog-action"
+                aria-label="Action"
+                onClick={onAddPermission}
+              >
+                {t(
+                  "manage_permissions_dialog.assign_permissions.add_permission"
+                )}
+              </DropdownToggleAction>,
+            ]}
+            splitButtonVariant="action"
+            onToggle={onToggleClick}
+          />
+        }
+      />
     );
 
     return (
