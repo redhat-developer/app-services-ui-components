@@ -2,6 +2,7 @@ import React, {
   FunctionComponent,
   useState,
   VoidFunctionComponent,
+  useCallback,
 } from "react";
 import { useTranslation, Trans } from "react-i18next";
 
@@ -28,7 +29,7 @@ type KafkaInstanceStatusPopoverContentProps = {
   isVertical?: boolean;
   showWarning?: boolean;
   showError?: boolean;
-  setIsVisible: (isOpen: boolean) => void;
+  setIsVisible?: (isOpen: boolean) => void;
   redirectToConnectionTab?: () => void;
   redirectToSupportCase?: () => void;
 };
@@ -36,7 +37,7 @@ type KafkaInstanceStatusPopoverContentProps = {
 export type KafkaInstanceStatusPopoverProps = {
   isOpen?: boolean;
 } & KafkaInstanceStatusPopoverContentProps &
-  PopoverProps;
+  Omit<PopoverProps, "bodyContent">;
 
 export const KafkaInstanceStatusPopover: FunctionComponent<
   KafkaInstanceStatusPopoverProps
@@ -130,15 +131,15 @@ const KafkaInstanceStatusPopoverContent: VoidFunctionComponent<
 
   const currentStep = statusOrders.findIndex((s) => s === currentStatus);
 
-  const onClickConnectionTabLink = () => {
-    setIsVisible(false);
+  const onClickConnectionTabLink = useCallback(() => {
+    setIsVisible && setIsVisible(false);
     redirectToConnectionTab && redirectToConnectionTab();
-  };
+  }, [redirectToConnectionTab, setIsVisible]);
 
-  const onClickSupportLink = () => {
-    setIsVisible(false);
+  const onClickSupportLink = useCallback(() => {
+    setIsVisible && setIsVisible(false);
     redirectToSupportCase && redirectToSupportCase();
-  };
+  }, [redirectToSupportCase, setIsVisible]);
 
   return (
     <div>
