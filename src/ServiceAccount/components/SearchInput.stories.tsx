@@ -52,7 +52,7 @@ ErrorMessageForInvalidOwnerSearchInput.play = async ({ canvasElement }) => {
 ErrorMessageForInvalidOwnerSearchInput.parameters = {
   docs: {
     description: {
-      story: `When user enter some invalid search text for "Owner" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
+      story: `When user enter some invalid search text for Owner search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
     },
   },
 };
@@ -72,7 +72,7 @@ ErrorMessageForInvalidSearchInputForClientID.play = async ({ canvasElement }) =>
 ErrorMessageForInvalidSearchInputForClientID.parameters = {
   docs: {
     description: {
-      story: `When user enter some invalid search text for "ClientID" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
+      story: `When user enter some invalid search text for ClientID search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
     },
   },
 };
@@ -92,7 +92,7 @@ ErrorMessageForInvalidSearchInputForShortDescription.play = async ({ canvasEleme
 ErrorMessageForInvalidSearchInputForShortDescription.parameters = {
   docs: {
     description: {
-      story: `When user enter some invalid search text for "Short Description" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
+      story: `When user enter some invalid search text for Short Description search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
     },
   },
 };
