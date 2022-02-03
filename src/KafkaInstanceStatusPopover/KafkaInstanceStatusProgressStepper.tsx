@@ -17,14 +17,14 @@ export type Step = ProgressStepProps & {
   status: InstanceStatus;
 };
 
-type InstanceStatusProgressStepperProps = {
+type KfkaInstanceStatusProgressStepperProps = {
   currentStatus: InstanceStatus;
   steps: Step[];
   isVertical?: boolean;
 };
 
-const InstanceStatusProgressStepper: React.VFC<
-  InstanceStatusProgressStepperProps
+const KafkaInstanceStatusProgressStepper: React.VFC<
+  KfkaInstanceStatusProgressStepperProps
 > = ({ isVertical, currentStatus, steps }) => {
   const statusOrders: InstanceStatus[] = [
     InstanceStatus.pending,
@@ -71,4 +71,4 @@ const InstanceStatusProgressStepper: React.VFC<
   );
 };
 
-export { InstanceStatusProgressStepper };
+export { KafkaInstanceStatusProgressStepper };
