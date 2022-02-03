@@ -20,6 +20,10 @@ const Template: ComponentStory<typeof SearchInput> = (args) => (
 export const EmptyState = Template.bind({});
 
 export const SomeValidInput = Template.bind({});
+SomeValidInput.args = {
+  placeholder: "Filter by owner"
+}
+
 SomeValidInput.play = async ({ canvasElement }) => {
   const story = within(canvasElement);
   userEvent.type(await story.findByLabelText("Filter by owner"), "some-name");
@@ -33,18 +37,66 @@ SomeValidInput.parameters = {
   },
 };
 
-export const InvalidSearch = Template.bind({});
-InvalidSearch.play = async ({ canvasElement }) => {
+export const ErrorMessageForInvalidOwnerSearchInput = Template.bind({});
+ErrorMessageForInvalidOwnerSearchInput.args = {
+  placeholder: "Filter by owner",
+  errorMessage: "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )"
+}
+ErrorMessageForInvalidOwnerSearchInput.play = async ({ canvasElement }) => {
   const story = within(canvasElement);
   userEvent.type(
     await story.findByLabelText("Filter by owner"),
     "some-%%%-invalid"
   );
 };
-InvalidSearch.parameters = {
+ErrorMessageForInvalidOwnerSearchInput.parameters = {
   docs: {
     description: {
-      story: `A user can type some invalid search text and be displayed a tooltip describing why the text is invalid. Search is also disabled.`,
+      story: `When user enter some invalid search text for "Owner" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
     },
   },
 };
+
+export const ErrorMessageForInvalidSearchInputForClientID = Template.bind({});
+ErrorMessageForInvalidSearchInputForClientID.args = {
+  placeholder: "Filter by Client ID",
+  errorMessage: "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - )."
+}
+ErrorMessageForInvalidSearchInputForClientID.play = async ({ canvasElement }) => {
+  const story = within(canvasElement);
+  userEvent.type(
+    await story.findByLabelText("Filter by Client ID"),
+    "some invalid"
+  );
+};
+ErrorMessageForInvalidSearchInputForClientID.parameters = {
+  docs: {
+    description: {
+      story: `When user enter some invalid search text for "ClientID" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
+    },
+  },
+};
+
+export const ErrorMessageForInvalidSearchInputForShortDescription = Template.bind({});
+ErrorMessageForInvalidSearchInputForShortDescription.args = {
+  placeholder: "Filter by short description",
+  errorMessage: "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - )."
+}
+ErrorMessageForInvalidSearchInputForShortDescription.play = async ({ canvasElement }) => {
+  const story = within(canvasElement);
+  userEvent.type(
+    await story.findByLabelText("Filter by short description"),
+    "some invalid"
+  );
+};
+ErrorMessageForInvalidSearchInputForShortDescription.parameters = {
+  docs: {
+    description: {
+      story: `When user enter some invalid search text for "Short Description" search type, Tooltip text will be displayed describing why the text entered is invalid. Search is also disabled.`,
+    },
+  },
+};
+
+
+
+

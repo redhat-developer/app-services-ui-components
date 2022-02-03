@@ -20,12 +20,12 @@ export const Search: VoidFunctionComponent<SearchProps> = ({ onSearch }) => {
       errorMessage: t("kafka:owner_field_invalid_message"),
     },
     description: {
-      placeholder: t("kafka:TODO"),
-      errorMessage: t("kafka:TODO"),
+      placeholder: t("kafka:filter_by_short_description"),
+      errorMessage: t("kafka:input_field_invalid_message"),
     },
     clientid: {
-      placeholder: t("kafka:TODO"),
-      errorMessage: t("kafka:TODO"),
+      placeholder: t("kafka:filter_by_client_id"),
+      errorMessage: t("kafka:input_field_invalid_message"),
     },
   };
   return (
