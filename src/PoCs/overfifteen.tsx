@@ -10,9 +10,7 @@ export const Warning: VoidFunctionComponent  = () => {
                     <Spinner isSVG size="md"/>
                 </FlexItem>
                 <FlexItem>
-                    <Button variant="link" isInline>
-                        Creating                      
-                    </Button>
+                    <Button variant="link" isInline>Creating</Button>
                     <Flex>
                         <FlexItem>
                             <Alert variant="warning" isInline isPlain title="This is taking longer than expected." />
@@ -20,7 +18,7 @@ export const Warning: VoidFunctionComponent  = () => {
                     </Flex> 
                 </FlexItem>
             </Flex> 
-            </Flex>           
+            </Flex>  
         </div>
     );
 }; 

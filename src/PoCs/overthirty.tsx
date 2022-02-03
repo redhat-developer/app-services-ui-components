@@ -9,7 +9,7 @@ export const Error: VoidFunctionComponent  = () => {
                 <FlexItem spacer={{ default: 'spacerSm' }}><Spinner isSVG size="md"/></FlexItem>
                 <FlexItem>
                     <Button variant="link" isInline>
-                        Creating                      
+                        Creating              
                     </Button>
                     <Flex>
                         <FlexItem> 
