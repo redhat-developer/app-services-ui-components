@@ -1,0 +1,8 @@
+.foo.pf-l-split.pf-m-gutter > *:not(:last-child) {
+    --pf-l-split--m-gutter--MarginRight: var(--pf-global--spacer--sm);
+  }
+  
+  .fixIcon {
+    font-size: var(--pf-global--icon--FontSize--md);
+  }
+  

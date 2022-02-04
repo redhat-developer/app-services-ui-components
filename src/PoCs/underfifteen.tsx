@@ -1,28 +1,27 @@
-import { Button, Spinner, HelperText, HelperTextItem, Flex, FlexItem, Alert } from "@patternfly/react-core";
+import { Button, Spinner, HelperText, HelperTextItem, Flex, FlexItem, Split, SplitItem, Alert } from "@patternfly/react-core";
 import React, {VoidFunctionComponent } from "react";
-
+import "./style.css";
+import CheckCircleIcon from '@patternfly/react-icons/dist/js/icons/check-circle-icon';
 export const OnTime: VoidFunctionComponent  = () => {
     return (
         <div>
-        <Flex  direction={{ default: 'column' }}>
-        <Flex spacer={{ default: 'spacerXs' }}>
-            <FlexItem spacer={{ default: 'spacerSm' }}>
-                <Spinner isSVG size="md"/>
-            </FlexItem>
-            <FlexItem>
-                <Button variant="link" isInline>
-                Creating 
-                </Button>
-                <Flex>
+        <Split hasGutter className="foo">
+        <SplitItem>
+            <Spinner size="md" />
+        </SplitItem>
+        <SplitItem>
+            <Button variant="link" isInline>
+                Creating
+            </Button>
+            <Flex>
                     <FlexItem>
                         <HelperText>
                         <HelperTextItem variant="indeterminate">This will be ready shortly.</HelperTextItem>
                         </HelperText> 
                     </FlexItem>  
                 </Flex>  
-            </FlexItem>
-        </Flex>  
-        </Flex>     
+        </SplitItem>
+        </Split>   
         </div>
     );
-};
+}; 
