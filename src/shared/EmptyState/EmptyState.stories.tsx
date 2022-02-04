@@ -1,23 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import {
-  AppServicesEmptyState,
-  AppServicesEmptyStateVariant,
-} from "./AppServicesEmptyState";
+import { EmptyState, EmptyStateVariant } from "./EmptyState";
 
 export default {
   title: "Empty States/App Services",
-  component: AppServicesEmptyState,
-  parameters: {
-  },
-} as ComponentMeta<typeof AppServicesEmptyState>;
+  component: EmptyState,
+  parameters: {},
+} as ComponentMeta<typeof EmptyState>;
 
-const Template: ComponentStory<typeof AppServicesEmptyState> = (
-  args,
-  { parameters }
-) => (
+const Template: ComponentStory<typeof EmptyState> = (args, { parameters }) => (
   <div style={{ height: parameters.previewHeight }}>
-    <AppServicesEmptyState {...args} />
+    <EmptyState {...args} />
   </div>
 );
 
@@ -33,14 +26,14 @@ DefaultStory.args = {
     dignissim elementum. Mollis tincidunt mattis hendrerit dolor eros enim, nisi ligula ornare.
     Hendrerit parturient habitant pharetra rutrum gravida porttitor eros feugiat. Mollis elit
     sodales taciti duis praesent id. Consequat urna vitae morbi nunc congue.`,
-  }
+  },
 };
 DefaultStory.storyName = "Default";
 
 export const GettingStartedStory = Template.bind({});
 GettingStartedStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.GettingStarted,
+    variant: EmptyStateVariant.GettingStarted,
   },
   titleProps: {
     title: "Getting Started Empty State",
@@ -59,7 +52,7 @@ GettingStartedStory.storyName = "Getting Started";
 export const NoAccessStory = Template.bind({});
 NoAccessStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.NoAccess,
+    variant: EmptyStateVariant.NoAccess,
   },
   titleProps: {
     title: "No Access Empty State",
@@ -78,7 +71,7 @@ NoAccessStory.storyName = "No Access";
 export const NoItemsStory = Template.bind({});
 NoItemsStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.NoItems,
+    variant: EmptyStateVariant.NoItems,
   },
   titleProps: {
     title: "No Items Empty State",
@@ -97,7 +90,7 @@ NoItemsStory.storyName = "No Items";
 export const NoResultStory = Template.bind({});
 NoResultStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.NoResult,
+    variant: EmptyStateVariant.NoResult,
   },
   titleProps: {
     title: "No Result Empty State",
@@ -116,7 +109,7 @@ NoResultStory.storyName = "No Result";
 export const UnexpectedErrorStory = Template.bind({});
 UnexpectedErrorStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.UnexpectedError,
+    variant: EmptyStateVariant.UnexpectedError,
   },
   titleProps: {
     title: "Unexpected Error Empty State",
@@ -135,7 +128,7 @@ UnexpectedErrorStory.storyName = "Unexpected Error";
 export const PageNotFoundStory = Template.bind({});
 PageNotFoundStory.args = {
   emptyStateProps: {
-    variant: AppServicesEmptyStateVariant.PageNotFound,
+    variant: EmptyStateVariant.PageNotFound,
   },
   titleProps: {
     title: "Page Not Found Empty State",

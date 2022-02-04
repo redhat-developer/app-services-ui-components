@@ -1,4 +1,4 @@
-import React from "react";
+import React, { VoidFunctionComponent } from "react";
 import {
   Title,
   Button,
@@ -12,7 +12,7 @@ import {
   EmptyStateProps as PFEmptyStateProps,
   EmptyStateBodyProps,
   ButtonVariant,
-  EmptyStateVariant,
+  EmptyStateVariant as PFEmptyStateVariant,
 } from "@patternfly/react-core";
 import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
 import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shuttle-icon";
@@ -20,10 +20,10 @@ import LockIcon from "@patternfly/react-icons/dist/esm/icons/lock-icon";
 import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
 import { css } from "@patternfly/react-styles";
-import "./AppServicesEmptyState.css";
+import "./EmptyState.css";
 import { NotFoundIcon } from "../../images";
 
-export enum AppServicesEmptyStateVariant {
+export enum EmptyStateVariant {
   GettingStarted = "GettingStarted",
   NoAccess = "NoAccess",
   NoResult = "NoResult",
@@ -32,12 +32,12 @@ export enum AppServicesEmptyStateVariant {
   PageNotFound = "PageNotFound",
 }
 
-export type AppServicesEmptyStateProps = {
+export type EmptyStateProps = {
   titleProps?: Omit<TitleProps, "children" | "headingLevel"> & {
     headingLevel?: string;
   };
   emptyStateProps?: Omit<PFEmptyStateProps, "children" | "variant"> & {
-    variant?: AppServicesEmptyStateVariant | EmptyStateVariant;
+    variant?: EmptyStateVariant | PFEmptyStateVariant;
   };
   emptyStateIconProps?: EmptyStateIconProps;
   emptyStateBodyProps?: Omit<EmptyStateBodyProps, "children"> & {
@@ -51,14 +51,14 @@ export type AppServicesEmptyStateProps = {
   children?: React.ReactNode;
 };
 
-export const AppServicesEmptyState: React.FC<AppServicesEmptyStateProps> = ({
+export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
   titleProps,
   buttonProps,
   emptyStateIconProps,
   emptyStateProps,
   emptyStateBodyProps,
   children,
-}: AppServicesEmptyStateProps) => {
+}) => {
   const {
     variant: buttonVariant = ButtonVariant.primary,
     onClick,
@@ -67,7 +67,7 @@ export const AppServicesEmptyState: React.FC<AppServicesEmptyStateProps> = ({
   const { title, ...restTitleProps } = titleProps || {};
   const { body, ...restEmptyStateBodyProps } = emptyStateBodyProps || {};
   const {
-    variant: masEmptyStateVariant = AppServicesEmptyStateVariant.GettingStarted,
+    variant: masEmptyStateVariant = EmptyStateVariant.GettingStarted,
     className,
     ...restEmptyStateProps
   } = emptyStateProps || {};
@@ -79,49 +79,49 @@ export const AppServicesEmptyState: React.FC<AppServicesEmptyStateProps> = ({
   const getVariantConfig = () => {
     let variantConfig: any = {};
     switch (masEmptyStateVariant) {
-      case AppServicesEmptyStateVariant.GettingStarted:
+      case EmptyStateVariant.GettingStarted:
         variantConfig = {
-          variant: EmptyStateVariant.xl,
+          variant: PFEmptyStateVariant.xl,
           icon: SpaceShuttleIcon,
           titleSize: TitleSizes["4xl"],
           headingLevel: "h1",
         };
         break;
-      case AppServicesEmptyStateVariant.NoAccess:
+      case EmptyStateVariant.NoAccess:
         variantConfig = {
-          variant: EmptyStateVariant.large,
+          variant: PFEmptyStateVariant.large,
           icon: LockIcon,
           titleSize: TitleSizes.xl,
           headingLevel: "h2",
         };
         break;
-      case AppServicesEmptyStateVariant.NoItems:
+      case EmptyStateVariant.NoItems:
         variantConfig = {
-          variant: EmptyStateVariant.large,
+          variant: PFEmptyStateVariant.large,
           icon: PlusCircleIcon,
           titleSize: TitleSizes.xl,
           headingLevel: "h2",
         };
         break;
-      case AppServicesEmptyStateVariant.NoResult:
+      case EmptyStateVariant.NoResult:
         variantConfig = {
-          variant: EmptyStateVariant.large,
+          variant: PFEmptyStateVariant.large,
           icon: SearchIcon,
           titleSize: TitleSizes.lg,
           headingLevel: "h2",
         };
         break;
-      case AppServicesEmptyStateVariant.UnexpectedError:
+      case EmptyStateVariant.UnexpectedError:
         variantConfig = {
-          variant: EmptyStateVariant.full,
+          variant: PFEmptyStateVariant.full,
           icon: ExclamationCircleIcon,
           titleSize: TitleSizes.lg,
           headingLevel: "h1",
         };
         break;
-      case AppServicesEmptyStateVariant.PageNotFound:
+      case EmptyStateVariant.PageNotFound:
         variantConfig = {
-          variant: EmptyStateVariant.full,
+          variant: PFEmptyStateVariant.full,
           icon: NotFoundImg,
           titleSize: TitleSizes.lg,
           headingLevel: "h1",
@@ -129,7 +129,7 @@ export const AppServicesEmptyState: React.FC<AppServicesEmptyStateProps> = ({
         break;
       default:
         variantConfig = {
-          variant: masEmptyStateVariant || EmptyStateVariant.full,
+          variant: masEmptyStateVariant || PFEmptyStateVariant.full,
           icon: emptyStateIconProps?.icon,
           titleSize: titleProps?.size,
           headingLevel: titleProps?.headingLevel,
