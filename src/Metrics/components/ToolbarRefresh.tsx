@@ -41,7 +41,7 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
             <>
               {t("metrics:last-refresh")}
               <br />
-              <FormatDate date={lastUpdated} format="distanceToNow"/>
+              <FormatDate date={lastUpdated} format="distanceToNow" />
               {t("metrics:last-refresh-distance")}
             </>
           )}

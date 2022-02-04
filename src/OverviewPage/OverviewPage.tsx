@@ -217,7 +217,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
           </Card>
 
           {/* Kafka card */}
-          <Card ouiaId='card-rhosak'>
+          <Card ouiaId="card-rhosak">
             <CardHeader>
               <CardHeaderMain>
                 <img

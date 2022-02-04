@@ -1,2 +1,2 @@
-export * from './KafkaInstanceStatusPopover';
-export * from './KafkaInstanceStatusProgressStepper';
+export * from "./KafkaInstanceStatusPopover";
+export * from "./KafkaInstanceStatusProgressStepper";

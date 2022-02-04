@@ -9,7 +9,8 @@ export interface AsyncBackendOptions {
 }
 
 export default class AsyncBackend
-  implements BackendModule<AsyncBackendOptions> {
+  implements BackendModule<AsyncBackendOptions>
+{
   // i18next is dumb as TypeScript requires the class property for `type`
   // but the runtime requires the static `type` property.
   static type = "backend";

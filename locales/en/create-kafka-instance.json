@@ -20,6 +20,25 @@
   },
   "instance_information": "Instance information",
   "instance_name": "Name",
+  "kafka_status_popover": {
+    "header_content": "This will be ready shortly. In the meantime, you can create a service account under the <0>Connection tab.<0>",
+    "header_content_with_error": "In the meantime, you can create a service account under the <0>Connections tab.</0> If your Kafka instance continues to take longer than expected, <1>open a support case.</1>",
+    "header_content_with_warning": "In the meantime, you can create a service account under the <0>Connection tab.<0>",
+    "pending": {
+      "description": "Passed quota check and awaiting creation",
+      "title": "Creation pending"
+    },
+    "preparing": {
+      "description": "Creating prerequisite resources",
+      "title": "Preparing"
+    },
+    "provisioning": {
+      "description": "Creating Kafka instance",
+      "title": "Provisioning"
+    },
+    "title": "Creating instance",
+    "warning_or_error_title": "This is taking longer than expected."
+  },
   "modal_alerts": {
     "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
     "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
@@ -34,24 +53,5 @@
   "multi": "Multi",
   "quick_start_guide_message": "Need help getting started? Follow our quick start guide.",
   "select_region": "Select region",
-  "single": "Single",
-  "kafka_status_popover": {
-    "title": "Creating instance",
-    "pending": {
-      "title": "Creation pending",
-      "description": "Passed quota check and awaiting creation"
-    },
-    "provisioning": {
-      "title": "Provisioning",
-      "description": "Creating Kafka instance"
-    },
-    "preparing": {
-      "title": "Preparing",
-      "description": "Creating prerequisite resources"
-    },
-    "warning_or_error_title": "This is taking longer than expected.",
-    "header_content": "This will be ready shortly. In the meantime, you can create a service account under the <0>Connection tab.<0>",
-    "header_content_with_warning": "In the meantime, you can create a service account under the <0>Connection tab.<0>",
-    "header_content_with_error": "In the meantime, you can create a service account under the <0>Connections tab.</0> If your Kafka instance continues to take longer than expected, <1>open a support case.</1>"
-  }
+  "single": "Single"
 }

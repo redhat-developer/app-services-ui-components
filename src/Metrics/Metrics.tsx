@@ -145,9 +145,9 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
 type ConnectedTopicsMetricsProps = {
   onCreateTopic: () => void;
 };
-const ConnectedTopicsMetrics: VoidFunctionComponent<ConnectedTopicsMetricsProps> = ({
-  onCreateTopic,
-}) => {
+const ConnectedTopicsMetrics: VoidFunctionComponent<
+  ConnectedTopicsMetricsProps
+> = ({ onCreateTopic }) => {
   const {
     isInitialLoading,
     isLoading,

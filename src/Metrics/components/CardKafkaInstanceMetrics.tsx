@@ -28,7 +28,9 @@ type ChartTitleProps = {
   helperText: string;
 };
 
-export const CardKafkaInstanceMetrics: FunctionComponent<CardKafkaInstanceMetricsProps> = ({
+export const CardKafkaInstanceMetrics: FunctionComponent<
+  CardKafkaInstanceMetricsProps
+> = ({
   usedDiskMetrics,
   clientConnectionsMetrics,
   connectionAttemptRateMetrics,

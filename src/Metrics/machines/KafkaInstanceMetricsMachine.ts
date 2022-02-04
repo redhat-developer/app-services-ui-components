@@ -107,102 +107,104 @@ const apiState = {
   },
 };
 
-export const KafkaInstanceMetricsMachine = KafkaInstanceMetricsModel.createMachine(
-  {
-    id: "kafkaInstanceMetrics",
-    context: KafkaInstanceMetricsModel.initialContext,
-    initial: "initialLoading",
-    states: {
-      initialLoading: {
-        ...apiState,
-        tags: "initialLoading",
-        entry: setFetchTimestamp,
-        on: {
-          fetchSuccess: [
-            {
-              cond: "isJustCreated",
+export const KafkaInstanceMetricsMachine =
+  KafkaInstanceMetricsModel.createMachine(
+    {
+      id: "kafkaInstanceMetrics",
+      context: KafkaInstanceMetricsModel.initialContext,
+      initial: "initialLoading",
+      states: {
+        initialLoading: {
+          ...apiState,
+          tags: "initialLoading",
+          entry: setFetchTimestamp,
+          on: {
+            fetchSuccess: [
+              {
+                cond: "isJustCreated",
+                actions: setMetrics,
+                target: "#kafkaInstanceMetrics.withResponse",
+              },
+              { actions: setMetrics, target: "justCreated" },
+            ],
+          },
+        },
+        callApi: {
+          ...apiState,
+          tags: "loading",
+          entry: setFetchTimestamp,
+          on: {
+            fetchSuccess: {
               actions: setMetrics,
               target: "#kafkaInstanceMetrics.withResponse",
             },
-            { actions: setMetrics, target: "justCreated" },
-          ],
-        },
-      },
-      callApi: {
-        ...apiState,
-        tags: "loading",
-        entry: setFetchTimestamp,
-        on: {
-          fetchSuccess: {
-            actions: setMetrics,
-            target: "#kafkaInstanceMetrics.withResponse",
           },
         },
-      },
-      criticalFail: {
-        tags: "failed",
-        on: {
-          refresh: {
-            actions: resetRetries,
-            target: "callApi",
+        criticalFail: {
+          tags: "failed",
+          on: {
+            refresh: {
+              actions: resetRetries,
+              target: "callApi",
+            },
           },
         },
-      },
-      justCreated: {
-        tags: "justCreated",
-        on: {
-          refresh: {
-            target: "initialLoading",
+        justCreated: {
+          tags: "justCreated",
+          on: {
+            refresh: {
+              target: "initialLoading",
+            },
           },
         },
-      },
-      withResponse: {
-        tags: "withResponse",
-        on: {
-          refresh: {
-            target: "refreshing",
-          },
-          selectDuration: {
-            actions: setDuration,
-            target: "callApi",
+        withResponse: {
+          tags: "withResponse",
+          on: {
+            refresh: {
+              target: "refreshing",
+            },
+            selectDuration: {
+              actions: setDuration,
+              target: "callApi",
+            },
           },
         },
-      },
-      refreshing: {
-        tags: "refreshing",
-        entry: setFetchTimestamp,
-        invoke: {
-          src: "api",
-        },
-        on: {
-          fetchSuccess: {
-            actions: setMetrics,
-            target: "withResponse",
+        refreshing: {
+          tags: "refreshing",
+          entry: setFetchTimestamp,
+          invoke: {
+            src: "api",
           },
-          fetchFail: {
-            // 👀 we silently ignore this happened and go back to the right
-            // state depending on the previous data
-            target: "withResponse",
+          on: {
+            fetchSuccess: {
+              actions: setMetrics,
+              target: "withResponse",
+            },
+            fetchFail: {
+              // 👀 we silently ignore this happened and go back to the right
+              // state depending on the previous data
+              target: "withResponse",
+            },
           },
         },
       },
     },
-  },
-  {
-    guards: {
-      canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
-      isJustCreated: (_, event) => {
-        if (event.type === "fetchSuccess") {
-          return (
-            Object.keys(event.clientConnectionsMetrics).length > 0 ||
-            Object.keys(event.connectionAttemptRateMetrics).length > 0 ||
-            Object.keys(event.usedDiskSpaceMetrics).length > 0
-          );
-        }
-        return false;
+    {
+      guards: {
+        canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
+        isJustCreated: (_, event) => {
+          if (event.type === "fetchSuccess") {
+            return (
+              Object.keys(event.clientConnectionsMetrics).length > 0 ||
+              Object.keys(event.connectionAttemptRateMetrics).length > 0 ||
+              Object.keys(event.usedDiskSpaceMetrics).length > 0
+            );
+          }
+          return false;
+        },
       },
-    },
-  }
-);
+    }
+  );
 
-export type KafkaInstanceMetricsMachineType = typeof KafkaInstanceMetricsMachine;
+export type KafkaInstanceMetricsMachineType =
+  typeof KafkaInstanceMetricsMachine;

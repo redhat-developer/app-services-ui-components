@@ -13,11 +13,11 @@ export const KafkaInstanceMetricsContext = createContext<{
   service: InterpreterFrom<KafkaInstanceMetricsMachineType>;
 }>(null!);
 
-export type KafkaInstanceMetricsProviderProps = UseKafkaInstanceMetricsMachineServiceOptions;
-export const KafkaInstanceMetricsProvider: FunctionComponent<KafkaInstanceMetricsProviderProps> = ({
-  children,
-  getKafkaInstanceMetrics,
-}) => {
+export type KafkaInstanceMetricsProviderProps =
+  UseKafkaInstanceMetricsMachineServiceOptions;
+export const KafkaInstanceMetricsProvider: FunctionComponent<
+  KafkaInstanceMetricsProviderProps
+> = ({ children, getKafkaInstanceMetrics }) => {
   const service = useKafkaInstanceMetricsMachineService({
     getKafkaInstanceMetrics,
   });

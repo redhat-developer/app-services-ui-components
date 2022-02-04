@@ -17,7 +17,9 @@ type ToolbarKafkaInstanceMetricProps = {
   duration: DurationOptions;
   onSetTimeDuration: (value: DurationOptions) => void;
 } & ToolbarRefreshProps;
-export const ToolbarKafkaInstanceMetric: FunctionComponent<ToolbarKafkaInstanceMetricProps> = ({
+export const ToolbarKafkaInstanceMetric: FunctionComponent<
+  ToolbarKafkaInstanceMetricProps
+> = ({
   title,
   isDisabled,
   isRefreshing,

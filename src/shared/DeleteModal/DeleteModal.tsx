@@ -199,56 +199,57 @@ type DeleteModalConfirmationProps = {
    */
   requiredConfirmationValue: string;
 };
-export const DeleteModalConfirmation: VoidFunctionComponent<DeleteModalConfirmationProps> =
-  ({ requiredConfirmationValue }) => {
-    const [value, setValue] = useState("");
-    const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
+export const DeleteModalConfirmation: VoidFunctionComponent<
+  DeleteModalConfirmationProps
+> = ({ requiredConfirmationValue }) => {
+  const [value, setValue] = useState("");
+  const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
 
-    const onChange = useCallback(
-      (value: string) => {
-        setValue(value);
-        setDeleteEnabled(value === requiredConfirmationValue);
-      },
-      [requiredConfirmationValue, setDeleteEnabled]
-    );
-
-    useEffect(() => {
+  const onChange = useCallback(
+    (value: string) => {
+      setValue(value);
       setDeleteEnabled(value === requiredConfirmationValue);
-    }, [requiredConfirmationValue, setDeleteEnabled, value]);
+    },
+    [requiredConfirmationValue, setDeleteEnabled]
+  );
 
-    const id = "delete-confirmation-value";
-    let validated: FormGroupProps["validated"] = "default";
-    switch (true) {
-      case value && value === requiredConfirmationValue:
-        validated = "success";
-        break;
-      case value && value !== requiredConfirmationValue:
-        validated = "warning";
-        break;
-    }
-    return (
-      <Form>
-        <FormGroup
-          label={
-            <Trans
-              i18nKey={"common:type_value_to_confirm"}
-              values={{
-                value: requiredConfirmationValue,
-              }}
-            />
-          }
-          fieldId={id}
-        >
-          <TextInput
-            id={id}
-            value={value}
-            type="text"
-            onChange={onChange}
-            validated={validated}
-            isDisabled={isDeleting}
-            ouiaId={"delete-confirmation"}
+  useEffect(() => {
+    setDeleteEnabled(value === requiredConfirmationValue);
+  }, [requiredConfirmationValue, setDeleteEnabled, value]);
+
+  const id = "delete-confirmation-value";
+  let validated: FormGroupProps["validated"] = "default";
+  switch (true) {
+    case value && value === requiredConfirmationValue:
+      validated = "success";
+      break;
+    case value && value !== requiredConfirmationValue:
+      validated = "warning";
+      break;
+  }
+  return (
+    <Form>
+      <FormGroup
+        label={
+          <Trans
+            i18nKey={"common:type_value_to_confirm"}
+            values={{
+              value: requiredConfirmationValue,
+            }}
           />
-        </FormGroup>
-      </Form>
-    );
-  };
+        }
+        fieldId={id}
+      >
+        <TextInput
+          id={id}
+          value={value}
+          type="text"
+          onChange={onChange}
+          validated={validated}
+          isDisabled={isDeleting}
+          ouiaId={"delete-confirmation"}
+        />
+      </FormGroup>
+    </Form>
+  );
+};
