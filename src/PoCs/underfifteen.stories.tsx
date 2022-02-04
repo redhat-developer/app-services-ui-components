@@ -6,6 +6,7 @@ import { Warning } from './overfifteen';
 import { Error } from './overthirty';
 import { ReadyForUse } from './ready';
 import { InstanceDeletion } from './deleting';
+import { InstanceCreationFailed } from './failed';
 
 export default {
   title: 'PoCs/StatusComponent',
@@ -79,4 +80,18 @@ DeletingInstance.parameters = {
         story: 'The Kafka instance is in the process of being deleted.'
     },
   },
+};
+
+
+const Template6: ComponentStory<typeof InstanceCreationFailed> = (args) => (
+  <InstanceCreationFailed {...args} />
+);
+export const InstanceFailed = Template6.bind({});
+InstanceFailed.args = {};
+InstanceFailed.parameters = {
+docs: {
+  description: {
+      story: 'The Kafka instance has failed to create.'
+  },
+},
 };
