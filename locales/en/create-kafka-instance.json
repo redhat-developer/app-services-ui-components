@@ -53,5 +53,14 @@
   "multi": "Multi",
   "quick_start_guide_message": "Need help getting started? Follow our quick start guide.",
   "select_region": "Select region",
-  "single": "Single"
+  "single": "Single",
+  "statuses": {
+    "accepted": "Creation pending",
+    "deleting": "Deletion in progress",
+    "deprovision": "Deletion in progress",
+    "failed": "Failed",
+    "preparing": "Creation in progress",
+    "provisioning": "Creation in progress",
+    "ready": "Ready"
+  }
 }

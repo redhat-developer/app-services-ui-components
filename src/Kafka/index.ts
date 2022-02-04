@@ -1,5 +1,6 @@
 export * from "./CreateKafkaInstance";
-export * from "./KafkaInstanceStatusPopover";
+export * from "./KafkaInstanceDrawer";
+export * from "./KafkaInstanceStatus";
 export * from "./ManageKafkaPermissions";
 export * from "./Metrics";
 export * from "./ServiceAccount";

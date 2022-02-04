@@ -1,0 +1,7 @@
+.appservices_kafka-instance-status_icon--completed {
+  color: var(--pf-global--success-color--100);
+}
+
+.appservices_kafka-instance-status_icon--failed {
+  color: var(--pf-global--danger-color--100);
+}
