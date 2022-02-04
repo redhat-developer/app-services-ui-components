@@ -16,5 +16,6 @@
   "submitting_request": "Submitting request",
   "type_value_to_confirm": "Type <i>{{value}}</i> to confirm",
   "unexpected_error": "There was a problem processing the request. Please try again.",
-  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for."
+  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for.",
+  "progress_stepper_current_step": "{{currentStep}} of {{total}} steps completed"
 }
