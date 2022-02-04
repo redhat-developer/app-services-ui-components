@@ -28,6 +28,13 @@ const Template2: ComponentStory<typeof Warning> = (args) => (
 );
 export const WarningCreation = Template2.bind({});
 WarningCreation.args = {};
+WarningCreation.parameters = {
+  docs: {
+    description: {
+        story: 'The instance creation is taking longer than fifteen minutes. This is significantly longer than expected. A warning plain inline alert displays below the "Creating" status in the table.'
+    },
+  },
+};
 
 
 
@@ -36,6 +43,13 @@ const Template3: ComponentStory<typeof Error> = (args) => (
 );
 export const ErrorCreation = Template3.bind({});
 ErrorCreation.args = {};
+ErrorCreation.parameters = {
+  docs: {
+    description: {
+        story: 'The instance creation is taking longer than thirty minutes. This is significantly longer than expected. An error plain inline alert displays below the "Creating" status in the table.'
+    },
+  },
+};
 
 
 
@@ -44,6 +58,13 @@ const Template4: ComponentStory<typeof ReadyForUse> = (args) => (
 );
 export const InstanceReady = Template4.bind({});
 InstanceReady.args = {};
+InstanceReady.parameters = {
+  docs: {
+    description: {
+        story: 'The Kafka instance is ready for use.'
+    },
+  },
+};
 
 
 
@@ -52,3 +73,10 @@ const Template5: ComponentStory<typeof InstanceDeletion> = (args) => (
 );
 export const DeletingInstance = Template5.bind({});
 DeletingInstance.args = {};
+DeletingInstance.parameters = {
+  docs: {
+    description: {
+        story: 'The Kafka instance is in the process of being deleted.'
+    },
+  },
+};
