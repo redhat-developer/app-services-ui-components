@@ -14,18 +14,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { AppServicesLoading, I18nProvider } from "../src";
 
 export const parameters = {
-  options: {
-    storySort: {
-      order: [
-        "Intro",
-        "Features",
-        "Marketing pages",
-        "Empty states",
-        "Components",
-        "*",
-      ],
-    },
-  },
+  options: {},
   previewTabs: { "storybook/docs/panel": { index: -1 } },
   ouia: "false",
   locale: "en_US",

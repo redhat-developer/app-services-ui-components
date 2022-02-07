@@ -5,7 +5,6 @@ import React from "react";
 import { FormatDate } from "./FormatDate";
 
 export default {
-  title: "Components/Shared/FormatDate",
   component: FormatDate,
   args: {
     date: new Date(),

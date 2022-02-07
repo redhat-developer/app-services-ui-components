@@ -7,16 +7,13 @@ import { createMachine } from "xstate";
 import { DeleteModal, DeleteModalConfirmation } from "./DeleteModal";
 
 export default {
-  title: "Components/Shared/DeleteModal",
   component: DeleteModal,
   subcomponents: { DeleteModalConfirmation },
   args: {
-    title: "Delete something",
     children: "You are deleting something.",
     disableFocusTrap: true,
   },
   argTypes: {
-    title: { table: { category: "Appearance" } },
     ouiaId: { table: { category: "Tracking" } },
     appendTo: { table: { category: "Functional" } },
     onDelete: { table: { category: "Events" } },
@@ -146,7 +143,7 @@ SyncronousDeleteWithError.parameters = {
   docs: {
     description: {
       story: `If the delete action fails, it's possible to show an inline error.
-The user can then try again or cancel the action. In this demo the delete will 
+The user can then try again or cancel the action. In this demo the delete will
 always fail.
       `,
     },
@@ -161,7 +158,7 @@ SyncronousDeleteWithConfirmation.args = {
 SyncronousDeleteWithConfirmation.parameters = {
   docs: {
     description: {
-      story: `It is possible to ask the user to type something to enable the 
+      story: `It is possible to ask the user to type something to enable the
 disable button. In this demo you should be typing \`digit this\`.
       `,
     },
@@ -177,10 +174,10 @@ SyncronousDeleteWithConfirmationAndError.parameters = {
 
   docs: {
     description: {
-      story: `It is possible to ask the user to type something to enable the 
+      story: `It is possible to ask the user to type something to enable the
 disable button. In this demo you should be typing \`digit this\`.
 
-If the delete action fails, it's possible to show an inline error. The user can 
+If the delete action fails, it's possible to show an inline error. The user can
 then try again or cancel the action. In this demo the delete will always fail.
       `,
     },
@@ -194,9 +191,9 @@ AsyncronousDelete.parameters = {
   initialState: "deleting",
   docs: {
     description: {
-      story: `For asyncronous deletes, after the user clicks Delete all the 
-buttons gets disabled, the X button to close the modal is removed, and the 
-Delete button shows a spinner to indicate that the delete process is 
+      story: `For asyncronous deletes, after the user clicks Delete all the
+buttons gets disabled, the X button to close the modal is removed, and the
+Delete button shows a spinner to indicate that the delete process is
 ongoing.`,
     },
   },
@@ -211,12 +208,12 @@ AsyncronousDeleteWithError.parameters = {
 
   docs: {
     description: {
-      story: `For asyncronous deletes, after the user clicks Delete all the 
-buttons gets disabled, the X button to close the modal is removed, and the 
-Delete button shows a spinner to indicate that the delete process is 
+      story: `For asyncronous deletes, after the user clicks Delete all the
+buttons gets disabled, the X button to close the modal is removed, and the
+Delete button shows a spinner to indicate that the delete process is
 ongoing.
-      
-If the delete action fails, it's possible to show an inline error. The user can 
+
+If the delete action fails, it's possible to show an inline error. The user can
 then try again or cancel the action. In this demo the delete will always fail.
       `,
     },
@@ -229,7 +226,7 @@ AsyncronousDeleteWithConfirmation.parameters = {
   isDeleteAsync: true,
   docs: {
     description: {
-      story: `It is possible to ask the user to type something to enable the 
+      story: `It is possible to ask the user to type something to enable the
 disable button. In this demo you should be typing \`digit this\`.
       `,
     },
@@ -246,11 +243,11 @@ AsyncronousDeleteWithConfirmationAndError.parameters = {
 
   docs: {
     description: {
-      story: `It is possible to ask the user to type something to enable the 
+      story: `It is possible to ask the user to type something to enable the
 disable button. In this demo you should be typing \`digit this\`.
 
 If the delete action fails, it's possible to show an inline error.
-The user can then try again or cancel the action. In this demo the delete will 
+The user can then try again or cancel the action. In this demo the delete will
 always fail.
 
 In this example a single wrapper will be applied.
