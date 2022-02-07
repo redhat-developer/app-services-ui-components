@@ -9,7 +9,6 @@ import React from "react";
 import { Search } from "./Search";
 
 export const ServiceAccountToolbar: React.FunctionComponent = () => {
-
   return (
     <Toolbar
       id="service-account-toolbar"

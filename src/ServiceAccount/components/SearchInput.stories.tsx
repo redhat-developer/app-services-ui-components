@@ -21,13 +21,16 @@ export const EmptyState = Template.bind({});
 
 export const SomeValidInput = Template.bind({});
 SomeValidInput.args = {
-  placeholder: "Filter by owner"
-}
+  placeholder: "Filter by owner",
+};
 
 SomeValidInput.play = async ({ canvasElement }) => {
   const story = within(canvasElement);
-  userEvent.type(await story.findByLabelText("Filter by owner"), "some-name");
-  userEvent.click(await story.findByLabelText("Search"));
+  await userEvent.type(
+    await story.findByLabelText("Filter by owner"),
+    "some-name"
+  );
+  await userEvent.click(await story.findByLabelText("Search"));
 };
 SomeValidInput.parameters = {
   docs: {
@@ -40,11 +43,12 @@ SomeValidInput.parameters = {
 export const ErrorMessageForInvalidOwnerSearchInput = Template.bind({});
 ErrorMessageForInvalidOwnerSearchInput.args = {
   placeholder: "Filter by owner",
-  errorMessage: "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )"
-}
+  errorMessage:
+    'Red Hat Login ID cannot contain spaces, national characters or the following special characters " $ ^ < > | + % / ; : , * = ~ # ( )',
+};
 ErrorMessageForInvalidOwnerSearchInput.play = async ({ canvasElement }) => {
   const story = within(canvasElement);
-  userEvent.type(
+  await userEvent.type(
     await story.findByLabelText("Filter by owner"),
     "some-%%%-invalid"
   );
@@ -60,11 +64,14 @@ ErrorMessageForInvalidOwnerSearchInput.parameters = {
 export const ErrorMessageForInvalidSearchInputForClientID = Template.bind({});
 ErrorMessageForInvalidSearchInputForClientID.args = {
   placeholder: "Filter by Client ID",
-  errorMessage: "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - )."
-}
-ErrorMessageForInvalidSearchInputForClientID.play = async ({ canvasElement }) => {
+  errorMessage:
+    "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
+};
+ErrorMessageForInvalidSearchInputForClientID.play = async ({
+  canvasElement,
+}) => {
   const story = within(canvasElement);
-  userEvent.type(
+  await userEvent.type(
     await story.findByLabelText("Filter by Client ID"),
     "some invalid"
   );
@@ -77,14 +84,18 @@ ErrorMessageForInvalidSearchInputForClientID.parameters = {
   },
 };
 
-export const ErrorMessageForInvalidSearchInputForShortDescription = Template.bind({});
+export const ErrorMessageForInvalidSearchInputForShortDescription =
+  Template.bind({});
 ErrorMessageForInvalidSearchInputForShortDescription.args = {
   placeholder: "Filter by short description",
-  errorMessage: "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - )."
-}
-ErrorMessageForInvalidSearchInputForShortDescription.play = async ({ canvasElement }) => {
+  errorMessage:
+    "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
+};
+ErrorMessageForInvalidSearchInputForShortDescription.play = async ({
+  canvasElement,
+}) => {
   const story = within(canvasElement);
-  userEvent.type(
+  await userEvent.type(
     await story.findByLabelText("Filter by short description"),
     "some invalid"
   );
@@ -96,7 +107,3 @@ ErrorMessageForInvalidSearchInputForShortDescription.parameters = {
     },
   },
 };
-
-
-
-

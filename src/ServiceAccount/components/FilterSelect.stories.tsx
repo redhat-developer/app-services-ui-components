@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { FilterSelect } from './FilterSelect'
+import { FilterSelect } from "./FilterSelect";
 
 export default {
   title: "Components/ServiceAccount/Search",
