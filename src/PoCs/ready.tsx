@@ -13,19 +13,6 @@ export const ReadyForUse: VoidFunctionComponent  = () => {
                     Ready
                 </SplitItem>   
             </Split>   
-
-
-
-            <Split hasGutter className="foo">
-                <SplitItem>
-                    <CheckCircleIcon  height={18} width={18} />      
-                </SplitItem>
-                <SplitItem>
-                    Ready
-                </SplitItem>   
-            </Split>      
-                                        
-
         </div>
     );
 };
