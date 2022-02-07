@@ -16,7 +16,7 @@ export function useKafkaInstanceMetrics() {
       isFailed: state.hasTag("failed"),
       isJustCreated: state.hasTag("justCreated"),
     }),
-    []
+    [service]
   );
   const {
     usedDiskSpaceMetrics,

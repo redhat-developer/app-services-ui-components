@@ -13,6 +13,7 @@ import React, {
   Children,
   createContext,
   FunctionComponent,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -24,6 +25,7 @@ const ModalContext = createContext<{
   isDeleteEnabled: boolean;
   isDeleting: boolean;
   setDeleteEnabled: (value: boolean) => void;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
 export type DeleteModalProps = {
@@ -203,14 +205,17 @@ export const DeleteModalConfirmation: VoidFunctionComponent<
   const [value, setValue] = useState("");
   const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
 
-  const onChange = (value: string) => {
-    setValue(value);
-    setDeleteEnabled(value === requiredConfirmationValue);
-  };
+  const onChange = useCallback(
+    (value: string) => {
+      setValue(value);
+      setDeleteEnabled(value === requiredConfirmationValue);
+    },
+    [requiredConfirmationValue, setDeleteEnabled]
+  );
 
   useEffect(() => {
     setDeleteEnabled(value === requiredConfirmationValue);
-  }, [requiredConfirmationValue]);
+  }, [requiredConfirmationValue, setDeleteEnabled, value]);
 
   const id = "delete-confirmation-value";
   let validated: FormGroupProps["validated"] = "default";

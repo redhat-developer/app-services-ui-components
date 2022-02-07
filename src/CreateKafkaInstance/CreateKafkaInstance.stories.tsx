@@ -216,9 +216,14 @@ FormErrorsCantSubmit.args = {
 FormErrorsCantSubmit.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  userEvent.type(await canvas.findByLabelText("Name *"), "%3-foo-;");
-  userEvent.selectOptions(await canvas.findByLabelText("Cloud region *"), "");
-  userEvent.click(await canvas.findByTestId("modalCreateKafka-buttonSubmit"));
+  await userEvent.type(await canvas.findByLabelText("Name *"), "%3-foo-;");
+  await userEvent.selectOptions(
+    await canvas.findByLabelText("Cloud region *"),
+    ""
+  );
+  await userEvent.click(
+    await canvas.findByTestId("modalCreateKafka-buttonSubmit")
+  );
 };
 
 export const VariantCanCustomizeDefaultProvider = Template.bind({});
@@ -326,10 +331,12 @@ function makeAvailableProvidersAndDefaults(
 async function sampleSubmit({ canvasElement }) {
   const canvas = within(canvasElement);
 
-  userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
-  userEvent.selectOptions(
+  await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
+  await userEvent.selectOptions(
     await canvas.findByLabelText("Cloud region *"),
     "eu-west-1"
   );
-  userEvent.click(await canvas.findByTestId("modalCreateKafka-buttonSubmit"));
+  await userEvent.click(
+    await canvas.findByTestId("modalCreateKafka-buttonSubmit")
+  );
 }

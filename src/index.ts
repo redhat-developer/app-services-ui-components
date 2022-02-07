@@ -9,4 +9,4 @@ export * from "./utils";
 export * from "./images";
 export * from "./DataSciencePage";
 export * from "./APIManagement";
-export * from './KafkaInstanceStatusPopover';
+export * from "./KafkaInstanceStatusPopover";

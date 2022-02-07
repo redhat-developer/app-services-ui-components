@@ -21,7 +21,9 @@ type ToolbarTopicsMetricsProps = {
   onSetTimeDuration: (value: DurationOptions) => void;
   onSetSelectedTopic: (value: string | undefined) => void;
 } & ToolbarRefreshProps;
-export const ToolbarTopicsMetrics: FunctionComponent<ToolbarTopicsMetricsProps> = ({
+export const ToolbarTopicsMetrics: FunctionComponent<
+  ToolbarTopicsMetricsProps
+> = ({
   title,
   selectedTopic,
   topicList,

@@ -14,10 +14,9 @@ export const TopicsMetricsContext = createContext<{
 }>(null!);
 
 export type TopicsMetricsProviderProps = UseTopicsMetricsMachineServiceOptions;
-export const TopicsMetricsProvider: FunctionComponent<TopicsMetricsProviderProps> = ({
-  children,
-  getTopicsMetrics,
-}) => {
+export const TopicsMetricsProvider: FunctionComponent<
+  TopicsMetricsProviderProps
+> = ({ children, getTopicsMetrics }) => {
   const service = useTopicsMetricsMachineService({
     getTopicsMetrics,
   });

@@ -16,7 +16,7 @@ export function useTopicsMetrics() {
       isFailed: state.hasTag("failed"),
       isJustCreated: state.hasTag("justCreated"),
     }),
-    []
+    [service]
   );
   const {
     selectedTopic,

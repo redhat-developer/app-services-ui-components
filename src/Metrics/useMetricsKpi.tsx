@@ -15,7 +15,7 @@ export function useMetricsKpi() {
       isFailed: state.hasTag("failed"),
       isJustCreated: state.hasTag("justCreated"),
     }),
-    []
+    [service]
   );
   const {
     topics,

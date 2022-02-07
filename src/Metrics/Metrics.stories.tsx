@@ -64,7 +64,7 @@ JustCreated.parameters = {
   docs: {
     description: {
       story: `
-When all APIs respond with a code \`200\` but will not contain any metric, we 
+When all APIs respond with a code \`200\` but will not contain any metric, we
 will show an empty state that suggest to wait for the monitoring instance to be ready.
 
 A spinner is shown until all APIs respond, to avoid showing the empty states for
@@ -85,10 +85,10 @@ AllApiError.parameters = {
   docs: {
     description: {
       story: `
-When all APIs fail (return code different than \`200\`) we will show an empty 
+When all APIs fail (return code different than \`200\`) we will show an empty
 state that suggest to wait for the monitoring instance to be ready.
 
-From our tests, this scenario will likely never happen since all APIs will 
+From our tests, this scenario will likely never happen since all APIs will
 respond with a code 200 but will not provide any metric.
       `,
     },
@@ -105,8 +105,8 @@ KafkaInstanceApiError.parameters = {
   docs: {
     description: {
       story: `
-If the API that returns the data for the Kafka instance metrics fails, the _No metrics data_ 
-empty state is shown inside the card. 
+If the API that returns the data for the Kafka instance metrics fails, the _No metrics data_
+empty state is shown inside the card.
 
 The toolbar is disabled, but the refresh button can be clicked.
       `,
@@ -125,8 +125,8 @@ TopicsApiError.parameters = {
   docs: {
     description: {
       story: `
-If the API that returns the data for the Topic metrics fails, the _No metrics data_ 
-empty state is shown inside the card. 
+If the API that returns the data for the Topic metrics fails, the _No metrics data_
+empty state is shown inside the card.
 
 The toolbar is disabled, but the refresh button can be clicked.
       `,
@@ -144,8 +144,8 @@ KpiApiError.parameters = {
   docs: {
     description: {
       story: `
-If the API that returns the data for the Metrics KPIs fails, the _No metrics data_ 
-empty state is shown inside each KPI card. 
+If the API that returns the data for the Metrics KPIs fails, the _No metrics data_
+empty state is shown inside each KPI card.
       `,
     },
   },
@@ -172,7 +172,7 @@ NoTopics.parameters = {
     description: {
       story: `
 When a Kafka instance exists but no topic has been created yet, the Topic metrics
-card will show an empty state to suggest creating a topic to start seeing data. 
+card will show an empty state to suggest creating a topic to start seeing data.
 A call to action button to create a topic is provided.
 
 The toolbar is disabled, but the refresh button can be clicked.
@@ -202,7 +202,7 @@ TopicsJustCreated.parameters = {
     description: {
       story: `
 When a Kafka instance exists and at least a topic has been created but no metrics
-are available for the topics, the topic has not been yet been used. We will show 
+are available for the topics, the topic has not been yet been used. We will show
 an empty state that suggest to wait for the monitoring instance to be ready.
 
 The toolbar is disabled, but the refresh button can be clicked.
@@ -285,8 +285,8 @@ SomeMissingMetricsButApiOk.parameters = {
   docs: {
     description: {
       story: `
-In case the APIs are working ok but some metrics are missing from the system, a 
-_Data unavailable_ empty state is shown in place of the charts with missing 
+In case the APIs are working ok but some metrics are missing from the system, a
+_Data unavailable_ empty state is shown in place of the charts with missing
       `,
     },
   },
@@ -361,7 +361,7 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
 
     const expectTextCount = async (label: string, count = 3) => {
       const timeAxisValues = await card.findAllByText(label);
-      expect(timeAxisValues).toHaveLength(count);
+      await expect(timeAxisValues).toHaveLength(count);
     };
 
     // default is last 1 hour
@@ -402,7 +402,7 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
 
     const expectTextCount = async (label: string, count = 2) => {
       const timeAxisValues = await card.findAllByText(label, { exact: false });
-      expect(timeAxisValues).toHaveLength(count);
+      await expect(timeAxisValues).toHaveLength(count);
     };
 
     await expectTextCount("Filter by Topic", 1);
@@ -433,7 +433,7 @@ KafkaInstanceToolbarStaysEnabled.parameters = {
   docs: {
     description: {
       story: `
-If the user asks for data too in the past for a recently created instance, the 
+If the user asks for data too in the past for a recently created instance, the
 API will return no data. The charts will show the _No metrics data_ empty state
 and the toolbar will stay enabled.
 

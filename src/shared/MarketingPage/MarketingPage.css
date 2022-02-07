@@ -1,7 +1,9 @@
 .pf-c-page__main-section.appsrv-marketing--banner {
   --appsrv-marketing--banner--before--GridTemplateColumns: 1fr;
   --appsrv-marketing--banner--ColumnGap: var(--pf-global--spacer--2xl);
-  --appsrv-marketing--banner__tagline--Color: var(--pf-global--Color--light-300);
+  --appsrv-marketing--banner__tagline--Color: var(
+    --pf-global--Color--light-300
+  );
   --appsrv-marketing--banner--Padding: var(--pf-global--spacer--lg);
   --appsrv-marketing--banner--PaddingTop: var(
     --appsrv-marketing--banner--Padding
@@ -69,7 +71,9 @@
   background-image: var(--appsrv-marketing--banner--before--BackgroundImage);
   background-size: var(--appsrv-marketing--banner--before--BackgroundSize);
   background-repeat: var(--appsrv-marketing--banner--before--BackgroundRepeat);
-  background-position-y: var(--appsrv-marketing--banner--before--BackgroundPositionY);
+  background-position-y: var(
+    --appsrv-marketing--banner--before--BackgroundPositionY
+  );
   opacity: var(--appsrv-marketing--banner--before--Opacity);
 }
 

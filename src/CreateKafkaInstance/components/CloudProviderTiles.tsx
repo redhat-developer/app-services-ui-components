@@ -10,33 +10,31 @@ export type CloudProvidersTileProps = {
   onChange: (provider: Provider) => void;
   isDisabled?: boolean;
 };
-export const CloudProvidersTiles: VoidFunctionComponent<CloudProvidersTileProps> =
-  ({ providers, value, onChange, isDisabled }) => {
-    if (providers.length === 0) {
-      return (
-        <Skeleton
-          className="pf-m-text-4xl"
-          screenreaderText="Loading contents"
-        />
-      );
-    }
-
+export const CloudProvidersTiles: VoidFunctionComponent<
+  CloudProvidersTileProps
+> = ({ providers, value, onChange, isDisabled }) => {
+  if (providers.length === 0) {
     return (
-      <>
-        {providers.map(({ id, displayName }) => (
-          <Fragment key={id}>
-            <Tile
-              title={displayName}
-              icon={tiles[id]}
-              isSelected={value === id}
-              isDisabled={isDisabled}
-              onClick={() => onChange(id)}
-            />{" "}
-          </Fragment>
-        ))}
-      </>
+      <Skeleton className="pf-m-text-4xl" screenreaderText="Loading contents" />
     );
-  };
+  }
+
+  return (
+    <>
+      {providers.map(({ id, displayName }) => (
+        <Fragment key={id}>
+          <Tile
+            title={displayName}
+            icon={tiles[id]}
+            isSelected={value === id}
+            isDisabled={isDisabled}
+            onClick={() => onChange(id)}
+          />{" "}
+        </Fragment>
+      ))}
+    </>
+  );
+};
 
 const tiles: { [id: Provider]: JSX.Element } = {
   aws: (

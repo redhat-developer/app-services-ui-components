@@ -51,7 +51,9 @@ type ChartLinearWithOptionalLimitProps = {
   emptyState: ReactElement;
 };
 
-export const ChartLinearWithOptionalLimit: VoidFunctionComponent<ChartLinearWithOptionalLimitProps> = ({
+export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
+  ChartLinearWithOptionalLimitProps
+> = ({
   metrics,
   duration,
   chartName,

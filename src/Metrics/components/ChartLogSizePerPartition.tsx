@@ -46,13 +46,9 @@ export type ChartLogSizePerPartitionProps = {
   isLoading: boolean;
   emptyState: ReactElement;
 };
-export const ChartLogSizePerPartition: FunctionComponent<ChartLogSizePerPartitionProps> = ({
-  partitions,
-  topic,
-  duration,
-  isLoading,
-  emptyState,
-}) => {
+export const ChartLogSizePerPartition: FunctionComponent<
+  ChartLogSizePerPartitionProps
+> = ({ partitions, topic, duration, isLoading, emptyState }) => {
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 

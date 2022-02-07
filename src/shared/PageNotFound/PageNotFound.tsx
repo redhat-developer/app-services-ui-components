@@ -1,13 +1,10 @@
-import React from "react";
+import React, { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { PageSection, Button } from "@patternfly/react-core";
 import { useHistory } from "react-router-dom";
-import {
-  AppServicesEmptyState,
-  AppServicesEmptyStateVariant,
-} from "../AppServicesEmptyState";
+import { EmptyState, EmptyStateVariant } from "../EmptyState";
 
-const AppServicesPageNotFound: React.FunctionComponent = () => {
+export const PageNotFound: VoidFunctionComponent = () => {
   const { t } = useTranslation();
 
   function GoHomeBtn() {
@@ -22,17 +19,15 @@ const AppServicesPageNotFound: React.FunctionComponent = () => {
 
   return (
     <PageSection padding={{ default: "noPadding" }} isFilled>
-      <AppServicesEmptyState
-        emptyStateProps={{ variant: AppServicesEmptyStateVariant.PageNotFound }}
+      <EmptyState
+        emptyStateProps={{ variant: EmptyStateVariant.PageNotFound }}
         titleProps={{ title: t("common:404_page_does_not_exist") }}
         emptyStateBodyProps={{
           body: t("common:we_cannot_find_the_page_you_are_looking_for"),
         }}
       >
         <GoHomeBtn />
-      </AppServicesEmptyState>
+      </EmptyState>
     </PageSection>
   );
 };
-
-export { AppServicesPageNotFound };
