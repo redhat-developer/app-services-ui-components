@@ -3,7 +3,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { EmptyState, EmptyStateVariant } from "./EmptyState";
 
 export default {
-  title: "Empty States/App Services",
   component: EmptyState,
   parameters: {},
 } as ComponentMeta<typeof EmptyState>;
