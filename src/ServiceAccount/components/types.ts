@@ -1,1 +1,1 @@
-export type SearchType = "description" | "clientid" | "owner";
+export type SearchCategory = "description" | "clientid" | "owner";

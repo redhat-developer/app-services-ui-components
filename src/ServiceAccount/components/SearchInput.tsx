@@ -17,12 +17,14 @@ import { useTranslation } from "react-i18next";
 export type SearchInputProps = {
   placeholder: string;
   errorMessage: string;
+  validate: (value: string) => boolean;
   onSearch: (value: string) => void;
 };
 
 export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
   placeholder,
   errorMessage,
+  validate,
   onSearch,
 }) => {
   const { t } = useTranslation();
@@ -37,6 +39,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
   const handleSearch = useCallback(() => {
     if (canSearch) {
       onSearch(value);
+      setValue("");
     }
   }, [canSearch, onSearch, value]);
 
@@ -60,6 +63,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
         validated={
           showErrorFeedback ? ValidatedOptions.error : ValidatedOptions.default
         }
+        value={value}
         onChange={setValue}
         onKeyPress={onKeyPress}
         ref={inputRef}
@@ -81,7 +85,3 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
     </>
   );
 };
-
-function validate(value: string) {
-  return !/["$^<>|+%/;:,\s*=~#()]/.test(value);
-}

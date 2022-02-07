@@ -4,6 +4,7 @@
   "clientID": "Client ID",
   "connection_rate": "Connection rate",
   "connection_rate_value": "up to 100 connections/second",
+  "create_service_account": "Create service account",
   "duration": "Duration",
   "duration_value": "48 hours",
   "filter_by_client_id": "Filter by Client ID",
@@ -19,6 +20,7 @@
   "owner_field_invalid_message": "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )",
   "partitions": "Partitions",
   "partitions_value": "up to 500",
+  "select_filter_category": "Select filter category",
   "short_description": "Short Description",
   "storage": "Storage",
   "storage_value": "up to 1000 GiB"

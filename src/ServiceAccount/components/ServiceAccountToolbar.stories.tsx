@@ -1,6 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ServiceAccountToolbar } from "./ServiceAccountToolbar";
+import { ValidClientId, ValidDescription, ValidOwner } from "./Search.stories";
+import { userEvent, within } from "@storybook/testing-library";
 
 export default {
   title: "Components/ServiceAccount/ServiceAccountToolbar",
@@ -14,8 +16,8 @@ const Template: ComponentStory<typeof ServiceAccountToolbar> = (args) => (
   <ServiceAccountToolbar {...args} />
 );
 
-export const ServiceAccountToolbarFilter = Template.bind({});
-ServiceAccountToolbarFilter.parameters = {
+export const Default = Template.bind({});
+Default.parameters = {
   docs: {
     description: {
       story: `
@@ -25,57 +27,74 @@ ToolbarFilter for ServiceAccount Search/filter functionality
   },
 };
 
-export const InvalidClientIdInput = Template.bind({});
-InvalidClientIdInput.args = {
-  filterSelected: "clientID",
-  value: "Hema HG",
-  filteredValue: [],
-};
-InvalidClientIdInput.storyName =
-  "Invalid Input error message when the filter selected is clientID";
-InvalidClientIdInput.parameters = {
-  docs: {
-    description: {
-      story: `
-When the clienttID filter is selected if the input filed is not valid Input Invalid error message
-will be displayed and the search icon button is disabled
-        `,
-    },
-  },
+export const ClientIdChips = Template.bind({});
+ClientIdChips.play = ValidClientId.play;
+
+export const CanDeleteClientIdChips = Template.bind({});
+CanDeleteClientIdChips.play = async (context) => {
+  const story = within(context.canvasElement);
+
+  await ValidClientId.play(context);
+
+  // delete the "foo" chip
+  const clearChipButtons = await story.findAllByLabelText("close");
+  await userEvent.click(clearChipButtons[0]);
+
+  // delete the whole group
+  await userEvent.click(await story.findByLabelText("Close chip group"));
 };
 
-export const InvalidOwnerInput = Template.bind({});
-InvalidOwnerInput.args = {
-  filterSelected: "owner",
-  value: "Hema HG",
-  filteredValue: [],
-};
-InvalidOwnerInput.storyName =
-  "Invalid Input error message when the filter selected is owner";
-InvalidOwnerInput.parameters = {
-  docs: {
-    description: {
-      story: `
-When the Owner filter is selected if the input filed is not valid Input Invalid error message
-will be displayed and the search icon button is disabled
-        `,
-    },
-  },
+export const DescriptionChips = Template.bind({});
+DescriptionChips.play = ValidDescription.play;
+
+export const CanDeleteDescriptionChips = Template.bind({});
+CanDeleteDescriptionChips.play = async (context) => {
+  const story = within(context.canvasElement);
+
+  await ValidClientId.play(context);
+
+  // delete the "foo" chip
+  const clearChipButtons = await story.findAllByLabelText("close");
+  await userEvent.click(clearChipButtons[0]);
+
+  // delete the whole group
+  await userEvent.click(await story.findByLabelText("Close chip group"));
 };
 
-export const MaxFilterMessage = Template.bind({});
-MaxFilterMessage.args = {
-  isMaxFilter: true,
+export const OwnerChips = Template.bind({});
+OwnerChips.play = ValidOwner.play;
+
+export const CanDeleteOwnerChips = Template.bind({});
+CanDeleteOwnerChips.play = async (context) => {
+  const story = within(context.canvasElement);
+
+  await ValidClientId.play(context);
+
+  // delete the "foo" chip
+  const clearChipButtons = await story.findAllByLabelText("close");
+  await userEvent.click(clearChipButtons[0]);
+
+  // delete the whole group
+  await userEvent.click(await story.findByLabelText("Close chip group"));
 };
-MaxFilterMessage.storyName =
-  "Error message when maximum filter search is reached";
-MaxFilterMessage.parameters = {
-  docs: {
-    description: {
-      story: `
-When the Filter reaches the Maximum limit, Maximum limit error message will be displayed
-and the search icon button is disabled
-        `,
-    },
-  },
+
+export const AllChips = Template.bind({});
+AllChips.play = async (context) => {
+  await ValidDescription.play(context);
+  await ValidClientId.play(context);
+  await ValidOwner.play(context);
+};
+
+export const CanClearAllFilters = Template.bind({});
+CanClearAllFilters.play = async (context) => {
+  const story = within(context.canvasElement);
+  await AllChips.play(context);
+  const clearButtons = await story.findAllByText("Clear all filters");
+  await userEvent.click(clearButtons[0]);
+};
+
+export const CanClickCreateServiceAccount = Template.bind({});
+CanClickCreateServiceAccount.play = async (context) => {
+  const story = within(context.canvasElement);
+  await userEvent.click(await story.findByText("Create service account"));
 };

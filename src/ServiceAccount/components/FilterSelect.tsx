@@ -6,11 +6,11 @@ import {
   SelectOptionObject,
   SelectVariant,
 } from "@patternfly/react-core";
-import { SearchType } from "./types";
+import { SearchCategory } from "./types";
 
 export type FilterSelectProps = {
-  value: SearchType;
-  onChange: (value: SearchType) => void;
+  value: SearchCategory;
+  onChange: (value: SearchCategory) => void;
 };
 
 export const FilterSelect: React.FunctionComponent<FilterSelectProps> = ({
@@ -29,7 +29,7 @@ export const FilterSelect: React.FunctionComponent<FilterSelectProps> = ({
     selection: string | SelectOptionObject
   ) => {
     setIsFilterExpanded(!isFilterExpanded);
-    onChange(selection as SearchType);
+    onChange(selection as SearchCategory);
   };
 
   const options = [
@@ -42,25 +42,32 @@ export const FilterSelect: React.FunctionComponent<FilterSelectProps> = ({
     { label: t("kafka:owner"), value: "owner", disabled: false },
   ];
 
+  const ariaId = "select_filter_category";
+
   return (
-    <Select
-      variant={SelectVariant.single}
-      aria-label="Select filter"
-      onToggle={onToggle}
-      selections={value}
-      isOpen={isFilterExpanded}
-      onSelect={onSelect}
-      width={"200px"}
-    >
-      {options.map((option, index) => (
-        <SelectOption
-          isDisabled={option.disabled}
-          key={index}
-          value={option.value}
-        >
-          {option.label}
-        </SelectOption>
-      ))}
-    </Select>
+    <>
+      <label hidden id={ariaId}>
+        {t("kafka:select_filter_category")}
+      </label>
+      <Select
+        variant={SelectVariant.single}
+        aria-labelledby={ariaId}
+        onToggle={onToggle}
+        selections={value}
+        isOpen={isFilterExpanded}
+        onSelect={onSelect}
+        width={"200px"}
+      >
+        {options.map((option, index) => (
+          <SelectOption
+            isDisabled={option.disabled}
+            key={index}
+            value={option.value}
+          >
+            {option.label}
+          </SelectOption>
+        ))}
+      </Select>
+    </>
   );
 };

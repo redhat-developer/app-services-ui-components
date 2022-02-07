@@ -2,13 +2,15 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { FilterSelect } from "./FilterSelect";
 
 export default {
-  title: "Components/ServiceAccount/Search",
+  title: "Components/ServiceAccount/FilterSelect",
   component: FilterSelect,
-  args: {},
+  args: {
+    value: "clientid",
+  },
 } as ComponentMeta<typeof FilterSelect>;
 
 const Template: ComponentStory<typeof FilterSelect> = (args) => (
   <FilterSelect {...args} />
 );
 
-export const SelectFilter = Template.bind({});
+export const Default = Template.bind({});
