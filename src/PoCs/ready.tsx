@@ -7,12 +7,25 @@ export const ReadyForUse: VoidFunctionComponent  = () => {
         <div>       
             <Split hasGutter className="foo">
                 <SplitItem>
-                    <CheckCircleIcon style={{ color: "#3E8635" }} className="fixIcon" />
+                    <CheckCircleIcon className="fixIcon" color="#3E8635" />      
                 </SplitItem>
                 <SplitItem>
                     Ready
                 </SplitItem>   
-            </Split>     
+            </Split>   
+
+
+
+            <Split hasGutter className="foo">
+                <SplitItem>
+                    <CheckCircleIcon  height={18} width={18} />      
+                </SplitItem>
+                <SplitItem>
+                    Ready
+                </SplitItem>   
+            </Split>      
+                                        
+
         </div>
     );
 };
