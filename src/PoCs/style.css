@@ -1,8 +1,8 @@
-.foo.pf-l-split.pf-m-gutter > *:not(:last-child) {
+.mas-c-status.pf-l-split.pf-m-gutter > *:not(:last-child) {
     --pf-l-split--m-gutter--MarginRight: var(--pf-global--spacer--sm);
   }
   
-  .fixIcon {
+  .mas-c-status__icon {
     font-size: var(--pf-global--icon--FontSize--md);
   }
   

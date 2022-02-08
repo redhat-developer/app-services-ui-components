@@ -11,25 +11,23 @@ import { InstanceCreationFailed } from './failed';
 export default {
   title: 'PoCs/StatusComponent',
   component: OnTime,
-  args: {
-
-  },
+  args: {},
 } as ComponentMeta<typeof OnTime>;
 
 const Template: ComponentStory<typeof OnTime> = (args) => (
   <OnTime {...args} />
 );
-export const OnTimeCreation = Template.bind({});
-OnTimeCreation.args = {};
+export const Creating = Template.bind({});
+Creating.args = {};
 
 
 
 const Template2: ComponentStory<typeof Warning> = (args) => (
     <Warning {...args} />
 );
-export const WarningCreation = Template2.bind({});
-WarningCreation.args = {};
-WarningCreation.parameters = {
+export const CreatingWithWarning = Template2.bind({});
+CreatingWithWarning .args = {};
+CreatingWithWarning .parameters = {
   docs: {
     description: {
         story: 'The instance creation is taking longer than fifteen minutes. This is significantly longer than expected. A warning plain inline alert displays below the "Creating" status in the table.'
@@ -42,9 +40,9 @@ WarningCreation.parameters = {
 const Template3: ComponentStory<typeof Error> = (args) => (
     <Error {...args} />
 );
-export const ErrorCreation = Template3.bind({});
-ErrorCreation.args = {};
-ErrorCreation.parameters = {
+export const CreatingWithError = Template3.bind({});
+CreatingWithError.args = {};
+CreatingWithError.parameters = {
   docs: {
     description: {
         story: 'The instance creation is taking longer than thirty minutes. This is significantly longer than expected. An error plain inline alert displays below the "Creating" status in the table.'
@@ -57,9 +55,9 @@ ErrorCreation.parameters = {
 const Template4: ComponentStory<typeof ReadyForUse> = (args) => (
     <ReadyForUse {...args} />
 );
-export const InstanceReady = Template4.bind({});
-InstanceReady.args = {};
-InstanceReady.parameters = {
+export const Ready = Template4.bind({});
+Ready.args = {};
+Ready.parameters = {
   docs: {
     description: {
         story: 'The Kafka instance is ready for use.'
@@ -72,9 +70,9 @@ InstanceReady.parameters = {
 const Template5: ComponentStory<typeof InstanceDeletion> = (args) => (
     <InstanceDeletion {...args} />
 );
-export const DeletingInstance = Template5.bind({});
-DeletingInstance.args = {};
-DeletingInstance.parameters = {
+export const Deleting = Template5.bind({});
+Deleting.args = {};
+Deleting.parameters = {
   docs: {
     description: {
         story: 'The Kafka instance is in the process of being deleted.'
@@ -86,12 +84,12 @@ DeletingInstance.parameters = {
 const Template6: ComponentStory<typeof InstanceCreationFailed> = (args) => (
   <InstanceCreationFailed {...args} />
 );
-export const InstanceFailed = Template6.bind({});
-InstanceFailed.args = {};
-InstanceFailed.parameters = {
+export const Failed = Template6.bind({});
+Failed.args = {};
+Failed.parameters = {
 docs: {
   description: {
       story: 'The Kafka instance has failed to create.'
   },
 },
-};
+}; 

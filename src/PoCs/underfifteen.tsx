@@ -15,7 +15,7 @@ import "./style.css";
 export const OnTime: VoidFunctionComponent  = () => {
     return (
         <div>
-        <Split hasGutter className="foo">
+        <Split hasGutter className="mas-c-status">
         <SplitItem>
             <Spinner size="md" />
         </SplitItem>
