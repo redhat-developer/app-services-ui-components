@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { DataSciencePage } from "./DataSciencePage";
 
@@ -11,5 +11,4 @@ const Template: ComponentStory<typeof DataSciencePage> = (args) => (
   <DataSciencePage {...args} />
 );
 
-export const DataScience = Template.bind({});
-DataScience.storyName = "DataScience";
+export const Example = Template.bind({});
