@@ -17,9 +17,7 @@ type DetailsTabProps = {
   owner: string;
   region: string;
 };
-type SupportedRegions = {
-  [key: string]: string;
-};
+
 export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
   id,
   created_at,
@@ -28,11 +26,6 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
   region,
 }) => {
   const { t } = useTranslation();
-
-  const RegionMapping: SupportedRegions = {
-    "US East, N. Virginia": t("common:USEast"),
-    "EU, Ireland": t("common:EUIreland"),
-  };
 
   const renderTextListItem = (title: string, value?: string) =>
     value && (
@@ -51,7 +44,7 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
             t("common:cloud_provider"),
             t("common:cloudProviders.aws")
           )}
-          {renderTextListItem(t("common:region"), RegionMapping[region])}
+          {renderTextListItem(t("common:region"), region)}
           {renderTextListItem(t("common:id"), id)}
           {renderTextListItem(t("common:owner"), owner)}
           {renderTextListItem(
