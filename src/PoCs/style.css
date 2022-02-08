@@ -2,7 +2,12 @@
     --pf-l-split--m-gutter--MarginRight: var(--pf-global--spacer--sm);
   }
   
-  .mas-c-status__icon {
+  .mas-m-ready {
     font-size: var(--pf-global--icon--FontSize--md);
+    color: var(--pf-global--success-color--100);
   }
-  
+
+  .mas-m-failed {
+    font-size: var(--pf-global--icon--FontSize--md);
+    color: var(--pf-global--danger-color--100);
+  }
