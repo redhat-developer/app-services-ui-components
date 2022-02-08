@@ -31,7 +31,7 @@ Creating .args = {};
 Creating .parameters = {
 docs: {
   description: {
-      story: 'The instance creation is taking longer than fifteen minutes. This is significantly longer than expected. A warning plain inline alert displays below the "Creating" status in the table.'
+      story: 'A user has just selected to create a Kafka Instance. Their instance is not ready for use yet. The "Creating" status is shown in the table along with some grey text informing the user that their instance will be ready shortly. The "Creating" status is clickable which opens a popover with more in-depth information about the creation process.'
   },
 },
 };

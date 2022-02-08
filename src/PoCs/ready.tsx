@@ -8,7 +8,7 @@ import "./style.css";
 *These are the various statuses that show in the Kafka Instances table under the "Status" header.
 *<br><br>
 *<h3>Ready</h3>
-*The Kafka instance is ready for use
+*The Kafka instance is ready for use.
 *
 */
 

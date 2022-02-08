@@ -9,7 +9,7 @@ export const InstanceCreationFailed: VoidFunctionComponent  = () => {
         <div>       
             <Split hasGutter className="mas-c-status">
                 <SplitItem>
-                    <ExclamationCircleIcon className="mas-m-failed" />      
+                    <ExclamationCircleIcon className="mas-m-failed"/>      
                 </SplitItem>
                 <SplitItem>
                     Failed
