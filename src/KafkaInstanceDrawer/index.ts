@@ -1,2 +1,2 @@
-export * from './DetailsTab';
-export * from './DetailsTabAlert';
+export * from "./DetailsTab";
+export * from "./DetailsTabAlert";

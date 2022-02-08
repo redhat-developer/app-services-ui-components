@@ -1,26 +1,26 @@
-import { Alert } from '@patternfly/react-core'
-import { addHours, differenceInHours } from 'date-fns'
-import React from 'react'
-import { Trans } from 'react-i18next'
-import { FormatDate } from '../shared'
+import { Alert } from "@patternfly/react-core";
+import { addHours, differenceInHours } from "date-fns";
+import React from "react";
+import { Trans } from "react-i18next";
+import { FormatDate } from "../shared";
 
 type DetailsTabAlertProps = {
-  creationDate: Date
-}
+  creationDate: Date;
+};
 
 export const DetailsTabAlert: React.FunctionComponent<DetailsTabAlertProps> = ({
   creationDate,
 }) => {
-  const expiryDate = addHours(creationDate, 48)
-  const hoursLeft = differenceInHours(expiryDate,Date.now())
+  const expiryDate = addHours(creationDate, 48);
+  const hoursLeft = differenceInHours(expiryDate, Date.now());
   return (
     <Alert
       variant={
         hoursLeft > 24
-          ? 'info'
+          ? "info"
           : hoursLeft < 24 && hoursLeft > 5
-          ? 'warning'
-          : 'danger'
+          ? "warning"
+          : "danger"
       }
       title={
         <Trans
@@ -34,5 +34,5 @@ export const DetailsTabAlert: React.FunctionComponent<DetailsTabAlertProps> = ({
       isInline
       className="pf-u-mb-lg"
     />
-  )
-}
+  );
+};
