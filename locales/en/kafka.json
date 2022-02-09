@@ -23,5 +23,6 @@
   "select_filter_category": "Select filter category",
   "short_description": "Short Description",
   "storage": "Storage",
-  "storage_value": "up to 1000 GiB"
+  "storage_value": "up to 1000 GiB",
+  "will_expire": "This instance will expire in <time>{{time}}</time>"
 }
