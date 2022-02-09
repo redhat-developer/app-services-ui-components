@@ -7,21 +7,21 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from "@patternfly/react-core";
-import { DetailsTabAlert } from "./DetailsTabAlert";
+import { DetailsTabAlert } from "./components/DetailsTabAlert";
 import { format } from "date-fns";
 
 type DetailsTabProps = {
   id: string;
-  created_at: Date;
-  updated_at: Date;
+  createdAt: Date;
+  updatedAt: Date;
   owner: string;
   region: string;
 };
 
 export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
   id,
-  created_at,
-  updated_at,
+  createdAt,
+  updatedAt,
   owner,
   region,
 }) => {
@@ -37,7 +37,7 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
 
   return (
     <div className="mas--details__drawer--tab-content">
-      <DetailsTabAlert creationDate={created_at} />
+      <DetailsTabAlert creationDate={createdAt} />
       <TextContent>
         <TextList component={TextListVariants.dl}>
           {renderTextListItem(
@@ -47,14 +47,8 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
           {renderTextListItem(t("common:region"), region)}
           {renderTextListItem(t("common:id"), id)}
           {renderTextListItem(t("common:owner"), owner)}
-          {renderTextListItem(
-            t("common:created"),
-            format(created_at, "PPPP,p")
-          )}
-          {renderTextListItem(
-            t("common:updated"),
-            format(updated_at, "PPPP,p")
-          )}
+          {renderTextListItem(t("common:created"), format(createdAt, "PPPP,p"))}
+          {renderTextListItem(t("common:updated"), format(updatedAt, "PPPP,p"))}
         </TextList>
       </TextContent>
     </div>

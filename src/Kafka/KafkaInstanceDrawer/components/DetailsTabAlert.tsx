@@ -2,7 +2,7 @@ import { Alert } from "@patternfly/react-core";
 import { addHours, differenceInHours } from "date-fns";
 import React from "react";
 import { Trans } from "react-i18next";
-import { FormatDate } from "../shared";
+import { FormatDate } from "../../../shared";
 
 type DetailsTabAlertProps = {
   creationDate: Date;
@@ -24,7 +24,7 @@ export const DetailsTabAlert: React.FunctionComponent<DetailsTabAlertProps> = ({
       }
       title={
         <Trans
-          i18nKey="common:will_expire"
+          i18nKey="kafka:will_expire"
           components={{
             time: <FormatDate date={expiryDate} format="expiration" />,
           }}
