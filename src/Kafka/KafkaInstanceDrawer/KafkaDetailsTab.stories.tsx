@@ -18,20 +18,20 @@ const Template: ComponentStory<typeof KafkaDetailsTab> = (args) => (
   <KafkaDetailsTab {...args} />
 );
 
-export const NoTimeLimit = Template.bind({});
-NoTimeLimit.args = {};
+export const NormalInstance = Template.bind({});
+NormalInstance.args = {};
 
-export const JustCreated = Template.bind({});
-JustCreated.args = {
+export const TrialInstanceJustCreated = Template.bind({});
+TrialInstanceJustCreated.args = {
   expiryDate: addHours(new Date(), 48),
 };
 
-export const CreatedSomeTimeAgo = Template.bind({});
-CreatedSomeTimeAgo.args = {
+export const TrialIntsanceRecentlyCreated = Template.bind({});
+TrialIntsanceRecentlyCreated.args = {
   expiryDate: addHours(new Date(), 22),
 };
 
-export const CreatedLongTimeAgo = Template.bind({});
-CreatedLongTimeAgo.args = {
+export const TrialInstanceNearExpiration = Template.bind({});
+TrialInstanceNearExpiration.args = {
   expiryDate: addHours(new Date(), 2),
 };
