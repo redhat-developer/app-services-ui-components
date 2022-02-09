@@ -139,9 +139,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   children,
 }) => {
   const { t } = useTranslation();
-  const handleDelete = () => {
-    onDelete();
-  };
+
   const { isDeleteEnabled } = useContext(ModalContext);
   return (
     <Modal
@@ -154,12 +152,12 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
       onClose={onCancel}
       appendTo={appendTo}
       disableFocusTrap={disableFocusTrap}
-      hasNoBodyWrapper={true}
+      hasNoBodyWrapper={false}
       actions={[
         <Button
           key={"confirm__button"}
           variant={ButtonVariant.danger}
-          onClick={handleDelete}
+          onClick={onDelete}
           isDisabled={isDeleting || !isDeleteEnabled}
           isLoading={isDeleting}
           ouiaId={"delete"}
@@ -202,6 +200,7 @@ type DeleteModalConfirmationProps = {
 export const DeleteModalConfirmation: VoidFunctionComponent<
   DeleteModalConfirmationProps
 > = ({ requiredConfirmationValue }) => {
+  const { t } = useTranslation();
   const [value, setValue] = useState("");
   const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
 
@@ -232,7 +231,7 @@ export const DeleteModalConfirmation: VoidFunctionComponent<
       <FormGroup
         label={
           <Trans
-            i18nKey={"common:type_value_to_confirm"}
+            i18nKey={"common:type_value_to_confirm_html"}
             values={{
               value: requiredConfirmationValue,
             }}
@@ -248,6 +247,9 @@ export const DeleteModalConfirmation: VoidFunctionComponent<
           validated={validated}
           isDisabled={isDeleting}
           ouiaId={"delete-confirmation"}
+          aria-label={t("common:type_value_to_confirm_plain", {
+            value: requiredConfirmationValue,
+          })}
         />
       </FormGroup>
     </Form>

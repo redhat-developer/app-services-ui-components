@@ -16,7 +16,7 @@ type ToolbarKafkaInstanceMetricProps = {
   isDisabled: boolean;
   duration: DurationOptions;
   onSetTimeDuration: (value: DurationOptions) => void;
-} & ToolbarRefreshProps;
+} & Omit<ToolbarRefreshProps, "ariaLabel">;
 export const ToolbarKafkaInstanceMetric: FunctionComponent<
   ToolbarKafkaInstanceMetricProps
 > = ({
@@ -48,6 +48,7 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
             isRefreshing={isRefreshing}
             lastUpdated={lastUpdated}
             onRefresh={onRefresh}
+            ariaLabel={t("metrics:kafka_instance_refresh")}
           />
         </ToolbarContent>
       </Toolbar>

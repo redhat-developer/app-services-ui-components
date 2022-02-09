@@ -2,8 +2,8 @@ import { useInterpret } from "@xstate/react";
 import React, { createContext, FunctionComponent } from "react";
 import { InterpreterFrom } from "xstate";
 import {
-  TopicsMetricsMachineType,
   TopicsMetricsMachine,
+  TopicsMetricsMachineType,
   TopicsMetricsModel,
 } from "./machines";
 import { DurationOptions, GetTopicsMetricsResponse } from "./types";
@@ -11,6 +11,7 @@ import { timeIntervalsMapping } from "./consts";
 
 export const TopicsMetricsContext = createContext<{
   service: InterpreterFrom<TopicsMetricsMachineType>;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
 export type TopicsMetricsProviderProps = UseTopicsMetricsMachineServiceOptions;

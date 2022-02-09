@@ -20,8 +20,7 @@ export function makeMetrics(
     }).getTime(),
     rng.nextInt(min * exp, max * exp),
   ]);
-  const metrics = Object.fromEntries(entries);
-  return metrics;
+  return Object.fromEntries(entries);
 }
 
 export function makeGrowingMetrics(
@@ -49,6 +48,5 @@ export function makeGrowingMetrics(
     }).getTime(),
     values[index],
   ]);
-  const metrics = Object.fromEntries(entries);
-  return metrics;
+  return Object.fromEntries(entries);
 }

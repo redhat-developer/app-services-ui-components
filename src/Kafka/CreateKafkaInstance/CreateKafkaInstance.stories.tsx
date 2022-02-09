@@ -1,5 +1,5 @@
 import { Button } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import React, { useState } from "react";
 import {
@@ -14,6 +14,8 @@ import {
   ProviderInfo,
   Providers,
 } from "./machines";
+import { PlayFunction } from "@storybook/csf";
+import { ReactFramework } from "@storybook/react/types-6-0";
 
 const AWS: ProviderInfo = {
   id: "aws",
@@ -69,7 +71,11 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
   const onOpenModal = () => {
     setIsModalOpen(true);
   };
-  const onCreate = (data, onSuccess, onFailure) => {
+  const onCreate: CreateKafkaInstanceProps["onCreate"] = (
+    data,
+    onSuccess,
+    onFailure
+  ) => {
     args.onCreate(
       data,
       () => {
@@ -84,7 +90,7 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
     <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
       <CreateKafkaInstance
         {...args}
-        appendTo={() => document.getElementById(id)}
+        appendTo={() => document.getElementById(id) || document.body}
         isModalOpen={isModalOpen}
         onCancel={onCloseModal}
         onCreate={onCreate}
@@ -94,6 +100,22 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
         <Button onClick={() => onOpenModal()}>Open modal</Button>
       </div>
     </div>
+  );
+};
+
+const sampleSubmit: PlayFunction<
+  ReactFramework,
+  CreateKafkaInstanceProps
+> = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
+  await userEvent.selectOptions(
+    await canvas.findByLabelText("Cloud region *"),
+    "eu-west-1"
+  );
+  await userEvent.click(
+    await canvas.findByTestId("modalCreateKafka-buttonSubmit")
   );
 };
 
@@ -325,17 +347,4 @@ function makeAvailableProvidersAndDefaults(
       instanceAvailability,
     };
   };
-}
-
-async function sampleSubmit({ canvasElement }) {
-  const canvas = within(canvasElement);
-
-  await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
-  await userEvent.selectOptions(
-    await canvas.findByLabelText("Cloud region *"),
-    "eu-west-1"
-  );
-  await userEvent.click(
-    await canvas.findByTestId("modalCreateKafka-buttonSubmit")
-  );
 }

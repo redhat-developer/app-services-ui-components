@@ -5,7 +5,7 @@ import { terser } from "rollup-plugin-terser";
 import autoExternals from "rollup-plugin-auto-external";
 import renameNodeModules from "rollup-plugin-rename-node-modules";
 import postcss from "rollup-plugin-postcss";
-import replace from "rollup-plugin-replace";
+import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
 import { importMetaAssets } from "@web/rollup-plugin-import-meta-assets";
 import path from "path";
@@ -42,6 +42,7 @@ export default {
     }),
     replace({
       "process.env.NODE_ENV": JSON.stringify("production"),
+      preventAssignment: true,
     }),
     json(),
     typescript(),

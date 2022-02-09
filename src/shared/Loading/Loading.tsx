@@ -14,8 +14,10 @@ export type LoadingProps = {
 export const Loading: React.FunctionComponent<LoadingProps> = ({
   bullseyeProps,
   spinnerProps,
-}: LoadingProps) => (
-  <Bullseye {...bullseyeProps}>
-    <Spinner {...spinnerProps} />
-  </Bullseye>
-);
+}: LoadingProps) => {
+  return (
+    <Bullseye {...bullseyeProps}>
+      <Spinner {...spinnerProps} />
+    </Bullseye>
+  );
+};

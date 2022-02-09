@@ -68,7 +68,7 @@ export const DataSciencePage: React.FunctionComponent = () => {
                   data-testid="CTA-videoRHODSDemo"
                   variant={ButtonVariant.secondary}
                   component="a"
-                  href="http://www.openshift.com/DataScienceVideoDemo"
+                  href="https://www.openshift.com/DataScienceVideoDemo"
                   target="_blank"
                 >
                   {t("datascienceoverview:heroViewDemo")}{" "}

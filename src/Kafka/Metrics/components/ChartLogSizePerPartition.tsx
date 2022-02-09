@@ -41,7 +41,7 @@ type LegendData = {
 
 export type ChartLogSizePerPartitionProps = {
   partitions: PartitionBytesMetric;
-  topic: string;
+  topic: string | undefined;
   duration: number;
   isLoading: boolean;
   emptyState: ReactElement;
@@ -122,7 +122,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
 
 export function getChartData(
   partitions: PartitionBytesMetric,
-  topic: string,
+  topic: string | undefined,
   duration: number
 ): {
   legendData: Array<LegendData>;

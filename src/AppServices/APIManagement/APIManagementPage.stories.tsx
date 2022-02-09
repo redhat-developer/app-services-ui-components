@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import { APIManagementPage } from "./APIManagementPage";
 
@@ -11,5 +11,4 @@ const Template: ComponentStory<typeof APIManagementPage> = (args) => (
   <APIManagementPage {...args} />
 );
 
-export const APIManagement = Template.bind({});
-APIManagement.storyName = "APIManagement";
+export const Example = Template.bind({});

@@ -1,15 +1,23 @@
 import { Alert } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useMachine } from "@xstate/react";
 import React from "react";
 import { createMachine } from "xstate";
 
-import { DeleteModal, DeleteModalConfirmation } from "./DeleteModal";
+import {
+  DeleteModal,
+  DeleteModalConfirmation,
+  DeleteModalProps,
+} from "./DeleteModal";
+import { userEvent, within } from "@storybook/testing-library";
+import { PlayFunction } from "@storybook/csf";
+import { ReactFramework } from "@storybook/react/types-6-0";
 
 export default {
   component: DeleteModal,
   subcomponents: { DeleteModalConfirmation },
   args: {
+    title: "Delete?",
     children: "You are deleting something.",
     disableFocusTrap: true,
   },
@@ -37,11 +45,27 @@ export default {
 } as ComponentMeta<typeof DeleteModal>;
 
 const onDelete = [
-  { cond: (context) => context.isAsync, target: "deleting" },
-  { cond: (context) => context.willFail, target: "withError" },
+  {
+    cond: (context: { isAsync: boolean }) => context.isAsync,
+    target: "deleting",
+  },
+  {
+    cond: (context: { willFail: boolean }) => context.willFail,
+    target: "withError",
+  },
   { target: "closed" },
 ];
-const makeModalStoryMachine = ({ id, initial = "open", isAsync, willFail }) =>
+const makeModalStoryMachine = ({
+  id,
+  initial = "open",
+  isAsync,
+  willFail,
+}: {
+  id: string;
+  initial?: string;
+  isAsync: boolean;
+  willFail: boolean;
+}) =>
   createMachine({
     initial,
     id,
@@ -68,7 +92,7 @@ const makeModalStoryMachine = ({ id, initial = "open", isAsync, willFail }) =>
           ],
         },
         on: {
-          CLOSE: null,
+          CLOSE: "deleting",
         },
       },
       withError: {
@@ -98,28 +122,29 @@ const Template: ComponentStory<typeof DeleteModal> = (
   );
 
   const onDelete = () => {
-    onDeleteAction();
+    onDeleteAction && onDeleteAction();
     send("DELETE");
   };
   const onCancel = () => {
-    onCancelAction();
+    onCancelAction && onCancelAction();
     send("CLOSE");
   };
 
   return (
     <div style={{ minHeight: 500, height: "100%" }}>
       <DeleteModal
+        {...args}
         isDeleting={state.value === "deleting"}
         isModalOpen={state.value !== "closed"}
         appendTo={() => {
           return (
             document.getElementById(`story--${id}`) ||
-            document.getElementById("root")
+            document.getElementById("root") ||
+            document.body
           );
         }}
         onCancel={onCancel}
         onDelete={onDelete}
-        {...args}
       >
         {state.value === "withError" && (
           <Alert variant="danger" title="Danger alert title" isInline>
@@ -133,11 +158,24 @@ const Template: ComponentStory<typeof DeleteModal> = (
   );
 };
 
-export const SyncronousDelete = Template.bind({});
+const fillConfirmation: PlayFunction<
+  ReactFramework,
+  DeleteModalProps
+> = async ({ canvasElement, args }) => {
+  const story = within(canvasElement);
+  const confirmationValue = args.confirmationValue || "digit this";
+  await userEvent.type(
+    await story.findByLabelText(`Type ${confirmationValue} to confirm`),
+    confirmationValue
+  );
+  await userEvent.click(await story.findByText("Delete"));
+};
 
-export const SyncronousDeleteWithError = Template.bind({});
-SyncronousDeleteWithError.args = SyncronousDelete.args;
-SyncronousDeleteWithError.parameters = {
+export const SynchronousDelete = Template.bind({});
+
+export const SynchronousDeleteWithError = Template.bind({});
+SynchronousDeleteWithError.args = SynchronousDelete.args;
+SynchronousDeleteWithError.parameters = {
   willDeleteFail: true,
   initialState: "withError",
   docs: {
@@ -150,12 +188,12 @@ always fail.
   },
 };
 
-export const SyncronousDeleteWithConfirmation = Template.bind({});
-SyncronousDeleteWithConfirmation.args = {
+export const SynchronousDeleteWithConfirmation = Template.bind({});
+SynchronousDeleteWithConfirmation.args = {
   confirmationValue: "digit this",
-  ...SyncronousDelete.args,
+  ...SynchronousDelete.args,
 };
-SyncronousDeleteWithConfirmation.parameters = {
+SynchronousDeleteWithConfirmation.parameters = {
   docs: {
     description: {
       story: `It is possible to ask the user to type something to enable the
@@ -164,11 +202,12 @@ disable button. In this demo you should be typing \`digit this\`.
     },
   },
 };
+SynchronousDeleteWithConfirmation.play = fillConfirmation;
 
-export const SyncronousDeleteWithConfirmationAndError = Template.bind({});
-SyncronousDeleteWithConfirmationAndError.args =
-  SyncronousDeleteWithConfirmation.args;
-SyncronousDeleteWithConfirmationAndError.parameters = {
+export const SynchronousDeleteWithConfirmationAndError = Template.bind({});
+SynchronousDeleteWithConfirmationAndError.args =
+  SynchronousDeleteWithConfirmation.args;
+SynchronousDeleteWithConfirmationAndError.parameters = {
   willDeleteFail: true,
   initialState: "withError",
 
@@ -184,9 +223,9 @@ then try again or cancel the action. In this demo the delete will always fail.
   },
 };
 
-export const AsyncronousDelete = Template.bind({});
-AsyncronousDelete.args = SyncronousDelete.args;
-AsyncronousDelete.parameters = {
+export const AsynchronousDelete = Template.bind({});
+AsynchronousDelete.args = SynchronousDelete.args;
+AsynchronousDelete.parameters = {
   isDeleteAsync: true,
   initialState: "deleting",
   docs: {
@@ -199,9 +238,9 @@ ongoing.`,
   },
 };
 
-export const AsyncronousDeleteWithError = Template.bind({});
-AsyncronousDeleteWithError.args = SyncronousDeleteWithError.args;
-AsyncronousDeleteWithError.parameters = {
+export const AsynchronousDeleteWithError = Template.bind({});
+AsynchronousDeleteWithError.args = SynchronousDeleteWithError.args;
+AsynchronousDeleteWithError.parameters = {
   isDeleteAsync: true,
   willDeleteFail: true,
   initialState: "withError",
@@ -220,9 +259,10 @@ then try again or cancel the action. In this demo the delete will always fail.
   },
 };
 
-export const AsyncronousDeleteWithConfirmation = Template.bind({});
-AsyncronousDeleteWithConfirmation.args = SyncronousDeleteWithConfirmation.args;
-AsyncronousDeleteWithConfirmation.parameters = {
+export const AsynchronousDeleteWithConfirmation = Template.bind({});
+AsynchronousDeleteWithConfirmation.args =
+  SynchronousDeleteWithConfirmation.args;
+AsynchronousDeleteWithConfirmation.parameters = {
   isDeleteAsync: true,
   docs: {
     description: {
@@ -232,11 +272,12 @@ disable button. In this demo you should be typing \`digit this\`.
     },
   },
 };
+AsynchronousDeleteWithConfirmation.play = fillConfirmation;
 
-export const AsyncronousDeleteWithConfirmationAndError = Template.bind({});
-AsyncronousDeleteWithConfirmationAndError.args =
-  SyncronousDeleteWithConfirmationAndError.args;
-AsyncronousDeleteWithConfirmationAndError.parameters = {
+export const AsynchronousDeleteWithConfirmationAndError = Template.bind({});
+AsynchronousDeleteWithConfirmationAndError.args =
+  SynchronousDeleteWithConfirmationAndError.args;
+AsynchronousDeleteWithConfirmationAndError.parameters = {
   isDeleteAsync: true,
   willDeleteFail: true,
   initialState: "withError",
@@ -281,6 +322,7 @@ component to apply proper spacing.
     },
   },
 };
+CustomConfirmationPlacement.play = fillConfirmation;
 
 export const CustomConfirmationPlacementWithAutomaticSpacing = Template.bind(
   {}
@@ -302,17 +344,21 @@ an array of elements is being passed to the \`children\` property.`,
     },
   },
 };
+CustomConfirmationPlacementWithAutomaticSpacing.play = fillConfirmation;
 
-export const AsyncronousCustomConfirmationPlacement = Template.bind({});
-AsyncronousCustomConfirmationPlacement.args = CustomConfirmationPlacement.args;
-AsyncronousCustomConfirmationPlacement.parameters = {
+export const AsynchronousCustomConfirmationPlacement = Template.bind({});
+AsynchronousCustomConfirmationPlacement.args = CustomConfirmationPlacement.args;
+AsynchronousCustomConfirmationPlacement.parameters = {
   isDeleteAsync: true,
 };
+AsynchronousCustomConfirmationPlacement.play = fillConfirmation;
 
-export const AsyncronousCustomConfirmationPlacementAndError = Template.bind({});
-AsyncronousCustomConfirmationPlacementAndError.args =
+export const AsynchronousCustomConfirmationPlacementAndError = Template.bind(
+  {}
+);
+AsynchronousCustomConfirmationPlacementAndError.args =
   CustomConfirmationPlacement.args;
-AsyncronousCustomConfirmationPlacementAndError.parameters = {
+AsynchronousCustomConfirmationPlacementAndError.parameters = {
   isDeleteAsync: true,
   willDeleteFail: true,
   initialState: "withError",
