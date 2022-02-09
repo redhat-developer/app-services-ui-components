@@ -33,7 +33,7 @@ type CardTopicsMetricsProps = {
   onCreateTopic: () => void;
   onSelectedTopic: (topic: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
-} & ToolbarRefreshProps;
+} & Omit<ToolbarRefreshProps, "ariaLabel">;
 
 export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   topics,

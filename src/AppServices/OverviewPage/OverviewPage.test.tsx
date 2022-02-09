@@ -1,5 +1,5 @@
 import React from "react";
-import { render, suspenseTestId, waitFor } from "../../test-utils";
+import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./OverviewPage.stories";
 
@@ -7,10 +7,8 @@ const { Example } = composeStories(stories);
 
 describe("OverviewPage", () => {
   it("renders", async () => {
-    const comp = await render(<Example />);
-    await waitFor(() => {
-      expect(comp.queryByTestId(suspenseTestId)).not.toBeInTheDocument();
-    });
+    const comp = render(<Example />);
+    await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
     expect(
       comp.getByText("Try OpenShift Streams for Apache Kafka")

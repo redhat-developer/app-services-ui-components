@@ -22,7 +22,7 @@ type CardKafkaInstanceMetricsProps = {
   isLoading: boolean;
   isJustCreated: boolean;
   onDurationChange: (duration: DurationOptions) => void;
-} & ToolbarRefreshProps;
+} & Omit<ToolbarRefreshProps, "ariaLabel">;
 type ChartTitleProps = {
   title: string;
   helperText: string;

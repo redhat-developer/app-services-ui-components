@@ -8,7 +8,7 @@ module.exports = {
     images$: "<rootDir>/__mocks__/imagesMock.js",
   },
   transformIgnorePatterns: [
-    "node_modules/(?!@patternfly/react-icons|@novnc|@popperjs|lodash|monaco-editor|react-monaco-editor)",
+    "node_modules/(?!@patternfly/react-icons|@patternfly/react-tokens|@novnc|@popperjs|lodash|monaco-editor|react-monaco-editor|byte-size)",
   ],
   setupFilesAfterEnv: ["<rootDir>/setupJest.ts"],
 };

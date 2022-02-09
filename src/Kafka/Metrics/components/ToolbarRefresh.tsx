@@ -7,12 +7,14 @@ import { FormatDate } from "../../../shared";
 export type ToolbarRefreshProps = {
   isRefreshing: boolean;
   lastUpdated: Date | undefined;
+  ariaLabel: string;
   onRefresh: () => void;
 };
 
 export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
   isRefreshing,
   lastUpdated = new Date(),
+  ariaLabel,
   onRefresh,
 }) => {
   const { t } = useTranslation(["metrics"]);
@@ -20,7 +22,7 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
   return (
     <>
       <ToolbarItem>
-        <Button variant="plain" aria-label="sync" onClick={onRefresh}>
+        <Button variant="plain" aria-label={ariaLabel} onClick={onRefresh}>
           {isRefreshing ? (
             <span className="pf-c-button__progress">
               <Spinner size="md" />

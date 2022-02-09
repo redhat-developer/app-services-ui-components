@@ -20,7 +20,7 @@ type ToolbarTopicsMetricsProps = {
   isDisabled: boolean;
   onSetTimeDuration: (value: DurationOptions) => void;
   onSetSelectedTopic: (value: string | undefined) => void;
-} & ToolbarRefreshProps;
+} & Omit<ToolbarRefreshProps, "ariaLabel">;
 export const ToolbarTopicsMetrics: FunctionComponent<
   ToolbarTopicsMetricsProps
 > = ({
@@ -62,6 +62,7 @@ export const ToolbarTopicsMetrics: FunctionComponent<
             isRefreshing={isRefreshing}
             lastUpdated={lastUpdated}
             onRefresh={onRefresh}
+            ariaLabel={t("metrics:topics_refresh")}
           />
         </ToolbarContent>
       </Toolbar>

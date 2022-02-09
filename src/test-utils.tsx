@@ -1,5 +1,10 @@
 import React, { FunctionComponent, ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
+import {
+  render,
+  RenderOptions,
+  RenderResult,
+  waitFor,
+} from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { I18nProvider } from "./I18n";
 
@@ -45,8 +50,14 @@ const customRender = (
   options?: Omit<RenderOptions, "wrapper">
 ) => render(ui, { wrapper: AllTheProviders, ...options });
 
+async function waitForI18n(r: RenderResult) {
+  await waitFor(() => {
+    expect(r.queryByTestId(suspenseTestId)).not.toBeInTheDocument();
+  });
+}
+
 // re-export everything
 export * from "@testing-library/react";
 
 // override render method
-export { customRender as render, suspenseTestId };
+export { customRender as render, waitForI18n };
