@@ -8,9 +8,9 @@ type KafkaDetailsTabAlertProps = {
   creationDate: Date;
 };
 
-export const KafkaDetailsTabAlert: React.FunctionComponent<KafkaDetailsTabAlertProps> = ({
-  creationDate,
-}) => {
+export const KafkaDetailsTabAlert: React.FunctionComponent<
+  KafkaDetailsTabAlertProps
+> = ({ creationDate }) => {
   const expiryDate = addHours(creationDate, 48);
   const hoursLeft = differenceInHours(expiryDate, Date.now());
   return (
