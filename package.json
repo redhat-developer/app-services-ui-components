@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "build-storybook": "build-storybook",
-    "prebuild": "npm-run-all lint:* test parse-i18n",
+    "prebuild": "npm run parse-i18n",
     "build": "rollup -c",
     "chromatic": "chromatic",
     "clean": "rimraf dist",
