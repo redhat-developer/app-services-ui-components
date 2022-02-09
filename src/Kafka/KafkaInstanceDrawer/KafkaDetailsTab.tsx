@@ -14,6 +14,7 @@ type KafkaDetailsTabProps = {
   id: string;
   createdAt: Date;
   updatedAt: Date;
+  expiryDate?: Date;
   owner: string;
   region: string;
 };
@@ -24,6 +25,7 @@ export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
   updatedAt,
   owner,
   region,
+  expiryDate,
 }) => {
   const { t } = useTranslation();
 
@@ -37,7 +39,7 @@ export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
 
   return (
     <div className="mas--details__drawer--tab-content">
-      <DetailsTabAlert creationDate={createdAt} />
+      <DetailsTabAlert expiryDate={expiryDate} />
       <TextContent>
         <TextList component={TextListVariants.dl}>
           {renderTextListItem(

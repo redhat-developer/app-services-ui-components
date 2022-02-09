@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { subHours } from "date-fns";
+import { addHours, subHours } from "date-fns";
 import React from "react";
 import { KafkaDetailsTab } from "./KafkaDetailsTab";
 
@@ -18,15 +18,20 @@ const Template: ComponentStory<typeof KafkaDetailsTab> = (args) => (
   <KafkaDetailsTab {...args} />
 );
 
+export const NoTimeLimit = Template.bind({});
+NoTimeLimit.args = {};
+
 export const JustCreated = Template.bind({});
-JustCreated.args = {};
+JustCreated.args = {
+  expiryDate: addHours(new Date(), 48),
+};
 
 export const CreatedSomeTimeAgo = Template.bind({});
 CreatedSomeTimeAgo.args = {
-  createdAt: subHours(new Date(), 25),
+  expiryDate: addHours(new Date(), 22),
 };
 
 export const CreatedLongTimeAgo = Template.bind({});
 CreatedLongTimeAgo.args = {
-  createdAt: subHours(new Date(), 46),
+  expiryDate: addHours(new Date(), 2),
 };
