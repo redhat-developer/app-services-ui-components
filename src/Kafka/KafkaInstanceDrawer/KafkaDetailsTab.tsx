@@ -7,7 +7,7 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from "@patternfly/react-core";
-import { KafkaDetailsTabAlert } from "./components/KafkaDetailsTabAlert";
+import { DetailsTabAlert } from "./components/DetailsTabAlert";
 import { format } from "date-fns";
 
 type KafkaDetailsTabProps = {
@@ -37,7 +37,7 @@ export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
 
   return (
     <div className="mas--details__drawer--tab-content">
-      <KafkaDetailsTabAlert creationDate={createdAt} />
+      <DetailsTabAlert creationDate={createdAt} />
       <TextContent>
         <TextList component={TextListVariants.dl}>
           {renderTextListItem(
