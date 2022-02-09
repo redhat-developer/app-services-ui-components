@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { subHours } from "date-fns";
 import React from "react";
-import { DetailsTab } from "./DetailsTab";
+import { KafkaDetailsTab } from "./KafkaDetailsTab";
 
 export default {
-  component: DetailsTab,
+  component: KafkaDetailsTab,
   args: {
     id: "c7tkgchgb2d04561srg",
     owner: "snaithan_kafka_devexp",
@@ -12,10 +12,10 @@ export default {
     createdAt: new Date(),
     updatedAt: new Date(),
   },
-} as ComponentMeta<typeof DetailsTab>;
+} as ComponentMeta<typeof KafkaDetailsTab>;
 
-const Template: ComponentStory<typeof DetailsTab> = (args) => (
-  <DetailsTab {...args} />
+const Template: ComponentStory<typeof KafkaDetailsTab> = (args) => (
+  <KafkaDetailsTab {...args} />
 );
 
 export const JustCreated = Template.bind({});

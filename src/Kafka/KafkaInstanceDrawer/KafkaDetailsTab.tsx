@@ -7,10 +7,10 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from "@patternfly/react-core";
-import { DetailsTabAlert } from "./components/DetailsTabAlert";
+import { KafkaDetailsTabAlert } from "./components/KafkaDetailsTabAlert";
 import { format } from "date-fns";
 
-type DetailsTabProps = {
+type KafkaDetailsTabProps = {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -18,7 +18,7 @@ type DetailsTabProps = {
   region: string;
 };
 
-export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
+export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
   id,
   createdAt,
   updatedAt,
@@ -37,7 +37,7 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
 
   return (
     <div className="mas--details__drawer--tab-content">
-      <DetailsTabAlert creationDate={createdAt} />
+      <KafkaDetailsTabAlert creationDate={createdAt} />
       <TextContent>
         <TextList component={TextListVariants.dl}>
           {renderTextListItem(
@@ -55,4 +55,4 @@ export const DetailsTab: React.FunctionComponent<DetailsTabProps> = ({
   );
 };
 
-export default DetailsTab;
+export default KafkaDetailsTab;

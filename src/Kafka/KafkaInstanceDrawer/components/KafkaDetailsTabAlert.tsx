@@ -4,11 +4,11 @@ import React from "react";
 import { Trans } from "react-i18next";
 import { FormatDate } from "../../../shared";
 
-type DetailsTabAlertProps = {
+type KafkaDetailsTabAlertProps = {
   creationDate: Date;
 };
 
-export const DetailsTabAlert: React.FunctionComponent<DetailsTabAlertProps> = ({
+export const KafkaDetailsTabAlert: React.FunctionComponent<KafkaDetailsTabAlertProps> = ({
   creationDate,
 }) => {
   const expiryDate = addHours(creationDate, 48);
