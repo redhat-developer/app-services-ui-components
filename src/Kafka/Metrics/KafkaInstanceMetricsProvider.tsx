@@ -11,6 +11,7 @@ import { timeIntervalsMapping } from "./consts";
 
 export const KafkaInstanceMetricsContext = createContext<{
   service: InterpreterFrom<KafkaInstanceMetricsMachineType>;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
 export type KafkaInstanceMetricsProviderProps =

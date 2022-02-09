@@ -34,7 +34,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
           }
         />
       );
-    case isSystemUnavailable === true:
+    case isSystemUnavailable:
       return (
         <Alert
           id="mk-create-instance-quota-alert"

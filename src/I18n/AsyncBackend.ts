@@ -16,6 +16,7 @@ export default class AsyncBackend
   static type = "backend";
   type = "backend" as const;
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   private options: AsyncBackendOptions = null!;
 
   constructor(services: Services, options: AsyncBackendOptions) {

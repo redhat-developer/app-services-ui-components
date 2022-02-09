@@ -56,5 +56,3 @@ export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
     </div>
   );
 };
-
-export default KafkaDetailsTab;

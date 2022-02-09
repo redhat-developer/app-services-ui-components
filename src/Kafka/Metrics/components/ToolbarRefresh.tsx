@@ -2,7 +2,7 @@ import { Button, Spinner, ToolbarItem } from "@patternfly/react-core";
 import SyncAltIcon from "@patternfly/react-icons/dist/esm/icons/sync-alt-icon";
 import React, { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate } from "../../../shared/FormatDate";
+import { FormatDate } from "../../../shared";
 
 export type ToolbarRefreshProps = {
   isRefreshing: boolean;

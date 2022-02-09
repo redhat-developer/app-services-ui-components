@@ -92,14 +92,14 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
               </CardBody>
             );
 
-          case isJustCreated && noTopics === false:
+          case isJustCreated && !noTopics:
             return (
               <CardBody>
                 <EmptyStateNoTopics />
               </CardBody>
             );
 
-          case isJustCreated && noTopics === true:
+          case isJustCreated && noTopics:
             return (
               <CardBody>
                 <EmptyStateNoTopics onCreateTopic={onCreateTopic} />
@@ -137,7 +137,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <CardBody>
                   <ChartLogSizePerPartition
                     partitions={partitions}
-                    topic={selectedTopic!}
+                    topic={selectedTopic}
                     duration={duration}
                     isLoading={isLoading}
                     emptyState={chartEmptyState}

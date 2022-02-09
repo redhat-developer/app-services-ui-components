@@ -17,9 +17,9 @@ import { useTranslation } from "react-i18next";
 import {
   CloudProvidersTiles,
   CloudRegionSelect,
-  ModalAlerts,
   FormAlerts,
   InstanceInfo,
+  ModalAlerts,
 } from "./components";
 import "./CreateKafkaInstance.css";
 import {
@@ -115,8 +115,7 @@ export const CreateKafkaInstance: React.FunctionComponent<
   const regionValidation = isRegionError ? "error" : "default";
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
-    azOptions === undefined ||
-    (azOptions?.multi === true && azOptions.single === true);
+    azOptions === undefined || (azOptions?.multi === true && azOptions.single);
 
   return (
     <Modal

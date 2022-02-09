@@ -45,11 +45,27 @@ export default {
 } as ComponentMeta<typeof DeleteModal>;
 
 const onDelete = [
-  { cond: (context) => context.isAsync, target: "deleting" },
-  { cond: (context) => context.willFail, target: "withError" },
+  {
+    cond: (context: { isAsync: boolean }) => context.isAsync,
+    target: "deleting",
+  },
+  {
+    cond: (context: { willFail: boolean }) => context.willFail,
+    target: "withError",
+  },
   { target: "closed" },
 ];
-const makeModalStoryMachine = ({ id, initial = "open", isAsync, willFail }) =>
+const makeModalStoryMachine = ({
+  id,
+  initial = "open",
+  isAsync,
+  willFail,
+}: {
+  id: string;
+  initial?: string;
+  isAsync: boolean;
+  willFail: boolean;
+}) =>
   createMachine({
     initial,
     id,
@@ -76,7 +92,7 @@ const makeModalStoryMachine = ({ id, initial = "open", isAsync, willFail }) =>
           ],
         },
         on: {
-          CLOSE: null,
+          CLOSE: "deleting",
         },
       },
       withError: {
@@ -123,7 +139,8 @@ const Template: ComponentStory<typeof DeleteModal> = (
         appendTo={() => {
           return (
             document.getElementById(`story--${id}`) ||
-            document.getElementById("root")
+            document.getElementById("root") ||
+            document.body
           );
         }}
         onCancel={onCancel}

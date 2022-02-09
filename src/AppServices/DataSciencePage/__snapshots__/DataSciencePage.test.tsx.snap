@@ -119,7 +119,7 @@ exports[`DataSciencePage renders 1`] = `
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
                   data-testid="CTA-videoRHODSDemo"
-                  href="http://www.openshift.com/DataScienceVideoDemo"
+                  href="https://www.openshift.com/DataScienceVideoDemo"
                   target="_blank"
                 >
                   View the demo

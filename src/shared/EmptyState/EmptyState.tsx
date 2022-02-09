@@ -1,18 +1,18 @@
-import React, { VoidFunctionComponent } from "react";
+import React, { ComponentType, VoidFunctionComponent } from "react";
 import {
-  Title,
   Button,
-  EmptyState as PFEmptyState,
-  EmptyStateIcon,
-  EmptyStateBody,
-  TitleSizes,
-  TitleProps,
   ButtonProps,
+  ButtonVariant,
+  EmptyState as PFEmptyState,
+  EmptyStateBody,
+  EmptyStateBodyProps,
+  EmptyStateIcon,
   EmptyStateIconProps,
   EmptyStateProps as PFEmptyStateProps,
-  EmptyStateBodyProps,
-  ButtonVariant,
   EmptyStateVariant as PFEmptyStateVariant,
+  Title,
+  TitleProps,
+  TitleSizes,
 } from "@patternfly/react-core";
 import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
 import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shuttle-icon";
@@ -34,7 +34,7 @@ export enum EmptyStateVariant {
 
 export type EmptyStateProps = {
   titleProps?: Omit<TitleProps, "children" | "headingLevel"> & {
-    headingLevel?: string;
+    headingLevel?: TitleProps["headingLevel"];
   };
   emptyStateProps?: Omit<PFEmptyStateProps, "children" | "variant"> & {
     variant?: EmptyStateVariant | PFEmptyStateVariant;
@@ -77,7 +77,12 @@ export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
   );
 
   const getVariantConfig = () => {
-    let variantConfig: any = {};
+    let variantConfig: {
+      variant: PFEmptyStateVariant;
+      icon?: ComponentType<any>;
+      titleSize: TitleProps["size"];
+      headingLevel: TitleProps["headingLevel"];
+    };
     switch (masEmptyStateVariant) {
       case EmptyStateVariant.GettingStarted:
         variantConfig = {
@@ -131,8 +136,8 @@ export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
         variantConfig = {
           variant: masEmptyStateVariant || PFEmptyStateVariant.full,
           icon: emptyStateIconProps?.icon,
-          titleSize: titleProps?.size,
-          headingLevel: titleProps?.headingLevel,
+          titleSize: titleProps?.size || TitleSizes.lg,
+          headingLevel: titleProps?.headingLevel || "h2",
         };
         break;
     }
