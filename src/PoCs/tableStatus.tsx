@@ -13,11 +13,11 @@ type KafkaStatus =
   | "deleting"
 
 
-type StatusLabelProps = {
+type TableStatusProps = {
   value: KafkaStatus;
 };
 
-export const StatusLabel: VoidFunctionComponent<StatusLabelProps> = ({
+export const TableStatus: VoidFunctionComponent<TableStatusProps> = ({
     value
   }) => {
 

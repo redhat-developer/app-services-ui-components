@@ -1,18 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React from 'react';
 
-import { StatusLabel } from './tableStatus';
+import { TableStatus } from './tableStatus';
 
 export default {
-  title: 'pocs/StatusLabel',
-  component: StatusLabel,
+  title: 'pocs/TableStatus',
+  component: TableStatus,
   args: {
     instanceName: "string",
   },
-} as ComponentMeta<typeof StatusLabel>;
+} as ComponentMeta<typeof TableStatus>;
 
-const Template: ComponentStory<typeof StatusLabel> = (args) => (
-  <StatusLabel {...args} />
+const Template: ComponentStory<typeof TableStatus> = (args) => (
+  <TableStatus {...args} />
 );
 
 export const Ready = Template.bind({});
