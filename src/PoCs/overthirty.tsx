@@ -19,4 +19,4 @@ export const Error: VoidFunctionComponent  = () => {
             <Alert variant="danger" isInline isPlain title="This is taking longer than expected." />                 
         </div>
     );
-}; 
+};  
