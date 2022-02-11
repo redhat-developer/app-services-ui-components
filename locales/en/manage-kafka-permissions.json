@@ -1,4 +1,22 @@
 {
+  "acls_treeview": {
+    "consumer_group": "Consumer group",
+    "kafka_instance": "Kafka instance",
+    "operations": {
+      "all": "All",
+      "alter": "Alter",
+      "alter_configs": "Alter configs",
+      "create": "Create",
+      "delete": "Delete",
+      "describe": "Describe",
+      "describe_configs": "Describe configs",
+      "read": "Read",
+      "write": "Write"
+    },
+    "topic": "Topic",
+    "transational_id": "Transactional ID",
+    "treeview_placeholder": "Filter by resource type operation"
+  },
   "cells": {
     "pattern_type_literal": "is",
     "pattern_type_prefixed": "starts with"
@@ -85,23 +103,5 @@
       "delete": "Delete",
       "manage": "Manage"
     }
-  },
-  "acls_treeview": {
-    "operations": {
-      "all": "All",
-      "alter": "Alter",
-      "alter_configs": "Alter configs",
-      "create": "Create",
-      "delete": "Delete",
-      "describe": "Describe",
-      "describe_configs": "Describe configs",
-      "read": "Read",
-      "write": "Write"
-    },
-    "consumer_group": "Consumer group",
-    "kafka_instance": "Kafka instance",
-    "topic": "Topic",
-    "transational_id": "Transactional ID",
-    "treeview_placeholder": "Filter by resource type operation"
   }
 }

@@ -233,7 +233,7 @@ export const ResourceTypeOperationFilter: React.VFC<
   const filterItems = (
     item: TreeViewDataItem,
     checkedItem: TreeViewDataItem
-  ) => {
+  ): TreeViewDataItem | boolean | undefined => {
     if (item.id === checkedItem.id) {
       return true;
     }
@@ -245,6 +245,8 @@ export const ResourceTypeOperationFilter: React.VFC<
           .filter((child) => filterItems(child, checkedItem))).length > 0
       );
     }
+
+    return undefined;
   };
 
   const onCheck = (
@@ -275,18 +277,20 @@ export const ResourceTypeOperationFilter: React.VFC<
     const checkedItemTree = options
       .map((opt) => Object.assign({}, opt))
       .filter((item) => filterItems(item, treeViewItem));
+
     const flatCheckedItems = flattenTree(checkedItemTree);
-    onCheckedItemsChange((prevCheckedItems) =>
-      checked
-        ? prevCheckedItems.concat(
-            flatCheckedItems.filter(
-              (item) => !prevCheckedItems.some((i) => i.id === item.id)
-            )
+
+    const newCheckedItems = checked
+      ? checkedItems.concat(
+          flatCheckedItems.filter(
+            (item) => !checkedItems.some((i) => i.id === item.id)
           )
-        : prevCheckedItems.filter(
-            (item) => !flatCheckedItems.some((i) => i.id === item.id)
-          )
-    );
+        )
+      : checkedItems.filter(
+          (item) => !flatCheckedItems.some((i) => i.id === item.id)
+        );
+
+    onCheckedItemsChange(newCheckedItems);
   };
 
   const handleMenuKeys = React.useCallback(
@@ -339,7 +343,11 @@ export const ResourceTypeOperationFilter: React.VFC<
   };
 
   const toggle = (
-    <MenuToggle ref={toggleRef} onClick={onToggleClick} isExpanded={isOpen}>
+    <MenuToggle
+      ref={toggleRef as React.RefObject<HTMLButtonElement>}
+      onClick={onToggleClick}
+      isExpanded={isOpen}
+    >
       {t("acls_treeview.treeview_placeholder")}
     </MenuToggle>
   );
@@ -350,7 +358,7 @@ export const ResourceTypeOperationFilter: React.VFC<
   const transactionalIdMapped = transactionalIdOptions.map(mapTree);
 
   const menu = (
-    <Menu ref={menuRef}>
+    <Menu ref={menuRef as React.RefObject<HTMLDivElement>}>
       <MenuContent>
         <MenuList>
           <MenuGroup>
