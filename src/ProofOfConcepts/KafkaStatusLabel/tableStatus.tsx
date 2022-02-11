@@ -25,6 +25,10 @@ type KafkaStatus =
 type TableStatusProps = {
   value: KafkaStatus;
 };
+/**
+*<strong> Introduction </strong>
+*These are the various statuses that can show in the Kafka instances table under the "Status" header.
+*/
 
 export const TableStatus: VoidFunctionComponent<TableStatusProps> = ({
   value,
