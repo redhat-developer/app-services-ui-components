@@ -13,7 +13,7 @@ const Template: ComponentStory<typeof TableStatus> = (args) => (
   <TableStatus {...args} />
 );
 
-export const AllStatuesAtOnce = () => (
+export const AllStatutesAtOnce = () => (
   <>
     <TableStatus value={"ready"} />
     <br />

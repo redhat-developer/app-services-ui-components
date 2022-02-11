@@ -1,4 +1,4 @@
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 
 import { ProgressStep, ProgressStepper } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";

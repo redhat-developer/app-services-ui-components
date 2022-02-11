@@ -1,88 +1,147 @@
-import { Flex, FlexItem, Spinner } from "@patternfly/react-core";
+import {
+  Alert,
+  Button,
+  Flex,
+  FlexItem,
+  HelperText,
+  HelperTextItem,
+  Spinner,
+  Split,
+  SplitItem,
+} from "@patternfly/react-core";
 import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
-import PendingIcon from "@patternfly/react-icons/dist/js/icons/pending-icon";
-import React, {
-  FunctionComponent,
-  ReactElement,
-  VoidFunctionComponent,
-} from "react";
+import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { KafkaStatus } from "../../types";
 import "./StatusLabel.css";
 
 type StatusLabelProps = {
   value: KafkaStatus;
+  showWarning?: boolean;
+  showError?: boolean;
   withPopover?: boolean;
 };
 
-export const StatusLabel: VoidFunctionComponent<StatusLabelProps> = ({
-  value,
-  withPopover,
-}) => {
-  const { t } = useTranslation(["create-kafka-instance"]);
-  const translations: { [status in KafkaStatus]: string } = {
-    ready: t("statuses.ready"),
-    failed: t("statuses.failed"),
-    accepted: t("statuses.accepted"),
-    provisioning: t("statuses.provisioning"),
-    preparing: t("statuses.preparing"),
-    deprovision: t("statuses.deprovision"),
-    deleting: t("statuses.deleting"),
-  };
-  const statusCopy = translations[value];
-  const statusElement = withPopover ? <a>{statusCopy}</a> : statusCopy;
+/**
+ *<strong> Introduction </strong>
+ *These are the various statuses that can show in the Kafka instances table under the "Status" header.
+ */
+export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
+  (
+    { value, showWarning = false, showError = false, withPopover = false },
+    ref
+  ) => {
+    const { t } = useTranslation(["create-kafka-instance"]);
 
-  switch (value) {
-    case "ready":
-      return (
-        <StatusWithIcon
-          icon={
-            <CheckCircleIcon className="appservices_kafka-instance-status_icon--completed" />
-          }
-        >
-          {statusElement}
-        </StatusWithIcon>
-      );
-    case "failed":
-      return (
-        <StatusWithIcon
-          icon={
-            <ExclamationCircleIcon className="appservices_kafka-instance-status_icon--failed" />
-          }
-        >
-          {statusElement}
-        </StatusWithIcon>
-      );
-    case "accepted":
-      return (
-        <StatusWithIcon icon={<PendingIcon />}>{statusElement}</StatusWithIcon>
-      );
-    case "provisioning":
-    case "preparing":
-      return (
-        <StatusWithIcon
-          icon={<Spinner size="md" aria-valuetext="Creation in progress" />}
-        >
-          {statusElement}
-        </StatusWithIcon>
-      );
-    case "deprovision":
-    case "deleting":
-      return <StatusWithIcon>{statusElement}</StatusWithIcon>;
-    default:
-      return (
-        <StatusWithIcon icon={<PendingIcon />}>{statusElement}</StatusWithIcon>
-      );
+    const buttonVariant = withPopover ? "link" : "plain";
+
+    switch (value) {
+      case "ready":
+        return (
+          <div>
+            <Split hasGutter className="mas-c-status">
+              <SplitItem>
+                <CheckCircleIcon className="mas-m-ready" />
+              </SplitItem>
+              <SplitItem>{t("statuses.ready")}</SplitItem>
+            </Split>
+          </div>
+        );
+
+      case "accepted":
+      case "provisioning":
+      case "preparing":
+        switch (true) {
+          case showWarning:
+            return (
+              <div>
+                <Split hasGutter className="mas-c-status">
+                  <SplitItem>
+                    <Spinner size="md" />
+                  </SplitItem>
+                  <SplitItem>
+                    <Button ref={ref} variant={buttonVariant} isInline>
+                      {t("statuses.creating")}
+                    </Button>
+                  </SplitItem>
+                </Split>
+                <Alert
+                  variant="warning"
+                  isInline
+                  isPlain
+                  title="This is taking longer than expected."
+                />
+              </div>
+            );
+          case showError:
+            return (
+              <div>
+                <Split hasGutter className="mas-c-status">
+                  <SplitItem>
+                    <Spinner size="md" />
+                  </SplitItem>
+                  <SplitItem>
+                    <Button ref={ref} variant={buttonVariant} isInline>
+                      {t("statuses.creating")}
+                    </Button>
+                  </SplitItem>
+                </Split>
+                <Alert
+                  variant="danger"
+                  isInline
+                  isPlain
+                  title="This is taking longer than expected."
+                />
+              </div>
+            );
+          default:
+            return (
+              <div>
+                <Split hasGutter className="mas-c-status">
+                  <SplitItem>
+                    <Spinner size="md" />
+                  </SplitItem>
+                  <SplitItem>
+                    <Button ref={ref} variant={buttonVariant} isInline>
+                      {t("statuses.creating")}
+                    </Button>
+                    <Flex>
+                      <FlexItem>
+                        <HelperText>
+                          <HelperTextItem variant="indeterminate">
+                            {t("kafka_status_created_shortly_help")}
+                          </HelperTextItem>
+                        </HelperText>
+                      </FlexItem>
+                    </Flex>
+                  </SplitItem>
+                </Split>
+              </div>
+            );
+        }
+
+      case "failed":
+        return (
+          <div>
+            <Split hasGutter className="mas-c-status">
+              <SplitItem>
+                <ExclamationCircleIcon className="mas-m-failed" />
+              </SplitItem>
+              <SplitItem>{t("statuses.failed")}</SplitItem>
+            </Split>
+          </div>
+        );
+
+      case "deleting":
+      case "deprovision":
+        return (
+          <div>
+            <p className="mas-m-deleting"> {t("statuses.deleting")}</p>
+          </div>
+        );
+      default:
+        return null;
+    }
   }
-};
-
-const StatusWithIcon: FunctionComponent<{ icon?: ReactElement }> = ({
-  icon,
-  children,
-}) => (
-  <Flex display={{ default: "inlineFlex" }}>
-    {icon && <FlexItem spacer={{ default: "spacerSm" }}>{icon}</FlexItem>}
-    <FlexItem>{children}</FlexItem>
-  </Flex>
 );

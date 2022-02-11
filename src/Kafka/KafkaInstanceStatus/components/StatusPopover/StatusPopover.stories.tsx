@@ -1,8 +1,6 @@
-import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { StatusPopover } from "./StatusPopover";
-import { sub } from "date-fns";
 
 export default {
   component: StatusPopover,
@@ -70,13 +68,13 @@ PreparingStatus.parameters = {
   },
 };
 
-export const MoreThan15Minutes = Template.bind({});
-MoreThan15Minutes.args = {
+export const CreatingOver15Minutes = Template.bind({});
+CreatingOver15Minutes.args = {
   status: "provisioning",
-  createdAt: sub(new Date(), { minutes: 19 }),
+  showWarning: true,
 };
 
-MoreThan15Minutes.parameters = {
+CreatingOver15Minutes.parameters = {
   docs: {
     description: {
       story:
@@ -85,13 +83,13 @@ MoreThan15Minutes.parameters = {
   },
 };
 
-export const MoreThan30Minutes = Template.bind({});
-MoreThan30Minutes.args = {
+export const CreatingOver30Minutes = Template.bind({});
+CreatingOver30Minutes.args = {
   status: "provisioning",
-  createdAt: sub(new Date(), { minutes: 38 }),
+  showError: true,
 };
 
-MoreThan30Minutes.parameters = {
+CreatingOver30Minutes.parameters = {
   docs: {
     description: {
       story:

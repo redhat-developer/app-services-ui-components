@@ -1,4 +1,4 @@
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import {
   Stack,

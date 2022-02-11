@@ -1,9 +1,9 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import * as popoverStories from "./components/StatusPopover/StatusPopover.stories";
 import { StatusLabel, StatusPopover } from "./components";
 
 import { KafkaInstanceStatus } from "./KafkaInstanceStatus";
+import { sub } from "date-fns";
 
 export default {
   component: KafkaInstanceStatus,
@@ -16,18 +16,16 @@ export default {
   },
 } as ComponentMeta<typeof KafkaInstanceStatus>;
 
-const Template: ComponentStory<typeof KafkaInstanceStatus> = (args) => (
-  <KafkaInstanceStatus {...args} />
-);
-
-export const Ready = Template.bind({});
-Ready.args = {
-  status: "ready",
-};
-
-export const Failed = Template.bind({});
-Failed.args = {
-  status: "failed",
+const Template: ComponentStory<typeof KafkaInstanceStatus> = (
+  args,
+  { viewMode }
+) => {
+  const inDocs = viewMode === "docs";
+  return (
+    <div style={{ paddingTop: inDocs ? 0 : 250 }}>
+      <KafkaInstanceStatus {...args} />
+    </div>
+  );
 };
 
 export const Accepted = Template.bind({});
@@ -45,19 +43,21 @@ Preparing.args = {
   status: "preparing",
 };
 
-export const MoreThan15Minutes = Template.bind({});
-MoreThan15Minutes.args = {
+export const CreatingOver15Minutes = Template.bind({});
+CreatingOver15Minutes.args = {
   status: "accepted",
-  createdAt: popoverStories.MoreThan15Minutes.args?.createdAt,
+  createdAt: sub(new Date(), { minutes: 19 }),
 };
-MoreThan15Minutes.parameters = popoverStories.MoreThan15Minutes.parameters;
+CreatingOver15Minutes.parameters =
+  popoverStories.CreatingOver15Minutes.parameters;
 
-export const MoreThan30Minutes = Template.bind({});
-MoreThan30Minutes.args = {
+export const CreatingOver30Minutes = Template.bind({});
+CreatingOver30Minutes.args = {
   status: "accepted",
-  createdAt: popoverStories.MoreThan30Minutes.args?.createdAt,
+  createdAt: sub(new Date(), { minutes: 38 }),
 };
-MoreThan30Minutes.parameters = popoverStories.MoreThan30Minutes.parameters;
+CreatingOver30Minutes.parameters =
+  popoverStories.CreatingOver30Minutes.parameters;
 
 export const Deprovision = Template.bind({});
 Deprovision.args = {
@@ -67,4 +67,14 @@ Deprovision.args = {
 export const Deleting = Template.bind({});
 Deleting.args = {
   status: "deleting",
+};
+
+export const Ready = Template.bind({});
+Ready.args = {
+  status: "ready",
+};
+
+export const Failed = Template.bind({});
+Failed.args = {
+  status: "failed",
 };

@@ -1,21 +1,19 @@
-import React, { useCallback, useState, VoidFunctionComponent } from "react";
+import { RefObject, useCallback, useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Popover, PopoverProps } from "@patternfly/react-core";
 import { PopoverContent, PopoverContentProps } from "./PopoverContent";
 import { PopoverStatus } from "../../types";
-import { useInterval } from "../../../../utils";
-import { differenceInMinutes } from "date-fns";
 
 export type StatusPopoverProps = {
   status: PopoverStatus;
-  createdAt: Date;
   initialOpen?: boolean;
-  children: PopoverProps["children"];
+  showWarning?: boolean;
+  showError?: boolean;
+  children?: PopoverProps["children"];
   onClickConnectionTabLink: PopoverContentProps["onClickConnectionTabLink"];
   onClickSupportLink: PopoverContentProps["onClickSupportLink"];
-  warningAfterMinutes?: number;
-  errorAfterMinutes?: number;
+  reference?: RefObject<HTMLButtonElement>;
 };
 
 /**
@@ -38,31 +36,17 @@ export type StatusPopoverProps = {
 export const StatusPopover: VoidFunctionComponent<StatusPopoverProps> = ({
   initialOpen = false,
   status,
-  createdAt,
+  showWarning = false,
+  showError = false,
   onClickConnectionTabLink,
   onClickSupportLink,
-  warningAfterMinutes = 15,
-  errorAfterMinutes = 30,
+  reference,
   children,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
   const [isVisible, setIsVisible] = useState(initialOpen);
   const onClose = () => setIsVisible(false);
-  const [alert, setAlert] = useState<"warning" | "error" | false>(false);
-
-  const checkCreatedAt = useCallback(() => {
-    const elapsed = differenceInMinutes(new Date(), createdAt);
-    if (elapsed > errorAfterMinutes) {
-      setAlert("error");
-    } else if (elapsed > warningAfterMinutes) {
-      setAlert("warning");
-    } else {
-      setAlert(false);
-    }
-  }, [createdAt, errorAfterMinutes, warningAfterMinutes]);
-
-  useInterval(checkCreatedAt, 5000);
 
   const handleClickConnectionTabLink = useCallback(() => {
     onClose();
@@ -80,8 +64,8 @@ export const StatusPopover: VoidFunctionComponent<StatusPopoverProps> = ({
       bodyContent={
         <PopoverContent
           currentStatus={status}
-          showWarning={alert === "warning"}
-          showError={alert === "error"}
+          showWarning={showWarning}
+          showError={showError}
           onClickConnectionTabLink={handleClickConnectionTabLink}
           onClickSupportLink={handleClickSupportLink}
         />
@@ -91,6 +75,7 @@ export const StatusPopover: VoidFunctionComponent<StatusPopoverProps> = ({
       shouldClose={() => setIsVisible(false)}
       position={"right"}
       enableFlip={true}
+      reference={reference}
     >
       {children}
     </Popover>
