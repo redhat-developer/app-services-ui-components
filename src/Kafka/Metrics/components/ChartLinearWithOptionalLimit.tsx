@@ -156,7 +156,6 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
         </div>
       );
   }
-  return null;
 };
 
 function getChartData(

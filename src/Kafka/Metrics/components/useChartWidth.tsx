@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, RefObject } from "react";
+import { RefObject, useEffect, useRef, useState } from "react";
 
 export function useChartWidth(): [RefObject<HTMLDivElement>, number] {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -8,8 +8,8 @@ export function useChartWidth(): [RefObject<HTMLDivElement>, number] {
     containerRef.current && setWidth(containerRef.current.clientWidth);
 
   useEffect(() => {
-    handleResize(), [];
-  });
+    handleResize();
+  }, []);
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);

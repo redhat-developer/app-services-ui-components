@@ -1,0 +1,320 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`APIManagementPage renders 1`] = `
+<body>
+  <div>
+    <section
+      class="pf-c-page__main-section pf-m-light appsrv-marketing--banner pf-u-background-color-100"
+      style="--appsrv-marketing--banner--before--BackgroundImage: url(dummyimage); --appsrv-marketing--banner--before--BackgroundSize: 478px; --appsrv-marketing--banner--before--BackgroundRepeat: no-repeat; --appsrv-marketing--banner--before--BackgroundPositionY: -99px;"
+    >
+      <div
+        class="pf-l-stack pf-m-gutter"
+      >
+        <h1
+          class="pf-c-title pf-m-2xl"
+          data-ouia-component-id="OUIA-Generated-Title-1"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
+        >
+          Get started with Red Hat OpenShift API Management
+        </h1>
+        <p
+          class="appsrv-marketing--banner__tagline pf-u-color-200"
+          data-ouia-component-id="OUIA-Generated-Text-1"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Add-on service for managed OpenShift
+        </p>
+        <p
+          class=""
+          data-ouia-component-id="OUIA-Generated-Text-2"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Based on Red Hat 3scale API management, OpenShift API Management accelerates time to value and reduces the operational cost of delivering API-first, microservices-based applications.
+        </p>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-limit-width appsrv-marketing--page-section--marketing"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <div
+          class="pf-l-grid pf-m-all-6-col-on-lg pf-m-gutter"
+        >
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <div
+                  class="pf-c-card__title"
+                >
+                  <h3
+                    class="pf-c-title pf-m-lg"
+                    data-ouia-component-id="OUIA-Generated-Title-2"
+                    data-ouia-component-type="PF4/Title"
+                    data-ouia-safe="true"
+                  >
+                    Already have OpenShift API Management?
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              If OpenShift API Management has already been added to your cluster, access the service from the OpenShift web console. Otherwise, use the OpenShift Cluster Manager to add the service to a new or existing managed OpenShift cluster.
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item"
+                >
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-secondary"
+                    data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardHaveRHOAM-buttonGoOCM"
+                    href="https://cloud.redhat.com/openshift/"
+                  >
+                    Go to OpenShift Cluster Manager
+                  </a>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-1"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardHaveRHOAM-linkViewDocs"
+                    href="https://access.redhat.com/products/red-hat-openshift-api-management"
+                    target="_blank"
+                  >
+                    View documentation
+                     
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-sm"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+               
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class="pf-c-card__title"
+              >
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  data-ouia-component-id="OUIA-Generated-Title-3"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
+                >
+                  Want to try OpenShift API Management?
+                </h3>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              Explore the many resources available for the OpenShift API Management service, including videos, use cases, and documentation. The 3scale SaaS no-cost trial can help you evaluate the service; the capabilities and experience are similar to OpenShift API Management.
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item"
+                >
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-secondary"
+                    data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardTryRHOAM-buttonGetStarted"
+                    href="https://developers.redhat.com/products/rhoam/getting-started"
+                    target="_blank"
+                  >
+                    Get started with API Management
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-md"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link"
+                    data-ouia-component-id="OUIA-Generated-Button-link-2"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardTryRHOAM-linkViewDocs"
+                    href="https://access.redhat.com/products/red-hat-openshift-api-management"
+                    target="_blank"
+                  >
+                    View documentation
+                     
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-sm"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-light pf-m-limit-width appsrv-marketing--page-section--marketing pf-u-background-color-100"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <h3
+          class="pf-c-title pf-m-xl pf-u-mb-lg"
+          data-ouia-component-id="OUIA-Generated-Title-4"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
+        >
+          Use Red Hat OpenShift API Management to build an app in five steps
+        </h3>
+        <div
+          class="pf-l-grid pf-m-gutter"
+        >
+          <div
+            class="pf-l-grid__item pf-m-7-col-on-md"
+          >
+            <article
+              class="pf-c-card appsrv-marketing--video"
+              data-ouia-component-id="OUIA-Generated-Card-3"
+              data-ouia-component-type="PF4/Card"
+              data-ouia-safe="true"
+              id=""
+            >
+              <div
+                class="appsrv-marketing--video__wrapper"
+              >
+                <iframe
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen=""
+                  frameborder="0"
+                  src="https://www.youtube.com/embed/NzNgc0f75pc"
+                  title="Use Red Hat OpenShift API Management to build an app in five steps"
+                />
+              </div>
+            </article>
+          </div>
+          <div
+            class="pf-l-grid__item pf-m-5-col-on-md"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <p
+                class="pf-u-color-200 pf-u-ml-md"
+                data-ouia-component-id="OUIA-Generated-Text-3"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
+                data-pf-content="true"
+              >
+                In this video, you'll learn how to:
+              </p>
+              <ul
+                class="pf-c-list app-services-ui--icon-list"
+              >
+                <li
+                  class=""
+                >
+                  Build an application using a Quarkus framework on Red Hat OpenShift Dedicated.
+                </li>
+                <li
+                  class=""
+                >
+                  Import that application into an OpenShift API Management service.
+                </li>
+                <li
+                  class=""
+                >
+                  Add an API Key security to protect the API endpoints.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+`;

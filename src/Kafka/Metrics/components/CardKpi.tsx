@@ -24,7 +24,7 @@ export const CardKpi: VoidFunctionComponent<CardKpiProps> = ({
   isLoading,
 }) => {
   return (
-    <Card isFullHeight>
+    <Card isFullHeight data-testid={name}>
       <CardTitle component="h3">
         {name} <ChartPopover title={name} description={popover} />
       </CardTitle>
@@ -34,7 +34,11 @@ export const CardKpi: VoidFunctionComponent<CardKpiProps> = ({
             (metric === undefined ? (
               <EmptyStateNoMetricsData />
             ) : (
-              <Title headingLevel="h3" size="4xl">
+              <Title
+                headingLevel="h3"
+                size="4xl"
+                aria-valuetext={`${metric} ${name}`}
+              >
                 {metric}
               </Title>
             ))}

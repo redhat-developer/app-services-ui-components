@@ -10,6 +10,7 @@ import { GetMetricsKpiResponse } from "./types";
 
 export const MetricsKpiContext = createContext<{
   service: InterpreterFrom<MetricsKpiMachineType>;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
 export type MetricsKpiProviderProps = UseMetricsKpiMachineServiceOptions;

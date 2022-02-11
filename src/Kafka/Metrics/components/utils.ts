@@ -32,7 +32,7 @@ export function timestampsToTicks(
   allTimestamps.sort();
   const mostRecentTs =
     parseInt(allTimestamps[allTimestamps.length - 1]) || Date.now();
-  const tickValues: number[] = new Array(
+  return new Array(
     Math.max(timeIntervalsMapping[duration].ticks, allTimestamps.length)
   )
     .fill(mostRecentTs)
@@ -41,5 +41,4 @@ export function timestampsToTicks(
         seconds: timeIntervalsMapping[duration].interval * index,
       }).getTime()
     );
-  return tickValues;
 }

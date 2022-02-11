@@ -22,6 +22,7 @@
   "incoming_bytes_all_topics": "Incoming bytes (all topics)",
   "kafka_instance_filter_by_time": "Filter $t(common:kafka) instance metrics by time range",
   "kafka_instance_metrics": "$t(common:kafka) instance metrics",
+  "kafka_instance_refresh": "Refresh $t(common:kafka) instance metrics",
   "last-refresh": "Last update",
   "last-refresh-distance": "ago",
   "limit": "Limit",
@@ -47,6 +48,7 @@
   "topic_partition_size_popover_header": "Topic partition size",
   "topics_filter_by_time": "Filter topic metrics by time range",
   "topics_filter_by_topic": "Filter topic metrics by topic name",
+  "topics_refresh": "Refresh topic metrics",
   "total_bytes": "Bytes incoming and outgoing",
   "total_bytes_popover_header": "Bytes incoming and outgoing",
   "used_disk_space": "Used disk space"

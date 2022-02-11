@@ -1,10 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { within, fireEvent, findByTestId } from "@storybook/testing-library";
+import { findByTestId, fireEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { Metrics } from "./Metrics";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-import { DurationOptions } from "./types";
+import { DurationOptions, GetMetricsKpiResponse } from "./types";
+import {
+  apiError,
+  fakeApi,
+  getKafkaInstanceMetrics,
+  getMetricsKpi,
+  getTopicsMetrics,
+  getTopicsMetricsOneTopic,
+  getTopicsMetricsWithDeletedTopicMetric,
+} from "./storiesHelpers";
 
 export default {
   component: Metrics,
@@ -34,7 +43,8 @@ AllReady.storyName = "Kafka and topics exist and are in use";
 
 export const JustCreated = Template.bind({});
 JustCreated.args = {
-  getMetricsKpi: () => fakeApi({}, 300),
+  getMetricsKpi: () =>
+    fakeApi<GetMetricsKpiResponse>({} as GetMetricsKpiResponse, 300),
   getKafkaInstanceMetrics: () =>
     fakeApi(
       {
@@ -354,8 +364,8 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
       const timeSelector = await card.findByLabelText(
         "Filter Kafka instance metrics by time range"
       );
-      await fireEvent.click(timeSelector);
-      await fireEvent.click(await card.findByText(duration));
+      fireEvent.click(timeSelector);
+      fireEvent.click(await card.findByText(duration));
     };
 
     const expectTextCount = async (label: string, count = 3) => {
@@ -385,18 +395,18 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
       const topicSelector = await card.findByLabelText(
         "Filter topic metrics by topic name"
       );
-      await fireEvent.click(topicSelector);
-      await fireEvent.click(topicSelector);
-      await fireEvent.click(topicSelector);
-      await fireEvent.click(await card.findByText(topic));
+      fireEvent.click(topicSelector);
+      fireEvent.click(topicSelector);
+      fireEvent.click(topicSelector);
+      fireEvent.click(await card.findByText(topic));
     };
 
     const setDuration = async (duration: string) => {
       const timeSelector = await card.findByLabelText(
         "Filter topic metrics by time range"
       );
-      await fireEvent.click(timeSelector);
-      await fireEvent.click(await card.findByText(duration));
+      fireEvent.click(timeSelector);
+      fireEvent.click(await card.findByText(duration));
     };
 
     const expectTextCount = async (label: string, count = 2) => {
@@ -441,159 +451,3 @@ In this demo, all data past the last 12 hours will be empty.
     },
   },
 };
-
-function fakeApi(response: unknown, waitLengthMs = 500): Promise<unknown> {
-  return new Promise((resolve) => {
-    const timeout = setTimeout(() => resolve(response), waitLengthMs);
-    return () => clearTimeout(timeout);
-  });
-}
-
-function getKafkaInstanceMetrics({
-  duration,
-  offset,
-  waitLengthMs,
-}: {
-  duration: DurationOptions;
-  offset?: number;
-  waitLengthMs?: number;
-}) {
-  return fakeApi(
-    {
-      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9, offset),
-      clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1, offset),
-      connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1, offset),
-    },
-    waitLengthMs
-  );
-}
-
-function getMetricsKpi({ waitLengthMs }: { waitLengthMs?: number } = {}) {
-  return fakeApi(
-    { topics: 3, topicPartitions: 6, consumerGroups: 12 },
-    waitLengthMs
-  );
-}
-
-function getTopicsMetrics({
-  duration,
-  selectedTopic,
-  offset,
-  waitLengthMs,
-}: {
-  duration: DurationOptions;
-  selectedTopic?: string;
-  offset?: number;
-  waitLengthMs?: number;
-}) {
-  return fakeApi(
-    {
-      kafkaTopics: ["lorem", "dolor", "ipsum"],
-      metricsTopics: ["lorem", "dolor", "ipsum", "sit"],
-      bytesIncoming: makeGrowingMetrics(
-        duration,
-        0,
-        9,
-        10 ** 7,
-        10 ** 4,
-        offset
-      ),
-      bytesOutgoing: makeGrowingMetrics(
-        duration,
-        3,
-        8,
-        10 ** 7,
-        10 ** 4,
-        offset
-      ),
-      incomingMessageRate: makeMetrics(duration, 3, 8, 10, offset),
-      bytesPerPartition: selectedTopic
-        ? {
-            "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-            "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-            "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
-          }
-        : {},
-    },
-    waitLengthMs
-  );
-}
-
-function getTopicsMetricsWithDeletedTopicMetric({
-  duration,
-  selectedTopic,
-  offset,
-  waitLengthMs,
-}: {
-  duration: DurationOptions;
-  selectedTopic?: string;
-  offset?: number;
-  waitLengthMs?: number;
-}) {
-  const hasMetrics =
-    selectedTopic === undefined ||
-    selectedTopic !== "topic deleted in the past" ||
-    (selectedTopic === "topic deleted in the past" && duration > 60);
-  return fakeApi(
-    {
-      kafkaTopics: ["lorem", "dolor", "ipsum"],
-      metricsTopics:
-        duration <= 60
-          ? ["lorem", "dolor", "ipsum"]
-          : ["lorem", "dolor", "ipsum", "topic deleted in the past"],
-      bytesIncoming: hasMetrics
-        ? makeGrowingMetrics(duration, 0, 9, 10 ** 7, 10 ** 4, offset)
-        : {},
-      bytesOutgoing: hasMetrics
-        ? makeGrowingMetrics(duration, 3, 8, 10 ** 7, 10 ** 4, offset)
-        : {},
-      incomingMessageRate: hasMetrics
-        ? makeMetrics(duration, 3, 8, 10, offset)
-        : {},
-      bytesPerPartition: hasMetrics
-        ? {
-            "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-            "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-            "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
-          }
-        : {},
-    },
-    waitLengthMs
-  );
-}
-
-function getTopicsMetricsOneTopic({ duration, offset, waitLengthMs }) {
-  return fakeApi(
-    {
-      kafkaTopics: ["lorem"],
-      metricsTopics: ["lorem"],
-      bytesIncoming: makeGrowingMetrics(
-        duration,
-        0,
-        9,
-        10 ** 7,
-        10 ** 4,
-        offset
-      ),
-      bytesOutgoing: makeGrowingMetrics(
-        duration,
-        3,
-        8,
-        10 ** 7,
-        10 ** 4,
-        offset
-      ),
-      incomingMessageRate: makeMetrics(duration, 3, 8, 10, offset),
-      bytesPerPartition: {
-        "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-        "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-        "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
-      },
-    },
-    waitLengthMs
-  );
-}
-
-function apiError() {
-  return Promise.reject();
-}

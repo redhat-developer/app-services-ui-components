@@ -98,7 +98,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
                     variant={ButtonVariant.link}
                     component="a"
                     target="_blank"
-                    href="http://openshift.com"
+                    href="https://openshift.com"
                   >
                     OpenShift
                     <ExternalLinkAltIcon className="pf-u-ml-xs" />
@@ -151,7 +151,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
                     variant={ButtonVariant.link}
                     component="a"
                     target="_blank"
-                    href="http://openshift.com"
+                    href="https://openshift.com"
                   >
                     {" "}
                     OpenShift
@@ -282,7 +282,7 @@ export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
                     variant={ButtonVariant.link}
                     component="a"
                     target="_blank"
-                    href="http://openshift.com"
+                    href="https://openshift.com"
                   >
                     {" "}
                     OpenShift

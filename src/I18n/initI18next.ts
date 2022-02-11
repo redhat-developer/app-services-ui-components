@@ -44,8 +44,11 @@ export function initI18next(
       // missingKeyHandler: function (lng, ns, key) {
       //   // window.windowError = `Missing i18n key "${key}" in namespace "${ns}" and language "${lng}."`;
       //   // eslint-disable-next-line no-console
-      //   // console.error(window.windowError); // we use these in OpenShift to break tests
+      //   //  console.error(window.windowError); // we use these in OpenShift to break tests
       // },
+    })
+    .then(() => {
+      debug && console.log("Done initializing i18n");
     });
 
   return instance;
