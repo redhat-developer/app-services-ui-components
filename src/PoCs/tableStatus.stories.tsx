@@ -7,7 +7,7 @@ export default {
   title: 'pocs/TableStatus',
   component: TableStatus,
   args: {
-    instanceName: "string",
+    value: "ready",
   },
 } as ComponentMeta<typeof TableStatus>;
 
@@ -19,7 +19,6 @@ export const Ready = Template.bind({});
 Ready.args = {
   value: "ready",
 };
-
 
 export const Creating = Template.bind({});
 Creating.args = {
