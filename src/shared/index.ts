@@ -5,3 +5,4 @@ export * from "./FormatDate";
 export * from "./Loading";
 export * from "./PageNotFound";
 export * from "./ModalProvider";
+export * from "./SolidLabel";
