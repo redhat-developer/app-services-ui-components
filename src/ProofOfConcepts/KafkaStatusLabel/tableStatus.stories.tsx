@@ -37,9 +37,10 @@ Ready.args = {
 Ready.parameters = {
   docs: {
     description: {
-        story: 'The Kafka instance was successfully created and is now either ready for use or in use.'
+      story:
+        "The Kafka instance was successfully created and is now either ready for use or in use.",
     },
-  },  
+  },
 };
 
 export const Creating = Template.bind({});
@@ -49,9 +50,10 @@ Creating.args = {
 Creating.parameters = {
   docs: {
     description: {
-      story: 'A user has just selected to create a Kafka instance. The "Creating" status is shown in the table along with some grey text informing the user that their instance will be ready shortly. (The "Creating" status is clickable which opens a popover with more in-depth information about the creation process).'
+      story:
+        'A user has just selected to create a Kafka instance. The "Creating" status is shown in the table along with some grey text informing the user that their instance will be ready shortly. (The "Creating" status is clickable which opens a popover with more in-depth information about the creation process).',
     },
-  },  
+  },
 };
 
 export const CreatingOver15Minutes = Template.bind({});
@@ -61,9 +63,10 @@ CreatingOver15Minutes.args = {
 CreatingOver15Minutes.parameters = {
   docs: {
     description: {
-      story: 'The instance creation is taking longer than fifteen minutes. This is significantly longer than expected. A plain inline warning alert displays below the "Creating" status in the table.'
+      story:
+        'The instance creation is taking longer than fifteen minutes. This is significantly longer than expected. A plain inline warning alert displays below the "Creating" status in the table.',
     },
-  },  
+  },
 };
 
 export const CreatingOver30Minutes = Template.bind({});
@@ -73,9 +76,10 @@ CreatingOver30Minutes.args = {
 CreatingOver30Minutes.parameters = {
   docs: {
     description: {
-      story: 'The instance creation is taking longer than thirty minutes. This is significantly longer than expected. An error plain inline alert displays below the "Creating" status in the table.'
+      story:
+        'The instance creation is taking longer than thirty minutes. This is significantly longer than expected. An error plain inline alert displays below the "Creating" status in the table.',
     },
-  },  
+  },
 };
 
 export const Deleting = Template.bind({});
@@ -85,9 +89,10 @@ Deleting.args = {
 Deleting.parameters = {
   docs: {
     description: {
-      story: 'The user has selected to delete the Kafka instance and it is in the process of being deleted.'
+      story:
+        "The user has selected to delete the Kafka instance and it is in the process of being deleted.",
     },
-  },  
+  },
 };
 
 export const Failed = Template.bind({});
@@ -97,7 +102,7 @@ Failed.args = {
 Failed.parameters = {
   docs: {
     description: {
-      story: 'Something has gone wrong with the Kafka instance .'
+      story: "Something has gone wrong with the Kafka instance .",
     },
   },
 };
