@@ -1,4 +1,4 @@
-enum AclOperation {
+export enum AclOperation {
   All = "ALL",
   Read = "READ",
   Write = "WRITE",
@@ -10,11 +10,9 @@ enum AclOperation {
   AlterConfigs = "ALTER_CONFIGS",
 }
 
-enum AclResourceType {
+export enum AclResourceType {
   Group = "GROUP",
   Topic = "TOPIC",
   Cluster = "CLUSTER",
   TransactionalId = "TRANSACTIONAL_ID",
 }
-
-export { AclOperation, AclResourceType };

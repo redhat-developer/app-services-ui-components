@@ -11,26 +11,22 @@ import {
   TreeView,
   TreeViewDataItem,
 } from "@patternfly/react-core";
-import { SolidLabel } from "../../shared/SolidLabel";
-import { AclResourceType, AclOperation } from "../../utils";
+import { SolidLabel } from "../SolidLabel";
+import { AclResourceType, AclOperation } from "../../types";
 
-export type AclsTreeViewProps = {
-  setSelectedItems: (items: TreeViewDataItem[]) => void;
+export type ResourceTypeOperationFilterProps = {
+  setCheckedItems: (items: TreeViewDataItem[]) => void;
+  checkedItems: TreeViewDataItem[];
 };
 
-export const AclsTreeView: React.VFC<AclsTreeViewProps> = ({
-  setSelectedItems,
-}) => {
+export const ResourceTypeOperationFilter: React.VFC<
+  ResourceTypeOperationFilterProps
+> = ({ setCheckedItems, checkedItems = [] }) => {
   const { t } = useTranslation("manage-kafka-permissions");
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [checkedItems, setCheckedItems] = useState<TreeViewDataItem[]>([]);
   const toggleRef = useRef<HTMLButtonElement>();
   const menuRef = useRef<HTMLDivElement>();
-
-  useEffect(() => {
-    setSelectedItems && setSelectedItems(checkedItems);
-  }, [checkedItems]);
 
   const consumerGroupOptions: TreeViewDataItem[] = [
     {

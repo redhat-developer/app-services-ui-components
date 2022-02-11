@@ -1,18 +1,16 @@
 import React from "react";
 import { Label, LabelProps } from "@patternfly/react-core";
-import { AclResourceType } from "../../utils";
+import { AclResourceType } from "../../types";
 import "./SolidLabel.css";
 
 export type SolidLabelProps = {
   variant: AclResourceType;
 };
 
-type Variant =
-  | {
-      labelColor: LabelProps["color"];
-      content: string;
-    }
-  | undefined;
+type Variant = {
+  labelColor: LabelProps["color"];
+  content: string;
+};
 
 export const SolidLabel: React.VFC<SolidLabelProps> = ({ variant }) => {
   const getVariant = (): Variant => {
@@ -25,8 +23,6 @@ export const SolidLabel: React.VFC<SolidLabelProps> = ({ variant }) => {
         return { labelColor: "blue", content: "T" };
       case AclResourceType.TransactionalId:
         return { labelColor: "orange", content: "TI" };
-      default:
-        return;
     }
   };
 
