@@ -14,6 +14,22 @@ const Template: ComponentStory<typeof TableStatus> = (args) => (
   <TableStatus {...args} />
 );
 
+export const AllStatuesAtOnce = () => (
+  <>
+    <TableStatus value={"ready"} />
+    <br />
+    <TableStatus value={"creating"} />
+    <br />
+    <TableStatus value={"creatingWarning"} />
+    <br />
+    <TableStatus value={"creatingError"} />
+    <br />
+    <TableStatus value={"deleting"} />
+    <br />
+    <TableStatus value={"failed"} />
+  </>
+);
+
 export const Ready = Template.bind({});
 Ready.args = {
   value: "ready",
