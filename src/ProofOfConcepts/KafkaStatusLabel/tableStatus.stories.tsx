@@ -1,10 +1,9 @@
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import React from "react";
 
-import { TableStatus } from './tableStatus';
+import { TableStatus } from "./tableStatus";
 
 export default {
-  title: 'pocs/TableStatus',
   component: TableStatus,
   args: {
     value: "ready",
