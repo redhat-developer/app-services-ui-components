@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof ResourceTypeOperationFilter> = () => {
   const [checkedItems, setCheckedItems] = useState([]);
   return (
     <ResourceTypeOperationFilter
-      setCheckedItems={setCheckedItems}
+      onCheckedItemsChange={setCheckedItems}
       checkedItems={checkedItems}
     />
   );

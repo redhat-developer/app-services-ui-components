@@ -15,13 +15,13 @@ import { SolidLabel } from "../SolidLabel";
 import { AclResourceType, AclOperation } from "../../types";
 
 export type ResourceTypeOperationFilterProps = {
-  setCheckedItems: (items: TreeViewDataItem[]) => void;
+  onCheckedItemsChange: (items: TreeViewDataItem[]) => void;
   checkedItems: TreeViewDataItem[];
 };
 
 export const ResourceTypeOperationFilter: React.VFC<
   ResourceTypeOperationFilterProps
-> = ({ setCheckedItems, checkedItems = [] }) => {
+> = ({ onCheckedItemsChange, checkedItems = [] }) => {
   const { t } = useTranslation("manage-kafka-permissions");
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -276,7 +276,7 @@ export const ResourceTypeOperationFilter: React.VFC<
       .map((opt) => Object.assign({}, opt))
       .filter((item) => filterItems(item, treeViewItem));
     const flatCheckedItems = flattenTree(checkedItemTree);
-    setCheckedItems((prevCheckedItems) =>
+    onCheckedItemsChange((prevCheckedItems) =>
       checked
         ? prevCheckedItems.concat(
             flatCheckedItems.filter(
@@ -289,26 +289,32 @@ export const ResourceTypeOperationFilter: React.VFC<
     );
   };
 
-  const handleMenuKeys = (event: KeyboardEvent) => {
-    if (!isOpen) {
-      return;
-    }
-    if (
-      menuRef?.current?.contains(event.target as Node) ||
-      toggleRef?.current?.contains(event.target as Node)
-    ) {
-      if (event.key === "Escape" || event.key === "Tab") {
-        setIsOpen(!isOpen);
-        toggleRef?.current?.focus();
+  const handleMenuKeys = React.useCallback(
+    (event: KeyboardEvent) => {
+      if (!isOpen) {
+        return;
       }
-    }
-  };
+      if (
+        menuRef?.current?.contains(event.target as Node) ||
+        toggleRef?.current?.contains(event.target as Node)
+      ) {
+        if (event.key === "Escape" || event.key === "Tab") {
+          setIsOpen(!isOpen);
+          toggleRef?.current?.focus();
+        }
+      }
+    },
+    [isOpen]
+  );
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (isOpen && !menuRef?.current?.contains(event.target as Node)) {
-      setIsOpen(false);
-    }
-  };
+  const handleClickOutside = React.useCallback(
+    (event: MouseEvent) => {
+      if (isOpen && !menuRef?.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    },
+    [isOpen]
+  );
 
   useEffect(() => {
     window.addEventListener("keydown", handleMenuKeys);
@@ -317,7 +323,7 @@ export const ResourceTypeOperationFilter: React.VFC<
       window.removeEventListener("keydown", handleMenuKeys);
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [isOpen, menuRef]);
+  }, [isOpen, menuRef, handleMenuKeys, handleClickOutside]);
 
   const onToggleClick = (ev: React.MouseEvent) => {
     ev.stopPropagation(); // Stop handleClickOutside from handling
