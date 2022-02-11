@@ -1,0 +1,142 @@
+.pf-c-page__main-section.appsrv-marketing--banner {
+  --appsrv-marketing--banner--before--GridTemplateColumns: 1fr;
+  --appsrv-marketing--banner--ColumnGap: var(--pf-global--spacer--2xl);
+  --appsrv-marketing--banner__tagline--Color: var(
+    --pf-global--Color--light-300
+  );
+  --appsrv-marketing--banner--Padding: var(--pf-global--spacer--lg);
+  --appsrv-marketing--banner--PaddingTop: var(
+    --appsrv-marketing--banner--Padding
+  );
+  --appsrv-marketing--banner--PaddingRight: var(
+    --appsrv-marketing--banner--Padding
+  );
+  --appsrv-marketing--banner--PaddingBottom: var(
+    --appsrv-marketing--banner--Padding
+  );
+  --appsrv-marketing--banner--PaddingLeft: var(
+    --appsrv-marketing--banner--Padding
+  );
+  --appsrv-marketing--banner--before--Offset--top: calc(
+    var(--appsrv-marketing--banner--PaddingTop) * -1
+  );
+  --appsrv-marketing--banner--before--Offset--bottom: calc(
+    var(--appsrv-marketing--banner--PaddingBottom) * -1
+  );
+  --appsrv-marketing--banner--before--Offset--right: calc(
+    var(--appsrv-marketing--banner--PaddingRight) * -1
+  );
+  --appsrv-marketing--banner--before--Offset--left: calc(
+    var(--appsrv-marketing--banner--PaddingLeft) * -1
+  );
+  display: grid;
+  grid-template-columns: var(
+    --appsrv-marketing--banner--before--GridTemplateColumns
+  );
+  grid-template-areas: "content";
+  grid-gap: var(--appsrv-marketing--banner--ColumnGap);
+  padding-top: var(--appsrv-marketing--banner--PaddingTop);
+  padding-right: var(--appsrv-marketing--banner--PaddingRight);
+  padding-bottom: var(--appsrv-marketing--banner--PaddingBottom);
+  padding-left: var(--appsrv-marketing--banner--PaddingLeft);
+}
+
+@media screen and (min-width: 768px) {
+  .pf-c-page__main-section.appsrv-marketing--banner {
+    --appsrv-marketing--banner--Padding: var(--pf-global--spacer--2xl);
+    --appsrv-marketing--banner--before--Opacity: 0.65;
+    --appsrv-marketing--banner--before--GridTemplateColumns: 2fr 1fr;
+    grid-template-areas: "content graphic";
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .pf-c-page__main-section.appsrv-marketing--banner {
+    --appsrv-marketing--banner--before--GridTemplateColumns: 2fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .pf-c-page__main-section.appsrv-marketing--banner {
+    --appsrv-marketing--banner--before--Opacity: 1;
+  }
+}
+
+.pf-c-page__main-section.appsrv-marketing--banner:before {
+  content: "";
+  grid-area: graphic;
+  margin-top: var(--appsrv-marketing--banner--before--Offset--top);
+  margin-right: var(--appsrv-marketing--banner--before--Offset--right);
+  margin-bottom: var(--appsrv-marketing--banner--before--Offset--bottom);
+  background-image: var(--appsrv-marketing--banner--before--BackgroundImage);
+  background-size: var(--appsrv-marketing--banner--before--BackgroundSize);
+  background-repeat: var(--appsrv-marketing--banner--before--BackgroundRepeat);
+  background-position-y: var(
+    --appsrv-marketing--banner--before--BackgroundPositionY
+  );
+  opacity: var(--appsrv-marketing--banner--before--Opacity);
+}
+
+.pf-c-page__main-section.appsrv-marketing--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary {
+  color: var(--pf-global--primary-color-100);
+  background-color: var(--pf-global--palette--blue-400);
+}
+
+.pf-c-page__main-section.appsrv-marketing--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:hover,
+.pf-c-page__main-section.appsrv-marketing--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:focus,
+.pf-c-page__main-section.appsrv-marketing--banner[class*="pf-m-dark-"].pf-c-page__main-section
+  .pf-c-button.pf-m-primary:active {
+  color: var(--pf-global--primary-color-100);
+  background-color: var(--pf-global--palette--blue-500);
+}
+
+.appsrv-marketing--banner--text-only {
+  font-size: var(--pf-global--FontSize--xl);
+  text-align: center;
+  max-width: 800px;
+}
+
+.appsrv-marketing--page-section--marketing,
+.appsrv-marketing--page-section--video {
+  --pf-c-page__main-section--PaddingTop: var(--pf-global--spacer--xl);
+  --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--lg);
+  --pf-c-page__main-section--PaddingBottom: var(--pf-global--spacer--xl);
+  --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--lg);
+}
+
+.appsrv-marketing--page-section--marketing .pf-l-grid.pf-m-gutter,
+.appsrv-marketing--page-section--video .pf-l-grid.pf-m-gutter {
+  --pf-l-grid--m-gutter--GridGap: var(--pf-global--spacer--lg);
+}
+
+@media screen and (min-width: pf-global--breakpoint--md) {
+  .appsrv-marketing--page-section--marketing,
+  .appsrv-marketing--page-section--video {
+    --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--2xl);
+    --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--2xl);
+  }
+}
+
+.appsrv-marketing--banner__tagline {
+  color: var(--appsrv-marketing--banner__tagline--Color);
+  font-size: var(--pf-global--FontSize--lg);
+  margin-bottom: var(--pf-global--spacer--lg);
+}
+
+.appsrv-marketing--video {
+  position: relative;
+  /* important only because somehow PF styles are coming in again after */
+  padding-bottom: 56.25% !important; /* 16:9 */
+  height: 0;
+}
+
+.appsrv-marketing--video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

@@ -2,5 +2,8 @@ dist
 node_modules
 .idea
 .DS_Store
+.eslintcache
+.vscode
 storybook-static
 build-storybook.log
+coverage

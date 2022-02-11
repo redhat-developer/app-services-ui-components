@@ -17,15 +17,15 @@
   padding-bottom: var(--pf-global--spacer--xs);
   padding-left: var(--pf-global--spacer--sm);
   border-radius: var(--pf-global--BorderRadius--lg);
-  border: 1px solid ;
+  border: 1px solid;
   border-radius: 30em;
   z-index: 100;
 }
 
-.show-ouia [data-ouia-component-id*=OUIA-Generated] {
+.show-ouia [data-ouia-component-id*="OUIA-Generated"] {
   outline-color: rgb(201, 25, 11);
 }
-.show-ouia [data-ouia-component-id*=OUIA-Generated]::before {
+.show-ouia [data-ouia-component-id*="OUIA-Generated"]::before {
   background: var(--pf-global--palette--red-50);
   border-color: rgb(201, 25, 11);
 }

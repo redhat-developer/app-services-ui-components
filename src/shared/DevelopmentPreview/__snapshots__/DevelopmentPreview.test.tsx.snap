@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders HideDevPreview story 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="i18n-suspense"
+    >
+      loading
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Renders ShowDevPreview story 1`] = `
+<body>
+  <div>
+    <div
+      data-testid="i18n-suspense"
+    >
+      loading
+    </div>
+  </div>
+</body>
+`;
