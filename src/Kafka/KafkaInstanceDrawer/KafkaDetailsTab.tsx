@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   TextContent,
@@ -19,7 +19,7 @@ type KafkaDetailsTabProps = {
   region: string;
 };
 
-export const KafkaDetailsTab: React.FunctionComponent<KafkaDetailsTabProps> = ({
+export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
   id,
   createdAt,
   updatedAt,

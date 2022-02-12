@@ -1,4 +1,4 @@
-import React, { useEffect, useState, VoidFunctionComponent } from "react";
+import { useEffect, useState, VoidFunctionComponent } from "react";
 import {
   ToolbarItem,
   Select,

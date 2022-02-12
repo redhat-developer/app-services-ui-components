@@ -1,5 +1,5 @@
 import { useInterpret } from "@xstate/react";
-import React, { createContext, FunctionComponent } from "react";
+import { createContext, FunctionComponent } from "react";
 import { InterpreterFrom } from "xstate";
 import {
   KafkaInstanceMetricsMachine,

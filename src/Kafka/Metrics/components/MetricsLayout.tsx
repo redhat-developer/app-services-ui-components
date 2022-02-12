@@ -1,5 +1,5 @@
 import { Grid, GridItem, PageSection } from "@patternfly/react-core";
-import React, { ReactElement, FunctionComponent } from "react";
+import { ReactElement, FunctionComponent } from "react";
 
 type MetricsLayoutProps = {
   topicsKpi: ReactElement;

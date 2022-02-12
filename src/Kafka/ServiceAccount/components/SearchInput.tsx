@@ -6,7 +6,8 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
-import React, {
+import {
+  KeyboardEvent,
   useCallback,
   useRef,
   useState,
@@ -44,7 +45,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
   }, [canSearch, onSearch, value]);
 
   const onKeyPress = useCallback(
-    (event: React.KeyboardEvent) => {
+    (event: KeyboardEvent) => {
       if (event.key === "Enter") {
         handleSearch();
       }

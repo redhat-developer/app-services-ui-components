@@ -7,11 +7,7 @@ import {
   Stack,
   StackItem,
 } from "@patternfly/react-core";
-import React, {
-  FunctionComponent,
-  useState,
-  VoidFunctionComponent,
-} from "react";
+import { FunctionComponent, useState, VoidFunctionComponent } from "react";
 
 type KafkaStatusPopover3Props = {
   shouldStartOpen?: boolean;

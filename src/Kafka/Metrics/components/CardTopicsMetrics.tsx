@@ -1,5 +1,5 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   DurationOptions,

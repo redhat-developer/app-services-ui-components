@@ -1,4 +1,3 @@
-import React from "react";
 import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./DataSciencePage.stories";

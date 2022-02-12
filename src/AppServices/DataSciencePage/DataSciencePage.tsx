@@ -11,7 +11,7 @@ import {
   TitleSizes,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
-import React from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   MarketingPageHero,
@@ -20,7 +20,7 @@ import {
 } from "../components";
 import { RhodsMlTechnology } from "../../images";
 
-export const DataSciencePage: React.FunctionComponent = () => {
+export const DataSciencePage: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <>

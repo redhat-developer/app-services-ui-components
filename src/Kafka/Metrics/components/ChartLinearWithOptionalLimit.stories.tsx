@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";

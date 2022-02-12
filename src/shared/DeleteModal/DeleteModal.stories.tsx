@@ -1,7 +1,6 @@
 import { Alert } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useMachine } from "@xstate/react";
-import React from "react";
 import { createMachine } from "xstate";
 
 import {

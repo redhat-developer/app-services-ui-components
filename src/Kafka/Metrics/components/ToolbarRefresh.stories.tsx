@@ -1,7 +1,6 @@
 import { Toolbar, ToolbarContent } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import sub from "date-fns/sub";
-import React from "react";
 
 import { ToolbarRefresh } from "./ToolbarRefresh";
 

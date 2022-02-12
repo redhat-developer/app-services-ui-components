@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { findByTestId, fireEvent, within } from "@storybook/testing-library";
 import { expect } from "@storybook/jest";
 import { Metrics } from "./Metrics";

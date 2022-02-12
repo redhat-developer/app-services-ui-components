@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FormSelect,
@@ -15,7 +15,7 @@ export type CloudRegionProps = {
   validated?: SelectProps["validated"];
 };
 
-export const CloudRegionSelect: React.FunctionComponent<CloudRegionProps> = ({
+export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   value,
   regions,
   isDisabled,

@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { APIManagementPage } from "./APIManagementPage";
 
 export default {

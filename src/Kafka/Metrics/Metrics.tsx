@@ -5,7 +5,7 @@ import {
   MetricsLayout,
   CardKafkaInstanceMetrics,
 } from "./components";
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 import {
   KafkaInstanceMetricsProvider,
   KafkaInstanceMetricsProviderProps,

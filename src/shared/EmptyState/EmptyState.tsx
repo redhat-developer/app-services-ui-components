@@ -1,4 +1,9 @@
-import React, { ComponentType, VoidFunctionComponent } from "react";
+import {
+  ComponentType,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+  VoidFunctionComponent,
+} from "react";
 import {
   Button,
   ButtonProps,
@@ -41,14 +46,14 @@ export type EmptyStateProps = {
   };
   emptyStateIconProps?: EmptyStateIconProps;
   emptyStateBodyProps?: Omit<EmptyStateBodyProps, "children"> & {
-    body?: string | React.ReactNode;
+    body?: string | ReactNode;
   };
   buttonProps?: Omit<ButtonProps, "children"> & {
     title?: string;
-    onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+    onClick?: (event: ReactMouseEvent<HTMLButtonElement, MouseEvent>) => void;
     "data-testid"?: string;
   };
-  children?: React.ReactNode;
+  children?: ReactNode;
 };
 
 export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({

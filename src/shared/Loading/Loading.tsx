@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import {
   Bullseye,
   BullseyeProps,
@@ -11,7 +11,7 @@ export type LoadingProps = {
   spinnerProps?: SpinnerProps;
 };
 
-export const Loading: React.FunctionComponent<LoadingProps> = ({
+export const Loading: FunctionComponent<LoadingProps> = ({
   bullseyeProps,
   spinnerProps,
 }: LoadingProps) => {

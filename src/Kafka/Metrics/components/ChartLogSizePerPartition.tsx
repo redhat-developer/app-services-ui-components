@@ -9,7 +9,7 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_blue_300";
 import chart_color_green_300 from "@patternfly/react-tokens/dist/esm/chart_color_green_300";
-import React, { FunctionComponent, ReactElement } from "react";
+import { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
 import { PartitionBytesMetric } from "../types";

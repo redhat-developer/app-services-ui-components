@@ -6,7 +6,7 @@ import {
   EmptyStateBody,
 } from "@patternfly/react-core";
 import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const EmptyStateNoTopicSelected: VoidFunctionComponent = () => {

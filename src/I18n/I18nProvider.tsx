@@ -1,5 +1,5 @@
 import { ResourceLanguage } from "i18next";
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { I18nextProvider } from "react-i18next";
 import { initI18next } from "./initI18next";
 

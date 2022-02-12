@@ -19,7 +19,7 @@ import {
   TitleSizes,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
-import React from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiManagementMechApiFullColorPink } from "../../images";
 import {
@@ -28,7 +28,7 @@ import {
   MarketingPageVideoCard,
 } from "../components";
 
-export const APIManagementPage: React.FunctionComponent = () => {
+export const APIManagementPage: FunctionComponent = () => {
   const { t } = useTranslation();
 
   return (

@@ -9,7 +9,7 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
 import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
 import "./style.css";
