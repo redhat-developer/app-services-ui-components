@@ -1,5 +1,6 @@
 import React, { FunctionComponent, ReactElement } from "react";
 import {
+  act,
   render,
   RenderOptions,
   RenderResult,
@@ -56,8 +57,14 @@ async function waitForI18n(r: RenderResult) {
   });
 }
 
+async function waitForPopper() {
+  await act(async () => {
+    /* let popper do its updates */
+  });
+}
+
 // re-export everything
 export * from "@testing-library/react";
 
 // override render method
-export { customRender as render, waitForI18n };
+export { customRender as render, waitForI18n, waitForPopper };

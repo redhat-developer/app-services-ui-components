@@ -1,12 +1,9 @@
 import React from "react";
-// import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 
-import {
-  render,
-  waitForI18n,
-} from "../../../../test-utils";
+import { render, waitForI18n, waitForPopper } from "../../../../test-utils";
 import * as stories from "./ResourceTypeOperationFilter.stories";
+import { userEvent } from "@storybook/testing-library";
 
 const { ResourceTypeOperationFilterStory } = composeStories(stories);
 
@@ -41,9 +38,10 @@ describe("<ResourceTypeOperationFilter/>", () => {
     //   await comp.findByTestId("acls-treeview-menu-toggle")
     // );
 
-    //const button = await comp.getByText(/Filter by resource type operation/i);
+    // const button = await comp.getByText(/Filter by resource type operation/i);
     // button.click();
 
-    //userEvent.click(await comp.findByText("Filter by resource type operation"));
+    userEvent.click(await comp.findByText("Filter by resource type operation"));
+    await waitForPopper();
   });
 });
