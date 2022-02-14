@@ -2,7 +2,6 @@ import {
   Popover,
   ProgressStep,
   ProgressStepper,
-  Button,
   Stack,
   StackItem,
 } from "@patternfly/react-core";
@@ -13,6 +12,9 @@ type KafkaStatusPopoverProps = {
 } & KafkaStatusPopoverBodyProps;
 
 /**
+ * <strong style="font-size:200%">Heads up! This component is promoted to production</strong>
+ * Find the latest implementation under `Kafka/Kafka Instance Status/Kafka Instance Status/components/Status Popover`
+ *
  *<strong> Introduction/Background </strong>
  *
  *This is a popover that can be reached from the Kafka Instance table while the status of the instance in question is “Creating”. A Kafka instance usually takes a few minutes to create. The purpose of this popover is to give the user some insights into the creation process of their instance while they wait for it to be available to use.

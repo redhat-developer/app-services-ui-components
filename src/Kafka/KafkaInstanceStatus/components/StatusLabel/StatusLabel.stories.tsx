@@ -1,31 +1,47 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { TableStatus } from "./tableStatus";
+import { StatusLabel } from "./StatusLabel";
 
 export default {
-  component: TableStatus,
+  component: StatusLabel,
   args: {
-    value: "ready",
+    instanceName: "string",
   },
-} as ComponentMeta<typeof TableStatus>;
+} as ComponentMeta<typeof StatusLabel>;
 
-const Template: ComponentStory<typeof TableStatus> = (args) => (
-  <TableStatus {...args} />
+const Template: ComponentStory<typeof StatusLabel> = (args) => (
+  <StatusLabel {...args} />
 );
 
 export const AllStatutesAtOnce = () => (
   <>
-    <TableStatus value={"ready"} />
+    <pre>ready</pre>
+    <StatusLabel value={"ready"} />
     <br />
-    <TableStatus value={"creating"} />
+    <pre>accepted</pre>
+    <StatusLabel value={"accepted"} />
     <br />
-    <TableStatus value={"creatingWarning"} />
+    <pre>provisioning</pre>
+    <StatusLabel value={"provisioning"} />
     <br />
-    <TableStatus value={"creatingError"} />
+    <pre>preparing</pre>
+    <StatusLabel value={"preparing"} />
     <br />
-    <TableStatus value={"deleting"} />
+    <pre>accepted</pre> over 15 minutes
+    <StatusLabel value={"accepted"} showWarning={true} />
     <br />
-    <TableStatus value={"failed"} />
+    <pre>accepted</pre> over 30 minutes
+    <StatusLabel value={"accepted"} showError={true} />
+    <br />
+    <pre>deleting</pre>
+    <StatusLabel value={"deleting"} />
+    <br />
+    <pre>deprovision</pre>
+    <StatusLabel value={"deprovision"} />
+    <br />
+    <pre>failed</pre>
+    <StatusLabel value={"failed"} />
+    <br />
   </>
 );
 
@@ -42,11 +58,11 @@ Ready.parameters = {
   },
 };
 
-export const Creating = Template.bind({});
-Creating.args = {
-  value: "creating",
+export const Accepted = Template.bind({});
+Accepted.args = {
+  value: "accepted",
 };
-Creating.parameters = {
+Accepted.parameters = {
   docs: {
     description: {
       story:
@@ -55,9 +71,22 @@ Creating.parameters = {
   },
 };
 
+export const Provisioning = Template.bind({});
+Provisioning.args = {
+  value: "provisioning",
+};
+Provisioning.parameters = Accepted.parameters;
+
+export const Preparing = Template.bind({});
+Preparing.args = {
+  value: "preparing",
+};
+Preparing.parameters = Accepted.parameters;
+
 export const CreatingOver15Minutes = Template.bind({});
 CreatingOver15Minutes.args = {
-  value: "creatingWarning",
+  value: "accepted",
+  showWarning: true,
 };
 CreatingOver15Minutes.parameters = {
   docs: {
@@ -70,7 +99,8 @@ CreatingOver15Minutes.parameters = {
 
 export const CreatingOver30Minutes = Template.bind({});
 CreatingOver30Minutes.args = {
-  value: "creatingError",
+  value: "accepted",
+  showError: true,
 };
 CreatingOver30Minutes.parameters = {
   docs: {
@@ -93,6 +123,12 @@ Deleting.parameters = {
     },
   },
 };
+
+export const Deprovision = Template.bind({});
+Deprovision.args = {
+  value: "deprovision",
+};
+Deprovision.parameters = Deleting.parameters;
 
 export const Failed = Template.bind({});
 Failed.args = {

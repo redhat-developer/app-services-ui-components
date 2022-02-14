@@ -1,11 +1,11 @@
 import {
   Alert,
   Button,
-  Spinner,
-  HelperText,
-  HelperTextItem,
   Flex,
   FlexItem,
+  HelperText,
+  HelperTextItem,
+  Spinner,
   Split,
   SplitItem,
 } from "@patternfly/react-core";
@@ -26,6 +26,9 @@ type TableStatusProps = {
   value: KafkaStatus;
 };
 /**
+ * <strong style="font-size:200%">Heads up! This component is promoted to production</strong>
+ * Find the latest implementation under `Kafka/Kafka Instance Status/Kafka Instance Status/components/Status Label`
+ *
  *<strong> Introduction </strong>
  *These are the various statuses that can show in the Kafka instances table under the "Status" header.
  */
