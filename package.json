@@ -27,7 +27,8 @@
     "parse-i18n": "i18next 'src/**/*.tsx'",
     "prepare": "npm run clean && npm run package && husky install",
     "storybook": "start-storybook -p 6006",
-    "test": "jest"
+    "test": "jest",
+    "test:watch":"npm run test -- --watch"
   },
   "repository": {
     "type": "git",

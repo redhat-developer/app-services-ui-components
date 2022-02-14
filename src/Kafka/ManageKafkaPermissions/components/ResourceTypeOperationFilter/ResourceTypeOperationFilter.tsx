@@ -25,8 +25,8 @@ export const ResourceTypeOperationFilter: React.VFC<
   const { t } = useTranslation("manage-kafka-permissions");
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const toggleRef = useRef<HTMLButtonElement>();
-  const menuRef = useRef<HTMLDivElement>();
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const consumerGroupOptions: TreeViewDataItem[] = [
     {
@@ -233,7 +233,7 @@ export const ResourceTypeOperationFilter: React.VFC<
   const filterItems = (
     item: TreeViewDataItem,
     checkedItem: TreeViewDataItem
-  ): TreeViewDataItem | boolean | undefined => {
+  ): TreeViewDataItem | boolean => {
     if (item.id === checkedItem.id) {
       return true;
     }
@@ -246,7 +246,7 @@ export const ResourceTypeOperationFilter: React.VFC<
       );
     }
 
-    return undefined;
+    return false;
   };
 
   const onCheck = (
@@ -344,9 +344,10 @@ export const ResourceTypeOperationFilter: React.VFC<
 
   const toggle = (
     <MenuToggle
-      ref={toggleRef as React.RefObject<HTMLButtonElement>}
+      ref={toggleRef}
       onClick={onToggleClick}
       isExpanded={isOpen}
+      data-testid="acls-treeview-menu-toggle"
     >
       {t("acls_treeview.treeview_placeholder")}
     </MenuToggle>
@@ -358,7 +359,7 @@ export const ResourceTypeOperationFilter: React.VFC<
   const transactionalIdMapped = transactionalIdOptions.map(mapTree);
 
   const menu = (
-    <Menu ref={menuRef as React.RefObject<HTMLDivElement>}>
+    <Menu ref={menuRef} data-testid="acls-treeview-menu">
       <MenuContent>
         <MenuList>
           <MenuGroup>
