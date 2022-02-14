@@ -6,8 +6,8 @@ export const AppServicesOverviewIconPattern = new URL(
   "../static/images/AppServicesOverview-IconPattern.svg",
   import.meta.url
 ).href;
-export const LogoRedHatDataServicesAStandardRgb = new URL(
-  "../static/images/Logo-Red_Hat-Data_Services-A-Standard-RGB.png",
+export const LogoRedHatOpenShiftDatabaseAccessAStandardRgb = new URL(
+  "../static/images/Logo-Red_Hat-OpenShift_Database_Access-A-Standard-RGB.png",
   import.meta.url
 ).href;
 export const LogoRedHatOpenShiftApiManagementAStandardRgb = new URL(

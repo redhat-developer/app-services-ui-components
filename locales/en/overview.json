@@ -26,5 +26,6 @@
   "rhosrCallToActionButton": "Create an instance",
   "rhosrMainText": "Service Registry provides a metadata layer for developers and applications to publish, discover and evolve schema definitions and API designs.",
   "rhosrSecondaryText": "This service is fully hosted and managed by Red Hat and offered at no cost to Streams for Apache Kafka and API Management users.",
-  "rhosrTitle": "Red Hat OpenShift Service Registry"
+  "rhosrTitle": "Red Hat OpenShift Service Registry",
+  "servicePreview": "Service Preview"
 }
