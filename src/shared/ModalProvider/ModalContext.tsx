@@ -1,5 +1,10 @@
-import * as React from "react";
-import { MutableRefObject, useRef, useState } from "react";
+import {
+  FunctionComponent,
+  Suspense,
+  MutableRefObject,
+  useRef,
+  useState,
+} from "react";
 import { Modal, ModalProps } from "@patternfly/react-core";
 import { Loading } from "../Loading";
 import {
@@ -21,7 +26,7 @@ type FallbackModalProps<T extends ModalType> = Pick<ModalProps, "variant"> &
   Pick<ModalWrapperProps<T>, "hideModal"> &
   Pick<ModalProps, "title">;
 
-const FallbackModal: React.FunctionComponent<FallbackModalProps<ModalType>> = ({
+const FallbackModal: FunctionComponent<FallbackModalProps<ModalType>> = ({
   variant,
   hideModal,
   title,
@@ -47,7 +52,7 @@ const FallbackModal: React.FunctionComponent<FallbackModalProps<ModalType>> = ({
   );
 };
 
-const ModalWrapper: React.FunctionComponent<ModalWrapperProps<ModalType>> = ({
+const ModalWrapper: FunctionComponent<ModalWrapperProps<ModalType>> = ({
   activeModal,
   hideModal,
   modalRegistry,
@@ -62,7 +67,7 @@ const ModalWrapper: React.FunctionComponent<ModalWrapperProps<ModalType>> = ({
 
   const ModalComponent = entry.lazyComponent;
   return (
-    <React.Suspense
+    <Suspense
       fallback={
         <FallbackModal
           hideModal={hideModal}
@@ -77,11 +82,11 @@ const ModalWrapper: React.FunctionComponent<ModalWrapperProps<ModalType>> = ({
         variant={entry.variant}
         {...activeModal.modalProps}
       />
-    </React.Suspense>
+    </Suspense>
   );
 };
 
-export const ModalProvider: React.FunctionComponent = ({ children }) => {
+export const ModalProvider: FunctionComponent = ({ children }) => {
   const [activeModal, setActiveModal] = useState<
     ActiveModalProps<ModalType> | undefined
   >();

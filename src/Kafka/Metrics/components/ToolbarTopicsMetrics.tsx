@@ -5,7 +5,7 @@ import {
   Toolbar,
   ToolbarContent,
 } from "@patternfly/react-core";
-import React, { FunctionComponent } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { DurationOptions } from "../types";
 import { FilterByTime } from "./FilterByTime";

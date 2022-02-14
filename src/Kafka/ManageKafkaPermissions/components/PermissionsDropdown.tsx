@@ -11,7 +11,8 @@ import {
   MenuProps,
   Popper,
 } from "@patternfly/react-core";
-import React, {
+import {
+  MouseEvent as ReactMouseEvent,
   useCallback,
   useEffect,
   useRef,
@@ -84,7 +85,7 @@ export const PermissionsDropdown: VoidFunctionComponent<
     };
   }, [handleClickOutside, handleMenuKeys, isOpen, menuRef]);
 
-  const onToggleClick = useCallback((open: boolean, ev: React.MouseEvent) => {
+  const onToggleClick = useCallback((open: boolean, ev: ReactMouseEvent) => {
     ev.stopPropagation(); // Stop handleClickOutside from handling
     setTimeout(() => {
       if (menuRef.current) {

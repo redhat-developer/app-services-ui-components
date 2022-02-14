@@ -1,6 +1,6 @@
 import { Popover } from "@patternfly/react-core";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 
 type ChartPopoverProps = {
   title: string;

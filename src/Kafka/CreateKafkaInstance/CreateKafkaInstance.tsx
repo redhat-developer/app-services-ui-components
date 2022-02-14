@@ -12,7 +12,7 @@ import {
   ToggleGroupItem,
   Tooltip,
 } from "@patternfly/react-core";
-import React, { FormEvent, useCallback } from "react";
+import { FunctionComponent, FormEvent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CloudProvidersTiles,
@@ -50,7 +50,7 @@ export type CreateKafkaInstanceProps = {
   onCancel: () => void;
 } & MakeCreateKafkaInstanceMachine;
 
-export const CreateKafkaInstance: React.FunctionComponent<
+export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstanceProps
 > = ({
   getAvailableProvidersAndDefaults,

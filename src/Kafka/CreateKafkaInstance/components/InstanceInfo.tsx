@@ -1,4 +1,4 @@
-import React from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
   TextContent,
@@ -21,7 +21,7 @@ export type InstanceInfoProps = {
   onClickQuickStart: () => void;
 };
 
-const InstanceInfo: React.FC<InstanceInfoProps> = ({
+const InstanceInfo: FC<InstanceInfoProps> = ({
   isLoading,
   isTrial,
   onClickQuickStart,

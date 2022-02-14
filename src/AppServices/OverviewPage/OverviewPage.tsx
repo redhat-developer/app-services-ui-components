@@ -14,7 +14,7 @@ import {
   Title,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons";
-import React from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
@@ -36,7 +36,7 @@ export type OverviewPageProps = {
   toServiceRegistryHref: string;
 };
 
-export const OverviewPage: React.FunctionComponent<OverviewPageProps> = ({
+export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
   toKafkaHref,
   toServiceRegistryHref,
 }) => {

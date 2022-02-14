@@ -1,5 +1,5 @@
 import { ToolbarFilter, ToolbarGroup } from "@patternfly/react-core";
-import React, { VoidFunctionComponent } from "react";
+import { VoidFunctionComponent } from "react";
 import { Search, SearchProps } from "./Search";
 import { SearchCategory } from "../types";
 

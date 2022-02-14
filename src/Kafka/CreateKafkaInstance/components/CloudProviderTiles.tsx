@@ -1,7 +1,7 @@
 import { Skeleton, Tile } from "@patternfly/react-core";
 import { AzureIcon } from "@patternfly/react-icons";
 import AwsIcon from "@patternfly/react-icons/dist/esm/icons/aws-icon";
-import React, { Fragment, VoidFunctionComponent } from "react";
+import { Fragment, VoidFunctionComponent } from "react";
 import { Provider, ProviderInfo } from "../machines";
 
 export type CloudProvidersTileProps = {

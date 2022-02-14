@@ -1,6 +1,6 @@
 import { Alert } from "@patternfly/react-core";
 import { differenceInHours } from "date-fns";
-import React from "react";
+import { FunctionComponent } from "react";
 import { Trans } from "react-i18next";
 import { FormatDate } from "../../../shared";
 
@@ -8,7 +8,7 @@ type DetailsTabAlertProps = {
   expiryDate?: Date;
 };
 
-export const DetailsTabAlert: React.FunctionComponent<DetailsTabAlertProps> = ({
+export const DetailsTabAlert: FunctionComponent<DetailsTabAlertProps> = ({
   expiryDate,
 }) => {
   const hoursLeft = expiryDate ? differenceInHours(expiryDate, Date.now()) : 0;

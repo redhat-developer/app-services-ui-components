@@ -7,7 +7,7 @@ import {
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
 import { FilterIcon } from "@patternfly/react-icons";
-import React, { useEffect, useReducer, VoidFunctionComponent } from "react";
+import { useEffect, useReducer, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchProps } from "./Search";
 import { SearchChips } from "./SearchChips";

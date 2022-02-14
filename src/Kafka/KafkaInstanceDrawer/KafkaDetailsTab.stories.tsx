@@ -1,6 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { addHours } from "date-fns";
-import React from "react";
 import { KafkaDetailsTab } from "./KafkaDetailsTab";
 
 export default {

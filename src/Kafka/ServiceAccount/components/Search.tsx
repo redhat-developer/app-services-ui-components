@@ -1,5 +1,5 @@
 import { InputGroup, ToolbarItem } from "@patternfly/react-core";
-import React, { useState, VoidFunctionComponent } from "react";
+import { useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FilterSelect } from "./FilterSelect";
 import { SearchInput } from "./SearchInput";

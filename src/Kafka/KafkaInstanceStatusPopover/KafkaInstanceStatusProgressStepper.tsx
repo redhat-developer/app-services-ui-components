@@ -1,4 +1,4 @@
-import React from "react";
+import { VFC } from "react";
 
 import {
   ProgressStep,
@@ -23,7 +23,7 @@ type KfkaInstanceStatusProgressStepperProps = {
   isVertical?: boolean;
 };
 
-const KafkaInstanceStatusProgressStepper: React.VFC<
+const KafkaInstanceStatusProgressStepper: VFC<
   KfkaInstanceStatusProgressStepperProps
 > = ({ isVertical, currentStatus, steps }) => {
   const statusOrders: InstanceStatus[] = [

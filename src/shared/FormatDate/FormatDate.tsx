@@ -4,7 +4,6 @@ import {
   formatDuration,
   intervalToDuration,
 } from "date-fns";
-import React from "react";
 import { useState, VoidFunctionComponent } from "react";
 import { useInterval } from "../../utils";
 

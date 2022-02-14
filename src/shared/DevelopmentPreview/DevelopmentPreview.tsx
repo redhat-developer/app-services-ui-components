@@ -1,4 +1,4 @@
-import React from "react";
+import { FunctionComponent } from "react";
 import { Banner, Bullseye, Button, Popover } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import "./DevelopmentPreview.css";
@@ -7,9 +7,10 @@ export type DevelopmentPreviewProps = {
   show?: boolean;
 };
 
-export const DevelopmentPreview: React.FunctionComponent<
-  DevelopmentPreviewProps
-> = ({ children, show }) => {
+export const DevelopmentPreview: FunctionComponent<DevelopmentPreviewProps> = ({
+  children,
+  show,
+}) => {
   const { t } = useTranslation();
   if (show) {
     return (

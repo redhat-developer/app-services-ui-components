@@ -1,7 +1,7 @@
 import { Button } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   CreateKafkaInstance,
   CreateKafkaInstanceProps,

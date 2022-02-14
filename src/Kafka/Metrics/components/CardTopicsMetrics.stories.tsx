@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { CardTopicsMetrics } from "./CardTopicsMetrics";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";

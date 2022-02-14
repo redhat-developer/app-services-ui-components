@@ -9,7 +9,7 @@ import {
   TextVariants,
   Title,
 } from "@patternfly/react-core";
-import React, {
+import {
   CSSProperties,
   FunctionComponent,
   ReactNode,

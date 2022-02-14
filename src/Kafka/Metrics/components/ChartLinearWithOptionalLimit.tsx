@@ -10,7 +10,7 @@ import {
 } from "@patternfly/react-charts";
 import chart_color_black_500 from "@patternfly/react-tokens/dist/esm/chart_color_black_500";
 import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_blue_300";
-import React, { ReactElement, VoidFunctionComponent } from "react";
+import { ReactElement, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
 import { DurationOptions, TimeSeriesMetrics } from "../types";

@@ -1,5 +1,4 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 import { CardKafkaInstanceMetrics } from "./CardKafkaInstanceMetrics";
 import { DurationOptions } from "../types";
 import { makeMetrics } from "../makeMetrics";

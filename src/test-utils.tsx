@@ -1,4 +1,4 @@
-import React, { FunctionComponent, ReactElement } from "react";
+import { Suspense, FunctionComponent, ReactElement } from "react";
 import {
   render,
   RenderOptions,
@@ -35,11 +35,9 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
         }}
         debug={false}
       >
-        <React.Suspense
-          fallback={<div data-testid={suspenseTestId}>loading</div>}
-        >
+        <Suspense fallback={<div data-testid={suspenseTestId}>loading</div>}>
           {children}
-        </React.Suspense>
+        </Suspense>
       </I18nProvider>
     </Router>
   );

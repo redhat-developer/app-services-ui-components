@@ -9,7 +9,7 @@ import {
   ModalVariant,
   TextInput,
 } from "@patternfly/react-core";
-import React, {
+import {
   Children,
   createContext,
   FunctionComponent,

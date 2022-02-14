@@ -1,6 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { add, sub } from "date-fns";
-import React from "react";
 
 import { FormatDate } from "./FormatDate";
 
