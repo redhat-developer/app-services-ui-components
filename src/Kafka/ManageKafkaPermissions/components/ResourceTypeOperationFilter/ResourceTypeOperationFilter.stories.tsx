@@ -47,6 +47,7 @@ AllItemsChecked.args = {
     {
       name: AclOperation.All,
       id: `${AclResourceType.Group}-${AclOperation.All}`,
+      checkProps: { checked: true },
     },
     {
       name: AclOperation.Read,

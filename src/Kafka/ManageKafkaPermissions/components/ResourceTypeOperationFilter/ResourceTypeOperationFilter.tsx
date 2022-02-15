@@ -227,6 +227,7 @@ export const ResourceTypeOperationFilter: React.VFC<
         children: item.children.map(mapTree),
       };
     }
+
     return item;
   };
 
@@ -364,6 +365,7 @@ export const ResourceTypeOperationFilter: React.VFC<
         <MenuList>
           <MenuGroup>
             <TreeView
+              data-testid="acls-consumer-group"
               data={consumerGroupsMapped}
               hasChecks
               onCheck={(event, item) =>
