@@ -501,7 +501,7 @@ exports[`OverviewPage renders 1`] = `
                     <span
                       class="pf-c-label__content"
                     >
-                      Alpha
+                      Service Preview
                     </span>
                   </span>
                 </div>
@@ -556,7 +556,7 @@ exports[`OverviewPage renders 1`] = `
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardRHODS-buttonCTA"
-                href="https://access.redhat.com/documentation/en-us/red_hat_openshift_database_access/1/html-single/quick_start_guide/index"
+                href="https://console.redhat.com/application-services/databases"
                 target="_blank"
               >
                 Learn more

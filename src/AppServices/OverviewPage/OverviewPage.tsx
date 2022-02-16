@@ -19,7 +19,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   AppServicesOverviewIconPattern,
-  LogoRedHatDataServicesAStandardRgb,
+  LogoRedHatOpenShiftDatabaseAccessAStandardRgb,
   LogoRedHatOpenShiftApiManagementAStandardRgb,
   LogoRedHatOpenShiftDataScienceAStandardRgb,
   LogoRedHatOpenShiftServiceRegistryAStandardRgb,
@@ -257,7 +257,7 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardHeader>
               <CardHeaderMain>
                 <img
-                  src={LogoRedHatDataServicesAStandardRgb}
+                  src={LogoRedHatOpenShiftDatabaseAccessAStandardRgb}
                   alt="Red Hat OpenShift Data Science logo"
                   style={{ height: "50px" }}
                 />
@@ -271,7 +271,7 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardBody>
               <Stack hasGutter>
                 <StackItem className="pf-u-mb-lg">
-                  <Label>{t("overview:alpha")}</Label>
+                  <Label>{t("overview:servicePreview")}</Label>
                 </StackItem>
                 <StackItem>{t("overview:dbaasMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
@@ -298,7 +298,7 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
                 variant={ButtonVariant.secondary}
                 component="a"
                 target="_blank"
-                href="https://access.redhat.com/documentation/en-us/red_hat_openshift_database_access/1/html-single/quick_start_guide/index"
+                href="https://console.redhat.com/application-services/databases"
               >
                 {t("overview:learnMore")}{" "}
                 <ExternalLinkAltIcon className="pf-u-ml-sm" />

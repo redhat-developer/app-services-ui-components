@@ -2,7 +2,7 @@ const DUMMYIMAGE = "dummyimage";
 module.exports = {
   ApiManagementMechApiFullColorPink: DUMMYIMAGE,
   AppServicesOverviewIconPattern: DUMMYIMAGE,
-  LogoRedHatDataServicesAStandardRgb: DUMMYIMAGE,
+  LogoRedHatOpenShiftDatabaseAccessAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftApiManagementAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftApplicationServicesAReverseRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftDataScienceAStandardRgb: DUMMYIMAGE,
