@@ -27,7 +27,7 @@ import {
   MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
 } from "./machines";
-import OutlinedClockIcon from '@patternfly/react-icons/dist/esm/icons/outlined-clock-icon';
+import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -273,7 +273,14 @@ export const CreateKafkaInstance: FunctionComponent<
         </FlexItem>
       </Flex>
       <FlexItem>
-          <Alert className="mas-m-modalTop" customIcon={<OutlinedClockIcon />} variant="info" isInline isPlain title="Your Kafka instance will be ready for use shortly after creation." />
+        <Alert
+          className="mas-m-modalTop"
+          customIcon={<OutlinedClockIcon />}
+          variant="info"
+          isInline
+          isPlain
+          title="Your Kafka instance will be ready for use shortly after creation."
+        />
       </FlexItem>
     </Modal>
   );
