@@ -1,6 +1,5 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
-import { KafkaInstanceMetricsModel } from "./machines";
 import { KafkaInstanceMetricsContext } from "./KafkaInstanceMetricsProvider";
 import { DurationOptions } from "./types";
 
@@ -33,14 +32,11 @@ export function useKafkaInstanceMetrics() {
 
   const onDurationChange = useCallback(
     (duration: DurationOptions) =>
-      service.send(KafkaInstanceMetricsModel.events.selectDuration(duration)),
+      service.send({ type: "selectDuration", duration }),
     [service]
   );
 
-  const onRefresh = useCallback(
-    () => service.send(KafkaInstanceMetricsModel.events.refresh()),
-    [service]
-  );
+  const onRefresh = useCallback(() => service.send("refresh"), [service]);
 
   return {
     usedDiskSpaceMetrics,

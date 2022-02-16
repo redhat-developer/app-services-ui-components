@@ -1,27 +1,48 @@
 import { useInterpret } from "@xstate/react";
 import { createContext, FunctionComponent } from "react";
-import { InterpreterFrom } from "xstate";
-import {
-  KafkaInstanceMetricsMachine,
-  KafkaInstanceMetricsMachineType,
-  KafkaInstanceMetricsModel,
-} from "./machines";
-import { DurationOptions, GetKafkaInstanceMetricsResponse } from "./types";
 import { timeIntervalsMapping } from "./consts";
+import { KafkaInstanceMetricsMachine } from "./machines";
+import { DurationOptions, GetKafkaInstanceMetricsResponse } from "./types";
 
 export const KafkaInstanceMetricsContext = createContext<{
-  service: InterpreterFrom<KafkaInstanceMetricsMachineType>;
+  service: ReturnType<typeof useInterpret>;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
-export type KafkaInstanceMetricsProviderProps =
-  UseKafkaInstanceMetricsMachineServiceOptions;
+export type KafkaInstanceMetricsProviderProps = {
+  getKafkaInstanceMetrics: (options: {
+    duration: DurationOptions;
+    interval: number;
+  }) => Promise<GetKafkaInstanceMetricsResponse>;
+};
 export const KafkaInstanceMetricsProvider: FunctionComponent<
   KafkaInstanceMetricsProviderProps
 > = ({ children, getKafkaInstanceMetrics }) => {
-  const service = useKafkaInstanceMetricsMachineService({
-    getKafkaInstanceMetrics,
-  });
+  const service = useInterpret(
+    () =>
+      KafkaInstanceMetricsMachine.withConfig({
+        services: {
+          api: (context) => {
+            return (callback) => {
+              getKafkaInstanceMetrics({
+                duration: context.duration,
+                interval: timeIntervalsMapping[context.duration].interval,
+              })
+                .then((results) =>
+                  callback({ type: "fetchSuccess", ...results })
+                )
+                .catch((e) => {
+                  console.error("Failed fetching data", e);
+                  callback("fetchFail");
+                });
+            };
+          },
+        },
+      }),
+    {
+      devTools: true,
+    }
+  );
   return (
     <KafkaInstanceMetricsContext.Provider
       value={{
@@ -32,38 +53,3 @@ export const KafkaInstanceMetricsProvider: FunctionComponent<
     </KafkaInstanceMetricsContext.Provider>
   );
 };
-
-type UseKafkaInstanceMetricsMachineServiceOptions = {
-  getKafkaInstanceMetrics: (options: {
-    duration: DurationOptions;
-    interval: number;
-  }) => Promise<GetKafkaInstanceMetricsResponse>;
-};
-function useKafkaInstanceMetricsMachineService({
-  getKafkaInstanceMetrics,
-}: UseKafkaInstanceMetricsMachineServiceOptions) {
-  return useInterpret(
-    KafkaInstanceMetricsMachine.withConfig({
-      services: {
-        api: (context) => {
-          return (callback) => {
-            getKafkaInstanceMetrics({
-              duration: context.duration,
-              interval: timeIntervalsMapping[context.duration].interval,
-            })
-              .then((results) =>
-                callback(KafkaInstanceMetricsModel.events.fetchSuccess(results))
-              )
-              .catch((e) => {
-                console.error("Failed fetching data", e);
-                callback(KafkaInstanceMetricsModel.events.fetchFail());
-              });
-          };
-        },
-      },
-    }),
-    {
-      devTools: true,
-    }
-  );
-}

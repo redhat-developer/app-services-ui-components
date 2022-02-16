@@ -1,6 +1,5 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext, useMemo } from "react";
-import { TopicsMetricsModel } from "./machines";
 import { DurationOptions } from "./types";
 import { TopicsMetricsContext } from "./TopicsMetricsProvider";
 
@@ -36,21 +35,17 @@ export function useTopicsMetrics() {
   } = useSelector(service, selector);
 
   const onTopicChange = useCallback(
-    (topic: string | undefined) =>
-      service.send(TopicsMetricsModel.events.selectTopic(topic)),
+    (topic: string | undefined) => service.send({ type: "selectTopic", topic }),
     [service]
   );
 
   const onDurationChange = useCallback(
     (duration: DurationOptions) =>
-      service.send(TopicsMetricsModel.events.selectDuration(duration)),
+      service.send({ type: "selectDuration", duration }),
     [service]
   );
 
-  const onRefresh = useCallback(
-    () => service.send(TopicsMetricsModel.events.refresh()),
-    [service]
-  );
+  const onRefresh = useCallback(() => service.send("refresh"), [service]);
 
   const mergedTopics = useMemo((): string[] => {
     const topics = Array.from(

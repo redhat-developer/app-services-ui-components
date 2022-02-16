@@ -1,53 +1,7 @@
-import { createModel } from "xstate/lib/model";
+import { assign, createMachine } from "xstate";
 import { GetMetricsKpiResponse } from "../types";
 
 const MAX_RETRIES = 3;
-
-export const MetricsKpiModel = createModel(
-  {
-    // from the api
-    topics: undefined as number | undefined,
-    topicPartitions: undefined as number | undefined,
-    consumerGroups: undefined as number | undefined,
-
-    // how many time did we try a fetch (that combines more api)
-    fetchFailures: 0 as number,
-  },
-  {
-    events: {
-      // called when a new kafka id has been specified
-      fetch: () => ({}),
-      fetchSuccess: (value: GetMetricsKpiResponse) => ({ ...value }),
-      fetchFail: () => ({}),
-
-      // to refresh the data
-      refresh: () => ({}),
-    },
-  }
-);
-
-const setMetrics = MetricsKpiModel.assign((_, event) => {
-  const { topics, topicPartitions, consumerGroups } = event;
-  return {
-    topics,
-    topicPartitions,
-    consumerGroups,
-  };
-}, "fetchSuccess");
-
-const incrementRetries = MetricsKpiModel.assign(
-  {
-    fetchFailures: (context) => context.fetchFailures + 1,
-  },
-  "fetchFail"
-);
-
-const resetRetries = MetricsKpiModel.assign(
-  {
-    fetchFailures: () => 0,
-  },
-  "refresh"
-);
 
 const apiState = {
   initial: "loading",
@@ -58,7 +12,7 @@ const apiState = {
       },
       on: {
         fetchFail: {
-          actions: incrementRetries,
+          actions: "incrementRetries",
           target: "failure",
         },
       },
@@ -74,10 +28,32 @@ const apiState = {
   },
 };
 
-export const MetricsKpiMachine = MetricsKpiModel.createMachine(
+export const MetricsKpiMachine = createMachine(
   {
+    tsTypes: {} as import("./MetricsKpiMachine.typegen").Typegen0,
+    schema: {
+      context: {} as {
+        // from the api
+        topics: number | undefined;
+        topicPartitions: number | undefined;
+        consumerGroups: number | undefined;
+
+        // how many time did we try a fetch (that combines more api)
+        fetchFailures: number;
+      },
+      events: {} as
+        | { type: "fetch" }
+        | ({ type: "fetchSuccess" } & GetMetricsKpiResponse)
+        | { type: "fetchFail" }
+        | { type: "refresh" },
+    },
     id: "kpis",
-    context: MetricsKpiModel.initialContext,
+    context: {
+      topics: undefined,
+      topicPartitions: undefined,
+      consumerGroups: undefined,
+      fetchFailures: 0,
+    },
     initial: "initialLoading",
     states: {
       initialLoading: {
@@ -87,10 +63,10 @@ export const MetricsKpiMachine = MetricsKpiModel.createMachine(
           fetchSuccess: [
             {
               cond: "isJustCreated",
-              actions: setMetrics,
+              actions: "setMetrics",
               target: "#kpis.withResponse",
             },
-            { actions: setMetrics, target: "justCreated" },
+            { actions: "setMetrics", target: "justCreated" },
           ],
         },
       },
@@ -99,7 +75,7 @@ export const MetricsKpiMachine = MetricsKpiModel.createMachine(
         tags: "loading",
         on: {
           fetchSuccess: {
-            actions: setMetrics,
+            actions: "setMetrics",
             target: "#kpis.withResponse",
           },
         },
@@ -108,7 +84,7 @@ export const MetricsKpiMachine = MetricsKpiModel.createMachine(
         tags: "failed",
         on: {
           refresh: {
-            actions: resetRetries,
+            actions: "resetRetries",
             target: "callApi",
           },
         },
@@ -133,7 +109,7 @@ export const MetricsKpiMachine = MetricsKpiModel.createMachine(
             },
             on: {
               fetchSuccess: {
-                actions: setMetrics,
+                actions: "setMetrics",
                 target: "#kpis.withResponse",
               },
               fetchFail: {
@@ -152,6 +128,25 @@ export const MetricsKpiMachine = MetricsKpiModel.createMachine(
     },
   },
   {
+    actions: {
+      setMetrics: assign((_, event) => {
+        const { topics, topicPartitions, consumerGroups } = event;
+        return {
+          topics,
+          topicPartitions,
+          consumerGroups,
+        };
+      }),
+
+      incrementRetries: assign({
+        fetchFailures: (context) => context.fetchFailures + 1,
+      }),
+
+      resetRetries: assign({
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        fetchFailures: (_context) => 0,
+      }),
+    },
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
       isJustCreated: (_, event) => {
