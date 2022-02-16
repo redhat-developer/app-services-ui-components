@@ -1,4 +1,3 @@
-import React from "react";
 import { composeStories } from "@storybook/testing-react";
 
 import {
@@ -6,14 +5,14 @@ import {
   waitForI18n,
   waitForPopper,
   within,
-} from "../../../../test-utils";
+} from "../../../test-utils";
 import * as stories from "./ResourceTypeOperationFilter.stories";
 import { userEvent } from "@storybook/testing-library";
 
 const { NoItemChecked, AllItemsChecked, SomeItemChecked, InteractiveExample } =
   composeStories(stories);
 
-describe("<ResourceTypeOperationFilter/>", () => {
+describe("ResourceTypeOperationFilter", () => {
   it("should render acls treeview with no items checked and expanded", async () => {
     const onCheckedItemsChange = jest.fn();
     const comp = render(

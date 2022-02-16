@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ResourceTypeOperationFilter } from "./ResourceTypeOperationFilter";
-import { AclResourceType, AclOperation } from "../../types";
+import { AclOperation, AclResourceType } from "../types";
+import { TreeViewDataItem } from "@patternfly/react-core";
 
 export default {
   component: ResourceTypeOperationFilter,
@@ -120,8 +121,10 @@ AllItemsChecked.args = {
   ],
 };
 
-export const InteractiveExample = () => {
-  const [checkedItems, setCheckedItems] = useState([]);
+export const InteractiveExample: ComponentStory<
+  typeof ResourceTypeOperationFilter
+> = () => {
+  const [checkedItems, setCheckedItems] = useState<TreeViewDataItem[]>([]);
   return (
     <ResourceTypeOperationFilter
       onCheckedItemsChange={setCheckedItems}

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { PermissionsDropdown } from "./PermissionsDropdown";
 
@@ -13,6 +13,5 @@ const Template: ComponentStory<typeof PermissionsDropdown> = (args) => (
   </div>
 );
 
-export const Story = Template.bind({});
-Story.args = {};
-Story.storyName = "PermissionsDropdown";
+export const Example = Template.bind({});
+Example.args = {};

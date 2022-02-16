@@ -1,6 +1,6 @@
-import React from "react";
+import { VFC } from "react";
 import { Label, LabelProps } from "@patternfly/react-core";
-import { AclResourceType } from "../../types";
+import { AclResourceType } from "../types";
 import "./SolidLabel.css";
 
 export type SolidLabelProps = {
@@ -12,7 +12,7 @@ type Variant = {
   content: string;
 };
 
-export const SolidLabel: React.VFC<SolidLabelProps> = ({ variant }) => {
+export const SolidLabel: VFC<SolidLabelProps> = ({ variant }) => {
   const getVariant = (): Variant => {
     switch (variant) {
       case AclResourceType.Group:
