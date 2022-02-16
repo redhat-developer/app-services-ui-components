@@ -11,7 +11,7 @@ import {
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
+import ExclamationTriangleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-triangle-icon";
 import "./style.css";
 
 type KafkaStatus =
@@ -19,7 +19,7 @@ type KafkaStatus =
   | "creating"
   | "creatingWarning"
   | "creatingError"
-  | "failed"
+  | "degraded"
   | "deleting";
 
 type TableStatusProps = {
@@ -118,14 +118,14 @@ export const TableStatus: VoidFunctionComponent<TableStatusProps> = ({
         </div>
       );
 
-    case "failed":
+    case "degraded":
       return (
         <div>
           <Split hasGutter className="mas-c-status">
             <SplitItem>
-              <ExclamationCircleIcon className="mas-m-failed" />
+              <ExclamationTriangleIcon className="mas-m-degraded" />
             </SplitItem>
-            <SplitItem>Failed</SplitItem>
+            <SplitItem>Degraded</SplitItem>
           </Split>
         </div>
       );
