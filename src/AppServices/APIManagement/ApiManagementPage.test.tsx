@@ -4,7 +4,7 @@ import * as stories from "./APIManagementPage.stories";
 
 const { Example } = composeStories(stories);
 
-describe("APIManagementPage", () => {
+describe("ApiManagementPage", () => {
   it("renders", async () => {
     const comp = render(<Example />);
     await waitForI18n(comp);

@@ -1,4 +1,5 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
+import * as React from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -11,8 +12,8 @@ import {
   TreeView,
   TreeViewDataItem,
 } from "@patternfly/react-core";
-import { SolidLabel } from "../SolidLabel";
-import { AclResourceType, AclOperation } from "../../types";
+import { SolidLabel } from "./SolidLabel";
+import { AclResourceType, AclOperation } from "../types";
 
 export type ResourceTypeOperationFilterProps = {
   onCheckedItemsChange: (items: TreeViewDataItem[]) => void;

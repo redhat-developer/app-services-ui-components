@@ -41,7 +41,6 @@ export const PermissionsDropdown: VoidFunctionComponent<
   const [isOpen, setIsOpen] = useState(false);
   useState<string | number | undefined>(0);
 
-  const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handleMenuKeys = useCallback(
@@ -49,13 +48,11 @@ export const PermissionsDropdown: VoidFunctionComponent<
       if (
         isOpen &&
         menuRef.current &&
-        toggleRef.current &&
         event.target &&
         menuRef.current.contains(event.target as Node)
       ) {
         if (event.key === "Escape" || event.key === "Tab") {
           setIsOpen(!isOpen);
-          toggleRef.current.focus();
         }
       }
     },
@@ -186,11 +183,13 @@ export const PermissionsDropdown: VoidFunctionComponent<
     <Dropdown
       toggle={
         <DropdownToggle
-          ref={toggleRef}
+          data-testid={"permissions-dropdown-toggle"}
           splitButtonItems={[
             <DropdownToggleAction
               key="cog-action"
-              aria-label="Action"
+              aria-label={t(
+                "manage_permissions_dialog.assign_permissions.add_permission"
+              )}
               onClick={onAddPermission}
             >
               {t("manage_permissions_dialog.assign_permissions.add_permission")}

@@ -4,6 +4,7 @@ node_modules
 .DS_Store
 .eslintcache
 .vscode
+.jest-test-results.json
 storybook-static
 build-storybook.log
 coverage
