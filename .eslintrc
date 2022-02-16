@@ -45,5 +45,5 @@
       }
     }
   ],
-  "ignorePatterns": ["ProofOfconcepts"]
+  "ignorePatterns": ["ProofOfconcepts", "*.typegen.ts"]
 }

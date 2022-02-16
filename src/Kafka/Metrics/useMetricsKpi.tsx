@@ -1,6 +1,5 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
-import { MetricsKpiModel } from "./machines";
 import { MetricsKpiContext } from "./MetricsKpiProvider";
 
 export function useMetricsKpi() {
@@ -28,10 +27,7 @@ export function useMetricsKpi() {
     isJustCreated,
   } = useSelector(service, selector);
 
-  const onRefresh = useCallback(
-    () => service.send(MetricsKpiModel.events.refresh()),
-    [service]
-  );
+  const onRefresh = useCallback(() => service.send("refresh"), [service]);
 
   return {
     isInitialLoading,

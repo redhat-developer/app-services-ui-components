@@ -1,4 +1,4 @@
-import { createModel } from "xstate/lib/model";
+import { assign, createMachine } from "xstate";
 import {
   DurationOptions,
   TimeSeriesMetrics,
@@ -7,96 +7,6 @@ import {
 } from "../types";
 
 const MAX_RETRIES = 3;
-
-export const TopicsMetricsModel = createModel(
-  {
-    lastUpdated: undefined as Date | undefined,
-
-    // from the UI elements
-    selectedTopic: undefined as string | undefined,
-    duration: 60 as DurationOptions,
-
-    // from the api
-    kafkaTopics: [] as string[],
-    metricsTopics: [] as string[],
-    bytesOutgoing: {} as TimeSeriesMetrics,
-    bytesIncoming: {} as TimeSeriesMetrics,
-    bytesPerPartition: {} as PartitionBytesMetric,
-    incomingMessageRate: {} as TimeSeriesMetrics,
-
-    // how many time did we try a fetch (that combines more api)
-    fetchFailures: 0 as number,
-  },
-  {
-    events: {
-      // called when a new kafka id has been specified
-      fetchSuccess: (value: GetTopicsMetricsResponse) => ({ ...value }),
-      fetchFail: () => ({}),
-
-      // to refresh the data
-      refresh: () => ({}),
-
-      // from the UI elements
-      selectTopic: (topic: string | undefined) => ({
-        selectedTopic: topic,
-      }),
-      selectDuration: (duration: DurationOptions) => ({
-        duration: duration,
-      }),
-    },
-  }
-);
-
-const setFetchTimestamp = TopicsMetricsModel.assign({
-  lastUpdated: () => new Date(),
-});
-
-const setMetrics = TopicsMetricsModel.assign((_, event) => {
-  const {
-    kafkaTopics,
-    metricsTopics,
-    bytesPerPartition,
-    bytesIncoming,
-    bytesOutgoing,
-    incomingMessageRate,
-  } = event;
-  return {
-    kafkaTopics,
-    metricsTopics,
-    bytesPerPartition,
-    bytesIncoming,
-    bytesOutgoing,
-    incomingMessageRate,
-  };
-}, "fetchSuccess");
-
-const incrementRetries = TopicsMetricsModel.assign(
-  {
-    fetchFailures: (context) => context.fetchFailures + 1,
-  },
-  "fetchFail"
-);
-
-const resetRetries = TopicsMetricsModel.assign(
-  {
-    fetchFailures: () => 0,
-  },
-  "refresh"
-);
-
-const setTopic = TopicsMetricsModel.assign(
-  {
-    selectedTopic: (_, event) => event.selectedTopic,
-  },
-  "selectTopic"
-);
-
-const setDuration = TopicsMetricsModel.assign(
-  {
-    duration: (_, event) => event.duration,
-  },
-  "selectDuration"
-);
 
 const apiState = {
   initial: "loading",
@@ -107,7 +17,7 @@ const apiState = {
       },
       on: {
         fetchFail: {
-          actions: incrementRetries,
+          actions: "incrementRetries",
           target: "failure",
         },
       },
@@ -123,34 +33,82 @@ const apiState = {
   },
 };
 
-export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
+export const TopicsMetricsMachine = createMachine(
   {
+    tsTypes: {} as import("./TopicsMetricsMachine.typegen").Typegen0,
+    schema: {
+      context: {} as {
+        lastUpdated: Date | undefined;
+
+        // from the UI elements
+        selectedTopic: string | undefined;
+        duration: DurationOptions;
+
+        // from the api
+        kafkaTopics: string[];
+        metricsTopics: string[];
+        bytesOutgoing: TimeSeriesMetrics;
+        bytesIncoming: TimeSeriesMetrics;
+        bytesPerPartition: PartitionBytesMetric;
+        incomingMessageRate: TimeSeriesMetrics;
+
+        // how many time did we try a fetch (that combines more api)
+        fetchFailures: number;
+      },
+      events: {} as  // called when a new kafka id has been specified
+        | ({ type: "fetchSuccess" } & GetTopicsMetricsResponse)
+        | { type: "fetchFail" }
+
+        // to refresh the data
+        | { type: "refresh" }
+
+        // from the UI elements
+        | { type: "selectTopic"; topic: string | undefined }
+        | { type: "selectDuration"; duration: DurationOptions },
+    },
     id: "topicsMetrics",
-    context: TopicsMetricsModel.initialContext,
+    context: {
+      lastUpdated: undefined,
+
+      // from the UI elements
+      selectedTopic: undefined,
+      duration: DurationOptions.Last1hour,
+
+      // from the api
+      kafkaTopics: [],
+      metricsTopics: [],
+      bytesOutgoing: {},
+      bytesIncoming: {},
+      bytesPerPartition: {},
+      incomingMessageRate: {},
+
+      // how many time did we try a fetch (that combines more api)
+      fetchFailures: 0,
+    },
     initial: "initialLoading",
     states: {
       initialLoading: {
         ...apiState,
         tags: "initialLoading",
-        entry: setFetchTimestamp,
+        entry: "setFetchTimestamp",
         on: {
           fetchSuccess: [
             {
               cond: "isJustCreated",
-              actions: setMetrics,
+              actions: "setMetrics",
               target: "#topicsMetrics.withResponse",
             },
-            { actions: setMetrics, target: "justCreated" },
+            { actions: "setMetrics", target: "justCreated" },
           ],
         },
       },
       callApi: {
         ...apiState,
         tags: "loading",
-        entry: setFetchTimestamp,
+        entry: "setFetchTimestamp",
         on: {
           fetchSuccess: {
-            actions: setMetrics,
+            actions: "setMetrics",
             target: "#topicsMetrics.withResponse",
           },
         },
@@ -159,7 +117,7 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
         tags: "failed",
         on: {
           refresh: {
-            actions: resetRetries,
+            actions: "resetRetries",
             target: "callApi",
           },
         },
@@ -179,13 +137,13 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
           idle: {},
           refreshing: {
             tags: "refreshing",
-            entry: setFetchTimestamp,
+            entry: "setFetchTimestamp",
             invoke: {
               src: "api",
             },
             on: {
               fetchSuccess: {
-                actions: setMetrics,
+                actions: "setMetrics",
                 target: "#topicsMetrics.withResponse",
               },
               fetchFail: {
@@ -200,11 +158,11 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
             target: "#topicsMetrics.withResponse.refreshing",
           },
           selectTopic: {
-            actions: setTopic,
+            actions: "setTopic",
             target: "callApi",
           },
           selectDuration: {
-            actions: setDuration,
+            actions: "setDuration",
             target: "callApi",
           },
         },
@@ -212,6 +170,43 @@ export const TopicsMetricsMachine = TopicsMetricsModel.createMachine(
     },
   },
   {
+    actions: {
+      setFetchTimestamp: assign({
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        lastUpdated: (_context) => new Date(),
+      }),
+      setMetrics: assign((_context, event) => {
+        const {
+          kafkaTopics,
+          metricsTopics,
+          bytesPerPartition,
+          bytesIncoming,
+          bytesOutgoing,
+          incomingMessageRate,
+        } = event;
+        return {
+          kafkaTopics,
+          metricsTopics,
+          bytesPerPartition,
+          bytesIncoming,
+          bytesOutgoing,
+          incomingMessageRate,
+        };
+      }),
+      incrementRetries: assign({
+        fetchFailures: (context) => context.fetchFailures + 1,
+      }),
+      resetRetries: assign({
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        fetchFailures: (_context) => 0,
+      }),
+      setTopic: assign({
+        selectedTopic: (_context, event) => event.topic,
+      }),
+      setDuration: assign({
+        duration: (_, event) => event.duration,
+      }),
+    },
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
       isJustCreated: (_, event) => {

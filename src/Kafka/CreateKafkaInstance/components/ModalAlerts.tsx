@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { InstanceAvailability } from "../machines";
 
 export type ModalAlertsProps = {
-  instanceAvailability: InstanceAvailability;
+  instanceAvailability: InstanceAvailability | undefined;
   isSystemUnavailable: boolean;
   isLoading: boolean;
 };
