@@ -26,9 +26,12 @@
     "package": "npm run build",
     "parse-i18n": "i18next 'src/**/*.tsx'",
     "prepare": "npm run clean && npm run package && husky install",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "npm-run-all storybook:start test:generate-output:dev",
+    "storybook:start": "start-storybook -p 6006",
     "test": "jest",
-    "test:watch":"npm run test -- --watch"
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
+    "test:generate-output:dev": "npm run test:generate-output -- --watch",
+    "test:watch": "npm run test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -57,6 +60,7 @@
     "@storybook/addon-docs": "6.4.19",
     "@storybook/addon-essentials": "6.4.19",
     "@storybook/addon-interactions": "6.4.19",
+    "@storybook/addon-jest": "6.4.19",
     "@storybook/addon-links": "6.4.19",
     "@storybook/builder-webpack5": "6.4.19",
     "@storybook/jest": "0.0.6",

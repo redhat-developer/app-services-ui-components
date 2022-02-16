@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`APIManagementPage renders 1`] = `
+exports[`ApiManagementPage renders 1`] = `
 <body>
   <div>
     <section
