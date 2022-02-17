@@ -101,7 +101,7 @@ Degraded.args = {
 Degraded.parameters = {
   docs: {
     description: {
-      story: "Something has gone wrong with the Kafka instance .",
+      story: "Instance is reporting an error. The Kafka is not in a good state. ",
     },
   },
 };
