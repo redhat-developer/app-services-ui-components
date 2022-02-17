@@ -1,0 +1,115 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Folder Structure Convention" />
+
+# Folder Structure Convention
+
+## Top-level directory layout
+
+    .
+    ├── __mocks__                   # Jest mocks
+    ├── babel.config.js             # Babel config used by Jest
+    ├── dist                        # Compiled files
+    ├── docs                        # Documentation shown in Storybook
+    ├── i18next-parser.config.js    # Configuration file for the parser that extracts translation keys from the sources
+    ├── jest.config.js              # Jest configuration
+    ├── locales                     # Translation files. Generated from running `npm run parse-i18n`
+    ├── renovate.json               # Renovatebot config file
+    ├── rollup.config.ts            # Rollup is used to compile the project. This is its configuration
+    ├── semantic.yml                # Semantic PR GH action config
+    ├── setupJest.ts                # A setup file for the Jest test suite. It enables react-testing-library and some extra plugin
+    ├── src                         # Source files
+    ├── static                      # Assets (eg. images, videos)
+    └── tsconfig.json               # Typescript configuration
+
+## Sources directory layout
+
+    src
+    ├── AppServices                 # Components used by the Managed App Services UI itself, like static pages describing the products
+    ├── I18n                        # Internationalization context provider and the supporting code
+    ├── Kafka                       # Components used specifically by the control and data plane (listing Kafka instances, create Kafka dialog, etc)
+    ├── ProofOfConcepts             # Components not ready for production used to experiment with ideas and gather feedback quickly from stakeholders
+    ├── shared                      # Components used across UIs. Use these components to ensure a consistent UX across the board
+    └── utils
+
+## How to structure a component
+
+Let's analyze an existing component to understand how it's stuctured.
+
+    src/Kafka/CreateKafkaInstance
+    ├── components
+    │  ├── CloudProviderTiles.tsx
+    │  ├── CloudRegionsSelect.tsx
+    │  ├── FormAlerts.tsx
+    │  ├── index.ts
+    │  ├── InstanceInfo.tsx
+    │  └── ModalAlerts.tsx
+    ├── CreateKafkaInstance.css
+    ├── CreateKafkaInstance.test.tsx
+    ├── CreateKafkaInstance.stories.tsx
+    ├── CreateKafkaInstance.tsx
+    ├── index.ts
+    └── machines
+    ├── index.ts
+    └── types.ts
+
+### index.ts
+
+Contains the exports that should be made available to the consumers of the `@rhoas/app-services-ui-components`.
+
+You should not export internal components (see [components](#components)). For this component the exported items are:
+
+```typescript
+
+export * from "./CreateKafkaInstance"; // the main feature
+export * from "./machines/types"; // types useful to provide the data to the main feature
+
+```
+
+> ⚠️ *Heads up!*
+>
+> Don't do this. It will expose the internal components as a public API of the package and we don't want that.
+>
+> ```typescript
+>
+> export * from './components'; // don't do this!
+>
+> ````
+
+### components
+
+All internal components that are needed to build the overall feature should be placed in a `components` folder.
+Don't place these components in another folder called as the component itself, keep the folder flat. This way we
+get better navigation of the components on Storybook.
+
+There should be a barrel `index.ts` file that exports all the components in this folder to make it easier to the top level
+components to consume them. For example, the `CreateKafkaInstance` component imports these components like so:
+
+```typescript
+
+import {
+  CloudProvidersTiles,
+  CloudRegionSelect,
+  FormAlerts,
+  InstanceInfo,
+  ModalAlerts,
+} from "./components";
+
+```
+
+### machines
+
+It contains [Xstate](https://xstate.js.org/) machines, which are state charts that describe how the main feature works.
+
+### *.stories.tsx and *.tests.tsx
+
+Storybook stories are named following the naming convention `[ComponentName].stories.tsx` and live next to the component's
+source file.
+
+Jest tests are named following the naming convention `[ComponentName].test.tsx` and live next to the component's
+source file.
+
+### *.css
+
+If a component needs additional CSS, it should be placed in a file following the naming convention `[ComponentName].css`
+and live next to the component's source file.
