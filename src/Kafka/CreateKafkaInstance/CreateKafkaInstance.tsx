@@ -12,13 +12,14 @@ import {
   ToggleGroupItem,
   Tooltip,
 } from "@patternfly/react-core";
-import { FunctionComponent, FormEvent, useCallback } from "react";
+import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CloudProvidersTiles,
   CloudRegionSelect,
   FormAlerts,
   InstanceInfo,
+  InstanceInfoLimitsProps,
   ModalAlerts,
 } from "./components";
 import "./CreateKafkaInstance.css";
@@ -48,7 +49,8 @@ export type CreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
-} & MakeCreateKafkaInstanceMachine;
+} & MakeCreateKafkaInstanceMachine &
+  Partial<InstanceInfoLimitsProps>;
 
 export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstanceProps
@@ -60,6 +62,13 @@ export const CreateKafkaInstance: FunctionComponent<
   onCancel,
   onCreate,
   disableFocusTrap,
+  trialDurationInHours = 48,
+  ingresEgress = 30,
+  storage = 1000,
+  maxPartitions = 1000,
+  connections = 500,
+  connectionRate = 100,
+  messageSize = 1,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance");
@@ -266,6 +275,13 @@ export const CreateKafkaInstance: FunctionComponent<
           <InstanceInfo
             isLoading={isLoading}
             isTrial={isTrial}
+            trialDurationInHours={trialDurationInHours}
+            ingresEgress={ingresEgress}
+            storage={storage}
+            maxPartitions={maxPartitions}
+            connections={connections}
+            connectionRate={connectionRate}
+            messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
           />
         </FlexItem>

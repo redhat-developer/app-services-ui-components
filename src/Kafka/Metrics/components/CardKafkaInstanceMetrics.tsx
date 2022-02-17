@@ -11,7 +11,13 @@ import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import { ToolbarRefreshProps } from "./ToolbarRefresh";
 
-type CardKafkaInstanceMetricsProps = {
+export type CardKafkaInstanceMetricsLimits = {
+  diskSpaceLimit: number;
+  connectionsLimit: number;
+  connectionRateLimit: number;
+};
+
+export type CardKafkaInstanceMetricsProps = {
   usedDiskMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
@@ -22,7 +28,9 @@ type CardKafkaInstanceMetricsProps = {
   isLoading: boolean;
   isJustCreated: boolean;
   onDurationChange: (duration: DurationOptions) => void;
-} & Omit<ToolbarRefreshProps, "ariaLabel">;
+} & Omit<ToolbarRefreshProps, "ariaLabel"> &
+  CardKafkaInstanceMetricsLimits;
+
 type ChartTitleProps = {
   title: string;
   helperText: string;
@@ -41,6 +49,9 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
   isLoading,
   isRefreshing,
   isJustCreated,
+  diskSpaceLimit,
+  connectionsLimit,
+  connectionRateLimit,
   onRefresh,
   onDurationChange,
 }) => {
@@ -90,7 +101,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     metrics={usedDiskMetrics}
                     duration={duration}
                     formatValue={formatBytes}
-                    usageLimit={1000 * 1024 ** 3}
+                    usageLimit={diskSpaceLimit}
                     isLoading={isLoading}
                     emptyState={<EmptyStateNoMetricsData />}
                   />
@@ -106,7 +117,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     yLabel={t("client_connections_y_axis")}
                     metrics={clientConnectionsMetrics}
                     duration={duration}
-                    usageLimit={100}
+                    usageLimit={connectionsLimit}
                     isLoading={isLoading}
                     emptyState={<EmptyStateNoMetricsData />}
                   />
@@ -122,7 +133,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     yLabel={t("connection_attempt_rate_yaxis")}
                     metrics={connectionAttemptRateMetrics}
                     duration={duration}
-                    usageLimit={100}
+                    usageLimit={connectionRateLimit}
                     isLoading={isLoading}
                     emptyState={<EmptyStateNoMetricsData />}
                   />

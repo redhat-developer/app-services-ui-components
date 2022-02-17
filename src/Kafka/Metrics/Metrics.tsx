@@ -4,6 +4,7 @@ import {
   EmptyStateMetricsUnavailable,
   MetricsLayout,
   CardKafkaInstanceMetrics,
+  CardKafkaInstanceMetricsLimits,
 } from "./components";
 import { VoidFunctionComponent } from "react";
 import {
@@ -28,9 +29,13 @@ export type MetricsProps = {
   onCreateTopic: () => void;
 } & KafkaInstanceMetricsProviderProps &
   TopicsMetricsProviderProps &
-  MetricsKpiProviderProps;
+  MetricsKpiProviderProps &
+  Partial<CardKafkaInstanceMetricsLimits>;
 
 export const Metrics: VoidFunctionComponent<MetricsProps> = ({
+  diskSpaceLimit = 1000 * 1024 ** 3,
+  connectionsLimit = 100,
+  connectionRateLimit = 100,
   getKafkaInstanceMetrics,
   getTopicsMetrics,
   getMetricsKpi,
@@ -42,7 +47,12 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
         getKafkaInstanceMetrics={getKafkaInstanceMetrics}
       >
         <MetricsKpiProvider getMetricsKpi={getMetricsKpi}>
-          <ConnectedMetrics onCreateTopic={onCreateTopic} />
+          <ConnectedMetrics
+            diskSpaceLimit={diskSpaceLimit}
+            connectionsLimit={connectionsLimit}
+            connectionRateLimit={connectionRateLimit}
+            onCreateTopic={onCreateTopic}
+          />
         </MetricsKpiProvider>
       </KafkaInstanceMetricsProvider>
     </TopicsMetricsProvider>
@@ -52,7 +62,12 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
 type ConnectedMetricsProps = {
   onCreateTopic: () => void;
 };
-const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
+const ConnectedMetrics: VoidFunctionComponent<
+  ConnectedMetricsProps & CardKafkaInstanceMetricsLimits
+> = ({
+  diskSpaceLimit,
+  connectionsLimit,
+  connectionRateLimit,
   onCreateTopic,
 }) => {
   const { t } = useTranslation();
@@ -99,7 +114,13 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
               popover={t("metrics:metric_kpi_consumerGroup_description")}
             />
           }
-          diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
+          diskSpaceMetrics={
+            <ConnectedKafkaInstanceMetrics
+              diskSpaceLimit={diskSpaceLimit}
+              connectionsLimit={connectionsLimit}
+              connectionRateLimit={connectionRateLimit}
+            />
+          }
           topicMetrics={
             <ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />
           }
@@ -108,7 +129,9 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
   }
 };
 
-const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
+const ConnectedKafkaInstanceMetrics: VoidFunctionComponent<
+  CardKafkaInstanceMetricsLimits
+> = ({ diskSpaceLimit, connectionsLimit, connectionRateLimit }) => {
   const {
     isInitialLoading,
     isLoading,
@@ -138,6 +161,9 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
       lastUpdated={lastUpdated}
       onRefresh={onRefresh}
       onDurationChange={onDurationChange}
+      diskSpaceLimit={diskSpaceLimit}
+      connectionsLimit={connectionsLimit}
+      connectionRateLimit={connectionRateLimit}
     />
   );
 };
