@@ -1,0 +1,430 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Loading story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      style=""
+    >
+      <div
+        class="pf-c-content"
+      >
+        <h3
+          class=""
+          data-ouia-component-id="OUIA-Generated-Text-1"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Instance information
+        </h3>
+        <dl
+          class=""
+          data-pf-content="true"
+        >
+          <div
+            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 75%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                >
+                  Loading contents
+                </span>
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 66%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 50%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 33%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 25%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 55%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <div
+                class="pf-c-skeleton"
+                style="--pf-c-skeleton--Width: 35%;"
+              >
+                <span
+                  class="pf-u-screen-reader"
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+            data-ouia-component-id="OUIA-Generated-Button-link-1"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            style="margin-top: 20px;"
+            type="button"
+          >
+            Need help getting started? Follow our quick start guide.
+          </button>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Renders QuotaInstance story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      style=""
+    >
+      <div
+        class="pf-c-content"
+      >
+        <h3
+          class=""
+          data-ouia-component-id="OUIA-Generated-Text-2"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Instance information
+        </h3>
+        <dl
+          class=""
+          data-pf-content="true"
+        >
+          <div
+            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Ingress/Egress
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB/second each
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Storage
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 GiB
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Partitions
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Client connections
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Connection rate
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 connections/second
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Message size
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB
+              </dd>
+            </div>
+          </div>
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+            data-ouia-component-id="OUIA-Generated-Button-link-2"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            style="margin-top: 20px;"
+            type="button"
+          >
+            Need help getting started? Follow our quick start guide.
+          </button>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`Renders TrialInstance story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      style=""
+    >
+      <div
+        class="pf-c-content"
+      >
+        <h3
+          class=""
+          data-ouia-component-id="OUIA-Generated-Text-3"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Instance information
+        </h3>
+        <dl
+          class=""
+          data-pf-content="true"
+        >
+          <div
+            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+          >
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Duration
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                123 hours
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Ingress/Egress
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB/second each
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Storage
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 GiB
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Partitions
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Client connections
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Connection rate
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 connections/second
+              </dd>
+            </div>
+            <div
+              class="pf-l-grid__item"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Message size
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB
+              </dd>
+            </div>
+          </div>
+          <button
+            aria-disabled="false"
+            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+            data-ouia-component-id="OUIA-Generated-Button-link-3"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            style="margin-top: 20px;"
+            type="button"
+          >
+            Need help getting started? Follow our quick start guide.
+          </button>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+`;

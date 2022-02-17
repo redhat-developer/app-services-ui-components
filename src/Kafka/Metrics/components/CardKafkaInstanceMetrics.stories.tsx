@@ -15,6 +15,9 @@ export default {
     isLoading: false,
     isRefreshing: false,
     isJustCreated: false,
+    diskSpaceLimit: 1000 * 1024 ** 3,
+    connectionsLimit: 100,
+    connectionRateLimit: 100,
   },
   argTypes: {
     duration: {
