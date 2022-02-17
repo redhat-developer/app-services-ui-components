@@ -24,5 +24,10 @@
   "short_description": "Short Description",
   "storage": "Storage",
   "storage_value": "up to 1000 GiB",
-  "will_expire": "This instance will expire in <time>{{time}}</time>"
+  "will_expire": "This instance will expire in <time>{{time}}</time>",
+  "manage_permissions_dialog": {
+    "assign_permissions": {
+      "remove_row_help": "Remove"
+    }
+  }
 }
