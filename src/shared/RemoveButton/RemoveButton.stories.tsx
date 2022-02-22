@@ -12,5 +12,6 @@ const Template: ComponentStory<typeof RemoveButton> = (args) => (
 
 export const Remove_Button = Template.bind({});
 Remove_Button.args = {
+  row: 1,
   ToolTipText: "Remove",
 };
