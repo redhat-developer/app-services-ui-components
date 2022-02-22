@@ -1,7 +1,7 @@
 {
   "name": "@rhoas/app-services-ui-components",
   "version": "0.0.0",
-  "description": "UI Shared contains a number of type definitions for shared data structures and components for the application services UI.",
+  "description": "@rhoas/app-services-ui-components contains a number of components for the Managed Application Services UI.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "sideEffects": [
