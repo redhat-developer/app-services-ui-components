@@ -6,3 +6,4 @@ export * from "./Loading";
 export * from "./PageNotFound";
 export * from "./ModalProvider";
 export * from "./RemoveButton";
+export * from "./FormGroupWithPopover";
