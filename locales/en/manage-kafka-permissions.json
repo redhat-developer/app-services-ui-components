@@ -21,6 +21,8 @@
     "pattern_type_literal": "is",
     "pattern_type_prefixed": "starts with"
   },
+  "consumer_group": "",
+  "kafka_instance": "",
   "manage_permissions_dialog": {
     "account_id_aria": "The account",
     "account_id_help": "A service account enables your application or tool to connect securely to your resources. A user account enables users in your organization to access resources.",
@@ -95,6 +97,7 @@
     "delete_selected": "Delete selected permissions",
     "manage_button": "Manage access",
     "manage_permissions_button": "Manage access",
+    "no_existing_permissions": "No existing permissions",
     "no_results_body": "The Kafka instance owner and organization administrators have access to resources in this instance. Give other accounts access by managing permissions.",
     "no_results_title": "No permissions defined",
     "permissions_column_title": "Permission",
@@ -102,7 +105,8 @@
     "row_kebab": {
       "delete": "Delete",
       "manage": "Manage"
-    },
-    "no_existing_permissions": "No existing permissions"
-  }
+    }
+  },
+  "topic": "",
+  "transactional_id": ""
 }

@@ -5,6 +5,7 @@
   "cloudProviders": {
     "aws": "Amazon Web Services"
   },
+  "consumer_group": "Consumer group",
   "created": "Created",
   "delete": "Delete",
   "developmentPreview": "Development preview ",
@@ -13,6 +14,7 @@
   "go_to_kafka_instances": "Go to $t(common:kafka) Instances",
   "id": "ID",
   "kafka": "Kafka",
+  "kafka_instance": "Kafka instance",
   "owner": "Owner",
   "progress_stepper_current_step": "{{currentStep}} of {{total}} steps completed",
   "region": "Region",
@@ -21,13 +23,11 @@
   "search_button_label": "Search",
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
+  "topic": "Topic",
+  "transactional_id": "Transactional ID",
   "type_value_to_confirm_html": "Type <i>{{value}}</i> to confirm",
   "type_value_to_confirm_plain": "Type {{value}} to confirm",
   "unexpected_error": "There was a problem processing the request. Please try again.",
   "updated": "Updated",
-  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for.",
-  "consumer_group": "Consumer group",
-  "topic": "Topic",
-  "kafka_instance": "Kafka instance",
-  "transactional_id": "Transactional ID"
+  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for."
 }

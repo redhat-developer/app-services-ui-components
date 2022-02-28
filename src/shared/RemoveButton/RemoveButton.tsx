@@ -1,7 +1,6 @@
 import { Button, Tooltip } from "@patternfly/react-core";
 import { TrashIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
-import { RemovableEnhancedAclBinding } from "../../Kafka/ManageKafkaPermissions/types";
 
 export type RemoveButtonProps = {
   row: number | string;
