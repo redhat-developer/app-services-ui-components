@@ -514,7 +514,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
     <pre
       style=""
     >
-      failed
+      degraded
     </pre>
     <div>
       <div
@@ -525,7 +525,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="mas-m-failed"
+            class="mas-m-degraded"
             fill="currentColor"
             height="1em"
             role="img"
@@ -541,7 +541,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
         <div
           class="pf-l-split__item"
         >
-          Failed
+          Degraded
         </div>
       </div>
     </div>
@@ -746,7 +746,7 @@ exports[`Renders Deprovision story 1`] = `
 </body>
 `;
 
-exports[`Renders Failed story 1`] = `
+exports[`Renders Degraded story 1`] = `
 <body>
   <div>
     <div>
@@ -758,7 +758,7 @@ exports[`Renders Failed story 1`] = `
         >
           <svg
             aria-hidden="true"
-            class="mas-m-failed"
+            class="mas-m-degraded"
             fill="currentColor"
             height="1em"
             role="img"
@@ -774,7 +774,7 @@ exports[`Renders Failed story 1`] = `
         <div
           class="pf-l-split__item"
         >
-          Failed
+          Degraded
         </div>
       </div>
     </div>

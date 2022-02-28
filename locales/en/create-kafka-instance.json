@@ -59,7 +59,7 @@
   "statuses": {
     "creating": "Creating",
     "deleting": "Deleting",
-    "failed": "Failed",
+    "degraded": "Degraded",
     "ready": "Ready"
   },
   "duration_value": "{{value}} hours",

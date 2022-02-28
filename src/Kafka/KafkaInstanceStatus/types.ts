@@ -1,6 +1,6 @@
 export type KafkaStatus =
   | "ready"
-  | "failed"
+  | "degraded"
   | "accepted"
   | "provisioning"
   | "preparing"
@@ -19,7 +19,7 @@ export const KafkaToPopoverMapping: {
   [status in KafkaStatus]: PopoverStatus | null;
 } = {
   ready: null,
-  failed: null,
+  degraded: null,
   accepted: "pending",
   provisioning: "provisioning",
   preparing: "preparing",
