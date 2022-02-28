@@ -121,14 +121,14 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
             );
         }
 
-      case "failed":
+      case "degraded":
         return (
           <div>
             <Split hasGutter className="mas-c-status">
               <SplitItem>
-                <ExclamationCircleIcon className="mas-m-failed" />
+                <ExclamationCircleIcon className="mas-m-degraded" />
               </SplitItem>
-              <SplitItem>{t("statuses.failed")}</SplitItem>
+              <SplitItem>{t("statuses.degraded")}</SplitItem>
             </Split>
           </div>
         );
