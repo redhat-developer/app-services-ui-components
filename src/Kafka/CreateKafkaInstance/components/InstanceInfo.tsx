@@ -1,18 +1,18 @@
-import { FC } from "react";
+import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  TextContent,
-  Text,
-  TextVariants,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants,
-  Grid,
-  GridItem,
   Button,
   ButtonVariant,
+  Grid,
+  GridItem,
   Skeleton,
+  Text,
+  TextContent,
+  TextList,
+  TextListItem,
+  TextListItemVariants,
+  TextListVariants,
+  TextVariants,
 } from "@patternfly/react-core";
 
 export type InstanceInfoProps = {
@@ -21,9 +21,37 @@ export type InstanceInfoProps = {
   onClickQuickStart: () => void;
 };
 
-const InstanceInfo: FC<InstanceInfoProps> = ({
+export type InstanceInfoLimitsProps = {
+  trialDurationInHours: number;
+  ingresEgress: number;
+  /**
+   * Max storage in GiB
+   */
+  storage: number;
+  maxPartitions: number;
+  connections: number;
+  /**
+   * Max connections/second
+   */
+  connectionRate: number;
+  /**
+   * Message size in MiB
+   */
+  messageSize: number;
+};
+
+export const InstanceInfo: VoidFunctionComponent<
+  InstanceInfoProps & InstanceInfoLimitsProps
+> = ({
   isLoading,
   isTrial,
+  trialDurationInHours,
+  ingresEgress,
+  storage,
+  maxPartitions,
+  connections,
+  connectionRate,
+  messageSize,
   onClickQuickStart,
 }) => {
   const { t } = useTranslation();
@@ -42,7 +70,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                   {t("kafka:duration")}
                 </TextListItem>
                 <TextListItem component={TextListItemVariants.dd}>
-                  {t("kafka:duration_value")}
+                  {t("create-kafka-instance:duration_value", {
+                    value: trialDurationInHours,
+                  })}
                 </TextListItem>
               </GridItem>
             )}
@@ -51,7 +81,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:ingress_egress")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:ingress_egress_value")}
+                {t("create-kafka-instance:ingress_egress_value", {
+                  value: ingresEgress,
+                })}
               </TextListItem>
             </GridItem>
             <GridItem>
@@ -59,7 +91,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:storage")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:storage_value")}
+                {t("create-kafka-instance:storage_value", {
+                  value: storage,
+                })}
               </TextListItem>
             </GridItem>
             <GridItem>
@@ -67,7 +101,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:partitions")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:partitions_value")}
+                {t("create-kafka-instance:partitions_value", {
+                  value: maxPartitions,
+                })}
               </TextListItem>
             </GridItem>
             <GridItem>
@@ -75,7 +111,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:client_connections")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:client_connections_value")}
+                {t("create-kafka-instance:client_connections_value", {
+                  value: connections,
+                })}
               </TextListItem>
             </GridItem>
             <GridItem>
@@ -83,7 +121,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:connection_rate")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:connection_rate_value")}
+                {t("create-kafka-instance:connection_rate_value", {
+                  value: connectionRate,
+                })}
               </TextListItem>
             </GridItem>
             <GridItem>
@@ -91,7 +131,9 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
                 {t("kafka:message_size")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("kafka:message_size_value")}
+                {t("create-kafka-instance:message_size_value", {
+                  value: messageSize,
+                })}
               </TextListItem>
             </GridItem>
           </Grid>
@@ -134,5 +176,3 @@ const InstanceInfo: FC<InstanceInfoProps> = ({
     </TextContent>
   );
 };
-
-export { InstanceInfo };

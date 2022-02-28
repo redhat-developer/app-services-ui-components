@@ -61,5 +61,12 @@
     "deleting": "Deleting",
     "failed": "Failed",
     "ready": "Ready"
-  }
+  },
+  "duration_value": "{{value}} hours",
+  "client_connections_value": "up to {{value}}",
+  "connection_rate_value": "up to {{value}} connections/second",
+  "ingress_egress_value": "up to {{value}} MiB/second each",
+  "message_size_value": "up to {{value}} MiB",
+  "partitions_value": "up to {{value}}",
+  "storage_value": "up to {{value}} GiB"
 }
