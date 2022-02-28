@@ -102,6 +102,7 @@
     "row_kebab": {
       "delete": "Delete",
       "manage": "Manage"
-    }
+    },
+    "no_existing_permissions": "No existing permissions"
   }
 }

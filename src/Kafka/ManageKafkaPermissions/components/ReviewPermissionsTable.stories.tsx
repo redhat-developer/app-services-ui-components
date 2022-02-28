@@ -2,10 +2,8 @@ import { useState } from "react";
 import { ComponentMeta } from "@storybook/react";
 import objectHash from "object-hash";
 
-import {
-  ReviewPermissionsTable,
-  RemovableEnhancedAclBinding,
-} from "./ReviewPermissionsTable";
+import { ReviewPermissionsTable } from "./ReviewPermissionsTable";
+import { RemovableEnhancedAclBinding } from "../types";
 
 const permissions = {
   items: [
@@ -110,6 +108,67 @@ const permissionsForSelectedAccount = {
   ],
 };
 
+const permissionsForSelectedAccountWithDeny = {
+  items: [
+    {
+      resourceType: "TOPIC",
+      resourceName: "test",
+      patternType: "PREFIXED",
+      principal: "User:*",
+      operation: "CREATE",
+      permission: "DENY",
+    },
+    {
+      resourceType: "TOPIC",
+      resourceName: "test",
+      patternType: "PREFIXED",
+      principal: "User:*",
+      operation: "WRITE",
+      permission: "DENY",
+    },
+    {
+      resourceType: "CLUSTER",
+      resourceName: "*",
+      patternType: "LITERAL",
+      principal: "User:*",
+      operation: "DESCRIBE",
+      permission: "ALLOW",
+    },
+    {
+      resourceType: "GROUP",
+      resourceName: "*",
+      patternType: "LITERAL",
+      principal: "User:*",
+      operation: "DESCRIBE",
+      permission: "ALLOW",
+    },
+    {
+      resourceType: "TOPIC",
+      resourceName: "*",
+      patternType: "LITERAL",
+      principal: "User:*",
+      operation: "DESCRIBE",
+      permission: "ALLOW",
+    },
+    {
+      resourceType: "TOPIC",
+      resourceName: "*",
+      patternType: "LITERAL",
+      principal: "User:*",
+      operation: "DESCRIBE_CONFIGS",
+      permission: "ALLOW",
+    },
+    {
+      resourceType: "TOPIC",
+      resourceName: "ajay",
+      patternType: "PREFIXED",
+      principal: "User:*",
+      operation: "ALL",
+      permission: "ALLOW",
+    },
+  ],
+};
+
 export default {
   component: ReviewPermissionsTable,
   args: {},
@@ -130,10 +189,10 @@ const AclsReview = ({ permissions, selectedAccountId }) => {
 
   const [acls, setAcls] = useState<RemovableEnhancedAclBinding[]>(newAcls);
 
-  const onRemoveAcl = (acl: RemovableEnhancedAclBinding) => {
+  const onRemoveAcl = (rowId: string | number) => {
     setAcls((prevState) => {
       return prevState.map((v) => {
-        if (v.hash() === acl.hash()) {
+        if (v.hash() === rowId) {
           v.removed = true;
         }
         return v;
@@ -162,6 +221,13 @@ export const AclsReviewForSelectedAccount = () => (
   <AclsReview
     permissions={permissionsForSelectedAccount.items}
     selectedAccountId="test_kafka_devexp"
+  />
+);
+
+export const AclsReviewForAllAccountsWithDenyPermission = () => (
+  <AclsReview
+    permissions={permissionsForSelectedAccountWithDeny.items}
+    selectedAccountId="*"
   />
 );
 

@@ -69,3 +69,8 @@ export interface IAclBinding {
 export type EnhancedAclBinding = IAclBinding & {
   hash: () => string;
 };
+
+export type RemovableEnhancedAclBinding = EnhancedAclBinding & {
+  removed: boolean;
+  index: number;
+};
