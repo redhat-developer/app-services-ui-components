@@ -97,7 +97,7 @@
     "delete_selected": "Delete selected permissions",
     "manage_button": "Manage access",
     "manage_permissions_button": "Manage access",
-    "no_existing_permissions": "No existing permissions",
+    "no_existing_permissions": "No existing permissions.",
     "no_results_body": "The Kafka instance owner and organization administrators have access to resources in this instance. Give other accounts access by managing permissions.",
     "no_results_title": "No permissions defined",
     "permissions_column_title": "Permission",

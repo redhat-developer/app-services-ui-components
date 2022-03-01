@@ -10,6 +10,7 @@ import {
   Td,
   TableVariant,
 } from "@patternfly/react-table";
+import { TextContent, Text, TextVariants } from "@patternfly/react-core";
 
 import { RemovableEnhancedAclBinding } from "../types";
 import { ResourceCell, PermissionOperationCell, PrincipalCell } from "./Cells";
@@ -33,7 +34,13 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
   ];
 
   if (filteredAcls?.length <= 0) {
-    return t("table.no_existing_permissions");
+    return (
+      <TextContent>
+        <Text component={TextVariants.small}>
+          {t("table.no_existing_permissions")}
+        </Text>
+      </TextContent>
+    );
   }
 
   return (
@@ -58,7 +65,7 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
           } = acl;
 
           return (
-            <Tr>
+            <Tr key={hash()}>
               <Td>
                 <ResourceCell
                   patternType={patternType}
