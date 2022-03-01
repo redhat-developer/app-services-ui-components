@@ -39,8 +39,8 @@ export const AllStatutesAtOnce = () => (
     <pre>deprovision</pre>
     <StatusLabel value={"deprovision"} />
     <br />
-    <pre>failed</pre>
-    <StatusLabel value={"failed"} />
+    <pre>degraded</pre>
+    <StatusLabel value={"degraded"} />
     <br />
   </>
 );
@@ -130,11 +130,11 @@ Deprovision.args = {
 };
 Deprovision.parameters = Deleting.parameters;
 
-export const Failed = Template.bind({});
-Failed.args = {
-  value: "failed",
+export const Degraded = Template.bind({});
+Degraded.args = {
+  value: "degraded",
 };
-Failed.parameters = {
+Degraded.parameters = {
   docs: {
     description: {
       story: "Something has gone wrong with the Kafka instance .",
