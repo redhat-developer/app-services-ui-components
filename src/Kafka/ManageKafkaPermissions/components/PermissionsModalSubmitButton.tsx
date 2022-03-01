@@ -1,20 +1,29 @@
-import { Button, SelectOptionObject } from "@patternfly/react-core";
+import { Button } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 
 type SubmitButtonProps = {
-  selectedAccountId?: string | SelectOptionObject;
+  isButtonDisabled: boolean;
+  step: number;
+  onChangeStep: (value: number) => void;
 };
 export const SubmitButton: React.FunctionComponent<SubmitButtonProps> = ({
-  selectedAccountId,
+  isButtonDisabled,
+  step,
+  onChangeStep,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   {
-    return (
+    return step == 1 ? (
       <Button
         variant="primary"
-        isDisabled={selectedAccountId === undefined || selectedAccountId === ""}
+        isDisabled={isButtonDisabled}
+        onClick={() => onChangeStep(2)}
       >
         {t("manage_permissions_dialog.step_1_submit_button")}
+      </Button>
+    ) : (
+      <Button variant="primary">
+        {t("manage_permissions_dialog.step_2_submit_button")}
       </Button>
     );
   }

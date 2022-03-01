@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
-import { Principal, PrincipalType } from "./ManagePermissionsModal";
+import { Account, PrincipalType } from "../types";
 import {
   Divider,
   Select,
@@ -24,14 +24,14 @@ export type SelectAccountProps = {
   onChangeAccount: React.Dispatch<
     React.SetStateAction<Validated<string | undefined | SelectOptionObject>>
   >;
-  initialOptions: Principal[];
+  accounts: Account[];
   onEscapeModal: (closes: boolean) => void;
 };
 
 export const SelectAccount: React.VFC<SelectAccountProps> = ({
   onChangeAccount,
   id,
-  initialOptions,
+  accounts,
   onEscapeModal,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
@@ -53,6 +53,61 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     });
     setIsOpen(false);
   };
+  const serviceAccountOptions = () => {
+    const serviceAccountsLength = accounts.filter(
+      (account) => account.principalType === PrincipalType.ServiceAccount
+    ).length;
+    return serviceAccountsLength
+      ? accounts
+          .filter(
+            (principal) =>
+              principal.principalType === PrincipalType.ServiceAccount
+          )
+          .sort((a, b) =>
+            a.displayName && b.displayName
+              ? a.displayName.localeCompare(b.displayName)
+              : -1
+          )
+          .map((principal, index) => (
+            <SelectOption
+              key={index}
+              value={principal.id}
+              description={principal.displayName}
+            >
+              {principal.id}
+            </SelectOption>
+          ))
+      : [
+          <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+            No results found
+          </SelectOption>,
+        ];
+  };
+
+  const userAccountOperations = () => {
+    const userAccountsLength = accounts.filter(
+      (account) => account.principalType === PrincipalType.UserAccount
+    ).length;
+    return userAccountsLength
+      ? accounts
+          .filter(
+            (principal) => principal.principalType === PrincipalType.UserAccount
+          )
+          .map((principal, index) => (
+            <SelectOption
+              key={index}
+              value={principal.id}
+              description={principal.displayName}
+            >
+              {principal.id}
+            </SelectOption>
+          ))
+      : [
+          <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+            No results found
+          </SelectOption>,
+        ];
+  };
 
   const onSelect: SelectProps["onSelect"] = (_, selection) => {
     onChangeAccount({
@@ -61,68 +116,31 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     });
     setIsOpen(false);
   };
-  const options = initialOptions.length
-    ? [
-        <SelectGroup key="all_accounts_group">
-          <SelectOption
-            key="*"
-            value="*"
-            description={t(
-              "manage_permissions_dialog.all_accounts_description"
-            )}
-          >
-            {t("manage_permissions_dialog.all_accounts_title")}
-          </SelectOption>
-        </SelectGroup>,
-        <Divider key="all_accounts_divider" />,
-        <SelectGroup
-          label={t(
-            "manage_permissions_dialog.all_accounts_service_account_group"
-          )}
-          key="service_accounts_group"
-        >
-          {initialOptions
-            .filter(
-              (principal) =>
-                principal.principalType === PrincipalType.ServiceAccount
-            )
-            .sort((a, b) =>
-              a.displayName && b.displayName
-                ? a.displayName.localeCompare(b.displayName)
-                : -1
-            )
-            .map((principal, index) => (
-              <SelectOption
-                key={index}
-                value={principal.id}
-                description={principal.displayName}
-              >
-                {principal.id}
-              </SelectOption>
-            ))}
-        </SelectGroup>,
-        <Divider key="user_account_divider" />,
-        <SelectGroup
-          label={t("manage_permissions_dialog.all_accounts_user_account_group")}
-          key="user_accounts_group"
-        >
-          {initialOptions
-            .filter(
-              (principal) =>
-                principal.principalType === PrincipalType.UserAccount
-            )
-            .map((principal, index) => (
-              <SelectOption
-                key={index}
-                value={principal}
-                description={principal.displayName}
-              >
-                {principal.id}
-              </SelectOption>
-            ))}
-        </SelectGroup>,
-      ]
-    : [];
+  const options = [
+    <SelectGroup key="all_accounts_group">
+      <SelectOption
+        key="*"
+        value="*"
+        description={t("manage_permissions_dialog.all_accounts_description")}
+      >
+        {t("manage_permissions_dialog.all_accounts_title")}
+      </SelectOption>
+    </SelectGroup>,
+    <Divider key="all_accounts_divider" />,
+    <SelectGroup
+      label={t("manage_permissions_dialog.all_accounts_service_account_group")}
+      key="service_accounts_group"
+    >
+      {serviceAccountOptions()}
+    </SelectGroup>,
+    <Divider key="user_account_divider" />,
+    <SelectGroup
+      label={t("manage_permissions_dialog.all_accounts_user_account_group")}
+      key="user_accounts_group"
+    >
+      {userAccountOperations()}
+    </SelectGroup>,
+  ];
 
   const customFilter = (
     _: React.ChangeEvent<HTMLInputElement> | null,
@@ -137,9 +155,16 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       .filter((accounts) => Array.isArray(accounts.props.children))
       .map((account) =>
         account.props.children.filter(
-          (allAccounts: { props: { value: string; description: string } }) =>
-            input.test(allAccounts.props.value) ||
-            input.test(allAccounts.props.description)
+          (allAccounts: {
+            props: {
+              value: string;
+              description: string;
+              isNoResultsOption: boolean;
+            };
+          }) =>
+            !allAccounts.props.isNoResultsOption &&
+            (input.test(allAccounts.props.value) ||
+              input.test(allAccounts.props.description))
         )
       );
   };
@@ -158,7 +183,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       <Select
         data-testid="acls-select-account"
         variant={SelectVariant.typeahead}
-        className="kafka-ui--select--limit-height"
         typeAheadAriaLabel={t(
           "manage_permissions_dialog.account_id_typeahead_placeholder"
         )}
@@ -169,9 +193,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onFilter={customFilter}
         isOpen={isOpen}
         placeholderText={t(
-          "manage_permissions_dialog.account_id_typeahead_placeholder"
-        )}
-        placeholder={t(
           "manage_permissions_dialog.account_id_typeahead_placeholder"
         )}
         isCreatable={false}

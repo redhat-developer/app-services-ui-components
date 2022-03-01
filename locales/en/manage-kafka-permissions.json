@@ -19,7 +19,7 @@
     "deny": "Deny"
   },
   "manage_permissions_dialog": {
-    "account_id_aria": "The account",
+    "account_id_aria": "More info for Account field",
     "account_id_help": "A service account enables your application or tool to connect securely to your resources. A user account enables users in your organization to access resources.",
     "account_id_title": "Account",
     "account_id_typeahead_placeholder": "Select an account",
