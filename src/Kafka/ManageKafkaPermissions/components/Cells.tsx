@@ -32,9 +32,9 @@ export const DisplayResourceName: VFC<{ resourceType: AclResourceType }> = ({
 const PatternType: VFC<{ patternType: AclPatternType }> = ({ patternType }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   if (patternType === "PREFIXED") {
-    return t("cells.pattern_type_prefixed");
+    return t("pattern_type_prefixed");
   } else {
-    return t("cells.pattern_type_literal");
+    return t("pattern_type_literal");
   }
 };
 
@@ -128,9 +128,7 @@ export const PrincipalCell: VFC<PrincipalCellProps> = ({
       {isDeleteEnabled && (
         <RemoveButton
           variant="link"
-          tooltip={t(
-            "manage_permissions_dialog.assign_permissions.remove_row_help"
-          )}
+          tooltip={t("remove_permission_tooltip")}
           onClick={onRemoveAcl}
         />
       )}
