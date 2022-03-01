@@ -1,28 +1,10 @@
 {
-  "acls_treeview": {
-    "consumer_group": "Consumer group",
-    "kafka_instance": "Kafka instance",
-    "operations": {
-      "all": "All",
-      "alter": "Alter",
-      "alter_configs": "Alter configs",
-      "create": "Create",
-      "delete": "Delete",
-      "describe": "Describe",
-      "describe_configs": "Describe configs",
-      "read": "Read",
-      "write": "Write"
-    },
-    "topic": "Topic",
-    "transational_id": "Transactional ID",
-    "treeview_placeholder": "Filter by resource type operation"
-  },
   "cells": {
     "pattern_type_literal": "is",
     "pattern_type_prefixed": "starts with"
   },
-  "consumer_group": "",
-  "kafka_instance": "",
+  "consumer_group": "Consumer group",
+  "kafka_instance": "Kafka instance",
   "manage_permissions_dialog": {
     "account_id_aria": "The account",
     "account_id_help": "A service account enables your application or tool to connect securely to your resources. A user account enables users in your organization to access resources.",
@@ -87,6 +69,28 @@
     "modal_description": "Any changes you made to access permissions will be lost.",
     "resume_editing": "Resume editing"
   },
+  "operations": {
+    "all": "All",
+    "alter": "Alter",
+    "alter_configs": "Alter configs",
+    "create": "Create",
+    "delete": "Delete",
+    "describe": "Describe",
+    "describe_configs": "Describe configs",
+    "read": "Read",
+    "write": "Write"
+  },
+  "permissions": {
+    "allow": "Allow",
+    "deny": "Deny"
+  },
+  "resource_type_operation_filter_placeholder": "Filter by resource type operation",
+  "resourceTypes": {
+    "consumer_group": "Consumer group",
+    "kafka_instance": "Kafka instance",
+    "topic": "Topic",
+    "transactional_id": "Transactional ID"
+  },
   "tab": {
     "label": "Access"
   },
@@ -107,6 +111,6 @@
       "manage": "Manage"
     }
   },
-  "topic": "",
-  "transactional_id": ""
+  "topic": "Topic",
+  "transactional_id": "Transactional ID"
 }

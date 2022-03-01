@@ -1,7 +1,7 @@
 import { VFC } from "react";
 import { Label, LabelProps } from "@patternfly/react-core";
 import { AclResourceType } from "../types";
-import "./SolidLabel.css";
+import "./ResourceTypeLabel.css";
 
 export type SolidLabelProps = {
   variant: AclResourceType;
@@ -12,16 +12,16 @@ type Variant = {
   content: string;
 };
 
-export const SolidLabel: VFC<SolidLabelProps> = ({ variant }) => {
+export const ResourceTypeLabel: VFC<SolidLabelProps> = ({ variant }) => {
   const getVariant = (): Variant => {
     switch (variant) {
-      case AclResourceType.Group:
+      case "GROUP":
         return { labelColor: "green", content: "G" };
-      case AclResourceType.Cluster:
+      case "CLUSTER":
         return { labelColor: "grey", content: "KI" };
-      case AclResourceType.Topic:
+      case "TOPIC":
         return { labelColor: "blue", content: "T" };
-      case AclResourceType.TransactionalId:
+      case "TRANSACTIONAL_ID":
         return { labelColor: "orange", content: "TI" };
     }
   };

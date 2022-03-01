@@ -1,40 +1,37 @@
 import { VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { sentenceCase } from "sentence-case";
 
 import { Label, LabelGroup } from "@patternfly/react-core";
 
 import {
-  AclPatternType,
-  AclResourceType,
-  AclPermissionType,
   AclOperation,
+  AclPatternType,
+  AclPermissionType,
+  AclResourceType,
 } from "../types";
-import { SolidLabel } from "./SolidLabel";
-import { RemoveButton } from "../../../shared/RemoveButton";
+import { ResourceTypeLabel } from "./ResourceTypeLabel";
+import { RemoveButton } from "../../../shared";
 
 export const DisplayResourceName: VFC<{ resourceType: AclResourceType }> = ({
   resourceType,
 }) => {
-  const { t } = useTranslation(["common"]);
+  const { t } = useTranslation(["manage-kafka-permissions"]);
 
   switch (resourceType) {
-    case AclResourceType.Group:
-      return t("consumer_group");
-    case AclResourceType.Topic:
-      return t("topic");
-    case AclResourceType.Cluster:
-      return t("kafka_instance");
-    case AclResourceType.TransactionalId:
-      return t("transactional_id");
-    default:
-      return <>{sentenceCase(resourceType)}</>;
+    case "GROUP":
+      return t("resourceTypes.consumer_group");
+    case "TOPIC":
+      return t("resourceTypes.topic");
+    case "CLUSTER":
+      return t("resourceTypes.kafka_instance");
+    case "TRANSACTIONAL_ID":
+      return t("resourceTypes.transactional_id");
   }
 };
 
 const PatternType: VFC<{ patternType: AclPatternType }> = ({ patternType }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
-  if (patternType === AclPatternType.Prefixed) {
+  if (patternType === "PREFIXED") {
     return t("cells.pattern_type_prefixed");
   } else {
     return t("cells.pattern_type_literal");
@@ -52,10 +49,10 @@ export const ResourceCell: VFC<ResourceCellProps> = ({
   patternType,
   resourceName,
 }) => {
-  if (resourceType === AclResourceType.Cluster) {
+  if (resourceType === "CLUSTER") {
     return (
       <>
-        <SolidLabel variant={resourceType} />{" "}
+        <ResourceTypeLabel variant={resourceType} />{" "}
         <DisplayResourceName resourceType={resourceType} />
       </>
     );
@@ -63,7 +60,7 @@ export const ResourceCell: VFC<ResourceCellProps> = ({
 
   return (
     <>
-      <SolidLabel variant={resourceType} />{" "}
+      <ResourceTypeLabel variant={resourceType} />{" "}
       <DisplayResourceName resourceType={resourceType} />{" "}
       <PatternType patternType={patternType} /> "{resourceName}"
     </>
@@ -79,68 +76,64 @@ export const PermissionOperationCell: VFC<PermissionOperationCellProps> = ({
   permission,
   operation,
 }) => {
+  const { t } = useTranslation("manage-kafka-permissions");
+  const permissions: { [key in AclPermissionType]: string } = {
+    ALLOW: t("permissions.allow"),
+    DENY: t("permissions.deny"),
+  };
+  const operations: { [key in AclOperation]: string } = {
+    ALL: t("operations.all"),
+    READ: t("operations.read"),
+    WRITE: t("operations.write"),
+    CREATE: t("operations.create"),
+    DELETE: t("operations.delete"),
+    ALTER: t("operations.alter"),
+    DESCRIBE: t("operations.describe"),
+    DESCRIBE_CONFIGS: t("operations.describe_configs"),
+    ALTER_CONFIGS: t("operations.alter_configs"),
+  };
   return (
     <LabelGroup>
       {permission && (
         <Label
           variant="outline"
-          color={permission === AclPermissionType.Deny ? "red" : undefined}
+          color={permission === "DENY" ? "red" : undefined}
         >
-          {sentenceCase(permission)}
+          {permissions[permission]}
         </Label>
       )}
-      {operation && <Label variant="outline">{sentenceCase(operation)}</Label>}
+      {operation && <Label variant="outline">{operations[operation]}</Label>}
     </LabelGroup>
   );
 };
 
 export type PrincipalCellProps = {
-  selectedAccountId: string;
-  principal: string;
-  rowId: string | number;
-  onRemoveAcl: (rowId: string | number) => void;
+  isDeleteEnabled: boolean;
+  isAllAccounts: boolean;
+  onRemoveAcl: () => void;
 };
 
 export const PrincipalCell: VFC<PrincipalCellProps> = ({
-  selectedAccountId,
-  principal,
-  rowId,
+  isDeleteEnabled,
+  isAllAccounts,
   onRemoveAcl,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
-  if (selectedAccountId === "*" && principal === "*") {
-    return (
-      <div className="pf-u-display-flex pf-u-justify-content-space-between pf-u-justify-content-flex-end-on-lg">
+  return (
+    <div className="pf-u-display-flex pf-u-justify-content-space-between pf-u-justify-content-flex-end-on-lg">
+      {isAllAccounts && (
         <Label variant="outline">{t("table.all_accounts")}</Label>
+      )}
+      {isDeleteEnabled && (
         <RemoveButton
           variant="link"
-          row={rowId}
-          ToolTipText={t(
+          tooltip={t(
             "manage_permissions_dialog.assign_permissions.remove_row_help"
           )}
-          onButtonClick={() => onRemoveAcl(rowId)}
+          onClick={onRemoveAcl}
         />
-      </div>
-    );
-  } else if (principal === "*") {
-    return (
-      <div className="pf-u-display-flex pf-u-justify-content-flex-end-on-lg">
-        <Label variant="outline">{t("table.all_accounts")}</Label>
-      </div>
-    );
-  }
-
-  return (
-    <div className="pf-u-display-flex pf-u-justify-content-flex-end">
-      <RemoveButton
-        variant="link"
-        row={rowId}
-        ToolTipText={t(
-          "manage_permissions_dialog.assign_permissions.remove_row_help"
-        )}
-        onButtonClick={() => onRemoveAcl(rowId)}
-      />
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { RemoveButton } from "./RemoveButton";
 
 export default {
@@ -12,6 +12,5 @@ const Template: ComponentStory<typeof RemoveButton> = (args) => (
 
 export const Remove_Button = Template.bind({});
 Remove_Button.args = {
-  row: 1,
-  ToolTipText: "Remove",
+  tooltip: "Remove",
 };

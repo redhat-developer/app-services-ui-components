@@ -11,25 +11,13 @@ import {
 import * as stories from "./ReviewPermissionsTable.stories";
 
 const {
-  AclsReviewForAllAccounts,
-  AclsReviewForSelectedAccount,
-  AclsReviewForAllAccountsWithDenyPermission,
-  AclsReviewEmpty,
+  AllAccountsCanDeleteAllAccounts,
+  IndividualAccountCanDeleteOnlyOwnRules,
 } = composeStories(stories);
 
 describe("ReviewPermissionsTable", () => {
-  it("should render empty review table", async () => {
-    const comp = render(<AclsReviewEmpty />);
-
-    await waitForI18n(comp);
-
-    expect(
-      await comp.findByText("No existing permissions.")
-    ).toBeInTheDocument();
-  });
-
   it("should render review table with data for 'all accounts'", async () => {
-    const comp = render(<AclsReviewForAllAccounts />);
+    const comp = render(<AllAccountsCanDeleteAllAccounts />);
 
     await waitForI18n(comp);
 
@@ -46,10 +34,16 @@ describe("ReviewPermissionsTable", () => {
     expect(within(firstRow).getByText("Allow")).toBeInTheDocument();
     expect(within(firstRow).getByText("All accounts")).toBeInTheDocument();
     expect(within(firstRow).getByRole("button")).toBeInTheDocument();
+
+    //check deny permission
+    const denyPermissionRows = await comp.getAllByText("Deny");
+
+    expect(denyPermissionRows[0]).toBeInTheDocument();
+    expect(denyPermissionRows[1]).toBeInTheDocument();
   });
 
   it("should render review table with selected account and should not have delete button for 'all accounts' rows", async () => {
-    const comp = render(<AclsReviewForSelectedAccount />);
+    const comp = render(<IndividualAccountCanDeleteOnlyOwnRules />);
     await waitForI18n(comp);
 
     //check selected account rows
@@ -73,7 +67,7 @@ describe("ReviewPermissionsTable", () => {
   });
 
   it("should delete row for 'all accounts' review", async () => {
-    const comp = render(<AclsReviewForAllAccounts />);
+    const comp = render(<AllAccountsCanDeleteAllAccounts />);
 
     await waitForI18n(comp);
     await waitForPopper();
@@ -85,16 +79,5 @@ describe("ReviewPermissionsTable", () => {
     expect(
       within(firstRow).queryByText("Kafka instance")
     ).not.toBeInTheDocument();
-  });
-
-  it("should render review table with deny permission", async () => {
-    const comp = render(<AclsReviewForAllAccountsWithDenyPermission />);
-    await waitForI18n(comp);
-
-    //check deny permission
-    const denyPermissionRows = await comp.getAllByText("Deny");
-
-    expect(denyPermissionRows[0]).toBeInTheDocument();
-    expect(denyPermissionRows[1]).toBeInTheDocument();
   });
 });

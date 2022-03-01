@@ -1,23 +1,28 @@
-import { useRef, useState, useEffect } from "react";
 import * as React from "react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
-  MenuToggle,
   Menu,
   MenuContent,
   MenuGroup,
   MenuList,
+  MenuToggle,
   Popper,
   TreeView,
   TreeViewDataItem,
 } from "@patternfly/react-core";
-import { SolidLabel } from "./SolidLabel";
-import { AclResourceType, AclOperation } from "../types";
+import { ResourceTypeLabel } from "./ResourceTypeLabel";
+import { AclOperation, AclResourceType } from "../types";
+
+export type ResourceTypeDataItem = TreeViewDataItem & {
+  id: `${AclResourceType}` | `${AclResourceType}-${AclOperation}`;
+  children?: ResourceTypeDataItem[];
+};
 
 export type ResourceTypeOperationFilterProps = {
-  onCheckedItemsChange: (items: TreeViewDataItem[]) => void;
-  checkedItems: TreeViewDataItem[];
+  onCheckedItemsChange: (items: ResourceTypeDataItem[]) => void;
+  checkedItems: ResourceTypeDataItem[];
 };
 
 export const ResourceTypeOperationFilter: React.VFC<
@@ -29,150 +34,147 @@ export const ResourceTypeOperationFilter: React.VFC<
   const toggleRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const consumerGroupOptions: TreeViewDataItem[] = [
+  const consumerGroupOptions: ResourceTypeDataItem[] = [
     {
       name: (
         <>
-          <SolidLabel variant={AclResourceType.Group} />{" "}
-          {t("acls_treeview.consumer_group")}
+          <ResourceTypeLabel variant={"GROUP"} /> {t("consumer_group")}
         </>
       ),
-      id: AclResourceType.Group,
+      id: "GROUP",
       checkProps: { checked: false },
       children: [
         {
-          name: t("acls_treeview.operations.all"),
-          id: `${AclResourceType.Group}-${AclOperation.All}`,
+          name: t("operations.all"),
+          id: `GROUP-ALL`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.read"),
-          id: `${AclResourceType.Group}-${AclOperation.Read}`,
+          name: t("operations.read"),
+          id: `GROUP-READ`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.delete"),
-          id: `${AclResourceType.Group}-${AclOperation.Delete}`,
+          name: t("operations.delete"),
+          id: `GROUP-DELETE`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.describe"),
-          id: `${AclResourceType.Group}-${AclOperation.Describe}`,
+          name: t("operations.describe"),
+          id: `GROUP-DESCRIBE`,
           checkProps: { checked: false },
         },
       ],
     },
   ];
 
-  const kafkaInstanceOptions: TreeViewDataItem[] = [
+  const kafkaInstanceOptions: ResourceTypeDataItem[] = [
     {
       name: (
         <>
-          <SolidLabel variant={AclResourceType.Cluster} />{" "}
-          {t("acls_treeview.kafka_instance")}
+          <ResourceTypeLabel variant={"CLUSTER"} /> {t("kafka_instance")}
         </>
       ),
-      id: AclResourceType.Cluster,
+      id: "CLUSTER",
       checkProps: { checked: false },
       children: [
         {
-          name: t("acls_treeview.operations.alter"),
-          id: `${AclResourceType.Cluster}-${AclOperation.Alter}`,
+          name: t("operations.alter"),
+          id: `CLUSTER-ALTER`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.describe"),
-          id: `${AclResourceType.Cluster}-${AclOperation.Describe}`,
+          name: t("operations.describe"),
+          id: `CLUSTER-DESCRIBE`,
           checkProps: { checked: false },
         },
       ],
     },
   ];
 
-  const topicOptions: TreeViewDataItem[] = [
+  const topicOptions: ResourceTypeDataItem[] = [
     {
       name: (
         <>
-          <SolidLabel variant={AclResourceType.Topic} />{" "}
-          {t("acls_treeview.topic")}
+          <ResourceTypeLabel variant={"TOPIC"} /> {t("topic")}
         </>
       ),
-      id: AclResourceType.Topic,
+      id: "TOPIC",
       checkProps: { checked: false },
       children: [
         {
-          name: t("acls_treeview.operations.all"),
-          id: `${AclResourceType.Topic}-${AclOperation.All}`,
+          name: t("operations.all"),
+          id: `TOPIC-ALL`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.alter"),
-          id: `${AclResourceType.Topic}-${AclOperation.Alter}`,
+          name: t("operations.alter"),
+          id: `TOPIC-ALTER`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.alter_configs"),
-          id: `${AclResourceType.Topic}-${AclOperation.AlterConfigs}`,
+          name: t("operations.alter_configs"),
+          id: `TOPIC-ALTER_CONFIGS`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.create"),
-          id: `${AclResourceType.Topic}-${AclOperation.Create}`,
+          name: t("operations.create"),
+          id: `TOPIC-CREATE`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.delete"),
-          id: `${AclResourceType.Topic}-${AclOperation.Delete}`,
+          name: t("operations.delete"),
+          id: `TOPIC-DELETE`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.describe"),
-          id: `${AclResourceType.Topic}-${AclOperation.Describe}`,
+          name: t("operations.describe"),
+          id: `TOPIC-DESCRIBE`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.describe_configs"),
-          id: `${AclResourceType.Topic}-${AclOperation.DescribeConfigs}`,
+          name: t("operations.describe_configs"),
+          id: `TOPIC-DESCRIBE_CONFIGS`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.read"),
-          id: `${AclResourceType.Topic}-${AclOperation.Read}`,
+          name: t("operations.read"),
+          id: `TOPIC-READ`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.write"),
-          id: `${AclResourceType.Topic}-${AclOperation.Write}`,
+          name: t("operations.write"),
+          id: `TOPIC-WRITE`,
           checkProps: { checked: false },
         },
       ],
     },
   ];
 
-  const transactionalIdOptions: TreeViewDataItem[] = [
+  const transactionalIdOptions: ResourceTypeDataItem[] = [
     {
       name: (
         <>
-          <SolidLabel variant={AclResourceType.TransactionalId} />{" "}
-          {t("acls_treeview.transational_id")}
+          <ResourceTypeLabel variant={"TRANSACTIONAL_ID"} />{" "}
+          {t("transactional_id")}
         </>
       ),
-      id: AclResourceType.TransactionalId,
+      id: "TRANSACTIONAL_ID",
       checkProps: { checked: false },
       children: [
         {
-          name: t("acls_treeview.operations.all"),
-          id: `${AclResourceType.TransactionalId}-${AclOperation.All}`,
+          name: t("operations.all"),
+          id: `TRANSACTIONAL_ID-ALL`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.alter"),
-          id: `${AclResourceType.TransactionalId}-${AclOperation.Alter}`,
+          name: t("operations.alter"),
+          id: `TRANSACTIONAL_ID-ALTER`,
           checkProps: { checked: false },
         },
         {
-          name: t("acls_treeview.operations.describe"),
-          id: `${AclResourceType.TransactionalId}-${AclOperation.Describe}`,
+          name: t("operations.describe"),
+          id: `TRANSACTIONAL_ID-DESCRIBE`,
           checkProps: { checked: false },
         },
       ],
@@ -192,8 +194,8 @@ export const ResourceTypeOperationFilter: React.VFC<
       ? dataItem.children.some((child) => areSomeDescendantsChecked(child))
       : isChecked(dataItem);
 
-  const flattenTree = (tree: TreeViewDataItem[]) => {
-    let result: TreeViewDataItem[] = [];
+  const flattenTree = (tree: ResourceTypeDataItem[]) => {
+    let result: ResourceTypeDataItem[] = [];
 
     tree.forEach((item) => {
       result.push(item);
@@ -257,19 +259,19 @@ export const ResourceTypeOperationFilter: React.VFC<
     treeType: AclResourceType
   ) => {
     const checked = (evt.target as HTMLInputElement).checked;
-    let options: TreeViewDataItem[] = [];
+    let options: ResourceTypeDataItem[] = [];
 
     switch (treeType) {
-      case AclResourceType.Group:
+      case "GROUP":
         options = consumerGroupOptions;
         break;
-      case AclResourceType.Cluster:
+      case "CLUSTER":
         options = kafkaInstanceOptions;
         break;
-      case AclResourceType.Topic:
+      case "TOPIC":
         options = topicOptions;
         break;
-      case AclResourceType.TransactionalId:
+      case "TRANSACTIONAL_ID":
         options = transactionalIdOptions;
         break;
       default:
@@ -351,7 +353,7 @@ export const ResourceTypeOperationFilter: React.VFC<
       isExpanded={isOpen}
       data-testid="acls-treeview-menu-toggle"
     >
-      {t("acls_treeview.treeview_placeholder")}
+      {t("resource_type_operation_filter_placeholder")}
     </MenuToggle>
   );
 
@@ -369,27 +371,21 @@ export const ResourceTypeOperationFilter: React.VFC<
               data-testid="acls-consumer-group"
               data={consumerGroupsMapped}
               hasChecks
-              onCheck={(event, item) =>
-                onCheck(event, item, AclResourceType.Group)
-              }
+              onCheck={(event, item) => onCheck(event, item, "GROUP")}
             />
           </MenuGroup>
           <MenuGroup>
             <TreeView
               data={kafkaInstanceMapped}
               hasChecks
-              onCheck={(event, item) =>
-                onCheck(event, item, AclResourceType.Cluster)
-              }
+              onCheck={(event, item) => onCheck(event, item, "CLUSTER")}
             />
           </MenuGroup>
           <MenuGroup>
             <TreeView
               data={topicMapped}
               hasChecks
-              onCheck={(event, item) =>
-                onCheck(event, item, AclResourceType.Topic)
-              }
+              onCheck={(event, item) => onCheck(event, item, "TOPIC")}
             />
           </MenuGroup>
           <MenuGroup>
@@ -397,7 +393,7 @@ export const ResourceTypeOperationFilter: React.VFC<
               data={transactionalIdMapped}
               hasChecks
               onCheck={(event, item) =>
-                onCheck(event, item, AclResourceType.TransactionalId)
+                onCheck(event, item, "TRANSACTIONAL_ID")
               }
             />
           </MenuGroup>

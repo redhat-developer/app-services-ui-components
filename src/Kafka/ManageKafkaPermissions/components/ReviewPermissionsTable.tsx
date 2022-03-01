@@ -3,23 +3,21 @@ import { useTranslation } from "react-i18next";
 
 import {
   TableComposable,
-  Thead,
-  Tr,
-  Th,
+  TableVariant,
   Tbody,
   Td,
-  TableVariant,
+  Th,
+  Thead,
+  Tr,
 } from "@patternfly/react-table";
-import { TextContent, Text, TextVariants } from "@patternfly/react-core";
 
-import { RemovableEnhancedAclBinding } from "../types";
-import { ResourceCell, PermissionOperationCell, PrincipalCell } from "./Cells";
+import { AclBinding } from "../types";
+import { PermissionOperationCell, PrincipalCell, ResourceCell } from "./Cells";
 
 export type ReviewPermissionsTableProps = {
-  acls: RemovableEnhancedAclBinding[];
-  onChangeAcls: (acls: RemovableEnhancedAclBinding[]) => void;
+  acls: AclBinding[];
   selectedAccountId: string;
-  onRemoveAcl: (rowId: string | number) => void;
+  onRemoveAcl: (idx: number) => void;
 };
 
 export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
@@ -29,31 +27,17 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
-  const filteredAcls = [
-    ...acls.filter((acl: RemovableEnhancedAclBinding) => !acl.removed),
-  ];
-
-  if (filteredAcls?.length <= 0) {
-    return (
-      <TextContent>
-        <Text component={TextVariants.small}>
-          {t("table.no_existing_permissions")}
-        </Text>
-      </TextContent>
-    );
-  }
-
   return (
     <TableComposable variant={TableVariant.compact}>
       <Thead noWrap>
         <Tr>
           <Th width={60}>{t("table.resource_column_title")}</Th>
           <Th width={20}>{t("table.permissions_column_title")}</Th>
-          <Th width={20}></Th>
+          <Th width={20} />
         </Tr>
       </Thead>
       <Tbody>
-        {filteredAcls?.map((acl: RemovableEnhancedAclBinding) => {
+        {acls.map((acl, idx) => {
           const {
             patternType,
             resourceType,
@@ -61,11 +45,15 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
             operation,
             permission,
             principal,
-            hash,
           } = acl;
 
+          const isDeleteEnabled =
+            selectedAccountId === "*" ||
+            principal === `User:${selectedAccountId}`;
+          const isAllAccounts = principal === "User:*";
+
           return (
-            <Tr key={hash()}>
+            <Tr key={idx}>
               <Td>
                 <ResourceCell
                   patternType={patternType}
@@ -81,10 +69,9 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
               </Td>
               <Td>
                 <PrincipalCell
-                  selectedAccountId={selectedAccountId}
-                  principal={principal}
-                  rowId={hash()}
-                  onRemoveAcl={onRemoveAcl}
+                  isDeleteEnabled={isDeleteEnabled}
+                  isAllAccounts={isAllAccounts}
+                  onRemoveAcl={() => onRemoveAcl(idx)}
                 />
               </Td>
             </Tr>

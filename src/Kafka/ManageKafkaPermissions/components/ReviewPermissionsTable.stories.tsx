@@ -1,243 +1,166 @@
 import { useState } from "react";
-import { ComponentMeta } from "@storybook/react";
-import objectHash from "object-hash";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ReviewPermissionsTable } from "./ReviewPermissionsTable";
-import { RemovableEnhancedAclBinding } from "../types";
+import { AclBinding } from "../types";
 
-const permissions = {
-  items: [
-    {
-      resourceType: "CLUSTER",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-  ],
-};
+const permissionsForAllAccounts: AclBinding[] = [
+  {
+    resourceType: "CLUSTER",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "GROUP",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE_CONFIGS",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "test",
+    patternType: "PREFIXED",
+    principal: "User:*",
+    operation: "CREATE",
+    permission: "DENY",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "test",
+    patternType: "PREFIXED",
+    principal: "User:*",
+    operation: "WRITE",
+    permission: "DENY",
+  },
+];
 
-const permissionsForAllAccounts = {
-  items: [
-    {
-      resourceType: "CLUSTER",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "GROUP",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE_CONFIGS",
-      permission: "ALLOW",
-    },
-  ],
-};
-
-const permissionsForSelectedAccount = {
-  items: [
-    {
-      resourceType: "CLUSTER",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "GROUP",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE_CONFIGS",
-      permission: "ALLOW",
-    },
-    {
-      operation: "ALL",
-      patternType: "PREFIXED",
-      permission: "ALLOW",
-      principal: "User:test_kafka_devexp",
-      resourceName: "test",
-      resourceType: "TOPIC",
-    },
-    {
-      operation: "ALL",
-      patternType: "PREFIXED",
-      permission: "ALLOW",
-      principal: "User:test_kafka_devexp",
-      resourceName: "test",
-      resourceType: "GROUP",
-    },
-  ],
-};
-
-const permissionsForSelectedAccountWithDeny = {
-  items: [
-    {
-      resourceType: "TOPIC",
-      resourceName: "test",
-      patternType: "PREFIXED",
-      principal: "User:*",
-      operation: "CREATE",
-      permission: "DENY",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "test",
-      patternType: "PREFIXED",
-      principal: "User:*",
-      operation: "WRITE",
-      permission: "DENY",
-    },
-    {
-      resourceType: "CLUSTER",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "GROUP",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "*",
-      patternType: "LITERAL",
-      principal: "User:*",
-      operation: "DESCRIBE_CONFIGS",
-      permission: "ALLOW",
-    },
-    {
-      resourceType: "TOPIC",
-      resourceName: "ajay",
-      patternType: "PREFIXED",
-      principal: "User:*",
-      operation: "ALL",
-      permission: "ALLOW",
-    },
-  ],
-};
+const permissionsForSelectedAccount: AclBinding[] = [
+  {
+    resourceType: "CLUSTER",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "GROUP",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE",
+    permission: "ALLOW",
+  },
+  {
+    resourceType: "TOPIC",
+    resourceName: "*",
+    patternType: "LITERAL",
+    principal: "User:*",
+    operation: "DESCRIBE_CONFIGS",
+    permission: "ALLOW",
+  },
+  {
+    operation: "ALL",
+    patternType: "PREFIXED",
+    permission: "ALLOW",
+    principal: "User:test_kafka_devexp",
+    resourceName: "test",
+    resourceType: "TOPIC",
+  },
+  {
+    operation: "ALL",
+    patternType: "PREFIXED",
+    permission: "ALLOW",
+    principal: "User:test_kafka_devexp",
+    resourceName: "test",
+    resourceType: "GROUP",
+  },
+];
 
 export default {
   component: ReviewPermissionsTable,
   args: {},
 } as ComponentMeta<typeof ReviewPermissionsTable>;
 
-const AclsReview = ({ permissions, selectedAccountId }) => {
-  const newAcls = permissions.map((v, k) => {
-    const answer = v as RemovableEnhancedAclBinding;
-    answer.index = k;
-    return {
-      ...answer,
-      principal: v.principal.substring(5),
-      hash: () => {
-        return objectHash(v);
-      },
-    };
-  });
+const AclsReview: ComponentStory<typeof ReviewPermissionsTable> = ({
+  acls: initialAcls,
+  selectedAccountId,
+}) => {
+  const [acls, setAcls] = useState<AclBinding[]>(initialAcls);
 
-  const [acls, setAcls] = useState<RemovableEnhancedAclBinding[]>(newAcls);
-
-  const onRemoveAcl = (rowId: string | number) => {
-    setAcls((prevState) => {
-      return prevState.map((v) => {
-        if (v.hash() === rowId) {
-          v.removed = true;
-        }
-        return v;
-      });
-    });
+  const onRemoveAcl = (index: number) => {
+    const newAcls = acls.filter((_, i) => i !== index);
+    setAcls(newAcls);
   };
 
   return (
     <ReviewPermissionsTable
       acls={acls}
       selectedAccountId={selectedAccountId}
-      onChangeAcls={setAcls}
       onRemoveAcl={onRemoveAcl}
     />
   );
 };
 
-export const AclsReviewForAllAccounts = () => (
-  <AclsReview
-    permissions={permissionsForAllAccounts.items}
-    selectedAccountId="*"
-  />
-);
+export const _Example = AclsReview.bind({});
+_Example.args = {
+  acls: permissionsForAllAccounts,
+  selectedAccountId: "*",
+};
 
-export const AclsReviewForSelectedAccount = () => (
-  <AclsReview
-    permissions={permissionsForSelectedAccount.items}
-    selectedAccountId="test_kafka_devexp"
-  />
-);
+export const AllAccountsCanDeleteAllAccounts = AclsReview.bind({});
+AllAccountsCanDeleteAllAccounts.args = {
+  acls: permissionsForAllAccounts,
+  selectedAccountId: "*",
+};
+AllAccountsCanDeleteAllAccounts.parameters = {
+  docs: {
+    description: {
+      story:
+        'If you select all accounts, you see all ACLs assigned to "All accounts" and can remove any of those ACLs.',
+    },
+  },
+};
 
-export const AclsReviewForAllAccountsWithDenyPermission = () => (
-  <AclsReview
-    permissions={permissionsForSelectedAccountWithDeny.items}
-    selectedAccountId="*"
-  />
-);
-
-export const AclsReviewEmpty = () => (
-  <AclsReview
-    permissions={permissions.items.map((v) => {
-      const answer = v as RemovableEnhancedAclBinding;
-      answer.removed = true;
-      return answer;
-    })}
-    selectedAccountId="*"
-  />
-);
+export const IndividualAccountCanDeleteOnlyOwnRules = AclsReview.bind({});
+IndividualAccountCanDeleteOnlyOwnRules.args = {
+  acls: permissionsForSelectedAccount,
+  selectedAccountId: "test_kafka_devexp",
+};
+IndividualAccountCanDeleteOnlyOwnRules.parameters = {
+  docs: {
+    description: {
+      story:
+        'If you select an individual account, you still see all ACLs assigned to "All accounts" because they affect the selected account, but you cannot remove them because they are not explicitly assigned to the selected account.',
+    },
+  },
+};

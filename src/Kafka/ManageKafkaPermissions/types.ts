@@ -1,33 +1,25 @@
-export enum AclOperation {
-  All = "ALL",
-  Read = "READ",
-  Write = "WRITE",
-  Create = "CREATE",
-  Delete = "DELETE",
-  Alter = "ALTER",
-  Describe = "DESCRIBE",
-  DescribeConfigs = "DESCRIBE_CONFIGS",
-  AlterConfigs = "ALTER_CONFIGS",
-}
+export type AclOperation =
+  | "ALL"
+  | "READ"
+  | "WRITE"
+  | "CREATE"
+  | "DELETE"
+  | "ALTER"
+  | "DESCRIBE"
+  | "DESCRIBE_CONFIGS"
+  | "ALTER_CONFIGS";
 
-export enum AclResourceType {
-  Group = "GROUP",
-  Topic = "TOPIC",
-  Cluster = "CLUSTER",
-  TransactionalId = "TRANSACTIONAL_ID",
-}
+export type AclResourceType =
+  | "GROUP"
+  | "TOPIC"
+  | "CLUSTER"
+  | "TRANSACTIONAL_ID";
 
-export enum AclPatternType {
-  Literal = "LITERAL",
-  Prefixed = "PREFIXED",
-}
+export type AclPatternType = "LITERAL" | "PREFIXED";
 
-export enum AclPermissionType {
-  Allow = "ALLOW",
-  Deny = "DENY",
-}
+export type AclPermissionType = "ALLOW" | "DENY";
 
-export interface IAclBinding {
+export interface AclBinding {
   /**
    *
    * @type {AclResourceType}
@@ -65,12 +57,3 @@ export interface IAclBinding {
    */
   permission: AclPermissionType;
 }
-
-export type EnhancedAclBinding = IAclBinding & {
-  hash: () => string;
-};
-
-export type RemovableEnhancedAclBinding = EnhancedAclBinding & {
-  removed: boolean;
-  index: number;
-};

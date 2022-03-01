@@ -1,31 +1,21 @@
-import { Button, Tooltip } from "@patternfly/react-core";
+import { Button, ButtonProps, Tooltip } from "@patternfly/react-core";
 import { TrashIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
 
 export type RemoveButtonProps = {
-  row: number | string;
-  onButtonClick: (row: number | string) => void;
-  ToolTipText: string;
-  variant?:
-    | "link"
-    | "plain"
-    | "primary"
-    | "secondary"
-    | "tertiary"
-    | "danger"
-    | "warning"
-    | "control";
+  onClick: () => void;
+  tooltip: string;
+  variant?: ButtonProps["variant"];
 };
 
 export const RemoveButton: FunctionComponent<RemoveButtonProps> = ({
-  row,
-  ToolTipText,
-  onButtonClick,
+  tooltip,
+  onClick,
   variant = "plain",
 }) => {
   return (
-    <Tooltip content={ToolTipText}>
-      <Button variant={variant} onClick={() => onButtonClick(row)}>
+    <Tooltip content={tooltip}>
+      <Button variant={variant} onClick={onClick}>
         <TrashIcon />
       </Button>
     </Tooltip>

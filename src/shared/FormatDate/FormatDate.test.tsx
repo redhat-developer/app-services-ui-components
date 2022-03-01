@@ -34,7 +34,7 @@ describe("FormatDate", () => {
     expect(comp.getByText("1 day")).toBeTruthy();
   });
 
-  xit("OneMonthAgo", () => {
+  it("OneMonthAgo", () => {
     const comp = render(<OneMonthAgo />);
     expect(comp.getByText("about 1 month")).toBeTruthy();
   });
