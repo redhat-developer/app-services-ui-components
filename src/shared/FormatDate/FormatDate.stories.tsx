@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { add, sub } from "date-fns";
 
 import { FormatDate } from "./FormatDate";
@@ -35,7 +35,7 @@ OneDayAgo.args = {
 
 export const OneMonthAgo = Template.bind({});
 OneMonthAgo.args = {
-  date: sub(new Date(), { months: 1 }),
+  date: sub(new Date(), { days: 31 }),
 };
 
 export const OneYearAgo = Template.bind({});
