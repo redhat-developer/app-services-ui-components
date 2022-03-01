@@ -9,7 +9,7 @@
 
 .mas-m-degraded {
   font-size: var(--pf-global--icon--FontSize--md);
-  color: var(--pf-global--danger-color--100);
+  color: var(--pf-global--warning-color--100);
 }
 
 .mas-m-deleting {
