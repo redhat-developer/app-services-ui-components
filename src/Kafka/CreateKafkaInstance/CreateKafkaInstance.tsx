@@ -66,7 +66,7 @@ export const CreateKafkaInstance: FunctionComponent<
   ingresEgress = 30,
   storage = 1000,
   maxPartitions = 1000,
-  connections = 500,
+  connections = 2000,
   connectionRate = 100,
   messageSize = 1,
 }) => {
