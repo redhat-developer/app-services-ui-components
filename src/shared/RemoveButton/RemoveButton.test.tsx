@@ -1,5 +1,5 @@
 import { userEvent } from "@storybook/testing-library";
-import { render, screen } from "../../test-utils";
+import { render } from "../../test-utils";
 import { RemoveButton } from "./RemoveButton";
 
 describe("Remove Button component", () => {
@@ -7,11 +7,7 @@ describe("Remove Button component", () => {
     const onClickButton = jest.fn();
 
     const comp = render(
-      <RemoveButton
-        onButtonClick={onClickButton}
-        ToolTipText={"Remove"}
-        row={2}
-      />
+      <RemoveButton onClick={onClickButton} tooltip={"Remove"} />
     );
     userEvent.click(comp.getByRole("button"));
     expect(onClickButton).toHaveBeenCalledTimes(1);

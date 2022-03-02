@@ -128,49 +128,37 @@ export const PermissionsDropdown: VoidFunctionComponent<
           <MenuGroup>
             <MenuList>
               <MenuItem itemId={"add_permission"}>
-                {t(
-                  "manage_permissions_dialog.assign_permissions.add_permission"
-                )}
+                {t("permissions_dropdown.add_permission")}
               </MenuItem>
             </MenuList>
           </MenuGroup>
 
           <Divider />
-          <MenuGroup
-            label={t(
-              "manage_permissions_dialog.assign_permissions.task_based_permission"
-            )}
-          >
+          <MenuGroup label={t("permissions_dropdown.task_based_permission")}>
             <MenuList>
               <MenuItem
                 itemId={"shortcut_consume_topic"}
                 description={t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_consume_topic_description"
+                  "permissions_dropdown.shortcut_consume_topic_description"
                 )}
               >
-                {t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_consume_topic"
-                )}
+                {t("permissions_dropdown.shortcut_consume_topic")}
               </MenuItem>
               <MenuItem
                 itemId={"shortcut_produce_topic"}
                 description={t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_produce_topic_description"
+                  "permissions_dropdown.shortcut_produce_topic_description"
                 )}
               >
-                {t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_produce_topic"
-                )}
+                {t("permissions_dropdown.shortcut_produce_topic")}
               </MenuItem>
               <MenuItem
                 itemId={"shortcut_manage_access"}
                 description={t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_manage_access_description"
+                  "permissions_dropdown.shortcut_manage_access_description"
                 )}
               >
-                {t(
-                  "manage_permissions_dialog.assign_permissions.shortcut_manage_access"
-                )}
+                {t("permissions_dropdown.shortcut_manage_access")}
               </MenuItem>
             </MenuList>
           </MenuGroup>
@@ -187,12 +175,10 @@ export const PermissionsDropdown: VoidFunctionComponent<
           splitButtonItems={[
             <DropdownToggleAction
               key="cog-action"
-              aria-label={t(
-                "manage_permissions_dialog.assign_permissions.add_permission"
-              )}
+              aria-label={t("permissions_dropdown.add_permission")}
               onClick={onAddPermission}
             >
-              {t("manage_permissions_dialog.assign_permissions.add_permission")}
+              {t("permissions_dropdown.add_permission")}
             </DropdownToggleAction>,
           ]}
           splitButtonVariant="action"

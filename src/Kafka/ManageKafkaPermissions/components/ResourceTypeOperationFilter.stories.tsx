@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { ResourceTypeOperationFilter } from "./ResourceTypeOperationFilter";
-import { AclOperation, AclResourceType } from "../types";
-import { TreeViewDataItem } from "@patternfly/react-core";
+import {
+  ResourceTypeDataItem,
+  ResourceTypeOperationFilter,
+} from "./ResourceTypeOperationFilter";
 
 export default {
   component: ResourceTypeOperationFilter,
@@ -20,24 +21,24 @@ export const SomeItemChecked = Template.bind({});
 SomeItemChecked.args = {
   checkedItems: [
     {
-      id: `${AclResourceType.Group}-${AclOperation.All}`,
-      name: AclOperation.All,
+      id: `GROUP-ALL`,
+      name: "ALL",
     },
     {
-      id: `${AclResourceType.Group}-${AclOperation.Read}`,
-      name: AclOperation.Read,
+      id: `GROUP-READ`,
+      name: "READ",
     },
     {
-      id: `${AclResourceType.Group}-${AclOperation.Delete}`,
-      name: AclOperation.Delete,
+      id: `GROUP-DELETE`,
+      name: "DELETE",
     },
     {
-      id: `${AclResourceType.Group}-${AclOperation.Describe}`,
-      name: AclOperation.Describe,
+      id: `GROUP-DESCRIBE`,
+      name: "DESCRIBE",
     },
     {
-      id: `${AclResourceType.Cluster}-${AclOperation.Alter}`,
-      name: AclOperation.Alter,
+      id: `CLUSTER-ALTER`,
+      name: "ALTER",
     },
   ],
 };
@@ -46,77 +47,77 @@ export const AllItemsChecked = Template.bind({});
 AllItemsChecked.args = {
   checkedItems: [
     {
-      name: AclOperation.All,
-      id: `${AclResourceType.Group}-${AclOperation.All}`,
+      name: "ALL",
+      id: `GROUP-ALL`,
       checkProps: { checked: true },
     },
     {
-      name: AclOperation.Read,
-      id: `${AclResourceType.Group}-${AclOperation.Read}`,
+      name: "READ",
+      id: `GROUP-READ`,
     },
     {
-      name: AclOperation.Delete,
-      id: `${AclResourceType.Group}-${AclOperation.Delete}`,
+      name: "DELETE",
+      id: `GROUP-DELETE`,
     },
     {
-      name: AclOperation.Describe,
-      id: `${AclResourceType.Group}-${AclOperation.Describe}`,
+      name: "DESCRIBE",
+      id: `GROUP-DESCRIBE`,
     },
     {
-      name: AclOperation.Alter,
-      id: `${AclResourceType.Cluster}-${AclOperation.Alter}`,
+      name: "ALTER",
+      id: `CLUSTER-ALTER`,
     },
     {
-      name: AclOperation.Describe,
-      id: `${AclResourceType.Cluster}-${AclOperation.Describe}`,
+      name: "DESCRIBE",
+      id: `CLUSTER-DESCRIBE`,
     },
     {
-      name: AclOperation.All,
-      id: `${AclResourceType.Topic}-${AclOperation.All}`,
+      name: "ALL",
+      id: `TOPIC-ALL`,
     },
     {
-      name: AclOperation.Alter,
-      id: `${AclResourceType.Topic}-${AclOperation.Alter}`,
+      name: "ALTER",
+      id: `TOPIC-ALTER`,
     },
     {
-      name: AclOperation.AlterConfigs,
-      id: `${AclResourceType.Topic}-${AclOperation.AlterConfigs}`,
+      name: "ALTERCONFIGS",
+      id: `TOPIC-ALTER_CONFIGS`,
     },
     {
-      name: AclOperation.Create,
-      id: `${AclResourceType.Topic}-${AclOperation.Create}`,
+      name: "CREATE",
+      id: `TOPIC-CREATE`,
     },
     {
-      name: AclOperation.Delete,
-      id: `${AclResourceType.Topic}-${AclOperation.Delete}`,
+      name: "DELETE",
+      id: `TOPIC-DELETE`,
     },
     {
-      name: AclOperation.Describe,
-      id: `${AclResourceType.Topic}-${AclOperation.Describe}`,
+      name: "DESCRIBE",
+      id: `TOPIC-DESCRIBE`,
     },
     {
-      name: AclOperation.DescribeConfigs,
-      id: `${AclResourceType.Topic}-${AclOperation.DescribeConfigs}`,
+      name: "DESCRIBECONFIGS",
+      id: `TOPIC-DESCRIBE_CONFIGS`,
     },
     {
-      name: AclOperation.Read,
-      id: `${AclResourceType.Topic}-${AclOperation.Read}`,
+      name: "READ",
+      id: `TOPIC-READ`,
     },
     {
-      name: AclOperation.Write,
-      id: `${AclResourceType.Topic}-${AclOperation.Write}`,
+      name: "WRITE",
+      id: `TOPIC-WRITE`,
     },
     {
-      name: AclOperation.All,
-      id: `${AclResourceType.TransactionalId}-${AclOperation.All}`,
+      name: "ALL",
+      id: `TRANSACTIONAL_ID-ALL`,
     },
     {
-      name: AclOperation.Alter,
-      id: `${AclResourceType.TransactionalId}-${AclOperation.Alter}`,
+      name: "ALTER",
+      id: `TRANSACTIONAL_ID-ALTER`,
     },
     {
-      name: AclOperation.Describe,
-      id: `${AclResourceType.TransactionalId}-${AclOperation.Describe}`,
+      name: "DESCRIBE",
+      id: `TRANSACTIONAL_ID-DESCRIBE`,
     },
   ],
 };
@@ -124,7 +125,7 @@ AllItemsChecked.args = {
 export const InteractiveExample: ComponentStory<
   typeof ResourceTypeOperationFilter
 > = () => {
-  const [checkedItems, setCheckedItems] = useState<TreeViewDataItem[]>([]);
+  const [checkedItems, setCheckedItems] = useState<ResourceTypeDataItem[]>([]);
   return (
     <ResourceTypeOperationFilter
       onCheckedItemsChange={setCheckedItems}

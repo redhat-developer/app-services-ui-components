@@ -1,18 +1,59 @@
-export enum AclOperation {
-  All = "ALL",
-  Read = "READ",
-  Write = "WRITE",
-  Create = "CREATE",
-  Delete = "DELETE",
-  Alter = "ALTER",
-  Describe = "DESCRIBE",
-  DescribeConfigs = "DESCRIBE_CONFIGS",
-  AlterConfigs = "ALTER_CONFIGS",
-}
+export type AclOperation =
+  | "ALL"
+  | "READ"
+  | "WRITE"
+  | "CREATE"
+  | "DELETE"
+  | "ALTER"
+  | "DESCRIBE"
+  | "DESCRIBE_CONFIGS"
+  | "ALTER_CONFIGS";
 
-export enum AclResourceType {
-  Group = "GROUP",
-  Topic = "TOPIC",
-  Cluster = "CLUSTER",
-  TransactionalId = "TRANSACTIONAL_ID",
+export type AclResourceType =
+  | "GROUP"
+  | "TOPIC"
+  | "CLUSTER"
+  | "TRANSACTIONAL_ID";
+
+export type AclPatternType = "LITERAL" | "PREFIXED";
+
+export type AclPermissionType = "ALLOW" | "DENY";
+
+export interface AclBinding {
+  /**
+   *
+   * @type {AclResourceType}
+   * @memberof AclBinding
+   */
+  resourceType: AclResourceType;
+  /**
+   *
+   * @type {string}
+   * @memberof AclBinding
+   */
+  resourceName: string;
+  /**
+   *
+   * @type {AclPatternType}
+   * @memberof AclBinding
+   */
+  patternType: AclPatternType;
+  /**
+   * Identifies the user or service account to which an ACL entry is bound. The literal prefix value of `User:` is required. May be used to specify all users with value `User:*`.
+   * @type {string}
+   * @memberof AclBinding
+   */
+  principal: string;
+  /**
+   *
+   * @type {AclOperation}
+   * @memberof AclBinding
+   */
+  operation: AclOperation;
+  /**
+   *
+   * @type {AclPermissionType}
+   * @memberof AclBinding
+   */
+  permission: AclPermissionType;
 }
