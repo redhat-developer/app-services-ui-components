@@ -168,7 +168,7 @@ describe("KafkaInstanceStatus", () => {
     await tree.findByText("Ready");
   });
 
-  it("Failed", async () => {
+  it("Degraded", async () => {
     const onClickConnectionTabLink = jest.fn();
     const onClickSupportLink = jest.fn();
     const createdAt = new Date();
@@ -177,11 +177,11 @@ describe("KafkaInstanceStatus", () => {
       <KafkaInstanceStatus
         onClickConnectionTabLink={onClickConnectionTabLink}
         onClickSupportLink={onClickSupportLink}
-        status={"failed"}
+        status={"degraded"}
         createdAt={createdAt}
       />
     );
     await waitForI18n(tree);
-    await tree.findByText("Failed");
+    await tree.findByText("Degraded");
   });
 });

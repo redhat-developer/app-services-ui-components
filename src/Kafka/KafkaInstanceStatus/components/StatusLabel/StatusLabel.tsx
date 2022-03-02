@@ -10,7 +10,7 @@ import {
   SplitItem,
 } from "@patternfly/react-core";
 import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-circle-icon";
+import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { KafkaStatus } from "../../types";
@@ -121,14 +121,14 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
             );
         }
 
-      case "failed":
+      case "degraded":
         return (
           <div>
             <Split hasGutter className="mas-c-status">
               <SplitItem>
-                <ExclamationCircleIcon className="mas-m-failed" />
+                <ExclamationTriangleIcon className="mas-m-degraded" />
               </SplitItem>
-              <SplitItem>{t("statuses.failed")}</SplitItem>
+              <SplitItem>{t("statuses.degraded")}</SplitItem>
             </Split>
           </div>
         );
