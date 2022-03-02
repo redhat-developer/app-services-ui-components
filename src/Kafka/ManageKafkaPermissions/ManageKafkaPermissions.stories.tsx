@@ -1,11 +1,47 @@
 import { ManageKafkaPermissions } from "./ManageKafkaPermissions";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { account } from "./types";
+import { PrincipalType } from "./types";
 
 export default {
   component: ManageKafkaPermissions,
   args: {
-    accounts: account,
+    accounts: [
+      {
+        id: "id",
+        displayName: "displayName",
+        principalType: PrincipalType.ServiceAccount,
+      },
+      {
+        id: "id5",
+        displayName: "displayName5",
+        principalType: PrincipalType.ServiceAccount,
+      },
+      {
+        id: "id2",
+        displayName: "displayName2",
+        principalType: PrincipalType.ServiceAccount,
+      },
+      {
+        id: "id3",
+        displayName: "displayName3",
+        principalType: PrincipalType.UserAccount,
+      },
+      {
+        id: "id4",
+        displayName: "displayName4",
+        principalType: PrincipalType.UserAccount,
+      },
+      {
+        id: "id6",
+        displayName: "displayName6",
+        principalType: PrincipalType.UserAccount,
+      },
+      {
+        id: "id7",
+        displayName: "displayName7",
+        principalType: PrincipalType.ServiceAccount,
+      },
+    ],
     kafkaName: "name-test",
   },
 } as ComponentMeta<typeof ManageKafkaPermissions>;

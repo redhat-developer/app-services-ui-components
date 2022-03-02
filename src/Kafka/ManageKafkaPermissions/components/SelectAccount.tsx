@@ -20,9 +20,9 @@ export type Validated<T> = {
 };
 
 export type SelectAccountProps = {
-  id: Validated<string | undefined | SelectOptionObject>;
+  id: string | undefined | SelectOptionObject;
   onChangeAccount: React.Dispatch<
-    React.SetStateAction<Validated<string | undefined | SelectOptionObject>>
+    React.SetStateAction<string | undefined | SelectOptionObject>
   >;
   accounts: Account[];
   onEscapeModal: (closes: boolean) => void;
@@ -36,6 +36,9 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [validated, setValidated] = useState<ValidatedOptions>(
+    ValidatedOptions.default
+  );
 
   const onToggle = (newState: boolean | ((prevState: boolean) => boolean)) => {
     if (newState) {
@@ -46,11 +49,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   };
 
   const clearSelection = () => {
-    onChangeAccount({
-      value: undefined,
-      validated: ValidatedOptions.error,
-      errorMessage: t("common:required"),
-    });
+    onChangeAccount(undefined);
+    setValidated(ValidatedOptions.error);
     setIsOpen(false);
   };
   const serviceAccountOptions = () => {
@@ -79,7 +79,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           ))
       : [
           <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
-            No results found
+            {t("manage_permissions_dialog.no_results_found")}
           </SelectOption>,
         ];
   };
@@ -104,16 +104,14 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           ))
       : [
           <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
-            No results found
+            {t("manage_permissions_dialog.no_results_found")}
           </SelectOption>,
         ];
   };
 
   const onSelect: SelectProps["onSelect"] = (_, selection) => {
-    onChangeAccount({
-      value: selection,
-      validated: ValidatedOptions.default,
-    });
+    onChangeAccount(selection);
+    setValidated(ValidatedOptions.default);
     setIsOpen(false);
   };
   const options = [
@@ -177,8 +175,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       labelBody={t("manage_permissions_dialog.account_id_help")}
       buttonAriaLabel={t("manage_permissions_dialog.account_id_aria")}
       isRequired={true}
-      helperTextInvalid={id.errorMessage}
-      validated={id.validated || ValidatedOptions.default}
+      helperTextInvalid={t("common:required")}
+      validated={validated}
     >
       <Select
         data-testid="acls-select-account"
@@ -189,7 +187,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onToggle={onToggle}
         onSelect={onSelect}
         onClear={clearSelection}
-        selections={id.value}
+        selections={id}
         onFilter={customFilter}
         isOpen={isOpen}
         placeholderText={t(
@@ -197,7 +195,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         )}
         isCreatable={false}
         menuAppendTo="parent"
-        validated={id.validated || ValidatedOptions.default}
+        validated={validated}
         isGrouped={true}
         maxHeight={400}
       >

@@ -8,13 +8,13 @@ import {
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SubmitButton } from "./components/PermissionsModalSubmitButton";
-import { Validated, SelectAccount } from "./components/SelectAccount";
+import { SelectAccount } from "./components/SelectAccount";
 import { Account } from "./types";
 
 type ManageKafkaPermissionsProps = {
   accounts: Account[];
   hideModal: () => void;
-  kafkaName?: string;
+  kafkaName: string;
 };
 
 export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
@@ -25,12 +25,10 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const escapeClosesModal = useRef<boolean>(true);
   const [selectedAccount, setSelectedAccount] = useState<
-    Validated<string | undefined | SelectOptionObject>
-  >({ value: undefined, validated: undefined });
+    string | undefined | SelectOptionObject
+  >(undefined);
   const [step, setStep] = useState<number>(1);
-  /*value of step will be used when working on step 2
-  const [step, setStep] = useState<number>(1);
-  */
+
   const onEscapePress = () => {
     if (escapeClosesModal.current) {
       hideModal();
@@ -40,23 +38,6 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const setEscapeClosesModal = (closes: boolean) => {
     escapeClosesModal.current = closes;
   };
-  const ModalForm: React.FunctionComponent = () => (
-    <Form>
-      <FormGroup
-        fieldId="kafka-instance-name"
-        label={t("manage_permissions_dialog.kafka_instance_title")}
-        id="modal-message"
-      >
-        {kafkaName}
-      </FormGroup>
-      <SelectAccount
-        id={selectedAccount}
-        onChangeAccount={setSelectedAccount}
-        accounts={accounts}
-        onEscapeModal={setEscapeClosesModal}
-      />
-    </Form>
-  );
 
   return (
     <Modal
@@ -74,7 +55,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         <SubmitButton
           key={1}
           isButtonDisabled={
-            selectedAccount.value === undefined || selectedAccount.value === ""
+            selectedAccount === undefined || selectedAccount === ""
               ? true
               : false
           }
@@ -86,7 +67,21 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         </Button>,
       ]}
     >
-      <ModalForm />
+      <Form>
+        <FormGroup
+          fieldId="kafka-instance-name"
+          label={t("manage_permissions_dialog.kafka_instance_title")}
+          id="modal-message"
+        >
+          {kafkaName}
+        </FormGroup>
+        <SelectAccount
+          id={selectedAccount}
+          onChangeAccount={setSelectedAccount}
+          accounts={accounts}
+          onEscapeModal={setEscapeClosesModal}
+        />
+      </Form>
     </Modal>
   );
 };

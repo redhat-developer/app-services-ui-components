@@ -1,13 +1,50 @@
-import { SelectAccount, Validated } from "./SelectAccount";
+import { SelectAccount } from "./SelectAccount";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React, { useState } from "react";
-import { account } from "../types";
 import { SelectOptionObject } from "@patternfly/react-core";
 import { PrincipalType } from "../types";
 
+const account = [
+  {
+    id: "id",
+    displayName: "displayName",
+    principalType: PrincipalType.ServiceAccount,
+  },
+  {
+    id: "id5",
+    displayName: "displayName5",
+    principalType: PrincipalType.ServiceAccount,
+  },
+  {
+    id: "id2",
+    displayName: "displayName2",
+    principalType: PrincipalType.ServiceAccount,
+  },
+  {
+    id: "id3",
+    displayName: "displayName3",
+    principalType: PrincipalType.UserAccount,
+  },
+  {
+    id: "id4",
+    displayName: "displayName4",
+    principalType: PrincipalType.UserAccount,
+  },
+  {
+    id: "id6",
+    displayName: "displayName6",
+    principalType: PrincipalType.UserAccount,
+  },
+  {
+    id: "id7",
+    displayName: "displayName7",
+    principalType: PrincipalType.ServiceAccount,
+  },
+];
+
 export default {
   component: SelectAccount,
-  args: { accounts: account, id: { value: "" } },
+  args: { accounts: account, id: undefined },
 } as ComponentMeta<typeof SelectAccount>;
 
 const Template: ComponentStory<typeof SelectAccount> = (args) => (
@@ -16,8 +53,8 @@ const Template: ComponentStory<typeof SelectAccount> = (args) => (
 
 export const InteractiveExample: ComponentStory<typeof SelectAccount> = () => {
   const [selectedAccount, setSelectedAccount] = useState<
-    Validated<string | undefined | SelectOptionObject>
-  >({ value: undefined, validated: undefined });
+    string | undefined | SelectOptionObject
+  >(undefined);
   return (
     <SelectAccount
       id={selectedAccount}

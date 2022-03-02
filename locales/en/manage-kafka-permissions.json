@@ -26,6 +26,7 @@
     "all_accounts_description": "Uses a wildcard (*) to assign permissions to all user and service accounts",
     "all_accounts_service_account_group": "Service accounts",
     "all_accounts_title": "All accounts",
+    "no_results_found":"No results found",
     "all_accounts_user_account_group": "User accounts",
     "aria_label": "Manage access dialog",
     "assign_permissions": {
