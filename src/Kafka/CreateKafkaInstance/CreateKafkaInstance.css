@@ -9,3 +9,6 @@
 .mk--create-instance-modal__sidebar--content dt {
   font-size: var(--pf-global--FontSize--sm);
 }
+.mas-m-modalTop {
+  top: var(--pf-global--spacer--md);
+}
