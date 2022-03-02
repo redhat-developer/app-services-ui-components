@@ -296,7 +296,7 @@ export const CreateKafkaInstance: FunctionComponent<
             variant="info"
             isInline
             isPlain
-            title="Your Kafka instance will be ready for use shortly after creation."
+            title={t("instance_creation_time_alert")}
           />
         </FlexItem>
       </Flex>
