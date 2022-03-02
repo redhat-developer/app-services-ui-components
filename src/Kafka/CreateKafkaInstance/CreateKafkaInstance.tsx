@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   Divider,
   Flex,
@@ -27,6 +28,7 @@ import {
   MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
 } from "./machines";
+import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -283,6 +285,18 @@ export const CreateKafkaInstance: FunctionComponent<
             connectionRate={connectionRate}
             messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
+          />
+        </FlexItem>
+      </Flex>
+      <Flex>
+        <FlexItem>
+          <Alert
+            className="mas-m-modalTop"
+            customIcon={<OutlinedClockIcon />}
+            variant="info"
+            isInline
+            isPlain
+            title={t("instance_creation_time_alert")}
           />
         </FlexItem>
       </Flex>
