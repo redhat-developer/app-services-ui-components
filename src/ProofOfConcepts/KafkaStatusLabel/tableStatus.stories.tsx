@@ -25,7 +25,7 @@ export const AllStatutesAtOnce = () => (
     <br />
     <TableStatus value={"deleting"} />
     <br />
-    <TableStatus value={"failed"} />
+    <TableStatus value={"degraded"} />
   </>
 );
 
@@ -94,14 +94,15 @@ Deleting.parameters = {
   },
 };
 
-export const Failed = Template.bind({});
-Failed.args = {
-  value: "failed",
+export const Degraded = Template.bind({});
+Degraded.args = {
+  value: "degraded",
 };
-Failed.parameters = {
+Degraded.parameters = {
   docs: {
     description: {
-      story: "Something has gone wrong with the Kafka instance .",
+      story:
+        "Instance is reporting an error. The Kafka is not in a good state. ",
     },
   },
 };

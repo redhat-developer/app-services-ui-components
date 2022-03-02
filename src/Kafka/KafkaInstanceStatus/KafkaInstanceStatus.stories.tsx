@@ -74,7 +74,7 @@ Ready.args = {
   status: "ready",
 };
 
-export const Failed = Template.bind({});
-Failed.args = {
-  status: "failed",
+export const Degraded = Template.bind({});
+Degraded.args = {
+  status: "degraded",
 };
