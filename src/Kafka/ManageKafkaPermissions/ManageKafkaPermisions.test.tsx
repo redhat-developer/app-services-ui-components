@@ -8,8 +8,8 @@ const { EmptyState } = composeStories(stories);
 
 describe("ManagePermissionsModal", () => {
   it("should render a modal with a title and a select component", async () => {
-    const onChangeAccount = jest.fn();
-    const comp = render(<EmptyState onChangeAccount={onChangeAccount} />);
+    const hideModal = jest.fn();
+    const comp = render(<EmptyState hideModal={hideModal} />);
 
     await waitForI18n(comp);
     expect(await comp.findByText("Manage access")).toBeInTheDocument();
