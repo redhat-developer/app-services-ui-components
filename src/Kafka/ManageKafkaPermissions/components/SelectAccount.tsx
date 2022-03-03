@@ -115,15 +115,14 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     setIsOpen(false);
   };
   const options = [
-    <SelectGroup key="all_accounts_group">
-      <SelectOption
-        key="*"
-        value="*"
-        description={t("manage_permissions_dialog.all_accounts_description")}
-      >
-        {t("manage_permissions_dialog.all_accounts_title")}
-      </SelectOption>
-    </SelectGroup>,
+    <SelectOption
+      key="*"
+      value="*"
+      description={t("manage_permissions_dialog.all_accounts_description")}
+    >
+      {t("manage_permissions_dialog.all_accounts_title")}
+    </SelectOption>,
+
     <Divider key="all_accounts_divider" />,
     <SelectGroup
       label={t("manage_permissions_dialog.all_accounts_service_account_group")}
