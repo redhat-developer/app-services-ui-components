@@ -22,7 +22,7 @@ describe("Select Account", () => {
     );
 
     await waitForI18n(comp);
-    userEvent.click(await comp.findByLabelText("Select an account"));
+    userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
 
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe("Select Account", () => {
     );
     await waitForI18n(comp);
 
-    userEvent.click(await comp.findByLabelText("Select an account"));
+    userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
@@ -61,7 +61,7 @@ describe("Select Account", () => {
     );
     await waitForI18n(comp);
 
-    userEvent.click(await comp.findByLabelText("Select an account"));
+    userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe("Select Account", () => {
     expect(await comp.findByText("id5")).toBeInTheDocument();
   });
 
-  it("should show list of user accounts while showing empty user accounts", async () => {
+  it("should show list of user accounts while showing empty service accounts", async () => {
     const onChangeAccount = jest.fn();
     const onEscapeModal = jest.fn();
     const comp = render(
@@ -81,7 +81,7 @@ describe("Select Account", () => {
     );
     await waitForI18n(comp);
 
-    userEvent.click(await comp.findByLabelText("Select an account"));
+    userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();

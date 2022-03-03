@@ -1,7 +1,7 @@
 import { SelectAccount } from "./SelectAccount";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React, { useState } from "react";
-import { SelectOptionObject } from "@patternfly/react-core";
+import { SelectOptionObject, ValidatedOptions } from "@patternfly/react-core";
 import { PrincipalType } from "../types";
 
 const account = [
@@ -55,12 +55,17 @@ export const InteractiveExample: ComponentStory<typeof SelectAccount> = () => {
   const [selectedAccount, setSelectedAccount] = useState<
     string | undefined | SelectOptionObject
   >(undefined);
+  const [validated, setValidated] = useState<ValidatedOptions>(
+    ValidatedOptions.default
+  );
   return (
     <SelectAccount
       id={selectedAccount}
       onChangeAccount={setSelectedAccount}
       accounts={account}
       onEscapeModal={() => ({})}
+      onChangeValidation={setValidated}
+      validated={validated}
     />
   );
 };

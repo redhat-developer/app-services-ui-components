@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
 import { Account, PrincipalType } from "../types";
 import {
   Divider,
@@ -26,6 +25,8 @@ export type SelectAccountProps = {
   >;
   accounts: Account[];
   onEscapeModal: (closes: boolean) => void;
+  validated: ValidatedOptions;
+  onChangeValidation: (value: ValidatedOptions) => void;
 };
 
 export const SelectAccount: React.VFC<SelectAccountProps> = ({
@@ -33,12 +34,11 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   id,
   accounts,
   onEscapeModal,
+  validated,
+  onChangeValidation,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [validated, setValidated] = useState<ValidatedOptions>(
-    ValidatedOptions.default
-  );
 
   const onToggle = (newState: boolean | ((prevState: boolean) => boolean)) => {
     if (newState) {
@@ -50,7 +50,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
 
   const clearSelection = () => {
     onChangeAccount(undefined);
-    setValidated(ValidatedOptions.error);
+    onChangeValidation(ValidatedOptions.error);
     setIsOpen(false);
   };
   const serviceAccountOptions = () => {
@@ -111,7 +111,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
 
   const onSelect: SelectProps["onSelect"] = (_, selection) => {
     onChangeAccount(selection);
-    setValidated(ValidatedOptions.default);
+    onChangeValidation(ValidatedOptions.default);
     setIsOpen(false);
   };
   const options = [
@@ -169,39 +169,26 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   };
 
   return (
-    <FormGroupWithPopover
-      labelHead={t("manage_permissions_dialog.account_id_title")}
-      fieldId="kafka-instance-name"
-      fieldLabel={t("manage_permissions_dialog.account_id_title")}
-      labelBody={t("manage_permissions_dialog.account_id_help")}
-      buttonAriaLabel={t("manage_permissions_dialog.account_id_aria")}
-      isRequired={true}
-      helperTextInvalid={t("common:required")}
+    <Select
+      data-testid="acls-select-account"
+      variant={SelectVariant.typeahead}
+      typeAheadAriaLabel={t("manage_permissions_dialog.account_id_title")}
+      onToggle={onToggle}
+      onSelect={onSelect}
+      onClear={clearSelection}
+      selections={id}
+      onFilter={customFilter}
+      isOpen={isOpen}
+      placeholderText={t(
+        "manage_permissions_dialog.account_id_typeahead_placeholder"
+      )}
+      isCreatable={false}
+      menuAppendTo="parent"
       validated={validated}
+      isGrouped={true}
+      maxHeight={400}
     >
-      <Select
-        data-testid="acls-select-account"
-        variant={SelectVariant.typeahead}
-        typeAheadAriaLabel={t(
-          "manage_permissions_dialog.account_id_typeahead_placeholder"
-        )}
-        onToggle={onToggle}
-        onSelect={onSelect}
-        onClear={clearSelection}
-        selections={id}
-        onFilter={customFilter}
-        isOpen={isOpen}
-        placeholderText={t(
-          "manage_permissions_dialog.account_id_typeahead_placeholder"
-        )}
-        isCreatable={false}
-        menuAppendTo="parent"
-        validated={validated}
-        isGrouped={true}
-        maxHeight={400}
-      >
-        {options}
-      </Select>
-    </FormGroupWithPopover>
+      {options}
+    </Select>
   );
 };

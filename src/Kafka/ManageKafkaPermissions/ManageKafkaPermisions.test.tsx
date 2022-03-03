@@ -18,7 +18,7 @@ describe("ManagePermissionsModal", () => {
     const button = await comp.findByText("Next");
     expect(button).toBeDisabled();
 
-    userEvent.click(await comp.findByLabelText("Select an account"));
+    userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
 
     expect(await comp.findByText("All accounts")).toBeInTheDocument();

@@ -4,9 +4,11 @@ import {
   FormGroup,
   Modal,
   SelectOptionObject,
+  ValidatedOptions,
 } from "@patternfly/react-core";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { FormGroupWithPopover } from "../..";
 import { SubmitButton } from "./components/PermissionsModalSubmitButton";
 import { SelectAccount } from "./components/SelectAccount";
 import { Account } from "./types";
@@ -28,6 +30,9 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
     string | undefined | SelectOptionObject
   >(undefined);
   const [step, setStep] = useState<number>(1);
+  const [validated, setValidated] = useState<ValidatedOptions>(
+    ValidatedOptions.default
+  );
 
   const onEscapePress = () => {
     if (escapeClosesModal.current) {
@@ -75,12 +80,25 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         >
           {kafkaName}
         </FormGroup>
-        <SelectAccount
-          id={selectedAccount}
-          onChangeAccount={setSelectedAccount}
-          accounts={accounts}
-          onEscapeModal={setEscapeClosesModal}
-        />
+        <FormGroupWithPopover
+          labelHead={t("manage_permissions_dialog.account_id_title")}
+          fieldId="kafka-instance-name"
+          fieldLabel={t("manage_permissions_dialog.account_id_title")}
+          labelBody={t("manage_permissions_dialog.account_id_help")}
+          buttonAriaLabel={t("manage_permissions_dialog.account_id_aria")}
+          isRequired={true}
+          helperTextInvalid={t("common:required")}
+          validated={validated}
+        >
+          <SelectAccount
+            id={selectedAccount}
+            onChangeAccount={setSelectedAccount}
+            accounts={accounts}
+            onEscapeModal={setEscapeClosesModal}
+            validated={validated}
+            onChangeValidation={setValidated}
+          />
+        </FormGroupWithPopover>
       </Form>
     </Modal>
   );
