@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
 
-import { render, waitForI18n, waitForPopper } from "../../test-utils";
+import { render, waitForI18n } from "../../test-utils";
 import * as stories from "./ManageKafkaPermissions.stories";
 import { userEvent } from "@storybook/testing-library";
 
@@ -19,17 +19,16 @@ describe("ManagePermissionsModal", () => {
     expect(button).toBeDisabled();
 
     userEvent.click(await comp.findByLabelText("Account"));
-    await waitForPopper();
 
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
     expect(await comp.findByText("id2")).toBeInTheDocument();
     userEvent.click(await comp.findByText("id2"));
-    await waitForPopper();
+
     expect(button).toBeEnabled();
     userEvent.click(await comp.findByLabelText("Clear all"));
-    await waitForPopper();
+
     expect(button).toBeDisabled();
     expect(await comp.findByText("Required")).toBeInTheDocument();
   });

@@ -1,13 +1,14 @@
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./SelectAccount.stories";
 import { userEvent } from "@storybook/testing-library";
-import { render, waitForI18n, waitForPopper } from "../../../test-utils";
+import { render, waitForI18n } from "../../../test-utils";
 
 const {
   EmptyState,
   NoServiceOrUserAccounts,
   OnlyServiceAccounts,
   OnlyUserAccounts,
+  InteractiveExample,
 } = composeStories(stories);
 
 describe("Select Account", () => {
@@ -23,7 +24,6 @@ describe("Select Account", () => {
 
     await waitForI18n(comp);
     userEvent.click(await comp.findByLabelText("Account"));
-    await waitForPopper();
 
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
@@ -43,7 +43,7 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
-    await waitForPopper();
+
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
-    await waitForPopper();
+
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
@@ -82,11 +82,27 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
-    await waitForPopper();
+
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
     expect(await comp.findByText("No results found")).toBeInTheDocument();
     expect(await comp.findByText("id6")).toBeInTheDocument();
+  });
+
+  it("should show a select component ", async () => {
+    const onChangeAccount = jest.fn();
+    const comp = render(
+      <InteractiveExample onChangeAccount={onChangeAccount} />
+    );
+    await waitForI18n(comp);
+
+    userEvent.click(await comp.findByLabelText("Account"));
+
+    expect(await comp.findByText("All accounts")).toBeInTheDocument();
+    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
+    expect(await comp.findByText("User accounts")).toBeInTheDocument();
+    userEvent.type(comp.getByPlaceholderText("Select an account"), "id2");
+    userEvent.click(await comp.findByText("id2"));
   });
 });
