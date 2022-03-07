@@ -83,6 +83,7 @@ export const CreateKafkaInstance: FunctionComponent<
     regions,
     azOptions,
     availableProviders,
+    instanceAvailability,
 
     isNameTaken,
     isNameInvalid,
@@ -110,11 +111,6 @@ export const CreateKafkaInstance: FunctionComponent<
     onCreate,
   });
 
-  let { instanceAvailability } = useCreateKafkaInstanceMachine({
-    getAvailableProvidersAndDefaults,
-    onCreate,
-  });
-
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -123,11 +119,7 @@ export const CreateKafkaInstance: FunctionComponent<
     [create]
   );
 
-  const isRegionsAvailable =
-    regions && regions?.some(({ isDisabled }) => isDisabled !== true);
-
-  const disableControls =
-    isLoading || isSaving || !canCreate || !isRegionsAvailable;
+  const disableControls = isLoading || isSaving || !canCreate;
 
   const nameValidation = isNameError ? "error" : "default";
   const providerValidation = isProviderError ? "error" : "default";
@@ -135,8 +127,6 @@ export const CreateKafkaInstance: FunctionComponent<
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
-
-  if (!isRegionsAvailable) instanceAvailability = "trial-unavailable";
 
   return (
     <Modal
@@ -154,7 +144,7 @@ export const CreateKafkaInstance: FunctionComponent<
           variant="primary"
           type="submit"
           form={FORM_ID}
-          isDisabled={!canSave || !isRegionsAvailable}
+          isDisabled={!canSave}
           spinnerAriaValueText={t("common:submitting_request")}
           isLoading={isSaving}
           data-testid="modalCreateKafka-buttonSubmit"
@@ -231,7 +221,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 value={region}
                 regions={regions || []}
                 onChange={setRegion}
-                isDisabled={disableControls || !isRegionsAvailable}
+                isDisabled={disableControls}
                 validated={regionValidation}
               />
             </FormGroup>

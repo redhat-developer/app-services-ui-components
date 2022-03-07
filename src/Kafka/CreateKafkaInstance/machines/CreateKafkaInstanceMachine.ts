@@ -417,6 +417,9 @@ export function useCreateKafkaInstanceMachine({
 
   const isFormInvalid = state.context.creationError === "form-invalid";
   const isNameTaken = state.context.creationError === "name-taken";
+  const isRegionsAvailable = selectedProviderInfo?.regions?.some(
+    ({ isDisabled }) => isDisabled !== true
+  );
 
   return {
     name: state.context.name,
@@ -428,7 +431,9 @@ export function useCreateKafkaInstanceMachine({
     regions: selectedProviderInfo?.regions,
 
     availableProviders: state.context.availableProviders,
-    instanceAvailability: state.context.instanceAvailability,
+    instanceAvailability: !isRegionsAvailable
+      ? "trial-unavailable"
+      : state.context.instanceAvailability,
 
     isNameInvalid: state.hasTag(NAME_INVALID),
     isNameEmpty: state.hasTag(NAME_EMPTY),
@@ -449,8 +454,8 @@ export function useCreateKafkaInstanceMachine({
       ),
     isLoading: state.matches("loading"),
     isSaving: state.matches("saving"),
-    canCreate: state.matches("configuring"),
-    canSave: state.can("create"),
+    canCreate: isRegionsAvailable && state.matches("configuring"),
+    canSave: isRegionsAvailable && state.can("create"),
     isSystemUnavailable: state.hasTag(SYSTEM_UNAVAILABLE),
 
     error: state.context.creationError,
