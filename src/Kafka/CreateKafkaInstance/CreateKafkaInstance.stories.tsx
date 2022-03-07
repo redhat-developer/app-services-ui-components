@@ -348,3 +348,61 @@ function makeAvailableProvidersAndDefaults(
     };
   };
 }
+
+export const LoadSupportedRegionsAndDisabledUnsupported = Template.bind({});
+LoadSupportedRegionsAndDisabledUnsupported.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "trial",
+      defaultAZ: "multi",
+      defaultProvider: "aws",
+      providers: ["aws"],
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: [
+        {
+          id: "us-east-1",
+          displayName: "US East, N. Virginia",
+        },
+        {
+          id: "eu-west-1",
+          displayName: "EU, Ireland (not supported)",
+          isDisabled: true,
+        },
+      ],
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const ReachedMaxLimitForTrialInstanceForSupportedRegions = Template.bind(
+  {}
+);
+ReachedMaxLimitForTrialInstanceForSupportedRegions.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "trial",
+      defaultProvider: "aws",
+      providers: ["aws"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: [],
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm =
+  Template.bind({});
+ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial",
+    defaultAZ: "multi",
+    defaultProvider: "aws",
+    providers: ["aws"],
+  }),
+  onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
+} as CreateKafkaInstanceProps;
+
+ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm.play = sampleSubmit;
