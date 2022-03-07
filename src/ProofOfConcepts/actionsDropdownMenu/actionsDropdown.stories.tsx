@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { ActionsDropdown } from "./actionsDropdown-1";
+import { ActionsDropdown } from "./actionsDropdown";
 
 export default {
-  title: "PoCs/ActionsDropdown",
+  title: "Proof Of Concepts/ActionsDropdown ",
   component: ActionsDropdown,
   args: {},
 } as ComponentMeta<typeof ActionsDropdown>;
