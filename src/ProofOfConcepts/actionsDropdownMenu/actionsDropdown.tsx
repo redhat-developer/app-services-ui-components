@@ -1,25 +1,31 @@
-import React from 'react';
-import { Dropdown, DropdownToggle, DropdownGroup, DropdownItem, DropdownSeparator} from '@patternfly/react-core';
+import React from "react";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownGroup,
+  DropdownItem,
+  DropdownSeparator,
+} from "@patternfly/react-core";
 
 export class ActionsDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
     };
-    this.onToggle = isOpen => {
+    this.onToggle = (isOpen) => {
       this.setState({
-        isOpen
+        isOpen,
       });
     };
-    this.onSelect = event => {
+    this.onSelect = (event) => {
       this.setState({
-        isOpen: !this.state.isOpen
+        isOpen: !this.state.isOpen,
       });
       this.onFocus();
     };
     this.onFocus = () => {
-      const element = document.getElementById('toggle-id-3');
+      const element = document.getElementById("toggle-id-3");
       element.focus();
     };
   }
@@ -29,7 +35,10 @@ export class ActionsDropdown extends React.Component {
     const dropdownItems = [
       <DropdownGroup label="View information" key="View information">
         <DropdownItem key="View information:Details">Details</DropdownItem>
-        <DropdownItem key="View information:Connection"> Connection</DropdownItem>
+        <DropdownItem key="View information:Connection">
+          {" "}
+          Connection
+        </DropdownItem>
         <DropdownSeparator key="dropdown separator" />
       </DropdownGroup>,
       <DropdownGroup key="Actions">
