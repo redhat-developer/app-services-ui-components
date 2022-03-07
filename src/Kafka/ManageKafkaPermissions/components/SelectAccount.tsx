@@ -40,7 +40,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const onToggle = (newState: boolean | ((prevState: boolean) => boolean)) => {
+  const onToggle = (newState: boolean) => {
     if (newState) {
       onEscapeModal(false);
     } else onEscapeModal(true);
