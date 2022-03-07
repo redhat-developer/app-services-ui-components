@@ -83,11 +83,11 @@ export const DropdownMenu: VoidFunctionComponent<DropdownMenuProps> = ({
             <MenuList>
               <MenuItem
                 itemId={"shortcut_consume_topic"}
-                description={"Details"}
+                description={"View details"}
               ></MenuItem>
               <MenuItem
                 itemId={"shortcut_consume_topic"}
-                description={"Connection"}
+                description={"View connection information"}
               ></MenuItem>
             </MenuList>
           </MenuGroup>
