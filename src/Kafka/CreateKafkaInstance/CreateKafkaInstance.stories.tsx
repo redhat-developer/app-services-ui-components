@@ -367,7 +367,7 @@ LoadSupportedRegionsAndDisabledUnsupported.args = {
         },
         {
           id: "eu-west-1",
-          displayName: "EU, Ireland (not supported)",
+          displayName: "EU, Ireland",
           isDisabled: true,
         },
       ],
@@ -392,17 +392,3 @@ ReachedMaxLimitForTrialInstanceForSupportedRegions.args = {
     }))
   ),
 } as CreateKafkaInstanceProps;
-
-export const ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm =
-  Template.bind({});
-ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    instanceAvailability: "trial",
-    defaultAZ: "multi",
-    defaultProvider: "aws",
-    providers: ["aws"],
-  }),
-  onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
-} as CreateKafkaInstanceProps;
-
-ReachedMaxLimitForSupportedRegionAfterSubmitCreateForm.play = sampleSubmit;

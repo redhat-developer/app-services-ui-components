@@ -261,10 +261,27 @@ const CreateKafkaInstanceMachine = createMachine(
   {
     actions: {
       setAvailableProvidersAndDefault: assign((_context, event) => {
+        const {
+          availableProviders,
+          defaultProvider,
+          instanceAvailability,
+          defaultAZ,
+        } = event.data;
+        const selectedProviderInfo = availableProviders.find(
+          (p) => p.id === defaultProvider
+        );
+
+        const isRegionsAvailable = selectedProviderInfo?.regions?.some(
+          ({ isDisabled }) => isDisabled !== true
+        );
+
         return {
           ...event.data,
-          provider: event.data.defaultProvider,
-          az: event.data.defaultAZ,
+          provider: defaultProvider,
+          az: defaultAZ,
+          instanceAvailability: !isRegionsAvailable
+            ? "trial-unavailable"
+            : instanceAvailability,
         };
       }),
       formChange: send("formChange"),
@@ -417,9 +434,6 @@ export function useCreateKafkaInstanceMachine({
 
   const isFormInvalid = state.context.creationError === "form-invalid";
   const isNameTaken = state.context.creationError === "name-taken";
-  const isRegionsAvailable = selectedProviderInfo?.regions?.some(
-    ({ isDisabled }) => isDisabled !== true
-  );
 
   return {
     name: state.context.name,
@@ -431,9 +445,7 @@ export function useCreateKafkaInstanceMachine({
     regions: selectedProviderInfo?.regions,
 
     availableProviders: state.context.availableProviders,
-    instanceAvailability: !isRegionsAvailable
-      ? "trial-unavailable"
-      : state.context.instanceAvailability,
+    instanceAvailability: state.context.instanceAvailability,
 
     isNameInvalid: state.hasTag(NAME_INVALID),
     isNameEmpty: state.hasTag(NAME_EMPTY),
@@ -454,8 +466,8 @@ export function useCreateKafkaInstanceMachine({
       ),
     isLoading: state.matches("loading"),
     isSaving: state.matches("saving"),
-    canCreate: isRegionsAvailable && state.matches("configuring"),
-    canSave: isRegionsAvailable && state.can("create"),
+    canCreate: state.matches("configuring"),
+    canSave: state.can("create"),
     isSystemUnavailable: state.hasTag(SYSTEM_UNAVAILABLE),
 
     error: state.context.creationError,
