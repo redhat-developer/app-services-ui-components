@@ -1,6 +1,17 @@
 {
+  "account_id_aria": "More info for Account field",
+  "account_id_help": "A service account enables your application or tool to connect securely to your resources. A user account enables users in your organization to access resources.",
+  "account_id_title": "Account",
+  "account_id_typeahead_placeholder": "Select an account",
+  "all_accounts_description": "Uses a wildcard (*) to assign permissions to all user and service accounts",
+  "all_accounts_service_account_group": "Service accounts",
+  "all_accounts_title": "All accounts",
+  "all_accounts_user_account_group": "User accounts",
   "consumer_group": "Consumer group",
-  "kafka_instance": "Kafka instance",
+  "dialog_aria_label": "Manage access dialog",
+  "dialog_title": "Manage access",
+  "kafka_instance": "$t(common:kafka) instance",
+  "no_results_found": "No results found",
   "operations": {
     "all": "All",
     "alter": "Alter",
@@ -23,7 +34,7 @@
     "shortcut_consume_topic": "Consume from a topic",
     "shortcut_consume_topic_description": "Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
     "shortcut_manage_access": "Manage access",
-    "shortcut_manage_access_description": "Provides access to add and remove permissions on this Kafka instance",
+    "shortcut_manage_access_description": "Provides access to add and remove permissions on this $t(common:kafka) instance",
     "shortcut_produce_topic": "Produce to a topic",
     "shortcut_produce_topic_description": "Provides access to produce to one or more topics depending on topic selection criteria",
     "task_based_permission": "Task-based permissions"
@@ -32,10 +43,12 @@
   "resource_type_operation_filter_placeholder": "Filter by resource type operation",
   "resourceTypes": {
     "consumer_group": "Consumer group",
-    "kafka_instance": "Kafka instance",
+    "kafka_instance": "$t(common:kafka) instance",
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
+  "step_1_submit_button": "Next",
+  "step_2_submit_button": "Save",
   "table": {
     "all_accounts": "All accounts",
     "permissions_column_title": "Permission",
