@@ -261,10 +261,27 @@ const CreateKafkaInstanceMachine = createMachine(
   {
     actions: {
       setAvailableProvidersAndDefault: assign((_context, event) => {
+        const {
+          availableProviders,
+          defaultProvider,
+          instanceAvailability,
+          defaultAZ,
+        } = event.data;
+        const selectedProviderInfo = availableProviders.find(
+          (p) => p.id === defaultProvider
+        );
+
+        const isRegionsAvailable = selectedProviderInfo?.regions?.some(
+          ({ isDisabled }) => isDisabled !== true
+        );
+
         return {
           ...event.data,
-          provider: event.data.defaultProvider,
-          az: event.data.defaultAZ,
+          provider: defaultProvider,
+          az: defaultAZ,
+          instanceAvailability: !isRegionsAvailable
+            ? "trial-unavailable"
+            : instanceAvailability,
         };
       }),
       formChange: send("formChange"),

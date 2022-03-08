@@ -221,7 +221,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 value={region}
                 regions={regions || []}
                 onChange={setRegion}
-                isDisabled={disableControls || !(regions && regions.length > 0)}
+                isDisabled={disableControls}
                 validated={regionValidation}
               />
             </FormGroup>
