@@ -1,43 +1,43 @@
 import { SelectAccount } from "./SelectAccount";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React, { useState } from "react";
-import { SelectOptionObject, ValidatedOptions } from "@patternfly/react-core";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { useState } from "react";
+import { Form, Modal } from "@patternfly/react-core";
 import { PrincipalType } from "../types";
 
 const account = [
   {
     id: "id",
-    displayName: "displayName",
+    displayName: "ServiceAccount",
     principalType: PrincipalType.ServiceAccount,
   },
   {
     id: "id5",
-    displayName: "displayName5",
+    displayName: "ServiceAccount5",
     principalType: PrincipalType.ServiceAccount,
   },
   {
     id: "id2",
-    displayName: "displayName2",
+    displayName: "ServiceAccount2",
     principalType: PrincipalType.ServiceAccount,
   },
   {
     id: "id3",
-    displayName: "displayName3",
+    displayName: "UserAccount3",
     principalType: PrincipalType.UserAccount,
   },
   {
     id: "id4",
-    displayName: "displayName4",
+    displayName: "UserAccount4",
     principalType: PrincipalType.UserAccount,
   },
   {
     id: "id6",
-    displayName: "displayName6",
+    displayName: "UserAccount6",
     principalType: PrincipalType.UserAccount,
   },
   {
     id: "id7",
-    displayName: "displayName7",
+    displayName: "ServiceAccount7",
     principalType: PrincipalType.ServiceAccount,
   },
 ];
@@ -48,25 +48,26 @@ export default {
 } as ComponentMeta<typeof SelectAccount>;
 
 const Template: ComponentStory<typeof SelectAccount> = (args) => (
-  <SelectAccount {...args} />
+  <Form>
+    <SelectAccount {...args} />
+  </Form>
 );
 
-export const InteractiveExample: ComponentStory<typeof SelectAccount> = () => {
-  const [selectedAccount, setSelectedAccount] = useState<
-    string | undefined | SelectOptionObject
-  >(undefined);
-  const [validated, setValidated] = useState<ValidatedOptions>(
-    ValidatedOptions.default
+export const InteractiveExample: ComponentStory<typeof SelectAccount> = (
+  args
+) => {
+  const [selectedAccount, setSelectedAccount] = useState<string | undefined>(
+    undefined
   );
   return (
-    <SelectAccount
-      id={selectedAccount}
-      onChangeAccount={setSelectedAccount}
-      accounts={account}
-      onEscapeModal={() => ({})}
-      onChangeValidation={setValidated}
-      validated={validated}
-    />
+    <Form>
+      <SelectAccount
+        {...args}
+        value={selectedAccount}
+        onChangeAccount={setSelectedAccount}
+        accounts={account}
+      />
+    </Form>
   );
 };
 InteractiveExample.parameters = {
@@ -127,6 +128,32 @@ OnlyUserAccounts.parameters = {
   docs: {
     description: {
       story: `Only user accounts are available for selection`,
+    },
+  },
+};
+
+export const CanExpandOverDialog: ComponentStory<typeof SelectAccount> = (
+  args,
+  { id }
+) => {
+  return (
+    <Modal
+      title="Simple modal header"
+      isOpen={true}
+      appendTo={() => document.getElementById(id) || document.body}
+      disableFocusTrap={true}
+    >
+      <Template {...args} />
+    </Modal>
+  );
+};
+CanExpandOverDialog.args = {
+  initialOpen: true,
+};
+CanExpandOverDialog.parameters = {
+  docs: {
+    description: {
+      story: `When the select is the last element of a dialog, it should fully expand outside its borders`,
     },
   },
 };

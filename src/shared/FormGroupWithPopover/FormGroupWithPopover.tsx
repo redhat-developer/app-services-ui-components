@@ -1,6 +1,7 @@
 import { FormGroup, Popover, ValidatedOptions } from "@patternfly/react-core";
 import HelpIcon from "@patternfly/react-icons/dist/js/icons/help-icon";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export type FormGroupWithPopoverProps = {
   children: React.ReactNode;
@@ -27,8 +28,7 @@ export const FormGroupWithPopover: React.FC<FormGroupWithPopoverProps> = ({
   helperTextInvalid,
   isRequired,
 }) => {
-  const preventButtonSubmit = (event: { preventDefault: () => any }) =>
-    event.preventDefault();
+  const { t } = useTranslation("common");
 
   return (
     <FormGroup
@@ -36,7 +36,7 @@ export const FormGroupWithPopover: React.FC<FormGroupWithPopoverProps> = ({
       label={fieldLabel}
       validated={validated}
       helperText={helperText}
-      helperTextInvalid={helperTextInvalid}
+      helperTextInvalid={helperTextInvalid || t("required")}
       isRequired={isRequired}
       labelIcon={
         <Popover
@@ -45,7 +45,9 @@ export const FormGroupWithPopover: React.FC<FormGroupWithPopoverProps> = ({
         >
           <button
             aria-label={buttonAriaLabel}
-            onClick={preventButtonSubmit}
+            onClick={(event) => {
+              event.preventDefault();
+            }}
             className="pf-c-form__group-label-help"
           >
             <HelpIcon noVerticalAlign />

@@ -64,6 +64,6 @@ export enum PrincipalType {
 
 export type Account = {
   id: string;
-  principalType?: PrincipalType;
-  displayName?: string;
+  principalType: PrincipalType;
+  displayName: string;
 };

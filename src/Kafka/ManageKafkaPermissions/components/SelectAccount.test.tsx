@@ -92,8 +92,13 @@ describe("Select Account", () => {
 
   it("should show a select component ", async () => {
     const onChangeAccount = jest.fn();
+    const onEscapeModal = jest.fn();
+
     const comp = render(
-      <InteractiveExample onChangeAccount={onChangeAccount} />
+      <InteractiveExample
+        onChangeAccount={onChangeAccount}
+        onEscapeModal={onEscapeModal}
+      />
     );
     await waitForI18n(comp);
 
@@ -102,7 +107,10 @@ describe("Select Account", () => {
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByText("Service accounts")).toBeInTheDocument();
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
-    userEvent.type(comp.getByPlaceholderText("Select an account"), "id2");
-    userEvent.click(await comp.findByText("id2"));
+    userEvent.type(
+      comp.getByPlaceholderText("Select an account"),
+      "ServiceAccount2"
+    );
+    userEvent.click(await comp.findByText("ServiceAccount2"));
   });
 });
