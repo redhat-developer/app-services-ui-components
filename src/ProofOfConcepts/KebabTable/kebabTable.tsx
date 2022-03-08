@@ -50,19 +50,25 @@ export const KebabTable: React.FunctionComponent = () => {
 
   const defaultActions = (repo: Repository): IAction[] => [
     {
-      title: "View details",
-      onClick: () =>
-        console.log(`clicked on View details, on row ${repo.name}`),
+      title: "Details",
+      onClick: () => console.log(`clicked on Details, on row ${repo.name}`),
     },
     {
-      title: "View connections information",
+      title: "Connections",
+      onClick: () => console.log(`clicked on Connections, on row ${repo.name}`),
+    },
+    {
+      title: "[primary data plane tab]",
       onClick: () =>
-        console.log(
-          `clicked on View connections information, on row ${repo.name}`
-        ),
+        console.log(`clicked on [primary data plane tab], on row ${repo.name}`),
     },
     {
       isSeparator: true,
+    },
+    {
+      title: "Change owner",
+      onClick: () =>
+        console.log(`clicked on Change owner, on row ${repo.name}`),
     },
     {
       title: "Delete instance",
