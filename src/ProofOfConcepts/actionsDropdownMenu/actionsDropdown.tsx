@@ -36,12 +36,15 @@ export class ActionsDropdown extends React.Component {
       <DropdownGroup label="View information" key="View information">
         <DropdownItem key="View information:Details">Details</DropdownItem>
         <DropdownItem key="View information:Connection">
-          {" "}
           Connection
+        </DropdownItem>
+        <DropdownItem key="View information:[primary data plane tab]">
+          [primary data plane tab]
         </DropdownItem>
         <DropdownSeparator key="dropdown separator" />
       </DropdownGroup>,
       <DropdownGroup key="Actions">
+        <DropdownItem key="Actions:Change owner">Change owner</DropdownItem>
         <DropdownItem key="Actions:Delete">Delete instance</DropdownItem>
       </DropdownGroup>,
     ];
