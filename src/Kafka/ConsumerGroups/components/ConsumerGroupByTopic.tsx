@@ -18,7 +18,7 @@ import {
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Consumer, ConsumerGroupStateEnum } from "../types";
-import { displayConsumerGroupState } from "../utils";
+import { ConsumerGroupState } from "./ConsumerGroupState";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { activeMembers, partionsWithLag } from "../utils";
 
@@ -64,9 +64,7 @@ export const ConsumerGroupByTopic: FunctionComponent<
           </FlexItem>
           <FlexItem>
             <Text component={TextVariants.h4}>{t("consumerGroup.state")}</Text>
-            <Text component={TextVariants.h2}>
-              {displayConsumerGroupState[state]}
-            </Text>
+            <Text component={TextVariants.h2}>{ConsumerGroupState(state)}</Text>
           </FlexItem>
         </Flex>
       </TextContent>

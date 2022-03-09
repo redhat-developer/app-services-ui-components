@@ -44,7 +44,13 @@
     "unassigned": "unassigned",
     "uncosumed_partitions": "Unconsumed partitions",
     "uncosumed_partitions_for_topic": "Unconsumed partitions for this topic",
-    "view_partitions_offsets": "View partition offsets"
+    "view_partitions_offsets": "View partition offsets",
+    "stable_state": "Stable",
+    "empty_state": "Empty",
+    "dead_state": "Dead",
+    "completing_rebalance_state": "Completing rebalance",
+    "preparing_rebalance_state": "Preparing rebalance",
+    "unknown_state": "Unknown"
   },
   "create_service_account": "Create service account",
   "duration": "Duration",

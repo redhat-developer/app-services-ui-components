@@ -21,6 +21,7 @@ import { Consumer, ConsumerGroupStateEnum } from "../types";
 import { displayConsumerGroupState } from "../utils";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { activeMembers, partionsWithLag } from "../utils";
+import { ConsumerGroupState } from "./ConsumerGroupState";
 
 export type ConsumerGroupByKafkaProps = {
   state: ConsumerGroupStateEnum;
@@ -65,9 +66,7 @@ export const ConsumerGroupByKafka: FunctionComponent<
           </FlexItem>
           <FlexItem>
             <Text component={TextVariants.h4}>{t("consumerGroup.state")}</Text>
-            <Text component={TextVariants.h2}>
-              {displayConsumerGroupState[state]}
-            </Text>
+            <Text component={TextVariants.h2}>{ConsumerGroupState(state)}</Text>
           </FlexItem>
         </Flex>
       </TextContent>

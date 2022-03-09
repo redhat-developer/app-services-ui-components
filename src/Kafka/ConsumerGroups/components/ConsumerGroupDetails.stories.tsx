@@ -47,7 +47,7 @@ ConsumerGroupWithActiveMembers.args = {
 
 export const ConsumerGroupDetailsAtTopicLevel = Template.bind({});
 ConsumerGroupDetailsAtTopicLevel.args = {
-  state: ConsumerGroupStateEnum.Stable,
+  state: ConsumerGroupStateEnum.Empty,
   consumers: consumer,
   consumerGroupByTopic: true,
 };
