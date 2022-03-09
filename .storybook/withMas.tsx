@@ -47,6 +47,8 @@ export const withMas = (
             apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
             "manage-kafka-permissions": () =>
               import("../locales/en/manage-kafka-permissions.json"),
+            "service-account": () =>
+              import("../locales/en/service-account.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

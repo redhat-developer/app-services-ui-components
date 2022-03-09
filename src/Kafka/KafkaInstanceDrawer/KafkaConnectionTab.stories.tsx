@@ -3,14 +3,7 @@ import { KafkaConnectionTab } from "./KafkaConnectionTab";
 
 export default {
   component: KafkaConnectionTab,
-  args: {
-    isKafkaPending: false,
-    externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
-    tokenEndPointUrl:
-      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token",
-    linkToServiceAccount: "/to-service-account",
-    linkToAccessTab: "/to-access-tab",
-  },
+  args: {},
   parameters: {
     backgrounds: {
       default: "Background color 100",
@@ -23,3 +16,33 @@ const Template: ComponentStory<typeof KafkaConnectionTab> = (args) => (
 );
 
 export const ConnectionTab = Template.bind({});
+ConnectionTab.args = {
+  isKafkaPending: false,
+  externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
+  tokenEndPointUrl:
+    "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token",
+  linkToServiceAccount: "/to-service-account",
+  linkToAccessTab: "/to-access-tab",
+};
+
+export const ConnectionTabWhenkafkaCreationPending = Template.bind({});
+ConnectionTabWhenkafkaCreationPending.args = {
+  isKafkaPending: true,
+  externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
+  tokenEndPointUrl:
+    "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token",
+  linkToServiceAccount: "/to-service-account",
+  linkToAccessTab: "/to-access-tab",
+};
+ConnectionTabWhenkafkaCreationPending.storyName =
+  "Connection tab when Kafka Creation pending";
+ConnectionTabWhenkafkaCreationPending.parameters = {
+  previewHeight: 200,
+  docs: {
+    description: {
+      story: `
+        Copy clipboard is disable when the kafka creation is pending  
+      `,
+    },
+  },
+};
