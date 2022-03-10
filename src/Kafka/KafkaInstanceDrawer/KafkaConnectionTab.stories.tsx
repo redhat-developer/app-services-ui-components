@@ -41,7 +41,7 @@ ConnectionTabWhenkafkaCreationPending.parameters = {
   docs: {
     description: {
       story: `
-        Copy clipboard is disable when the kafka creation is pending  
+        Copy clipboard is disable in Bootstrap server and Token endpoint URL when the kafka creation is pending  
       `,
     },
   },
