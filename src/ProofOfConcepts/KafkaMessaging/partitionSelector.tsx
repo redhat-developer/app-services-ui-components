@@ -20,7 +20,7 @@ export class Selector extends React.Component {
       { value: "1" },
       { value: "2" },
       { value: "3" },
-      { value: "4" }
+      { value: "4" },
     ];
 
     this.state = {
@@ -31,12 +31,12 @@ export class Selector extends React.Component {
       isCreatable: false,
       isInputValuePersisted: false,
       isInputFilterPersisted: false,
-      hasOnCreateOption: false
+      hasOnCreateOption: false,
     };
 
     this.onToggle = (isOpen) => {
       this.setState({
-        isOpen
+        isOpen,
       });
     };
 
@@ -45,7 +45,7 @@ export class Selector extends React.Component {
       else {
         this.setState({
           selected: selection,
-          isOpen: false
+          isOpen: false,
         });
         console.log("selected:", selection);
       }
@@ -53,7 +53,7 @@ export class Selector extends React.Component {
 
     this.onCreateOption = (newValue) => {
       this.setState({
-        options: [...this.state.options, { value: newValue }]
+        options: [...this.state.options, { value: newValue }],
       });
     };
 
@@ -61,37 +61,37 @@ export class Selector extends React.Component {
       this.setState({
         selected: null,
         isOpen: false,
-        options: this.defaultOptions
+        options: this.defaultOptions,
       });
     };
 
     this.toggleDisabled = (checked) => {
       this.setState({
-        isDisabled: checked
+        isDisabled: checked,
       });
     };
 
     this.toggleCreatable = (checked) => {
       this.setState({
-        isCreatable: checked
+        isCreatable: checked,
       });
     };
 
     this.toggleCreateNew = (checked) => {
       this.setState({
-        hasOnCreateOption: checked
+        hasOnCreateOption: checked,
       });
     };
 
     this.toggleInputValuePersisted = (checked) => {
       this.setState({
-        isInputValuePersisted: checked
+        isInputValuePersisted: checked,
       });
     };
 
     this.toggleInputFilterPersisted = (checked) => {
       this.setState({
-        isInputFilterPersisted: checked
+        isInputFilterPersisted: checked,
       });
     };
   }
@@ -105,7 +105,7 @@ export class Selector extends React.Component {
       hasOnCreateOption,
       isInputValuePersisted,
       isInputFilterPersisted,
-      options
+      options,
     } = this.state;
     const titleId = "typeahead-select-id-1";
     return (
@@ -116,7 +116,7 @@ export class Selector extends React.Component {
             <span id={titleId} hidden>
               Select a state
             </span>
-            <Select    
+            <Select
               variant={SelectVariant.typeahead}
               typeAheadAriaLabel="Select a state"
               onToggle={this.onToggle}
@@ -140,7 +140,7 @@ export class Selector extends React.Component {
                   key={index}
                   value={option.value}
                   {...(option.description && {
-                    description: option.description
+                    description: option.description,
                   })}
                 />
               ))}
@@ -158,4 +158,3 @@ export class Selector extends React.Component {
     );
   }
 }
-
