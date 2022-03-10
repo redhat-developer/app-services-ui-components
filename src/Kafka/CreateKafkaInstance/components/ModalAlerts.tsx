@@ -85,16 +85,18 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
         </Alert>
       );
     case instanceAvailability === "trial-unavailable":
+    case instanceAvailability === "regions-unavailable":
+    case instanceAvailability === "instance-unavailable":
       return (
         <Alert
           id="mk-create-instance-quota-alert"
           className="pf-u-mb-md"
           variant={AlertVariant.warning}
-          title={t("modal_alerts.trial_unavailable_title")}
+          title={t("modal_alerts.instance_or_region_unavailable_title")}
           aria-live="polite"
           isInline
         >
-          {t("modal_alerts.trial_unavailable_message")}
+          {t("modal_alerts.instance_or_region_unavailable_message")}
         </Alert>
       );
   }

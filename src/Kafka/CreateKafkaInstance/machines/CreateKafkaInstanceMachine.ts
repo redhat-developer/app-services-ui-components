@@ -3,13 +3,13 @@ import { useCallback } from "react";
 import { assign, createMachine, send } from "xstate";
 import {
   AZ,
-  Provider,
-  CreateKafkaInstanceError,
   CreateKafkaInitializationData,
-  MakeCreateKafkaInstanceMachine,
-  Region,
-  Providers,
+  CreateKafkaInstanceError,
   InstanceAvailability,
+  MakeCreateKafkaInstanceMachine,
+  Provider,
+  Providers,
+  Region,
 } from "./types";
 
 const NAME_EMPTY = "nameEmpty";
@@ -268,20 +268,18 @@ const CreateKafkaInstanceMachine = createMachine(
           defaultAZ,
         } = event.data;
 
-        const selectedProviderInfo = availableProviders.find(
-          (p) => p.id === defaultProvider
-        );
+        const allRegions = availableProviders.flatMap((p) => p.regions);
 
-        const isRegionsAvailable = selectedProviderInfo?.regions?.every(
-          ({ isDisabled }) => isDisabled === true
-        );
+        const noRegionsAvailable =
+          allRegions.every(({ isDisabled }) => isDisabled === true) ||
+          allRegions.length === 0;
 
         return {
           ...event.data,
           provider: defaultProvider,
           az: defaultAZ,
-          instanceAvailability: isRegionsAvailable
-            ? "trial-unavailable"
+          instanceAvailability: noRegionsAvailable
+            ? "regions-unavailable"
             : instanceAvailability,
         };
       }),
