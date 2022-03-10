@@ -1,12 +1,14 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import React from "react";
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from 'react';
 
-import { Selector } from "./partitionSelector";
+import { Selector } from './partitionSelector';
 
 export default {
-  title: "Proof Of Concepts/Selector",
+  title: 'PoCs/Selector',
   component: Selector,
-  args: {},
+  args: {
+
+  },
 } as ComponentMeta<typeof Selector>;
 
 const Template: ComponentStory<typeof Selector> = (args) => (
