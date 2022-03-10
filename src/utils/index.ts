@@ -1,2 +1,2 @@
 export * from "./useInterval";
-export * from "./kafka";
+export * from "./types";

@@ -18,19 +18,19 @@ const Template: ComponentStory<typeof KafkaDetailsTab> = (args) => (
 );
 
 const instanceInfo = {
-  ingress: "up to 50 MiB/second",
-  egress: "up to 50 MiB/second",
-  storage: "up to 1000 GiB",
-  maxPartitions: "up to 1500",
-  connections: "up to 2000",
-  connectionRate: "up to 100 connections/seconds",
-  messageSize: "up to 1 MiB",
+  ingress: 50,
+  egress: 50,
+  storage: 50,
+  maxPartitions: 1500,
+  connections: 2000,
+  connectionRate: 100,
+  messageSize: 1,
 };
 
 export const StandardInstanceCreated = Template.bind({});
 StandardInstanceCreated.args = {
   instanceType: "standard",
-  size: "1 streaming unit",
+  size: 1,
   ...instanceInfo,
   isTesting: true,
 };
