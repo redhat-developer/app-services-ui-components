@@ -7,11 +7,16 @@ import {
   SelectOption,
   SelectVariant,
 } from "@patternfly/react-core";
+import "./styling.css";
 
 export class Selector extends React.Component {
   constructor(props) {
     super(props);
     this.defaultOptions = [
+      { value: "1" },
+      { value: "2" },
+      { value: "3" },
+      { value: "4" },
       { value: "1" },
       { value: "2" },
       { value: "3" },
@@ -111,7 +116,7 @@ export class Selector extends React.Component {
             <span id={titleId} hidden>
               Select a state
             </span>
-            <Select
+            <Select    
               variant={SelectVariant.typeahead}
               typeAheadAriaLabel="Select a state"
               onToggle={this.onToggle}
@@ -142,6 +147,7 @@ export class Selector extends React.Component {
             </Select>
           </div>
           <InputGroupText
+            className="mas-m-color"
             id="plain-example"
             variant={InputGroupTextVariant.plain}
           >
