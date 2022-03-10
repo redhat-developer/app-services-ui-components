@@ -9,7 +9,6 @@ import {
 } from "@patternfly/react-core";
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 import { format } from "date-fns";
-import "./KafkaInstanceDrawer.css";
 
 type KafkaDetailsTabProps = {
   id: string;

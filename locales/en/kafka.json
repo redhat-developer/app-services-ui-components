@@ -4,6 +4,25 @@
   "clientID": "Client ID",
   "connection_rate": "Connection rate",
   "connection_rate_value": "up to 100 connections/second",
+  "connection_tab": {
+    "bootstrap_server_description": "Establish the initial connection between your client and Kafka instance.",
+    "sasl_oauthbearer_description": "Use your service account credentials and a token endpoint URL to authenticate your client with the Kafka instance.",
+    "sasl_oauthbearer_popover_content": "OpenShift Streams for Apache Kafka uses the industry-standard OAuth protocol via the SASL/OAUTHBEARER provided by Apache Kafka.",
+    "sasl_plain_description": "Use your service account credentials (Client ID and Client secret) as the user name and password to authenticate your client with the Kafka instance.",
+    "more_info_about_sasl_oauthbearer": "More information about SASL/OAUTHBEARER",
+    "bootstrap_server": "Bootstrap server",
+    "sasl_oauthbearer": "SASL/OAUTHBEARER",
+    "recommended": "Recommended",
+    "authentication_method": "Authentication method",
+    "create_service_account_to_generate_credentials": "Create a service account to generate credentials. Manage the service accounts you create on the",
+    "drawer_resource_tab_body_description_1": "Your application or tool initially connects to the Kafka instance using the bootstrap server and authenticates with your service accounts credentials.",
+    "token_endpoint_url": "Token endpoint URL",
+    "page": "page",
+    "sasl_plain": "SASL/PLAIN",
+    "access_tab": "Access tab.",
+    "alter_allow": "The owner, the organization administrator, or users with the Allow Alter permission on this instance can manage access.",
+    "current_instance": "Accounts do not have access to this instance unless granted under the instance’s"
+  },
   "consumerGroup": {
     "active_members": "Active members",
     "active_members_for_topic": "Active members for this topic",
@@ -52,7 +71,6 @@
     "unknown_state": "Unknown",
     "view_partitions_offsets": "View partition offsets"
   },
-  "create_service_account": "Create service account",
   "duration": "Duration",
   "duration_value": "48 hours",
   "filter_by_client_id": "Filter by Client ID",
@@ -75,8 +93,5 @@
   "topic": {
     "topic": "Topic"
   },
-  "will_expire": "This instance will expire in <time>{{time}}</time>",
-  "connection_tab": {
-    "bootstrap_server_description": "Establish the initial connection between your client and Kafka instance."
-  }
+  "will_expire": "This instance will expire in <time>{{time}}</time>"
 }

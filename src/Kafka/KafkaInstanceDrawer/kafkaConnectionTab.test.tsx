@@ -5,21 +5,25 @@ import * as stories from "./KafkaConnectionTab.stories";
 const { ConnectionTab, ConnectionTabWhenkafkaCreationPending } =
   composeStories(stories);
 
-describe("OverviewPage", () => {
+describe("ConnectionTab", () => {
   it("renders", async () => {
     const comp = render(<ConnectionTab />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
   });
 
-  it("CopyClipboard Disabled when the kafka creating is pending", async () => {
+  it("should render bootstrap server and Token endpoint URL value when kafka instance creation is done", async () => {
     const comp = render(<ConnectionTab />);
     await waitForI18n(comp);
-    expect(await comp.findByLabelText("Bootstrap server")).toBeEnabled;
-    expect(await comp.findByLabelText("Token endpoint URL")).toBeEnabled;
+    expect(await comp.findByLabelText("Bootstrap server")).toHaveDisplayValue(
+      "hema-test-c-k-l-kafka-stage.rhcloud.com:443"
+    );
+    expect(await comp.findByLabelText("Token endpoint URL")).toHaveDisplayValue(
+      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token"
+    );
   });
 
-  it("CopyClipboard Disabled when the kafka creating is pending", async () => {
+  it("bootstrap server and Token endpoint URL should be disabled when the kafka creating is pending", async () => {
     const comp = render(<ConnectionTabWhenkafkaCreationPending />);
     await waitForI18n(comp);
     expect(await comp.queryByLabelText("Token endpoint URL")).toBe(null);
