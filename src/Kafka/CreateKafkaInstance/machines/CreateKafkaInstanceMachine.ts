@@ -267,19 +267,20 @@ const CreateKafkaInstanceMachine = createMachine(
           instanceAvailability,
           defaultAZ,
         } = event.data;
+
         const selectedProviderInfo = availableProviders.find(
           (p) => p.id === defaultProvider
         );
 
-        const isRegionsAvailable = selectedProviderInfo?.regions?.some(
-          ({ isDisabled }) => isDisabled !== true
+        const isRegionsAvailable = selectedProviderInfo?.regions?.every(
+          ({ isDisabled }) => isDisabled === true
         );
 
         return {
           ...event.data,
           provider: defaultProvider,
           az: defaultAZ,
-          instanceAvailability: !isRegionsAvailable
+          instanceAvailability: isRegionsAvailable
             ? "trial-unavailable"
             : instanceAvailability,
         };
