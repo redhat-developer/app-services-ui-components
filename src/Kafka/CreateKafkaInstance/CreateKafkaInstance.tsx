@@ -1,7 +1,6 @@
 import {
   Alert,
   Button,
-  Divider,
   Flex,
   FlexItem,
   Form,
@@ -12,6 +11,7 @@ import {
   ToggleGroup,
   ToggleGroupItem,
   Tooltip,
+  Slider,
 } from "@patternfly/react-core";
 import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +29,7 @@ import {
   useCreateKafkaInstanceMachine,
 } from "./machines";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
+import { FormGroupWithPopover } from "../../shared/FormGroupWithPopover";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -51,6 +52,10 @@ export type CreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
+
+  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
+  It will be remove when actual data will available*/
+  isTesting?: boolean;
 } & MakeCreateKafkaInstanceMachine &
   Partial<InstanceInfoLimitsProps>;
 
@@ -71,6 +76,7 @@ export const CreateKafkaInstance: FunctionComponent<
   connections = 2000,
   connectionRate = 100,
   messageSize = 1,
+  isTesting = false,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance");
@@ -267,9 +273,23 @@ export const CreateKafkaInstance: FunctionComponent<
                 </Tooltip>
               </ToggleGroup>
             </FormGroup>
+            <FormGroupWithPopover
+              labelHead={"Size"}
+              fieldId="streaming-size"
+              fieldLabel={"Size"}
+              labelBody={t("account_id_help")}
+              buttonAriaLabel={t("account_id_aria")}
+            >
+              <Slider
+                min={1}
+                max={5}
+                showTicks={true}
+                style={{ maxWidth: "50%" }}
+                label={"streaming units"}
+              />
+            </FormGroupWithPopover>
           </Form>
         </FlexItem>
-        <Divider isVertical />
         <FlexItem
           flex={{ default: "flex_1" }}
           className="mk--create-instance-modal__sidebar--content"

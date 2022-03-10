@@ -1,18 +1,26 @@
 import { VoidFunctionComponent } from "react";
-import { Alert, AlertVariant, Spinner } from "@patternfly/react-core";
-import { useTranslation } from "react-i18next";
+import {
+  Alert,
+  AlertVariant,
+  Spinner,
+  Button,
+  ButtonVariant,
+} from "@patternfly/react-core";
+import { useTranslation, Trans } from "react-i18next";
 import { InstanceAvailability } from "../machines";
 
 export type ModalAlertsProps = {
   instanceAvailability: InstanceAvailability | undefined;
   isSystemUnavailable: boolean;
   isLoading: boolean;
+  onClickPricingAndPurchasing?: () => void;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   instanceAvailability,
   isSystemUnavailable,
   isLoading,
+  onClickPricingAndPurchasing,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -56,7 +64,20 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
           title={t("modal_alerts.trial_available_title")}
           aria-live="polite"
           isInline
-        />
+        >
+          <Trans
+            ns={["create-kafka-instance"]}
+            i18nKey="modal_alerts.trial_available_message"
+            components={[
+              <Button
+                key="btn-pricing-purchasing"
+                variant={ButtonVariant.link}
+                onClick={onClickPricingAndPurchasing}
+                isInline
+              />,
+            ]}
+          />
+        </Alert>
       );
     case instanceAvailability === "over-quota":
       return (
