@@ -72,5 +72,9 @@
     "deleting": "Deleting",
     "ready": "Ready"
   },
-  "storage_value": "up to {{value}} GiB"
+  "storage_value": "up to {{value}} GiB",
+  "size": "Size",
+  "streaming_unit": "streaming units",
+  "size_field_aria": "More info for Size field",
+  "size_description": "Your organization needs a subscription to specify a size, Slecting a size will determine what limits exist for the instance,such as ingress, egress, and storage. The limits that you get with a trial instance are listed under instance information. "
 }

@@ -6,10 +6,16 @@ export interface Typegen0 {
     setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
     resetCreationErrorMessage: "formChange" | "";
     setName: "nameChange";
-    formChange: "nameChange" | "providerChange" | "regionChange" | "azChange";
+    formChange:
+      | "nameChange"
+      | "providerChange"
+      | "regionChange"
+      | "azChange"
+      | "sizeChange";
     setProvider: "providerChange";
     setRegion: "regionChange";
     setAZ: "azChange";
+    setSize: "sizeChange";
     setCreationError: "createError";
     markRequiredFields: "";
   };
@@ -48,6 +54,8 @@ export interface Typegen0 {
     regionIsValid: "";
     azIsUntouched: "";
     azIsValid: "";
+    sizeIsUntouched: "";
+    sizeIsValid: "";
   };
   eventsCausingDelays: {};
   matchesStates:
@@ -77,6 +85,11 @@ export interface Typegen0 {
     | "configuring.az.validate"
     | "configuring.az.invalid"
     | "configuring.az.valid"
+    | "configuring.size"
+    | "configuring.size.untouched"
+    | "configuring.size.validate"
+    | "configuring.size.invalid"
+    | "configuring.size.valid"
     | "submit"
     | "formInvalid"
     | "saving"
@@ -87,11 +100,13 @@ export interface Typegen0 {
           | "provider"
           | "region"
           | "az"
+          | "size"
           | {
               name?: "untouched" | "empty" | "invalid" | "valid" | "validate";
               provider?: "untouched" | "validate" | "invalid" | "valid";
               region?: "untouched" | "validate" | "invalid" | "valid";
               az?: "untouched" | "validate" | "invalid" | "valid";
+              size?: "untouched" | "validate" | "invalid" | "valid";
             };
       };
   tags:
@@ -108,5 +123,8 @@ export interface Typegen0 {
     | "regionValid"
     | "azUntouched"
     | "azInvalid"
-    | "azValid";
+    | "azValid"
+    | "sizeUntouched"
+    | "sizeInvalid"
+    | "sizeValid";
 }

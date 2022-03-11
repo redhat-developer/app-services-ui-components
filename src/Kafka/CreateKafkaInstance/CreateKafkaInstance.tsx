@@ -12,6 +12,10 @@ import {
   ToggleGroupItem,
   Tooltip,
   Slider,
+  TextContent,
+  Text,
+  TextVariants,
+  ButtonVariant,
 } from "@patternfly/react-core";
 import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -90,6 +94,7 @@ export const CreateKafkaInstance: FunctionComponent<
     azOptions,
     availableProviders,
     instanceAvailability,
+    size,
 
     isNameTaken,
     isNameInvalid,
@@ -97,6 +102,7 @@ export const CreateKafkaInstance: FunctionComponent<
     isProviderError,
     isRegionError,
     isAzError,
+    isSizeInvalid,
 
     isTrial,
     isLoading,
@@ -112,6 +118,7 @@ export const CreateKafkaInstance: FunctionComponent<
     setRegion,
     setAZ,
     create,
+    setSize,
   } = useCreateKafkaInstanceMachine({
     getAvailableProvidersAndDefaults,
     onCreate,
@@ -274,19 +281,42 @@ export const CreateKafkaInstance: FunctionComponent<
               </ToggleGroup>
             </FormGroup>
             <FormGroupWithPopover
-              labelHead={"Size"}
+              labelHead={t("size")}
               fieldId="streaming-size"
-              fieldLabel={"Size"}
-              labelBody={t("account_id_help")}
-              buttonAriaLabel={t("account_id_aria")}
+              fieldLabel={t("size")}
+              labelBody={t("size_description")}
+              buttonAriaLabel={t("size_field_aria")}
+              isRequired={instanceAvailability !== "trial"}
             >
-              <Slider
-                min={1}
-                max={5}
-                showTicks={true}
-                style={{ maxWidth: "50%" }}
-                label={"streaming units"}
-              />
+              <div className="pf-c-input-group pf-u-w-50">
+                <Slider
+                  min={1}
+                  max={2}
+                  value={size}
+                  showTicks={true}
+                  label={t("streaming_unit")}
+                  className="pf-u-w-100"
+                  isDisabled={
+                    instanceAvailability === "trial" || disableControls
+                  }
+                  onChange={setSize}
+                />
+                <span
+                  className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
+                  id="plain-example"
+                >
+                  {t("streaming_unit")}
+                </span>
+              </div>
+              <Text
+                component={TextVariants.p}
+                className="pf-c-form__helper-text"
+              >
+                {t("size_description")}
+              </Text>
+              <Button variant={ButtonVariant.link} isInline>
+                Learn more about sizes
+              </Button>
             </FormGroupWithPopover>
           </Form>
         </FlexItem>

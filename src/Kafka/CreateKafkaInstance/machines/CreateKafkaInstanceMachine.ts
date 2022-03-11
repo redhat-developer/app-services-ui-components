@@ -26,6 +26,9 @@ const AZ_UNTOUCHED = "azUntouched";
 const AZ_VALID = "azValid";
 const AZ_INVALID = "azInvalid";
 const SYSTEM_UNAVAILABLE = "systemUnavailable";
+const SIZE_VALID = "sizeValid";
+const SIZE_INVALID = "sizeInvalid";
+const SIZE_UNTOUCHED = "sizeUntouched";
 
 const CreateKafkaInstanceMachine = createMachine(
   {
@@ -36,6 +39,7 @@ const CreateKafkaInstanceMachine = createMachine(
         provider: Provider | undefined;
         region: Region | undefined;
         az: AZ | undefined;
+        size?: number | undefined;
 
         defaultProvider: Provider | undefined;
         defaultRegion: Region | undefined;
@@ -51,6 +55,7 @@ const CreateKafkaInstanceMachine = createMachine(
         | { type: "providerChange"; provider: Provider }
         | { type: "regionChange"; region: Region }
         | { type: "azChange"; az: AZ }
+        | { type: "sizeChange"; size: number }
         | { type: "nameIsValid" }
         | { type: "nameIsInvalid" }
         | { type: "nameIsTaken" }
@@ -70,6 +75,7 @@ const CreateKafkaInstanceMachine = createMachine(
       provider: undefined,
       region: undefined,
       az: undefined,
+      size: 1,
 
       defaultProvider: undefined,
       defaultRegion: undefined,
@@ -218,6 +224,31 @@ const CreateKafkaInstanceMachine = createMachine(
               },
             },
           },
+          size: {
+            initial: "validate",
+            states: {
+              untouched: { tags: SIZE_UNTOUCHED },
+              validate: {
+                always: [
+                  { cond: "sizeIsUntouched", target: "untouched" },
+                  { cond: "sizeIsValid", target: "valid" },
+                  { target: "invalid" },
+                ],
+              },
+              invalid: {
+                tags: SIZE_INVALID,
+              },
+              valid: {
+                tags: SIZE_VALID,
+              },
+            },
+            on: {
+              sizeChange: {
+                actions: ["setSize", "formChange"],
+                target: ".validate",
+              },
+            },
+          },
         },
         on: {
           create: "submit",
@@ -297,6 +328,7 @@ const CreateKafkaInstanceMachine = createMachine(
       })),
       setRegion: assign((_context, { region }) => ({ region })),
       setAZ: assign((_context, { az }) => ({ az })),
+      setSize: assign((_context, { size }) => ({ size })),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       resetCreationErrorMessage: assign((_context) => ({
         creationError: undefined,
@@ -350,6 +382,8 @@ const CreateKafkaInstanceMachine = createMachine(
           selectedProviderInfo?.AZ[c.az] === true
         );
       },
+      sizeIsUntouched: (c) => c.size === undefined,
+      sizeIsValid: (c) => c.size !== undefined,
       canCreateInstances: (context) =>
         context.instanceAvailability !== undefined &&
         ["quota", "trial"].includes(context.instanceAvailability),
@@ -431,21 +465,36 @@ export function useCreateKafkaInstanceMachine({
   );
   const setAZ = useCallback((az: AZ) => send({ type: "azChange", az }), [send]);
   const create = useCallback(() => send("create"), [send]);
+  const setSize = useCallback(
+    (size: number) => send({ type: "sizeChange", size }),
+    [send]
+  );
 
   const isFormInvalid = state.context.creationError === "form-invalid";
   const isNameTaken = state.context.creationError === "name-taken";
 
+  const {
+    size,
+    name,
+    provider,
+    region,
+    az,
+    availableProviders,
+    instanceAvailability,
+  } = state.context;
+
   return {
-    name: state.context.name,
-    provider: state.context.provider,
-    region: state.context.region,
-    az: state.context.az,
+    name,
+    provider,
+    region,
+    az,
+    size,
 
     azOptions: selectedProviderInfo?.AZ,
     regions: selectedProviderInfo?.regions,
 
-    availableProviders: state.context.availableProviders,
-    instanceAvailability: state.context.instanceAvailability,
+    availableProviders,
+    instanceAvailability,
 
     isNameInvalid: state.hasTag(NAME_INVALID),
     isNameEmpty: state.hasTag(NAME_EMPTY),
@@ -454,6 +503,7 @@ export function useCreateKafkaInstanceMachine({
       isNameTaken ||
       (!state.hasTag(NAME_VALID) && isFormInvalid),
     isNameTaken,
+    isSizeInvalid: state.hasTag(SIZE_INVALID),
 
     isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
     isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,
@@ -477,5 +527,6 @@ export function useCreateKafkaInstanceMachine({
     setRegion,
     setAZ,
     create,
+    setSize,
   };
 }
