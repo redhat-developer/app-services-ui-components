@@ -11,7 +11,7 @@ import {
 } from "@patternfly/react-core";
 import { HelpIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export type KafkaConnectionTabProps = {
@@ -61,13 +61,14 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           {t("service-account:service_accounts_small")}
         </Text>
         <Text component={TextVariants.small}>
-          {t(
-            "kafka:connection_tab.create_service_account_to_generate_credentials"
-          )}{" "}
-          <Link to={linkToServiceAccount} data-testid="tableStreams-linkKafka">
-            {t("service-account:service_accounts")}
-          </Link>{" "}
-          {t("kafka:connection_tab.page")}.
+          {
+            <Trans
+              i18nKey={"kafka:connection_tab.create_service_account_to_generate_credentials"}
+              components={{
+                value: <Link to={linkToServiceAccount}></Link>
+              }}
+            />
+          }
         </Text>
       </TextContent>
       <Button

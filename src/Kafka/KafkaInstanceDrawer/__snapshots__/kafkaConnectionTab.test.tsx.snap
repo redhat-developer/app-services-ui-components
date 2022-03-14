@@ -101,17 +101,13 @@ exports[`ConnectionTab renders 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Create a service account to generate credentials. Manage the service accounts you create on the
-           
+          Create a service account to generate credentials. Manage the service accounts you create on the 
           <a
-            data-testid="tableStreams-linkKafka"
             href="/to-service-account"
           >
             Service Accounts
           </a>
-           
-          page
-          .
+           page
         </small>
       </div>
       <button

@@ -86,7 +86,7 @@ export const ServiceAccountToolbar: VoidFunctionComponent<
         <ToolbarGroup>
           <ToolbarItem>
             <Button variant={"primary"} onClick={onCreateServiceAccountClick}>
-              {t("service:create_service_account")}
+              {t("service-account:create_service_account")}
             </Button>
           </ToolbarItem>
         </ToolbarGroup>
@@ -101,22 +101,22 @@ type State = {
 
 type Actions =
   | {
-      type: "search";
-      category: SearchCategory;
-      value: string;
-    }
+    type: "search";
+    category: SearchCategory;
+    value: string;
+  }
   | {
-      type: "removeChip";
-      category: SearchCategory;
-      value: string;
-    }
+    type: "removeChip";
+    category: SearchCategory;
+    value: string;
+  }
   | {
-      type: "removeGroup";
-      category: SearchCategory;
-    }
+    type: "removeGroup";
+    category: SearchCategory;
+  }
   | {
-      type: "clearAll";
-    };
+    type: "clearAll";
+  };
 
 function reducer(state: State, action: Actions) {
   switch (action.type) {
