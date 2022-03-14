@@ -1,4 +1,4 @@
-import React, {VoidFunctionComponent } from "react";
+import React, { VoidFunctionComponent } from "react";
 import {
   TableComposable,
   Thead,
@@ -17,7 +17,7 @@ interface Repository {
   header: string | object;
 }
 
-export const Table: VoidFunctionComponent  = () => {
+export const Table: VoidFunctionComponent = () => {
   // In real usage, this data would come from some external source like an API via props.
   const repositories: Repository[] = [
     {
