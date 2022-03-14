@@ -7,7 +7,6 @@ import {
   SelectOption,
   SelectVariant,
 } from "@patternfly/react-core";
-import "./styling.css";
 
 export class Selector extends React.Component {
   constructor(props) {
@@ -22,7 +21,7 @@ export class Selector extends React.Component {
       { value: "7" },
       { value: "8" },
       { value: "9" },
-      { value: "10" }
+      { value: "10" },
     ];
 
     this.state = {
@@ -151,7 +150,6 @@ export class Selector extends React.Component {
             </Select>
           </div>
           <InputGroupText
-            className="mas-m-color"
             id="plain-example"
             variant={InputGroupTextVariant.plain}
           >
