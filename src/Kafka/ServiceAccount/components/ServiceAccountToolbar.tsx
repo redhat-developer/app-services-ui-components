@@ -101,22 +101,22 @@ type State = {
 
 type Actions =
   | {
-    type: "search";
-    category: SearchCategory;
-    value: string;
-  }
+      type: "search";
+      category: SearchCategory;
+      value: string;
+    }
   | {
-    type: "removeChip";
-    category: SearchCategory;
-    value: string;
-  }
+      type: "removeChip";
+      category: SearchCategory;
+      value: string;
+    }
   | {
-    type: "removeGroup";
-    category: SearchCategory;
-  }
+      type: "removeGroup";
+      category: SearchCategory;
+    }
   | {
-    type: "clearAll";
-  };
+      type: "clearAll";
+    };
 
 function reducer(state: State, action: Actions) {
   switch (action.type) {

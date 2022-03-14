@@ -63,9 +63,11 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         <Text component={TextVariants.small}>
           {
             <Trans
-              i18nKey={"kafka:connection_tab.create_service_account_to_generate_credentials"}
+              i18nKey={
+                "kafka:connection_tab.create_service_account_to_generate_credentials"
+              }
               components={{
-                value: <Link to={linkToServiceAccount}></Link>
+                value: <Link to={linkToServiceAccount}></Link>,
               }}
             />
           }
