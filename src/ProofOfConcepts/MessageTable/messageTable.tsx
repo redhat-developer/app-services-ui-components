@@ -1,4 +1,4 @@
-import React from "react";
+import React, {VoidFunctionComponent } from "react";
 import {
   TableComposable,
   Thead,
@@ -9,15 +9,15 @@ import {
 } from "@patternfly/react-table";
 
 interface Repository {
-  partition: string | object;
-  offset: string | null | object;
-  timestamp: string | null | object;
-  key: string | null | object;
+  partition: string;
+  offset: string;
+  timestamp: string | object;
+  key: string | object;
   value: string | object;
   header: string | object;
 }
 
-export const Table: React.FunctionComponent = () => {
+export const Table: VoidFunctionComponent  = () => {
   // In real usage, this data would come from some external source like an API via props.
   const repositories: Repository[] = [
     {
@@ -163,14 +163,14 @@ export const Table: React.FunctionComponent = () => {
   const setRepoSelected = (repo: Repository, isSelecting = true) =>
     setSelectedRepoNames((prevSelected) => {
       const otherSelectedRepoNames = prevSelected.filter(
-        (r) => r !== repo.partition
+        (r) => r !== repo.offset
       );
       return isSelecting
-        ? [...otherSelectedRepoNames, repo.partition]
+        ? [...otherSelectedRepoNames, repo.offset]
         : otherSelectedRepoNames;
     });
   const isRepoSelected = (repo: Repository) =>
-    selectedRepoNames.includes(repo.partition);
+    selectedRepoNames.includes(repo.offset);
 
   return (
     <TableComposable aria-label="Hoverable table">

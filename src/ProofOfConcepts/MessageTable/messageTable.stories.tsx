@@ -4,7 +4,7 @@ import React from "react";
 import { Table } from "./messageTable";
 
 export default {
-  title: "PoCs/Table",
+  title: "Proof Of Concepts/Message Browsing Table",
   component: Table,
   args: {},
 } as ComponentMeta<typeof Table>;
