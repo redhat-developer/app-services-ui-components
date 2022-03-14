@@ -1,3 +1,5 @@
+import { ValidatedOptions } from "@patternfly/react-core";
+
 export type AclOperation =
   | "ALL"
   | "READ"
@@ -66,4 +68,46 @@ export type Account = {
   id: string;
   principalType: PrincipalType;
   displayName: string;
+};
+
+export type SelectOption<T> = {
+  value: T;
+  title: string;
+  description: string;
+  disabled: boolean;
+};
+export enum AclShortcutType {
+  ConsumeTopic = "ConsumeTopic",
+  ProduceTopic = "ProduceTopic",
+  ManageAccess = "ManageAccess",
+}
+
+export type NewAcl = {
+  permission: Validated<AclPermissionType | undefined>;
+  operation: Validated<AclOperation | undefined>;
+  resourceType: Validated<AclResourceType | undefined>;
+  patternType: Validated<AclPatternType | undefined>;
+  resource: Validated<string | undefined>;
+  aclShortcutType: AclShortcutType | undefined;
+  operations?: AclOperation[];
+  metaData?: {
+    title: string;
+    popoverHeader: string;
+    popoverBody: string;
+    ariaLabel: string;
+  };
+};
+
+export type Validated<T> = {
+  value: T;
+  validated?: ValidatedOptions;
+  errorMessage?: string;
+};
+
+export type NewAcls = NewAcl | NewAcl[];
+
+export type CellProps = {
+  acl: NewAcl;
+  row: number;
+  childRow?: number;
 };
