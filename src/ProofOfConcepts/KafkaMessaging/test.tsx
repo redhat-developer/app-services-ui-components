@@ -103,7 +103,6 @@ export class Test extends React.Component {
     } = this.state;
     const titleId = "typeahead-select-id-1";
     return (
-      <React.Fragment>
         <InputGroup>
           <InputGroupText className="pf-c-content">Partition</InputGroupText>
           <div>
@@ -149,7 +148,6 @@ export class Test extends React.Component {
             of 50
           </InputGroupText>
         </InputGroup>
-      </React.Fragment>
     );
   }
 }
