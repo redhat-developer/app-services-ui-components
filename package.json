@@ -14,6 +14,7 @@
     "static/"
   ],
   "scripts": {
+    "prebuild-storybook": "npm run test:generate-output",
     "build-storybook": "build-storybook",
     "prebuild": "npm run parse-i18n",
     "build": "rollup -c",
@@ -26,11 +27,9 @@
     "package": "npm run build",
     "parse-i18n": "i18next 'src/**/*.tsx'",
     "prepare": "npm run clean && npm run package && husky install",
-    "storybook": "npm-run-all storybook:start test:generate-output:dev",
-    "storybook:start": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006",
     "test": "jest",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json",
-    "test:generate-output:dev": "npm run test:generate-output -- --watch",
     "test:watch": "npm run test -- --watch"
   },
   "repository": {
