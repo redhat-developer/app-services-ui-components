@@ -9,7 +9,7 @@ import {
 } from "@patternfly/react-core";
 import "./styling.css";
 
-export class Test extends React.Component {
+export class Option extends React.Component {
   constructor(props) {
     super(props);
     this.defaultOptions = [
