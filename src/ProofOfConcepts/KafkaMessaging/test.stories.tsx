@@ -9,9 +9,7 @@ export default {
   args: {},
 } as ComponentMeta<typeof Test>;
 
-const Template: ComponentStory<typeof Test> = (args) => (
-  <Test {...args} />
-);
+const Template: ComponentStory<typeof Test> = (args) => <Test {...args} />;
 
 export const Story2 = Template.bind({});
 Story2.args = {};

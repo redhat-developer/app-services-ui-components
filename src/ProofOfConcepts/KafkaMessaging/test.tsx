@@ -112,11 +112,10 @@ export class Test extends React.Component {
             </span>
             <Select
               width={115}
-              variant={SelectVariant.typeahead} 
+              variant={SelectVariant.typeahead}
               typeAheadAriaLabel="Select a state"
               onToggle={this.onToggle}
               onSelect={this.onSelect}
-
               selections={selected}
               isOpen={isOpen}
               aria-labelledby={titleId}
@@ -146,7 +145,6 @@ export class Test extends React.Component {
             id="plain-example"
             variant={InputGroupTextVariant.plain}
             className="pf-c-content"
-            
           >
             of 50
           </InputGroupText>
@@ -155,4 +153,3 @@ export class Test extends React.Component {
     );
   }
 }
- 
