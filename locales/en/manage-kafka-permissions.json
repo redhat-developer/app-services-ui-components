@@ -44,6 +44,7 @@
   "resourceTypes": {
     "consumer_group": "Consumer group",
     "kafka_instance": "$t(common:kafka) instance",
+    "placeholder_text": "Select type",
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
