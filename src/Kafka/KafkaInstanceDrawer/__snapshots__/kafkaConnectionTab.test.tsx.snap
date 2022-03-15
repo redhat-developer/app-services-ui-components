@@ -132,7 +132,7 @@ exports[`ConnectionTab renders 1`] = `
         >
           Accounts do not have access to this instance unless granted under the instance’s 
           <a
-            href="/to-service-account"
+            href="/to-access-tab"
           >
             Access tab
           </a>

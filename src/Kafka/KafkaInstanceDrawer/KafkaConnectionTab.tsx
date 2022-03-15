@@ -86,7 +86,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
             <Trans
               i18nKey={"kafka:connection_tab.current_instance"}
               components={{
-                value: <Link to={linkToServiceAccount}></Link>,
+                value: <Link to={linkToAccessTab}></Link>,
               }}
             />
           }
