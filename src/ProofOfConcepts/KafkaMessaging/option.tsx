@@ -103,51 +103,51 @@ export class Option extends React.Component {
     } = this.state;
     const titleId = "typeahead-select-id-1";
     return (
-        <InputGroup>
-          <InputGroupText className="pf-c-content">Partition</InputGroupText>
-          <div>
-            <span id={titleId} hidden>
-              Select a state
-            </span>
-            <Select
-              width={115}
-              variant={SelectVariant.typeahead}
-              typeAheadAriaLabel="Select a state"
-              onToggle={this.onToggle}
-              onSelect={this.onSelect}
-              selections={selected}
-              isOpen={isOpen}
-              aria-labelledby={titleId}
-              isInputValuePersisted={isInputValuePersisted}
-              isInputFilterPersisted={isInputFilterPersisted}
-              placeholderText="0"
-              isDisabled={isDisabled}
-              isCreatable={isCreatable}
-              onCreateOption={
-                (hasOnCreateOption && this.onCreateOption) || undefined
-              }
-              maxHeight={200}
-            >
-              {options.map((option, index) => (
-                <SelectOption
-                  isDisabled={option.disabled}
-                  key={index}
-                  value={option.value}
-                  {...(option.description && {
-                    description: option.description,
-                  })}
-                />
-              ))}
-            </Select>
-          </div>
-          <InputGroupText
-            id="plain-example"
-            variant={InputGroupTextVariant.plain}
-            className="pf-c-content"
+      <InputGroup>
+        <InputGroupText className="pf-c-content">Partition</InputGroupText>
+        <div>
+          <span id={titleId} hidden>
+            Select a state
+          </span>
+          <Select
+            width={115}
+            variant={SelectVariant.typeahead}
+            typeAheadAriaLabel="Select a state"
+            onToggle={this.onToggle}
+            onSelect={this.onSelect}
+            selections={selected}
+            isOpen={isOpen}
+            aria-labelledby={titleId}
+            isInputValuePersisted={isInputValuePersisted}
+            isInputFilterPersisted={isInputFilterPersisted}
+            placeholderText="0"
+            isDisabled={isDisabled}
+            isCreatable={isCreatable}
+            onCreateOption={
+              (hasOnCreateOption && this.onCreateOption) || undefined
+            }
+            maxHeight={200}
           >
-            of 50
-          </InputGroupText>
-        </InputGroup>
+            {options.map((option, index) => (
+              <SelectOption
+                isDisabled={option.disabled}
+                key={index}
+                value={option.value}
+                {...(option.description && {
+                  description: option.description,
+                })}
+              />
+            ))}
+          </Select>
+        </div>
+        <InputGroupText
+          id="plain-example"
+          variant={InputGroupTextVariant.plain}
+          className="pf-c-content"
+        >
+          of 50
+        </InputGroupText>
+      </InputGroup>
     );
   }
 }
