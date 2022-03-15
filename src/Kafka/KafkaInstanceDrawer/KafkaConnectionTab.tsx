@@ -82,11 +82,14 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
       </Button>
       <TextContent className="pf-u-pt-sm">
         <Text component={TextVariants.small}>
-          {t("kafka:connection_tab.current_instance")}{" "}
-          <Link to={linkToAccessTab}>
-            {t("kafka:connection_tab.access_tab")}
-          </Link>{" "}
-          {t("kafka:connection_tab.alter_allow")}.
+          {
+            <Trans
+              i18nKey={"kafka:connection_tab.current_instance"}
+              components={{
+                value: <Link to={linkToServiceAccount}></Link>,
+              }}
+            />
+          }
         </Text>
       </TextContent>
       <TextContent className="pf-u-pb-sm">

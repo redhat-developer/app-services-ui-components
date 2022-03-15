@@ -16,7 +16,7 @@ exports[`ConnectionTab renders 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Your application or tool initially connects to the Kafka instance using the bootstrap server and authenticates with your service accounts credentials.
+          Your application or tool initially connects to the Kafka instance using the bootstrap server and authenticates with your service account credentials.
         </small>
         <h3
           class="pf-u-mt-lg"
@@ -107,7 +107,7 @@ exports[`ConnectionTab renders 1`] = `
           >
             Service Accounts
           </a>
-           page
+           page.
         </small>
       </div>
       <button
@@ -130,16 +130,13 @@ exports[`ConnectionTab renders 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Accounts do not have access to this instance unless granted under the instance’s
-           
+          Accounts do not have access to this instance unless granted under the instance’s 
           <a
-            href="/to-access-tab"
+            href="/to-service-account"
           >
-            Access tab.
+            Access tab
           </a>
-           
-          The owner, the organization administrator, or users with the Allow Alter permission on this instance can manage access.
-          .
+          . The owner, the organization administrator, or users with the Allow Alter permission on this instance can manage access.
         </small>
       </div>
       <div
