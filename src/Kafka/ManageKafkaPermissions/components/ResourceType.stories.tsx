@@ -1,3 +1,4 @@
+import { Modal } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
 
@@ -8,22 +9,38 @@ export default {
   args: { resourceTypeValue: undefined },
 } as ComponentMeta<typeof ResourceType>;
 
-const Template: ComponentStory<typeof ResourceType> = (args) => (
-  <div style={{ height: "90vh", display: "flex", alignItems: "end" }}>
-    <ResourceType {...args} />
-  </div>
-);
-export const InteractiveExample: ComponentStory<typeof ResourceType> = () => {
+const Template: ComponentStory<typeof ResourceType> = (args, { id }) => {
+  return (
+    <Modal
+      title="Simple modal header"
+      isOpen={true}
+      appendTo={() => document.getElementById(id) || document.body}
+      disableFocusTrap={true}
+    >
+      <ResourceType {...args} />
+    </Modal>
+  );
+};
+export const InteractiveExample: ComponentStory<typeof ResourceType> = (
+  _,
+  { id }
+) => {
   const [resourceTypeValue, setResourceTypeValue] = useState<
     string | undefined
   >(undefined);
   return (
-    <div style={{ height: "90vh", display: "flex", alignItems: "end" }}>
+    <Modal
+      title="Simple modal header"
+      isOpen={true}
+      appendTo={() => document.getElementById(id) || document.body}
+      disableFocusTrap={true}
+    >
       <ResourceType
         resourceTypeValue={resourceTypeValue}
         onChangeValue={setResourceTypeValue}
+        initialOpen={true}
       />
-    </div>
+    </Modal>
   );
 };
 InteractiveExample.parameters = {
@@ -34,7 +51,7 @@ InteractiveExample.parameters = {
   },
 };
 export const InitialState = Template.bind({});
-InitialState.args = {};
+InitialState.args = { initialOpen: true };
 InitialState.parameters = {
   docs: {
     description: {

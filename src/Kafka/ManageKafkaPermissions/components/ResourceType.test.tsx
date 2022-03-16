@@ -13,7 +13,6 @@ describe("Resource type", () => {
     await waitForI18n(comp);
 
     expect(await comp.findByText("Select type")).toBeInTheDocument();
-    userEvent.click(await comp.findByRole("button"));
     expect(await comp.findByText("Consumer group")).toBeInTheDocument();
     expect(await comp.findByText("Topic")).toBeInTheDocument();
     expect(await comp.findByText("Kafka instance")).toBeInTheDocument();
@@ -30,7 +29,6 @@ describe("Resource type", () => {
     const comp = render(<InteractiveExample onChangeValue={onChangeValue} />);
     await waitForI18n(comp);
     expect(await comp.findByText("Select type")).toBeInTheDocument();
-    userEvent.click(await comp.findByRole("button"));
     expect(await comp.findByText("Consumer group")).toBeInTheDocument();
     expect(await comp.findByText("Topic")).toBeInTheDocument();
     expect(await comp.findByText("Kafka instance")).toBeInTheDocument();
