@@ -15,3 +15,11 @@
 .mas-m-deleting {
   color: var(--pf-global--Color--200);
 }
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}

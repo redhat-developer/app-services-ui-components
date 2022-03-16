@@ -26,7 +26,7 @@ export const Table: VoidFunctionComponent = () => {
       timestamp: "Feb 6, 2022, 11:26:00:456 AM",
       key: "this-is-a-sample-key",
       value: (
-        <div>
+        <div className="text">
           {
             " {”menu”:{ ”id”:{“20”, ”value”:”File”, ”popup”:{ ”menuitem”:[ {”value”:”New”, ”onclick”:”CreateNewDoc()”}, {”value”:” . . . "
           }
@@ -34,7 +34,7 @@ export const Table: VoidFunctionComponent = () => {
         </div>
       ),
       header: (
-        <div>
+        <div className="text">
           {
             '{”key”: Struct{order_id=3}”, ”payload”:{“order_id”:{ "string”:”3” }, ”customer_id”:{“string”:”695” }, ”order_total_en . . . '
           }
@@ -49,7 +49,7 @@ export const Table: VoidFunctionComponent = () => {
       timestamp: "Feb 6, 2022, 11:25:55:999 AM",
       key: "this-is-another-sample-key",
       value: (
-        <div>
+        <div className="text">
           {
             "{”menu”:{ ”id”:{“19”, ”value”:”File”, ”popup”:{ ”menuitem”:[ {”value”:”New”, ”onclick”:”CreateNewDoc()”}, {”value”:” . . .  "
           }
@@ -94,7 +94,7 @@ export const Table: VoidFunctionComponent = () => {
       key: "this-is-a-long-sample-key-something-something",
       value: '{"test":{ "id":"10"}}',
       header: (
-        <div>
+        <div className="text">
           {
             '{"menu":{ "id":"19", "value":"File", "popup":{"menuitem":[ {"value":"New", "onclick": "CreateNewDoc()"}, {"value": . . .'
           }{" "}
@@ -117,7 +117,7 @@ export const Table: VoidFunctionComponent = () => {
       offset: "2",
       timestamp: "Feb 6, 2022, 11:15:01:567 AM",
       key: (
-        <div>
+        <div className="text">
           {
             "this-is-a-super-long-sample-key-something-something-something-else-on..."
           }
@@ -176,7 +176,7 @@ export const Table: VoidFunctionComponent = () => {
     <TableComposable aria-label="Hoverable table">
       <Thead>
         <Tr>
-          <Th>{columnNames.partition}</Th>
+          <Th modifier="nowrap">{columnNames.partition}</Th>
           <Th>{columnNames.offset}</Th>
           <Th>{columnNames.timestamp}</Th>
           <Th>{columnNames.key}</Th>
@@ -194,9 +194,9 @@ export const Table: VoidFunctionComponent = () => {
           >
             <Td dataLabel={columnNames.partition}>{repo.partition}</Td>
             <Td dataLabel={columnNames.offset}>{repo.offset}</Td>
-            <Td dataLabel={columnNames.timestamp}>{repo.timestamp}</Td>
+            <Td modifier="nowrap" dataLabel={columnNames.timestamp}>{repo.timestamp}</Td>
             <Td dataLabel={columnNames.key}>{repo.key}</Td>
-            <Td dataLabel={columnNames.value}>{repo.value}</Td>
+            <Td modifier="wrap" dataLabel={columnNames.value}>{repo.value}</Td>
             <Td dataLabel={columnNames.header}>{repo.header}</Td>
           </Tr>
         ))}
