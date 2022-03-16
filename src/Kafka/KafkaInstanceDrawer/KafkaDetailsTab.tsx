@@ -10,7 +10,7 @@ import {
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 import { format } from "date-fns";
 
-import { InstanceType } from "../../utils";
+import { InstanceType } from "../utils";
 
 type KafkaDetailsTabProps = {
   id: string;
@@ -125,15 +125,21 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
               )}
             </>
           )}
+          {renderTextListItem(t("common:id"), id)}
+          {renderTextListItem(t("common:owner"), owner)}
+          {renderTextListItem(
+            t("common:time_created"),
+            format(createdAt, "PPPP,p")
+          )}
+          {renderTextListItem(
+            t("common:time_updated"),
+            format(updatedAt, "PPPP,p")
+          )}
           {renderTextListItem(
             t("common:cloud_provider"),
             t("common:cloudProviders.aws")
           )}
           {renderTextListItem(t("common:region"), region)}
-          {renderTextListItem(t("common:id"), id)}
-          {renderTextListItem(t("common:owner"), owner)}
-          {renderTextListItem(t("common:created"), format(createdAt, "PPPP,p"))}
-          {renderTextListItem(t("common:updated"), format(updatedAt, "PPPP,p"))}
         </TextList>
       </TextContent>
     </div>
