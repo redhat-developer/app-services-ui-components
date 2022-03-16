@@ -7,8 +7,9 @@ import {
   SelectOption,
   SelectVariant,
 } from "@patternfly/react-core";
+import "./styling.css";
 
-export class Selector extends React.Component {
+export class PartitionSelector extends React.Component {
   constructor(props) {
     super(props);
     this.defaultOptions = [
@@ -22,6 +23,46 @@ export class Selector extends React.Component {
       { value: "8" },
       { value: "9" },
       { value: "10" },
+      { value: "11" },
+      { value: "12" },
+      { value: "13" },
+      { value: "14" },
+      { value: "15" },
+      { value: "16" },
+      { value: "17" },
+      { value: "18" },
+      { value: "19" },
+      { value: "20" },
+      { value: "21" },
+      { value: "22" },
+      { value: "23" },
+      { value: "24" },
+      { value: "25" },
+      { value: "26" },
+      { value: "27" },
+      { value: "28" },
+      { value: "29" },
+      { value: "30" },
+      { value: "31" },
+      { value: "32" },
+      { value: "33" },
+      { value: "34" },
+      { value: "35" },
+      { value: "36" },
+      { value: "37" },
+      { value: "38" },
+      { value: "39" },
+      { value: "40" },
+      { value: "41" },
+      { value: "42" },
+      { value: "43" },
+      { value: "44" },
+      { value: "45" },
+      { value: "46" },
+      { value: "47" },
+      { value: "48" },
+      { value: "49" },
+      { value: "50" },
     ];
 
     this.state = {
@@ -103,7 +144,7 @@ export class Selector extends React.Component {
     const titleId = "typeahead-select-id-1";
     return (
       <InputGroup>
-        <InputGroupText>Partition</InputGroupText>
+        <InputGroupText className="pf-c-content">Partition</InputGroupText>
         <div>
           <span id={titleId} hidden>
             Select a state
@@ -142,6 +183,7 @@ export class Selector extends React.Component {
         <InputGroupText
           id="plain-example"
           variant={InputGroupTextVariant.plain}
+          className="pf-c-content"
         >
           of 50
         </InputGroupText>

@@ -1,17 +1,17 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { Selector } from "./partitionSelector";
+import { PartitionSelector } from "./partitionSelector";
 
 export default {
-  title: "PoCs/Selector",
-  component: Selector,
+  title: "PoCs/Selectors",
+  component: PartitionSelector,
   args: {},
-} as ComponentMeta<typeof Selector>;
+} as ComponentMeta<typeof PartitionSelector>;
 
-const Template: ComponentStory<typeof Selector> = (args) => (
-  <Selector {...args} />
+const Template: ComponentStory<typeof PartitionSelector> = (args) => (
+  <PartitionSelector {...args} />
 );
 
-export const Story = Template.bind({});
-Story.args = {};
+export const Partition = Template.bind({});
+Partition.args = {};
