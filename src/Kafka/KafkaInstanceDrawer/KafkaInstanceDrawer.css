@@ -1,0 +1,4 @@
+.mas--details__drawer--tab-content {
+  padding-top: var(--pf-global--spacer--lg);
+  padding-bottom: var(--pf-global--spacer--lg);
+}
