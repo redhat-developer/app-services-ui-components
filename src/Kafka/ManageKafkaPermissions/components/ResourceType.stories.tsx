@@ -26,5 +26,19 @@ export const InteractiveExample: ComponentStory<typeof ResourceType> = () => {
     </div>
   );
 };
+InteractiveExample.parameters = {
+  docs: {
+    description: {
+      story: `A user can select a valid resource type, the initial select value is undefined with placeholder text as Select type `,
+    },
+  },
+};
 export const InitialState = Template.bind({});
 InitialState.args = {};
+InitialState.parameters = {
+  docs: {
+    description: {
+      story: `A user can select a valid resource type and see their action being loged in the actions tab `,
+    },
+  },
+};
