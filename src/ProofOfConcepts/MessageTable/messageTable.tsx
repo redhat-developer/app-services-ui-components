@@ -194,9 +194,13 @@ export const Table: VoidFunctionComponent = () => {
           >
             <Td dataLabel={columnNames.partition}>{repo.partition}</Td>
             <Td dataLabel={columnNames.offset}>{repo.offset}</Td>
-            <Td modifier="nowrap" dataLabel={columnNames.timestamp}>{repo.timestamp}</Td>
+            <Td modifier="nowrap" dataLabel={columnNames.timestamp}>
+              {repo.timestamp}
+            </Td>
             <Td dataLabel={columnNames.key}>{repo.key}</Td>
-            <Td modifier="wrap" dataLabel={columnNames.value}>{repo.value}</Td>
+            <Td modifier="wrap" dataLabel={columnNames.value}>
+              {repo.value}
+            </Td>
             <Td dataLabel={columnNames.header}>{repo.header}</Td>
           </Tr>
         ))}
