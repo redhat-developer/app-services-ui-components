@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_rhoas_app_services_ui_components=self.webpackChunk_rhoas_app_services_ui_components||[]).push([[98],{"./locales/en/service-account.json":module=>{module.exports=JSON.parse('{"create_service_account":"Create service account","service_accounts_small":"Service accounts"}')}}]);
