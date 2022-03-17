@@ -9,8 +9,14 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 
-export type ResourceTypeProps = {
-  value: string | undefined;
+type ResourceTypeValue =
+  | "Topic"
+  | "Consumer group"
+  | "Kafka instance"
+  | "Transactional ID";
+
+type ResourceTypeProps = {
+  value: ResourceTypeValue | undefined;
   onChangeValue: (value: string | undefined) => void;
   initialOpen?: boolean;
   invalid: boolean;
