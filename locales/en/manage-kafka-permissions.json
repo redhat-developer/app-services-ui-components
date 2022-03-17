@@ -50,6 +50,9 @@
     "resource_type":"Resource type",
     "resource_type_selected":"{{value}} Resource type"
   },
+  "resourcePrefix":{
+    "placeholder_text":"Enter prefix"
+  },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
   "table": {
