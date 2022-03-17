@@ -58,6 +58,9 @@
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
+  "resourcePrefix":{
+    "placeholder_text":"Enter prefix"
+  },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
   "table": {
