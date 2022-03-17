@@ -1,4 +1,4 @@
-import { Modal, ValidatedOptions, Form } from "@patternfly/react-core";
+import { Modal, Form } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ResourceType } from "./ResourceType";
@@ -6,8 +6,8 @@ import { ResourceType } from "./ResourceType";
 export default {
   component: ResourceType,
   args: {
-    resourceTypeValue: undefined,
-    resourceTypeValidated: ValidatedOptions.default,
+    value: undefined,
+    invalid: false,
   },
 } as ComponentMeta<typeof ResourceType>;
 
@@ -26,21 +26,31 @@ const Template: ComponentStory<typeof ResourceType> = (args, { id }) => {
   );
 };
 
-export const InitialState = Template.bind({});
-InitialState.args = { initialOpen: true };
-InitialState.parameters = {
+export const WorksWithModal = Template.bind({});
+WorksWithModal.args = { initialOpen: true };
+WorksWithModal.parameters = {
   docs: {
     description: {
-      story: `A user can select a valid resource type and see their action being logged in the actions tab `,
+      story: `Story to show behaviour of select when inside a modal `,
     },
   },
 };
 export const InvalidSelection = Template.bind({});
-InvalidSelection.args = { resourceTypeValidated: ValidatedOptions.error };
+InvalidSelection.args = { invalid: true };
 InvalidSelection.parameters = {
   docs: {
     description: {
       story: `Form error when user clicks on submit without selecting a valid value `,
+    },
+  },
+};
+
+export const ValidSelection = Template.bind({});
+ValidSelection.args = { value: "Topic" };
+ValidSelection.parameters = {
+  docs: {
+    description: {
+      story: `When a user selects a valid value from the dropdown `,
     },
   },
 };

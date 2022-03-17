@@ -10,17 +10,17 @@ import {
 } from "@patternfly/react-core";
 
 export type ResourceTypeProps = {
-  resourceTypeValue: string | undefined;
+  value: string | undefined;
   onChangeValue: (value: string | undefined) => void;
   initialOpen?: boolean;
-  resourceTypeValidated: ValidatedOptions.default | ValidatedOptions.error;
+  invalid: boolean;
 };
 
 export const ResourceType: React.VFC<ResourceTypeProps> = ({
-  resourceTypeValue,
+  value,
   onChangeValue,
   initialOpen = false,
-  resourceTypeValidated,
+  invalid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,7 +47,7 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
 
   return (
     <FormGroup
-      validated={resourceTypeValidated}
+      validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
       helperTextInvalid={t("common:required")}
       fieldId={"resource-type-select"}
     >
@@ -60,8 +60,8 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
         isOpen={isOpen}
         width={200}
         placeholderText={t("resourceTypes.placeholder_text")}
-        validated={resourceTypeValidated}
-        selections={resourceTypeValue}
+        validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
+        selections={value}
         menuAppendTo={"parent"}
       >
         {makeOptions()}

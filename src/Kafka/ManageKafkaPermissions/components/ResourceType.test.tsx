@@ -3,12 +3,13 @@ import * as stories from "./ResourceType.stories";
 import { userEvent } from "@storybook/testing-library";
 import { render, waitForI18n } from "../../../test-utils";
 
-const { InitialState, InvalidSelection } = composeStories(stories);
+const { WorksWithModal, InvalidSelection, ValidSelection } =
+  composeStories(stories);
 
 describe("Resource type", () => {
   it("should render a select component for resource type", async () => {
     const onChangeValue = jest.fn();
-    const comp = render(<InitialState onChangeValue={onChangeValue} />);
+    const comp = render(<WorksWithModal onChangeValue={onChangeValue} />);
 
     await waitForI18n(comp);
 
@@ -40,5 +41,20 @@ describe("Resource type", () => {
     expect(await comp.queryByText("Topic")).not.toBeInTheDocument();
     expect(await comp.queryByText("Kafka instance")).not.toBeInTheDocument();
     expect(await comp.queryByText("Consumer group")).not.toBeInTheDocument();
+  });
+
+  it("should show a select component for resource type with a valid value selected ", async () => {
+    const onChangeValue = jest.fn();
+    const comp = render(<ValidSelection onChangeValue={onChangeValue} />);
+    await waitForI18n(comp);
+    expect(await comp.findByText("Topic")).toBeInTheDocument();
+    expect(await comp.queryByText("Select type")).not.toBeInTheDocument();
+    userEvent.click(await comp.findByText("Topic"));
+    expect(await comp.findByText("Kafka instance")).toBeInTheDocument();
+    expect(await comp.findByText("Transactional ID")).toBeInTheDocument();
+    expect(await comp.findByText("Consumer group")).toBeInTheDocument();
+    const topicValue = await comp.getAllByText("Topic");
+    expect(topicValue[0]).toBeInTheDocument();
+    expect(topicValue[1]).toBeInTheDocument();
   });
 });
