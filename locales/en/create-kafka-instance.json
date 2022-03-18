@@ -76,7 +76,7 @@
   "size": "Size",
   "size_description": "",
   "size_field_aria": "More info for Size field",
-  "standard_kafka_size_help_content": "Size affects instance capacity and is specified using streaming units",
+  "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
   "standard_kafka_streaming_units": "Your organization has {{streamingUnits}} streaming units remaining",
   "statuses": {
     "creating": "Creating",

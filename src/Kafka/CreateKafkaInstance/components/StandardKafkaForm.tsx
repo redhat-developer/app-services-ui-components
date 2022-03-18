@@ -181,7 +181,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           labelHead={t("size")}
           fieldId="streaming-size"
           fieldLabel={t("size")}
-          labelBody={t("standard_kafka_size_help_content")}
+          labelBody={t("size_help_content")}
           buttonAriaLabel={t("size_field_aria")}
         >
           <div className="pf-c-input-group pf-u-w-50">

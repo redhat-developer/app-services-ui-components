@@ -164,7 +164,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           labelHead={t("size")}
           fieldId="streaming-size"
           fieldLabel={t("size")}
-          labelBody={t("trial_kafka_size_description")}
+          labelBody={t("size_help_content")}
           buttonAriaLabel={t("size_field_aria")}
         >
           <div className="pf-c-input-group pf-u-w-50">
