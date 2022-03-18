@@ -13,6 +13,8 @@ import {
   InstanceInfo,
   InstanceInfoLimitsProps,
   ModalAlerts,
+  TrialKafkaForm,
+  StandardKafkaForm,
 } from "./components";
 import "./CreateKafkaInstance.css";
 import {
@@ -20,8 +22,6 @@ import {
   useCreateKafkaInstanceMachine,
 } from "./machines";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
-import { TrialKafkaForm } from "./TrialKafkaForm";
-import { StandardKafkaForm } from "./StandardKafkaForm";
 
 export type CreateKafkaInstanceProps = {
   /**

@@ -2,6 +2,7 @@ import { VFC } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
+  Button,
   Form,
   FormGroup,
   TextInput,
@@ -11,19 +12,20 @@ import {
   Slider,
   Text,
   TextVariants,
+  ButtonVariant,
 } from "@patternfly/react-core";
-import { CloudProvidersTiles, CloudRegionSelect } from "./components";
-import { FormGroupWithPopover } from "../../shared/FormGroupWithPopover";
-import { FormProps } from "./machines/types";
+import { CloudRegionSelect } from "./CloudRegionsSelect";
+import { CloudProvidersTiles } from "./CloudProviderTiles";
+import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
+import { FormProps } from "../machines/types";
 
-export type StandardKafkaFormProps = FormProps & {
-  streamingUnits: number | undefined;
+export type TrialKafkaFormProps = FormProps & {
   /*isTesting flag is temporary for show some contet in storybook, not in productio. 
   It will be remove when actual data will available*/
   isTesting?: boolean;
 };
 
-export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
+export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   FORM_ID,
   isNameTaken,
   isNameInvalid,
@@ -42,7 +44,6 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   disableAZTooltip,
   isDisabledSize,
   size,
-  streamingUnits,
   setSize,
   setRegion,
   setAZ,
@@ -108,6 +109,16 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           isDisabled={disableControls}
           validated={regionValidation}
         />
+        {isTesting && (
+          <>
+            <Text component={TextVariants.p} className="pf-c-form__helper-text">
+              {t("cloud_region_description")}
+            </Text>
+            <Button variant={ButtonVariant.link} isInline>
+              {t("learn_about_cloud_regions")}
+            </Button>
+          </>
+        )}
       </FormGroup>
       <FormGroup
         label={t("availability_zones")}
@@ -125,7 +136,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             <ToggleGroupItem
               text={t("single")}
               value={"single"}
-              isDisabled={disableControls || azOptions?.single !== true}
+              isDisabled={disableControls || !(azOptions?.single === true)}
               buttonId="single"
               isSelected={az === "single"}
               onChange={() => setAZ("single")}
@@ -142,7 +153,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
               text={t("multi")}
               value="multi"
               buttonId="multi"
-              isDisabled={disableControls || azOptions?.multi !== true}
+              isDisabled={disableControls || !(azOptions?.multi === true)}
               isSelected={az === "multi"}
               onChange={() => setAZ("multi")}
             />
@@ -154,7 +165,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           labelHead={t("size")}
           fieldId="streaming-size"
           fieldLabel={t("size")}
-          labelBody={t("standard_kafka_size_help_content")}
+          labelBody={t("trial_kafka_size_description")}
           buttonAriaLabel={t("size_field_aria")}
         >
           <div className="pf-c-input-group pf-u-w-50">
@@ -176,8 +187,11 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             </span>
           </div>
           <Text component={TextVariants.p} className="pf-c-form__helper-text">
-            {t("standard_kafka_streaming_units", { streamingUnits })}
+            {t("trial_kafka_size_description")}
           </Text>
+          <Button variant={ButtonVariant.link} isInline>
+            {t("learn_about_sizes")}
+          </Button>
         </FormGroupWithPopover>
       )}
     </Form>
