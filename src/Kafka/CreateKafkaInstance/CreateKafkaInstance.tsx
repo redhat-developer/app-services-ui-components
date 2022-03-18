@@ -3,25 +3,12 @@ import {
   Button,
   Flex,
   FlexItem,
-  Form,
-  FormGroup,
   Modal,
   ModalVariant,
-  TextInput,
-  ToggleGroup,
-  ToggleGroupItem,
-  Tooltip,
-  Slider,
-  TextContent,
-  Text,
-  TextVariants,
-  ButtonVariant,
 } from "@patternfly/react-core";
 import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  CloudProvidersTiles,
-  CloudRegionSelect,
   FormAlerts,
   InstanceInfo,
   InstanceInfoLimitsProps,
@@ -33,7 +20,8 @@ import {
   useCreateKafkaInstanceMachine,
 } from "./machines";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
-import { FormGroupWithPopover } from "../../shared/FormGroupWithPopover";
+import { TrialKafkaForm } from "./TrialKafkaForm";
+import { StandardKafkaForm } from "./StandardKafkaForm";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -102,7 +90,6 @@ export const CreateKafkaInstance: FunctionComponent<
     isProviderError,
     isRegionError,
     isAzError,
-    isSizeInvalid,
 
     isTrial,
     isLoading,
@@ -140,6 +127,7 @@ export const CreateKafkaInstance: FunctionComponent<
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
+  const isDisabledSize = instanceAvailability === "trial" || disableControls;
 
   return (
     <Modal
@@ -178,147 +166,71 @@ export const CreateKafkaInstance: FunctionComponent<
         instanceAvailability={instanceAvailability}
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
+        isTesting={isTesting}
       />
       <Flex direction={{ default: "column", lg: "row" }}>
         <FlexItem flex={{ default: "flex_2" }}>
           <FormAlerts error={error} />
-          <Form onSubmit={onSubmit} id={FORM_ID}>
-            {/* <FormValidAlert /> */}
-            <FormGroup
-              label={t("instance_name")}
-              helperText={t("create_instance_name_helper_text")}
-              helperTextInvalid={
-                isNameTaken
-                  ? t("create_instance_name_helper_text_name_taken", { name })
-                  : isNameInvalid
-                  ? t("create_instance_name_helper_text")
-                  : t("common:required")
-              }
-              isRequired
-              validated={nameValidation}
-              fieldId="form-instance-name"
-            >
-              <TextInput
-                id="form-instance-name"
-                isRequired
-                validated={nameValidation}
-                type="text"
-                value={name || ""}
-                onChange={setName}
-                autoFocus={true}
-                isDisabled={disableControls}
+          {isTrial ? (
+            <>
+              <TrialKafkaForm
+                FORM_ID={FORM_ID}
+                isNameTaken={isNameTaken}
+                isNameInvalid={isNameInvalid}
+                nameValidation={nameValidation}
+                name={name}
+                disableControls={disableControls}
+                providerValidation={providerValidation}
+                availableProviders={availableProviders}
+                provider={provider}
+                regionValidation={regionValidation}
+                regions={regions}
+                region={region}
+                azValidation={azValidation}
+                azOptions={azOptions}
+                az={az}
+                disableAZTooltip={disableAZTooltip}
+                isDisabledSize={isDisabledSize}
+                size={size}
+                setSize={setSize}
+                setRegion={setRegion}
+                setAZ={setAZ}
+                setProvider={setProvider}
+                setName={setName}
+                onSubmit={onSubmit}
+                isTesting={isTesting}
               />
-            </FormGroup>
-            <FormGroup
-              label={t("cloud_provider")}
-              fieldId="form-cloud-provider-name"
-              validated={providerValidation}
-              helperTextInvalid={t("common:required")}
-              isRequired
-            >
-              <CloudProvidersTiles
-                providers={availableProviders}
-                value={provider}
-                onChange={setProvider}
-                isDisabled={disableControls}
-              />
-            </FormGroup>
-            <FormGroup
-              label={t("cloud_region")}
-              fieldId="form-cloud-region-option"
-              isRequired
-              validated={regionValidation}
-              helperTextInvalid={t("common:required")}
-            >
-              <CloudRegionSelect
-                value={region}
-                regions={regions || []}
-                onChange={setRegion}
-                isDisabled={disableControls}
-                validated={regionValidation}
-              />
-            </FormGroup>
-            <FormGroup
-              label={t("availability_zones")}
-              fieldId="availability-zones"
-              validated={azValidation}
-              helperTextInvalid={t("common:required")}
-            >
-              <ToggleGroup aria-label={t("availability_zone_selection")}>
-                <Tooltip
-                  content={t("availability_zones_tooltip_message", {
-                    enabledZone: azOptions?.multi ? "multi" : "single",
-                  })}
-                  trigger={disableAZTooltip ? "manual" : undefined}
-                >
-                  <ToggleGroupItem
-                    text={t("single")}
-                    value={"single"}
-                    isDisabled={
-                      disableControls || !(azOptions?.single === true)
-                    }
-                    buttonId="single"
-                    isSelected={az === "single"}
-                    onChange={() => setAZ("single")}
-                  />
-                </Tooltip>
-
-                <Tooltip
-                  trigger={disableAZTooltip ? "manual" : undefined}
-                  content={t("availability_zones_tooltip_message", {
-                    enabledZone: azOptions?.multi ? "multi" : "single",
-                  })}
-                >
-                  <ToggleGroupItem
-                    text={t("multi")}
-                    value="multi"
-                    buttonId="multi"
-                    isDisabled={disableControls || !(azOptions?.multi === true)}
-                    isSelected={az === "multi"}
-                    onChange={() => setAZ("multi")}
-                  />
-                </Tooltip>
-              </ToggleGroup>
-            </FormGroup>
-            <FormGroupWithPopover
-              labelHead={t("size")}
-              fieldId="streaming-size"
-              fieldLabel={t("size")}
-              labelBody={t("size_description")}
-              buttonAriaLabel={t("size_field_aria")}
-              isRequired={instanceAvailability !== "trial"}
-            >
-              <div className="pf-c-input-group pf-u-w-50">
-                <Slider
-                  min={1}
-                  max={2}
-                  value={size}
-                  showTicks={true}
-                  label={t("streaming_unit")}
-                  className="pf-u-w-100"
-                  isDisabled={
-                    instanceAvailability === "trial" || disableControls
-                  }
-                  onChange={setSize}
-                />
-                <span
-                  className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
-                  id="plain-example"
-                >
-                  {t("streaming_unit")}
-                </span>
-              </div>
-              <Text
-                component={TextVariants.p}
-                className="pf-c-form__helper-text"
-              >
-                {t("size_description")}
-              </Text>
-              <Button variant={ButtonVariant.link} isInline>
-                Learn more about sizes
-              </Button>
-            </FormGroupWithPopover>
-          </Form>
+            </>
+          ) : (
+            <StandardKafkaForm
+              FORM_ID={FORM_ID}
+              isNameTaken={isNameTaken}
+              isNameInvalid={isNameInvalid}
+              nameValidation={nameValidation}
+              name={name}
+              disableControls={disableControls}
+              providerValidation={providerValidation}
+              availableProviders={availableProviders}
+              provider={provider}
+              regionValidation={regionValidation}
+              regions={regions}
+              region={region}
+              azValidation={azValidation}
+              azOptions={azOptions}
+              az={az}
+              disableAZTooltip={disableAZTooltip}
+              isDisabledSize={isDisabledSize}
+              size={size}
+              setSize={setSize}
+              setRegion={setRegion}
+              setAZ={setAZ}
+              setProvider={setProvider}
+              setName={setName}
+              onSubmit={onSubmit}
+              streamingUnits={3}
+              isTesting={isTesting}
+            />
+          )}
         </FlexItem>
         <FlexItem
           flex={{ default: "flex_1" }}
@@ -335,13 +247,14 @@ export const CreateKafkaInstance: FunctionComponent<
             connectionRate={connectionRate}
             messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
+            streamingUnits={2}
           />
         </FlexItem>
       </Flex>
       <Flex>
         <FlexItem>
           <Alert
-            className="mas-m-modalTop"
+            className="mk--create-instance-modal__alert--message"
             customIcon={<OutlinedClockIcon />}
             variant="info"
             isInline

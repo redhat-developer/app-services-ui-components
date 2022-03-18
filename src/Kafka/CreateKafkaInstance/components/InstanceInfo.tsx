@@ -43,6 +43,7 @@ export type InstanceInfoLimitsProps = {
    * Message size in MiB
    */
   messageSize: number;
+  streamingUnits: number;
 };
 
 export const InstanceInfo: VoidFunctionComponent<
@@ -58,29 +59,38 @@ export const InstanceInfo: VoidFunctionComponent<
   connectionRate,
   messageSize,
   onClickQuickStart,
+  streamingUnits,
 }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("create-kafka-instance");
 
   return (
     <TextContent>
       <Card>
         <CardHeader>
-          <Text component={TextVariants.h3}>
-            {t("create-kafka-instance:instance_information")}
-          </Text>
+          <Text component={TextVariants.h3}>{t("instance_information")}</Text>
         </CardHeader>
         <CardBody>
           <TextList component={TextListVariants.dl}>
             {!isLoading && (
               <Grid sm={6} lg={12} hasGutter>
+                {!isTrial && (
+                  <GridItem>
+                    <TextListItem component={TextListItemVariants.dt}>
+                      {t("size")}
+                    </TextListItem>
+                    <TextListItem component={TextListItemVariants.dd}>
+                      {t("stream_unit_value", { size: streamingUnits })}
+                    </TextListItem>
+                  </GridItem>
+                )}
                 {isTrial && (
                   <GridItem>
                     <TextListItem component={TextListItemVariants.dt}>
                       {t("kafka:duration")}
                     </TextListItem>
                     <TextListItem component={TextListItemVariants.dd}>
-                      <ClockIcon />{" "}
-                      {t("create-kafka-instance:duration_value", {
+                      <ClockIcon color="var(--pf-global--info-color--100)" />{" "}
+                      {t("duration_value", {
                         value: trialDurationInHours,
                       })}
                     </TextListItem>
@@ -91,7 +101,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:ingress")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:ingress_value", {
+                    {t("ingress_value", {
                       value: ingresEgress,
                     })}
                   </TextListItem>
@@ -101,7 +111,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:egress")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:egress_value", {
+                    {t("egress_value", {
                       value: ingresEgress,
                     })}
                   </TextListItem>
@@ -111,7 +121,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:storage")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:storage_value", {
+                    {t("storage_value", {
                       value: storage,
                     })}
                   </TextListItem>
@@ -121,7 +131,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:partitions")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:partitions_value", {
+                    {t("partitions_value", {
                       value: maxPartitions,
                     })}
                   </TextListItem>
@@ -131,7 +141,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:client_connections")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:client_connections_value", {
+                    {t("client_connections_value", {
                       value: connections,
                     })}
                   </TextListItem>
@@ -141,7 +151,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:connection_rate")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:connection_rate_value", {
+                    {t("connection_rate_value", {
                       value: connectionRate,
                     })}
                   </TextListItem>
@@ -151,7 +161,7 @@ export const InstanceInfo: VoidFunctionComponent<
                     {t("kafka:message_size")}
                   </TextListItem>
                   <TextListItem component={TextListItemVariants.dd}>
-                    {t("create-kafka-instance:message_size_value", {
+                    {t("message_size_value", {
                       value: messageSize,
                     })}
                   </TextListItem>
@@ -192,7 +202,7 @@ export const InstanceInfo: VoidFunctionComponent<
       <Card isCompact className="pf-u-mt-md">
         <CardHeader>
           <Text component={TextVariants.h3}>
-            {t("create-kafka-instance:quick_start_guide_title")}
+            {t("quick_start_guide_title")}
           </Text>
         </CardHeader>
         <CardBody>
@@ -202,7 +212,7 @@ export const InstanceInfo: VoidFunctionComponent<
             variant={ButtonVariant.link}
             onClick={onClickQuickStart}
           >
-            {t("create-kafka-instance:quick_start_guide_message")}
+            {t("quick_start_guide_message")}
           </Button>
         </CardBody>
       </Card>

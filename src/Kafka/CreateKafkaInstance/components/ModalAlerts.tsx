@@ -14,6 +14,9 @@ export type ModalAlertsProps = {
   isSystemUnavailable: boolean;
   isLoading: boolean;
   onClickPricingAndPurchasing?: () => void;
+  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
+  It will be remove when actual data will available*/
+  isTesting?: boolean;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
@@ -21,6 +24,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   isSystemUnavailable,
   isLoading,
   onClickPricingAndPurchasing,
+  isTesting,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -55,13 +59,13 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
           {t("modal_alerts.system_unavailable_message")}
         </Alert>
       );
-    case instanceAvailability === "trial":
+    case isTesting && instanceAvailability === "trial":
       return (
         <Alert
           id="mk-create-instance-quota-alert"
           className="pf-u-mb-md"
           variant={AlertVariant.info}
-          title={t("modal_alerts.trial_available_title")}
+          title={t("modal_alerts.trial_available_title_storybook")}
           aria-live="polite"
           isInline
         >
@@ -78,6 +82,18 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
             ]}
           />
         </Alert>
+      );
+    //Todo: remove below case when large kafka api integration done
+    case instanceAvailability === "trial":
+      return (
+        <Alert
+          id="mk-create-instance-quota-alert"
+          className="pf-u-mb-md"
+          variant={AlertVariant.info}
+          title={t("modal_alerts.trial_available_title")}
+          aria-live="polite"
+          isInline
+        />
       );
     case instanceAvailability === "over-quota":
       return (
