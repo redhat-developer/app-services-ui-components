@@ -17,7 +17,7 @@ type ResourceTypeValue =
 
 type ResourceTypeProps = {
   value: ResourceTypeValue | undefined;
-  onChangeValue: (value: string | undefined) => void;
+  onChangeValue: (value: ResourceTypeValue | undefined) => void;
   initialOpen?: boolean;
   invalid: boolean;
 };
@@ -32,22 +32,25 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // for Storybook, allows opening the select programmatically respecting the initialization needed by the modal and Popper.js
   useLayoutEffect(() => setIsOpen(initialOpen), [initialOpen]);
-  const resourceTypeOptions = [
-    t("resourceTypes.consumer_group"),
-    t("resourceTypes.topic"),
-    t("resourceTypes.kafka_instance"),
-    t("resourceTypes.transactional_id"),
-  ];
+
+  const resourceTypeOptions: { [key in ResourceTypeValue]: string } = {
+    "Consumer group": t("resourceTypes.consumer_group"),
+    Topic: t("resourceTypes.topic"),
+    "Kafka instance": t("resourceTypes.kafka_instance"),
+    "Transactional ID": t("resourceTypes.transactional_id"),
+  };
   const onToggle = (value: boolean) => {
     setIsOpen(value);
   };
   const onSelect: SelectProps["onSelect"] = (_, selection) => {
-    onChangeValue(selection as string);
+    onChangeValue(selection as ResourceTypeValue);
     setIsOpen(false);
   };
   const makeOptions = () => {
-    return resourceTypeOptions.map((value, index) => (
-      <SelectOption key={index} value={value}></SelectOption>
+    return Object.entries(resourceTypeOptions).map(([value, label]) => (
+      <SelectOption key={value} value={value}>
+        {label}
+      </SelectOption>
     ));
   };
 
