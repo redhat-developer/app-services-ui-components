@@ -10,10 +10,10 @@ import {
 } from "@patternfly/react-core";
 
 type ResourceTypeValue =
-  | "Topic"
-  | "Consumer group"
-  | "Kafka instance"
-  | "Transactional ID";
+  | "topic"
+  | "consumer-group"
+  | "kafka-instance"
+  | "transactional-id";
 
 type ResourceTypeProps = {
   value: ResourceTypeValue | undefined;
@@ -34,10 +34,10 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
   useLayoutEffect(() => setIsOpen(initialOpen), [initialOpen]);
 
   const resourceTypeOptions: { [key in ResourceTypeValue]: string } = {
-    "Consumer group": t("resourceTypes.consumer_group"),
-    Topic: t("resourceTypes.topic"),
-    "Kafka instance": t("resourceTypes.kafka_instance"),
-    "Transactional ID": t("resourceTypes.transactional_id"),
+    "consumer-group": t("resourceTypes.consumer_group"),
+    topic: t("resourceTypes.topic"),
+    "kafka-instance": t("resourceTypes.kafka_instance"),
+    "transactional-id": t("resourceTypes.transactional_id"),
   };
   const onToggle = (value: boolean) => {
     setIsOpen(value);
