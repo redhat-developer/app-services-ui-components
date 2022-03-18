@@ -30,5 +30,6 @@
   "trial": "Trial",
   "standard": "Standard",
   "time_created": "Time created",
-  "time_updated": "Time updated"
+  "time_updated": "Time updated",
+  "size": "Size"
 }

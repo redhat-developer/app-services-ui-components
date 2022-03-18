@@ -76,7 +76,7 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
               )}
               {instanceType === "standard" &&
                 renderTextListItem(
-                  t("size"),
+                  t("common:size"),
                   t("create-kafka-instance:streaming_size_value", {
                     value: size,
                   })
@@ -129,11 +129,11 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
           {renderTextListItem(t("common:owner"), owner)}
           {renderTextListItem(
             t("common:time_created"),
-            format(createdAt, "PPPP,p")
+            format(createdAt, "PPPP p")
           )}
           {renderTextListItem(
             t("common:time_updated"),
-            format(updatedAt, "PPPP,p")
+            format(updatedAt, "PPPP p")
           )}
           {renderTextListItem(
             t("common:cloud_provider"),
