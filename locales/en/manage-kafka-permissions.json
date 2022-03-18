@@ -46,7 +46,9 @@
     "kafka_instance": "$t(common:kafka) instance",
     "placeholder_text": "Select type",
     "topic": "Topic",
-    "transactional_id": "Transactional ID"
+    "transactional_id": "Transactional ID",
+    "resource_type":"Resource type",
+    "resource_type_selected":"{{value}} Resource type"
   },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",

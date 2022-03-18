@@ -67,7 +67,6 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
             ? t("resourceTypes.resource_type_selected", { value })
             : t("resourceTypes.resource_type")
         }
-        //aria-label={value != undefined?"myLabel":"suyashLabel"}
         data-testid="acls-resource-type-select"
         variant={SelectVariant.single}
         onToggle={onToggle}
