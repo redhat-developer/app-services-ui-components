@@ -1,5 +1,3 @@
-import { FormEvent } from "react";
-
 export type InstanceAvailability =
   | "quota"
   | "trial"
