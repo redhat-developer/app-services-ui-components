@@ -13,16 +13,18 @@ export default {
 
 const Template: ComponentStory<typeof ResourceType> = (args, { id }) => {
   return (
-    <Modal
-      title="Simple modal header"
-      isOpen={true}
-      appendTo={() => document.getElementById(id) || document.body}
-      disableFocusTrap={true}
-    >
-      <Form>
-        <ResourceType {...args} />
-      </Form>
-    </Modal>
+    <div id={id} style={{ transform: "scale(1)", minHeight: 450 }}>
+      <Modal
+        title="Simple modal header"
+        isOpen={true}
+        appendTo={() => document.getElementById(id) || document.body}
+        disableFocusTrap={true}
+      >
+        <Form>
+          <ResourceType {...args} />
+        </Form>
+      </Modal>
+    </div>
   );
 };
 
