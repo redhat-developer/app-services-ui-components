@@ -17,13 +17,12 @@ import {
 import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
-import { FormProps } from "../machines/types";
+import { StandardKafkaFormProps } from "./StandardKafkaForm";
 
-export type TrialKafkaFormProps = FormProps & {
-  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
-  It will be remove when actual data will available*/
-  isTesting?: boolean;
-};
+export type TrialKafkaFormProps = Omit<
+  StandardKafkaFormProps,
+  "streamingUnits"
+>;
 
 export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   FORM_ID,
@@ -136,7 +135,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
             <ToggleGroupItem
               text={t("single")}
               value={"single"}
-              isDisabled={disableControls || !(azOptions?.single === true)}
+              isDisabled={disableControls || azOptions?.single !== true}
               buttonId="single"
               isSelected={az === "single"}
               onChange={() => setAZ("single")}
@@ -153,7 +152,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
               text={t("multi")}
               value="multi"
               buttonId="multi"
-              isDisabled={disableControls || !(azOptions?.multi === true)}
+              isDisabled={disableControls || azOptions?.multi !== true}
               isSelected={az === "multi"}
               onChange={() => setAZ("multi")}
             />

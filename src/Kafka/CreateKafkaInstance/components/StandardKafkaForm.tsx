@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import { VFC, FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -15,9 +15,35 @@ import {
 import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
-import { FormProps } from "../machines/types";
+import { AZ, Provider, Providers, Region, RegionInfo } from "../machines/types";
 
-export type StandardKafkaFormProps = FormProps & {
+type validate = "error" | "default";
+
+export type StandardKafkaFormProps = {
+  FORM_ID: string;
+  isNameTaken: boolean;
+  isNameInvalid: boolean;
+  nameValidation: validate;
+  name: string | undefined;
+  disableControls: boolean;
+  providerValidation: validate;
+  availableProviders: Providers;
+  provider: Provider | undefined;
+  regionValidation: validate;
+  regions: RegionInfo[] | undefined;
+  region: Region | undefined;
+  azValidation: validate;
+  azOptions: { [az in AZ]: boolean } | undefined;
+  az: AZ | undefined;
+  disableAZTooltip: boolean;
+  isDisabledSize: boolean;
+  size: number | undefined;
+  setSize: (size: number) => void;
+  setRegion: (region: Region) => void;
+  setName: (name: string) => void;
+  setProvider: (provider: Provider) => void;
+  setAZ: (az: AZ) => void;
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   streamingUnits: number | undefined;
   /*isTesting flag is temporary for show some contet in storybook, not in productio. 
   It will be remove when actual data will available*/
