@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
-import { App } from './chipGroupOptions';
+import { App } from "./chipGroupOptions";
 
 export default {
-  title: 'POC/chipGroupOptions',
+  title: "POC/chipGroupOptions",
   component: App,
   args: {},
-}
+};
 
 const Template = (args) => <App {...args} />;
 
