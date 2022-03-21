@@ -1,0 +1,122 @@
+.pf-c-label.mas-m-solid.smaller-label {
+  --pf-c-label__content--before--BorderColor: transparent;
+  --pf-c-label__content--Color: var(--pf-global--palette--white);
+  --pf-c-label--PaddingLeft: 0;
+  --pf-c-label--PaddingRight: 0;
+  font-weight: var(--pf-global--FontWeight--bold);
+  font-size: calc(var(--pf-global--FontSize--xs) * 0.9);
+  min-width: calc(
+    (
+        (var(--pf-c-label--FontSize) * var(--pf-global--LineHeight--md)) +
+          (var(--pf-c-label--PaddingTop) + var(--pf-c-label--PaddingBottom))
+      ) * 0.85
+  );
+  min-height: calc(
+    (
+        (var(--pf-c-label--FontSize) * var(--pf-global--LineHeight--md)) +
+          (var(--pf-c-label--PaddingTop) + var(--pf-c-label--PaddingBottom))
+      ) * 0.85
+  );
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pf-c-label.pf-m-blue {
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-400);
+}
+
+.pf-c-label.pf-m-grey {
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--black-600);
+}
+
+.pf-c-label.pf-m-green {
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--green-500);
+}
+
+.pf-c-label.pf-m-orange {
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--orange-400);
+}
+
+.box {
+  inline-size: 750px;
+  padding-left: 1rem;
+}
+
+.child {
+  display: inline-block;
+}
+
+.myTextColor span {
+  color: rgb(234, 0, 255); /* other font properties */
+}
+
+.pf-c-chip-group.bkg-color {
+  background-color: var(--pf-c-label--BackgroundColor);
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-100);
+}
+
+.pf-c-chip-group__close {
+  display: flex;
+  align-self: center;
+  /* --pf-c-chip-group__close--MarginTop: 0; */
+  /* margin-top: var(--pf-c-chip-group__close--MarginTop); this would normally push it up into the padding of the chip group */
+  /* margin-bottom: var(--pf-c-chip-group__close--MarginBottom); This one isn't actually affecting it since it's taller */
+}
+
+.pf-c-chip.custom-c-chip {
+  /* --pf-c-chip--before--BorderColor: blue; */
+  /* --pf-c-chip__c-button--PaddingTop: 0;
+  --pf-c-chip__c-button--PaddingRight: 0;
+  --pf-c-chip__c-button--PaddingBottom: 0;
+  --pf-c-chip__c-button--PaddingLeft: 0; */
+  --pf-c-chip--PaddingTop: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip--PaddingRight: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip--PaddingBottom: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip--PaddingLeft: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip__text--MaxWidth: auto;
+}
+
+.pf-c-chip.blue-border {
+  --pf-c-chip--before--BorderColor: var(--pf-global--palette--blue-400);
+}
+
+.pf-c-chip.green-border {
+  --pf-c-chip--before--BorderColor: var(--pf-global--palette--green-500);
+}
+
+.pf-c-chip.grey-border {
+  --pf-c-chip--before--BorderColor: var(--pf-global--palette--black-600);
+}
+
+.pf-c-chip.black-border {
+  --pf-c-chip--before--BorderColor: black;
+}
+
+.pf-c-chip-group.lightblue {
+  --pf-c-chip-group--m-category--BackgroundColor: #bee1f4;
+}
+
+.pf-c-chip-group.lightgreen {
+  --pf-c-chip-group--m-category--BackgroundColor: #bde5b8;
+}
+
+.pf-c-chip-group.lightgrey {
+  --pf-c-chip-group--m-category--BackgroundColor: #d2d2d2;
+}
+
+.pf-c-chip-group.bar {
+  --pf-c-chip-group--m-category--BackgroundColor: darkgray;
+}
+
+/* .pf-c-chip.custom-c-chip-height {
+  --pf-c-chip__c-button--PaddingTop: 10rem;
+  --pf-c-chip__c-button--PaddingRight: 0;
+  --pf-c-chip__c-button--PaddingBottom: 0;
+  --pf-c-chip__c-button--PaddingLeft: 0;
+  --pf-c-chip--PaddingTop: calc(var(--pf-global--BorderWidth--sm) * 10);
+  --pf-c-chip--PaddingRight: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip--PaddingBottom: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip--PaddingLeft: var(--pf-global--BorderWidth--sm);
+  --pf-c-chip__text--MaxWidth: auto;
+} */
