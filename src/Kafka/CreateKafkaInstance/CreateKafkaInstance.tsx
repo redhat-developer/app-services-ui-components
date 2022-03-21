@@ -148,7 +148,7 @@ export const CreateKafkaInstance: FunctionComponent<
           spinnerAriaValueText={t("common:submitting_request")}
           isLoading={isSaving}
           data-testid="modalCreateKafka-buttonSubmit"
-          data-ouia-component-id="button-create"
+          ouiaId="button-create"
         >
           {t("create_instance")}
         </Button>,
