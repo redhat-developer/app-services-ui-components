@@ -32,16 +32,16 @@ export const DataSciencePage: FunctionComponent = () => {
         cta={
           <Flex>
             <Button
-            data-testid="hero-buttonTryIt"
-            ouiaId="button-rhoads-tryit"
-            variant={ButtonVariant.secondary}
-            component="a"
-            href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started"
-            target="_blank"
-          >
-            {t("datascienceoverview:heroTryItButton")}{" "}
-          </Button>
-          <Button
+              data-testid="hero-buttonTryIt"
+              ouiaId="button-rhoads-tryit"
+              variant={ButtonVariant.secondary}
+              component="a"
+              href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started"
+              target="_blank"
+            >
+              {t("datascienceoverview:heroTryItButton")}{" "}
+            </Button>
+            <Button
               data-testid="hero-buttonLearnMore"
               variant={ButtonVariant.link}
               component="a"
@@ -51,8 +51,8 @@ export const DataSciencePage: FunctionComponent = () => {
               {t("datascienceoverview:heroCallToActionButton")}{" "}
               <ExternalLinkAltIcon className="pf-u-ml-sm" />
             </Button>
-        </Flex>
-      }
+          </Flex>
+        }
         heroImage={RhodsMlTechnology}
         heroImageSize={478}
         heroImageCanRepeat={false}
