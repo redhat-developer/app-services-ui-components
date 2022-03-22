@@ -16,7 +16,7 @@
     "form_invalid": "Address form errors to proceed.",
     "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
     "over_quota_title": "$t(common:kafka) instance can't be created",
-    "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
+    "trial_unavailable_message": "All available $t(common:kafka) evaluation slots are currently in use. Please try again later",
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
