@@ -8,7 +8,6 @@ export function useChartWidth(): [RefObject<HTMLDivElement>, number] {
     containerRef.current && setWidth(containerRef.current.clientWidth);
 
   useLayoutEffect(() => {
-    console.log("???", containerRef.current);
     handleResize();
   }, []);
 
