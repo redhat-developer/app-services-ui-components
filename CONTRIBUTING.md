@@ -370,3 +370,12 @@ consumed without additional setup needed by the user of the package.
 
 Add the same export into the [__mocks__/imagesMock.js](https://github.com/redhat-developer/app-services-ui-components/blob/main/__mocks__/imagesMock.js) 
 file to make the image available to the Jest test suite.
+
+### Running storybook
+
+Storybook allows developers to test components in separation.
+After changing any code related to component developers should verify their changes by running:
+
+```
+npm run storybook
+```
