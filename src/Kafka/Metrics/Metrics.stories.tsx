@@ -1,9 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { findByTestId, fireEvent, within } from "@storybook/testing-library";
-import { expect } from "@storybook/jest";
 import { Metrics } from "./Metrics";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-import { DurationOptions, GetMetricsKpiResponse } from "./types";
+import { GetMetricsKpiResponse } from "./types";
 import {
   apiError,
   fakeApi,
@@ -322,129 +320,130 @@ Sample data that show the charts with data over the limits.
   },
 };
 
-export const KafkaInstanceToolbarStaysEnabled = Template.bind({});
-KafkaInstanceToolbarStaysEnabled.parameters = {};
-KafkaInstanceToolbarStaysEnabled.args = {
-  getMetricsKpi,
-  getKafkaInstanceMetrics: ({ duration }) =>
-    // simulate no data past the 12h mark
-    duration > DurationOptions.Last12hours
-      ? fakeApi({
-          usedDiskSpaceMetrics: {},
-          clientConnectionsMetrics: {},
-          connectionAttemptRateMetrics: {},
-        })
-      : fakeApi({
-          usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
-          clientConnectionsMetrics: makeMetrics(duration, 60, 170, 1),
-          connectionAttemptRateMetrics: makeMetrics(duration, 4, 130, 1),
-        }),
-  getTopicsMetrics: ({ duration, selectedTopic }) =>
-    // simulate no data past the 12h mark
-    duration > DurationOptions.Last12hours
-      ? fakeApi({
-          kafkaTopics: ["lorem", "dolor", "ipsum"],
-          metricsTopics: [],
-          bytesIncoming: {},
-          bytesOutgoing: {},
-          incomingMessageRate: {},
-          bytesPerPartition: {},
-        })
-      : getTopicsMetrics({ duration, selectedTopic }),
-};
-KafkaInstanceToolbarStaysEnabled.storyName =
-  "Toolbars stay enabled after the user has interacted with them";
-KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
-  async function testKafkaInstance() {
-    const card = within(
-      await findByTestId(canvasElement, "metrics-kafka-instance")
-    );
-    const setDuration = async (duration: string) => {
-      const timeSelector = await card.findByLabelText(
-        "Filter Kafka instance metrics by time range"
-      );
-      fireEvent.click(timeSelector);
-      fireEvent.click(await card.findByText(duration));
-    };
-
-    const expectTextCount = async (label: string, count = 3) => {
-      const timeAxisValues = await card.findAllByText(label);
-      await expect(timeAxisValues).toHaveLength(count);
-    };
-
-    // default is last 1 hour
-    await expectTextCount("09:55");
-
-    // select last 5 minutes
-    await setDuration("Last 5 minutes");
-    await expectTextCount("10:41");
-
-    // select last 24 hours
-    await setDuration("Last 24 hours");
-    await expectTextCount("Data unavailable");
-
-    // select last 12 hours
-    await setDuration("Last 12 hours");
-    await expectTextCount("00:45");
-  }
-  async function testTopicMetrics() {
-    const card = within(await findByTestId(canvasElement, "metrics-topics"));
-
-    const setTopic = async (topic: string) => {
-      const topicSelector = await card.findByLabelText(
-        "Filter topic metrics by topic name"
-      );
-      fireEvent.click(topicSelector);
-      fireEvent.click(await card.findByText(topic));
-    };
-
-    const setDuration = async (duration: string) => {
-      const timeSelector = await card.findByLabelText(
-        "Filter topic metrics by time range"
-      );
-      fireEvent.click(timeSelector);
-      fireEvent.click(await card.findByText(duration));
-    };
-
-    const expectTextCount = async (label: string, count = 2) => {
-      const timeAxisValues = await card.findAllByText(label, { exact: false });
-      await expect(timeAxisValues).toHaveLength(count);
-    };
-
-    await expectTextCount("Filter by Topic", 1);
-
-    // default is last 1 hour
-    await expectTextCount("09:55");
-
-    // select last 5 minutes
-    await setDuration("Last 5 minutes");
-    await expectTextCount("10:41");
-
-    // select last 24 hours
-    await setDuration("Last 24 hours");
-    await expectTextCount("Data unavailable");
-
-    // select last 12 hours
-    await setDuration("Last 12 hours");
-    await expectTextCount("00:45");
-
-    // select topic
-    await setTopic("dolor");
-    await expectTextCount("dolor: partition", 3);
-  }
-  await testKafkaInstance();
-  await testTopicMetrics();
-};
-KafkaInstanceToolbarStaysEnabled.parameters = {
-  docs: {
-    description: {
-      story: `
-If the user asks for data too in the past for a recently created instance, the
-API will return no data. The charts will show the _No metrics data_ empty state
-and the toolbar will stay enabled.
-
-In this demo, all data past the last 12 hours will be empty.
-      `,
-    },
-  },
-};
+// TODO: story disabled since testing this in Storybook is too flaky. We should write a unit test for this instead
+// export const KafkaInstanceToolbarStaysEnabled = Template.bind({});
+// KafkaInstanceToolbarStaysEnabled.parameters = {};
+// KafkaInstanceToolbarStaysEnabled.args = {
+//   getMetricsKpi,
+//   getKafkaInstanceMetrics: ({ duration }) =>
+//     // simulate no data past the 12h mark
+//     duration > DurationOptions.Last12hours
+//       ? fakeApi({
+//           usedDiskSpaceMetrics: {},
+//           clientConnectionsMetrics: {},
+//           connectionAttemptRateMetrics: {},
+//         })
+//       : fakeApi({
+//           usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
+//           clientConnectionsMetrics: makeMetrics(duration, 60, 170, 1),
+//           connectionAttemptRateMetrics: makeMetrics(duration, 4, 130, 1),
+//         }),
+//   getTopicsMetrics: ({ duration, selectedTopic }) =>
+//     // simulate no data past the 12h mark
+//     duration > DurationOptions.Last12hours
+//       ? fakeApi({
+//           kafkaTopics: ["lorem", "dolor", "ipsum"],
+//           metricsTopics: [],
+//           bytesIncoming: {},
+//           bytesOutgoing: {},
+//           incomingMessageRate: {},
+//           bytesPerPartition: {},
+//         })
+//       : getTopicsMetrics({ duration, selectedTopic }),
+// };
+// KafkaInstanceToolbarStaysEnabled.storyName =
+//   "Toolbars stay enabled after the user has interacted with them";
+// KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
+//   async function testKafkaInstance() {
+//     const card = within(
+//       await findByTestId(canvasElement, "metrics-kafka-instance")
+//     );
+//     const setDuration = async (duration: string) => {
+//       const timeSelector = await card.findByLabelText(
+//         "Filter Kafka instance metrics by time range"
+//       );
+//       fireEvent.click(timeSelector);
+//       fireEvent.click(await card.findByText(duration));
+//     };
+//
+//     const expectTextCount = async (label: string, count = 3) => {
+//       const timeAxisValues = await card.findAllByText(label);
+//       await expect(timeAxisValues).toHaveLength(count);
+//     };
+//
+//     // default is last 1 hour
+//     await expectTextCount("09:55");
+//
+//     // select last 5 minutes
+//     await setDuration("Last 5 minutes");
+//     await expectTextCount("10:41");
+//
+//     // select last 24 hours
+//     await setDuration("Last 24 hours");
+//     await expectTextCount("Data unavailable");
+//
+//     // select last 12 hours
+//     await setDuration("Last 12 hours");
+//     await expectTextCount("00:45");
+//   }
+//   async function testTopicMetrics() {
+//     const card = within(await findByTestId(canvasElement, "metrics-topics"));
+//
+//     const setTopic = async (topic: string) => {
+//       const topicSelector = await card.findByLabelText(
+//         "Filter topic metrics by topic name"
+//       );
+//       fireEvent.click(topicSelector);
+//       fireEvent.click(await card.findByText(topic));
+//     };
+//
+//     const setDuration = async (duration: string) => {
+//       const timeSelector = await card.findByLabelText(
+//         "Filter topic metrics by time range"
+//       );
+//       fireEvent.click(timeSelector);
+//       fireEvent.click(await card.findByText(duration));
+//     };
+//
+//     const expectTextCount = async (label: string, count = 2) => {
+//       const timeAxisValues = await card.findAllByText(label, { exact: false });
+//       await expect(timeAxisValues).toHaveLength(count);
+//     };
+//
+//     await expectTextCount("Filter by Topic", 1);
+//
+//     // default is last 1 hour
+//     await expectTextCount("09:55");
+//
+//     // select last 5 minutes
+//     await setDuration("Last 5 minutes");
+//     await expectTextCount("10:41");
+//
+//     // select last 24 hours
+//     await setDuration("Last 24 hours");
+//     await expectTextCount("Data unavailable");
+//
+//     // select last 12 hours
+//     await setDuration("Last 12 hours");
+//     await expectTextCount("00:45");
+//
+//     // select topic
+//     await setTopic("dolor");
+//     await expectTextCount("dolor: partition", 3);
+//   }
+//   await testKafkaInstance();
+//   await testTopicMetrics();
+// };
+// KafkaInstanceToolbarStaysEnabled.parameters = {
+//   docs: {
+//     description: {
+//       story: `
+// If the user asks for data too in the past for a recently created instance, the
+// API will return no data. The charts will show the _No metrics data_ empty state
+// and the toolbar will stay enabled.
+//
+// In this demo, all data past the last 12 hours will be empty.
+//       `,
+//     },
+//   },
+// };
