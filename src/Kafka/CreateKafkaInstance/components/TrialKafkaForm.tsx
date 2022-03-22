@@ -18,11 +18,14 @@ import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../shared/FormGroupWithPopover";
 import { StandardKafkaFormProps } from "./StandardKafkaForm";
+import { InstanceAvailability } from "../machines/types";
 
 export type TrialKafkaFormProps = Omit<
   StandardKafkaFormProps,
   "streamingUnits"
->;
+> & {
+  instanceAvailability: InstanceAvailability | undefined;
+};
 
 export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   FORM_ID,
@@ -50,6 +53,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   setName,
   onSubmit,
   isTesting,
+  instanceAvailability,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -108,12 +112,16 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           isDisabled={disableControls}
           validated={regionValidation}
         />
-        {isTesting && (
+        {isTesting && instanceAvailability && (
           <>
             <Text component={TextVariants.p} className="pf-c-form__helper-text">
               {t("cloud_region_description")}
             </Text>
-            <Button variant={ButtonVariant.link} isInline>
+            <Button
+              variant={ButtonVariant.link}
+              className="pf-c-form__helper-text"
+              isInline
+            >
               {t("learn_about_cloud_regions")}
             </Button>
           </>
@@ -185,12 +193,23 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
               {t("streaming_unit")}
             </span>
           </div>
-          <Text component={TextVariants.p} className="pf-c-form__helper-text">
-            {t("trial_kafka_size_description")}
-          </Text>
-          <Button variant={ButtonVariant.link} isInline>
-            {t("learn_about_sizes")}
-          </Button>
+          {instanceAvailability && (
+            <>
+              <Text
+                component={TextVariants.p}
+                className="pf-c-form__helper-text"
+              >
+                {t("trial_kafka_size_description")}
+              </Text>
+              <Button
+                className="pf-c-form__helper-text"
+                variant={ButtonVariant.link}
+                isInline
+              >
+                {t("learn_about_sizes")}
+              </Button>
+            </>
+          )}
         </FormGroupWithPopover>
       )}
     </Form>

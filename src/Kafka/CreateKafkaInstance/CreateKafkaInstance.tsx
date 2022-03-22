@@ -199,6 +199,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 setName={setName}
                 onSubmit={onSubmit}
                 isTesting={isTesting}
+                instanceAvailability={instanceAvailability}
               />
             </>
           ) : (

@@ -6,16 +6,15 @@ import {
   Grid,
   GridItem,
   Skeleton,
-  Text,
-  TextContent,
-  TextList,
-  TextListItem,
-  TextListItemVariants,
-  TextListVariants,
-  TextVariants,
   Card,
-  CardHeader,
   CardBody,
+  CardTitle,
+  Stack,
+  StackItem,
+  DescriptionList,
+  DescriptionListTerm,
+  DescriptionListGroup,
+  DescriptionListDescription,
 } from "@patternfly/react-core";
 
 import ClockIcon from "@patternfly/react-icons/dist/js/icons/outlined-clock-icon";
@@ -64,158 +63,159 @@ export const InstanceInfo: VoidFunctionComponent<
   const { t } = useTranslation("create-kafka-instance");
 
   return (
-    <TextContent>
-      <Card>
-        <CardHeader>
-          <Text component={TextVariants.h3}>{t("instance_information")}</Text>
-        </CardHeader>
-        <CardBody>
-          <TextList component={TextListVariants.dl}>
-            {!isLoading && (
-              <Grid sm={6} lg={12} hasGutter>
-                {!isTrial && (
-                  <GridItem>
-                    <TextListItem component={TextListItemVariants.dt}>
-                      {t("size")}
-                    </TextListItem>
-                    <TextListItem component={TextListItemVariants.dd}>
-                      {t("stream_unit_value", { size: streamingUnits })}
-                    </TextListItem>
-                  </GridItem>
+    <Stack hasGutter>
+      <StackItem>
+        <Card isFlat>
+          <CardTitle component="h2">{t("instance_information")}</CardTitle>
+          <CardBody>
+            <DescriptionList isCompact>
+              <DescriptionListGroup>
+                {!isLoading && (
+                  <Grid sm={6} lg={12} hasGutter>
+                    {!isTrial && (
+                      <GridItem>
+                        <DescriptionListTerm>{t("size")}</DescriptionListTerm>
+                        <DescriptionListDescription>
+                          {t("stream_unit_value", { size: streamingUnits })}
+                        </DescriptionListDescription>
+                      </GridItem>
+                    )}
+                    {isTrial && (
+                      <GridItem>
+                        <DescriptionListTerm>
+                          {t("kafka:duration")}
+                        </DescriptionListTerm>
+                        <DescriptionListDescription>
+                          <ClockIcon color="var(--pf-global--info-color--100)" />{" "}
+                          {t("duration_value", {
+                            value: trialDurationInHours,
+                          })}
+                        </DescriptionListDescription>
+                      </GridItem>
+                    )}
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:ingress")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("ingress_value", {
+                          value: ingresEgress,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:egress")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("egress_value", {
+                          value: ingresEgress,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:storage")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("storage_value", {
+                          value: storage,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:partitions")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("partitions_value", {
+                          value: maxPartitions,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:client_connections")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("client_connections_value", {
+                          value: connections,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:connection_rate")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("connection_rate_value", {
+                          value: connectionRate,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:message_size")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {t("message_size_value", {
+                          value: messageSize,
+                        })}
+                      </DescriptionListDescription>
+                    </GridItem>
+                  </Grid>
                 )}
-                {isTrial && (
-                  <GridItem>
-                    <TextListItem component={TextListItemVariants.dt}>
-                      {t("kafka:duration")}
-                    </TextListItem>
-                    <TextListItem component={TextListItemVariants.dd}>
-                      <ClockIcon color="var(--pf-global--info-color--100)" />{" "}
-                      {t("duration_value", {
-                        value: trialDurationInHours,
-                      })}
-                    </TextListItem>
-                  </GridItem>
+                {isLoading && (
+                  <Grid sm={6} lg={12} hasGutter>
+                    <GridItem>
+                      <Skeleton
+                        width="75%"
+                        screenreaderText="Loading contents"
+                      />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="66%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="66%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="50%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="33%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="25%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="55%" />
+                    </GridItem>
+                    <GridItem>
+                      <Skeleton width="35%" />
+                    </GridItem>
+                  </Grid>
                 )}
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:ingress")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("ingress_value", {
-                      value: ingresEgress,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:egress")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("egress_value", {
-                      value: ingresEgress,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:storage")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("storage_value", {
-                      value: storage,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:partitions")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("partitions_value", {
-                      value: maxPartitions,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:client_connections")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("client_connections_value", {
-                      value: connections,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:connection_rate")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("connection_rate_value", {
-                      value: connectionRate,
-                    })}
-                  </TextListItem>
-                </GridItem>
-                <GridItem>
-                  <TextListItem component={TextListItemVariants.dt}>
-                    {t("kafka:message_size")}
-                  </TextListItem>
-                  <TextListItem component={TextListItemVariants.dd}>
-                    {t("message_size_value", {
-                      value: messageSize,
-                    })}
-                  </TextListItem>
-                </GridItem>
-              </Grid>
-            )}
-            {isLoading && (
-              <Grid sm={6} lg={12} hasGutter>
-                <GridItem>
-                  <Skeleton width="75%" screenreaderText="Loading contents" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="66%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="66%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="50%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="33%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="25%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="55%" />
-                </GridItem>
-                <GridItem>
-                  <Skeleton width="35%" />
-                </GridItem>
-              </Grid>
-            )}
-          </TextList>
-        </CardBody>
-      </Card>
-      <Card isCompact className="pf-u-mt-md">
-        <CardHeader>
-          <Text component={TextVariants.h3}>
-            {t("quick_start_guide_title")}
-          </Text>
-        </CardHeader>
-        <CardBody>
-          <Button
-            isSmall
-            isInline
-            variant={ButtonVariant.link}
-            onClick={onClickQuickStart}
-          >
-            {t("quick_start_guide_message")}
-          </Button>
-        </CardBody>
-      </Card>
-    </TextContent>
+              </DescriptionListGroup>
+            </DescriptionList>
+          </CardBody>
+        </Card>
+      </StackItem>
+      <StackItem>
+        <Card isFlat isCompact>
+          <CardTitle component="h2">{t("quick_start_guide_title")}</CardTitle>
+          <CardBody>
+            <Button
+              isSmall
+              isInline
+              variant={ButtonVariant.link}
+              onClick={onClickQuickStart}
+            >
+              {t("quick_start_guide_message")}
+            </Button>
+          </CardBody>
+        </Card>
+      </StackItem>
+    </Stack>
   );
 };
