@@ -83,7 +83,7 @@
     "@web/rollup-plugin-import-meta-assets": "1.0.7",
     "@xstate/inspect": "0.6.4",
     "babel-jest": "27.5.1",
-    "babel-loader": "8.2.3",
+    "babel-loader": "8.2.4",
     "chromatic": "6.5.3",
     "concurrently": "7.0.0",
     "eslint": "8.11.0",
