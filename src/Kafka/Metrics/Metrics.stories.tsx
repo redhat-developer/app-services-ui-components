@@ -381,7 +381,7 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
 
     // select last 24 hours
     await setDuration("Last 24 hours");
-    await expectTextCount("No metrics data");
+    await expectTextCount("Data unavailable");
 
     // select last 12 hours
     await setDuration("Last 12 hours");
@@ -394,8 +394,6 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
       const topicSelector = await card.findByLabelText(
         "Filter topic metrics by topic name"
       );
-      fireEvent.click(topicSelector);
-      fireEvent.click(topicSelector);
       fireEvent.click(topicSelector);
       fireEvent.click(await card.findByText(topic));
     };
@@ -424,7 +422,7 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
 
     // select last 24 hours
     await setDuration("Last 24 hours");
-    await expectTextCount("No topic data");
+    await expectTextCount("Data unavailable");
 
     // select last 12 hours
     await setDuration("Last 12 hours");
@@ -432,7 +430,7 @@ KafkaInstanceToolbarStaysEnabled.play = async ({ canvasElement }) => {
 
     // select topic
     await setTopic("dolor");
-    await expectTextCount("dolor partition", 3);
+    await expectTextCount("dolor: partition", 3);
   }
   await testKafkaInstance();
   await testTopicMetrics();
