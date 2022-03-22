@@ -140,7 +140,7 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardBody>
               <Stack hasGutter>
                 <StackItem className="pf-u-mb-lg">
-                  <Label>{t("overview:beta")}</Label>
+                  <Label>{t("overview:fieldTrial")}</Label>
                 </StackItem>
                 <StackItem>{t("overview:rhodsMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
@@ -164,13 +164,12 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardFooter>
               <Button
                 data-testid="cardRHODS-buttonCTA"
+                ouiaId="button-rhoads-tryit"
                 variant={ButtonVariant.secondary}
                 component="a"
                 target="_blank"
-                href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
               >
-                {t("overview:learnMore")}{" "}
-                <ExternalLinkAltIcon className="pf-u-ml-sm" />
+                {t("overview:tryIt")}{" "}
               </Button>
             </CardFooter>
           </Card>
