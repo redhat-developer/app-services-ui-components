@@ -16,7 +16,7 @@
     "form_invalid": "Address form errors to proceed.",
     "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
     "over_quota_title": "$t(common:kafka) instance can't be created",
-    "trial_unavailable_message": "All available $t(common:kafka) evaluation slots are currently in use. Please try again later",
+    "trial_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
@@ -53,7 +53,7 @@
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
     "trial_available_title": "Your instance will expire after 48 hours.",
-    "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
+    "instance_or_region_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "instance_or_region_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
