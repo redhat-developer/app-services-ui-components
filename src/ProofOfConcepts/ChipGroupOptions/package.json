@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "react-dom": "^16.8.0",
+    "react": "^16.8.0",
+    "@patternfly/react-core": "4.181.1"
+  }
+}
