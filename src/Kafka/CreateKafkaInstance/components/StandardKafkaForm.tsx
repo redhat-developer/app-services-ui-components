@@ -11,6 +11,8 @@ import {
   Slider,
   Text,
   TextVariants,
+  Button,
+  ButtonVariant,
 } from "@patternfly/react-core";
 import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
@@ -205,6 +207,13 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           <Text component={TextVariants.p} className="pf-c-form__helper-text">
             {t("standard_kafka_streaming_units", { streamingUnits })}
           </Text>
+          <Button
+            className="pf-c-form__helper-text"
+            variant={ButtonVariant.link}
+            isInline
+          >
+            {t("standard_kafka_size_dscription")}
+          </Button>
         </FormGroupWithPopover>
       )}
     </Form>

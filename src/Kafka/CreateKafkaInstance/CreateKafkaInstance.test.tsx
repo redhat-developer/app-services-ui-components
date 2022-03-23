@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, waitForI18n, waitForPopper, within } from "../../test-utils";
+import { render, waitForI18n } from "../../test-utils";
 
 import * as stories from "./CreateKafkaInstance.stories";
 

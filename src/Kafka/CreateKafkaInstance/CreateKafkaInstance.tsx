@@ -175,7 +175,7 @@ export const CreateKafkaInstance: FunctionComponent<
       >
         <FlexItem flex={{ default: "flex_2" }}>
           <FormAlerts error={error} />
-          {isTrial ? (
+          {isTrial && instanceAvailability ? (
             <>
               <TrialKafkaForm
                 FORM_ID={FORM_ID}

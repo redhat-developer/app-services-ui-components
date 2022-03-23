@@ -58,7 +58,7 @@
     "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
-    "trial_available_message": "The trial has a duration of 48 hours. If you are interested in using this service in production, go to our <0>pricing and purchasing</0> page to see what options are available during creation and learn how to contact us.",
+    "trial_available_message": "The trial has a duration of 48 hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
     "trial_available_title": "Your instance will expire after 48 hours.",
     "trial_available_title_storybook": "You can create a trial instance to evaluate this service.",
     "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
@@ -77,6 +77,7 @@
   "size_description": "",
   "size_field_aria": "More info for Size field",
   "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
+  "standard_kafka_size_dscription": "Learn how to add streaming units to your account",
   "standard_kafka_streaming_units": "Your organization has {{streamingUnits}} streaming units remaining",
   "statuses": {
     "creating": "Creating",
