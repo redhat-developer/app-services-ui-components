@@ -1,0 +1,47 @@
+/* Timestamp Selector */
+
+.pf-c-form-control.custom {
+  --pf-c-form-control--Width: 15rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
+
+.pf-c-form-control.custom-new {
+  --pf-c-form-control--Width: 25rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
+
+/* Partition Selector */
+
+.pf-c-content {
+  color: var(--pf-c-content--Color);
+}
+
+/* Table */
+
+.mas-c-status.pf-l-split.pf-m-gutter > *:not(:last-child) {
+  --pf-l-split--m-gutter--MarginRight: var(--pf-global--spacer--sm);
+}
+
+.mas-m-ready {
+  font-size: var(--pf-global--icon--FontSize--md);
+  color: var(--pf-global--success-color--100);
+}
+
+.mas-m-degraded {
+  font-size: var(--pf-global--icon--FontSize--md);
+  color: var(--pf-global--warning-color--100);
+}
+
+.mas-m-deleting {
+  color: var(--pf-global--Color--200);
+}
+
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
