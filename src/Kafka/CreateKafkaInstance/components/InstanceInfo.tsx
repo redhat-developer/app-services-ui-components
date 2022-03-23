@@ -57,15 +57,15 @@ export const InstanceInfo: VoidFunctionComponent<
   const { t } = useTranslation();
 
   return (
-    <TextContent>
+    <TextContent data-testid={"instance-info"}>
       <Text component={TextVariants.h3}>
         {t("create-kafka-instance:instance_information")}
       </Text>
-      <TextList component={TextListVariants.dl}>
-        {!isLoading && (
-          <Grid sm={6} lg={12} hasGutter>
-            {isTrial && (
-              <GridItem>
+      {!isLoading && (
+        <Grid sm={6} lg={12} hasGutter>
+          {isTrial && (
+            <GridItem>
+              <TextList component={TextListVariants.dl}>
                 <TextListItem component={TextListItemVariants.dt}>
                   {t("kafka:duration")}
                 </TextListItem>
@@ -74,9 +74,11 @@ export const InstanceInfo: VoidFunctionComponent<
                     value: trialDurationInHours,
                   })}
                 </TextListItem>
-              </GridItem>
-            )}
-            <GridItem>
+              </TextList>
+            </GridItem>
+          )}
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:ingress_egress")}
               </TextListItem>
@@ -85,8 +87,10 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: ingresEgress,
                 })}
               </TextListItem>
-            </GridItem>
-            <GridItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:storage")}
               </TextListItem>
@@ -95,8 +99,10 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: storage,
                 })}
               </TextListItem>
-            </GridItem>
-            <GridItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:partitions")}
               </TextListItem>
@@ -105,8 +111,10 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: maxPartitions,
                 })}
               </TextListItem>
-            </GridItem>
-            <GridItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:client_connections")}
               </TextListItem>
@@ -115,8 +123,10 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: connections,
                 })}
               </TextListItem>
-            </GridItem>
-            <GridItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:connection_rate")}
               </TextListItem>
@@ -125,8 +135,10 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: connectionRate,
                 })}
               </TextListItem>
-            </GridItem>
-            <GridItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
                 {t("kafka:message_size")}
               </TextListItem>
@@ -135,44 +147,44 @@ export const InstanceInfo: VoidFunctionComponent<
                   value: messageSize,
                 })}
               </TextListItem>
-            </GridItem>
-          </Grid>
-        )}
-        {isLoading && (
-          <Grid sm={6} lg={12} hasGutter>
-            <GridItem>
-              <Skeleton width="75%" screenreaderText="Loading contents" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="66%" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="50%" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="33%" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="25%" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="55%" />
-            </GridItem>
-            <GridItem>
-              <Skeleton width="35%" />
-            </GridItem>
-          </Grid>
-        )}
-        <Button
-          isSmall
-          isInline
-          variant={ButtonVariant.link}
-          style={{ marginTop: "20px" }}
-          onClick={onClickQuickStart}
-        >
-          {t("create-kafka-instance:quick_start_guide_message")}
-        </Button>
-      </TextList>
+            </TextList>
+          </GridItem>
+        </Grid>
+      )}
+      {isLoading && (
+        <Grid sm={6} lg={12} hasGutter>
+          <GridItem>
+            <Skeleton width="75%" screenreaderText="Loading contents" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="66%" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="50%" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="33%" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="25%" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="55%" />
+          </GridItem>
+          <GridItem>
+            <Skeleton width="35%" />
+          </GridItem>
+        </Grid>
+      )}
+      <Button
+        isSmall
+        isInline
+        variant={ButtonVariant.link}
+        style={{ marginTop: "20px" }}
+        onClick={onClickQuickStart}
+      >
+        {t("create-kafka-instance:quick_start_guide_message")}
+      </Button>
     </TextContent>
   );
 };
