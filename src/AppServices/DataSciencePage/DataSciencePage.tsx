@@ -33,13 +33,12 @@ export const DataSciencePage: FunctionComponent = () => {
           <Flex>
             <Button
               data-testid="hero-buttonTryIt"
-              ouiaId="button-rhoads-tryit"
+              ouiaId="button-rhods-tryit"
               variant={ButtonVariant.secondary}
               component="a"
-              href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started"
               target="_blank"
             >
-              {t("datascienceoverview:heroTryItButton")}{" "}
+              {t("datascienceoverview:heroTryItButton")}
             </Button>
             <Button
               data-testid="hero-buttonLearnMore"

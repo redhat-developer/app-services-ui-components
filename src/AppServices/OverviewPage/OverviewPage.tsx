@@ -163,13 +163,13 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             </CardBody>
             <CardFooter>
               <Button
-                data-testid="cardRHODS-buttonCTA"
-                ouiaId="button-rhoads-tryit"
+                data-testid="cardRHODS-buttonTryIt"
+                ouiaId="button-rhods-tryit"
                 variant={ButtonVariant.secondary}
                 component="a"
                 target="_blank"
               >
-                {t("overview:tryIt")}{" "}
+                {t("overview:tryIt")}
               </Button>
             </CardFooter>
           </Card>

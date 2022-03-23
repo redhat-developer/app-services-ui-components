@@ -296,14 +296,13 @@ exports[`OverviewPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="button-rhoads-tryit"
+                data-ouia-component-id="button-rhods-tryit"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
-                data-testid="cardRHODS-buttonCTA"
+                data-testid="cardRHODS-buttonTryIt"
                 target="_blank"
               >
                 Try it
-                 
               </a>
             </div>
           </article>

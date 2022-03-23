@@ -45,15 +45,13 @@ exports[`DataSciencePage renders 1`] = `
             <a
               aria-disabled="false"
               class="pf-c-button pf-m-secondary"
-              data-ouia-component-id="button-rhoads-tryit"
+              data-ouia-component-id="button-rhods-tryit"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
               data-testid="hero-buttonTryIt"
-              href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started"
               target="_blank"
             >
               Try it
-               
             </a>
             <a
               aria-disabled="false"
