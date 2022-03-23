@@ -168,7 +168,10 @@ export const CreateKafkaInstance: FunctionComponent<
         isLoading={isLoading}
         isTesting={isTesting}
       />
-      <Flex direction={{ default: "column", lg: "row" }}>
+      <Flex
+        direction={{ default: "column", lg: "row" }}
+        alignItems={{ lg: "alignItemsFlexStart" }}
+      >
         <FlexItem flex={{ default: "flex_2" }}>
           <FormAlerts error={error} />
           {isTrial ? (
@@ -238,7 +241,7 @@ export const CreateKafkaInstance: FunctionComponent<
           className="mk--create-instance-modal__sidebar--content"
         >
           <InstanceInfo
-            isLoading={isLoading}
+            isLoading={isLoading || !canCreate}
             isTrial={isTrial}
             trialDurationInHours={trialDurationInHours}
             ingresEgress={ingresEgress}
