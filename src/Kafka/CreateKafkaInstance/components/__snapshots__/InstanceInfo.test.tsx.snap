@@ -1,14 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders Loading story 1`] = `
+exports[`InstanceInfo Renders Loading story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-c-content"
+        data-testid="instance-info"
       >
         <h3
           class=""
@@ -19,127 +20,123 @@ exports[`Renders Loading story 1`] = `
         >
           Instance information
         </h3>
-        <dl
-          class=""
-          data-pf-content="true"
+        <div
+          class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+            class="pf-l-grid__item"
           >
             <div
-              class="pf-l-grid__item"
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 75%;"
             >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 75%;"
+              <span
+                class="pf-u-screen-reader"
               >
-                <span
-                  class="pf-u-screen-reader"
-                >
-                  Loading contents
-                </span>
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 66%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 50%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 33%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 25%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 55%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
-            </div>
-            <div
-              class="pf-l-grid__item"
-            >
-              <div
-                class="pf-c-skeleton"
-                style="--pf-c-skeleton--Width: 35%;"
-              >
-                <span
-                  class="pf-u-screen-reader"
-                />
-              </div>
+                Loading contents
+              </span>
             </div>
           </div>
-          <button
-            aria-disabled="false"
-            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
-            data-ouia-component-id="OUIA-Generated-Button-link-1"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            style="margin-top: 20px;"
-            type="button"
+          <div
+            class="pf-l-grid__item"
           >
-            Need help getting started? Follow our quick start guide.
-          </button>
-        </dl>
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 66%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 50%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 33%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 25%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 55%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <div
+              class="pf-c-skeleton"
+              style="--pf-c-skeleton--Width: 35%;"
+            >
+              <span
+                class="pf-u-screen-reader"
+              />
+            </div>
+          </div>
+        </div>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+          data-ouia-component-id="OUIA-Generated-Button-link-1"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          style="margin-top: 20px;"
+          type="button"
+        >
+          Need help getting started? Follow our quick start guide.
+        </button>
       </div>
     </div>
   </div>
 </body>
 `;
 
-exports[`Renders QuotaInstance story 1`] = `
+exports[`InstanceInfo Renders QuotaInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-c-content"
+        data-testid="instance-info"
       >
         <h3
           class=""
@@ -150,15 +147,15 @@ exports[`Renders QuotaInstance story 1`] = `
         >
           Instance information
         </h3>
-        <dl
-          class=""
-          data-pf-content="true"
+        <div
+          class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+            class="pf-l-grid__item"
           >
-            <div
-              class="pf-l-grid__item"
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -172,9 +169,14 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123 MiB/second each
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -188,9 +190,14 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123 GiB
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -204,9 +211,14 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -220,9 +232,14 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -236,9 +253,14 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123 connections/second
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -252,35 +274,36 @@ exports[`Renders QuotaInstance story 1`] = `
               >
                 up to 123 MiB
               </dd>
-            </div>
+            </dl>
           </div>
-          <button
-            aria-disabled="false"
-            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
-            data-ouia-component-id="OUIA-Generated-Button-link-2"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            style="margin-top: 20px;"
-            type="button"
-          >
-            Need help getting started? Follow our quick start guide.
-          </button>
-        </dl>
+        </div>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+          data-ouia-component-id="OUIA-Generated-Button-link-2"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          style="margin-top: 20px;"
+          type="button"
+        >
+          Need help getting started? Follow our quick start guide.
+        </button>
       </div>
     </div>
   </div>
 </body>
 `;
 
-exports[`Renders TrialInstance story 1`] = `
+exports[`InstanceInfo Renders TrialInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-c-content"
+        data-testid="instance-info"
       >
         <h3
           class=""
@@ -291,15 +314,15 @@ exports[`Renders TrialInstance story 1`] = `
         >
           Instance information
         </h3>
-        <dl
-          class=""
-          data-pf-content="true"
+        <div
+          class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
         >
           <div
-            class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+            class="pf-l-grid__item"
           >
-            <div
-              class="pf-l-grid__item"
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -313,9 +336,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 123 hours
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -329,9 +357,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123 MiB/second each
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -345,9 +378,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123 GiB
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -361,9 +399,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -377,9 +420,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -393,9 +441,14 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123 connections/second
               </dd>
-            </div>
-            <div
-              class="pf-l-grid__item"
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
             >
               <dt
                 class=""
@@ -409,20 +462,20 @@ exports[`Renders TrialInstance story 1`] = `
               >
                 up to 123 MiB
               </dd>
-            </div>
+            </dl>
           </div>
-          <button
-            aria-disabled="false"
-            class="pf-c-button pf-m-link pf-m-inline pf-m-small"
-            data-ouia-component-id="OUIA-Generated-Button-link-3"
-            data-ouia-component-type="PF4/Button"
-            data-ouia-safe="true"
-            style="margin-top: 20px;"
-            type="button"
-          >
-            Need help getting started? Follow our quick start guide.
-          </button>
-        </dl>
+        </div>
+        <button
+          aria-disabled="false"
+          class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+          data-ouia-component-id="OUIA-Generated-Button-link-3"
+          data-ouia-component-type="PF4/Button"
+          data-ouia-safe="true"
+          style="margin-top: 20px;"
+          type="button"
+        >
+          Need help getting started? Follow our quick start guide.
+        </button>
       </div>
     </div>
   </div>
