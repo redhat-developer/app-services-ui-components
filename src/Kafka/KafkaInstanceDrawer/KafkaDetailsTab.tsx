@@ -68,12 +68,6 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
         <TextList component={TextListVariants.dl}>
           {isTesting && (
             <>
-              {renderTextListItem(
-                t("common:type"),
-                instanceType === "eval"
-                  ? t("common:trial")
-                  : t("common:standard")
-              )}
               {instanceType === "standard" &&
                 renderTextListItem(
                   t("common:size"),
