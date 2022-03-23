@@ -9,5 +9,8 @@ describe("DataSciencePage", () => {
     const comp = render(<Example />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
+
+    const btnSubmit = comp.getByTestId("hero-buttonTryIt");
+    expect(btnSubmit.dataset.ouiaComponentId).toBe("button-rhods-tryit");
   });
 });
