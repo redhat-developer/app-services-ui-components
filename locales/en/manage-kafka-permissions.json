@@ -27,7 +27,8 @@
   "pattern_type_prefixed": "starts with",
   "permissions": {
     "allow": "Allow",
-    "deny": "Deny"
+    "deny": "Deny",
+    "aria_label": "Resource permission"
   },
   "permissions_dropdown": {
     "add_permission": "Add permission",
@@ -44,6 +45,9 @@
   "resourceTypes": {
     "consumer_group": "Consumer group",
     "kafka_instance": "$t(common:kafka) instance",
+    "placeholder_text": "Select type",
+    "resource_type": "Resource type",
+    "resource_type_selected": "{{value}} Resource type",
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
