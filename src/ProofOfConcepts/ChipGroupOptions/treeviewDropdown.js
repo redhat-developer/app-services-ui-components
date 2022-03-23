@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import "@patternfly/react-core/dist/styles/base.css";
-import "./fonts.css";
-import "./styles.css";
+// import "./fonts.css";
+import "./customStyles.css";
 import React from "react";
 import ConsumerGroupLabel from "./ConsumerGroupLabel";
 import TopicLabel from "./TopicLabel";
@@ -203,14 +203,14 @@ class CheckboxTreeView extends React.Component {
         (prevState) => ({
           checkedItems: checked
             ? prevState.checkedItems.concat(
-                flatCheckedItems.filter(
-                  (item) =>
-                    !prevState.checkedItems.some((i) => i.id === item.id)
-                )
+              flatCheckedItems.filter(
+                (item) =>
+                  !prevState.checkedItems.some((i) => i.id === item.id)
               )
+            )
             : prevState.checkedItems.filter(
-                (item) => !flatCheckedItems.some((i) => i.id === item.id)
-              ),
+              (item) => !flatCheckedItems.some((i) => i.id === item.id)
+            ),
         }),
         () => {
           console.log("Checked items: ", this.state.checkedItems);

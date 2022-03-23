@@ -1,6 +1,6 @@
 import "@patternfly/react-core/dist/styles/base.css";
-import "./fonts.css";
-import "./styles.css";
+// import "./fonts.css";
+import "./customStyles.css";
 import React from "react";
 import ConsumerGroupLabel from "./ConsumerGroupLabel";
 import TopicLabel from "./TopicLabel";

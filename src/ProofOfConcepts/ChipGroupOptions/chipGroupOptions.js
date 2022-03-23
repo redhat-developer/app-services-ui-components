@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import "@patternfly/react-core/dist/styles/base.css";
-import "./fonts.css";
+// import "./fonts.css";
 import React from "react";
 import Toolbar from "./toolbar";
 import Chips1 from "./option1";
