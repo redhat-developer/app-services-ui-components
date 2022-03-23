@@ -88,9 +88,9 @@ export const EmptyState = Template8.bind({});
 EmptyState.args = {};
 
 // No Match Found State component
-const Template9: ComponentStory<typeof ComposableTableEmptyStateClass> = (args) => (
-  <ComposableTableEmptyStateClass {...args} />
-);
+const Template9: ComponentStory<typeof ComposableTableEmptyStateClass> = (
+  args
+) => <ComposableTableEmptyStateClass {...args} />;
 
 export const TableEmptyState = Template9.bind({});
 TableEmptyState.args = {};

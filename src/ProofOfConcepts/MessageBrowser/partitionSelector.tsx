@@ -11,7 +11,7 @@ import "./customStyles.css";
 
 // TODO
 // Add a tick for 0 since that is selected
-// Make the 0 black 
+// Make the 0 black
 
 export class PartitionSelectorClass extends React.Component {
   constructor(props) {

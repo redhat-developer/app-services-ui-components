@@ -1,13 +1,13 @@
-import ReactDOM from 'react-dom';
+import ReactDOM from "react-dom";
 import "@patternfly/react-core/dist/styles/base.css";
-import './fonts.css';
-import './customStyles.css';
+import "./fonts.css";
+import "./customStyles.css";
 import DateTimePicker from "./dateAndTimePicker";
 
-// TODO 
+// TODO
 // Add the blue tickmarks when the main dropdown item is selected.
 
-import React from 'react';
+import React from "react";
 import {
   Button,
   ButtonVariant,
@@ -38,10 +38,10 @@ import {
   EmptyState,
   EmptyStateIcon,
   EmptyStateBody,
-  EmptyStateSecondaryActions
-} from '@patternfly/react-core';
-import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
+  EmptyStateSecondaryActions,
+} from "@patternfly/react-core";
+import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
+import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 
 export class OffsetSelectorGroupClass extends React.Component {
   constructor(props) {
@@ -49,22 +49,24 @@ export class OffsetSelectorGroupClass extends React.Component {
     this.state = {
       filters: {
         offset: [],
-        epochTimestamp: []
+        epochTimestamp: [],
       },
-      currentCategory: 'Offset',
+      currentCategory: "Offset",
       isFilterDropdownOpen: false,
       isCategoryDropdownOpen: false,
-      offsetInput: '',
-      epochTimestampInput: '',
-      inputValue: ''
+      offsetInput: "",
+      epochTimestampInput: "",
+      inputValue: "",
     };
 
-    this.onDelete = (type = '', id = '') => {
+    this.onDelete = (type = "", id = "") => {
       if (type) {
-        this.setState(prevState => {
-          prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter(s => s !== id);
+        this.setState((prevState) => {
+          prevState.filters[type.toLowerCase()] = prevState.filters[
+            type.toLowerCase()
+          ].filter((s) => s !== id);
           return {
-            filters: prevState.filters
+            filters: prevState.filters,
           };
         });
       } else {
@@ -72,73 +74,77 @@ export class OffsetSelectorGroupClass extends React.Component {
           filters: {
             offset: [],
             epochTimestamp: [],
-            status: []
-          }
+            status: [],
+          },
         });
       }
     };
 
-    this.onCategoryToggle = isOpen => {
+    this.onCategoryToggle = (isOpen) => {
       this.setState({
-        isCategoryDropdownOpen: isOpen
+        isCategoryDropdownOpen: isOpen,
       });
     };
 
-    this.onCategorySelect = event => {
+    this.onCategorySelect = (event) => {
       this.setState({
         currentCategory: event.target.innerText,
-        isCategoryDropdownOpen: !this.state.isCategoryDropdownOpen
+        isCategoryDropdownOpen: !this.state.isCategoryDropdownOpen,
       });
     };
 
-    this.onFilterToggle = isOpen => {
+    this.onFilterToggle = (isOpen) => {
       this.setState({
-        isFilterDropdownOpen: isOpen
+        isFilterDropdownOpen: isOpen,
       });
     };
 
-    this.onFilterSelect = event => {
+    this.onFilterSelect = (event) => {
       this.setState({
-        isFilterDropdownOpen: !this.state.isFilterDropdownOpen
+        isFilterDropdownOpen: !this.state.isFilterDropdownOpen,
       });
     };
 
-    this.onInputChange = newValue => {
+    this.onInputChange = (newValue) => {
       this.setState({ inputValue: newValue });
     };
 
-    this.onEpochTimestampInput = event => {
-      if (event.key && event.key !== 'Enter') {
+    this.onEpochTimestampInput = (event) => {
+      if (event.key && event.key !== "Enter") {
         return;
       }
 
       const { inputValue } = this.state;
-      this.setState(prevState => {
-        const prevFilters = prevState.filters['epochTimestamp'];
+      this.setState((prevState) => {
+        const prevFilters = prevState.filters["epochTimestamp"];
         return {
           filters: {
             ...prevState.filters,
-            ['epochTimestamp']: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue]
+            ["epochTimestamp"]: prevFilters.includes(inputValue)
+              ? prevFilters
+              : [...prevFilters, inputValue],
           },
-          inputValue: ''
+          inputValue: "",
         };
       });
     };
 
-    this.onOffsetSelect = event => {
-      if (event.key && event.key !== 'Enter') {
+    this.onOffsetSelect = (event) => {
+      if (event.key && event.key !== "Enter") {
         return;
       }
 
       const { inputValue } = this.state;
-      this.setState(prevState => {
-        const prevFilters = prevState.filters['offset'];
+      this.setState((prevState) => {
+        const prevFilters = prevState.filters["offset"];
         return {
           filters: {
             ...prevState.filters,
-            ['offset']: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue]
+            ["offset"]: prevFilters.includes(inputValue)
+              ? prevFilters
+              : [...prevFilters, inputValue],
           },
-          inputValue: ''
+          inputValue: "",
         };
       });
     };
@@ -153,7 +159,10 @@ export class OffsetSelectorGroupClass extends React.Component {
           onSelect={this.onCategorySelect}
           position={DropdownPosition.left}
           toggle={
-            <DropdownToggle onToggle={this.onCategoryToggle} style={{ width: '100%' }}>
+            <DropdownToggle
+              onToggle={this.onCategoryToggle}
+              style={{ width: "100%" }}
+            >
               {/* <FilterIcon />  */}
               {currentCategory}
             </DropdownToggle>
@@ -164,22 +173,25 @@ export class OffsetSelectorGroupClass extends React.Component {
             <DropdownItem key="cat2">Timestamp</DropdownItem>,
             <DropdownItem key="cat3">Epoch Timestamp</DropdownItem>,
             <DropdownSeparator key="separator" />,
-            <DropdownItem key="cat5" itemId={1}>Latest messages</DropdownItem>
+            <DropdownItem key="cat5" itemId={1}>
+              Latest messages
+            </DropdownItem>,
           ]}
-          style={{ width: '100%' }}
+          style={{ width: "100%" }}
         ></Dropdown>
       </ToolbarItem>
     );
   }
 
   buildFilterDropdown() {
-    const { currentCategory, isFilterDropdownOpen, inputValue, filters } = this.state;
+    const { currentCategory, isFilterDropdownOpen, inputValue, filters } =
+      this.state;
 
     return (
       <React.Fragment>
         <ToolbarFilter
           categoryName="Offset"
-          showToolbarItem={currentCategory === 'Offset'}
+          showToolbarItem={currentCategory === "Offset"}
         >
           <TextInput
             aria-label="offset filter"
@@ -188,7 +200,7 @@ export class OffsetSelectorGroupClass extends React.Component {
             value={inputValue}
             type="text"
             onClear={() => {
-              this.onInputChange('');
+              this.onInputChange("");
             }}
           />
         </ToolbarFilter>
@@ -200,17 +212,17 @@ export class OffsetSelectorGroupClass extends React.Component {
         </ToolbarFilter>
         <ToolbarFilter
           categoryName="Epoch Timestamp"
-          showToolbarItem={currentCategory === 'Epoch Timestamp'}
+          showToolbarItem={currentCategory === "Epoch Timestamp"}
         >
           <TextInput
-            className='pf-c-form-control custom'
+            className="pf-c-form-control custom"
             aria-label="epochTimestamp filter"
             placeholder="Select epoch timestamp"
             onChange={this.onInputChange}
             value={inputValue}
             type="text"
             onClear={() => {
-              this.onInputChange('');
+              this.onInputChange("");
             }}
           />
         </ToolbarFilter>
@@ -221,7 +233,11 @@ export class OffsetSelectorGroupClass extends React.Component {
   renderToolbar() {
     const { filters } = this.state;
     return (
-      <Toolbar id="toolbar-with-chip-groups" clearAllFilters={this.onDelete} collapseListedFiltersBreakpoint="xl">
+      <Toolbar
+        id="toolbar-with-chip-groups"
+        clearAllFilters={this.onDelete}
+        collapseListedFiltersBreakpoint="xl"
+      >
         <ToolbarContent>
           <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
             <ToolbarGroup variant="filter-group">
@@ -236,11 +252,7 @@ export class OffsetSelectorGroupClass extends React.Component {
 
   render() {
     const { filters } = this.state;
-    return (
-      <React.Fragment>
-        {this.renderToolbar()}
-      </React.Fragment>
-    );
+    return <React.Fragment>{this.renderToolbar()}</React.Fragment>;
   }
 }
 
