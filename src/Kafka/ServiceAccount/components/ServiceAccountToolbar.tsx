@@ -86,7 +86,7 @@ export const ServiceAccountToolbar: VoidFunctionComponent<
         <ToolbarGroup>
           <ToolbarItem>
             <Button variant={"primary"} onClick={onCreateServiceAccountClick}>
-              {t("kafka:create_service_account")}
+              {t("service-account:create_service_account")}
             </Button>
           </ToolbarItem>
         </ToolbarGroup>
