@@ -19,25 +19,6 @@
 }
 
 /* Table */
-
-.mas-c-status.pf-l-split.pf-m-gutter > *:not(:last-child) {
-  --pf-l-split--m-gutter--MarginRight: var(--pf-global--spacer--sm);
-}
-
-.mas-m-ready {
-  font-size: var(--pf-global--icon--FontSize--md);
-  color: var(--pf-global--success-color--100);
-}
-
-.mas-m-degraded {
-  font-size: var(--pf-global--icon--FontSize--md);
-  color: var(--pf-global--warning-color--100);
-}
-
-.mas-m-deleting {
-  color: var(--pf-global--Color--200);
-}
-
 .text {
   overflow: hidden;
   text-overflow: ellipsis;
