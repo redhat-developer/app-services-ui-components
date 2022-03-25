@@ -1,22 +1,29 @@
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ConsumerGroupStateEnum } from "../types";
+import { ConsumerGroupState } from "../types";
 
-export const ConsumerGroupState = (state: ConsumerGroupStateEnum) => {
+export type ConsumerGroupStateLabelProps = {
+  state: ConsumerGroupState;
+};
+
+export const ConsumerGroupStateLabel: FunctionComponent<
+  ConsumerGroupStateLabelProps
+> = ({ state }) => {
   const { t } = useTranslation(["kafka"]);
 
   switch (state) {
-    case ConsumerGroupStateEnum.Stable:
-      return t("consumerGroup.stable_state");
-    case ConsumerGroupStateEnum.Empty:
-      return t("consumerGroup.empty_state");
-    case ConsumerGroupStateEnum.Dead:
-      return t("consumerGroup.dead_state");
-    case ConsumerGroupStateEnum.CompletingRebalance:
-      return t("consumerGroup.completing_rebalance_state");
-    case ConsumerGroupStateEnum.PreparingRebalance:
-      return t("consumerGroup.preparing_rebalance_state");
-    case ConsumerGroupStateEnum.Unknown:
-      return t("consumerGroup.unknown_state");
+    case "Stable":
+      return t("consumerGroup.state.stable");
+    case "Empty":
+      return t("consumerGroup.state.empty");
+    case "Dead":
+      return t("consumerGroup.state.dead");
+    case "CompletingRebalance":
+      return t("consumerGroup.state.completing_rebalance");
+    case "PreparingRebalance":
+      return t("consumerGroup.state.preparing_rebalance");
+    case "Unknown":
+      return t("consumerGroup.state.unknown");
     default:
       return null;
   }
