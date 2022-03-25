@@ -19,17 +19,9 @@ import { ComposableTableEmptyStateClass } from "./noSearchResults";
 
 export default {
   title: "PoCs/Mesage Browser",
-  component: TopicTabsClass,
+  component: PartitionSelectorClass,
   args: {},
-} as ComponentMeta<typeof TopicTabsClass>;
-
-// Tabs component
-const Template1: ComponentStory<typeof TopicTabsClass> = (args) => (
-  <TopicTabsClass {...args} />
-);
-
-export const Tabs = Template1.bind({});
-Tabs.args = {};
+} as ComponentMeta<typeof PartitionSelectorClass>;
 
 // Partition Selector component
 const Template2: ComponentStory<typeof PartitionSelectorClass> = (args) => (
