@@ -1,0 +1,14 @@
+{
+  "contactSalesCardCallToActionButton": "Contact sales",
+  "contactSalesCardMainText": "Contact sales to get a pre-paid subscription or modify limits of your current subscription. ",
+  "contactSalesCardTitle": "Contact sales",
+  "heroCallToActionButton": "",
+  "heroDescription": "Red Hat OpenShift Streams for Apache Kafka is a managed cloud service that provides a streamlined developer experience for building, deploying, and scaling real-time applications in hybrid-cloud environments. The combination of seamless operations across distributed microservices, large data transfer volumes, and managed operations allows teams to focus on core competencies, accelerate application velocity and reduce operational cost.",
+  "heroTagline": "Fully hosted and managed service for stream-based applications",
+  "heroTitle": "Get started with Red Hat OpenShift Streams for Apache Kafka",
+  "heroTryItButton": "",
+  "purchaseCardCallToActionButton": "Purchase now",
+  "purchaseCardMainText": "In the United States or Canada, purchase a subscription for up to 25 streaming units through Red Had Marketplace to pay as you go. ",
+  "purchaseCardTitle": "Purchase now",
+  "viewDocumentation": ""
+}

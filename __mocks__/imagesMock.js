@@ -12,6 +12,7 @@ module.exports = {
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbPng: DUMMYIMAGE,
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbSvg: DUMMYIMAGE,
   LogoRedHatOpenShiftStreamsForApacheKafkaAWhiteRgb: DUMMYIMAGE,
+  AppSpeedKeyArt: DUMMYIMAGE,
   RhodsMlTechnology: DUMMYIMAGE,
   RhodsVideoPreview: DUMMYIMAGE,
   Videoplaceholder: DUMMYIMAGE,
