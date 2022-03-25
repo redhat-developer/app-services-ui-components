@@ -64,60 +64,66 @@ export const ChartLogSizePerPartition: FunctionComponent<
 
   const showDate = shouldShowDate(duration);
 
-  switch (true) {
-    case isLoading:
-      return <ChartSkeletonLoader />;
-    case !hasMetrics:
-      return emptyState;
-    default:
-      return (
-        <div ref={containerRef}>
-          <Chart
-            ariaTitle={t("metrics:log_size_per_partition")}
-            containerComponent={
-              <ChartVoronoiContainer
-                labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
-                constrainToVisibleArea
-              />
-            }
-            legendPosition="bottom-left"
-            legendComponent={
-              <ChartLegend data={legendData} itemsPerRow={itemsPerRow} />
-            }
-            height={chartHeight}
-            padding={chartPadding}
-            themeColor={ChartThemeColor.multiUnordered}
-            width={width}
-            legendAllowWrap={true}
-          >
-            <ChartAxis
-              label={
-                "\n" +
-                (showDate
-                  ? t("metrics:axis-label-time-full")
-                  : t("metrics:axis-label-time"))
-              }
-              tickValues={tickValues}
-              tickFormat={(d) =>
-                dateToChartValue(d, {
-                  showDate,
-                })
-              }
-            />
-            <ChartAxis
-              label={"\n\n\n\n\n" + t("metrics:axis-label-bytes")}
-              dependentAxis
-              tickFormat={formatBytes}
-            />
-            <ChartGroup>
-              {chartData.map((value, index) => (
-                <ChartArea key={`chart-area-${index}`} data={value.area} />
-              ))}
-            </ChartGroup>
-          </Chart>
-        </div>
-      );
-  }
+  return (
+    <div ref={containerRef}>
+      {(() => {
+        switch (true) {
+          case isLoading:
+            return <ChartSkeletonLoader />;
+          case !hasMetrics:
+            return emptyState;
+          default:
+            return (
+              <Chart
+                ariaTitle={t("metrics:log_size_per_partition")}
+                containerComponent={
+                  <ChartVoronoiContainer
+                    labels={({ datum }) =>
+                      `${datum.name}: ${formatBytes(datum.y)}`
+                    }
+                    constrainToVisibleArea
+                  />
+                }
+                legendPosition="bottom-left"
+                legendComponent={
+                  <ChartLegend data={legendData} itemsPerRow={itemsPerRow} />
+                }
+                height={chartHeight}
+                padding={chartPadding}
+                themeColor={ChartThemeColor.multiUnordered}
+                width={width}
+                legendAllowWrap={true}
+              >
+                <ChartAxis
+                  label={
+                    "\n" +
+                    (showDate
+                      ? t("metrics:axis-label-time-full")
+                      : t("metrics:axis-label-time"))
+                  }
+                  tickValues={tickValues}
+                  tickFormat={(d) =>
+                    dateToChartValue(d, {
+                      showDate,
+                    })
+                  }
+                />
+                <ChartAxis
+                  label={"\n\n\n\n\n" + t("metrics:axis-label-bytes")}
+                  dependentAxis
+                  tickFormat={formatBytes}
+                />
+                <ChartGroup>
+                  {chartData.map((value, index) => (
+                    <ChartArea key={`chart-area-${index}`} data={value.area} />
+                  ))}
+                </ChartGroup>
+              </Chart>
+            );
+        }
+      })()}
+    </div>
+  );
 };
 
 export function getChartData(
