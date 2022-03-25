@@ -133,7 +133,7 @@ export const CreateKafkaInstance: FunctionComponent<
     <Modal
       id="modalCreateKafka"
       variant={ModalVariant.medium}
-      title={t("create_instance")}
+      title={t("create_instance_title")}
       disableFocusTrap={disableFocusTrap}
       isOpen={isModalOpen}
       ouiaId="modal-create-kafka"
