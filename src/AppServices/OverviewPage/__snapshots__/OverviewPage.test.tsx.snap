@@ -244,7 +244,7 @@ exports[`OverviewPage renders 1`] = `
                 class=""
               >
                 <img
-                  alt="Red Hat OpenShift Open Shift Connectors logo"
+                  alt="Red Hat OpenShift Connectors logo"
                   src="dummyimage"
                   style="height: 50px;"
                 />
