@@ -6,6 +6,7 @@ export default {
   args: {
     toKafkaHref: "/to-kafka",
     toServiceRegistryHref: "/to-service",
+    toConnectorsHref: "/to-connectors",
   },
 } as ComponentMeta<typeof OverviewPage>;
 
