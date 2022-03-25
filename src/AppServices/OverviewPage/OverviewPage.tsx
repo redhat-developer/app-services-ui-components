@@ -22,6 +22,7 @@ import {
   AppServicesOverviewIconPattern,
   LogoRedHatOpenShiftDatabaseAccessAStandardRgb,
   LogoRedHatOpenShiftApiManagementAStandardRgb,
+  LogoRedHatOpenShiftConnectorsBStandardRgb,
   LogoRedHatOpenShiftDataScienceAStandardRgb,
   LogoRedHatOpenShiftServiceRegistryAStandardRgb,
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbPng,
@@ -136,8 +137,8 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardHeader>
               <CardHeaderMain>
                 <img
-                  src={LogoRedHatOpenShiftDataScienceAStandardRgb}
-                  alt="Red Hat OpenShift Open Shift Connectors logo"
+                  src={LogoRedHatOpenShiftConnectorsBStandardRgb}
+                  alt="Red Hat OpenShift Connectors logo"
                   style={{ height: "50px" }}
                 />
               </CardHeaderMain>
