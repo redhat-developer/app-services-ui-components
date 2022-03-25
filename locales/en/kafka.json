@@ -76,6 +76,8 @@
   "filter_by_owner": "Filter by owner",
   "filter_by_short_description": "Filter by short description",
   "ingress_egress": "Ingress/Egress",
+  "ingress": "Ingress",
+  "egress": "Egress",
   "ingress_egress_value": "up to 30 MiB/second each",
   "input_field_invalid_message": "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "max_filter_message": "Maximum number of filters reached. Clear a filter before adding another.",
@@ -92,5 +94,5 @@
   "topic": {
     "topic": "Topic"
   },
-  "will_expire": "This instance will expire in <time>{{time}}</time>"
+  "will_expire": "This trial instance will expire in <time>{{time}}</time>"
 }

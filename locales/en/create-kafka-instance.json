@@ -22,6 +22,9 @@
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
   "ingress_egress_value": "up to {{value}} MiB/second each",
+  "ingress_value": "up to {{value}} MiB/second each",
+  "egress_value": "up to {{value}} MiB/second each",
+  "streaming_size_value": "{{value}} streaming unit",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
   "instance_information": "Instance information",
   "instance_name": "Name",
