@@ -17,19 +17,20 @@ import {
 } from "@patternfly/react-table";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Consumer, ConsumerGroupStateEnum } from "../types";
-import { ConsumerGroupState } from "./ConsumerGroupState";
+import { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
-import { activeMembers, partionsWithLag } from "../utils";
+import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
 
 export type ConsumerGroupByTopicProps = {
-  state: ConsumerGroupStateEnum;
+  state: ConsumerGroupState;
   consumers: Consumer[];
+  activeMembers: number;
+  partitionsWithLag: number;
 };
 
 export const ConsumerGroupByTopic: FunctionComponent<
   ConsumerGroupByTopicProps
-> = ({ state, consumers }) => {
+> = ({ state, consumers, activeMembers, partitionsWithLag }) => {
   const { t } = useTranslation(["kafka"]);
 
   const columnNames = {
@@ -48,7 +49,7 @@ export const ConsumerGroupByTopic: FunctionComponent<
             <Text component={TextVariants.h4} size={50}>
               {t("consumerGroup.active_members_for_topic")}
             </Text>
-            <Text component={TextVariants.h2}>{activeMembers(consumers)}</Text>
+            <Text component={TextVariants.h2}>{activeMembers}</Text>
           </FlexItem>
           <FlexItem>
             <Text component={TextVariants.h4}>
@@ -58,13 +59,15 @@ export const ConsumerGroupByTopic: FunctionComponent<
                 description={t("consumerGroup.partitions_with_lag_description")}
               />
             </Text>
-            <Text component={TextVariants.h2}>
-              {partionsWithLag(consumers)}
-            </Text>
+            <Text component={TextVariants.h2}>{partitionsWithLag}</Text>
           </FlexItem>
           <FlexItem>
-            <Text component={TextVariants.h4}>{t("consumerGroup.state")}</Text>
-            <Text component={TextVariants.h2}>{ConsumerGroupState(state)}</Text>
+            <Text component={TextVariants.h4}>
+              {t("consumerGroup.state_header")}
+            </Text>
+            <Text component={TextVariants.h2}>
+              <ConsumerGroupStateLabel state={state} />
+            </Text>
           </FlexItem>
         </Flex>
       </TextContent>
