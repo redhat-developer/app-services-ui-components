@@ -26,3 +26,10 @@
   -webkit-line-clamp: 3; /* number of lines to show */
   -webkit-box-orient: vertical;
 }
+
+/* Offset Range */
+.pf-u-font-size .custom-text {
+  font-size: var(--pf-global--FontSize--md);
+  font-weight: var(--pf-global--FontWeight--semi-bold);
+  display: inline-block;
+}

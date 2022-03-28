@@ -2,18 +2,16 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
 // Message Browser:
-// Tabs
 // Partition Selector, Offset Selector Group, Search, Reload, Offset Range
 // Table, Drawer
 // Empty State, No Match found State
 import { MessageBrowserClass } from "./messageBrowser";
-import { TopicTabsClass } from "./tabs";
 import { PartitionSelectorClass } from "./partitionSelector";
 import { OffsetSelectorGroupClass } from "./offsetSelectorGroup";
 import { ToolbarIconsClass } from "./searchAndReload";
 import { OffsetRangeClass } from "./offsetRange";
 import { TableClass } from "./table";
-import { OverlayDrawerClass } from "./overlayDrawer";
+import { OverlayDrawerClass } from "./drawer";
 import { EmptyStateMessageClass } from "./emptyState";
 import { ComposableTableEmptyStateClass } from "./noSearchResults";
 
