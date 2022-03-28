@@ -20,6 +20,7 @@
   "return_to_home_page": "Return to home page",
   "search_button_label": "Search",
   "size": "Size",
+  "skeleton_loader_screenreader_text": "Loading content",
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
   "time_created": "Time created",
