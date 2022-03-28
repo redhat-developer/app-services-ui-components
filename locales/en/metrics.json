@@ -51,5 +51,6 @@
   "topics_refresh": "Refresh topic metrics",
   "total_bytes": "Bytes incoming and outgoing",
   "total_bytes_popover_header": "Bytes incoming and outgoing",
-  "used_disk_space": "Used disk space"
+  "used_disk_space": "Used disk space",
+  "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed."
 }
