@@ -137,6 +137,6 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
-    "*.storybook": "prettier --write"
+    "*.{ts,tsx,css,json}": "prettier --write"
   }
 }
