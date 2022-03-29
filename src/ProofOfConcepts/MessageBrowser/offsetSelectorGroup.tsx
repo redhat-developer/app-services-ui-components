@@ -4,9 +4,6 @@ import "./fonts.css";
 import "./customStyles.css";
 import DateTimePicker from "./dateAndTimePicker";
 
-// TODO
-// Add the blue tickmarks when the main dropdown item is selected.
-
 import React from "react";
 import {
   Button,
