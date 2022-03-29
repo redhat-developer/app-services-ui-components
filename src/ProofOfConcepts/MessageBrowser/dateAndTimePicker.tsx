@@ -1,5 +1,4 @@
 import "./customStyles.css";
-
 import React from "react";
 import {
   Dropdown,
@@ -121,4 +120,3 @@ export const DateTimePicker = () => {
   );
 };
 
-export default DateTimePicker;

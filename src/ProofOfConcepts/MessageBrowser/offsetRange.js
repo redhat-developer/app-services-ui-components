@@ -8,9 +8,6 @@ import {
   Text,
   TextVariants
 } from "@patternfly/react-core";
-import { Button } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import SyncIcon from "@patternfly/react-icons/dist/esm/icons/sync-icon";
 
 // Follow the PF Pagination component styling here.
 // i.e. use default body copy size 16px (pf-global—fontsize—med)

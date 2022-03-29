@@ -3,14 +3,6 @@ import DateTimePicker from "./dateAndTimePicker";
 
 import React from "react";
 import {
-  Button,
-  ButtonVariant,
-  Bullseye,
-  Menu,
-  MenuContent,
-  MenuList,
-  MenuItem,
-  MenuToggle,
   TextInput,
   Toolbar,
   ToolbarItem,
@@ -23,18 +15,7 @@ import {
   DropdownPosition,
   DropdownToggle,
   DropdownSeparator,
-  InputGroup,
-  Title,
-  Select,
-  SelectOption,
-  SelectVariant,
-  SearchInput,
-  EmptyState,
-  EmptyStateIcon,
-  EmptyStateBody,
-  EmptyStateSecondaryActions,
 } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
 import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 
 export class OffsetSelectorGroupClass extends React.Component {

@@ -1,42 +1,22 @@
 import React from "react";
 import {
-  Drawer,
-  DrawerPanelContent,
-  DrawerContent,
-  DrawerContentBody,
-  DrawerHead,
-  DrawerActions,
-  DrawerCloseButton,
   Button,
   DescriptionList,
   DescriptionListTerm,
-  DescriptionListText,
   DescriptionListGroup,
   DescriptionListDescription,
   TextContent,
   Text,
   TextVariants,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants,
   Tabs,
   Tab,
   TabTitleText,
   Tooltip,
-  CodeBlock,
-  CodeBlockAction,
-  CodeBlockCode,
-  ClipboardCopyButton,
-  ClipboardCopy,
-  ClipboardCopyVariant,
-  Flex,
-  FlexItem,
   Grid,
   GridItem,
 } from "@patternfly/react-core";
 import CopyIcon from "@patternfly/react-icons/dist/esm/icons/copy-icon";
-import PlayIcon from '@patternfly/react-icons/dist/esm/icons/play-icon';
+
 
 export const OverlayDrawerClass = () => {
   const [showSuccessContent, setShowSuccessContent] = React.useState(false);
