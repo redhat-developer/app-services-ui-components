@@ -7,12 +7,8 @@ import {
   CardHeader,
   CardHeaderMain,
   CardTitle,
-  Flex,
   Grid,
-  Text,
-  TextContent,
   Title,
-  TitleSizes,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
@@ -28,7 +24,6 @@ export const KafkaPage: FunctionComponent = () => {
         title={t("kafkaoverview:heroTitle")}
         tagLine={t("kafkaoverview:heroTagline")}
         description={t("kafkaoverview:heroDescription")}
-        // cta={}
         heroImage={AppSpeedKeyArt}
         heroImageSize={478}
         heroImageCanRepeat={false}
