@@ -1,11 +1,10 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 
 // Message Browser:
 // Partition Selector, Offset Selector Group, Search, Reload, Offset Range
 // Table, Drawer
 // Empty State, No Match found State
-import { MessageBrowserClass } from "./messageBrowser";
 import { PartitionSelectorClass } from "./partitionSelector";
 import { OffsetSelectorGroupClass } from "./offsetSelectorGroup";
 import { ToolbarIconsClass } from "./searchAndReload";
@@ -16,7 +15,6 @@ import { EmptyStateMessageClass } from "./emptyState";
 import { ComposableTableEmptyStateClass } from "./noSearchResults";
 
 export default {
-  title: "PoCs/Mesage Browser",
   component: PartitionSelectorClass,
   args: {},
 } as ComponentMeta<typeof PartitionSelectorClass>;

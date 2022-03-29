@@ -27,8 +27,8 @@
   "pattern_type_prefixed": "starts with",
   "permissions": {
     "allow": "Allow",
-    "deny": "Deny",
-    "aria_label": "Resource permission"
+    "aria_label": "Resource permission",
+    "deny": "Deny"
   },
   "permissions_dropdown": {
     "add_permission": "Add permission",

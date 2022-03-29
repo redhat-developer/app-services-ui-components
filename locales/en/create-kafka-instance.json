@@ -48,13 +48,13 @@
   "kafka_status_warning_or_error_title": "This is taking longer than expected.",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
+    "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
+    "instance_or_region_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
     "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
     "trial_available_title": "Your instance will expire after 48 hours.",
-    "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
-    "instance_or_region_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
   },

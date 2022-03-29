@@ -1,20 +1,20 @@
 import "./customStyles.css";
-import DateTimePicker from "./dateAndTimePicker";
+import { DateTimePicker } from "./dateAndTimePicker";
 
 import React from "react";
 import {
-  TextInput,
-  Toolbar,
-  ToolbarItem,
-  ToolbarContent,
-  ToolbarFilter,
-  ToolbarToggleGroup,
-  ToolbarGroup,
   Dropdown,
   DropdownItem,
   DropdownPosition,
-  DropdownToggle,
   DropdownSeparator,
+  DropdownToggle,
+  TextInput,
+  Toolbar,
+  ToolbarContent,
+  ToolbarFilter,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarToggleGroup,
 } from "@patternfly/react-core";
 import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 
@@ -63,6 +63,7 @@ export class OffsetSelectorGroupClass extends React.Component {
 
     this.onCategorySelect = (event) => {
       this.setState({
+        inputValue: "",
         currentCategory: event.target.innerText,
         isCategoryDropdownOpen: !this.state.isCategoryDropdownOpen,
       });
@@ -153,7 +154,7 @@ export class OffsetSelectorGroupClass extends React.Component {
             </DropdownItem>,
           ]}
           style={{ width: "100%" }}
-        ></Dropdown>
+        />
       </ToolbarItem>
     );
   }
