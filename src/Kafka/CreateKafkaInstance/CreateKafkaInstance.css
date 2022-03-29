@@ -5,6 +5,6 @@
 .mas--CreateKafkaInstance__sidebar dt {
   font-size: var(--pf-global--FontSize--sm);
 }
-.mk--create-instance-modal__alert--message {
+.mas--CreateKafkaInstance__creationTimeAlert {
   margin-top: var(--pf-global--spacer--md);
 }

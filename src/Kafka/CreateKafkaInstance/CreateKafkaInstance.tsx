@@ -257,7 +257,7 @@ export const CreateKafkaInstance: FunctionComponent<
         </FlexItem>
       </Flex>
       <Alert
-        className="mk--create-instance-modal__alert--message"
+        className="mas--CreateKafkaInstance__creationTimeAlert"
         customIcon={<OutlinedClockIcon />}
         variant="info"
         isInline

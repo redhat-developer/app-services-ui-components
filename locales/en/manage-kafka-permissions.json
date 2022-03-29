@@ -21,14 +21,21 @@
     "describe": "Describe",
     "describe_configs": "Describe configs",
     "read": "Read",
-    "write": "Write"
+    "write": "Write",
+    "aria_label": "Resource type operation value",
+    "placeholder_text": "Select operation"
   },
-  "pattern_type_literal": "is",
-  "pattern_type_prefixed": "starts with",
+  "resource_prefix_rule": {
+    "is": "Is",
+    "starts_with": "Starts with",
+    "aria_label": "Resource prefix rule {{value}}",
+    "starts_with_description": "Refers to the prefix of the name in the API",
+    "is_description": "Refers to the literal name in the API"
+  },
   "permissions": {
     "allow": "Allow",
-    "deny": "Deny",
-    "aria_label": "Resource permission"
+    "aria_label": "Resource permission {{value}}",
+    "deny": "Deny"
   },
   "permissions_dropdown": {
     "add_permission": "Add permission",
