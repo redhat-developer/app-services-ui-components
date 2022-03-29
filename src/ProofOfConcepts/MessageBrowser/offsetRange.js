@@ -6,7 +6,7 @@ import {
   ToolbarItem,
   TextContent,
   Text,
-  TextVariants
+  TextVariants,
 } from "@patternfly/react-core";
 
 // Follow the PF Pagination component styling here.
@@ -16,13 +16,12 @@ export class OffsetRangeClass extends React.Component {
   render() {
     const items = (
       <React.Fragment>
-        <ToolbarGroup alignment={{ default: 'alignRight' }}>
+        <ToolbarGroup alignment={{ default: "alignRight" }}>
           <React.Fragment>
             <ToolbarItem>
               <TextContent className="pf-u-font-size">
-                <Text>Offset{" "}
-                  <Text className="custom-text">0</Text>
-                  -
+                <Text>
+                  Offset <Text className="custom-text">0</Text>-
                   <Text className="custom-text">9</Text>
                 </Text>
               </TextContent>

@@ -9,7 +9,7 @@ import {
   TextInput,
   Button,
   Popover,
-  yyyyMMddFormat
+  yyyyMMddFormat,
 } from "@patternfly/react-core";
 import OutlinedCalendarAltIcon from "@patternfly/react-icons/dist/esm/icons/outlined-calendar-alt-icon";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
@@ -22,7 +22,7 @@ export const DateTimePicker = () => {
   const [newValue, setNewValue] = React.useState("YYYY-MM-DDThh:mm:ss.s");
   const times = Array.from(new Array(10), (_, i) => i + 8);
   const defaultTime = "00:00:00:000";
-  const dateFormat = date => yyyyMMddFormat(date);
+  const dateFormat = (date) => yyyyMMddFormat(date);
 
   const onToggleCalendar = () => {
     setIsCalendarOpen(!isCalendarOpen);
@@ -119,4 +119,3 @@ export const DateTimePicker = () => {
     </div>
   );
 };
-

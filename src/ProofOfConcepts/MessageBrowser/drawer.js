@@ -17,11 +17,10 @@ import {
 } from "@patternfly/react-core";
 import CopyIcon from "@patternfly/react-icons/dist/esm/icons/copy-icon";
 
-
 export const OverlayDrawerClass = () => {
   const [showSuccessContent, setShowSuccessContent] = React.useState(false);
-  const copyText = 'Copy to clipboard';
-  const doneCopyText = 'Successfully copied to clipboard!';
+  const copyText = "Copy to clipboard";
+  const doneCopyText = "Successfully copied to clipboard!";
   const [content, setContent] = React.useState(copyText);
   return (
     <React.Fragment>
@@ -48,15 +47,11 @@ export const OverlayDrawerClass = () => {
         </DescriptionListGroup>
         <DescriptionListGroup>
           <DescriptionListTerm>Epoch timestamp</DescriptionListTerm>
-          <DescriptionListDescription>
-            1644146760456
-          </DescriptionListDescription>
+          <DescriptionListDescription>1644146760456</DescriptionListDescription>
         </DescriptionListGroup>
         <DescriptionListGroup>
           <DescriptionListTerm>Timestamp type</DescriptionListTerm>
-          <DescriptionListDescription>
-            Create time
-          </DescriptionListDescription>
+          <DescriptionListDescription>Create time</DescriptionListDescription>
         </DescriptionListGroup>
         <DescriptionListGroup>
           <DescriptionListTerm>Key</DescriptionListTerm>
@@ -89,7 +84,12 @@ export const OverlayDrawerClass = () => {
             </GridItem>
             <GridItem span={1}>
               <Tooltip content={showSuccessContent ? doneCopyText : copyText}>
-                <Button variant="plain" aria-label="Icon with tooltip attached" id="tt-ref" onClick={() => setShowSuccessContent(!showSuccessContent)}>
+                <Button
+                  variant="plain"
+                  aria-label="Icon with tooltip attached"
+                  id="tt-ref"
+                  onClick={() => setShowSuccessContent(!showSuccessContent)}
+                >
                   <CopyIcon />
                 </Button>
               </Tooltip>
@@ -132,7 +132,12 @@ export const OverlayDrawerClass = () => {
             </GridItem>
             <GridItem span={1}>
               <Tooltip content={showSuccessContent ? doneCopyText : copyText}>
-                <Button variant="plain" aria-label="Icon with tooltip attached" id="tt-ref-2" onClick={() => setShowSuccessContent(!showSuccessContent)}>
+                <Button
+                  variant="plain"
+                  aria-label="Icon with tooltip attached"
+                  id="tt-ref-2"
+                  onClick={() => setShowSuccessContent(!showSuccessContent)}
+                >
                   <CopyIcon />
                 </Button>
               </Tooltip>
@@ -140,6 +145,6 @@ export const OverlayDrawerClass = () => {
           </Grid>
         </Tab>
       </Tabs>
-    </React.Fragment >
+    </React.Fragment>
   );
-}
+};
