@@ -26,6 +26,7 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             overview: () => import("../locales/en/overview.json"),
             datascienceoverview: () =>
               import("../locales/en/datascienceoverview.json"),
+            kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
             apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
             "manage-kafka-permissions": () =>
               import("../locales/en/manage-kafka-permissions.json"),
