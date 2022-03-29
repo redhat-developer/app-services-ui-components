@@ -18,12 +18,6 @@ import {
 import OutlinedCalendarAltIcon from "@patternfly/react-icons/dist/esm/icons/outlined-calendar-alt-icon";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
-// TODO
-// Increase the width of Timestamp input field.
-// Make the Timestamp input field editable manually to enter Date and/or Time.
-// Add AM and PM units to time and make it 12-hour clock.
-// If possible, remove the blank space from the placeholder text so it looks like 'YYYY-MM-DDThh:mm:ss.s'.
-
 export const DateTimePicker = () => {
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
   const [isTimeOpen, setIsTimeOpen] = React.useState(false);

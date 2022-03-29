@@ -3,9 +3,6 @@ import "@patternfly/react-core/dist/styles/base.css";
 import "./fonts.css";
 import "./customStyles.css";
 import DateTimePicker from "./dateAndTimePicker";
-// import SimpleDrawer from "./overlayDrawer";
-// import EmptyStateMessage from "./emptyState";
-// import ComposableTableEmptyState from "./noSearchResults"
 
 import React from "react";
 import {
