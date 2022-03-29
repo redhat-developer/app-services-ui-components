@@ -226,7 +226,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                         <span
                           class="pf-c-description-list__text"
                         >
-                          Size
+                          size
                         </span>
                       </dt>
                       <dd

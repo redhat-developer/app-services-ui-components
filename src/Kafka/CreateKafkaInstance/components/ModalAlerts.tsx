@@ -64,11 +64,10 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
           case isTesting && instanceAvailability === "trial":
             return (
               <Alert
-                id="mk-create-instance-quota-alert"
+                role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.info}
                 title={t("modal_alerts.trial_available_title_storybook")}
-                aria-live="polite"
                 isInline
               >
                 <Trans
@@ -82,6 +81,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                       isInline
                     />,
                   ]}
+                  values={{ time: 48 }}
                 />
               </Alert>
             );
