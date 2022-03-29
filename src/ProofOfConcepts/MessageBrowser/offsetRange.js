@@ -27,7 +27,7 @@ export class OffsetRangeClass extends React.Component {
           <React.Fragment>
             <ToolbarItem>
               <TextContent className="pf-u-font-size">
-                <Text>Offset
+                <Text>Offset{" "}
                   <Text className="custom-text">0</Text>
                   -
                   <Text className="custom-text">9</Text>
