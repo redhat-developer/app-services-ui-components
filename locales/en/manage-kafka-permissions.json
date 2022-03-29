@@ -21,7 +21,9 @@
     "describe": "Describe",
     "describe_configs": "Describe configs",
     "read": "Read",
-    "write": "Write"
+    "write": "Write",
+    "aria_label":"Resource type operation value",
+    "placeholder_text":"Select operation"
   },
   "resource_prefix_rule": {
     "is": "Is",
