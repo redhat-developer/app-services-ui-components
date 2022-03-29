@@ -51,7 +51,9 @@
     "resource_type_selected":"{{value}} Resource type"
   },
   "resourcePrefix":{
-    "placeholder_text":"Enter prefix"
+    "placeholder_text_starts_with":"Enter prefix",
+    "placeholder_text_is":"Enter name",
+    "prefix_aria_label":"Select resource prefix"
   },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",

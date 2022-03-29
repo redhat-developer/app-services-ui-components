@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ResourcePrefix } from "./ResourcePrefix";
+import { getSelectOptions } from "../storiesHelpers";
 import { Form } from "@patternfly/react-core";
 
 export default {
@@ -7,6 +8,7 @@ export default {
   args: {
     value: undefined,
     invalid: false,
+    onFetchOptions: () => getSelectOptions("topic", 100),
   },
 } as ComponentMeta<typeof ResourcePrefix>;
 
@@ -21,17 +23,17 @@ InitialState.args = {};
 InitialState.parameters = {
   docs: {
     description: {
-      story: `Initial, empty state of the text input with placeholder text. A user can type a prefix value `,
+      story: `Initial, empty state of the typeahead select with placeholder text. A user can type a prefix value and select from a list of suggestions `,
     },
   },
 };
 
 export const ValidInput = Template.bind({});
-ValidInput.args = { value: "pet" };
+ValidInput.args = { value: "topic" };
 ValidInput.parameters = {
   docs: {
     description: {
-      story: `A user types a valid prefix value `,
+      story: `A user selects a valid prefix value `,
     },
   },
 };
@@ -42,6 +44,16 @@ InvalidInput.parameters = {
   docs: {
     description: {
       story: `A user clicks submit without entering a valid value `,
+    },
+  },
+};
+
+export const PlaceHolderVariation = Template.bind({});
+PlaceHolderVariation.args = { resourceCondition: "Starts with" };
+PlaceHolderVariation.parameters = {
+  docs: {
+    description: {
+      story: `A user select prefix rule as 'Starts with', a different placeholderText is displayed for that `,
     },
   },
 };

@@ -9,7 +9,7 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 
-type ResourceTypeValue =
+export type ResourceTypeValue =
   | "topic"
   | "consumer-group"
   | "kafka-instance"
