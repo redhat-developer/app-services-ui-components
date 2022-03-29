@@ -88,10 +88,14 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
   };
 
   return (
-    <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
+    <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
       <CreateKafkaInstance
         {...args}
-        appendTo={() => document.getElementById(id) || document.body}
+        appendTo={() =>
+          document.getElementById(`story--${id}`) ||
+          document.getElementById("root") ||
+          document.body
+        }
         isModalOpen={isModalOpen}
         onCancel={onCloseModal}
         onCreate={onCreate}
@@ -384,19 +388,6 @@ VariantOnlySingleAZEnabledWithRightTooltip.args = {
       defaultAZ: "single",
     },
     PROVIDERS.map((p) => ({ ...p, AZ: { multi: false, single: true } }))
-  ),
-} as CreateKafkaInstanceProps;
-
-export const VariantBothAZEnabledWithRightTooltip = Template.bind({});
-VariantBothAZEnabledWithRightTooltip.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      defaultProvider: "aws",
-      providers: ["aws"],
-      instanceAvailability: "quota",
-      defaultAZ: "single",
-    },
-    PROVIDERS.map((p) => ({ ...p, AZ: { multi: true, single: true } }))
   ),
 } as CreateKafkaInstanceProps;
 

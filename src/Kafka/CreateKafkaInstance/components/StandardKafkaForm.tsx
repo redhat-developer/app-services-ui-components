@@ -111,7 +111,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
       </FormGroup>
       <FormGroup
         label={t("cloud_provider")}
-        fieldId="form-cloud-provider-name"
+        fieldId="form-cloud-provider-option"
         validated={providerValidation}
         helperTextInvalid={t("common:required")}
         isRequired
@@ -121,6 +121,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           value={provider}
           onChange={setProvider}
           isDisabled={disableControls}
+          validated={providerValidation}
         />
       </FormGroup>
       <FormGroup
@@ -143,6 +144,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
         fieldId="availability-zones"
         validated={azValidation}
         helperTextInvalid={t("common:required")}
+        data-testid={"az"}
       >
         <ToggleGroup aria-label={t("availability_zone_selection")}>
           <Tooltip
@@ -152,7 +154,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             trigger={disableAZTooltip ? "manual" : undefined}
           >
             <ToggleGroupItem
-              text={t("single")}
+              text={t("az.single")}
               value={"single"}
               isDisabled={disableControls || azOptions?.single !== true}
               buttonId="single"
@@ -168,7 +170,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             })}
           >
             <ToggleGroupItem
-              text={t("multi")}
+              text={t("az.multi")}
               value="multi"
               buttonId="multi"
               isDisabled={disableControls || azOptions?.multi !== true}

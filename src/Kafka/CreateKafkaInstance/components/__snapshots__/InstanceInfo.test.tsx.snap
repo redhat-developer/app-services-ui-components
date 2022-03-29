@@ -1,14 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders Loading story 1`] = `
+exports[`InstanceInfo Renders Loading story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
       >
         <div
           class="pf-l-stack__item"
@@ -178,15 +179,16 @@ exports[`Renders Loading story 1`] = `
 </body>
 `;
 
-exports[`Renders QuotaInstance story 1`] = `
+exports[`InstanceInfo Renders QuotaInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
       >
         <div
           class="pf-l-stack__item"
@@ -434,15 +436,16 @@ exports[`Renders QuotaInstance story 1`] = `
 </body>
 `;
 
-exports[`Renders TrialInstance story 1`] = `
+exports[`InstanceInfo Renders TrialInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mk--create-instance-modal__sidebar--content"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
         class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
       >
         <div
           class="pf-l-stack__item"

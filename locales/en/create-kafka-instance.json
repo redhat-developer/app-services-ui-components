@@ -68,12 +68,10 @@
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
   },
-  "multi": "Multi",
   "no_regions_available": "No regions available",
   "partitions_value": "up to {{value}}",
   "quick_start_guide_message": "Follow our quick start guide.",
   "quick_start_guide_title": "Need help getting started?",
-  "select_region": "Select region",
   "single": "Single",
   "size": "Size",
   "size_description": "",
@@ -81,6 +79,12 @@
   "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
   "standard_kafka_size_dscription": "Learn how to add streaming units to your account",
   "standard_kafka_streaming_units": "Your organization has {{streamingUnits}} streaming units remaining",
+  "select_cloud_provider": "Select cloud provider",
+  "select_region": "Select region",
+  "az": {
+    "multi": "Multi",
+    "single": "Single"
+  },
   "statuses": {
     "creating": "Creating",
     "degraded": "Degraded",

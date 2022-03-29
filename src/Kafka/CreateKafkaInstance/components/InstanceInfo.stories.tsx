@@ -1,5 +1,5 @@
 import { FlexItem } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 
 import { InstanceInfo } from "./InstanceInfo";
@@ -22,7 +22,7 @@ export default {
 const Template: ComponentStory<typeof InstanceInfo> = (args) => (
   <FlexItem
     flex={{ default: "flex_1" }}
-    className="mk--create-instance-modal__sidebar--content"
+    className="mas--CreateKafkaInstance__sidebar"
   >
     <InstanceInfo {...args} />
   </FlexItem>

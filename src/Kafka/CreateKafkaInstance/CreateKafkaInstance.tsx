@@ -239,7 +239,7 @@ export const CreateKafkaInstance: FunctionComponent<
         </FlexItem>
         <FlexItem
           flex={{ default: "flex_1" }}
-          className="mk--create-instance-modal__sidebar--content"
+          className="mas--CreateKafkaInstance__sidebar"
         >
           <InstanceInfo
             isLoading={isLoading || !canCreate}
@@ -256,18 +256,14 @@ export const CreateKafkaInstance: FunctionComponent<
           />
         </FlexItem>
       </Flex>
-      <Flex>
-        <FlexItem>
-          <Alert
-            className="mk--create-instance-modal__alert--message"
-            customIcon={<OutlinedClockIcon />}
-            variant="info"
-            isInline
-            isPlain
-            title={t("instance_creation_time_alert")}
-          />
-        </FlexItem>
-      </Flex>
+      <Alert
+        className="mk--create-instance-modal__alert--message"
+        customIcon={<OutlinedClockIcon />}
+        variant="info"
+        isInline
+        isPlain
+        title={t("instance_creation_time_alert")}
+      />
     </Modal>
   );
 };

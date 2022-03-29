@@ -63,7 +63,7 @@ export const InstanceInfo: VoidFunctionComponent<
   const { t } = useTranslation("create-kafka-instance");
 
   return (
-    <Stack hasGutter>
+    <Stack hasGutter data-testid={"instance-info"}>
       <StackItem>
         <Card isFlat>
           <CardTitle component="h2">{t("instance_information")}</CardTitle>
