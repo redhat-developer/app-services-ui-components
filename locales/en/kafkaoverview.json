@@ -1,6 +1,6 @@
 {
   "contactSalesCardCallToActionButton": "Contact sales",
-  "contactSalesCardMainText": "Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers outside the United States and Canada.",
+  "contactSalesCardMainText": "Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers in any location, including locations outside the United States and Canada.",
   "contactSalesCardTitle": "Contact sales",
   "heroCallToActionButton": "",
   "heroDescription": "Red Hat OpenShift Streams for Apache Kafka is a managed cloud service that provides a streamlined developer experience for building, deploying, and scaling real-time applications in hybrid-cloud environments. The combination of seamless operations across distributed microservices, large data transfer volumes, and managed operations allows teams to focus on core competencies, accelerate application velocity and reduce operational cost.",

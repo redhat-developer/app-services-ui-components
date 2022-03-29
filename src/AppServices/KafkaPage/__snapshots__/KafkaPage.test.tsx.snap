@@ -136,7 +136,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-card__body"
             >
-              Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers outside the United States and Canada.
+              Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers in any location, including locations outside the United States and Canada.
             </div>
             <div
               class="pf-c-card__footer"
