@@ -3,6 +3,7 @@
   "axis-label-bytes": "Bytes",
   "axis-label-time": "Time",
   "axis-label-time-full": "Time (HH:mm MM/dd)",
+  "chart-popover-icon-screenreader-text": "Information about {{title}}",
   "client_connections": "Client connections",
   "client_connections_helper_text": "Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",
   "client_connections_y_axis": "Connections",
@@ -51,5 +52,6 @@
   "topics_refresh": "Refresh topic metrics",
   "total_bytes": "Bytes incoming and outgoing",
   "total_bytes_popover_header": "Bytes incoming and outgoing",
-  "used_disk_space": "Used disk space"
+  "used_disk_space": "Used disk space",
+  "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed."
 }

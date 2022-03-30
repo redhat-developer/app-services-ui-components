@@ -417,7 +417,7 @@ exports[`OverviewPage renders 1`] = `
                             <span
                               class="pf-c-label__content"
                             >
-                              Field Trial
+                              Field trial
                             </span>
                           </span>
                         </li>
