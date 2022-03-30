@@ -47,9 +47,6 @@ export type StandardKafkaFormProps = {
   setAZ: (az: AZ) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   streamingUnits: number | undefined;
-  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
-  It will be remove when actual data will available*/
-  isTesting?: boolean;
 };
 
 export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
@@ -78,7 +75,6 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   setProvider,
   setName,
   onSubmit,
-  isTesting,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -180,44 +176,43 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           </Tooltip>
         </ToggleGroup>
       </FormGroup>
-      {isTesting && (
-        <FormGroupWithPopover
-          labelHead={t("size")}
-          fieldId="streaming-size"
-          fieldLabel={t("size")}
-          labelBody={t("size_help_content")}
-          buttonAriaLabel={t("size_field_aria")}
-        >
-          <div className="pf-c-input-group pf-u-w-50">
-            <Slider
-              min={1}
-              max={2}
-              value={isDisabledSize ? -1 : size}
-              showTicks={true}
-              label={t("streaming_unit")}
-              className="pf-u-w-100"
-              isDisabled={isDisabledSize}
-              onChange={setSize}
-            />
-            <span
-              className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
-              id="plain-example"
-            >
-              {t("streaming_unit")}
-            </span>
-          </div>
-          <Text component={TextVariants.p} className="pf-c-form__helper-text">
-            {t("standard_kafka_streaming_units", { streamingUnits })}
-          </Text>
-          <Button
-            className="pf-c-form__helper-text"
-            variant={ButtonVariant.link}
-            isInline
+
+      <FormGroupWithPopover
+        labelHead={t("size")}
+        fieldId="streaming-size"
+        fieldLabel={t("size")}
+        labelBody={t("size_help_content")}
+        buttonAriaLabel={t("size_field_aria")}
+      >
+        <div className="pf-c-input-group pf-u-w-50">
+          <Slider
+            min={1}
+            max={2}
+            value={isDisabledSize ? -1 : size}
+            showTicks={true}
+            label={t("streaming_unit")}
+            className="pf-u-w-100"
+            isDisabled={isDisabledSize}
+            onChange={setSize}
+          />
+          <span
+            className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
+            id="plain-example"
           >
-            {t("standard_kafka_size_dscription")}
-          </Button>
-        </FormGroupWithPopover>
-      )}
+            {t("streaming_unit")}
+          </span>
+        </div>
+        <Text component={TextVariants.p} className="pf-c-form__helper-text">
+          {t("standard_kafka_streaming_units", { streamingUnits })}
+        </Text>
+        <Button
+          className="pf-c-form__helper-text"
+          variant={ButtonVariant.link}
+          isInline
+        >
+          {t("standard_kafka_size_dscription")}
+        </Button>
+      </FormGroupWithPopover>
     </Form>
   );
 };

@@ -44,10 +44,6 @@ export type CreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
-
-  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
-  It will be remove when actual data will available*/
-  isTesting?: boolean;
 } & MakeCreateKafkaInstanceMachine &
   Partial<InstanceInfoLimitsProps>;
 
@@ -68,7 +64,6 @@ export const CreateKafkaInstance: FunctionComponent<
   connections = 2000,
   connectionRate = 100,
   messageSize = 1,
-  isTesting = false,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance");
@@ -167,7 +162,6 @@ export const CreateKafkaInstance: FunctionComponent<
         instanceAvailability={instanceAvailability}
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
-        isTesting={isTesting}
       />
       <Flex
         direction={{ default: "column", lg: "row" }}
@@ -202,7 +196,6 @@ export const CreateKafkaInstance: FunctionComponent<
                 setProvider={setProvider}
                 setName={setName}
                 onSubmit={onSubmit}
-                isTesting={isTesting}
                 instanceAvailability={instanceAvailability}
               />
             </>
@@ -233,7 +226,6 @@ export const CreateKafkaInstance: FunctionComponent<
               setName={setName}
               onSubmit={onSubmit}
               streamingUnits={3}
-              isTesting={isTesting}
             />
           )}
         </FlexItem>
@@ -253,7 +245,6 @@ export const CreateKafkaInstance: FunctionComponent<
             messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
             streamingUnits={2}
-            isTesting={isTesting}
           />
         </FlexItem>
       </Flex>

@@ -52,7 +52,6 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   setProvider,
   setName,
   onSubmit,
-  isTesting,
   instanceAvailability,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
@@ -113,7 +112,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           isDisabled={disableControls}
           validated={regionValidation}
         />
-        {isTesting && instanceAvailability && (
+        {instanceAvailability && (
           <>
             <Text component={TextVariants.p} className="pf-c-form__helper-text">
               {t("cloud_region_description")}
@@ -169,51 +168,46 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           </Tooltip>
         </ToggleGroup>
       </FormGroup>
-      {isTesting && (
-        <FormGroupWithPopover
-          labelHead={t("size")}
-          fieldId="streaming-size"
-          fieldLabel={t("size")}
-          labelBody={t("size_help_content")}
-          buttonAriaLabel={t("size_field_aria")}
-        >
-          <div className="pf-c-input-group pf-u-w-50">
-            <Slider
-              min={1}
-              max={2}
-              value={isDisabledSize ? -1 : size}
-              showTicks={true}
-              label={t("streaming_unit")}
-              className="pf-u-w-100"
-              isDisabled={isDisabledSize}
-              onChange={setSize}
-            />
-            <span
-              className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
-              id="plain-example"
+      <FormGroupWithPopover
+        labelHead={t("size")}
+        fieldId="streaming-size"
+        fieldLabel={t("size")}
+        labelBody={t("size_help_content")}
+        buttonAriaLabel={t("size_field_aria")}
+      >
+        <div className="pf-c-input-group pf-u-w-50">
+          <Slider
+            min={1}
+            max={2}
+            value={isDisabledSize ? -1 : size}
+            showTicks={true}
+            label={t("streaming_unit")}
+            className="pf-u-w-100"
+            isDisabled={isDisabledSize}
+            onChange={setSize}
+          />
+          <span
+            className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
+            id="plain-example"
+          >
+            {t("streaming_unit")}
+          </span>
+        </div>
+        {instanceAvailability && (
+          <>
+            <Text component={TextVariants.p} className="pf-c-form__helper-text">
+              {t("trial_kafka_size_description")}
+            </Text>
+            <Button
+              className="pf-c-form__helper-text"
+              variant={ButtonVariant.link}
+              isInline
             >
-              {t("streaming_unit")}
-            </span>
-          </div>
-          {instanceAvailability && (
-            <>
-              <Text
-                component={TextVariants.p}
-                className="pf-c-form__helper-text"
-              >
-                {t("trial_kafka_size_description")}
-              </Text>
-              <Button
-                className="pf-c-form__helper-text"
-                variant={ButtonVariant.link}
-                isInline
-              >
-                {t("learn_about_sizes")}
-              </Button>
-            </>
-          )}
-        </FormGroupWithPopover>
-      )}
+              {t("learn_about_sizes")}
+            </Button>
+          </>
+        )}
+      </FormGroupWithPopover>
     </Form>
   );
 };

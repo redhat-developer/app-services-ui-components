@@ -60,7 +60,6 @@ export default {
       providers: ["aws", "azure"],
     }),
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
-    isTesting: true,
   },
 } as ComponentMeta<typeof CreateKafkaInstance>;
 

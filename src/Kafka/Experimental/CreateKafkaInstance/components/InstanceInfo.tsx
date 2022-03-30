@@ -43,9 +43,6 @@ export type InstanceInfoLimitsProps = {
    */
   messageSize: number;
   streamingUnits: number;
-  /*isTesting flag is temporary for show some contet in storybook, not in productio. 
-  It will be remove when actual data will available*/
-  isTesting?: boolean;
 };
 
 export const InstanceInfo: VoidFunctionComponent<
@@ -62,7 +59,6 @@ export const InstanceInfo: VoidFunctionComponent<
   messageSize,
   onClickQuickStart,
   streamingUnits,
-  isTesting,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -76,7 +72,7 @@ export const InstanceInfo: VoidFunctionComponent<
               <DescriptionListGroup>
                 {!isLoading && (
                   <Grid sm={6} lg={12} hasGutter>
-                    {!isTrial && isTesting && (
+                    {!isTrial && (
                       <GridItem>
                         <DescriptionListTerm>
                           {t("common:size")}
