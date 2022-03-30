@@ -89,7 +89,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
       return (
         <div ref={containerRef}>
           <Chart
-            ariaTitle={t("metrics:used_disk_space")}
+            ariaTitle={chartName}
             containerComponent={
               <ChartVoronoiContainer
                 labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}

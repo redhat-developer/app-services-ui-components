@@ -4,12 +4,14 @@
   "description": "@rhoas/app-services-ui-components contains a number of components for the Managed Application Services UI.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
+  "types": "./types/src/index.d.ts",
   "sideEffects": [
     "*.svg",
     "*.css"
   ],
   "files": [
     "dist/",
+    "types/",
     "locales/",
     "static/"
   ],
@@ -88,7 +90,7 @@
     "concurrently": "7.0.0",
     "eslint": "8.12.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-react-hooks": "4.4.0",
     "eslint-plugin-storybook": "0.5.7",
     "http-server": "14.1.0",
     "husky": "7.0.4",

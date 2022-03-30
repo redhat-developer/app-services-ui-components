@@ -18,6 +18,10 @@ export const LogoRedHatOpenShiftApplicationServicesAReverseRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift-Application_Services-A-Reverse-RGB.svg",
   import.meta.url
 ).href;
+export const LogoRedHatOpenShiftConnectorsBStandardRgb = new URL(
+  "../static/images/Logo-Red_Hat-OpenShift_Connectors-B-Standard-RGB.svg",
+  import.meta.url
+).href;
 export const LogoRedHatOpenShiftDataScienceAStandardRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift-Data_Science-A-Standard-RGB.svg",
   import.meta.url
@@ -45,6 +49,10 @@ export const LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbSvg = new URL(
 ).href;
 export const LogoRedHatOpenShiftStreamsForApacheKafkaAWhiteRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift_Streams_for_Apache_Kafka-A-White-RGB.png",
+  import.meta.url
+).href;
+export const AppSpeedKeyArt = new URL(
+  "../static/images/CND-AppSpeed-Keyart-2.png",
   import.meta.url
 ).href;
 export const RhodsMlTechnology = new URL(

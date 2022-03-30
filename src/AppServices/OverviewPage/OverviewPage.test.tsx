@@ -19,6 +19,11 @@ describe("OverviewPage", () => {
       "href",
       Example.args!.toServiceRegistryHref
     );
+    const createConnectors = comp.getByTestId("cardRHOC-buttonCTA");
+    expect(createConnectors).toHaveAttribute(
+      "href",
+      Example.args!.toConnectorsHref
+    );
 
     const btnSubmit = comp.getByTestId("cardRHODS-buttonTryIt");
     expect(btnSubmit.dataset.ouiaComponentId).toBe("button-rhods-tryit");

@@ -45,7 +45,7 @@ export default {
       preventAssignment: true,
     }),
     json(),
-    typescript(),
+    typescript({ useTsconfigDeclarationDir: true }),
     postcss({
       extract: true,
       minimize: true,
