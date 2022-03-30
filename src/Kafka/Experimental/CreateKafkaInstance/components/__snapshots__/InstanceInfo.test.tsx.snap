@@ -1,0 +1,708 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InstanceInfo Renders Loading story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
+      style=""
+    >
+      <div
+        class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
+      >
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Details
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <dl
+                class="pf-c-description-list pf-m-compact"
+              >
+                <div
+                  class="pf-c-description-list__group"
+                >
+                  <div
+                    class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+                  >
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 75%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        >
+                          Loading contents
+                        </span>
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 66%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 66%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 50%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 33%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 25%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 55%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <div
+                        class="pf-c-skeleton"
+                        style="--pf-c-skeleton--Width: 35%;"
+                      >
+                        <span
+                          class="pf-u-screen-reader"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </dl>
+            </div>
+          </article>
+        </div>
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-compact pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Need help getting started?
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+                data-ouia-component-id="OUIA-Generated-Button-link-1"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                Follow our quick start guide.
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`InstanceInfo Renders QuotaInstance story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
+      style=""
+    >
+      <div
+        class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
+      >
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Details
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <dl
+                class="pf-c-description-list pf-m-compact"
+              >
+                <div
+                  class="pf-c-description-list__group"
+                >
+                  <div
+                    class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+                  >
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Size
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          1 streaming units
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Ingress
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB/second each
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Egress
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB/second each
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Storage
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 GiB
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Partitions
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Client connections
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Connection rate
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 connections/second
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Message size
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB
+                        </div>
+                      </dd>
+                    </div>
+                  </div>
+                </div>
+              </dl>
+            </div>
+          </article>
+        </div>
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-compact pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-4"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Need help getting started?
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+                data-ouia-component-id="OUIA-Generated-Button-link-2"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                Follow our quick start guide.
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;
+
+exports[`InstanceInfo Renders TrialInstance story 1`] = `
+<body>
+  <div>
+    <div
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
+      style=""
+    >
+      <div
+        class="pf-l-stack pf-m-gutter"
+        data-testid="instance-info"
+      >
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-5"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Details
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <dl
+                class="pf-c-description-list pf-m-compact"
+              >
+                <div
+                  class="pf-c-description-list__group"
+                >
+                  <div
+                    class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
+                  >
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Duration
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            fill="var(--pf-global--info-color--100)"
+                            height="1em"
+                            role="img"
+                            style="vertical-align: -0.125em;"
+                            viewBox="0 0 512 512"
+                            width="1em"
+                          >
+                            <path
+                              d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"
+                            />
+                          </svg>
+                           
+                          123 hours
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Ingress
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB/second each
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Egress
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB/second each
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Storage
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 GiB
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Partitions
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Client connections
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Connection rate
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 connections/second
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-l-grid__item"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Message size
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          up to 123 MiB
+                        </div>
+                      </dd>
+                    </div>
+                  </div>
+                </div>
+              </dl>
+            </div>
+          </article>
+        </div>
+        <div
+          class="pf-l-stack__item"
+        >
+          <article
+            class="pf-c-card pf-m-compact pf-m-flat"
+            data-ouia-component-id="OUIA-Generated-Card-6"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <h2
+              class="pf-c-card__title"
+            >
+              Need help getting started?
+            </h2>
+            <div
+              class="pf-c-card__body"
+            >
+              <button
+                aria-disabled="false"
+                class="pf-c-button pf-m-link pf-m-inline pf-m-small"
+                data-ouia-component-id="OUIA-Generated-Button-link-3"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                type="button"
+              >
+                Follow our quick start guide.
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

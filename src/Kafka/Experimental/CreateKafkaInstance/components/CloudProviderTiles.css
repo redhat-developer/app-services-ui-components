@@ -1,0 +1,11 @@
+.mas--CreateKafkaInstance__CloudProviderTile:not(:last-child) {
+  margin-right: var(--pf-global--spacer--xs);
+}
+
+.mas--CreateKafkaInstance__CloudProviderTile--Icon {
+  margin-right: var(--pf-global--spacer--md);
+}
+
+.mas--CreateKafkaInstance__CloudProviderTile--select {
+  display: none;
+}

@@ -1,4 +1,4 @@
-import { render, waitForI18n } from "../../../test-utils";
+import { render, waitForI18n } from "../../../../test-utils";
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./InstanceInfo.stories";
 import { userEvent } from "@storybook/testing-library";
@@ -24,14 +24,10 @@ describe("InstanceInfo", function () {
     await waitForI18n(comp);
     const instanceInfo = await comp.findByTestId("instance-info");
     expect(instanceInfo.textContent).toBe(
-      "DetailsLoading contentsNeed help getting started? Follow our quick start guide."
+      "DetailsLoading contentsNeed help getting started?Follow our quick start guide."
     );
 
-    userEvent.click(
-      await comp.findByText(
-        "Need help getting started? Follow our quick start guide."
-      )
-    );
+    userEvent.click(await comp.findByText("Follow our quick start guide."));
 
     expect(spy).toBeCalledTimes(1);
   });

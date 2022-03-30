@@ -11,8 +11,10 @@
   "client_connections_value": "up to {{value}}",
   "cloud_provider": "Cloud provider",
   "cloud_region": "Cloud region",
+  "cloud_region_description": "More cloud regions are available with a subscription.",
   "connection_rate_value": "up to {{value}} connections/second",
   "create_instance": "Create instance",
+  "create_instance_title": "Create a $t(common:kafka) instance",
   "create_instance_name_helper_text": "Must start with a letter and end with a letter or number. Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "create_instance_name_helper_text_name_taken": "{{name}} already exists. Try a different name.",
   "duration_value": "{{value}} hours",
@@ -26,10 +28,11 @@
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
+  "ingress_egress": "Ingress/Egress",
   "ingress_egress_value": "up to {{value}} MiB/second each",
   "ingress_value": "up to {{value}} MiB/second each",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
-  "instance_information": "Instance information",
+  "instance_information": "Details",
   "instance_name": "Name",
   "kafka_status_created_shortly_help": "This will be ready shortly.",
   "kafka_status_popover": {
@@ -52,6 +55,8 @@
     "warning_or_error_title": "$t(kafka_status_warning_or_error_title)"
   },
   "kafka_status_warning_or_error_title": "This is taking longer than expected.",
+  "learn_about_cloud_regions": "Learn more about cloud regions",
+  "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
     "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
@@ -60,13 +65,23 @@
     "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
+    "trial_available_message": "The trial has a duration of {{time}} hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
     "trial_available_title": "Your instance will expire after 48 hours.",
+    "trial_available_title_storybook": "You can create a trial instance to evaluate this service.",
+    "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
+    "trial_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
   },
   "no_regions_available": "No regions available",
   "partitions_value": "up to {{value}}",
   "quick_start_guide_message": "Need help getting started? Follow our quick start guide.",
+  "quick_start_guide_message_exp": "Follow our quick start guide.",
+  "quick_start_guide_title": "Need help getting started?",
+  "size_field_aria": "More info for Size field",
+  "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
+  "standard_kafka_size_dscription": "Learn how to add streaming units to your account",
+  "standard_kafka_streaming_units": "Your organization has {{streamingUnits}} streaming units remaining",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
   "statuses": {
@@ -76,5 +91,8 @@
     "ready": "Ready"
   },
   "storage_value": "up to {{value}} GiB",
+  "stream_unit_value": "{{size}} streaming units",
+  "streaming_unit": "streaming units",
+  "trial_kafka_size_description": "With a subscription, you can select a size for your instance. Changing the size allows you to increase limits such as ingress, egress, and storage. The limits that you get with a trial instance are listed under Details.",
   "streaming_size_value": "{{value}} streaming unit"
 }
