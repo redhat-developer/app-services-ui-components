@@ -17,20 +17,45 @@ const Template: ComponentStory<typeof KafkaDetailsTab> = (args) => (
   <KafkaDetailsTab {...args} />
 );
 
-export const NormalInstance = Template.bind({});
-NormalInstance.args = {};
+const instanceInfo = {
+  ingress: 50,
+  egress: 50,
+  storage: 50,
+  maxPartitions: 1500,
+  connections: 2000,
+  connectionRate: 100,
+  messageSize: 1,
+};
+
+export const StandardInstanceCreated = Template.bind({});
+StandardInstanceCreated.args = {
+  instanceType: "standard",
+  size: 1,
+  ...instanceInfo,
+  isTesting: true,
+};
 
 export const TrialInstanceJustCreated = Template.bind({});
 TrialInstanceJustCreated.args = {
   expiryDate: addHours(new Date(), 48),
+  instanceType: "eval",
+  ...instanceInfo,
+  isTesting: true,
 };
+TrialInstanceJustCreated.doc = {};
 
 export const TrialIntsanceRecentlyCreated = Template.bind({});
 TrialIntsanceRecentlyCreated.args = {
   expiryDate: addHours(new Date(), 22),
+  instanceType: "eval",
+  isTesting: true,
+  ...instanceInfo,
 };
 
 export const TrialInstanceNearExpiration = Template.bind({});
 TrialInstanceNearExpiration.args = {
   expiryDate: addHours(new Date(), 2),
+  instanceType: "eval",
+  isTesting: true,
+  ...instanceInfo,
 };

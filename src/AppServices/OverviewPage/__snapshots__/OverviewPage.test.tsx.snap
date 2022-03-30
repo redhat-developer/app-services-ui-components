@@ -127,6 +127,38 @@ exports[`OverviewPage renders 1`] = `
                 class="pf-l-stack pf-m-gutter"
               >
                 <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
                   class="pf-l-stack__item"
                 >
                   API Management supports application development teams that want to take an API-first approach to building microservices-based applications.
@@ -212,7 +244,7 @@ exports[`OverviewPage renders 1`] = `
                 class=""
               >
                 <img
-                  alt="Red Hat OpenShift Data Science logo"
+                  alt="Red Hat OpenShift Connectors logo"
                   src="dummyimage"
                   style="height: 50px;"
                 />
@@ -224,6 +256,118 @@ exports[`OverviewPage renders 1`] = `
               <h2
                 class="pf-c-title pf-m-xl"
                 data-ouia-component-id="OUIA-Generated-Title-3"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Connectors
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Service Preview
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  Connectors provides pre-built integrations to enable connectivity from data, services, and systems to Red Hat OpenShift Streams for Apache Kafka.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is managed by Red Hat as an add-on for OpenShift Streams for Apache Kafka.
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHOC-buttonCTA"
+                href="/to-connectors"
+                target="_blank"
+              >
+                Get started
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Data Science logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-4"
                 data-ouia-component-type="PF4/Title"
                 data-ouia-safe="true"
               >
@@ -239,15 +383,47 @@ exports[`OverviewPage renders 1`] = `
                 <div
                   class="pf-l-stack__item pf-u-mb-lg"
                 >
-                  <span
-                    class="pf-c-label"
+                  <div
+                    class="pf-c-label-group"
                   >
-                    <span
-                      class="pf-c-label__content"
+                    <div
+                      class="pf-c-label-group__main"
                     >
-                      Field trial
-                    </span>
-                  </span>
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-green"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Data service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Field trial
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div
                   class="pf-l-stack__item"
@@ -308,7 +484,7 @@ exports[`OverviewPage renders 1`] = `
           </article>
           <article
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-id="OUIA-Generated-Card-4"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -331,7 +507,7 @@ exports[`OverviewPage renders 1`] = `
             >
               <h2
                 class="pf-c-title pf-m-xl"
-                data-ouia-component-id="OUIA-Generated-Title-4"
+                data-ouia-component-id="OUIA-Generated-Title-5"
                 data-ouia-component-type="PF4/Title"
                 data-ouia-safe="true"
               >
@@ -344,6 +520,38 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="pf-l-stack__item"
                 >
@@ -362,7 +570,7 @@ exports[`OverviewPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-3"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="hero-buttonTryKafka"
@@ -397,7 +605,7 @@ exports[`OverviewPage renders 1`] = `
             >
               <h2
                 class="pf-c-title pf-m-xl"
-                data-ouia-component-id="OUIA-Generated-Title-5"
+                data-ouia-component-id="OUIA-Generated-Title-6"
                 data-ouia-component-type="PF4/Title"
                 data-ouia-safe="true"
               >
@@ -410,6 +618,38 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
                 <div
                   class="pf-l-stack__item"
                 >
@@ -440,7 +680,7 @@ exports[`OverviewPage renders 1`] = `
           </article>
           <article
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-4"
+            data-ouia-component-id="OUIA-Generated-Card-5"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -463,7 +703,7 @@ exports[`OverviewPage renders 1`] = `
             >
               <h2
                 class="pf-c-title pf-m-xl"
-                data-ouia-component-id="OUIA-Generated-Title-6"
+                data-ouia-component-id="OUIA-Generated-Title-7"
                 data-ouia-component-type="PF4/Title"
                 data-ouia-safe="true"
               >
@@ -479,15 +719,47 @@ exports[`OverviewPage renders 1`] = `
                 <div
                   class="pf-l-stack__item pf-u-mb-lg"
                 >
-                  <span
-                    class="pf-c-label"
+                  <div
+                    class="pf-c-label-group"
                   >
-                    <span
-                      class="pf-c-label__content"
+                    <div
+                      class="pf-c-label-group__main"
                     >
-                      Service Preview
-                    </span>
-                  </span>
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-green"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Data service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Service Preview
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
                 <div
                   class="pf-l-stack__item"
@@ -536,7 +808,7 @@ exports[`OverviewPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-3"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-4"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardRHODS-buttonCTA"

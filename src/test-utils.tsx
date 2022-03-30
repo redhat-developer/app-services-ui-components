@@ -1,4 +1,4 @@
-import { Suspense, FunctionComponent, ReactElement } from "react";
+import { FunctionComponent, ReactElement, Suspense } from "react";
 import {
   act,
   render,
@@ -26,6 +26,7 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             overview: () => import("../locales/en/overview.json"),
             datascienceoverview: () =>
               import("../locales/en/datascienceoverview.json"),
+            kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
             apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
             "manage-kafka-permissions": () =>
               import("../locales/en/manage-kafka-permissions.json"),
@@ -46,10 +47,20 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
   );
 };
 
+const AllTheProvidersWithRoot: FunctionComponent = ({ children }) => (
+  <AllTheProviders>
+    <div id={"root"}>{children}</div>
+  </AllTheProviders>
+);
 const customRender = (
   ui: ReactElement,
   options?: Omit<RenderOptions, "wrapper">
 ) => render(ui, { wrapper: AllTheProviders, ...options });
+
+const renderDialog = (
+  ui: ReactElement,
+  options?: Omit<RenderOptions, "wrapper">
+) => render(ui, { wrapper: AllTheProvidersWithRoot, ...options });
 
 async function waitForI18n(r: RenderResult) {
   await waitFor(() => {
@@ -67,4 +78,4 @@ async function waitForPopper() {
 export * from "@testing-library/react";
 
 // override render method
-export { customRender as render, waitForI18n, waitForPopper };
+export { customRender as render, renderDialog, waitForI18n, waitForPopper };
