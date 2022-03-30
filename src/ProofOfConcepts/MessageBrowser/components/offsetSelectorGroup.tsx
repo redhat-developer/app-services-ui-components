@@ -170,6 +170,7 @@ export class OffsetSelectorGroupClass extends React.Component {
           showToolbarItem={currentCategory === "Offset"}
         >
           <TextInput
+          className="pf-c-form-control custom-width"
             aria-label="offset filter"
             placeholder="Select offset"
             onChange={this.onInputChange}
@@ -231,6 +232,3 @@ export class OffsetSelectorGroupClass extends React.Component {
     return <React.Fragment>{this.renderToolbar()}</React.Fragment>;
   }
 }
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<OffsetSelectorGroup />, rootElement);

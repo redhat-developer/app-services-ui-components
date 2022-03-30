@@ -1,4 +1,10 @@
-/* Timestamp Selector */
+/* Offset Selector, Timestamp Selector, DateAndTimePicker */
+
+.pf-c-form-control.custom-width {
+  --pf-c-form-control--Width: 10rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
 
 .pf-c-form-control.custom {
   --pf-c-form-control--Width: 15rem;
