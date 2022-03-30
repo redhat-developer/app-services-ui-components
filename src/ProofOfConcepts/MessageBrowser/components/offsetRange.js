@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  TextContent,
-  Text
-} from "@patternfly/react-core";
+import { TextContent, Text } from "@patternfly/react-core";
 
 // Follow the PF Pagination component styling here.
 // i.e. use default body copy size 16px (pf-global—fontsize—med)
@@ -13,9 +10,7 @@ export class OffsetRangeClass extends React.Component {
       <React.Fragment>
         <TextContent className="pf-u-font-size">
           <Text>
-            Offset{" "}
-            <Text className="custom-text">0</Text>
-            {" "}-{" "}
+            Offset <Text className="custom-text">0</Text> -{" "}
             <Text className="custom-text">9</Text>
           </Text>
         </TextContent>

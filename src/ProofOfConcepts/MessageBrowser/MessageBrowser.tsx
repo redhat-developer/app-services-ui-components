@@ -1,4 +1,8 @@
-import { TableClass, PartitionSelectorClass, OffsetSelectorGroupClass } from "./components";
+import {
+  TableClass,
+  PartitionSelectorClass,
+  OffsetSelectorGroupClass,
+} from "./components";
 import { ToolbarIconsClass } from "./components/searchAndReload";
 import { OffsetRangeClass } from "./components/offsetRange";
 
@@ -24,17 +28,17 @@ export const MessageBrowser: VoidFunctionComponent = () => {
     <React.Fragment>
       <Toolbar>
         <ToolbarContent>
-        <ToolbarGroup>
-        <PartitionSelectorClass />
-        <OffsetSelectorGroupClass />
-        <ToolbarIconsClass/>
-        </ToolbarGroup>
-        <ToolbarGroup alignment={{ default: "alignRight" }}>
-        <OffsetRangeClass/>
-        </ToolbarGroup>
+          <ToolbarGroup>
+            <PartitionSelectorClass />
+            <OffsetSelectorGroupClass />
+            <ToolbarIconsClass />
+          </ToolbarGroup>
+          <ToolbarGroup alignment={{ default: "alignRight" }}>
+            <OffsetRangeClass />
+          </ToolbarGroup>
         </ToolbarContent>
       </Toolbar>
       <TableClass />
-      </React.Fragment>
+    </React.Fragment>
   );
 };

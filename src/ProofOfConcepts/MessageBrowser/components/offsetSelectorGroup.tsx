@@ -170,7 +170,7 @@ export class OffsetSelectorGroupClass extends React.Component {
           showToolbarItem={currentCategory === "Offset"}
         >
           <TextInput
-          className="pf-c-form-control custom-width"
+            className="pf-c-form-control custom-width"
             aria-label="offset filter"
             placeholder="Select offset"
             onChange={this.onInputChange}
