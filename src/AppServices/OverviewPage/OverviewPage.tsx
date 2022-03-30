@@ -9,6 +9,7 @@ import {
   CardTitle,
   Grid,
   Label,
+  LabelGroup,
   Stack,
   StackItem,
   Title,
@@ -21,6 +22,7 @@ import {
   AppServicesOverviewIconPattern,
   LogoRedHatOpenShiftDatabaseAccessAStandardRgb,
   LogoRedHatOpenShiftApiManagementAStandardRgb,
+  LogoRedHatOpenShiftConnectorsBStandardRgb,
   LogoRedHatOpenShiftDataScienceAStandardRgb,
   LogoRedHatOpenShiftServiceRegistryAStandardRgb,
   LogoRedHatOpenShiftStreamsForApacheKafkaAStandardRgbPng,
@@ -34,11 +36,13 @@ import {
 export type OverviewPageProps = {
   toKafkaHref: string;
   toServiceRegistryHref: string;
+  toConnectorsHref: string;
 };
 
 export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
   toKafkaHref,
   toServiceRegistryHref,
+  toConnectorsHref,
 }) => {
   const { t } = useTranslation();
   return (
@@ -89,6 +93,13 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
+                <StackItem className="pf-u-mb-lg">
+                  <LabelGroup>
+                    <Label color="blue">
+                      {t("overview:applicationService")}
+                    </Label>
+                  </LabelGroup>
+                </StackItem>
                 <StackItem>{t("overview:rhoamMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview:rhoamSecondaryText")}{" "}
@@ -121,6 +132,50 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             </CardFooter>
           </Card>
 
+          {/* Connectors card */}
+          <Card>
+            <CardHeader>
+              <CardHeaderMain>
+                <img
+                  src={LogoRedHatOpenShiftConnectorsBStandardRgb}
+                  alt="Red Hat OpenShift Connectors logo"
+                  style={{ height: "50px" }}
+                />
+              </CardHeaderMain>
+            </CardHeader>
+            <CardTitle>
+              <Title headingLevel="h2" size="xl">
+                {t("overview:rhocTitle")}
+              </Title>
+            </CardTitle>
+            <CardBody>
+              <Stack hasGutter>
+                <StackItem className="pf-u-mb-lg">
+                  <LabelGroup>
+                    <Label color="blue">
+                      {t("overview:applicationService")}
+                    </Label>
+                    <Label>{t("overview:servicePreview")}</Label>
+                  </LabelGroup>
+                </StackItem>
+                <StackItem>{t("overview:rhocMainText")}</StackItem>
+                <StackItem className="pf-u-color-200">
+                  {t("overview:rhocSecondaryText")}
+                </StackItem>
+              </Stack>
+            </CardBody>
+            <CardFooter>
+              <Button
+                data-testid="cardRHOC-buttonCTA"
+                variant={ButtonVariant.secondary}
+                target="_blank"
+                component={(props) => <Link {...props} to={toConnectorsHref} />}
+              >
+                {t("overview:getStarted")}
+              </Button>
+            </CardFooter>
+          </Card>
+
           {/* Data science card */}
           <Card>
             <CardHeader>
@@ -140,7 +195,10 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardBody>
               <Stack hasGutter>
                 <StackItem className="pf-u-mb-lg">
-                  <Label>{t("overview:fieldTrial")}</Label>
+                  <LabelGroup>
+                    <Label color="green">{t("overview:dataService")}</Label>
+                    <Label>{t("overview:fieldTrial")}</Label>
+                  </LabelGroup>
                 </StackItem>
                 <StackItem>{t("overview:rhodsMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
@@ -192,6 +250,13 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
+                <StackItem className="pf-u-mb-lg">
+                  <LabelGroup>
+                    <Label color="blue">
+                      {t("overview:applicationService")}
+                    </Label>
+                  </LabelGroup>
+                </StackItem>
                 <StackItem>{t("overview:rhosrMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview:rhosrSecondaryText")}
@@ -233,6 +298,13 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
+                <StackItem className="pf-u-mb-lg">
+                  <LabelGroup>
+                    <Label color="blue">
+                      {t("overview:applicationService")}
+                    </Label>
+                  </LabelGroup>
+                </StackItem>
                 <StackItem>{t("overview:rhosakMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview:rhosakSecondaryText")}
@@ -270,7 +342,10 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
             <CardBody>
               <Stack hasGutter>
                 <StackItem className="pf-u-mb-lg">
-                  <Label>{t("overview:servicePreview")}</Label>
+                  <LabelGroup>
+                    <Label color="green">{t("overview:dataService")}</Label>
+                    <Label>{t("overview:servicePreview")}</Label>
+                  </LabelGroup>
                 </StackItem>
                 <StackItem>{t("overview:dbaasMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">

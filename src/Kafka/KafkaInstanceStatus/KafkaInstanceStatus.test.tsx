@@ -1,4 +1,4 @@
-import { render, waitForI18n } from "../../test-utils";
+import { render, waitForI18n, waitForPopper } from "../../test-utils";
 import { userEvent } from "@storybook/testing-library";
 import { KafkaInstanceStatus } from "./KafkaInstanceStatus";
 import sub from "date-fns/sub";
@@ -120,6 +120,7 @@ describe("KafkaInstanceStatus", () => {
     expect(onClickConnectionTabLink).toBeCalledTimes(1);
 
     userEvent.click(await tree.findByText("Creating"));
+    await waitForPopper();
     userEvent.click(await tree.findByText("open a support case."));
     expect(onClickSupportLink).toBeCalledTimes(1);
   });

@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ConsumerGroupDetails } from "./ConsumerGroupDetails";
-import { Consumer, ConsumerGroupStateEnum } from "../types";
+import { Consumer } from "../types";
 
 const consumer: Consumer[] = [
   {
@@ -35,25 +35,33 @@ const Template: ComponentStory<typeof ConsumerGroupDetails> = (args) => (
 
 export const ConsumerGroupWithNoActiveMembers = Template.bind({});
 ConsumerGroupWithNoActiveMembers.args = {
-  state: ConsumerGroupStateEnum.Stable,
+  state: "CompletingRebalance",
   consumers: withoutConsumer,
+  activeMembers: 1,
+  partitionsWithLag: 2,
 };
 
 export const ConsumerGroupWithActiveMembers = Template.bind({});
 ConsumerGroupWithActiveMembers.args = {
-  state: ConsumerGroupStateEnum.Stable,
+  state: "CompletingRebalance",
   consumers: consumer,
+  activeMembers: 2,
+  partitionsWithLag: 1,
 };
 
 export const ConsumerGroupDetailsAtTopicLevel = Template.bind({});
 ConsumerGroupDetailsAtTopicLevel.args = {
-  state: ConsumerGroupStateEnum.Empty,
+  state: "Unknown",
   consumers: consumer,
   consumerGroupByTopic: true,
+  activeMembers: 2,
+  partitionsWithLag: 2,
 };
 
 export const ConsumerGroupDetailsAtKafkaLevel = Template.bind({});
 ConsumerGroupDetailsAtKafkaLevel.args = {
-  state: ConsumerGroupStateEnum.Stable,
+  state: "Stable",
   consumers: consumer,
+  activeMembers: 0,
+  partitionsWithLag: 1,
 };
