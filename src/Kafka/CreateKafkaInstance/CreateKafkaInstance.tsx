@@ -253,6 +253,7 @@ export const CreateKafkaInstance: FunctionComponent<
             messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
             streamingUnits={2}
+            isTesting={isTesting}
           />
         </FlexItem>
       </Flex>

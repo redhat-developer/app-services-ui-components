@@ -226,7 +226,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                         <span
                           class="pf-c-description-list__text"
                         >
-                          size
+                          Size
                         </span>
                       </dt>
                       <dd
@@ -235,7 +235,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                           streaming units
+                          1 streaming units
                         </div>
                       </dd>
                     </div>

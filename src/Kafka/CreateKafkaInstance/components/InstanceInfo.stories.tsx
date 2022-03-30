@@ -16,6 +16,8 @@ export default {
     connections: 123,
     connectionRate: 123,
     messageSize: 123,
+    streamingUnits: 1,
+    isTesting: true,
   },
 } as ComponentMeta<typeof InstanceInfo>;
 
