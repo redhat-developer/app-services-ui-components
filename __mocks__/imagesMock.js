@@ -5,7 +5,6 @@ module.exports = {
   LogoRedHatOpenShiftDatabaseAccessAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftApiManagementAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftApplicationServicesAReverseRgb: DUMMYIMAGE,
-  LogoRedHatOpenShiftConnectorsBStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftDataScienceAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftServiceRegistryAStandardRgb: DUMMYIMAGE,
   LogoRedHatOpenShiftStreamsForApacheKafkaAReverseRgb_310x117: DUMMYIMAGE,
