@@ -54,7 +54,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   onSubmit,
   instanceAvailability,
 }) => {
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   return (
     <Form onSubmit={onSubmit} id={FORM_ID}>

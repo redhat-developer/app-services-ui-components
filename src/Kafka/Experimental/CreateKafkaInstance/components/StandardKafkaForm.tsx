@@ -76,7 +76,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   setName,
   onSubmit,
 }) => {
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   return (
     <Form onSubmit={onSubmit} id={FORM_ID}>

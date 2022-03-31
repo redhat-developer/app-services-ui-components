@@ -23,7 +23,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   isLoading,
   onClickPricingAndPurchasing,
 }) => {
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   return (
     <AlertGroup>
@@ -63,11 +63,11 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.info}
-                title={t("modal_alerts.trial_available_title_storybook")}
+                title={t("modal_alerts.trial_available_title")}
                 isInline
               >
                 <Trans
-                  ns={["create-kafka-instance"]}
+                  ns={["create-kafka-instance-exp"]}
                   i18nKey="modal_alerts.trial_available_message"
                   components={[
                     <Button

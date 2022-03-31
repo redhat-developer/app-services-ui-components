@@ -10,7 +10,7 @@ export type FormAlertsProps = {
 export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
 }) => {
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   return (
     <AlertGroup aria-live="assertive">

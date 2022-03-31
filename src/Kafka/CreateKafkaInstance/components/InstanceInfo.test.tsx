@@ -24,7 +24,7 @@ describe("InstanceInfo", function () {
     await waitForI18n(comp);
     const instanceInfo = await comp.findByTestId("instance-info");
     expect(instanceInfo.textContent).toBe(
-      "DetailsLoading contentsNeed help getting started? Follow our quick start guide."
+      "Instance informationLoading contentsNeed help getting started? Follow our quick start guide."
     );
 
     userEvent.click(

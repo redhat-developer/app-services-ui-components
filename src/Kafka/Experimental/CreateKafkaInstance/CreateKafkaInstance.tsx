@@ -66,7 +66,7 @@ export const CreateKafkaInstance: FunctionComponent<
   messageSize = 1,
 }) => {
   const FORM_ID = "create_instance_-form";
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   const {
     name,

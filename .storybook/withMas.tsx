@@ -38,6 +38,10 @@ export const withMas = (
                 import("../locales/en/service-account.json"),
               "message-browser": () =>
                 import("../locales/en/message-browser.json"),
+              "create-kafka-instance-exp": () =>
+                import("../locales/en/experimental/create-kafka-instance.json"),
+              "kafka-exp": () =>
+                import("../locales/en/experimental/kafka.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),

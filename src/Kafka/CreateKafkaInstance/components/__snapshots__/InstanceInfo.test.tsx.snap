@@ -18,7 +18,7 @@ exports[`InstanceInfo Renders Loading story 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Details
+          Instance information
         </h3>
         <div
           class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
@@ -145,7 +145,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Details
+          Instance information
         </h3>
         <div
           class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"
@@ -312,7 +312,7 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Details
+          Instance information
         </h3>
         <div
           class="pf-l-grid pf-m-all-6-col-on-sm pf-m-all-12-col-on-lg pf-m-gutter"

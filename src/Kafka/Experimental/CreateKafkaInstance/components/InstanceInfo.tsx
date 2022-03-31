@@ -60,7 +60,7 @@ export const InstanceInfo: VoidFunctionComponent<
   onClickQuickStart,
   streamingUnits,
 }) => {
-  const { t } = useTranslation("create-kafka-instance");
+  const { t } = useTranslation("create-kafka-instance-exp");
 
   return (
     <Stack hasGutter data-testid={"instance-info"}>
