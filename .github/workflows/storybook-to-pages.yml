@@ -14,7 +14,7 @@ jobs:
         run: |
           npm ci
           npm run test:generate-output
-          npm run build-storybook -- --quiet --loglevel silent
+          npm run build-storybook
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.2.5
