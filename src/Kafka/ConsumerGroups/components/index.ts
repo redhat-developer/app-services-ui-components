@@ -6,3 +6,4 @@ export * from "./ConsumerGroupTable";
 export * from "./ConsumerGroupState";
 export * from "./ConsumerGroupPagination";
 export * from "./ConsumerGroupToolbar";
+export * from "./ConsumerGroupEmptyState";
