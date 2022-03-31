@@ -5,7 +5,7 @@ export default {
   component: ConsumerGroupPagination,
   args: {
     itemCount: 500,
-    page: 1,
+    page: 2,
     perPage: 20,
   },
 } as ComponentMeta<typeof ConsumerGroupPagination>;

@@ -6,20 +6,19 @@ export type ConsumerGroupPaginationProps = {
   itemCount: number;
   page: number;
   perPage: number;
-  onSetPage: (page: number) => void;
-  onPerPageSelect: (perPage: number) => void;
+  onChange: (page: number, perPage: number) => void;
 };
 export const ConsumerGroupPagination: FunctionComponent<
   ConsumerGroupPaginationProps
-> = ({ itemCount, page, perPage, onSetPage, onPerPageSelect }) => {
+> = ({ itemCount, page, perPage, onChange }) => {
   const { t } = useTranslation(["common"]);
   return (
     <Pagination
       itemCount={itemCount}
       page={page}
       perPage={perPage}
-      onSetPage={(_, page) => onSetPage(page)}
-      onPerPageSelect={(_, perPage) => onPerPageSelect(perPage)}
+      onSetPage={(_, page) => onChange(page, perPage)}
+      onPerPageSelect={(_, perPage) => onChange(page, perPage)}
       titles={{
         paginationTitle: t("minimal_pagination"),
         perPageSuffix: t("per_page_suffix"),
