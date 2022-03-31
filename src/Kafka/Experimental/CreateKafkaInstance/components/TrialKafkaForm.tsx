@@ -99,9 +99,9 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
     };
 
     return (
-      <>
-        <ErrorMessage />
-        {instanceAvailability && (
+      instanceAvailability && (
+        <>
+          <ErrorMessage />
           <div className="pf-c-form__helper-text">
             <Trans
               ns={["create-kafka-instance-exp"]}
@@ -116,8 +116,8 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
               ]}
             />
           </div>
-        )}
-      </>
+        </>
+      )
     );
   };
 
