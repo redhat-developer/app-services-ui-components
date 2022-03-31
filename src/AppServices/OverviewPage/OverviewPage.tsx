@@ -160,7 +160,19 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
                 </StackItem>
                 <StackItem>{t("overview:rhocMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
-                  {t("overview:rhocSecondaryText")}
+                  {t("overview:rhocSecondaryText")}{" "}
+                  <Button
+                    data-testid="cardRHOC-linkOpenShift"
+                    isInline
+                    variant={ButtonVariant.link}
+                    component="a"
+                    target="_blank"
+                    href="https://openshift.com"
+                  >
+                    OpenShift
+                    <ExternalLinkAltIcon className="pf-u-ml-xs" />
+                  </Button>
+                  {t("overview:rhocSecondaryTextContinued")}
                 </StackItem>
               </Stack>
             </CardBody>
