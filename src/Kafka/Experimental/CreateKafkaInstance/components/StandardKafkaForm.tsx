@@ -88,7 +88,11 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
     regions && regions?.some(({ isDisabled }) => isDisabled === true);
 
   const HelperText = () => {
-    if (allRegionsUnavailable) {
+    if (
+      allRegionsUnavailable &&
+      regionValidation === "error" &&
+      !disableControls
+    ) {
       return (
         <div className="pf-c-form__helper-text pf-m-error">
           <Trans
@@ -105,7 +109,11 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           />
         </div>
       );
-    } else if (someRegionsUnavailable && regionValidation === "warning") {
+    } else if (
+      someRegionsUnavailable &&
+      regionValidation === "warning" &&
+      !disableControls
+    ) {
       return (
         <div className="pf-c-form__helper-text pf-m-warning">
           <Trans
@@ -122,9 +130,15 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           />
         </div>
       );
+    } else if (regionValidation === "error" && !disableControls) {
+      return (
+        <div className="pf-c-form__helper-text pf-m-error">
+          {t("common:required")}
+        </div>
+      );
     }
 
-    return <>{t("common:required")}</>;
+    return <></>;
   };
 
   return (

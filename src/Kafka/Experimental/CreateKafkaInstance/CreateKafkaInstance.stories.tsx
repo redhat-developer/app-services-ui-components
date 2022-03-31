@@ -233,11 +233,51 @@ SomeRegionsDisabledOnFormLoad.parameters = {
   },
 };
 
+export const TrialSomeRegionsDisabledOnFormLoad = Template.bind({});
+TrialSomeRegionsDisabledOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "trial",
+      defaultAZ: "multi",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: p.regions.map((r, idx) => ({ ...r, isDisabled: idx === 0 })),
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+TrialSomeRegionsDisabledOnFormLoad.parameters = {
+  docs: {
+    description: {
+      story: `Some regions could be disabled because they can't accept new instances, but we still want to show them
+      in the list in a disabled state.`,
+    },
+  },
+};
+
 export const AllRegionsDisabledOnFormLoad = Template.bind({});
 AllRegionsDisabledOnFormLoad.args = {
   getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
     {
       instanceAvailability: "quota",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: p.regions.map((r) => ({ ...r, isDisabled: true })),
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const TrialAllRegionsDisabledOnFormLoad = Template.bind({});
+TrialAllRegionsDisabledOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "trial",
       defaultProvider: "aws",
       providers: ["aws", "azure"],
       defaultAZ: "multi",

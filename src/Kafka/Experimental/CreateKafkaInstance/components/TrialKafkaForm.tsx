@@ -1,5 +1,5 @@
 import { VFC } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import {
   Button,
@@ -25,6 +25,7 @@ export type TrialKafkaFormProps = Omit<
   "streamingUnits"
 > & {
   instanceAvailability: InstanceAvailability | undefined;
+  onClickLearnMoreAboutRegions: () => void;
 };
 
 export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
@@ -38,7 +39,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   availableProviders,
   provider,
   regionValidation,
-  regions: regionsProp,
+  regions,
   region,
   azValidation,
   azOptions,
@@ -53,18 +54,72 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   setName,
   onSubmit,
   instanceAvailability,
+  onClickLearnMoreAboutRegions,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
-  const noRegions = [
-    {
-      id: "",
-      displayName: t("create-kafka-instance:no_regions_available"),
-      isDisabled: true,
-    },
-  ];
+  const allRegionsUnavailable =
+    regions?.every(({ isDisabled }) => isDisabled === true) ||
+    (regions && regions?.length <= 0);
 
-  const regions = regionsProp?.length === 0 ? noRegions : regionsProp;
+  const someRegionsUnavailable =
+    regions && regions?.some(({ isDisabled }) => isDisabled === true);
+
+  const HelperText = () => {
+    const ErrorMessage = () => {
+      if (
+        allRegionsUnavailable &&
+        regionValidation === "error" &&
+        !disableControls
+      ) {
+        return (
+          <div className="pf-c-form__helper-text pf-m-error">
+            {t("tria_all_region_unavailable_helper_text")}
+          </div>
+        );
+      } else if (
+        someRegionsUnavailable &&
+        regionValidation === "warning" &&
+        !disableControls
+      ) {
+        return (
+          <div className="pf-c-form__helper-text pf-m-warning">
+            {t("trial_some_region_unavailable_helper_text")}
+          </div>
+        );
+      } else if (regionValidation === "error" && !disableControls) {
+        return (
+          <div className="pf-c-form__helper-text pf-m-error">
+            {t("common:required")}
+          </div>
+        );
+      }
+
+      return <></>;
+    };
+
+    return (
+      <>
+        <ErrorMessage />
+        {instanceAvailability && (
+          <div className="pf-c-form__helper-text">
+            <Trans
+              ns={["create-kafka-instance-exp"]}
+              i18nKey={t("cloud_region_description")}
+              components={[
+                <Button
+                  key="btn-learn-more"
+                  variant={ButtonVariant.link}
+                  onClick={onClickLearnMoreAboutRegions}
+                  isInline
+                />,
+              ]}
+            />
+          </div>
+        )}
+      </>
+    );
+  };
 
   return (
     <Form onSubmit={onSubmit} id={FORM_ID}>
@@ -113,7 +168,8 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
         fieldId="form-cloud-region-option"
         isRequired
         validated={regionValidation}
-        helperTextInvalid={t("common:required")}
+        helperTextInvalid={<HelperText />}
+        helperText={<HelperText />}
       >
         <CloudRegionSelect
           value={region}
@@ -122,20 +178,6 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           isDisabled={disableControls}
           validated={regionValidation}
         />
-        {instanceAvailability && (
-          <>
-            <Text component={TextVariants.p} className="pf-c-form__helper-text">
-              {t("cloud_region_description")}
-            </Text>
-            <Button
-              variant={ButtonVariant.link}
-              className="pf-c-form__helper-text"
-              isInline
-            >
-              {t("learn_about_cloud_regions")}
-            </Button>
-          </>
-        )}
       </FormGroup>
       <FormGroup
         label={t("availability_zones")}

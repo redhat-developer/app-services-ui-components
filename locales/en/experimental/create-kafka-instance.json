@@ -11,7 +11,7 @@
   "client_connections_value": "up to {{value}}",
   "cloud_provider": "Cloud provider",
   "cloud_region": "Cloud region",
-  "cloud_region_description": "More cloud regions are available with a subscription.",
+  "cloud_region_description": "More options are available with a subscription. <0>Learn more</0>.",
   "connection_rate_value": "up to {{value}} connections/second",
   "create_instance": "Create instance",
   "create_instance_title": "Create a $t(common:kafka) instance",
@@ -96,5 +96,7 @@
   "trial_kafka_size_description": "With a subscription, you can select a size for your instance. Changing the size allows you to increase limits such as ingress, egress, and storage. The limits that you get with a trial instance are listed under Details.",
   "streaming_size_value": "{{value}} streaming unit",
   "all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider, try again later, or <0>contact support</0>.",
-  "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region, try again later, or <0>contact support</0>."
+  "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region, try again later, or <0>contact support</0>.",
+  "tria_all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider or try again later.",
+  "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
 }

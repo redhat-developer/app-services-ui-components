@@ -32,6 +32,8 @@ const {
   VariantBothAvailabilityZonesEnabledWithNoTooltip,
   VariantOnlySingleAZEnabledWithRightTooltip,
   VariantNoDefaultsRequired,
+  TrialSomeRegionsDisabledOnFormLoad,
+  TrialAllRegionsDisabledOnFormLoad,
 } = composeStories(stories);
 
 describe("CreateKafkaInstance", () => {
@@ -199,21 +201,68 @@ describe("CreateKafkaInstance", () => {
     expect(comp.getByText("EU, Ireland")).toBeDisabled();
   });
 
-  it("should show an alert when all cloud regions are disabled, and a disabled form", async () => {
+  it("should show 'EU, Ireland' as disabled and show inline warning message for region for trial kafka", async () => {
+    const comp = renderDialog(<TrialSomeRegionsDisabledOnFormLoad />);
+    await waitForI18n(comp);
+
+    expect(
+      await comp.queryByText(
+        "More options are available with a subscription.",
+        { exact: false }
+      )
+    ).toBeInTheDocument();
+
+    expect(
+      await comp.queryByText(
+        "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
+      )
+    ).toBeInTheDocument();
+
+    expect(comp.getByLabelText("Name *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
+    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
+
+    userEvent.click(comp.getByLabelText("Cloud region *"));
+
+    expect(comp.getByText("EU, Ireland")).toBeDisabled();
+  });
+
+  it("should show an alert when all cloud regions are disabled, and show inline error message for region", async () => {
     const comp = renderDialog(<AllRegionsDisabledOnFormLoad />);
     await waitForI18n(comp);
 
     expect(
       await comp.queryByText(
-        "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours."
+        "All regions in the selected cloud provider are temporarily unavailable.",
+        { exact: false }
       )
     ).toBeInTheDocument();
 
-    expect(comp.getByLabelText("Name *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(comp.getByLabelText("Name *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
-    expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
+    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
+  });
+
+  it("should show an alert when all cloud regions are disabled, and show inline error message for region for trial kafka", async () => {
+    const comp = renderDialog(<TrialAllRegionsDisabledOnFormLoad />);
+    await waitForI18n(comp);
+
+    expect(
+      await comp.queryByText(
+        "All regions in the selected cloud provider are temporarily unavailable.",
+        { exact: false }
+      )
+    ).toBeInTheDocument();
+
+    expect(comp.getByLabelText("Name *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
+    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
 
   it("should show a invalid helper text for AWS", async () => {
@@ -232,21 +281,22 @@ describe("CreateKafkaInstance", () => {
     ).toBeInTheDocument();
   });
 
-  it("should show an alert when no cloud region is available, and a disabled form", async () => {
+  it("should show an alert when no cloud region is available, and show inline message for cloud region", async () => {
     const comp = renderDialog(<NoRegionsReturnedFromApiOnFormLoad />);
     await waitForI18n(comp);
 
     expect(
       await comp.queryByText(
-        "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours."
+        "All regions in the selected cloud provider are temporarily unavailable.",
+        { exact: false }
       )
     ).toBeInTheDocument();
 
-    expect(comp.getByLabelText("Name *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(comp.getByLabelText("Name *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
+    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
-    expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
+    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
 
   it("should show an alert when a generic error contacting the API happened when opening the modal, and a disabled form", async () => {
