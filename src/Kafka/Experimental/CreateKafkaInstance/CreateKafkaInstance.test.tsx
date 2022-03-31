@@ -103,9 +103,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "Your organization reached the limit of Kafka instances available for creation."
+        "Your organization has no streaming units remaining."
       )
-    ).toBeInTheDocument();
+    );
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
@@ -141,7 +141,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "Kafka instances are no longer available. Try again in a few hours."
+        "All available trial instances are currently in use. Try again later."
       )
     ).toBeInTheDocument();
 
@@ -163,12 +163,6 @@ describe("CreateKafkaInstance", () => {
     expect(
       await comp.queryByText(
         "You can create a trial instance to evaluate this service."
-      )
-    ).toBeInTheDocument();
-
-    expect(
-      await comp.queryByText(
-        "Kafka instances are no longer available. Try again in a few hours."
       )
     ).toBeInTheDocument();
 
@@ -211,7 +205,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "Kafka instances are no longer available. Try again in a few hours."
+        "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours."
       )
     ).toBeInTheDocument();
 
@@ -222,7 +216,7 @@ describe("CreateKafkaInstance", () => {
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
 
-  it("should show a disabled 'No regions available' for AWS", async () => {
+  it("should show a invalid helper text for AWS", async () => {
     const comp = renderDialog(
       <NoRegionsReturnedFromApiForAProviderOnFormLoad />
     );
@@ -230,7 +224,12 @@ describe("CreateKafkaInstance", () => {
 
     userEvent.click(comp.getByLabelText("Cloud region *"));
 
-    expect(comp.getByText("No regions available")).toBeDisabled();
+    expect(
+      comp.getByText(
+        "All regions in the selected cloud provider are temporarily unavailable.",
+        { exact: false }
+      )
+    ).toBeInTheDocument();
   });
 
   it("should show an alert when no cloud region is available, and a disabled form", async () => {
@@ -239,7 +238,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "Kafka instances are no longer available. Try again in a few hours."
+        "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours."
       )
     ).toBeInTheDocument();
 

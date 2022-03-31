@@ -38,6 +38,7 @@ export type CreateKafkaInitializationData = {
   defaultAZ: AZ | undefined;
   availableProviders: Providers;
   instanceAvailability: InstanceAvailability;
+  allowedStreamingUnits?: number;
 };
 export type CreateKafkaFormData = {
   name: string;

@@ -40,6 +40,7 @@ const CreateKafkaInstanceMachine = createMachine(
         region: Region | undefined;
         az: AZ | undefined;
         size?: number | undefined;
+        allowedStreamingUnits: number;
 
         defaultProvider: Provider | undefined;
         defaultRegion: Region | undefined;
@@ -76,6 +77,7 @@ const CreateKafkaInstanceMachine = createMachine(
       region: undefined,
       az: undefined,
       size: 1,
+      allowedStreamingUnits: 0,
 
       defaultProvider: undefined,
       defaultRegion: undefined,
@@ -480,6 +482,7 @@ export function useCreateKafkaInstanceMachine({
     az,
     availableProviders,
     instanceAvailability,
+    allowedStreamingUnits,
   } = state.context;
 
   return {
@@ -488,6 +491,7 @@ export function useCreateKafkaInstanceMachine({
     region,
     az,
     size,
+    allowedStreamingUnits,
 
     azOptions: selectedProviderInfo?.AZ,
     regions: selectedProviderInfo?.regions,

@@ -14,7 +14,9 @@ export type ModalAlertsProps = {
   instanceAvailability: InstanceAvailability | undefined;
   isSystemUnavailable: boolean;
   isLoading: boolean;
-  onClickPricingAndPurchasing?: () => void;
+  onClickPricingAndPurchasing: () => void;
+  onClickContactUs: () => void;
+  allowedStreamingUnits: number;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
@@ -22,6 +24,8 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   isSystemUnavailable,
   isLoading,
   onClickPricingAndPurchasing,
+  onClickContactUs,
+  allowedStreamingUnits,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -90,7 +94,19 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 title={t("modal_alerts.over_quota_title")}
                 isInline
               >
-                {t("modal_alerts.over_quota_message")}
+                <Trans
+                  ns={["create-kafka-instance-exp"]}
+                  i18nKey={t("modal_alerts.over_quota_message")}
+                  components={[
+                    <Button
+                      key="btn-contact-us"
+                      variant={ButtonVariant.link}
+                      onClick={onClickContactUs}
+                      isInline
+                    />,
+                  ]}
+                  values={{ allowedStreamingUnits }}
+                />
               </Alert>
             );
           case instanceAvailability === "trial-used":
@@ -106,17 +122,28 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
               </Alert>
             );
           case instanceAvailability === "trial-unavailable":
-          case instanceAvailability === "regions-unavailable":
           case instanceAvailability === "instance-unavailable":
             return (
               <Alert
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.warning}
-                title={t("modal_alerts.instance_or_region_unavailable_title")}
+                title={t("modal_alerts.instance_unavailable_title")}
                 isInline
               >
-                {t("modal_alerts.instance_or_region_unavailable_message")}
+                {t("modal_alerts.instance_unavailable_message")}
+              </Alert>
+            );
+          case instanceAvailability === "regions-unavailable":
+            return (
+              <Alert
+                role={"alert"}
+                className="pf-u-mb-md"
+                variant={AlertVariant.warning}
+                title={t("modal_alerts.instance_unavailable_title")}
+                isInline
+              >
+                {t("modal_alerts.region_unavailable_message")}
               </Alert>
             );
         }

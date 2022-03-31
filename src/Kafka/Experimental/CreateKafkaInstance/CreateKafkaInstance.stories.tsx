@@ -142,6 +142,11 @@ LoadingData.args = {
   },
 } as CreateKafkaInstanceProps;
 
+const onClickPricingAndPurchasing = () => {
+  const url = "https://console.redhat.com/application-services/overview";
+  window.open(url);
+};
+
 export const QuotaAvailableOnFormLoad = Template.bind({});
 
 export const TrialAvailableOnFormLoad = Template.bind({});
@@ -152,6 +157,7 @@ TrialAvailableOnFormLoad.args = {
     defaultProvider: "",
     providers: ["aws", "azure"],
   }),
+  onClickPricingAndPurchasing,
 } as CreateKafkaInstanceProps;
 
 export const OverQuotaOnFormLoad = Template.bind({});
@@ -161,6 +167,7 @@ OverQuotaOnFormLoad.args = {
     defaultAZ: "multi",
     defaultProvider: "",
     providers: ["aws", "azure"],
+    allowedStreamingUnits: 2,
   }),
 } as CreateKafkaInstanceProps;
 
@@ -412,11 +419,17 @@ function makeAvailableProvidersAndDefaults(
     defaultAZ: AZ | undefined;
     defaultProvider: Provider | undefined;
     providers: string[];
+    allowedStreamingUnits?: number;
   },
   allProviders = PROVIDERS
 ): () => Promise<CreateKafkaInitializationData> {
-  const { instanceAvailability, defaultProvider, defaultAZ, providers } =
-    options;
+  const {
+    instanceAvailability,
+    defaultProvider,
+    defaultAZ,
+    providers,
+    allowedStreamingUnits,
+  } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
   );
@@ -427,6 +440,7 @@ function makeAvailableProvidersAndDefaults(
       defaultAZ,
       availableProviders,
       instanceAvailability,
+      allowedStreamingUnits,
     };
   };
 }

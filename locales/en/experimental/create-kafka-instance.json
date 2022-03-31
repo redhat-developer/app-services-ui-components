@@ -59,15 +59,16 @@
   "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
-    "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
-    "instance_or_region_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
-    "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
-    "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
+    "instance_unavailable_message": "All available trial instances are currently in use. Try again later.",
+    "region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours.",
+    "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
+    "over_quota_message": "Your organization has {{allowedStreamingUnits}} streaming units available which are already in use. To deploy a new instance, delete an existing one first or <0>contact us</0> to add more streaming units to your account.",
+    "over_quota_title": "Your organization has no streaming units remaining.",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
     "trial_available_message": "The trial has a duration of {{time}} hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
     "trial_available_title": "You can create a trial instance to evaluate this service.",
-    "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
+    "trial_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "trial_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
@@ -93,5 +94,7 @@
   "stream_unit_value": "{{size}} streaming units",
   "streaming_unit": "streaming units",
   "trial_kafka_size_description": "With a subscription, you can select a size for your instance. Changing the size allows you to increase limits such as ingress, egress, and storage. The limits that you get with a trial instance are listed under Details.",
-  "streaming_size_value": "{{value}} streaming unit"
+  "streaming_size_value": "{{value}} streaming unit",
+  "all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider, try again later, or <0>contact support</0>.",
+  "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region, try again later, or <0>contact support</0>."
 }

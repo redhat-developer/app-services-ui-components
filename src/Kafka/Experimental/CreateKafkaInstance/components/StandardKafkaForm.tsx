@@ -1,5 +1,5 @@
 import { VFC, FormEvent } from "react";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
 
 import {
   Form,
@@ -19,7 +19,7 @@ import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../../shared/FormGroupWithPopover";
 import { AZ, Provider, Providers, Region, RegionInfo } from "../machines/types";
 
-type validate = "error" | "default";
+type validate = "error" | "default" | "warning";
 
 export type StandardKafkaFormProps = {
   FORM_ID: string;
@@ -47,6 +47,7 @@ export type StandardKafkaFormProps = {
   setAZ: (az: AZ) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   streamingUnits: number | undefined;
+  onClickContactSupport: () => void;
 };
 
 export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
@@ -75,8 +76,56 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   setProvider,
   setName,
   onSubmit,
+  onClickContactSupport,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
+
+  const allRegionsUnavailable =
+    regions?.every(({ isDisabled }) => isDisabled === true) ||
+    (regions && regions?.length <= 0);
+
+  const someRegionsUnavailable =
+    regions && regions?.some(({ isDisabled }) => isDisabled === true);
+
+  const HelperText = () => {
+    if (allRegionsUnavailable) {
+      return (
+        <div className="pf-c-form__helper-text pf-m-error">
+          <Trans
+            ns={["create-kafka-instance-exp"]}
+            i18nKey={t("all_region_unavailable_helper_text")}
+            components={[
+              <Button
+                key="btn-contact-support"
+                variant={ButtonVariant.link}
+                onClick={onClickContactSupport}
+                isInline
+              />,
+            ]}
+          />
+        </div>
+      );
+    } else if (someRegionsUnavailable && regionValidation === "warning") {
+      return (
+        <div className="pf-c-form__helper-text pf-m-warning">
+          <Trans
+            ns={["create-kafka-instance-exp"]}
+            i18nKey={t("some_region_unavailable_helper_text")}
+            components={[
+              <Button
+                key="btn-contact-support"
+                variant={ButtonVariant.link}
+                onClick={onClickContactSupport}
+                isInline
+              />,
+            ]}
+          />
+        </div>
+      );
+    }
+
+    return <>{t("common:required")}</>;
+  };
 
   return (
     <Form onSubmit={onSubmit} id={FORM_ID}>
@@ -125,7 +174,8 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
         fieldId="form-cloud-region-option"
         isRequired
         validated={regionValidation}
-        helperTextInvalid={t("common:required")}
+        helperTextInvalid={<HelperText />}
+        helperText={<HelperText />}
       >
         <CloudRegionSelect
           value={region}

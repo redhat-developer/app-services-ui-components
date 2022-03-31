@@ -38,7 +38,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   availableProviders,
   provider,
   regionValidation,
-  regions,
+  regions: regionsProp,
   region,
   azValidation,
   azOptions,
@@ -55,6 +55,16 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
   instanceAvailability,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
+
+  const noRegions = [
+    {
+      id: "",
+      displayName: t("create-kafka-instance:no_regions_available"),
+      isDisabled: true,
+    },
+  ];
+
+  const regions = regionsProp?.length === 0 ? noRegions : regionsProp;
 
   return (
     <Form onSubmit={onSubmit} id={FORM_ID}>

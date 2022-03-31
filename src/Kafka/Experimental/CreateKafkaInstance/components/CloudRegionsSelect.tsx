@@ -17,21 +17,12 @@ export type CloudRegionProps = {
 
 export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   value,
-  regions: regionsProp,
+  regions,
   isDisabled,
   validated,
   onChange,
 }) => {
   const { t } = useTranslation();
-
-  const noRegions = [
-    {
-      id: "",
-      displayName: t("create-kafka-instance:no_regions_available"),
-      isDisabled: true,
-    },
-  ];
-  const regions = regionsProp.length === 0 ? noRegions : regionsProp;
 
   return (
     <FormSelect

@@ -44,6 +44,9 @@ export type CreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
+  onClickPricingAndPurchasing: () => void;
+  onClickContactUs: () => void;
+  onClickContactSupport: () => void;
 } & MakeCreateKafkaInstanceMachine &
   Partial<InstanceInfoLimitsProps>;
 
@@ -64,6 +67,9 @@ export const CreateKafkaInstance: FunctionComponent<
   connections = 2000,
   connectionRate = 100,
   messageSize = 1,
+  onClickPricingAndPurchasing,
+  onClickContactUs,
+  onClickContactSupport,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance-exp");
@@ -78,6 +84,7 @@ export const CreateKafkaInstance: FunctionComponent<
     availableProviders,
     instanceAvailability,
     size,
+    allowedStreamingUnits,
 
     isNameTaken,
     isNameInvalid,
@@ -118,7 +125,17 @@ export const CreateKafkaInstance: FunctionComponent<
 
   const nameValidation = isNameError ? "error" : "default";
   const providerValidation = isProviderError ? "error" : "default";
-  const regionValidation = isRegionError ? "error" : "default";
+  const allRegionsUnavailable =
+    regions?.every(({ isDisabled }) => isDisabled === true) ||
+    (regions && regions?.length <= 0);
+  const someRegionsUnavailable =
+    regions && regions?.some(({ isDisabled }) => isDisabled === true);
+  const regionValidation =
+    isRegionError || (allRegionsUnavailable && !disableControls)
+      ? "error"
+      : someRegionsUnavailable && !disableControls
+      ? "warning"
+      : "default";
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
@@ -162,6 +179,9 @@ export const CreateKafkaInstance: FunctionComponent<
         instanceAvailability={instanceAvailability}
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
+        onClickPricingAndPurchasing={onClickPricingAndPurchasing}
+        allowedStreamingUnits={allowedStreamingUnits}
+        onClickContactUs={onClickContactUs}
       />
       <Flex
         direction={{ default: "column", lg: "row" }}
@@ -197,6 +217,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 setName={setName}
                 onSubmit={onSubmit}
                 instanceAvailability={instanceAvailability}
+                onClickContactSupport={onClickContactSupport}
               />
             </>
           ) : (
@@ -226,6 +247,7 @@ export const CreateKafkaInstance: FunctionComponent<
               setName={setName}
               onSubmit={onSubmit}
               streamingUnits={3}
+              onClickContactSupport={onClickContactSupport}
             />
           )}
         </FlexItem>
