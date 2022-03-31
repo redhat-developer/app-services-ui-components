@@ -53,7 +53,9 @@
   "resourcePrefix":{
     "placeholder_text_starts_with":"Enter prefix",
     "placeholder_text_is":"Enter name",
-    "prefix_aria_label":"Select resource prefix"
+    "prefix_aria_label":"Resource prefix",
+    "select_prefix_aria_label":"{{value}} prefix",
+    "create_text":"Use"
   },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
