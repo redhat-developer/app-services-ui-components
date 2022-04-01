@@ -35,7 +35,7 @@ export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
   const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
     []
   );
-  const [filter, setFilter] = useState<string>();
+  const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
     setLoading(true);
@@ -43,7 +43,7 @@ export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
       setTypeAheadSuggestions(results);
       setLoading(false);
     });
-  }, [onFetchOptions, filter]);
+  }, [onFetchOptions]);
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     onChange(value as string);
@@ -55,12 +55,21 @@ export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
     onChange(undefined);
     setIsOpen(false);
   };
-  const makeOptions = () => {
-    return typeAheadSuggestions.map((value, index) => (
-      <SelectOption key={index} value={value}>
-        {value}
-      </SelectOption>
-    ));
+  const makeOptions = (value?: string) => {
+    if (!value)
+      return typeAheadSuggestions.map((value, index) => (
+        <SelectOption key={index} value={value}>
+          {value}
+        </SelectOption>
+      ));
+    const input = new RegExp(value, "i");
+    return typeAheadSuggestions
+      .filter((child) => input.test(child))
+      .map((value, index) => (
+        <SelectOption key={index} value={value}>
+          {value}
+        </SelectOption>
+      ));
   };
   const onCreateOption = (newValue: string) => {
     onChange(newValue);
@@ -97,6 +106,7 @@ export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
         onTypeaheadInputChanged={(value) => setFilter(value)}
         onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
+        onFilter={(_, value) => makeOptions(value)}
       >
         {makeOptions()}
       </Select>
