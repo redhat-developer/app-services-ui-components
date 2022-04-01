@@ -5,14 +5,13 @@ import { Metrics } from "./Metrics";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import { DurationOptions, GetMetricsKpiResponse } from "./types";
 import {
-  apiError,
-  fakeApi,
   getKafkaInstanceMetrics,
   getMetricsKpi,
   getTopicsMetrics,
   getTopicsMetricsOneTopic,
   getTopicsMetricsWithDeletedTopicMetric,
 } from "./storiesHelpers";
+import { apiError, fakeApi } from "../../shared/storiesHelpers";
 
 export default {
   component: Metrics,

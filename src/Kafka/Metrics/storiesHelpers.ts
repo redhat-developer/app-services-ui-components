@@ -5,13 +5,7 @@ import {
   GetTopicsMetricsResponse,
 } from "./types";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-
-export function fakeApi<T>(response: T, waitLengthMs = 500): Promise<T> {
-  return new Promise((resolve) => {
-    const timeout = setTimeout(() => resolve(response), waitLengthMs);
-    return () => clearTimeout(timeout);
-  });
-}
+import { fakeApi } from "../../shared/storiesHelpers";
 
 export const getKafkaInstanceMetrics = ({
   duration,
@@ -167,7 +161,3 @@ export const getTopicsMetricsOneTopic = ({
     waitLengthMs
   );
 };
-
-export function apiError() {
-  return Promise.reject();
-}
