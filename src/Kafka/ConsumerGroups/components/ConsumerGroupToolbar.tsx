@@ -12,14 +12,11 @@ import {
 import { FunctionComponent, useCallback, useState } from "react";
 import { FilterIcon, SearchIcon } from "@patternfly/react-icons";
 import { useTranslation } from "react-i18next";
-import {
-  ConsumerGroupPagination,
-  ConsumerGroupPaginationProps,
-} from "./ConsumerGroupPagination";
+import { Pagination, PaginationProps } from "../../../shared";
 
 export type ConsumerGroupToolbarProps = {
   onSearch: (value: string) => void;
-} & ConsumerGroupPaginationProps;
+} & PaginationProps;
 
 export const ConsumerGroupToolbar: FunctionComponent<
   ConsumerGroupToolbarProps
@@ -79,7 +76,7 @@ export const ConsumerGroupToolbar: FunctionComponent<
           </ToolbarFilter>
         </ToolbarToggleGroup>
         <ToolbarItem variant="pagination" alignment={{ default: "alignRight" }}>
-          <ConsumerGroupPagination
+          <Pagination
             itemCount={itemCount}
             page={page}
             perPage={perPage}
