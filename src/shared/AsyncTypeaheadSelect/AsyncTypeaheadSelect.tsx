@@ -8,6 +8,7 @@ import {
 } from "@patternfly/react-core";
 import { useRef, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
+import { useDebounce } from "../../utils";
 
 export type Validation = {
   message: string | undefined;
@@ -56,11 +57,11 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   const onTypeahead: SelectProps["onFilter"] = (_, filter) => {
     const validation = onValidationCheck(filter);
     setValidation(validation);
-    if (validation.isValid) {
-      doFilter(filter);
-    }
+    doFilter(filter);
+
     return undefined;
   };
+  const debouncedOnQuery = useDebounce(onTypeahead, 1000);
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     onChange(value as string);
@@ -103,14 +104,14 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         isOpen={isOpen}
         loadingVariant={loading ? "spinner" : undefined}
         placeholderText={placeholderText}
-        isCreatable={false}
+        isCreatable={!validation?.isValid ? false : true}
         menuAppendTo="parent"
         validated={validated}
         maxHeight={400}
         width={200}
         onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
-        onFilter={onTypeahead}
+        onFilter={debouncedOnQuery}
       >
         {typeAheadSuggestions.map((value, index) => (
           <SelectOption key={index} value={value}>

@@ -33,17 +33,17 @@ InitialState.args = {};
 InitialState.parameters = {
   docs: {
     description: {
-      story: `Initial, empty state of the typeahead select with placeholder text. A user can type a prefix value and select from a list of suggestions `,
+      story: `Initial, empty state of the async typeahead with a placeholder text. A user can type a prefix value and select from a list of suggestions `,
     },
   },
 };
 
 export const ValidInput = Template.bind({});
-ValidInput.args = { value: "topic" };
+ValidInput.args = { value: "foo" };
 ValidInput.parameters = {
   docs: {
     description: {
-      story: `A user selects a valid prefix value `,
+      story: `A user selects a valid value `,
     },
   },
 };
@@ -53,7 +53,7 @@ PlaceHolderVariation.args = { placeholderText: "Enter prefix" };
 PlaceHolderVariation.parameters = {
   docs: {
     description: {
-      story: `A user select prefix rule as 'Starts with', a different placeholderText is displayed for that `,
+      story: `A variation of the async typeahead with a different placholder`,
     },
   },
 };
@@ -70,7 +70,7 @@ LoadingSuggestions.play = async ({ canvasElement }) => {
 LoadingSuggestions.parameters = {
   docs: {
     description: {
-      story: `A user clicks on the typeahead select. Until the list of suggestions is ready to be dispayed, a spinner shows `,
+      story: `A user clicks on the async typeahead. Until the list of suggestions is ready to be dispayed, a spinner shows `,
     },
   },
 };
@@ -89,6 +89,112 @@ CreatableText.parameters = {
   docs: {
     description: {
       story: `A user clicks on the typeahead select and types a value. a cretable suggestion appears in the typeaead select list of options`,
+    },
+  },
+};
+export const InvalidTopicLength = Template.bind({});
+InvalidTopicLength.args = {
+  onFetchOptions: (filter) =>
+    fakeApi<string[]>(
+      ["topic", "test-topic", "my-test", "foo-12-topic"].filter((v) =>
+        v.includes(filter)
+      ),
+      300
+    ),
+  onValidationCheck: () => ({
+    isValid: false,
+    message:
+      "A topic name must contain at least 3 periods (...) if periods are the only characters used",
+  }),
+};
+InvalidTopicLength.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
+};
+InvalidTopicLength.parameters = {
+  docs: {
+    description: {
+      story: `In assign permission while selecting resource prefix,A user types a value that is either '.' or '..' while selecting resource for a 'Topic' that has a resource prefix condition 'Is' `,
+    },
+  },
+};
+export const InvalidLength = Template.bind({});
+InvalidLength.args = {
+  onFetchOptions: (filter) =>
+    fakeApi<string[]>(
+      ["topic", "test-topic", "my-test", "foo-12-topic"].filter((v) =>
+        v.includes(filter)
+      ),
+      300
+    ),
+  onValidationCheck: () => ({
+    isValid: false,
+    message: "Cannot exceed 32 characters",
+  }),
+};
+InvalidLength.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.type(
+    await canvas.findByPlaceholderText("Enter name"),
+    "this-is-a-very-long-invalid-name-exceeding--32-characters"
+  );
+};
+InvalidLength.parameters = {
+  docs: {
+    description: {
+      story: `A user types a value that exceeds maximum characters allowed `,
+    },
+  },
+};
+export const InvalidTopicCharacters = Template.bind({});
+InvalidTopicCharacters.args = {
+  onFetchOptions: (filter) =>
+    fakeApi<string[]>(
+      ["topic", "test-topic", "my-test", "foo-12-topic"].filter((v) =>
+        v.includes(filter)
+      ),
+      300
+    ),
+  onValidationCheck: () => ({
+    isValid: false,
+    message:
+      "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
+  }),
+};
+InvalidTopicCharacters.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "$!");
+};
+InvalidTopicCharacters.parameters = {
+  docs: {
+    description: {
+      story: `A user types a value that has invalid characters `,
+    },
+  },
+};
+export const InvalidConsumerGroupCharacters = Template.bind({});
+InvalidConsumerGroupCharacters.args = {
+  onFetchOptions: (filter) =>
+    fakeApi<string[]>(
+      ["topic", "test-consumer", "my-consumer", "foo-12-consumer"].filter((v) =>
+        v.includes(filter)
+      ),
+      300
+    ),
+  onValidationCheck: () => ({
+    isValid: false,
+    message:
+      "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - ).",
+  }),
+};
+InvalidConsumerGroupCharacters.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "$!");
+};
+InvalidConsumerGroupCharacters.parameters = {
+  docs: {
+    description: {
+      story: `A user types a value that has invalid characters `,
     },
   },
 };
