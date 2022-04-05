@@ -33,7 +33,9 @@ const consumer: Consumer[] = [
 
 export default {
   component: ConsumerGroupDrawer,
-  args: {},
+  args: {
+    isExpanded: true,
+  },
 } as ComponentMeta<typeof ConsumerGroupDrawer>;
 
 const Template: ComponentStory<typeof ConsumerGroupDrawer> = (args) => (

@@ -1,5 +1,4 @@
 import {
-  Button,
   Drawer,
   DrawerActions,
   DrawerCloseButton,
@@ -17,7 +16,7 @@ import {
   DropdownItem,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { createRef, FunctionComponent, useState } from "react";
+import { createRef, FunctionComponent, ReactNode, useState } from "react";
 import { ConsumerGroupState, Consumer } from "../types";
 import { ConsumerGroupDetails } from "./ConsumerGroupDetails";
 import { useTranslation } from "react-i18next";
@@ -25,6 +24,7 @@ import "./ConsumerGroup.css";
 import { EllipsisVIcon } from "@patternfly/react-icons";
 
 export type ConsumerGroupDrawerProps = {
+  children: ReactNode;
   consumerGroupByTopic: boolean;
   state: ConsumerGroupState;
   activeMembers: number;
@@ -33,11 +33,14 @@ export type ConsumerGroupDrawerProps = {
   groupId: string;
   onSelectDeleteConsumerGroup: () => void;
   onSelectResetOffsetConsumerGroup: () => void;
+  isExpanded: boolean;
+  onClickClose: () => void;
 };
 
 export const ConsumerGroupDrawer: FunctionComponent<
   ConsumerGroupDrawerProps
 > = ({
+  children,
   consumerGroupByTopic,
   state,
   activeMembers,
@@ -46,10 +49,10 @@ export const ConsumerGroupDrawer: FunctionComponent<
   groupId,
   onSelectDeleteConsumerGroup,
   onSelectResetOffsetConsumerGroup,
+  isExpanded,
+  onClickClose,
 }) => {
   const { t } = useTranslation(["kafka"]);
-
-  const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -58,10 +61,6 @@ export const ConsumerGroupDrawer: FunctionComponent<
   };
   const onSelect = () => {
     setIsOpen(!isOpen);
-  };
-
-  const onClickClose = () => {
-    setIsExpanded(!isExpanded);
   };
 
   const dropdownItems = [
@@ -113,10 +112,6 @@ export const ConsumerGroupDrawer: FunctionComponent<
     </DrawerPanelContent>
   );
 
-  const onClick = () => {
-    setIsExpanded(!isExpanded);
-  };
-
   const drawerRef = createRef();
 
   const onExpand = () => {
@@ -124,13 +119,16 @@ export const ConsumerGroupDrawer: FunctionComponent<
   };
 
   return (
-    <>
-      <Button aria-expanded={isExpanded} onClick={onClick}>
-        Toggle drawer
-      </Button>
-      <Drawer isExpanded={isExpanded} onExpand={onExpand}>
-        <DrawerContent panelContent={panelContent}></DrawerContent>
-      </Drawer>
-    </>
+    <Drawer
+      isExpanded={isExpanded}
+      onExpand={onExpand}
+      data-ouia-app-id={"dataPlane-consumerGroupDetails"}
+    >
+      <DrawerContent panelContent={panelContent}>
+        <DrawerContentBody className="consumer-group-drawer__drawer-content-body">
+          {children}
+        </DrawerContentBody>
+      </DrawerContent>
+    </Drawer>
   );
 };
