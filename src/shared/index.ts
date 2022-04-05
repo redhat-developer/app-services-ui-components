@@ -7,3 +7,4 @@ export * from "./PageNotFound";
 export * from "./ModalProvider";
 export * from "./RemoveButton";
 export * from "./FormGroupWithPopover";
+export * from "./Pagination";

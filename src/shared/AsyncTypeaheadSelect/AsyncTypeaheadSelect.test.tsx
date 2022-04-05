@@ -1,7 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./AsyncTypeaheadSelect.stories";
 import { userEvent } from "@storybook/testing-library";
-import { render, waitForI18n } from "../../test-utils";
+import { act, render, waitForI18n } from "../../test-utils";
 
 const {
   InitialState,
@@ -9,39 +9,33 @@ const {
   PlaceHolderVariation,
   LoadingSuggestions,
   CreatableText,
-  InvalidConsumerGroupCharacters,
-  InvalidLength,
-  InvalidTopicCharacters,
-  InvalidTopicLength,
 } = composeStories(stories);
 
-describe("Resource prefix", () => {
-  it("should render a select typeahead for resource prefix", async () => {
+describe("Async typeahead", () => {
+  jest.useFakeTimers();
+  it("should render a select with async typeahead suggestions", async () => {
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(InitialState.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
-    const comp = render(
-      <InitialState
-        onChange={onChangeValue}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-
-    await waitForI18n(comp);
-    userEvent.click(await comp.findByPlaceholderText("Enter name"));
-
-    expect(await comp.findByText("topic")).toBeInTheDocument();
-    expect(await comp.findByText("my-topic")).toBeInTheDocument();
-    expect(await comp.findByText("topic-test")).toBeInTheDocument();
-    userEvent.type(comp.getByPlaceholderText("Enter name"), "topic");
-    expect(await comp.findByText("topic")).toBeInTheDocument();
-    expect(await comp.findByText("topic-test")).toBeInTheDocument();
-    expect(await comp.queryByText("my-topic")).not.toBeInTheDocument();
-    userEvent.click(await comp.findByText("topic"));
+    await act(async () => {
+      const comp = render(
+        <InitialState
+          onChange={onChangeValue}
+          onFetchOptions={onFetchOptions}
+          onValidationCheck={onValidationCheck}
+        />
+      );
+      userEvent.click(await comp.findByPlaceholderText("Enter name"));
+      jest.advanceTimersByTime(1000);
+      expect(await comp.findByText("foo")).toBeInTheDocument();
+      expect(await comp.findByText("bar")).toBeInTheDocument();
+      userEvent.type(comp.getByPlaceholderText("Enter name"), "foo");
+      jest.advanceTimersByTime(2000);
+      expect(await comp.findByText("foo")).toBeInTheDocument();
+      expect(await comp.queryByText("bar")).not.toBeInTheDocument();
+    });
   });
-
-  it("should show a select component for resource prefix with a valid value selected ", async () => {
+  xit("should render a select with a valid value selected", async () => {
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(ValidInput.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
@@ -52,12 +46,10 @@ describe("Resource prefix", () => {
         onValidationCheck={onValidationCheck}
       />
     );
-    await waitForI18n(comp);
-    expect(await comp.queryByText("Required")).not.toBeInTheDocument();
-    expect(await comp.findByDisplayValue("topic")).toBeInTheDocument;
+    expect(await comp.findByDisplayValue("foo")).toBeInTheDocument();
+    expect(await comp.queryByText("bar")).not.toBeInTheDocument();
   });
-
-  it("should show a diffetrent typeahead when resouce condition is 'starts with' ", async () => {
+  it("should show the typeahad passed to the component through props", async () => {
     const onChange = jest.fn();
     const onFetchOptions = jest.fn(PlaceHolderVariation.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
@@ -75,6 +67,7 @@ describe("Resource prefix", () => {
       await comp.findByPlaceholderText("Enter prefix")
     ).toBeInTheDocument();
   });
+
   xit("should show a loading spinner when typeahead suggestions are loading ", async () => {
     const onChange = jest.fn();
     const onFetchOptions = jest.fn(LoadingSuggestions.args!.onFetchOptions);
@@ -86,10 +79,10 @@ describe("Resource prefix", () => {
         onValidationCheck={onValidationCheck}
       />
     );
-    await waitForI18n(comp);
     expect(await comp.findByPlaceholderText("Enter name")).toBeInTheDocument();
-    expect(await comp.getByRole("progressbar")).toBeInTheDocument();
+    expect(await comp.getByRole("listbox")).toBeInTheDocument();
   });
+
   xit("should show a creatable typeahead suggestion", async () => {
     const onChange = jest.fn();
     const onValidationCheck = jest.fn();
@@ -102,83 +95,6 @@ describe("Resource prefix", () => {
       />
     );
     await waitForI18n(comp);
-    expect(
-      await comp.findByLabelText(`Use "test-topic-name"`)
-    ).toBeInTheDocument();
-  });
-  //Ignoring these tests for now. Unable to find text inside the form
-  xit("should show invalid consumer group characters error message", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidConsumerGroupCharacters
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByText("$!")).toBeInTheDocument();
-    expect(
-      await comp.findByText(
-        "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
-      )
-    ).toBeInTheDocument();
-  });
-  xit("should show invalid length error message", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidLength
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(
-      await comp.findByText(
-        "this-is-a-very-long-invalid-name-exceeding--32-characters"
-      )
-    ).toBeInTheDocument();
-    expect(
-      await comp.findByText("Cannot exceed 32 characters")
-    ).toBeInTheDocument();
-  });
-  xit("should show error message when invalid charecters for topic name are typed", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidTopicCharacters
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByText("$!")).toBeInTheDocument();
-    expect(
-      await comp.findByText(
-        "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - )."
-      )
-    ).toBeInTheDocument();
-  });
-  xit("should show error message when topic reource with condition 'is' and value typed is '.' or '..'", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidTopicLength
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByTestId("resource-prefix-select-helper"));
-    expect(await comp.findByDisplayValue("..")).toBeInTheDocument();
+    expect(await comp.findByRole("progressbar")).toBeInTheDocument();
   });
 });

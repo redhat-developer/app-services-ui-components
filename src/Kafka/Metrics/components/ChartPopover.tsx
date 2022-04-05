@@ -1,6 +1,7 @@
 import { Popover } from "@patternfly/react-core";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 import { VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 
 type ChartPopoverProps = {
   title: string;
@@ -11,13 +12,18 @@ export const ChartPopover: VoidFunctionComponent<ChartPopoverProps> = ({
   title,
   description,
 }) => {
+  const { t } = useTranslation();
   return (
     <Popover
-      aria-label="Basic popover"
+      aria-label={title}
       headerContent={<div>{title}</div>}
       bodyContent={<div>{description}</div>}
     >
-      <OutlinedQuestionCircleIcon />
+      <OutlinedQuestionCircleIcon
+        aria-label={t("metrics:chart-popover-icon-screenreader-text", {
+          title,
+        })}
+      />
     </Popover>
   );
 };

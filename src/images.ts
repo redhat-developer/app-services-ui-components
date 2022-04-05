@@ -47,6 +47,10 @@ export const LogoRedHatOpenShiftStreamsForApacheKafkaAWhiteRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift_Streams_for_Apache_Kafka-A-White-RGB.png",
   import.meta.url
 ).href;
+export const AppSpeedKeyArt = new URL(
+  "../static/images/CND-AppSpeed-Keyart-2.png",
+  import.meta.url
+).href;
 export const RhodsMlTechnology = new URL(
   "../static/images/RHODS-ML-Technology.svg",
   import.meta.url

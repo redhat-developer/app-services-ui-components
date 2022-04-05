@@ -6,91 +6,97 @@ import {
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { useEffect, useState } from "react";
+import { useRef, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { ResourceTypeValue } from "../../Kafka/ManageKafkaPermissions/components/ResourceType";
+import { useDebounce } from "../../utils";
 
-export type AsyncTypeaheadSelectProps = {
-  value: string | undefined;
-  onChange: (value: string | undefined) => void;
-  invalid: boolean;
-  onFetchOptions: () => Promise<string[]>;
-  placeholderText: string;
-  onValidationCheck: (filterValue: string | undefined) => string | undefined;
-  resourceType: ResourceTypeValue | undefined;
+export type Validation = {
+  message: string | undefined;
+  isValid: boolean;
 };
 
-export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
+export type AsyncTypeaheadSelectProps = {
+  id: string;
+  value: string | undefined;
+  ariaLabel: string;
+  placeholderText: string;
+  onChange: (value: string | undefined) => void;
+  onFetchOptions: (filter: string) => Promise<string[]>;
+  onValidationCheck: (filterValue: string | undefined) => Validation;
+};
+
+export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
+  id,
   value,
+  ariaLabel,
   onChange,
-  invalid,
   onFetchOptions,
   placeholderText,
   onValidationCheck,
-  resourceType,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
     []
   );
-  const [filter, setFilter] = useState<string>("");
+  const [validation, setValidation] = useState<Validation | undefined>();
+  const latestFilter = useRef(value);
 
-  useEffect(() => {
-    setLoading(true);
-    onFetchOptions().then((results: string[]) => {
-      setTypeAheadSuggestions(results);
-      setLoading(false);
-    });
-  }, [onFetchOptions]);
+  const doFilter = (filter: string) => {
+    if (filter !== latestFilter.current) {
+      latestFilter.current = filter;
+
+      setLoading(true);
+      onFetchOptions(filter)
+        .then(setTypeAheadSuggestions)
+        .finally(() => setLoading(false));
+    }
+  };
+
+  const onTypeahead: SelectProps["onFilter"] = (_, filter) => {
+    const validation = onValidationCheck(filter);
+    setValidation(validation);
+    doFilter(filter);
+
+    return undefined;
+  };
+  const debouncedOnQuery = useDebounce(onTypeahead, 1000);
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
     setIsOpen(newState);
+    if (newState === true) {
+      doFilter("");
+    }
   };
   const clearSelection = () => {
     onChange(undefined);
     setIsOpen(false);
   };
-  const makeOptions = (value?: string) => {
-    if (!value)
-      return typeAheadSuggestions.map((value, index) => (
-        <SelectOption key={index} value={value}>
-          {value}
-        </SelectOption>
-      ));
-    const input = new RegExp(value, "i");
-    return typeAheadSuggestions
-      .filter((child) => input.test(child))
-      .map((value, index) => (
-        <SelectOption key={index} value={value}>
-          {value}
-        </SelectOption>
-      ));
-  };
+
   const onCreateOption = (newValue: string) => {
     onChange(newValue);
   };
 
+  const validated =
+    validation && !validation.isValid
+      ? ValidatedOptions.error
+      : ValidatedOptions.default;
+
   return (
     <FormGroup
-      validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
-      helperTextInvalid={onValidationCheck(filter)}
-      fieldId={"resource-prefix-select"}
+      validated={validated}
+      helperTextInvalid={validation?.message}
+      fieldId={id}
       style={{ maxWidth: 200 }}
     >
       <Select
-        id={"resource-prefix-select"}
-        data-testid="acls-prefix-select"
+        id={id}
         variant={SelectVariant.typeahead}
-        typeAheadAriaLabel={
-          resourceType == undefined
-            ? t("resourcePrefix.prefix_aria_label")
-            : t("resourcePrefix.select_prefix_aria_abel", resourceType)
-        }
+        typeAheadAriaLabel={ariaLabel}
         onToggle={onToggle}
         onSelect={onSelect}
         onClear={clearSelection}
@@ -98,17 +104,20 @@ export const AsyncTypeaheadSelect: React.VFC<AsyncTypeaheadSelectProps> = ({
         isOpen={isOpen}
         loadingVariant={loading ? "spinner" : undefined}
         placeholderText={placeholderText}
-        isCreatable={true}
+        isCreatable={!validation?.isValid ? false : true}
         menuAppendTo="parent"
-        validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
+        validated={validated}
         maxHeight={400}
         width={200}
-        onTypeaheadInputChanged={(value) => setFilter(value)}
         onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
-        onFilter={(_, value) => makeOptions(value)}
+        onFilter={debouncedOnQuery}
       >
-        {makeOptions()}
+        {typeAheadSuggestions.map((value, index) => (
+          <SelectOption key={index} value={value}>
+            {value}
+          </SelectOption>
+        ))}
       </Select>
     </FormGroup>
   );

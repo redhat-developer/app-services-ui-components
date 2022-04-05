@@ -1,22 +1,24 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AsyncTypeaheadSelect } from "./AsyncTypeaheadSelect";
-import {
-  getSelectOptions,
-  invalidTopic,
-  invalidConsumerGroup,
-} from "../storiesHelpers";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";
+import { fakeApi } from "../storiesHelpers";
 
 export default {
   component: AsyncTypeaheadSelect,
   args: {
+    id: "sample",
     value: undefined,
-    invalid: false,
-    onFetchOptions: () => getSelectOptions("topic", 100),
+    ariaLabel: "my aria label",
+    onFetchOptions: (filter) =>
+      fakeApi<string[]>(
+        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+          v.includes(filter)
+        ),
+        1000
+      ),
+    onValidationCheck: () => ({ isValid: true, message: undefined }),
     placeholderText: "Enter name",
-    onValidationCheck: (value: string | undefined) => invalidTopic(""),
-    resourceType: undefined,
   },
 } as ComponentMeta<typeof AsyncTypeaheadSelect>;
 
@@ -31,71 +33,17 @@ InitialState.args = {};
 InitialState.parameters = {
   docs: {
     description: {
-      story: `Initial, empty state of the typeahead select with placeholder text. A user can type a prefix value and select from a list of suggestions `,
+      story: `Initial, empty state of the async typeahead with a placeholder text. A user can type a prefix value and select from a list of suggestions `,
     },
   },
 };
 
 export const ValidInput = Template.bind({});
-ValidInput.args = { value: "topic" };
+ValidInput.args = { value: "foo" };
 ValidInput.parameters = {
   docs: {
     description: {
-      story: `A user selects a valid prefix value `,
-    },
-  },
-};
-
-export const InvalidTopicLength = Template.bind({});
-InvalidTopicLength.args = {
-  value: "..",
-  invalid: true,
-  onValidationCheck: (value: string | undefined) => invalidTopic(".."),
-};
-InvalidTopicLength.parameters = {
-  docs: {
-    description: {
-      story: `A user types a value that is either '.' or '..' while selecting resource for a 'Topic' that has a resource prefix condition 'Is' `,
-    },
-  },
-};
-export const InvalidLength = Template.bind({});
-InvalidLength.args = {
-  value: "this-is-a-very-long-invalid-name-exceeding--32-characters",
-  invalid: true,
-  onValidationCheck: (value: string | undefined) =>
-    invalidTopic("this-is-a-very-long-invalid-name-exceeding--32-characters"),
-};
-InvalidLength.parameters = {
-  docs: {
-    description: {
-      story: `A user types a value that exceeds maximum characters allowed `,
-    },
-  },
-};
-export const InvalidTopicCharacters = Template.bind({});
-InvalidTopicCharacters.args = {
-  value: "$!",
-  invalid: true,
-  onValidationCheck: (value: string | undefined) => invalidTopic("$!"),
-};
-InvalidTopicCharacters.parameters = {
-  docs: {
-    description: {
-      story: `A user types a value that has invalid characters `,
-    },
-  },
-};
-export const InvalidConsumerGroupCharacters = Template.bind({});
-InvalidConsumerGroupCharacters.args = {
-  value: "$!",
-  invalid: true,
-  onValidationCheck: (value: string | undefined) => invalidConsumerGroup("$!"),
-};
-InvalidConsumerGroupCharacters.parameters = {
-  docs: {
-    description: {
-      story: `A user types a value that has invalid characters `,
+      story: `A user selects a valid value `,
     },
   },
 };
@@ -105,7 +53,7 @@ PlaceHolderVariation.args = { placeholderText: "Enter prefix" };
 PlaceHolderVariation.parameters = {
   docs: {
     description: {
-      story: `A user select prefix rule as 'Starts with', a different placeholderText is displayed for that `,
+      story: `A variation of the async typeahead with a different placholder`,
     },
   },
 };
@@ -122,7 +70,7 @@ LoadingSuggestions.play = async ({ canvasElement }) => {
 LoadingSuggestions.parameters = {
   docs: {
     description: {
-      story: `A user clicks on the typeahead select. Until the list of suggestions is ready to be dispayed, a spinner shows `,
+      story: `A user clicks on the async typeahead. Until the list of suggestions is ready to be dispayed, a spinner shows `,
     },
   },
 };

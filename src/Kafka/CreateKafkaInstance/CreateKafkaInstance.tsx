@@ -148,6 +148,7 @@ export const CreateKafkaInstance: FunctionComponent<
           spinnerAriaValueText={t("common:submitting_request")}
           isLoading={isSaving}
           data-testid="modalCreateKafka-buttonSubmit"
+          ouiaId="button-create"
         >
           {t("create_instance")}
         </Button>,
@@ -198,7 +199,7 @@ export const CreateKafkaInstance: FunctionComponent<
             </FormGroup>
             <FormGroup
               label={t("cloud_provider")}
-              fieldId="form-cloud-provider-name"
+              fieldId="form-cloud-provider-option"
               validated={providerValidation}
               helperTextInvalid={t("common:required")}
               isRequired
@@ -208,6 +209,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 value={provider}
                 onChange={setProvider}
                 isDisabled={disableControls}
+                validated={providerValidation}
               />
             </FormGroup>
             <FormGroup
@@ -230,6 +232,7 @@ export const CreateKafkaInstance: FunctionComponent<
               fieldId="availability-zones"
               validated={azValidation}
               helperTextInvalid={t("common:required")}
+              data-testid={"az"}
             >
               <ToggleGroup aria-label={t("availability_zone_selection")}>
                 <Tooltip
@@ -239,7 +242,7 @@ export const CreateKafkaInstance: FunctionComponent<
                   trigger={disableAZTooltip ? "manual" : undefined}
                 >
                   <ToggleGroupItem
-                    text={t("single")}
+                    text={t("az.single")}
                     value={"single"}
                     isDisabled={
                       disableControls || !(azOptions?.single === true)
@@ -257,7 +260,7 @@ export const CreateKafkaInstance: FunctionComponent<
                   })}
                 >
                   <ToggleGroupItem
-                    text={t("multi")}
+                    text={t("az.multi")}
                     value="multi"
                     buttonId="multi"
                     isDisabled={disableControls || !(azOptions?.multi === true)}
@@ -272,7 +275,7 @@ export const CreateKafkaInstance: FunctionComponent<
         <Divider isVertical />
         <FlexItem
           flex={{ default: "flex_1" }}
-          className="mk--create-instance-modal__sidebar--content"
+          className="mas--CreateKafkaInstance__sidebar"
         >
           <InstanceInfo
             isLoading={isLoading}
@@ -288,18 +291,14 @@ export const CreateKafkaInstance: FunctionComponent<
           />
         </FlexItem>
       </Flex>
-      <Flex>
-        <FlexItem>
-          <Alert
-            className="mas-m-modalTop"
-            customIcon={<OutlinedClockIcon />}
-            variant="info"
-            isInline
-            isPlain
-            title={t("instance_creation_time_alert")}
-          />
-        </FlexItem>
-      </Flex>
+      <Alert
+        className="mas--CreateKafkaInstance__creationTimeAlert"
+        customIcon={<OutlinedClockIcon />}
+        variant="info"
+        isInline
+        isPlain
+        title={t("instance_creation_time_alert")}
+      />
     </Modal>
   );
 };
