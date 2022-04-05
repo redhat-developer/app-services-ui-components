@@ -9,10 +9,6 @@ const {
   PlaceHolderVariation,
   LoadingSuggestions,
   CreatableText,
-  InvalidConsumerGroupCharacters,
-  InvalidLength,
-  InvalidTopicCharacters,
-  InvalidTopicLength,
 } = composeStories(stories);
 
 describe("Async typeahead", () => {
@@ -100,99 +96,5 @@ describe("Async typeahead", () => {
     );
     await waitForI18n(comp);
     expect(await comp.findByRole("progressbar")).toBeInTheDocument();
-  });
-});
-
-xit("should show invalid consumer group characters error message", async () => {
-  const onChange = jest.fn();
-  const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-  const onValidationCheck = jest.fn();
-  const comp = render(
-    <InvalidConsumerGroupCharacters
-      onChange={onChange}
-      onFetchOptions={onFetchOptions}
-      onValidationCheck={onValidationCheck}
-    />
-  );
-  await waitForI18n(comp);
-  expect(
-    await comp.findByText(
-      "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
-    )
-  ).toBeInTheDocument();
-
-  xit("should show invalid consumer group characters error message", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidConsumerGroupCharacters
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByText("$!")).toBeInTheDocument();
-    expect(
-      await comp.findByText(
-        "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
-      )
-    ).toBeInTheDocument();
-  });
-  xit("should show invalid length error message", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidLength
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(
-      await comp.findByText(
-        "this-is-a-very-long-invalid-name-exceeding--32-characters"
-      )
-    ).toBeInTheDocument();
-    expect(
-      await comp.findByText("Cannot exceed 32 characters")
-    ).toBeInTheDocument();
-  });
-  xit("should show error message when invalid charecters for topic name are typed", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidTopicCharacters
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByText("$!")).toBeInTheDocument();
-    expect(
-      await comp.findByText(
-        "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - )."
-      )
-    ).toBeInTheDocument();
-  });
-  xit("should show error message when topic reource with condition 'is' and value typed is '.' or '..'", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <InvalidTopicLength
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    expect(await comp.findByTestId("resource-prefix-select-helper"));
-    expect(await comp.findByDisplayValue("..")).toBeInTheDocument();
   });
 });
