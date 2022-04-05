@@ -1,7 +1,7 @@
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./AsyncTypeaheadSelect.stories";
 import { userEvent } from "@storybook/testing-library";
-import { act, render, waitForI18n } from "../../test-utils";
+import { act, render, waitForI18n, waitForPopper } from "../../test-utils";
 
 const {
   InitialState,
@@ -35,7 +35,7 @@ describe("Async typeahead", () => {
       expect(await comp.queryByText("bar")).not.toBeInTheDocument();
     });
   });
-  xit("should render a select with a valid value selected", async () => {
+  it("should render a select with a valid value selected", async () => {
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(ValidInput.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
@@ -68,7 +68,7 @@ describe("Async typeahead", () => {
     ).toBeInTheDocument();
   });
 
-  xit("should show a loading spinner when typeahead suggestions are loading ", async () => {
+  it("should show a loading spinner when typeahead suggestions are loading ", async () => {
     const onChange = jest.fn();
     const onFetchOptions = jest.fn(LoadingSuggestions.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
@@ -79,11 +79,14 @@ describe("Async typeahead", () => {
         onValidationCheck={onValidationCheck}
       />
     );
-    expect(await comp.findByPlaceholderText("Enter name")).toBeInTheDocument();
-    expect(await comp.getByRole("listbox")).toBeInTheDocument();
+    await waitForI18n(comp);
+    const input = comp.getByPlaceholderText("Enter name");
+    userEvent.click(input);
+    await waitForPopper();
+    expect(await comp.getByRole("progressbar")).toBeInTheDocument();
   });
 
-  xit("should show a creatable typeahead suggestion", async () => {
+  it("should show a creatable typeahead suggestion", async () => {
     const onChange = jest.fn();
     const onValidationCheck = jest.fn();
     const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
@@ -95,6 +98,10 @@ describe("Async typeahead", () => {
       />
     );
     await waitForI18n(comp);
+    const input = comp.getByPlaceholderText("Enter name");
+    userEvent.click(input);
+    await waitForPopper();
+    userEvent.type(input, "test-topic-name");
     expect(await comp.findByRole("progressbar")).toBeInTheDocument();
   });
 });
