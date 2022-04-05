@@ -31,7 +31,8 @@ export type CreateKafkaInstanceError =
   | "name-taken"
   | "trial-unavailable"
   | "form-invalid"
-  | "unknown";
+  | "unknown"
+  | "region-unavailable";
 
 export type CreateKafkaInitializationData = {
   defaultProvider: Provider | undefined;

@@ -99,25 +99,27 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
     };
 
     return (
-      instanceAvailability && (
-        <>
-          <ErrorMessage />
-          <div className="pf-c-form__helper-text">
-            <Trans
-              ns={["create-kafka-instance-exp"]}
-              i18nKey={t("cloud_region_description")}
-              components={[
-                <Button
-                  key="btn-learn-more"
-                  variant={ButtonVariant.link}
-                  onClick={onClickLearnMoreAboutRegions}
-                  isInline
-                />,
-              ]}
-            />
-          </div>
-        </>
-      )
+      <>
+        {instanceAvailability && (
+          <>
+            <ErrorMessage />
+            <div className="pf-c-form__helper-text">
+              <Trans
+                ns={["create-kafka-instance-exp"]}
+                i18nKey={t("cloud_region_description")}
+                components={[
+                  <Button
+                    key="btn-learn-more"
+                    variant={ButtonVariant.link}
+                    onClick={onClickLearnMoreAboutRegions}
+                    isInline
+                  />,
+                ]}
+              />
+            </div>
+          </>
+        )}
+      </>
     );
   };
 
@@ -237,6 +239,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
             className="pf-u-w-100"
             isDisabled={isDisabledSize}
             onChange={setSize}
+            aria-describedby="streaming-size"
           />
           <span
             className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"

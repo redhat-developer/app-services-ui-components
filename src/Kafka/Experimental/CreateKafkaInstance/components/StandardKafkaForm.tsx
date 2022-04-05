@@ -41,7 +41,7 @@ export type StandardKafkaFormProps = {
   isDisabledSize: boolean;
   size: number | undefined;
   setSize: (size: number) => void;
-  setRegion: (region: Region) => void;
+  setRegion: (region: Region | undefined) => void;
   setName: (name: string) => void;
   setProvider: (provider: Provider) => void;
   setAZ: (az: AZ) => void;
@@ -184,6 +184,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
         />
       </FormGroup>
       <FormGroup
+        data-testid="cloudRegion"
         label={t("cloud_region")}
         fieldId="form-cloud-region-option"
         isRequired
@@ -258,6 +259,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             className="pf-u-w-100"
             isDisabled={isDisabledSize}
             onChange={setSize}
+            aria-describedby="streaming-size"
           />
           <span
             className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"

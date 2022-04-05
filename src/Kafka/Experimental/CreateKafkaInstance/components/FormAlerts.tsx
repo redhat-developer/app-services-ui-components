@@ -1,14 +1,24 @@
 import { VoidFunctionComponent } from "react";
-import { Alert, AlertGroup, AlertVariant } from "@patternfly/react-core";
-import { useTranslation } from "react-i18next";
+import {
+  Alert,
+  AlertGroup,
+  AlertVariant,
+  Button,
+  ButtonVariant,
+} from "@patternfly/react-core";
+import { useTranslation, Trans } from "react-i18next";
 import { CreateKafkaInstanceError } from "../machines";
 
 export type FormAlertsProps = {
   error: CreateKafkaInstanceError | undefined;
+  isTrial: boolean;
+  onClickContactSupport: () => void;
 };
 
 export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
+  isTrial,
+  onClickContactSupport,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -53,7 +63,33 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 {t("form_errors.trial_unavailable_message")}
               </Alert>
             );
-
+          case "region-unavailable":
+            return (
+              <Alert
+                role={"alert"}
+                className="pf-u-mb-md"
+                variant={AlertVariant.danger}
+                title={t("form_errors.instance_unavailable_title")}
+                isInline
+              >
+                {isTrial ? (
+                  t("form_errors.trial_region_unavailable_message")
+                ) : (
+                  <Trans
+                    ns={["create-kafka-instance-exp"]}
+                    i18nKey={t("form_errors.region_unavailable_message")}
+                    components={[
+                      <Button
+                        key="btn-contact-support"
+                        variant={ButtonVariant.link}
+                        onClick={onClickContactSupport}
+                        isInline
+                      />,
+                    ]}
+                  />
+                )}
+              </Alert>
+            );
           case "unknown":
             return (
               <Alert

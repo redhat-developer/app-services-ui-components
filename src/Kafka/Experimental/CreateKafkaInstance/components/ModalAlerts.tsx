@@ -122,7 +122,6 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
               </Alert>
             );
           case instanceAvailability === "trial-unavailable":
-          case instanceAvailability === "instance-unavailable":
             return (
               <Alert
                 role={"alert"}
@@ -131,7 +130,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 title={t("modal_alerts.instance_unavailable_title")}
                 isInline
               >
-                {t("modal_alerts.instance_unavailable_message")}
+                {t("modal_alerts.trial_unavailable_message")}
               </Alert>
             );
           case instanceAvailability === "regions-unavailable":
@@ -140,10 +139,21 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.warning}
-                title={t("modal_alerts.instance_unavailable_title")}
+                title={t("modal_alerts.regions_unavailable_title")}
                 isInline
               >
-                {t("modal_alerts.region_unavailable_message")}
+                <Trans
+                  ns={["create-kafka-instance-exp"]}
+                  i18nKey={t("modal_alerts.regions_unavailable_message")}
+                  components={[
+                    <Button
+                      key="btn-contact-support"
+                      variant={ButtonVariant.link}
+                      onClick={onClickContactUs}
+                      isInline
+                    />,
+                  ]}
+                />
               </Alert>
             );
         }

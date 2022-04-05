@@ -26,7 +26,10 @@
     "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
     "unknown_error_message": "$t(common:unexpected_error)",
-    "unknown_error_title": "$t(common:something_went_wrong)"
+    "unknown_error_title": "$t(common:something_went_wrong)",
+    "trial_region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours.",
+    "region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region, try again later, or <0>contact support</0>.",
+    "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation"
   },
   "ingress_egress": "Ingress/Egress",
   "ingress_egress_value": "up to {{value}} MiB/second each",
@@ -59,8 +62,8 @@
   "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
-    "instance_unavailable_message": "All available trial instances are currently in use. Try again later.",
-    "region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours.",
+    "regions_unavailable_title": "Cloud provider regions are temporarily unavailable.",
+    "regions_unavailable_message": "Try again later or <0>contact support</0>.",
     "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "over_quota_message": "Your organization has {{allowedStreamingUnits}} streaming units available which are already in use. To deploy a new instance, delete an existing one first or <0>contact us</0> to add more streaming units to your account.",
     "over_quota_title": "Your organization has no streaming units remaining.",
@@ -98,5 +101,6 @@
   "all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider, try again later, or <0>contact support</0>.",
   "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region, try again later, or <0>contact support</0>.",
   "tria_all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider or try again later.",
-  "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
+  "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later.",
+  "temporarily_unavailable": "Temporarily unavailable"
 }

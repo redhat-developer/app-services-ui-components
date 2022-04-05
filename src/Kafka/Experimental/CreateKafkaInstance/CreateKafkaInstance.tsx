@@ -47,6 +47,7 @@ export type CreateKafkaInstanceProps = {
   onClickPricingAndPurchasing: () => void;
   onClickContactUs: () => void;
   onClickContactSupport: () => void;
+  onClickLearnMoreAboutRegions: () => void;
 } & MakeCreateKafkaInstanceMachine &
   Partial<InstanceInfoLimitsProps>;
 
@@ -70,6 +71,7 @@ export const CreateKafkaInstance: FunctionComponent<
   onClickPricingAndPurchasing,
   onClickContactUs,
   onClickContactSupport,
+  onClickLearnMoreAboutRegions,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance-exp");
@@ -188,7 +190,11 @@ export const CreateKafkaInstance: FunctionComponent<
         alignItems={{ lg: "alignItemsFlexStart" }}
       >
         <FlexItem flex={{ default: "flex_2" }}>
-          <FormAlerts error={error} />
+          <FormAlerts
+            error={error}
+            isTrial={isTrial}
+            onClickContactSupport={onClickContactUs}
+          />
           {isTrial && instanceAvailability ? (
             <>
               <TrialKafkaForm
@@ -218,6 +224,7 @@ export const CreateKafkaInstance: FunctionComponent<
                 onSubmit={onSubmit}
                 instanceAvailability={instanceAvailability}
                 onClickContactSupport={onClickContactSupport}
+                onClickLearnMoreAboutRegions={onClickLearnMoreAboutRegions}
               />
             </>
           ) : (

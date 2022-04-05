@@ -199,6 +199,30 @@ TrialUnavailableOnFormSubmit.args = {
 } as CreateKafkaInstanceProps;
 TrialUnavailableOnFormSubmit.play = sampleSubmit;
 
+export const SelectedRegionUnavailableOnFormSubmit = Template.bind({});
+SelectedRegionUnavailableOnFormSubmit.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "quota",
+    defaultAZ: "multi",
+    defaultProvider: "aws",
+    providers: ["aws", "azure"],
+  }),
+  onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
+} as CreateKafkaInstanceProps;
+SelectedRegionUnavailableOnFormSubmit.play = sampleSubmit;
+
+export const TrialSelectedRegionUnavailableOnFormSubmit = Template.bind({});
+TrialSelectedRegionUnavailableOnFormSubmit.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    instanceAvailability: "trial",
+    defaultAZ: "multi",
+    defaultProvider: "aws",
+    providers: ["aws", "azure"],
+  }),
+  onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
+} as CreateKafkaInstanceProps;
+TrialSelectedRegionUnavailableOnFormSubmit.play = sampleSubmit;
+
 export const TrialUsedOnFormLoad = Template.bind({});
 TrialUsedOnFormLoad.args = {
   getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
@@ -313,6 +337,28 @@ NoRegionsReturnedFromApiForAProviderOnFormLoad.parameters = {
     description: {
       story: `If a provider doesn't have any region, it will still be displayed but the regions select will contain an 
       unselectable information message.`,
+    },
+  },
+};
+
+export const NoRegionsReturnedFromApiForAllProviderOnFormLoad = Template.bind(
+  {}
+);
+NoRegionsReturnedFromApiForAllProviderOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "regions-unavailable",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p) => ({ ...p, regions: [] }))
+  ),
+} as CreateKafkaInstanceProps;
+NoRegionsReturnedFromApiForAllProviderOnFormLoad.parameters = {
+  docs: {
+    description: {
+      story: `If all provider doesn't have any region, form will be disabled.`,
     },
   },
 };
