@@ -27,12 +27,17 @@ describe("Async typeahead", () => {
       );
       userEvent.click(await comp.findByPlaceholderText("Enter name"));
       jest.advanceTimersByTime(1000);
+      expect(onFetchOptions).toBeCalledTimes(1);
       expect(await comp.findByText("foo")).toBeInTheDocument();
       expect(await comp.findByText("bar")).toBeInTheDocument();
       userEvent.type(comp.getByPlaceholderText("Enter name"), "foo");
+      expect(onFetchOptions).toBeCalledTimes(1);
+      expect(onValidationCheck).toBeCalledTimes(1);
       jest.advanceTimersByTime(2000);
       expect(await comp.findByText("foo")).toBeInTheDocument();
       expect(await comp.queryByText("bar")).not.toBeInTheDocument();
+      userEvent.click(await comp.findByText("foo"));
+      expect(onChangeValue).toBeCalledTimes(1);
     });
   });
   it("should render a select with a valid value selected", async () => {
@@ -48,6 +53,9 @@ describe("Async typeahead", () => {
     );
     expect(await comp.findByDisplayValue("foo")).toBeInTheDocument();
     expect(await comp.queryByText("bar")).not.toBeInTheDocument();
+    expect(onChangeValue).not.toBeCalled();
+    expect(onFetchOptions).not.toBeCalled();
+    expect(onValidationCheck).not.toBeCalled();
   });
   it("should show the typeahad passed to the component through props", async () => {
     const onChange = jest.fn();
@@ -66,6 +74,9 @@ describe("Async typeahead", () => {
     expect(
       await comp.findByPlaceholderText("Enter prefix")
     ).toBeInTheDocument();
+    expect(onChange).not.toBeCalled();
+    expect(onFetchOptions).not.toBeCalled();
+    expect(onValidationCheck).not.toBeCalled();
   });
 
   it("should show a loading spinner when typeahead suggestions are loading ", async () => {
@@ -84,6 +95,9 @@ describe("Async typeahead", () => {
     userEvent.click(input);
     await waitForPopper();
     expect(await comp.getByRole("progressbar")).toBeInTheDocument();
+    expect(onChange).not.toBeCalled();
+    expect(onFetchOptions).toBeCalledTimes(1);
+    expect(onValidationCheck).not.toBeCalled();
   });
 
   it("should show a creatable typeahead suggestion", async () => {
@@ -100,8 +114,11 @@ describe("Async typeahead", () => {
     await waitForI18n(comp);
     const input = comp.getByPlaceholderText("Enter name");
     userEvent.click(input);
+    expect(onFetchOptions).toBeCalledTimes(1);
     await waitForPopper();
     userEvent.type(input, "test-topic-name");
     expect(await comp.findByRole("progressbar")).toBeInTheDocument();
+    expect(onFetchOptions).toBeCalledTimes(1);
+    expect(onChange).not.toBeCalled();
   });
 });
