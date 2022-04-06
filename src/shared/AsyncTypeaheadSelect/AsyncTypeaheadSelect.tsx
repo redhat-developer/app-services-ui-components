@@ -8,7 +8,6 @@ import {
 } from "@patternfly/react-core";
 import { useRef, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
-import { useDebounce } from "../../utils";
 
 export type Validation = {
   message: string | undefined;
@@ -21,6 +20,7 @@ export type AsyncTypeaheadSelectProps = {
   ariaLabel: string;
   placeholderText: string;
   onChange: (value: string | undefined) => void;
+  onCreate: (value: string) => void;
   onFetchOptions: (filter: string) => Promise<string[]>;
   onValidationCheck: (filterValue: string | undefined) => Validation;
 };
@@ -30,6 +30,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   value,
   ariaLabel,
   onChange,
+  onCreate,
   onFetchOptions,
   placeholderText,
   onValidationCheck,
@@ -41,54 +42,55 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     []
   );
   const [validation, setValidation] = useState<Validation | undefined>();
-  const latestFilter = useRef(value);
 
-  const doFilter = (filter: string) => {
-    if (filter !== latestFilter.current) {
-      latestFilter.current = filter;
+  const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
+    undefined
+  );
 
-      setLoading(true);
-      onFetchOptions(filter)
+  const onTypeahead = (filter: string | undefined) => {
+    function doFetch() {
+      onFetchOptions(filter || "")
         .then(setTypeAheadSuggestions)
         .finally(() => setLoading(false));
     }
+    setLoading(true);
+    if (filter !== undefined) {
+      setValidation(onValidationCheck(filter));
+      setTypeAheadSuggestions([]);
+    }
+    if (fetchTimeout.current) {
+      clearTimeout(fetchTimeout.current);
+      fetchTimeout.current = undefined;
+    }
+    fetchTimeout.current = setTimeout(doFetch, 300);
   };
-
-  const onTypeahead: SelectProps["onFilter"] = (_, filter) => {
-    const validation = onValidationCheck(filter);
-    setValidation(validation);
-    doFilter(filter);
-
-    return undefined;
-  };
-  const debouncedOnQuery = useDebounce(onTypeahead, 1000);
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
-    setIsOpen(newState);
-    if (newState === true) {
-      doFilter("");
-    }
+    setIsOpen((isOpen) => {
+      if (isOpen !== newState && newState === true) {
+        onTypeahead(undefined);
+      }
+      return newState;
+    });
   };
   const clearSelection = () => {
     onChange(undefined);
     setIsOpen(false);
   };
 
-  const onCreateOption = (newValue: string) => {
-    onChange(newValue);
-  };
-
-  const validated =
+  const formGroupValidated =
     validation && !validation.isValid
       ? ValidatedOptions.error
       : ValidatedOptions.default;
 
+  const isCreatable = !loading && validation && validation.isValid;
+
   return (
     <FormGroup
-      validated={validated}
+      validated={formGroupValidated}
       helperTextInvalid={validation?.message}
       fieldId={id}
       style={{ maxWidth: 200 }}
@@ -104,17 +106,18 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         isOpen={isOpen}
         loadingVariant={loading ? "spinner" : undefined}
         placeholderText={placeholderText}
-        isCreatable={!validation?.isValid ? false : true}
+        isCreatable={isCreatable}
         menuAppendTo="parent"
-        validated={validated}
+        validated={formGroupValidated}
         maxHeight={400}
         width={200}
-        onCreateOption={onCreateOption}
+        onCreateOption={onCreate}
         createText={t("resourcePrefix.create_text")}
-        onFilter={debouncedOnQuery}
+        onTypeaheadInputChanged={onTypeahead}
+        onFilter={() => undefined}
       >
         {typeAheadSuggestions.map((value, index) => (
-          <SelectOption key={index} value={value}>
+          <SelectOption key={index} value={value} isDisabled={loading}>
             {value}
           </SelectOption>
         ))}
