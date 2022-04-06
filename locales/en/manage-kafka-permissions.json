@@ -22,8 +22,8 @@
     "describe_configs": "Describe configs",
     "read": "Read",
     "write": "Write",
-    "aria_label":"Resource type operation value",
-    "placeholder_text":"Select operation"
+    "aria_label": "Resource type operation value",
+    "placeholder_text": "Select operation"
   },
   "resource_prefix_rule": {
     "is": "Is",
@@ -58,12 +58,19 @@
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
-  "resourcePrefix":{
-    "placeholder_text_starts_with":"Enter prefix",
-    "placeholder_text_is":"Enter name",
-    "prefix_aria_label":"Resource prefix",
-    "select_prefix_aria_label":"{{value}} prefix",
-    "create_text":"Use"
+  "resourcePrefix": {
+    "placeholder_text_starts_with": "Enter prefix",
+    "placeholder_text_is": "Enter name",
+    "prefix_aria_label": "Resource prefix",
+    "select_prefix_aria_label": "{{value}} prefix",
+    "create_text": "Use"
+  },
+  "resourcePrefix": {
+    "placeholder_text_starts_with": "Enter prefix",
+    "placeholder_text_is": "Enter name",
+    "prefix_aria_label": "Resource prefix",
+    "select_prefix_aria_label": "{{value}} prefix",
+    "create_text": "Use"
   },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
