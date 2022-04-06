@@ -14,111 +14,90 @@ const {
 describe("Async typeahead", () => {
   jest.useFakeTimers();
   it("should render a select with async typeahead suggestions", async () => {
+    const onCreate = jest.fn();
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(InitialState.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
+
     await act(async () => {
       const comp = render(
         <InitialState
+          onCreate={onCreate}
           onChange={onChangeValue}
           onFetchOptions={onFetchOptions}
           onValidationCheck={onValidationCheck}
         />
       );
-      userEvent.click(await comp.findByPlaceholderText("Enter name"));
-      jest.advanceTimersByTime(1000);
-      expect(onFetchOptions).toBeCalledTimes(1);
-      expect(await comp.findByText("foo")).toBeInTheDocument();
-      expect(await comp.findByText("bar")).toBeInTheDocument();
-      userEvent.type(comp.getByPlaceholderText("Enter name"), "foo");
-      expect(onFetchOptions).toBeCalledTimes(1);
-      expect(onValidationCheck).toBeCalledTimes(1);
-      jest.advanceTimersByTime(2000);
-      expect(await comp.findByText("foo")).toBeInTheDocument();
+      await waitForI18n(comp);
+
       expect(await comp.queryByText("bar")).not.toBeInTheDocument();
-      userEvent.click(await comp.findByText("foo"));
-      expect(onChangeValue).toBeCalledTimes(1);
+
+      expect(onCreate).not.toBeCalled();
+      expect(onChangeValue).not.toBeCalled();
+      expect(onFetchOptions).not.toBeCalled();
+      expect(onValidationCheck).not.toBeCalled();
     });
   });
+
   it("should render a select with a valid value selected", async () => {
-    const onChangeValue = jest.fn();
-    const onFetchOptions = jest.fn(ValidInput.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <ValidInput
-        onChange={onChangeValue}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    expect(await comp.findByDisplayValue("foo")).toBeInTheDocument();
-    expect(await comp.queryByText("bar")).not.toBeInTheDocument();
-    expect(onChangeValue).not.toBeCalled();
-    expect(onFetchOptions).not.toBeCalled();
-    expect(onValidationCheck).not.toBeCalled();
-  });
-  it("should show the typeahad passed to the component through props", async () => {
-    const onChange = jest.fn();
-    const onFetchOptions = jest.fn(PlaceHolderVariation.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-    const comp = render(
-      <PlaceHolderVariation
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
+    const comp = render(<ValidInput />);
     await waitForI18n(comp);
 
-    expect(await comp.queryByText("Enter name")).not.toBeInTheDocument();
-    expect(
-      await comp.findByPlaceholderText("Enter prefix")
-    ).toBeInTheDocument();
-    expect(onChange).not.toBeCalled();
-    expect(onFetchOptions).not.toBeCalled();
-    expect(onValidationCheck).not.toBeCalled();
+    expect(comp.getByDisplayValue("foo")).toBeInTheDocument();
+  });
+
+  it("should show a custom placeholder", async () => {
+    const comp = render(<PlaceHolderVariation />);
+    await waitForI18n(comp);
+
+    expect(comp.getByPlaceholderText("Enter prefix")).toBeInTheDocument();
   });
 
   it("should show a loading spinner when typeahead suggestions are loading ", async () => {
-    const onChange = jest.fn();
     const onFetchOptions = jest.fn(LoadingSuggestions.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
+
     const comp = render(
       <LoadingSuggestions
-        onChange={onChange}
         onFetchOptions={onFetchOptions}
         onValidationCheck={onValidationCheck}
       />
     );
-    await waitForI18n(comp);
-    const input = comp.getByPlaceholderText("Enter name");
-    userEvent.click(input);
-    await waitForPopper();
+    await focusSelect(comp);
+
     expect(await comp.getByRole("progressbar")).toBeInTheDocument();
-    expect(onChange).not.toBeCalled();
+    jest.advanceTimersByTime(1000);
     expect(onFetchOptions).toBeCalledTimes(1);
     expect(onValidationCheck).not.toBeCalled();
   });
 
   it("should show a creatable typeahead suggestion", async () => {
+    const onCreate = jest.fn();
     const onChange = jest.fn();
-    const onValidationCheck = jest.fn();
-    const onFetchOptions = jest.fn(CreatableText.args!.onFetchOptions);
+
     const comp = render(
-      <CreatableText
-        onChange={onChange}
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
+      <CreatableText onCreate={onCreate} onChange={onChange} />
     );
-    await waitForI18n(comp);
-    const input = comp.getByPlaceholderText("Enter name");
-    userEvent.click(input);
-    expect(onFetchOptions).toBeCalledTimes(1);
-    await waitForPopper();
-    userEvent.type(input, "test-topic-name");
-    expect(await comp.findByRole("progressbar")).toBeInTheDocument();
-    expect(onFetchOptions).toBeCalledTimes(1);
+    const select = await focusSelect(comp);
+
+    userEvent.type(select, "test-topic-name");
+    const option = await comp.findByText('Use "test-topic-name"');
+    expect(option).toBeInTheDocument();
+
+    expect(onCreate).not.toBeCalled();
     expect(onChange).not.toBeCalled();
+
+    userEvent.click(option);
+    expect(onCreate).toBeCalledTimes(1);
+    expect(onChange).toBeCalledTimes(1);
   });
 });
+
+async function focusSelect(comp: ReturnType<typeof render>) {
+  await waitForI18n(comp);
+  const select = comp.getByPlaceholderText("Enter name");
+  userEvent.click(select);
+  jest.advanceTimersByTime(1000);
+  await waitForPopper();
+  return select;
+}

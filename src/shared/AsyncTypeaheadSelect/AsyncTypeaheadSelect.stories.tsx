@@ -15,7 +15,7 @@ export default {
         ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
           v.includes(filter)
         ),
-        1000
+        100
       ),
     onValidationCheck: () => ({ isValid: true, message: undefined }),
     placeholderText: "Enter name",
@@ -77,7 +77,6 @@ LoadingSuggestions.parameters = {
 
 export const CreatableText = Template.bind({});
 CreatableText.args = {};
-
 CreatableText.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(
