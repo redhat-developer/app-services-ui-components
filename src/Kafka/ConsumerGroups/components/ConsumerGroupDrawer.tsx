@@ -16,12 +16,11 @@ import {
   DropdownItem,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { createRef, FunctionComponent, ReactNode, useState } from "react";
+import { FunctionComponent, ReactNode, useState } from "react";
 import { ConsumerGroupState, Consumer } from "../types";
 import { ConsumerGroupDetails } from "./ConsumerGroupDetails";
 import { useTranslation } from "react-i18next";
 import "./ConsumerGroup.css";
-import { EllipsisVIcon } from "@patternfly/react-icons";
 
 export type ConsumerGroupDrawerProps = {
   children: ReactNode;
@@ -94,9 +93,7 @@ export const ConsumerGroupDrawer: FunctionComponent<
             isOpen={isOpen}
             isPlain
             position={DropdownPosition.right}
-          >
-            <EllipsisVIcon />
-          </Dropdown>
+          />
           <DrawerCloseButton onClick={onClickClose} />
         </DrawerActions>
       </DrawerHead>
@@ -112,16 +109,9 @@ export const ConsumerGroupDrawer: FunctionComponent<
     </DrawerPanelContent>
   );
 
-  const drawerRef = createRef();
-
-  const onExpand = () => {
-    drawerRef.current;
-  };
-
   return (
     <Drawer
       isExpanded={isExpanded}
-      onExpand={onExpand}
       data-ouia-app-id={"dataPlane-consumerGroupDetails"}
     >
       <DrawerContent panelContent={panelContent}>
