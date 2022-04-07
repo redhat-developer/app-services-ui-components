@@ -12,7 +12,7 @@ describe("OverviewPage", () => {
     expect(
       comp.getByText("Try OpenShift Streams for Apache Kafka")
     ).toHaveAttribute("href", Example.args!.toKafkaHref);
-    const [createServiceRegistry, createKafka] =
+    const [createKafka, createServiceRegistry] =
       comp.getAllByText("Create an instance");
     expect(createKafka).toHaveAttribute("href", Example.args!.toKafkaHref);
     expect(createServiceRegistry).toHaveAttribute(
