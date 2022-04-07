@@ -10,3 +10,4 @@ export * from "./Pagination";
 export * from "./RefreshButton";
 export * from "./RemoveButton";
 export * from "./Table";
+export * from "./AsyncTypeaheadSelect";

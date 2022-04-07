@@ -93,7 +93,7 @@ describe("Async typeahead", () => {
   });
 });
 
-async function focusSelect(comp: ReturnType<typeof render>) {
+export async function focusSelect(comp: ReturnType<typeof render>) {
   await waitForI18n(comp);
   const select = comp.getByPlaceholderText("Enter name");
   userEvent.click(select);
