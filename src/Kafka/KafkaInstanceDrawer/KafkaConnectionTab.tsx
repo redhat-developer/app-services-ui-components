@@ -20,7 +20,10 @@ export type KafkaConnectionTabProps = {
   tokenEndPointUrl: string;
   linkToServiceAccount: string;
   linkToAccessTab: string;
+  linkToAPIDocumentation: string;
+  restAPIUrl: string;
   showCreateServiceAccountModal: () => void;
+  linkToLearnMore: string;
 };
 
 export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
@@ -29,6 +32,9 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
   tokenEndPointUrl,
   linkToServiceAccount,
   linkToAccessTab,
+  linkToAPIDocumentation,
+  restAPIUrl,
+  linkToLearnMore,
   showCreateServiceAccountModal,
 }) => {
   const { t } = useTranslation();
@@ -53,6 +59,69 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
             textAriaLabel={t("kafka:connection_tab.bootstrap_server")}
           >
             {externalServer}
+          </ClipboardCopy>
+        )}
+      </TextContent>
+      <TextContent className="pf-u-pb-sm">
+        <Text component={TextVariants.h3} className="pf-u-mt-lg">
+          {t("kafka:connection_tab.rest_api")}{" "}
+          <Popover
+            aria-label={t("kafka:connection_tab.rest_api_popover_label")}
+            bodyContent={
+              <div>
+                <div>
+                  {
+                    <Trans
+                      i18nKey={
+                        "kafka:connection_tab.rest_api_popover_content_1"
+                      }
+                      components={{
+                        value: <Link to={linkToAPIDocumentation}></Link>,
+                      }}
+                    />
+                  }
+                </div>
+                <div>
+                  {
+                    <Trans
+                      i18nKey={
+                        "kafka:connection_tab.rest_api_popover_content_2"
+                      }
+                      components={{
+                        value: <Link to={linkToLearnMore}></Link>,
+                      }}
+                    />
+                  }
+                </div>
+              </div>
+            }
+          >
+            <Button
+              variant={ButtonVariant.plain}
+              aria-label={t("kafka:connection_tab.rest_api_help_button_label")}
+            >
+              <HelpIcon />
+            </Button>
+          </Popover>
+        </Text>
+        <Text component={TextVariants.small}>
+          {
+            <Trans
+              i18nKey={"kafka:connection_tab.rest_api_url_description"}
+              components={{
+                value: <Link to={linkToAPIDocumentation}></Link>,
+              }}
+            />
+          }
+        </Text>
+        {isKafkaPending ? (
+          <Skeleton fontSize="2xl" />
+        ) : (
+          <ClipboardCopy
+            data-testid="drawerStreams-copyRestApiURL"
+            textAriaLabel={t("kafka:connection_tab.rest_api")}
+          >
+            {restAPIUrl}
           </ClipboardCopy>
         )}
       </TextContent>
