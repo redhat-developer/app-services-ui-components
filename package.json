@@ -86,7 +86,7 @@
     "@xstate/inspect": "0.6.4",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.4",
-    "chromatic": "6.5.3",
+    "chromatic": "6.5.4",
     "concurrently": "7.1.0",
     "eslint": "8.12.0",
     "eslint-config-prettier": "8.5.0",
