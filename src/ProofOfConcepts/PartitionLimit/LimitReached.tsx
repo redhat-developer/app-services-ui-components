@@ -1,4 +1,4 @@
-import { ExpandableDangerAlert } from "./DangerAlert";
+import { Alert } from "@patternfly/react-core";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 
 import { VoidFunctionComponent } from "react";
@@ -35,18 +35,25 @@ export const TopicPartitionsLimitReached: VoidFunctionComponent = () => {
           </Popover>
         </CardTitle>
         <CardBody>
-          {/* <br/> */}
           <Title headingLevel="h3" size="4xl">
-            950
+            1000
           </Title>
-        </CardBody>
-        <CardFooter>
           <TextContent>
             <Text>Limit 1000 partitions.</Text>
           </TextContent>
-        </CardFooter>
+        </CardBody>
         <CardFooter>
-          <ExpandableDangerAlert />
+          <Alert
+            isExpandable
+            isInline
+            variant="danger"
+            title="This Kafka instance reached the partition limit"
+          >
+            <p>
+              This Kafka instance has reached its maximum partition limit and
+              might experience degraded performance.
+            </p>
+          </Alert>
         </CardFooter>
       </Card>
     </React.Fragment>
