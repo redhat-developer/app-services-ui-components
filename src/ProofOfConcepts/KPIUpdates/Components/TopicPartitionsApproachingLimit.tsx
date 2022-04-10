@@ -54,7 +54,7 @@ export const TopicPartitionsApproachingLimit: VoidFunctionComponent = () => {
             <p>
               This Kafka instance is approaching the partition limit. If the
               Kafka instance exceeds 1000 partitions, it might experience
-              degraded performance.
+              degraded performance. 
             </p>
           </Alert>
         </CardFooter>

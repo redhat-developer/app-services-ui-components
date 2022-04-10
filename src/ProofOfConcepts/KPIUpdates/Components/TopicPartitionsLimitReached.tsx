@@ -52,7 +52,7 @@ export const TopicPartitionsLimitReached: VoidFunctionComponent = () => {
           >
             <p>
               This Kafka instance has reached its maximum partition limit and
-              might experience degraded performance.
+              might experience degraded performance. To create more partitions, use a larger Kafka Instance with higher limits.
             </p>
           </Alert>
         </CardFooter>
