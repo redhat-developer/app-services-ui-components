@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TopicPartitionsLimitReached } from "./LimitReached";
+import { TopicPartitionsLimitReached } from "./TopicPartitionsLimitReached";
 
 export default {
   component: TopicPartitionsLimitReached,

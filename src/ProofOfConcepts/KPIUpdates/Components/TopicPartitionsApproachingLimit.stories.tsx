@@ -1,5 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { TopicPartitionsApproachingLimit } from "./ApproachingLimit";
+import { TopicPartitionsApproachingLimit } from "./TopicPartitionsApproachingLimit";
 
 export default {
   component: TopicPartitionsApproachingLimit,
