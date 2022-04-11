@@ -6,7 +6,7 @@ import TransactionalIdLabel from "./TrasactionalIdLabel";
 import KafkaInstanceLabel from "./KafkaInstanceLabel";
 import { Chip, ChipGroup, Text } from "@patternfly/react-core";
 
-class Chips5 extends React.Component {
+class Chips extends React.Component {
   constructor(props) {
     super(props);
     const ReadText = [
@@ -112,7 +112,10 @@ class Chips5 extends React.Component {
           }}
         >
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup className="lightblue" categoryName={<TopicLabel />}>
+            <ChipGroup
+              // className="lightblue"
+              categoryName={<TopicLabel />}
+            >
               {chipsSet2.map((currentChip) => (
                 <Chip
                   key={currentChip}
@@ -126,7 +129,7 @@ class Chips5 extends React.Component {
 
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup
-              className="lightgrey"
+              // className="lightgrey"
               categoryName={<KafkaInstanceLabel />}
             >
               {chipsSet3.map((currentChip) => (
@@ -142,7 +145,7 @@ class Chips5 extends React.Component {
 
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup
-              className="lightgreen"
+              // className="lightgreen"
               categoryName={<ConsumerGroupLabel />}
             >
               {chipsSet4.map((currentChip) => (
@@ -161,4 +164,4 @@ class Chips5 extends React.Component {
   }
 }
 
-export default Chips5;
+export default Chips;
