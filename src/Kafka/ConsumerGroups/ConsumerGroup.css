@@ -1,0 +1,7 @@
+#custom-offset-input {
+  width: 10rem;
+}
+
+.form-title {
+  padding-top: var(--pf-c-form--m-horizontal__group-label--md--PaddingTop);
+}
