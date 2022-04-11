@@ -21,7 +21,7 @@ runs:
         node-version: ${{ inputs.node-version }}
 
     - name: Cache Node Modules
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       id: cache
       env:
         cache-name: cache-node-modules

@@ -3,6 +3,7 @@
   "heroDescription": "Accelerate your data science. OpenShift Data Science is a managed cloud service for data scientists and developers of intelligent applications. Within a fully supported sandbox, it allows businesses to rapidly develop, train, and test artificial intelligence (AI) and machine learning (ML) models using Red Hat and partner technology.",
   "heroTagline": "Add-on service for managed OpenShift",
   "heroTitle": "Get started with Red Hat OpenShift Data Science",
+  "heroTryItButton": "Try it",
   "heroViewDemo": "View the demo",
   "videoSectionInThisVideo": "In this video you’ll learn how to quickly build and deploy artificial intelligence and machine learning models using Red Hat and partner technology tools.",
   "videoSectionTitle": "Demo of Red Hat OpenShift Data Science"

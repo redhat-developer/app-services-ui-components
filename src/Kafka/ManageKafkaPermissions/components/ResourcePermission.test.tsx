@@ -18,7 +18,7 @@ describe("Resource type", () => {
     expect(await comp.findByText("Allow")).toBeInTheDocument();
     expect(await comp.queryByText("Deny")).not.toBeInTheDocument();
   });
-  it("should show a select component for resource type with validation error ", async () => {
+  it("should show a select component for resource type in initial state ", async () => {
     const onChangeValue = jest.fn();
     const comp = render(<InitialState onChangeValue={onChangeValue} />);
     await waitForI18n(comp);

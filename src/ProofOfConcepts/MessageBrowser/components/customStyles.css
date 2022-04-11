@@ -1,0 +1,41 @@
+/* Offset Selector, Timestamp Selector, DateAndTimePicker */
+
+.pf-c-form-control.custom-width {
+  --pf-c-form-control--Width: 10rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
+
+.pf-c-form-control.custom {
+  --pf-c-form-control--Width: 15rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
+
+.pf-c-form-control.custom-new {
+  --pf-c-form-control--Width: 25rem;
+  --pf-c-form-control--textarea--Width: var(--pf-c-form-control--Width);
+  width: var(--pf-c-form-control--textarea--Width);
+}
+
+/* Partition Selector */
+
+.pf-c-content {
+  color: var(--pf-c-content--Color);
+}
+
+/* Table */
+.text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show */
+  -webkit-box-orient: vertical;
+}
+
+/* Offset Range */
+.pf-u-font-size .custom-text {
+  font-size: var(--pf-global--FontSize--md);
+  font-weight: var(--pf-global--FontWeight--semi-bold);
+  display: inline-block;
+}

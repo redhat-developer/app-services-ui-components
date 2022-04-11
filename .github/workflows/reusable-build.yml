@@ -15,7 +15,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
@@ -25,13 +25,13 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
           node-version: ${{ inputs.node-version }}
-      - run: npm run test -- --coverage
-      - run: npm run test-storybook:ci
+      - name: Run the test suite
+        run: npm run test-storybook:ci
       - name: Generate coverage report
         uses: codecov/codecov-action@v2
 
@@ -39,7 +39,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
@@ -50,7 +50,7 @@ jobs:
     needs: setup
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:

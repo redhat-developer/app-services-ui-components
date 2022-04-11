@@ -51,14 +51,13 @@ export const ResourcePermission: React.VFC<ResourcePermissionProps> = ({
     <FormGroup fieldId={"resource-permission-select"}>
       <Select
         id={"resource-permission-select"}
-        aria-label={t("permissions.aria_label")}
-        data-testid="acls-resource-type-select"
+        aria-label={t("permissions.aria_label", { value })}
+        data-testid="acls-resource-permission-select"
         variant={SelectVariant.single}
         onToggle={onToggle}
         onSelect={onSelect}
         isOpen={isOpen}
         width={200}
-        placeholderText={t("resourceTypes.placeholder_text")}
         selections={value}
         menuAppendTo={"parent"}
       >

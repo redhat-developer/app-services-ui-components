@@ -1,14 +1,10 @@
-.mk--create-instance__tile--icon {
-  margin-right: var(--pf-global--spacer--md);
-}
-
 /* TextContent dl customizations */
-.mk--create-instance-modal__sidebar--content .pf-c-content dl {
+.mas--CreateKafkaInstance__sidebar .pf-c-content dl {
   display: block;
 }
-.mk--create-instance-modal__sidebar--content dt {
+.mas--CreateKafkaInstance__sidebar dt {
   font-size: var(--pf-global--FontSize--sm);
 }
-.mas-m-modalTop {
-  top: var(--pf-global--spacer--md);
+.mas--CreateKafkaInstance__creationTimeAlert {
+  margin-top: var(--pf-global--spacer--md);
 }
