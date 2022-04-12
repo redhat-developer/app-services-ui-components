@@ -16,7 +16,6 @@
     "static/"
   ],
   "scripts": {
-    "prebuild-storybook": "npm run test:generate-output",
     "build-storybook": "build-storybook --quiet --loglevel silent",
     "prebuild": "npm run parse-i18n",
     "build": "rollup -c",
