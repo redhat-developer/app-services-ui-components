@@ -24,9 +24,11 @@ export default {
 } as ComponentMeta<typeof AsyncTypeaheadSelect>;
 
 const Template: ComponentStory<typeof AsyncTypeaheadSelect> = (args) => (
-  <Form>
-    <AsyncTypeaheadSelect {...args} />
-  </Form>
+  <div style={{ maxWidth: 200 }}>
+    <Form>
+      <AsyncTypeaheadSelect {...args} />
+    </Form>
+  </div>
 );
 
 export const InvalidTopicLength = Template.bind({});

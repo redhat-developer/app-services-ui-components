@@ -104,7 +104,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       validated={formGroupValidated}
       helperTextInvalid={validation?.message}
       fieldId={id}
-      style={{ maxWidth: 200 }}
     >
       <Select
         id={id}
@@ -121,7 +120,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
-        width={200}
         onCreateOption={onCreate}
         createText={t("resourcePrefix.create_text")}
         onTypeaheadInputChanged={onTypeahead}
