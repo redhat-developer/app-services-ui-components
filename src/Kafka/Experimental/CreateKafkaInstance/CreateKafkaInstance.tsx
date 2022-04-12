@@ -87,6 +87,7 @@ export const CreateKafkaInstance: FunctionComponent<
     instanceAvailability,
     size,
     allowedStreamingUnits,
+    remainingStreamingUnits,
 
     isNameTaken,
     isNameInvalid,
@@ -253,7 +254,8 @@ export const CreateKafkaInstance: FunctionComponent<
               setProvider={setProvider}
               setName={setName}
               onSubmit={onSubmit}
-              streamingUnits={3}
+              remainingStreamingUnits={remainingStreamingUnits}
+              allowedStreamingUnits={allowedStreamingUnits}
               onClickContactSupport={onClickContactSupport}
             />
           )}
@@ -273,7 +275,7 @@ export const CreateKafkaInstance: FunctionComponent<
             connectionRate={connectionRate}
             messageSize={messageSize}
             onClickQuickStart={onClickQuickStart}
-            streamingUnits={2}
+            streamingUnits={size}
           />
         </FlexItem>
       </Flex>

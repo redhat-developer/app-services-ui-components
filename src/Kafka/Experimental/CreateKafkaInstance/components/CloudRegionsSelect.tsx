@@ -1,9 +1,10 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-  FormSelect,
-  FormSelectOption,
   SelectProps,
+  Select,
+  SelectVariant,
+  SelectOption,
 } from "@patternfly/react-core";
 import { Region, RegionInfo } from "../machines";
 
@@ -11,7 +12,7 @@ export type CloudRegionProps = {
   value: Region | undefined;
   regions: RegionInfo[];
   isDisabled?: boolean;
-  onChange: (region: Region) => void;
+  onChange: (region: string) => void;
   validated?: SelectProps["validated"];
 };
 
@@ -23,33 +24,63 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   onChange,
 }) => {
   const { t } = useTranslation();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const onToggle = (isOpen: boolean) => {
+    setIsOpen(isOpen);
+  };
+
+  const onSelect: SelectProps["onSelect"] = (_, value) => {
+    setIsOpen((prevState) => !prevState);
+    onChange(value as string);
+  };
+
+  const clearSelection = () => {
+    setIsOpen(false);
+    onChange("");
+  };
+
+  const makeRegionOptions = regions?.map(
+    ({ id, displayName, isDisabled }, index) => (
+      <SelectOption
+        isDisabled={isDisabled}
+        key={index}
+        value={id}
+        {...(isDisabled && {
+          description: t("create-kafka-instance-exp:temporarily_unavailable"),
+        })}
+      >
+        {displayName}
+      </SelectOption>
+    )
+  );
+
+  makeRegionOptions.unshift(
+    <SelectOption
+      key="placeholder"
+      value={t("create-kafka-instance:select_region")}
+      isPlaceholder
+    >
+      {t("create-kafka-instance:select_region")}
+    </SelectOption>
+  );
 
   return (
-    <FormSelect
-      validated={validated}
-      value={value}
-      onChange={onChange}
+    <Select
       id="form-cloud-region-option"
-      name="cloud-region"
+      toggleId="form-cloud-region-option"
+      name="form-cloud-region-option"
+      variant={SelectVariant.single}
+      onToggle={onToggle}
+      onSelect={onSelect}
+      validated={validated}
+      onClear={clearSelection}
+      selections={value}
+      isOpen={isOpen}
       isDisabled={isDisabled}
+      aria-labelledby="form-cloud-region-option"
     >
-      {[
-        <FormSelectOption
-          value=""
-          key="placeholder"
-          label={t("create-kafka-instance:select_region")}
-        />,
-        regions.map(({ id, displayName, isDisabled }, index) => {
-          return (
-            <FormSelectOption
-              key={index}
-              value={id}
-              label={displayName}
-              isDisabled={isDisabled}
-            />
-          );
-        }),
-      ]}
-    </FormSelect>
+      {makeRegionOptions}
+    </Select>
   );
 };

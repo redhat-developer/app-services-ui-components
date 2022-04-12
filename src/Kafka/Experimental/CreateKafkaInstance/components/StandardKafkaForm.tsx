@@ -41,12 +41,13 @@ export type StandardKafkaFormProps = {
   isDisabledSize: boolean;
   size: number | undefined;
   setSize: (size: number) => void;
-  setRegion: (region: Region | undefined) => void;
+  setRegion: (region: Region) => void;
   setName: (name: string) => void;
   setProvider: (provider: Provider) => void;
   setAZ: (az: AZ) => void;
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
-  streamingUnits: number | undefined;
+  remainingStreamingUnits: number | undefined;
+  allowedStreamingUnits: number;
   onClickContactSupport: () => void;
 };
 
@@ -69,7 +70,9 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   disableAZTooltip,
   isDisabledSize,
   size,
-  streamingUnits,
+  remainingStreamingUnits,
+  allowedStreamingUnits,
+
   setSize,
   setRegion,
   setAZ,
@@ -269,7 +272,9 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           </span>
         </div>
         <Text component={TextVariants.p} className="pf-c-form__helper-text">
-          {t("standard_kafka_streaming_units", { streamingUnits })}
+          {t("standard_kafka_streaming_units", {
+            streamingUnits: remainingStreamingUnits,
+          })}
         </Text>
         <Button
           className="pf-c-form__helper-text"

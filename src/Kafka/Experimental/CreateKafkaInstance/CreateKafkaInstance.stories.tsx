@@ -13,6 +13,7 @@ import {
   Provider,
   ProviderInfo,
   Providers,
+  Region,
 } from "./machines";
 import { PlayFunction } from "@storybook/csf";
 import { ReactFramework } from "@storybook/react/types-6-0";
@@ -114,10 +115,11 @@ const sampleSubmit: PlayFunction<
   const canvas = within(canvasElement);
 
   await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
-  await userEvent.selectOptions(
-    await canvas.findByLabelText("Cloud region *"),
-    "eu-west-1"
-  );
+
+  const regionSelect = await canvas.findByText("Select region");
+  await userEvent.click(regionSelect);
+  await userEvent.click(await canvas.findByText("EU, Ireland"));
+
   await userEvent.click(
     await canvas.findByTestId("modalCreateKafka-buttonSubmit")
   );
@@ -130,6 +132,9 @@ Default.args = {
     providers: ["aws"],
     instanceAvailability: "quota",
     defaultAZ: "multi",
+    defaultRegion: "eu-west-1",
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
   }),
 };
 
@@ -426,10 +431,7 @@ FormErrorsCantSubmit.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
   await userEvent.type(await canvas.findByLabelText("Name *"), "%3-foo-;");
-  await userEvent.selectOptions(
-    await canvas.findByLabelText("Cloud region *"),
-    ""
-  );
+
   await userEvent.click(
     await canvas.findByTestId("modalCreateKafka-buttonSubmit")
   );
@@ -504,8 +506,10 @@ function makeAvailableProvidersAndDefaults(
     instanceAvailability: InstanceAvailability;
     defaultAZ: AZ | undefined;
     defaultProvider: Provider | undefined;
+    defaultRegion?: Region;
     providers: string[];
     allowedStreamingUnits?: number;
+    remainingStreamingUnits?: number;
   },
   allProviders = PROVIDERS
 ): () => Promise<CreateKafkaInitializationData> {
@@ -515,6 +519,8 @@ function makeAvailableProvidersAndDefaults(
     defaultAZ,
     providers,
     allowedStreamingUnits,
+    remainingStreamingUnits,
+    defaultRegion,
   } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
@@ -527,6 +533,8 @@ function makeAvailableProvidersAndDefaults(
       availableProviders,
       instanceAvailability,
       allowedStreamingUnits,
+      remainingStreamingUnits,
+      defaultRegion,
     };
   };
 }

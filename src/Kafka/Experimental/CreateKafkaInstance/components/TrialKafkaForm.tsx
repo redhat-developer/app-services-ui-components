@@ -22,7 +22,7 @@ import { InstanceAvailability } from "../machines/types";
 
 export type TrialKafkaFormProps = Omit<
   StandardKafkaFormProps,
-  "streamingUnits"
+  "streamingUnits" | "remainingStreamingUnits" | "allowedStreamingUnits"
 > & {
   instanceAvailability: InstanceAvailability | undefined;
   onClickLearnMoreAboutRegions: () => void;
@@ -166,6 +166,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
         />
       </FormGroup>
       <FormGroup
+        data-testid="cloudRegion"
         label={t("cloud_region")}
         fieldId="form-cloud-region-option"
         isRequired

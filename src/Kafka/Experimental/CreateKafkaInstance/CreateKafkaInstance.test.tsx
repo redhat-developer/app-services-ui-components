@@ -70,7 +70,7 @@ describe("CreateKafkaInstance", () => {
     expect(await comp.queryAllByRole("alert")).toHaveLength(0);
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(comp.getByText("Select region")).not.toHaveAttribute("disabled");
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toHaveAttribute(
@@ -94,7 +94,9 @@ describe("CreateKafkaInstance", () => {
     ).toBeInTheDocument();
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
@@ -111,7 +113,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getByRole("button")
+    ).toHaveAttribute("disabled");
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
@@ -132,7 +136,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[1]
+    ).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
@@ -149,7 +155,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeDisabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
@@ -170,7 +178,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[1]
+    ).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
@@ -187,7 +197,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeDisabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
@@ -195,10 +207,16 @@ describe("CreateKafkaInstance", () => {
   it("should show 'EU, Ireland' as disabled", async () => {
     const comp = renderDialog(<SomeRegionsDisabledOnFormLoad />);
     await waitForI18n(comp);
+    const selectRegion = comp.getByText("Select region");
 
-    userEvent.click(comp.getByLabelText("Cloud region *"));
+    userEvent.click(selectRegion);
+    const regionList = comp.getByRole("listbox");
+    const regionOptionEuIreland =
+      within(regionList).getAllByRole("presentation")[1];
 
-    expect(comp.getByText("EU, Ireland")).toBeDisabled();
+    expect(within(regionOptionEuIreland).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
   });
 
   it("should show 'EU, Ireland' as disabled and show inline warning message for region for trial kafka", async () => {
@@ -220,13 +238,22 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
 
-    userEvent.click(comp.getByLabelText("Cloud region *"));
+    const selectRegion = comp.getByText("Select region");
 
-    expect(comp.getByText("EU, Ireland")).toBeDisabled();
+    userEvent.click(selectRegion);
+    const regionList = comp.getByRole("listbox");
+    const regionOptionEuIreland =
+      within(regionList).getAllByRole("presentation")[1];
+
+    expect(within(regionOptionEuIreland).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
   });
 
   it("should show an alert when all cloud regions are disabled, and show inline error message for region", async () => {
@@ -242,7 +269,24 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeEnabled();
+
+    const selectRegion = comp.getByText("Select region");
+
+    userEvent.click(selectRegion);
+    const regionList = comp.getByRole("listbox");
+    const regionOption1 = within(regionList).getAllByRole("presentation")[1];
+    const regionOption2 = within(regionList).getAllByRole("presentation")[2];
+
+    expect(within(regionOption1).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
+    expect(within(regionOption2).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
+
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
@@ -260,7 +304,24 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeEnabled();
+
+    const selectRegion = comp.getByText("Select region");
+
+    userEvent.click(selectRegion);
+    const regionList = comp.getByRole("listbox");
+    const regionOption1 = within(regionList).getAllByRole("presentation")[1];
+    const regionOption2 = within(regionList).getAllByRole("presentation")[2];
+
+    expect(within(regionOption1).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
+    expect(within(regionOption2).getByRole("option")).toHaveClass(
+      "pf-m-disabled"
+    );
+
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
@@ -270,8 +331,6 @@ describe("CreateKafkaInstance", () => {
       <NoRegionsReturnedFromApiForAProviderOnFormLoad />
     );
     await waitForI18n(comp);
-
-    userEvent.click(comp.getByLabelText("Cloud region *"));
 
     expect(
       comp.getByText(
@@ -294,7 +353,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
+    ).toBeEnabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
@@ -311,7 +372,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+    expect(
+      within(comp.getByTestId("cloudRegion")).getByRole("button")
+    ).toBeDisabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
@@ -325,7 +388,11 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
-    expect(comp.getByLabelText("Cloud region *")).toBeDisabled();
+
+    // expect(
+    //   within(await comp.findByText("EU, Ireland")).getByRole("img")
+    // ).toBeDisabled();
+
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
 
@@ -369,7 +436,9 @@ describe("CreateKafkaInstance", () => {
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();
     expect(comp.getByLabelText("Cloud provider *")).toBeInvalid();
-    expect(comp.getByLabelText("Cloud region *")).toBeInvalid();
+    expect(
+      await within(comp.getByTestId("cloudRegion")).findByText("Required")
+    ).toBeInTheDocument();
     expect(
       await within(comp.getByTestId("az")).findByText("Required")
     ).toBeInTheDocument();
@@ -412,7 +481,9 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(comp.getByDisplayValue("Select cloud provider"));
-    expect(comp.getByDisplayValue("Select region"));
+    expect(
+      await within(comp.getByTestId("cloudRegion")).findByText("Select region")
+    ).toBeInTheDocument();
     expect(comp.getByRole("button", { name: "Single" })).toHaveAttribute(
       "aria-pressed",
       "false"

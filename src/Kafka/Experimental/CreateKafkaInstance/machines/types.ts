@@ -36,10 +36,12 @@ export type CreateKafkaInstanceError =
 
 export type CreateKafkaInitializationData = {
   defaultProvider: Provider | undefined;
+  defaultRegion: Region | undefined;
   defaultAZ: AZ | undefined;
   availableProviders: Providers;
   instanceAvailability: InstanceAvailability;
   allowedStreamingUnits?: number;
+  remainingStreamingUnits?: number | undefined;
 };
 export type CreateKafkaFormData = {
   name: string;
