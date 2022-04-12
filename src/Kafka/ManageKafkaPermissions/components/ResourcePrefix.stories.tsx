@@ -33,10 +33,12 @@ export const InvalidTopicLength = Template.bind({});
 InvalidTopicLength.args = {
   onValidationCheck: () => validationCheck("topic", "is", ".."),
 };
+
 InvalidTopicLength.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
 };
+
 InvalidTopicLength.parameters = {
   docs: {
     description: {
@@ -68,21 +70,7 @@ InvalidLength.parameters = {
     },
   },
 };
-export const InvalidTopicCharacters = Template.bind({});
-InvalidTopicCharacters.args = {
-  onValidationCheck: () => validationCheck("topic", "starts-with", "$!"),
-};
-InvalidTopicCharacters.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "$!");
-};
-InvalidTopicCharacters.parameters = {
-  docs: {
-    description: {
-      story: `A user types a value that has invalid characters for a Topic resource `,
-    },
-  },
-};
+
 export const InvalidConsumerGroupCharacters = Template.bind({});
 InvalidConsumerGroupCharacters.args = {
   onValidationCheck: () =>
@@ -96,6 +84,35 @@ InvalidConsumerGroupCharacters.parameters = {
   docs: {
     description: {
       story: `A user types a value that has invalid characters for a Consumer group resource `,
+    },
+  },
+};
+
+export const RequiredField = Template.bind({});
+RequiredField.args = {
+  required: true,
+  submitted: true,
+};
+RequiredField.parameters = {
+  docs: {
+    description: {
+      story: `A user submits form without selecting or creating a value in the field `,
+    },
+  },
+};
+
+export const InvalidTopicCharacters = Template.bind({});
+InvalidTopicCharacters.args = {
+  onValidationCheck: () => validationCheck("topic", "starts-with", "$!"),
+};
+InvalidTopicCharacters.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "$!");
+};
+InvalidTopicCharacters.parameters = {
+  docs: {
+    description: {
+      story: `A user types a value that has invalid characters for a topic resource `,
     },
   },
 };

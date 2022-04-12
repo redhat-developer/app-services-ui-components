@@ -6,7 +6,7 @@ import {
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { useRef, useState, VFC } from "react";
+import { useEffect, useRef, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Validation = {
@@ -23,6 +23,8 @@ export type AsyncTypeaheadSelectProps = {
   onCreate: (value: string) => void;
   onFetchOptions: (filter: string) => Promise<string[]>;
   onValidationCheck: (filterValue: string | undefined) => Validation;
+  submitted?: boolean;
+  required?: boolean;
 };
 
 export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
@@ -34,6 +36,8 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   onFetchOptions,
   placeholderText,
   onValidationCheck,
+  submitted,
+  required,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -47,6 +51,12 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     undefined
   );
 
+  useEffect(() => {
+    if (submitted && required)
+      setValidation({ isValid: false, message: t("common:required") });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [submitted]);
+
   const onTypeahead = (filter: string | undefined) => {
     function doFetch() {
       onFetchOptions(filter || "")
@@ -58,6 +68,8 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       setValidation(onValidationCheck(filter));
       setTypeAheadSuggestions([]);
     }
+    if ((filter === undefined || filter.length < 1) && submitted && required)
+      setValidation({ message: t("common:required"), isValid: false });
     if (fetchTimeout.current) {
       clearTimeout(fetchTimeout.current);
       fetchTimeout.current = undefined;
@@ -85,7 +97,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     validation && !validation.isValid
       ? ValidatedOptions.error
       : ValidatedOptions.default;
-
   const isCreatable = !loading && validation && validation.isValid;
 
   return (

@@ -1,7 +1,7 @@
+import { act, render, waitForI18n, waitForPopper } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./AsyncTypeaheadSelect.stories";
 import { userEvent } from "@storybook/testing-library";
-import { act, render, waitForI18n, waitForPopper } from "../../test-utils";
 
 const {
   InitialState,
@@ -13,33 +13,29 @@ const {
 
 describe("Async typeahead", () => {
   jest.useFakeTimers();
-  it("should render a select with async typeahead suggestions", async () => {
+  it("It should render an async typeahead", async () => {
     const onCreate = jest.fn();
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(InitialState.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
+    const comp = render(
+      <InitialState
+        onCreate={onCreate}
+        onChange={onChangeValue}
+        onFetchOptions={onFetchOptions}
+        onValidationCheck={onValidationCheck}
+      />
+    );
+    await waitForI18n(comp);
 
-    await act(async () => {
-      const comp = render(
-        <InitialState
-          onCreate={onCreate}
-          onChange={onChangeValue}
-          onFetchOptions={onFetchOptions}
-          onValidationCheck={onValidationCheck}
-        />
-      );
-      await waitForI18n(comp);
+    expect(await comp.queryByText("bar")).not.toBeInTheDocument();
 
-      expect(await comp.queryByText("bar")).not.toBeInTheDocument();
-
-      expect(onCreate).not.toBeCalled();
-      expect(onChangeValue).not.toBeCalled();
-      expect(onFetchOptions).not.toBeCalled();
-      expect(onValidationCheck).not.toBeCalled();
-    });
+    expect(onCreate).not.toBeCalled();
+    expect(onChangeValue).not.toBeCalled();
+    expect(onFetchOptions).not.toBeCalled();
+    expect(onValidationCheck).not.toBeCalled();
   });
-
-  it("should render a select with a valid value selected", async () => {
+  it("It should render an async typeahead with a valid value selected", async () => {
     const comp = render(<ValidInput />);
     await waitForI18n(comp);
 
@@ -63,7 +59,11 @@ describe("Async typeahead", () => {
         onValidationCheck={onValidationCheck}
       />
     );
-    await focusSelect(comp);
+    await waitForI18n(comp);
+    const select = comp.getByPlaceholderText("Enter name");
+    userEvent.click(select);
+
+    await waitForPopper();
 
     expect(await comp.getByRole("progressbar")).toBeInTheDocument();
     jest.advanceTimersByTime(1000);
@@ -71,29 +71,29 @@ describe("Async typeahead", () => {
     expect(onValidationCheck).not.toBeCalled();
   });
 
-  it("should show a creatable typeahead suggestion", async () => {
+  it("should show an option to 'Use {{input value}}' if a valid value is typed ", async () => {
     const onCreate = jest.fn();
     const onChange = jest.fn();
+    await act(async () => {
+      const comp = render(
+        <CreatableText onCreate={onCreate} onChange={onChange} />
+      );
+      const select = await focusSelect(comp);
 
-    const comp = render(
-      <CreatableText onCreate={onCreate} onChange={onChange} />
-    );
-    const select = await focusSelect(comp);
+      userEvent.type(select, "test-topic-name");
+      const option = await comp.findByText('Use "test-topic-name"');
+      expect(option).toBeInTheDocument();
 
-    userEvent.type(select, "test-topic-name");
-    const option = await comp.findByText('Use "test-topic-name"');
-    expect(option).toBeInTheDocument();
+      expect(onCreate).not.toBeCalled();
+      expect(onChange).not.toBeCalled();
 
-    expect(onCreate).not.toBeCalled();
-    expect(onChange).not.toBeCalled();
-
-    userEvent.click(option);
-    expect(onCreate).toBeCalledTimes(1);
-    expect(onChange).toBeCalledTimes(1);
+      userEvent.click(option);
+      expect(onCreate).toBeCalledTimes(1);
+      expect(onChange).toBeCalledTimes(1);
+    });
   });
 });
-
-export async function focusSelect(comp: ReturnType<typeof render>) {
+async function focusSelect(comp: ReturnType<typeof render>) {
   await waitForI18n(comp);
   const select = comp.getByPlaceholderText("Enter name");
   userEvent.click(select);
