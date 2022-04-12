@@ -1,8 +1,11 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { actions } from "@storybook/addon-actions";
 import { ResponsiveTable } from "./ResponsiveTable";
 import Success from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
 import Creating from "@patternfly/react-icons/dist/js/icons/in-progress-icon";
 import { IAction } from "@patternfly/react-table";
+
+const eventsFromNames = actions("onRowClick");
 
 const columnLabels: { [key: string]: string } = {
   name: "Name",
@@ -23,6 +26,7 @@ const creationPendingSign = (
     <Creating color="blue" /> Creation pending
   </p>
 );
+const deletingSign = <p>Deleting...</p>;
 const sampleData = [
   [
     "kafka-test-instance",
@@ -54,7 +58,7 @@ const sampleData = [
     "about 4 hours ago",
     "Amazon Web Services",
     "US East, N. Virginia",
-    readySign,
+    deletingSign,
   ],
   [
     "kafka-test-instance-5",
@@ -88,10 +92,16 @@ export default {
   args: {
     ariaLabel: "Table title",
     minimumColumnWidth: 250,
+    hasActions: false,
+  },
+  argTypes: {
+    hasActions: { control: "boolean" },
+    isRowClickable: { control: "boolean" },
+    selectedRow: { control: "number" },
   },
 } as ComponentMeta<typeof ResponsiveTable>;
 
-export const Default: ComponentStory<typeof ResponsiveTable> = (args) => (
+const Template: ComponentStory<typeof ResponsiveTable> = (args) => (
   <ResponsiveTable
     {...args}
     data={sampleData}
@@ -104,26 +114,33 @@ export const Default: ComponentStory<typeof ResponsiveTable> = (args) => (
         {rowData[colIndex]}
       </Td>
     )}
+    renderActions={({ rowData, ActionsColumn }) =>
+      args.hasActions && <ActionsColumn items={defaultActions(rowData)} />
+    }
+    isRowSelected={
+      args.selectedRow
+        ? ({ rowIndex }) => rowIndex === args.selectedRow - 1
+        : undefined
+    }
+    isRowDeleted={({ row }) => row[5] === deletingSign}
+    {...(args.isRowClickable ? eventsFromNames : {})}
   />
 );
 
-export const ActionsAreNeverHidden: ComponentStory<typeof ResponsiveTable> = (
-  args
-) => (
-  <ResponsiveTable
-    {...args}
-    data={sampleData}
-    columns={Object.keys(columnLabels)}
-    renderHeader={({ column, Th, key }) => (
-      <Th key={key}>{columnLabels[column]}</Th>
-    )}
-    renderCell={({ column, rowData, colIndex, Td, key }) => (
-      <Td key={key} dataLabel={columnLabels[column]}>
-        {rowData[colIndex]}
-      </Td>
-    )}
-    renderActions={({ rowData, ActionsColumn }) => (
-      <ActionsColumn items={defaultActions(rowData)} />
-    )}
-  />
-);
+export const Default = Template.bind({});
+
+export const ActionsAreNeverHidden = Template.bind({});
+ActionsAreNeverHidden.args = {
+  hasActions: true,
+};
+
+export const ClickableRows = Template.bind({});
+ClickableRows.args = {
+  isRowClickable: true,
+};
+
+export const SelectedRow = Template.bind({});
+SelectedRow.args = {
+  selectedRow: 3,
+  isRowClickable: true,
+};
