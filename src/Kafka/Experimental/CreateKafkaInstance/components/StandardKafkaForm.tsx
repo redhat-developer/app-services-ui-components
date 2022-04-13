@@ -17,7 +17,14 @@ import {
 import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../../shared/FormGroupWithPopover";
-import { AZ, Provider, Providers, Region, RegionInfo } from "../machines/types";
+import {
+  AZ,
+  Provider,
+  Providers,
+  Region,
+  RegionInfo,
+  InstanceAvailability,
+} from "../machines/types";
 
 type validate = "error" | "default" | "warning";
 
@@ -49,6 +56,8 @@ export type StandardKafkaFormProps = {
   remainingStreamingUnits: number | undefined;
   allowedStreamingUnits: number;
   onClickContactSupport: () => void;
+  sizeValidation: validate;
+  instanceAvailability: InstanceAvailability | undefined;
 };
 
 export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
@@ -72,6 +81,8 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   size,
   remainingStreamingUnits,
   allowedStreamingUnits,
+  sizeValidation,
+  instanceAvailability,
 
   setSize,
   setRegion,
@@ -91,57 +102,54 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
     regions && regions?.some(({ isDisabled }) => isDisabled === true);
 
   const HelperText = () => {
-    if (
-      allRegionsUnavailable &&
-      regionValidation === "error" &&
-      !disableControls
-    ) {
-      return (
-        <div className="pf-c-form__helper-text pf-m-error">
-          <Trans
-            ns={["create-kafka-instance-exp"]}
-            i18nKey={t("all_region_unavailable_helper_text")}
-            components={[
-              <Button
-                key="btn-contact-support"
-                variant={ButtonVariant.link}
-                onClick={onClickContactSupport}
-                isInline
-              />,
-            ]}
-          />
-        </div>
-      );
-    } else if (
-      someRegionsUnavailable &&
-      regionValidation === "warning" &&
-      !disableControls
-    ) {
-      return (
-        <div className="pf-c-form__helper-text pf-m-warning">
-          <Trans
-            ns={["create-kafka-instance-exp"]}
-            i18nKey={t("some_region_unavailable_helper_text")}
-            components={[
-              <Button
-                key="btn-contact-support"
-                variant={ButtonVariant.link}
-                onClick={onClickContactSupport}
-                isInline
-              />,
-            ]}
-          />
-        </div>
-      );
-    } else if (regionValidation === "error" && !disableControls) {
-      return (
-        <div className="pf-c-form__helper-text pf-m-error">
-          {t("common:required")}
-        </div>
-      );
+    switch (true) {
+      case allRegionsUnavailable &&
+        regionValidation === "error" &&
+        !disableControls:
+        return (
+          <div className="pf-c-form__helper-text pf-m-error">
+            <Trans
+              ns={["create-kafka-instance-exp"]}
+              i18nKey={t("all_region_unavailable_helper_text")}
+              components={[
+                <Button
+                  key="btn-contact-support"
+                  variant={ButtonVariant.link}
+                  onClick={onClickContactSupport}
+                  isInline
+                />,
+              ]}
+            />
+          </div>
+        );
+      case someRegionsUnavailable &&
+        regionValidation === "warning" &&
+        !disableControls:
+        return (
+          <div className="pf-c-form__helper-text pf-m-warning">
+            <Trans
+              ns={["create-kafka-instance-exp"]}
+              i18nKey={t("some_region_unavailable_helper_text")}
+              components={[
+                <Button
+                  key="btn-contact-support"
+                  variant={ButtonVariant.link}
+                  onClick={onClickContactSupport}
+                  isInline
+                />,
+              ]}
+            />
+          </div>
+        );
+      case regionValidation === "error" && !disableControls:
+        return (
+          <div className="pf-c-form__helper-text pf-m-error">
+            {t("common:required")}
+          </div>
+        );
+      default:
+        return <></>;
     }
-
-    return <></>;
   };
 
   return (
@@ -246,11 +254,12 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
       </FormGroup>
 
       <FormGroupWithPopover
-        labelHead={t("size")}
+        labelHead={t("common:size")}
         fieldId="streaming-size"
-        fieldLabel={t("size")}
+        fieldLabel={t("common:size")}
         labelBody={t("size_help_content")}
         buttonAriaLabel={t("size_field_aria")}
+        isRequired={true}
       >
         <div className="pf-c-input-group pf-u-w-50">
           <Slider
@@ -271,18 +280,27 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
             {t("streaming_unit")}
           </span>
         </div>
-        <Text component={TextVariants.p} className="pf-c-form__helper-text">
-          {t("standard_kafka_streaming_units", {
-            streamingUnits: remainingStreamingUnits,
-          })}
-        </Text>
-        <Button
-          className="pf-c-form__helper-text"
-          variant={ButtonVariant.link}
-          isInline
-        >
-          {t("standard_kafka_size_dscription")}
-        </Button>
+        {instanceAvailability && (
+          <Text
+            component={TextVariants.p}
+            className={`pf-c-form__helper-text ${
+              sizeValidation === "error" ? "pf-m-error" : ""
+            }`}
+          >
+            {t("standard_kafka_streaming_units", {
+              streamingUnits: remainingStreamingUnits || "no",
+            })}
+          </Text>
+        )}
+        {sizeValidation === "error" && (
+          <Button
+            className="pf-c-form__helper-text"
+            variant={ButtonVariant.link}
+            isInline
+          >
+            {t("standard_kafka_size_dscription")}
+          </Button>
+        )}
       </FormGroupWithPopover>
     </Form>
   );

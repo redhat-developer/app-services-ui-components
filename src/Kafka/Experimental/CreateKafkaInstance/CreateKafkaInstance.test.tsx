@@ -130,7 +130,8 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "Your organization reached the limit of Kafka instances available for creation."
+        "The selected size requires more streaming units. Your organization has 1 of 2 streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first",
+        { exact: false }
       )
     ).toBeInTheDocument();
 
@@ -191,7 +192,8 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first."
+        "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
+        { exact: false }
       )
     ).toBeInTheDocument();
 
@@ -225,7 +227,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.queryByText(
-        "More options are available with a subscription.",
+        "More cloud regions are available with a subscription.",
         { exact: false }
       )
     ).toBeInTheDocument();

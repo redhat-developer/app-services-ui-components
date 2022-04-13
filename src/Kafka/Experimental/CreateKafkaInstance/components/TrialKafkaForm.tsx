@@ -18,13 +18,14 @@ import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
 import { FormGroupWithPopover } from "../../../../shared/FormGroupWithPopover";
 import { StandardKafkaFormProps } from "./StandardKafkaForm";
-import { InstanceAvailability } from "../machines/types";
 
 export type TrialKafkaFormProps = Omit<
   StandardKafkaFormProps,
-  "streamingUnits" | "remainingStreamingUnits" | "allowedStreamingUnits"
+  | "streamingUnits"
+  | "remainingStreamingUnits"
+  | "allowedStreamingUnits"
+  | "sizeValidation"
 > & {
-  instanceAvailability: InstanceAvailability | undefined;
   onClickLearnMoreAboutRegions: () => void;
 };
 
@@ -67,35 +68,32 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
 
   const HelperText = () => {
     const ErrorMessage = () => {
-      if (
-        allRegionsUnavailable &&
-        regionValidation === "error" &&
-        !disableControls
-      ) {
-        return (
-          <div className="pf-c-form__helper-text pf-m-error">
-            {t("tria_all_region_unavailable_helper_text")}
-          </div>
-        );
-      } else if (
-        someRegionsUnavailable &&
-        regionValidation === "warning" &&
-        !disableControls
-      ) {
-        return (
-          <div className="pf-c-form__helper-text pf-m-warning">
-            {t("trial_some_region_unavailable_helper_text")}
-          </div>
-        );
-      } else if (regionValidation === "error" && !disableControls) {
-        return (
-          <div className="pf-c-form__helper-text pf-m-error">
-            {t("common:required")}
-          </div>
-        );
+      switch (true) {
+        case allRegionsUnavailable &&
+          regionValidation === "error" &&
+          !disableControls:
+          return (
+            <div className="pf-c-form__helper-text pf-m-error">
+              {t("tria_all_region_unavailable_helper_text")}
+            </div>
+          );
+        case someRegionsUnavailable &&
+          regionValidation === "warning" &&
+          !disableControls:
+          return (
+            <div className="pf-c-form__helper-text pf-m-warning">
+              {t("trial_some_region_unavailable_helper_text")}
+            </div>
+          );
+        case regionValidation === "error" && !disableControls:
+          return (
+            <div className="pf-c-form__helper-text pf-m-error">
+              {t("common:required")}
+            </div>
+          );
+        default:
+          return <></>;
       }
-
-      return <></>;
     };
 
     return (
@@ -224,9 +222,9 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
         </ToggleGroup>
       </FormGroup>
       <FormGroupWithPopover
-        labelHead={t("size")}
+        labelHead={t("common:size")}
         fieldId="streaming-size"
-        fieldLabel={t("size")}
+        fieldLabel={t("common:size")}
         labelBody={t("size_help_content")}
         buttonAriaLabel={t("size_field_aria")}
       >

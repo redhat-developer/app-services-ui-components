@@ -44,7 +44,7 @@ export type CreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
-  onClickPricingAndPurchasing: () => void;
+  onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   onClickContactSupport: () => void;
   onClickLearnMoreAboutRegions: () => void;
@@ -68,7 +68,7 @@ export const CreateKafkaInstance: FunctionComponent<
   connections = 2000,
   connectionRate = 100,
   messageSize = 1,
-  onClickPricingAndPurchasing,
+  onClickKafkaOverview,
   onClickContactUs,
   onClickContactSupport,
   onClickLearnMoreAboutRegions,
@@ -95,6 +95,7 @@ export const CreateKafkaInstance: FunctionComponent<
     isProviderError,
     isRegionError,
     isAzError,
+    isSizeError,
 
     isTrial,
     isLoading,
@@ -143,6 +144,7 @@ export const CreateKafkaInstance: FunctionComponent<
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
   const isDisabledSize = instanceAvailability === "trial" || disableControls;
+  const sizeValidation = isSizeError ? "error" : "default";
 
   return (
     <Modal
@@ -182,7 +184,7 @@ export const CreateKafkaInstance: FunctionComponent<
         instanceAvailability={instanceAvailability}
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
-        onClickPricingAndPurchasing={onClickPricingAndPurchasing}
+        onClickKafkaOverview={onClickKafkaOverview}
         allowedStreamingUnits={allowedStreamingUnits}
         onClickContactUs={onClickContactUs}
       />
@@ -195,6 +197,8 @@ export const CreateKafkaInstance: FunctionComponent<
             error={error}
             isTrial={isTrial}
             onClickContactSupport={onClickContactUs}
+            totalStreamingUnits={allowedStreamingUnits}
+            streamingUnits={remainingStreamingUnits}
           />
           {isTrial && instanceAvailability ? (
             <>
@@ -257,6 +261,8 @@ export const CreateKafkaInstance: FunctionComponent<
               remainingStreamingUnits={remainingStreamingUnits}
               allowedStreamingUnits={allowedStreamingUnits}
               onClickContactSupport={onClickContactSupport}
+              sizeValidation={sizeValidation}
+              instanceAvailability={instanceAvailability}
             />
           )}
         </FlexItem>

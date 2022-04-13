@@ -14,7 +14,7 @@ export type ModalAlertsProps = {
   instanceAvailability: InstanceAvailability | undefined;
   isSystemUnavailable: boolean;
   isLoading: boolean;
-  onClickPricingAndPurchasing: () => void;
+  onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   allowedStreamingUnits: number;
 };
@@ -23,7 +23,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   instanceAvailability,
   isSystemUnavailable,
   isLoading,
-  onClickPricingAndPurchasing,
+  onClickKafkaOverview,
   onClickContactUs,
   allowedStreamingUnits,
 }) => {
@@ -77,7 +77,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                     <Button
                       key="btn-pricing-purchasing"
                       variant={ButtonVariant.link}
-                      onClick={onClickPricingAndPurchasing}
+                      onClick={onClickKafkaOverview}
                       isInline
                     />,
                   ]}
@@ -118,7 +118,18 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 title={t("modal_alerts.trial_used_title")}
                 isInline
               >
-                {t("modal_alerts.trial_used_message")}
+                <Trans
+                  ns={["create-kafka-instance-exp"]}
+                  i18nKey={t("modal_alerts.trial_used_message")}
+                  components={[
+                    <Button
+                      key="btn-overview"
+                      variant={ButtonVariant.link}
+                      onClick={onClickKafkaOverview}
+                      isInline
+                    />,
+                  ]}
+                />
               </Alert>
             );
           case instanceAvailability === "trial-unavailable":

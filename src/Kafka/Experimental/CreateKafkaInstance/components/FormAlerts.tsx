@@ -13,12 +13,16 @@ export type FormAlertsProps = {
   error: CreateKafkaInstanceError | undefined;
   isTrial: boolean;
   onClickContactSupport: () => void;
+  streamingUnits?: number;
+  totalStreamingUnits?: number;
 };
 
 export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
   isTrial,
   onClickContactSupport,
+  streamingUnits,
+  totalStreamingUnits,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -47,10 +51,21 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 title={t("form_errors.over_quota_title")}
                 isInline
               >
-                {t("form_errors.over_quota_message")}
+                <Trans
+                  ns={["create-kafka-instance-exp"]}
+                  i18nKey={t("form_errors.over_quota_message")}
+                  values={{ streamingUnits, totalStreamingUnits }}
+                  components={[
+                    <Button
+                      key="btn-contact-support"
+                      variant={ButtonVariant.link}
+                      onClick={onClickContactSupport}
+                      isInline
+                    />,
+                  ]}
+                />
               </Alert>
             );
-
           case "trial-unavailable":
             return (
               <Alert

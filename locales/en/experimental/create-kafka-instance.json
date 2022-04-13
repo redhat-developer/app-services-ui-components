@@ -11,7 +11,7 @@
   "client_connections_value": "up to {{value}}",
   "cloud_provider": "Cloud provider",
   "cloud_region": "Cloud region",
-  "cloud_region_description": "More options are available with a subscription. <0>Learn more</0>.",
+  "cloud_region_description": "More cloud regions are available with a subscription. <0>Learn more about cloud regions</0>.",
   "connection_rate_value": "up to {{value}} connections/second",
   "create_instance": "Create instance",
   "create_instance_title": "Create a $t(common:kafka) instance",
@@ -21,7 +21,7 @@
   "egress_value": "up to {{value}} MiB/second each",
   "form_errors": {
     "form_invalid": "Address form errors to proceed.",
-    "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
+    "over_quota_message": "The selected size requires more streaming units. Your organization has {{streamingUnits}} of {{totalStreamingUnits}} streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first, or <0>contact us</0> to add more streaming units to your account.",
     "over_quota_title": "$t(common:kafka) instance can't be created",
     "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
@@ -73,7 +73,7 @@
     "trial_available_title": "You can create a trial instance to evaluate this service.",
     "trial_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "trial_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
-    "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
+    "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first. If you are interested in using this service in production, go to the <0>Streams for Apache Kafka Overview</0> to see what options are available during creation and learn how to contact us.",
     "trial_used_title": "You already have an instance running"
   },
   "no_regions_available": "No regions available",

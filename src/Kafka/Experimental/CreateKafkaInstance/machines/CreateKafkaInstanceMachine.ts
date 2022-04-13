@@ -504,6 +504,9 @@ export function useCreateKafkaInstanceMachine({
       (!state.hasTag(NAME_VALID) && isFormInvalid),
     isNameTaken,
     isSizeInvalid: state.hasTag(SIZE_INVALID),
+    isSizeError:
+      state.hasTag(SIZE_INVALID) ||
+      (!state.hasTag(SIZE_VALID) && isFormInvalid),
 
     isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
     isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,

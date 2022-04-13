@@ -59,6 +59,8 @@ export default {
       defaultAZ: "multi",
       defaultProvider: "aws",
       providers: ["aws", "azure"],
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     }),
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
@@ -147,12 +149,22 @@ LoadingData.args = {
   },
 } as CreateKafkaInstanceProps;
 
-const onClickPricingAndPurchasing = () => {
+const onClickKafkaOverview = () => {
   const url = "https://console.redhat.com/application-services/overview";
   window.open(url);
 };
 
 export const QuotaAvailableOnFormLoad = Template.bind({});
+QuotaAvailableOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
+    defaultProvider: "aws",
+    providers: ["aws", "azure"],
+    instanceAvailability: "quota",
+    defaultAZ: "multi",
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
+  }),
+};
 
 export const TrialAvailableOnFormLoad = Template.bind({});
 TrialAvailableOnFormLoad.args = {
@@ -162,7 +174,7 @@ TrialAvailableOnFormLoad.args = {
     defaultProvider: "",
     providers: ["aws", "azure"],
   }),
-  onClickPricingAndPurchasing,
+  onClickKafkaOverview,
 } as CreateKafkaInstanceProps;
 
 export const OverQuotaOnFormLoad = Template.bind({});
@@ -211,6 +223,8 @@ SelectedRegionUnavailableOnFormSubmit.args = {
     defaultAZ: "multi",
     defaultProvider: "aws",
     providers: ["aws", "azure"],
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
   }),
   onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
 } as CreateKafkaInstanceProps;
@@ -246,6 +260,8 @@ SomeRegionsDisabledOnFormLoad.args = {
       defaultAZ: "multi",
       defaultProvider: "aws",
       providers: ["aws", "azure"],
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p) => ({
       ...p,
@@ -294,6 +310,8 @@ AllRegionsDisabledOnFormLoad.args = {
       defaultProvider: "aws",
       providers: ["aws", "azure"],
       defaultAZ: "multi",
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p) => ({
       ...p,
@@ -326,6 +344,8 @@ NoRegionsReturnedFromApiForAProviderOnFormLoad.args = {
       defaultProvider: "aws",
       providers: ["aws", "azure"],
       defaultAZ: "multi",
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p, idx) =>
       idx === 0
@@ -376,6 +396,8 @@ NoRegionsReturnedFromApiOnFormLoad.args = {
       defaultProvider: "aws",
       providers: ["aws", "azure"],
       defaultAZ: "multi",
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p) => ({
       ...p,
@@ -425,6 +447,8 @@ FormErrorsCantSubmit.args = {
     defaultAZ: undefined,
     instanceAvailability: "quota",
     providers: ["aws", "azure"],
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
   }),
 };
 FormErrorsCantSubmit.play = async ({ canvasElement }) => {
@@ -444,6 +468,8 @@ VariantCanCustomizeDefaultProvider.args = {
     instanceAvailability: "quota",
     defaultAZ: "multi",
     providers: ["aws", "azure"],
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
   }),
 } as CreateKafkaInstanceProps;
 
@@ -454,6 +480,8 @@ VariantSingleProvider.args = {
     providers: ["aws"],
     instanceAvailability: "quota",
     defaultAZ: "multi",
+    allowedStreamingUnits: 2,
+    remainingStreamingUnits: 1,
   }),
 } as CreateKafkaInstanceProps;
 
@@ -467,6 +495,8 @@ VariantBothAvailabilityZonesEnabledWithNoTooltip.args = {
       providers: ["aws"],
       instanceAvailability: "quota",
       defaultAZ: "multi",
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p) => ({ ...p, AZ: { multi: true, single: true } }))
   ),
@@ -480,6 +510,8 @@ VariantOnlySingleAZEnabledWithRightTooltip.args = {
       providers: ["aws"],
       instanceAvailability: "quota",
       defaultAZ: "single",
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p) => ({ ...p, AZ: { multi: false, single: true } }))
   ),
@@ -493,6 +525,8 @@ VariantNoDefaultsRequired.args = {
       defaultAZ: undefined,
       instanceAvailability: "quota",
       providers: ["aws", "azure"],
+      allowedStreamingUnits: 2,
+      remainingStreamingUnits: 1,
     },
     PROVIDERS.map((p, idx) => ({
       ...p,
