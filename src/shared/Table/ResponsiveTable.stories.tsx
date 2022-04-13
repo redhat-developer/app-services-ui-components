@@ -1,8 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { actions } from "@storybook/addon-actions";
 import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
-import { IAction } from "@patternfly/react-table";
-import { KafkaInstanceStatus } from "../../Kafka";
 import {
   EmptyState,
   EmptyStateBody,
@@ -12,109 +10,15 @@ import {
 } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
 import { VoidFunctionComponent } from "react";
+import {
+  columnLabels,
+  defaultActions,
+  deletingSign,
+  sampleData,
+  SampleDataType,
+} from "./storybookHelpers";
 
 const eventsFromNames = actions("onRowClick");
-
-const columnLabels: { [key: string]: string } = {
-  name: "Name",
-  owner: "Owner",
-  timeCreated: "Time created",
-  cloudProvider: "Cloud Provider",
-  region: "Region",
-  status: "Status",
-};
-
-const readySign = (
-  <KafkaInstanceStatus
-    status={"ready"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-const creationPendingSign = (
-  <KafkaInstanceStatus
-    status={"preparing"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-const deletingSign = (
-  <KafkaInstanceStatus
-    status={"deleting"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-type SampleDataType = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  typeof readySign | typeof creationPendingSign | typeof deletingSign
-];
-const sampleData: Array<SampleDataType> = [
-  [
-    "kafka-test-instance",
-    "username",
-    "about 2 hours ago",
-    "Amazon Web Services",
-    "US East, N. Virginia",
-    creationPendingSign,
-  ],
-  [
-    "kafka-test-instance-2",
-    "username2",
-    "about 2 hours ago",
-    "Amazon Web Services",
-    "US East, N. Virginia",
-    creationPendingSign,
-  ],
-  [
-    "kafka-test-instance-3",
-    "username3",
-    "about 3 hours ago",
-    "Amazon Web Services",
-    "US East, N. Virginia",
-    readySign,
-  ],
-  [
-    "kafka-test-instance-4",
-    "username4",
-    "about 4 hours ago",
-    "Amazon Web Services",
-    "US East, N. Virginia",
-    deletingSign,
-  ],
-  [
-    "kafka-test-instance-5",
-    "username5",
-    "about 5 hours ago",
-    "Amazon Web Services",
-    "US East, N. Virginia",
-    readySign,
-  ],
-];
-
-const defaultActions = (data: any): IAction[] => [
-  {
-    title: "Some action",
-    onClick: () => console.log(`clicked on Some action, on row ${data[0]}`),
-  },
-  {
-    title: <a href="https://www.patternfly.org">Link action</a>,
-  },
-  {
-    isSeparator: true,
-  },
-  {
-    title: "Third action",
-    onClick: () => console.log(`clicked on Third action, on row ${data[0]}`),
-  },
-];
 
 const ResponsiveTableSampleType: VoidFunctionComponent<
   ResponsiveTableProps<SampleDataType>
@@ -135,7 +39,6 @@ export default {
   argTypes: {
     hasActions: { control: "boolean" },
     isRowClickable: { control: "boolean" },
-    selectedRow: { control: "number" },
   },
 } as ComponentMeta<typeof ResponsiveTableSampleType>;
 
@@ -164,7 +67,7 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={InfoIcon} />
       <Title headingLevel="h4" size="lg">
-        You can set up you own empty state
+        Empty state to show when the data is filtered but has no results
       </Title>
       <EmptyStateBody>
         The <code>children</code> property will be used when no data is
@@ -192,12 +95,12 @@ NoSelectedRow.args = {
   selectedRow: undefined,
 };
 
-export const Loading = Template.bind({});
-Loading.args = {
+export const UndefinedDataShowsSkeleton = Template.bind({});
+UndefinedDataShowsSkeleton.args = {
   data: undefined,
 };
 
-export const NoData = Template.bind({});
-NoData.args = {
+export const NoResults = Template.bind({});
+NoResults.args = {
   data: [],
 };
