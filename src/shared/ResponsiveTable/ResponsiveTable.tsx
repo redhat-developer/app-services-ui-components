@@ -1,4 +1,11 @@
-import { forwardRef, ReactElement } from "react";
+import {
+  forwardRef,
+  PropsWithChildren,
+  ReactElement,
+  useCallback,
+  useMemo,
+  VoidFunctionComponent,
+} from "react";
 import {
   ActionsColumn,
   ActionsColumnProps,
@@ -13,6 +20,7 @@ import {
 } from "@patternfly/react-table";
 import useResizeObserver from "use-resize-observer";
 import "./ResponsiveTable.css";
+import { Skeleton } from "@patternfly/react-core";
 
 export type RenderHeaderCb = (props: {
   Th: typeof Th;
@@ -46,12 +54,13 @@ export type ResponsiveTableProps<TRow> = {
   renderActions?: RenderActionsCb<TRow>;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
+  expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
 
-export function ResponsiveTable<TRow>({
+export const ResponsiveTable = <TRow,>({
   ariaLabel,
   minimumColumnWidth = 250,
   columns,
@@ -61,10 +70,125 @@ export function ResponsiveTable<TRow>({
   renderActions,
   isRowDeleted,
   isRowSelected,
+  expectedLength = 3,
   onRowClick,
-}: ResponsiveTableProps<TRow>) {
+  children,
+}: PropsWithChildren<ResponsiveTableProps<TRow>>) => {
   const { ref, width = 1 } = useResizeObserver();
   const showColumns = width >= 576;
+
+  const canColumnBeHidden = useCallback(
+    (index: number) =>
+      showColumns && index !== 0 && index !== columns.length - 1,
+    [columns, showColumns]
+  );
+
+  const header = useMemo(() => {
+    return columns.map((column, index) => {
+      const Th = forwardRef<HTMLTableHeaderCellElement, ThProps>(
+        ({ children, ...props }, ref) => {
+          return (
+            <ResponsiveTh
+              position={index}
+              tableWidth={width}
+              columnWidth={minimumColumnWidth}
+              canHide={canColumnBeHidden(index)}
+              {...props}
+              ref={ref}
+            >
+              {children}
+            </ResponsiveTh>
+          );
+        }
+      );
+      Th.displayName = "ResponsiveThCurried";
+      return renderHeader({
+        Th,
+        key: `header_${column}`,
+
+        column,
+        colIndex: index,
+      });
+    });
+  }, [canColumnBeHidden, columns, minimumColumnWidth, renderHeader, width]);
+
+  const getTd = useCallback(
+    (index: number) => {
+      const Td = forwardRef<HTMLTableDataCellElement, TdProps>(
+        ({ children, ...props }, ref) => {
+          return (
+            <ResponsiveTd
+              position={index}
+              tableWidth={width}
+              columnWidth={minimumColumnWidth}
+              canHide={canColumnBeHidden(index)}
+              {...props}
+              ref={ref}
+            >
+              {children}
+            </ResponsiveTd>
+          );
+        }
+      );
+      Td.displayName = "ResponsiveTdCurried";
+      return Td;
+    },
+    [canColumnBeHidden, minimumColumnWidth, width]
+  );
+
+  const makeRow = useCallback(
+    (row: TRow, rowIndex: number) => {
+      const isDeleted = isRowDeleted && isRowDeleted({ row, rowIndex });
+      return (
+        <Tr
+          key={`row_${rowIndex}`}
+          isHoverable={!isDeleted && onRowClick !== undefined}
+          onRowClick={() =>
+            !isDeleted && onRowClick && onRowClick({ row, rowIndex })
+          }
+          isRowSelected={isRowSelected && isRowSelected({ row, rowIndex })}
+          className={
+            isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined
+          }
+        >
+          {columns.map((column, colIndex) => {
+            const Td = getTd(colIndex);
+            return renderCell({
+              Td,
+              key: `row_${rowIndex}_cell_${column}`,
+              column,
+              colIndex,
+              rowIndex,
+              rowData: row,
+            });
+          })}
+          {renderActions && !isDeleted && (
+            <ResponsiveTd
+              position={columns.length}
+              tableWidth={width}
+              columnWidth={minimumColumnWidth}
+              canHide={false}
+              isActionCell={true}
+            >
+              {renderActions({ rowIndex, rowData: row, ActionsColumn })}
+            </ResponsiveTd>
+          )}
+        </Tr>
+      );
+    },
+    [
+      columns,
+      getTd,
+      isRowDeleted,
+      isRowSelected,
+      minimumColumnWidth,
+      onRowClick,
+      renderActions,
+      renderCell,
+      width,
+    ]
+  );
+
   return (
     <TableComposable
       aria-label={ariaLabel}
@@ -73,101 +197,26 @@ export function ResponsiveTable<TRow>({
       className={showColumns ? "" : "pf-m-grid"}
     >
       <Thead>
-        <Tr>
-          {columns.map((column, index) => {
-            const Th = forwardRef<HTMLTableHeaderCellElement, ThProps>(
-              ({ children, ...props }, ref) => {
-                return (
-                  <ResponsiveTh
-                    position={index}
-                    tableWidth={width}
-                    columnWidth={minimumColumnWidth}
-                    canHide={
-                      showColumns && index !== 0 && index !== columns.length - 1
-                    }
-                    {...props}
-                    ref={ref}
-                  >
-                    {children}
-                  </ResponsiveTh>
-                );
-              }
-            );
-            Th.displayName = "ResponsiveThCurried";
-            return renderHeader({
-              Th,
-              key: `header_${column}`,
-
-              column,
-              colIndex: index,
-            });
-          })}
-        </Tr>
+        <Tr>{header}</Tr>
       </Thead>
       <Tbody>
-        {data?.map((row, rowIndex) => {
-          const isDeleted = isRowDeleted && isRowDeleted({ row, rowIndex });
-          return (
-            <Tr
-              key={`row_${rowIndex}`}
-              isHoverable={!isDeleted && onRowClick !== undefined}
-              onRowClick={() =>
-                !isDeleted && onRowClick && onRowClick({ row, rowIndex })
-              }
-              isRowSelected={isRowSelected && isRowSelected({ row, rowIndex })}
-              className={
-                isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined
-              }
-            >
-              {columns.map((column, colIndex) => {
-                const Td = forwardRef<HTMLTableDataCellElement, TdProps>(
-                  ({ children, ...props }, ref) => {
-                    return (
-                      <ResponsiveTd
-                        position={colIndex}
-                        tableWidth={width}
-                        columnWidth={minimumColumnWidth}
-                        canHide={
-                          showColumns &&
-                          colIndex !== 0 &&
-                          colIndex !== columns.length - 1
-                        }
-                        {...props}
-                        ref={ref}
-                      >
-                        {children}
-                      </ResponsiveTd>
-                    );
-                  }
-                );
-                Td.displayName = "ResponsiveTdCurried";
-                return renderCell({
-                  Td,
-                  key: `row_${rowIndex}_cell_${column}`,
-                  column,
-                  colIndex,
-                  rowIndex,
-                  rowData: row,
-                });
-              })}
-              {renderActions && (
-                <ResponsiveTd
-                  position={columns.length}
-                  tableWidth={width}
-                  columnWidth={minimumColumnWidth}
-                  canHide={false}
-                  isActionCell={true}
-                >
-                  {renderActions({ rowIndex, rowData: row, ActionsColumn })}
-                </ResponsiveTd>
-              )}
-            </Tr>
-          );
-        })}
+        {data === undefined && (
+          <TableSkeleton
+            columns={columns.length}
+            rows={expectedLength}
+            getTd={getTd}
+          />
+        )}
+        {data?.map(makeRow)}
+        {data?.length === 0 && (
+          <Tr>
+            <Td colSpan={columns.length}>{children}</Td>
+          </Tr>
+        )}
       </Tbody>
     </TableComposable>
   );
-}
+};
 
 export type ResponsiveThProps = {
   position: number;
@@ -232,3 +281,22 @@ export const ResponsiveTd = forwardRef<
   );
 });
 ResponsiveTd.displayName = "ResponsiveTd";
+
+const TableSkeleton: VoidFunctionComponent<{
+  columns: number;
+  rows: number;
+  getTd: (index: number) => typeof Td;
+}> = ({ columns, rows, getTd }) => {
+  const skeletonCells = new Array(columns).fill(0).map((_, index) => {
+    const Td = getTd(index);
+    return (
+      <Td>
+        <Skeleton />
+      </Td>
+    );
+  });
+  const skeletonRows = new Array(rows)
+    .fill(0)
+    .map((_, index) => <Tr key={`row_${index}`}>{skeletonCells}</Tr>);
+  return <>{skeletonRows}</>;
+};
