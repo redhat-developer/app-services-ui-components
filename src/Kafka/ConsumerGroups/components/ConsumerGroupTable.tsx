@@ -1,6 +1,5 @@
 import {
-  ActionsColumn,
-  IAction,
+  IActions,
   ISortBy,
   TableComposable,
   Tbody,
@@ -17,7 +16,6 @@ import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
 
 export type ConsumerGroupTableProps = {
   consumerGroup: ConsumerGroup[];
-  consumerGroupByTopic: boolean;
   onClickDeleteModal: (data: ConsumerGroup) => void;
   onClickPartitionoffset: (data: ConsumerGroup) => void;
   onClickResetoffset: (data: ConsumerGroup) => void;
@@ -25,7 +23,6 @@ export type ConsumerGroupTableProps = {
 
 export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
   consumerGroup,
-  consumerGroupByTopic,
   onClickDeleteModal,
   onClickPartitionoffset,
   onClickResetoffset,
@@ -66,27 +63,20 @@ export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
     state: t("consumerGroup.state_header"),
   };
 
-  const tableRow = (consumer: ConsumerGroup) => {
-    if (consumerGroupByTopic) {
-      return [];
-    }
-    const actionResolver = (consumer: ConsumerGroup): IAction[] => [
-      {
-        title: t("common:delete"),
-        onClick: () => onClickDeleteModal(consumer),
-      },
-      {
-        title: t("consumerGroup.view_partitions_offsets"),
-        onClick: () => onClickPartitionoffset(consumer),
-      },
-      {
-        title: t("consumerGroup.reset_offset"),
-        onClick: () => onClickResetoffset(consumer),
-      },
-    ];
-    const rowActions: IAction[] | null = actionResolver(consumer);
-    return rowActions ? <ActionsColumn items={rowActions} /> : null;
-  };
+  const actions = (consumer: ConsumerGroup): IActions => [
+    {
+      title: t("common:delete"),
+      onClick: () => onClickDeleteModal(consumer),
+    },
+    {
+      title: t("consumerGroup.view_partitions_offsets"),
+      onClick: () => onClickPartitionoffset(consumer),
+    },
+    {
+      title: t("consumerGroup.reset_offset"),
+      onClick: () => onClickResetoffset(consumer),
+    },
+  ];
 
   return (
     <TableComposable aria-label={t("consumerGroup.consumer_group_list")}>
@@ -124,7 +114,7 @@ export const ConsumerGroupTable: FunctionComponent<ConsumerGroupTableProps> = ({
               <Td key={tableColumns.state}>
                 <ConsumerGroupStateLabel state={consumer.state} />
               </Td>
-              <Td>{tableRow(consumer)}</Td>
+              <Td actions={{ items: actions(consumer) }} />
             </Tr>
           );
         })}
