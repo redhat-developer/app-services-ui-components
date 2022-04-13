@@ -17,6 +17,7 @@ export type ModalAlertsProps = {
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   allowedStreamingUnits: number;
+  isAllRegionsUnavailable: boolean;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
@@ -26,6 +27,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   onClickKafkaOverview,
   onClickContactUs,
   allowedStreamingUnits,
+  isAllRegionsUnavailable,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -145,26 +147,16 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
               </Alert>
             );
           case instanceAvailability === "regions-unavailable":
+          case isAllRegionsUnavailable:
             return (
               <Alert
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.warning}
-                title={t("modal_alerts.regions_unavailable_title")}
+                title={t("modal_alerts.instance_unavailable_title")}
                 isInline
               >
-                <Trans
-                  ns={["create-kafka-instance-exp"]}
-                  i18nKey={t("modal_alerts.regions_unavailable_message")}
-                  components={[
-                    <Button
-                      key="btn-contact-support"
-                      variant={ButtonVariant.link}
-                      onClick={onClickContactUs}
-                      isInline
-                    />,
-                  ]}
-                />
+                {t("modal_alerts.regions_unavailable_message")}
               </Alert>
             );
         }

@@ -1,5 +1,5 @@
 import { VFC, FormEvent } from "react";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import {
   Form,
@@ -55,7 +55,6 @@ export type StandardKafkaFormProps = {
   onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   remainingStreamingUnits: number | undefined;
   allowedStreamingUnits: number;
-  onClickContactSupport: () => void;
   sizeValidation: validate;
   instanceAvailability: InstanceAvailability | undefined;
 };
@@ -80,7 +79,6 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   isDisabledSize,
   size,
   remainingStreamingUnits,
-  allowedStreamingUnits,
   sizeValidation,
   instanceAvailability,
 
@@ -90,7 +88,6 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   setProvider,
   setName,
   onSubmit,
-  onClickContactSupport,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -108,18 +105,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
         !disableControls:
         return (
           <div className="pf-c-form__helper-text pf-m-error">
-            <Trans
-              ns={["create-kafka-instance-exp"]}
-              i18nKey={t("all_region_unavailable_helper_text")}
-              components={[
-                <Button
-                  key="btn-contact-support"
-                  variant={ButtonVariant.link}
-                  onClick={onClickContactSupport}
-                  isInline
-                />,
-              ]}
-            />
+            {t("all_region_unavailable_helper_text")}
           </div>
         );
       case someRegionsUnavailable &&
@@ -127,18 +113,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
         !disableControls:
         return (
           <div className="pf-c-form__helper-text pf-m-warning">
-            <Trans
-              ns={["create-kafka-instance-exp"]}
-              i18nKey={t("some_region_unavailable_helper_text")}
-              components={[
-                <Button
-                  key="btn-contact-support"
-                  variant={ButtonVariant.link}
-                  onClick={onClickContactSupport}
-                  isInline
-                />,
-              ]}
-            />
+            {t("some_region_unavailable_helper_text")}
           </div>
         );
       case regionValidation === "error" && !disableControls:
@@ -287,8 +262,8 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
               sizeValidation === "error" ? "pf-m-error" : ""
             }`}
           >
-            {t("standard_kafka_streaming_units", {
-              streamingUnits: remainingStreamingUnits || "no",
+            {t("standard_kafka_streaming_unit", {
+              count: remainingStreamingUnits || 0,
             })}
           </Text>
         )}

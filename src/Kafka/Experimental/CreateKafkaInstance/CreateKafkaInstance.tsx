@@ -46,7 +46,6 @@ export type CreateKafkaInstanceProps = {
   onCancel: () => void;
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
-  onClickContactSupport: () => void;
   onClickLearnMoreAboutRegions: () => void;
 } & MakeCreateKafkaInstanceMachine &
   Partial<InstanceInfoLimitsProps>;
@@ -70,7 +69,6 @@ export const CreateKafkaInstance: FunctionComponent<
   messageSize = 1,
   onClickKafkaOverview,
   onClickContactUs,
-  onClickContactSupport,
   onClickLearnMoreAboutRegions,
 }) => {
   const FORM_ID = "create_instance_-form";
@@ -187,6 +185,7 @@ export const CreateKafkaInstance: FunctionComponent<
         onClickKafkaOverview={onClickKafkaOverview}
         allowedStreamingUnits={allowedStreamingUnits}
         onClickContactUs={onClickContactUs}
+        isAllRegionsUnavailable={allRegionsUnavailable}
       />
       <Flex
         direction={{ default: "column", lg: "row" }}
@@ -196,7 +195,7 @@ export const CreateKafkaInstance: FunctionComponent<
           <FormAlerts
             error={error}
             isTrial={isTrial}
-            onClickContactSupport={onClickContactUs}
+            onClickContactUS={onClickContactUs}
             totalStreamingUnits={allowedStreamingUnits}
             streamingUnits={remainingStreamingUnits}
           />
@@ -228,7 +227,6 @@ export const CreateKafkaInstance: FunctionComponent<
                 setName={setName}
                 onSubmit={onSubmit}
                 instanceAvailability={instanceAvailability}
-                onClickContactSupport={onClickContactSupport}
                 onClickLearnMoreAboutRegions={onClickLearnMoreAboutRegions}
               />
             </>
@@ -260,7 +258,6 @@ export const CreateKafkaInstance: FunctionComponent<
               onSubmit={onSubmit}
               remainingStreamingUnits={remainingStreamingUnits}
               allowedStreamingUnits={allowedStreamingUnits}
-              onClickContactSupport={onClickContactSupport}
               sizeValidation={sizeValidation}
               instanceAvailability={instanceAvailability}
             />
@@ -271,7 +268,7 @@ export const CreateKafkaInstance: FunctionComponent<
           className="mas--CreateKafkaInstance__sidebar"
         >
           <InstanceInfo
-            isLoading={isLoading || !canCreate}
+            isLoading={isLoading}
             isTrial={isTrial}
             trialDurationInHours={trialDurationInHours}
             ingresEgress={ingresEgress}

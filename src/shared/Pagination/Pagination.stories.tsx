@@ -1,4 +1,3 @@
-import { PaginationVariant } from "@patternfly/react-core";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Pagination } from "./Pagination";
 

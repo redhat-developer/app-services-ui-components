@@ -74,7 +74,7 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           !disableControls:
           return (
             <div className="pf-c-form__helper-text pf-m-error">
-              {t("tria_all_region_unavailable_helper_text")}
+              {t("trial_all_region_unavailable_helper_text")}
             </div>
           );
         case someRegionsUnavailable &&

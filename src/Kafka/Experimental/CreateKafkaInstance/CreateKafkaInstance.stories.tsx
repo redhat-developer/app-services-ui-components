@@ -136,7 +136,7 @@ Default.args = {
     defaultAZ: "multi",
     defaultRegion: "eu-west-1",
     allowedStreamingUnits: 2,
-    remainingStreamingUnits: 1,
+    remainingStreamingUnits: 2,
   }),
 };
 

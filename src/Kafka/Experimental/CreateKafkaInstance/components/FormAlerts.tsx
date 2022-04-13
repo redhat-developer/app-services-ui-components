@@ -12,7 +12,7 @@ import { CreateKafkaInstanceError } from "../machines";
 export type FormAlertsProps = {
   error: CreateKafkaInstanceError | undefined;
   isTrial: boolean;
-  onClickContactSupport: () => void;
+  onClickContactUS: () => void;
   streamingUnits?: number;
   totalStreamingUnits?: number;
 };
@@ -20,7 +20,7 @@ export type FormAlertsProps = {
 export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
   isTrial,
-  onClickContactSupport,
+  onClickContactUS,
   streamingUnits,
   totalStreamingUnits,
 }) => {
@@ -57,9 +57,9 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                   values={{ streamingUnits, totalStreamingUnits }}
                   components={[
                     <Button
-                      key="btn-contact-support"
+                      key="btn-contact-us"
                       variant={ButtonVariant.link}
-                      onClick={onClickContactSupport}
+                      onClick={onClickContactUS}
                       isInline
                     />,
                   ]}
@@ -87,22 +87,9 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 title={t("form_errors.instance_unavailable_title")}
                 isInline
               >
-                {isTrial ? (
-                  t("form_errors.trial_region_unavailable_message")
-                ) : (
-                  <Trans
-                    ns={["create-kafka-instance-exp"]}
-                    i18nKey={t("form_errors.region_unavailable_message")}
-                    components={[
-                      <Button
-                        key="btn-contact-support"
-                        variant={ButtonVariant.link}
-                        onClick={onClickContactSupport}
-                        isInline
-                      />,
-                    ]}
-                  />
-                )}
+                {isTrial
+                  ? t("form_errors.trial_region_unavailable_message")
+                  : t("form_errors.region_unavailable_message")}
               </Alert>
             );
           case "unknown":
