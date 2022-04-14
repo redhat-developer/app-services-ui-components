@@ -184,6 +184,11 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
           onChange={setRegion}
           isDisabled={disableControls}
           validated={regionValidation}
+          placeholderText={
+            allRegionsUnavailable
+              ? t("regions_temporarily_unavailable")
+              : t("create-kafka-instance:select_region")
+          }
         />
       </FormGroup>
       <FormGroup

@@ -14,6 +14,7 @@ export type CloudRegionProps = {
   isDisabled?: boolean;
   onChange: (region: string) => void;
   validated?: SelectProps["validated"];
+  placeholderText: SelectProps["placeholderText"];
 };
 
 export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
@@ -22,6 +23,7 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   isDisabled,
   validated,
   onChange,
+  placeholderText,
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -55,15 +57,15 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
     )
   );
 
-  makeRegionOptions.unshift(
-    <SelectOption
-      key="placeholder"
-      value={t("create-kafka-instance:select_region")}
-      isPlaceholder
-    >
-      {t("create-kafka-instance:select_region")}
-    </SelectOption>
-  );
+  // makeRegionOptions.unshift(
+  //   <SelectOption
+  //     key="placeholder"
+  //     value={t("create-kafka-instance:select_region")}
+  //     isPlaceholder
+  //   >
+  //     {t("create-kafka-instance:select_region")}
+  //   </SelectOption>
+  // );
 
   return (
     <Select
@@ -79,6 +81,7 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
       isOpen={isOpen}
       isDisabled={isDisabled}
       aria-labelledby="form-cloud-region-option"
+      placeholderText={placeholderText}
     >
       {makeRegionOptions}
     </Select>

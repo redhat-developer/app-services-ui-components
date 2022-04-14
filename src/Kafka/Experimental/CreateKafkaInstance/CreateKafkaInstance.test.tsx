@@ -214,7 +214,7 @@ describe("CreateKafkaInstance", () => {
     userEvent.click(selectRegion);
     const regionList = comp.getByRole("listbox");
     const regionOptionEuIreland =
-      within(regionList).getAllByRole("presentation")[1];
+      within(regionList).getAllByRole("presentation")[0];
 
     expect(within(regionOptionEuIreland).getByRole("option")).toHaveClass(
       "pf-m-disabled"
@@ -251,7 +251,7 @@ describe("CreateKafkaInstance", () => {
     userEvent.click(selectRegion);
     const regionList = comp.getByRole("listbox");
     const regionOptionEuIreland =
-      within(regionList).getAllByRole("presentation")[1];
+      within(regionList).getAllByRole("presentation")[0];
 
     expect(within(regionOptionEuIreland).getByRole("option")).toHaveClass(
       "pf-m-disabled"
@@ -275,12 +275,12 @@ describe("CreateKafkaInstance", () => {
       within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
     ).toBeEnabled();
 
-    const selectRegion = comp.getByText("Select region");
+    const selectRegion = comp.getByText("Regions temporarily unavailable");
 
     userEvent.click(selectRegion);
     const regionList = comp.getByRole("listbox");
-    const regionOption1 = within(regionList).getAllByRole("presentation")[1];
-    const regionOption2 = within(regionList).getAllByRole("presentation")[2];
+    const regionOption1 = within(regionList).getAllByRole("presentation")[0];
+    const regionOption2 = within(regionList).getAllByRole("presentation")[1];
 
     expect(within(regionOption1).getByRole("option")).toHaveClass(
       "pf-m-disabled"
@@ -310,12 +310,12 @@ describe("CreateKafkaInstance", () => {
       within(comp.getByTestId("cloudRegion")).getAllByRole("button")[0]
     ).toBeEnabled();
 
-    const selectRegion = comp.getByText("Select region");
+    const selectRegion = comp.getByText("Regions temporarily unavailable");
 
     userEvent.click(selectRegion);
     const regionList = comp.getByRole("listbox");
-    const regionOption1 = within(regionList).getAllByRole("presentation")[1];
-    const regionOption2 = within(regionList).getAllByRole("presentation")[2];
+    const regionOption1 = within(regionList).getAllByRole("presentation")[0];
+    const regionOption2 = within(regionList).getAllByRole("presentation")[1];
 
     expect(within(regionOption1).getByRole("option")).toHaveClass(
       "pf-m-disabled"

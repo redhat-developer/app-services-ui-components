@@ -84,7 +84,7 @@
   "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
   "standard_kafka_size_dscription": "Learn how to add streaming units to your account",
   "standard_kafka_streaming_unit": "Your organization has {{count}} streaming unit remaining",
-  "standard_kafka_streaming_unit_plural": "Your organization has {{count}} streaming units remaining",
+  "standard_kafka_streaming_unit_other": "Your organization has {{count}} streaming units remaining",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
   "statuses": {
@@ -102,5 +102,6 @@
   "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region, try again later.",
   "trial_all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider or try again later.",
   "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later.",
-  "temporarily_unavailable": "Temporarily unavailable"
+  "temporarily_unavailable": "Temporarily unavailable",
+  "regions_temporarily_unavailable": "Regions temporarily unavailable"
 }

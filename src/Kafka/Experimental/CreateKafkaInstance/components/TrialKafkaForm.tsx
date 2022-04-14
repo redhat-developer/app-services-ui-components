@@ -178,6 +178,11 @@ export const TrialKafkaForm: VFC<TrialKafkaFormProps> = ({
           onChange={setRegion}
           isDisabled={disableControls}
           validated={regionValidation}
+          placeholderText={
+            allRegionsUnavailable
+              ? t("regions_temporarily_unavailable")
+              : t("select_region")
+          }
         />
       </FormGroup>
       <FormGroup
