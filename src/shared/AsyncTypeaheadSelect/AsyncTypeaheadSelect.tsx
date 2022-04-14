@@ -6,7 +6,7 @@ import {
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { useEffect, useRef, useState, VFC } from "react";
+import { useRef, useState, VFC } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Validation = {
@@ -46,18 +46,13 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     []
   );
   const [validation, setValidation] = useState<Validation | undefined>();
+  const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
 
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
-
-  useEffect(() => {
-    if (submitted && required)
-      setValidation({ isValid: false, message: t("common:required") });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [submitted]);
-
   const onTypeahead = (filter: string | undefined) => {
+    setFilterValue(filter);
     function doFetch() {
       onFetchOptions(filter || "")
         .then(setTypeAheadSuggestions)
@@ -68,8 +63,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       setValidation(onValidationCheck(filter));
       setTypeAheadSuggestions([]);
     }
-    if ((filter === undefined || filter.length < 1) && submitted && required)
-      setValidation({ message: t("common:required"), isValid: false });
     if (fetchTimeout.current) {
       clearTimeout(fetchTimeout.current);
       fetchTimeout.current = undefined;
@@ -81,6 +74,9 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
+    submitted && required
+      ? setValidation({ isValid: false, message: t("common:required") })
+      : null;
     setIsOpen((isOpen) => {
       if (isOpen !== newState && newState === true) {
         onTypeahead(undefined);
@@ -90,19 +86,36 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   };
   const clearSelection = () => {
     onChange(undefined);
+    submitted && required
+      ? setValidation({ isValid: false, message: t("common:required") })
+      : setValidation({ isValid: true, message: undefined });
     setIsOpen(false);
   };
 
+  const isCreatable = !loading && validation && validation.isValid;
+
   const formGroupValidated =
-    validation && !validation.isValid
+    submitted &&
+    required &&
+    (value === undefined || value === "") &&
+    (filterValue === undefined || filterValue === "")
+      ? ValidatedOptions.error
+      : validation && !validation.isValid
       ? ValidatedOptions.error
       : ValidatedOptions.default;
-  const isCreatable = !loading && validation && validation.isValid;
+
+  const formGroupValidatedText =
+    submitted &&
+    required &&
+    (value === undefined || value === "") &&
+    (filterValue === undefined || filterValue === "")
+      ? t("common:required")
+      : validation?.message;
 
   return (
     <FormGroup
       validated={formGroupValidated}
-      helperTextInvalid={validation?.message}
+      helperTextInvalid={formGroupValidatedText}
       fieldId={id}
     >
       <Select

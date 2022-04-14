@@ -1,16 +1,13 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { AsyncTypeaheadSelect } from "../../../shared";
-import { validationCheck } from "../storiesHelpers";
+import { ResourcePrefix } from "./ResourcePrefix";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";
 import { fakeApi } from "../../../shared/storiesHelpers";
 
 export default {
-  component: AsyncTypeaheadSelect,
+  component: ResourcePrefix,
   args: {
-    id: "sample",
     value: undefined,
-    ariaLabel: "my aria label",
     onFetchOptions: (filter) =>
       fakeApi<string[]>(
         ["foo-topic", "test", ",my-test", "random-topic-name"].filter((v) =>
@@ -18,23 +15,22 @@ export default {
         ),
         100
       ),
-    onValidationCheck: () => ({ isValid: true, message: undefined }),
-    placeholderText: "Enter name",
+    submitted: false,
+    resourcePrefixRule: "is",
+    resourceType: "topic",
   },
-} as ComponentMeta<typeof AsyncTypeaheadSelect>;
+} as ComponentMeta<typeof ResourcePrefix>;
 
-const Template: ComponentStory<typeof AsyncTypeaheadSelect> = (args) => (
+const Template: ComponentStory<typeof ResourcePrefix> = (args) => (
   <div style={{ maxWidth: 200 }}>
     <Form>
-      <AsyncTypeaheadSelect {...args} />
+      <ResourcePrefix {...args} />
     </Form>
   </div>
 );
 
 export const InvalidTopicLength = Template.bind({});
-InvalidTopicLength.args = {
-  onValidationCheck: () => validationCheck("topic", "is", ".."),
-};
+InvalidTopicLength.args = {};
 
 InvalidTopicLength.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -48,15 +44,9 @@ InvalidTopicLength.parameters = {
     },
   },
 };
+
 export const InvalidLength = Template.bind({});
-InvalidLength.args = {
-  onValidationCheck: () =>
-    validationCheck(
-      "topic",
-      "starts-with",
-      "this-is-a-very-long-invalid-name-exceeding--32-characters"
-    ),
-};
+InvalidLength.args = {};
 InvalidLength.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(
@@ -75,8 +65,7 @@ InvalidLength.parameters = {
 
 export const InvalidConsumerGroupCharacters = Template.bind({});
 InvalidConsumerGroupCharacters.args = {
-  onValidationCheck: () =>
-    validationCheck("consumer-group", "starts-with", "$!"),
+  resourceType: "consumer-group",
 };
 InvalidConsumerGroupCharacters.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -92,7 +81,6 @@ InvalidConsumerGroupCharacters.parameters = {
 
 export const RequiredField = Template.bind({});
 RequiredField.args = {
-  required: true,
   submitted: true,
 };
 RequiredField.parameters = {
@@ -104,9 +92,7 @@ RequiredField.parameters = {
 };
 
 export const InvalidTopicCharacters = Template.bind({});
-InvalidTopicCharacters.args = {
-  onValidationCheck: () => validationCheck("topic", "starts-with", "$!"),
-};
+InvalidTopicCharacters.args = {};
 InvalidTopicCharacters.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "$!");

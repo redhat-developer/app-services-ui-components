@@ -13,7 +13,7 @@ const {
 
 describe("Async typeahead", () => {
   jest.useFakeTimers();
-  it("It should render an async typeahead", async () => {
+  it("should render an async typeahead", async () => {
     const onCreate = jest.fn();
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(InitialState.args!.onFetchOptions);
