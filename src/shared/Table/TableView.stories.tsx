@@ -132,3 +132,10 @@ LastPage.args = {
   itemCount: 27,
   page: 3,
 };
+
+export const LoadingNewPage = Template.bind({});
+LoadingNewPage.args = {
+  data: undefined,
+  itemCount: 27,
+  page: 3,
+};

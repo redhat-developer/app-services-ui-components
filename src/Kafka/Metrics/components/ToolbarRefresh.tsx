@@ -1,8 +1,8 @@
-import { Button, Spinner, ToolbarItem } from "@patternfly/react-core";
-import SyncAltIcon from "@patternfly/react-icons/dist/esm/icons/sync-alt-icon";
+import { ToolbarItem } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../../shared";
+import { RefreshButton } from "../../../shared/RefreshButton/RefreshButton";
 
 export type ToolbarRefreshProps = {
   isRefreshing: boolean;
@@ -22,15 +22,11 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
   return (
     <>
       <ToolbarItem>
-        <Button variant="plain" aria-label={ariaLabel} onClick={onRefresh}>
-          {isRefreshing ? (
-            <span className="pf-c-button__progress">
-              <Spinner size="md" />
-            </span>
-          ) : (
-            <SyncAltIcon />
-          )}
-        </Button>
+        <RefreshButton
+          ariaLabel={ariaLabel}
+          onClick={onRefresh}
+          isRefreshing={isRefreshing}
+        />
       </ToolbarItem>
       <ToolbarItem
         alignment={{ default: "alignRight" }}

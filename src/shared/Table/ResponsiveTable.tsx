@@ -47,8 +47,8 @@ export type RenderActionsCb<TRow> = (props: {
 export type ResponsiveTableProps<TRow> = {
   ariaLabel: string;
   minimumColumnWidth?: number;
-  columns: Array<string>;
-  data: Array<TRow> | undefined;
+  columns: readonly string[];
+  data: readonly TRow[] | undefined;
   renderHeader: RenderHeaderCb;
   renderCell: RenderCellCb<TRow>;
   renderActions?: RenderActionsCb<TRow>;
@@ -290,7 +290,7 @@ const TableSkeleton: VoidFunctionComponent<{
   const skeletonCells = new Array(columns).fill(0).map((_, index) => {
     const Td = getTd(index);
     return (
-      <Td>
+      <Td key={`cell_${index}`}>
         <Skeleton />
       </Td>
     );

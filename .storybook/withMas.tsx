@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from "react";
-import { inspect, Inspector } from "@xstate/inspect";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Args, ReactFramework } from "@storybook/react/types-6-0";
 import { PartialStoryFn, StoryContext } from "@storybook/csf";
@@ -10,30 +9,10 @@ export const withMas = (
   Story: PartialStoryFn<ReactFramework, Args>,
   { globals }: StoryContext<ReactFramework, Args>
 ) => {
-  const xstateInspectorRef = useRef(false);
   useEffect(() => {
     document.body.classList.toggle("show-ouia", JSON.parse(globals.ouia));
   }, [globals.ouia]);
-  useEffect(() => {
-    let inspector: Inspector | undefined = undefined;
-    const showInspector = JSON.parse(globals.xstate) === true;
-    if (showInspector !== xstateInspectorRef.current) {
-      xstateInspectorRef.current = showInspector;
-      if (showInspector) {
-        inspector = inspect({
-          // options
-          url: "https://stately.ai/viz?inspect", // (default)
-          iframe: false, // open in new window
-        });
-      }
-    }
-    return () => {
-      if (inspector) {
-        inspector.disconnect();
-        inspector = undefined;
-      }
-    };
-  }, [globals.xstate]);
+
   return (
     <Router>
       <I18nProvider
@@ -54,6 +33,8 @@ export const withMas = (
               import("../locales/en/manage-kafka-permissions.json"),
             "service-account": () =>
               import("../locales/en/service-account.json"),
+            "message-browser": () =>
+              import("../locales/en/message-browser.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

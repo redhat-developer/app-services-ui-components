@@ -32,6 +32,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
               import("../locales/en/manage-kafka-permissions.json"),
             "service-account": () =>
               import("../locales/en/service-account.json"),
+            "message-browser": () =>
+              import("../locales/en/message-browser.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

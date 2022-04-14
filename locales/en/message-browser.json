@@ -1,0 +1,13 @@
+{
+  "columns": {
+    "header": "Header",
+    "key": "Key",
+    "offset": "Offset",
+    "partition": "Partition",
+    "timestamp": "Timestamp",
+    "value": "Value"
+  },
+  "offset": "Offset",
+  "select_partition_of_count": "of {{partitions}}",
+  "select_partition_typeahead": "Select partition value"
+}

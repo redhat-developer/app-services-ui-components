@@ -1,40 +1,40 @@
-import "./customStyles.css";
-import React from "react";
+import { useState } from "react";
 import {
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-  CalendarMonth,
-  InputGroup,
-  TextInput,
   Button,
+  CalendarMonth,
+  Dropdown,
+  DropdownItem,
+  DropdownProps,
+  DropdownToggle,
+  InputGroup,
   Popover,
+  TextInput,
   yyyyMMddFormat,
 } from "@patternfly/react-core";
 import OutlinedCalendarAltIcon from "@patternfly/react-icons/dist/esm/icons/outlined-calendar-alt-icon";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
+import "./DateTimePicker.css";
 
 export const DateTimePicker = () => {
-  const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);
-  const [isTimeOpen, setIsTimeOpen] = React.useState(false);
-  const [valueDate, setValueDate] = React.useState("YYYY-MM-DD");
-  const [valueTime, setValueTime] = React.useState("Thh:mm:ss.s");
-  const [newValue, setNewValue] = React.useState("YYYY-MM-DDThh:mm:ss.s");
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isTimeOpen, setIsTimeOpen] = useState(false);
+  const [valueDate, setValueDate] = useState("YYYY-MM-DD");
+  const [valueTime, setValueTime] = useState("Thh:mm:ss.s");
   const times = Array.from(new Array(10), (_, i) => i + 8);
   const defaultTime = "00:00:00:000";
-  const dateFormat = (date) => yyyyMMddFormat(date);
+  const dateFormat = (date: Date) => yyyyMMddFormat(date);
 
   const onToggleCalendar = () => {
     setIsCalendarOpen(!isCalendarOpen);
     setIsTimeOpen(false);
   };
 
-  const onToggleTime = (ev) => {
+  const onToggleTime = () => {
     setIsTimeOpen(!isTimeOpen);
     setIsCalendarOpen(false);
   };
 
-  const onSelectCalendar = (newValueDate) => {
+  const onSelectCalendar = (newValueDate: Date) => {
     const newValue = dateFormat(newValueDate);
     setValueDate(newValue);
     setIsCalendarOpen(!isCalendarOpen);
@@ -44,8 +44,7 @@ export const DateTimePicker = () => {
     }
   };
 
-  const onSelectTime = (ev) => {
-    setValueTime(ev.target.value);
+  const onSelectTime: DropdownProps["onSelect"] = () => {
     setIsTimeOpen(!isTimeOpen);
   };
 
@@ -53,13 +52,21 @@ export const DateTimePicker = () => {
   //     setNewValue({ inputValue: newValue });
   // };
 
-  const timeOptions = times.map((time) => (
-    <DropdownItem key={time} component="button" value={`${time}:00:00:000`}>
-      {`${time}:00`}
-    </DropdownItem>
-  ));
+  const timeOptions = times.map((time) => {
+    const timeString = `${time}:00`;
+    return (
+      <DropdownItem
+        key={time}
+        component="button"
+        value={`${time}:00:00:000`}
+        onClick={() => setValueTime(timeString)}
+      >
+        {timeString}
+      </DropdownItem>
+    );
+  });
   const calendar = (
-    <CalendarMonth date={valueDate} onChange={onSelectCalendar} />
+    <CalendarMonth date={new Date(valueDate)} onChange={onSelectCalendar} />
   );
   const time = (
     <Dropdown

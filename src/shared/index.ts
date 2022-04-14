@@ -5,6 +5,7 @@ export * from "./FormatDate";
 export * from "./Loading";
 export * from "./PageNotFound";
 export * from "./ModalProvider";
+export * from "./RefreshButton";
 export * from "./RemoveButton";
 export * from "./FormGroupWithPopover";
 export * from "./Pagination";
