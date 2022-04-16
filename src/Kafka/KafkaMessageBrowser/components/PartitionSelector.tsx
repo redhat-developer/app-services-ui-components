@@ -1,13 +1,16 @@
-import { useState, VoidFunctionComponent } from "react";
+import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
 import {
   InputGroup,
   InputGroupText,
   InputGroupTextVariant,
   Select,
   SelectOption,
+  SelectProps,
   SelectVariant,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
+
+const MAX_OPTIONS = 20;
 
 export type PartitionSelectorProps = {
   value: number | undefined;
@@ -22,6 +25,55 @@ export const PartitionSelector: VoidFunctionComponent<
   const toggleOpen = (isOpen: boolean) => setIsOpen(isOpen);
   const titleId = "partition-selector";
 
+  const handleChange = useCallback(
+    (value: number | undefined) => {
+      onChange(value);
+      setIsOpen(false);
+    },
+    [onChange]
+  );
+
+  const allPartitions = useMemo(() => {
+    return new Array(partitions).fill(0).map((_, index) => index.toString());
+  }, [partitions]);
+
+  const makeOptions = useCallback(
+    (values: string[]) => {
+      const options = values
+        .slice(0, MAX_OPTIONS)
+        .map((v) => <SelectOption key={v} value={v} />);
+      const hiddenOptionsCount = values.length - options.length;
+      return hiddenOptionsCount
+        ? [
+            ...options,
+            <SelectOption
+              isDisabled={true}
+              description={t("partitions_hidden", {
+                count: hiddenOptionsCount,
+              })}
+            />,
+          ]
+        : options;
+    },
+    [t]
+  );
+
+  const options = useMemo(() => {
+    return makeOptions(allPartitions);
+  }, [allPartitions, makeOptions]);
+
+  const handleFilter: SelectProps["onFilter"] = useCallback(
+    (_, filter) => {
+      if (filter !== "") {
+        return makeOptions(
+          allPartitions.filter((partition) => partition.includes(filter))
+        );
+      }
+      return options;
+    },
+    [allPartitions, makeOptions, options]
+  );
+
   return (
     <InputGroup>
       <InputGroupText className="pf-c-content">Partition</InputGroupText>
@@ -33,17 +85,17 @@ export const PartitionSelector: VoidFunctionComponent<
           variant={SelectVariant.typeahead}
           typeAheadAriaLabel={t("select_partition_typeahead")}
           onToggle={toggleOpen}
-          onSelect={(_, value) => onChange(parseInt(value as string, 10))}
+          onSelect={(_, value) => handleChange(parseInt(value as string, 10))}
           selections={[value]}
           isOpen={isOpen}
           aria-labelledby={titleId}
           maxHeight={200}
-          width={110}
-          placeholderText={"0"}
+          width={150}
+          onClear={() => handleChange(undefined)}
+          onFilter={handleFilter}
+          placeholderText={t("partition_placeholder")}
         >
-          {new Array(partitions).fill(0).map((_, index) => (
-            <SelectOption key={index} value={index} />
-          ))}
+          {options}
         </Select>
       </div>
       <InputGroupText

@@ -38,7 +38,7 @@ Example.args = {
             value: "{'user': 'user2', 'message': 'message2'}",
           },
         ],
-        partitions: 19,
+        partitions: 10000,
       },
       500
     ),
