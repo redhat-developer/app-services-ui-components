@@ -1,4 +1,3 @@
-import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
 import {
   InputGroup,
   InputGroupText,
@@ -8,18 +7,20 @@ import {
   SelectProps,
   SelectVariant,
 } from "@patternfly/react-core";
+import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 const MAX_OPTIONS = 20;
 
 export type PartitionSelectorProps = {
-  value: number | undefined;
+  value: number;
   partitions: number;
-  onChange: (value: number | undefined) => void;
+  isDisabled: boolean;
+  onChange: (value: number) => void;
 };
 export const PartitionSelector: VoidFunctionComponent<
   PartitionSelectorProps
-> = ({ value, partitions, onChange }) => {
+> = ({ value, partitions, isDisabled, onChange }) => {
   const { t } = useTranslation("message-browser");
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpen = (isOpen: boolean) => setIsOpen(isOpen);
@@ -27,7 +28,9 @@ export const PartitionSelector: VoidFunctionComponent<
 
   const handleChange = useCallback(
     (value: number | undefined) => {
-      onChange(value);
+      if (value && Number.isInteger(value)) {
+        onChange(value);
+      }
       setIsOpen(false);
     },
     [onChange]
@@ -47,6 +50,7 @@ export const PartitionSelector: VoidFunctionComponent<
         ? [
             ...options,
             <SelectOption
+              key={"more-info"}
               isDisabled={true}
               description={t("partitions_hidden", {
                 count: hiddenOptionsCount,
@@ -86,14 +90,14 @@ export const PartitionSelector: VoidFunctionComponent<
           typeAheadAriaLabel={t("select_partition_typeahead")}
           onToggle={toggleOpen}
           onSelect={(_, value) => handleChange(parseInt(value as string, 10))}
-          selections={[value]}
+          selections={[`${value}`]}
           isOpen={isOpen}
           aria-labelledby={titleId}
           maxHeight={200}
           width={150}
-          onClear={() => handleChange(undefined)}
           onFilter={handleFilter}
-          placeholderText={t("partition_placeholder")}
+          isInputValuePersisted={false}
+          isDisabled={isDisabled}
         >
           {options}
         </Select>

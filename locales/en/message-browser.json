@@ -1,16 +1,33 @@
 {
-  "columns": {
-    "header": "Header",
+  "field": {
+    "epoch": "Epoch timestamp",
+    "headers": "Headers",
     "key": "Key",
     "offset": "Offset",
     "partition": "Partition",
+    "size": "Size",
     "timestamp": "Timestamp",
     "value": "Value"
   },
+  "filter": {
+    "epoch": "Epoch timestamp",
+    "epoch_aria_label": "Select epoch timestamp",
+    "epoch_placeholder": "Select epoch timestamp",
+    "latest": "Select latest",
+    "offset": "$t(field.offset)",
+    "offset_aria_label": "Select offset",
+    "offset_placeholder": "Select offset",
+    "timestamp": "$t(field.timestamp)",
+    "timestamp_aria_label": "Select timestamp",
+    "timestamp_toggle_calendar_menu": "Toggle calendar menu",
+    "timestamp_toggle_time_menu": "Toggle time menu"
+  },
+  "message": "Message",
   "offset": "Offset",
+  "partition_placeholder": "All",
   "partitions_hidden_one": "And one more partition",
   "partitions_hidden_other": "And {{count}} more partitions",
-  "partition_placeholder": "All",
   "select_partition_of_count": "of {{partitions}}",
-  "select_partition_typeahead": "Select partition value"
+  "select_partition_typeahead": "Select partition value",
+  "show_more": "Show more"
 }

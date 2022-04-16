@@ -48,13 +48,13 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
     renderHeader={({ column, Th, key }) => (
       <Th key={key}>{columnLabels[column]}</Th>
     )}
-    renderCell={({ column, rowData, colIndex, Td, key }) => (
+    renderCell={({ column, row, colIndex, Td, key }) => (
       <Td key={key} dataLabel={columnLabels[column]}>
-        {rowData[colIndex]}
+        {row[colIndex]}
       </Td>
     )}
-    renderActions={({ rowData, ActionsColumn }) =>
-      args.hasActions && <ActionsColumn items={defaultActions(rowData)} />
+    renderActions={({ row, ActionsColumn }) =>
+      args.hasActions && <ActionsColumn items={defaultActions(row)} />
     }
     isRowSelected={
       args.selectedRow

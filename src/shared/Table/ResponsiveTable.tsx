@@ -1,9 +1,12 @@
 import {
   forwardRef,
+  FunctionComponent,
+  memo,
   PropsWithChildren,
   ReactElement,
   useCallback,
   useMemo,
+  useState,
   VoidFunctionComponent,
 } from "react";
 import {
@@ -35,12 +38,12 @@ export type RenderCellCb<TRow> = (props: {
   column: string;
   colIndex: number;
   rowIndex: number;
-  rowData: TRow;
+  row: TRow;
 }) => ReactElement<ResponsiveTdProps>;
 
 export type RenderActionsCb<TRow> = (props: {
   ActionsColumn: typeof ActionsColumn;
-  rowData: TRow;
+  row: TRow;
   rowIndex: number;
 }) => ReactElement<ActionsColumnProps> | undefined;
 
@@ -74,7 +77,23 @@ export const ResponsiveTable = <TRow,>({
   onRowClick,
   children,
 }: PropsWithChildren<ResponsiveTableProps<TRow>>) => {
-  const { ref, width = 1 } = useResizeObserver();
+  const [width, setWidth] = useState(1000);
+  let animationHandle: number;
+  /**
+   * resize the columns on a rAF loop to render the table at 60fps
+   * @param width
+   */
+  const onResize = ({ width }: { width: number | undefined }) => {
+    if (animationHandle) {
+      cancelAnimationFrame(animationHandle);
+    }
+    if (width) {
+      animationHandle = requestAnimationFrame(() => {
+        setWidth(width);
+      });
+    }
+  };
+  const { ref } = useResizeObserver({ onResize });
   const showColumns = width >= 576;
 
   const canColumnBeHidden = useCallback(
@@ -135,58 +154,9 @@ export const ResponsiveTable = <TRow,>({
     },
     [canColumnBeHidden, minimumColumnWidth, width]
   );
-
-  const makeRow = useCallback(
-    (row: TRow, rowIndex: number) => {
-      const isDeleted = isRowDeleted && isRowDeleted({ row, rowIndex });
-      return (
-        <Tr
-          key={`row_${rowIndex}`}
-          isHoverable={!isDeleted && onRowClick !== undefined}
-          onRowClick={() =>
-            !isDeleted && onRowClick && onRowClick({ row, rowIndex })
-          }
-          isRowSelected={isRowSelected && isRowSelected({ row, rowIndex })}
-          className={
-            isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined
-          }
-        >
-          {columns.map((column, colIndex) => {
-            const Td = getTd(colIndex);
-            return renderCell({
-              Td,
-              key: `row_${rowIndex}_cell_${column}`,
-              column,
-              colIndex,
-              rowIndex,
-              rowData: row,
-            });
-          })}
-          {renderActions && !isDeleted && (
-            <ResponsiveTd
-              position={columns.length}
-              tableWidth={width}
-              columnWidth={minimumColumnWidth}
-              canHide={false}
-              isActionCell={true}
-            >
-              {renderActions({ rowIndex, rowData: row, ActionsColumn })}
-            </ResponsiveTd>
-          )}
-        </Tr>
-      );
-    },
-    [
-      columns,
-      getTd,
-      isRowDeleted,
-      isRowSelected,
-      minimumColumnWidth,
-      onRowClick,
-      renderActions,
-      renderCell,
-      width,
-    ]
+  const TdList = useMemo(
+    () => columns.map((_, index) => getTd(index)),
+    [columns, getTd]
   );
 
   return (
@@ -207,7 +177,48 @@ export const ResponsiveTable = <TRow,>({
             getTd={getTd}
           />
         )}
-        {data?.map(makeRow)}
+        {data?.map((row, rowIndex) => {
+          const deleted =
+            isRowDeleted !== undefined && isRowDeleted({ row: row, rowIndex });
+          const selected =
+            isRowSelected !== undefined &&
+            isRowSelected({ row: row, rowIndex });
+
+          const onClick = () =>
+            !deleted && onRowClick && onRowClick({ row, rowIndex });
+          const cells = columns.map((column, colIndex) => {
+            return renderCell({
+              Td: TdList[colIndex],
+              key: `row_${rowIndex}_cell_${column}`,
+              column,
+              colIndex,
+              rowIndex,
+              row,
+            });
+          });
+          const action = !deleted && renderActions && (
+            <ResponsiveTd
+              position={columns.length}
+              tableWidth={width}
+              columnWidth={minimumColumnWidth}
+              canHide={false}
+              isActionCell={true}
+            >
+              {renderActions({ rowIndex, row, ActionsColumn })}
+            </ResponsiveTd>
+          );
+          return (
+            <DeletableRow
+              key={`row_${rowIndex}`}
+              isDeleted={deleted}
+              isSelected={selected}
+              onClick={onClick}
+            >
+              {cells}
+              {action}
+            </DeletableRow>
+          );
+        })}
         {data?.length === 0 && (
           <Tr>
             <Td colSpan={columns.length}>{children}</Td>
@@ -224,30 +235,33 @@ export type ResponsiveThProps = {
   columnWidth: number;
   canHide: boolean;
 } & Omit<ThProps, "ref">;
-export const ResponsiveTh = forwardRef<
-  HTMLTableHeaderCellElement,
-  ResponsiveThProps
->((props, ref) => {
-  const {
-    tableWidth,
-    columnWidth,
-    position,
-    canHide,
-    className = "",
-    children,
-    ...otherProps
-  } = props;
-  const responsiveClass =
-    canHide && tableWidth < columnWidth * (position + 1)
-      ? "pf-m-hidden"
-      : "pf-m-visible";
+export const ResponsiveTh = memo(
+  forwardRef<HTMLTableHeaderCellElement, ResponsiveThProps>((props, ref) => {
+    const {
+      tableWidth,
+      columnWidth,
+      position,
+      canHide,
+      className = "",
+      children,
+      ...otherProps
+    } = props;
+    const responsiveClass =
+      canHide && tableWidth < columnWidth * (position + 1)
+        ? "pf-m-hidden"
+        : "pf-m-visible";
 
-  return (
-    <Th ref={ref} className={`${responsiveClass} ${className}`} {...otherProps}>
-      {children}
-    </Th>
-  );
-});
+    return (
+      <Th
+        ref={ref}
+        className={`${responsiveClass} ${className}`}
+        {...otherProps}
+      >
+        {children}
+      </Th>
+    );
+  })
+);
 ResponsiveTh.displayName = "ResponsiveTh";
 
 export type ResponsiveTdProps = {
@@ -256,31 +270,55 @@ export type ResponsiveTdProps = {
   columnWidth: number;
   canHide: boolean;
 } & Omit<TdProps, "ref">;
-export const ResponsiveTd = forwardRef<
-  HTMLTableDataCellElement,
-  ResponsiveTdProps
->((props, ref) => {
-  const {
-    tableWidth,
-    columnWidth,
-    position,
-    canHide,
-    className = "",
-    children,
-    ...otherProps
-  } = props;
-  const responsiveClass =
-    canHide && tableWidth < columnWidth * (position + 1)
-      ? "pf-m-hidden"
-      : "pf-m-visible";
+export const ResponsiveTd = memo(
+  forwardRef<HTMLTableDataCellElement, ResponsiveTdProps>((props, ref) => {
+    const {
+      tableWidth,
+      columnWidth,
+      position,
+      canHide,
+      className = "",
+      children,
+      ...otherProps
+    } = props;
+    const responsiveClass =
+      canHide && tableWidth < columnWidth * (position + 1)
+        ? "pf-m-hidden"
+        : "pf-m-visible";
 
-  return (
-    <Td ref={ref} className={`${responsiveClass} ${className}`} {...otherProps}>
-      {children}
-    </Td>
-  );
-});
+    return (
+      <Td
+        ref={ref}
+        className={`${responsiveClass} ${className}`}
+        {...otherProps}
+      >
+        {children}
+      </Td>
+    );
+  })
+);
 ResponsiveTd.displayName = "ResponsiveTd";
+
+export type DeletableRowProps = {
+  isSelected: boolean;
+  isDeleted: boolean;
+  onClick?: () => void;
+};
+export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
+  ({ isDeleted, isSelected, onClick, children }) => {
+    return (
+      <Tr
+        isHoverable={!isDeleted && onClick !== undefined}
+        onRowClick={onClick}
+        isRowSelected={isSelected}
+        className={isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined}
+      >
+        {children}
+      </Tr>
+    );
+  }
+);
+DeletableRow.displayName = "DeletableRow";
 
 const TableSkeleton: VoidFunctionComponent<{
   columns: number;

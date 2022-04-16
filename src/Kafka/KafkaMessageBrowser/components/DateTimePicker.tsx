@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Button,
   CalendarMonth,
@@ -9,20 +8,32 @@ import {
   InputGroup,
   Popover,
   TextInput,
-  yyyyMMddFormat,
 } from "@patternfly/react-core";
 import OutlinedCalendarAltIcon from "@patternfly/react-icons/dist/esm/icons/outlined-calendar-alt-icon";
 import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
+import { format, isFuture, setHours } from "date-fns";
+import { useState, VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import "./DateTimePicker.css";
 
-export const DateTimePicker = () => {
+export type DateTimePickerProps = {
+  isDisabled: boolean;
+  value: number | undefined;
+  dateTimeFormat?: string;
+  onChange: (value: Date) => void;
+};
+export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
+  isDisabled,
+  value,
+  dateTimeFormat = "yyyy-MM-d'T'HH:mm:ss.SSS",
+  onChange,
+}) => {
+  const { t } = useTranslation("message-browser");
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [isTimeOpen, setIsTimeOpen] = useState(false);
-  const [valueDate, setValueDate] = useState("YYYY-MM-DD");
-  const [valueTime, setValueTime] = useState("Thh:mm:ss.s");
   const times = Array.from(new Array(10), (_, i) => i + 8);
-  const defaultTime = "00:00:00:000";
-  const dateFormat = (date: Date) => yyyyMMddFormat(date);
+
+  const date = new Date(value || Date.now());
 
   const onToggleCalendar = () => {
     setIsCalendarOpen(!isCalendarOpen);
@@ -35,16 +46,12 @@ export const DateTimePicker = () => {
   };
 
   const onSelectCalendar = (newValueDate: Date) => {
-    const newValue = dateFormat(newValueDate);
-    setValueDate(newValue);
+    onChange(newValueDate);
     setIsCalendarOpen(!isCalendarOpen);
-    // setting default time when it is not picked
-    if (valueTime === "Thh:mm:ss.s") {
-      setValueTime(defaultTime);
-    }
   };
 
   const onSelectTime: DropdownProps["onSelect"] = () => {
+    //onChange();
     setIsTimeOpen(!isTimeOpen);
   };
 
@@ -59,47 +66,27 @@ export const DateTimePicker = () => {
         key={time}
         component="button"
         value={`${time}:00:00:000`}
-        onClick={() => setValueTime(timeString)}
+        onClick={() => {
+          const newDate = setHours(date, time);
+          onChange(newDate);
+        }}
       >
         {timeString}
       </DropdownItem>
     );
   });
-  const calendar = (
-    <CalendarMonth date={new Date(valueDate)} onChange={onSelectCalendar} />
-  );
-  const time = (
-    <Dropdown
-      onSelect={onSelectTime}
-      toggle={
-        <DropdownToggle
-          aria-label="Toggle the time picker menu"
-          toggleIndicator={null}
-          onToggle={onToggleTime}
-          style={{ padding: "6px 16px" }}
-        >
-          <OutlinedClockIcon />
-        </DropdownToggle>
-      }
-      isOpen={isTimeOpen}
-      dropdownItems={timeOptions}
-    />
-  );
-  const calendarButton = (
-    <Button
-      variant="control"
-      aria-label="Toggle the calendar"
-      onClick={onToggleCalendar}
-    >
-      <OutlinedCalendarAltIcon />
-    </Button>
-  );
 
   return (
     <div style={{ width: "325px" }}>
       <Popover
         position="bottom"
-        bodyContent={calendar}
+        bodyContent={
+          <CalendarMonth
+            date={value ? date : undefined}
+            onChange={onSelectCalendar}
+            validators={[(date) => !isFuture(date)]}
+          />
+        }
         showClose={false}
         isVisible={isCalendarOpen}
         hasNoPadding
@@ -107,20 +94,37 @@ export const DateTimePicker = () => {
       >
         <InputGroup>
           <TextInput
-            className="pf-c-form-control custom-new"
-            type="datetime-local"
+            type="text"
             id="date-time"
-            aria-label="date and time picker"
-            // placeholder="YYYY-MM-DDThh:mm:ss.s"
-            // onChange={this.onInputChange}
-            placeholder={valueDate + "T" + valueTime}
-            // onClear={() => {
-            //     this.onInputChange('');
-            // }}
-            // isReadOnly
+            aria-label={t("filter.timestamp_aria_label")}
+            placeholder="YYYY-MM-DDThh:mm:ss.s"
+            value={value ? format(value, dateTimeFormat) : ""}
+            isDisabled={true}
           />
-          {calendarButton}
-          {time}
+          <Button
+            isDisabled={isDisabled}
+            variant="control"
+            aria-label={t("filter.timestamp_toggle_calendar_menu")}
+            onClick={onToggleCalendar}
+          >
+            <OutlinedCalendarAltIcon />
+          </Button>
+          <Dropdown
+            onSelect={onSelectTime}
+            toggle={
+              <DropdownToggle
+                isDisabled={isDisabled}
+                aria-label={t("filter.timestamp_toggle_time_menu")}
+                toggleIndicator={null}
+                onToggle={onToggleTime}
+                style={{ padding: "6px 16px" }}
+              >
+                <OutlinedClockIcon />
+              </DropdownToggle>
+            }
+            isOpen={isTimeOpen}
+            dropdownItems={timeOptions}
+          />
         </InputGroup>
       </Popover>
     </div>

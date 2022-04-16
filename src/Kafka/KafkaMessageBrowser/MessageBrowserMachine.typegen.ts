@@ -9,6 +9,8 @@ export interface Typegen0 {
     setTimestamp: "setTimestamp";
     setOffset: "setOffset";
     setLatest: "setLatest";
+    selectMessage: "selectMessage";
+    deselectMessage: "deselectMessage" | "";
   };
   internalEvents: {
     "": { type: "" };
@@ -26,16 +28,11 @@ export interface Typegen0 {
     delays: never;
   };
   eventsCausingServices: {
-    api:
-      | "refresh"
-      | "setPartition"
-      | "setEpoch"
-      | "setTimestamp"
-      | "setOffset"
-      | "setLatest";
+    api: "refresh";
   };
   eventsCausingGuards: {
     noMessages: "";
+    selectedMessageNotAvailable: "";
   };
   eventsCausingDelays: {};
   matchesStates:
@@ -44,6 +41,9 @@ export interface Typegen0 {
     | "noData"
     | "error"
     | "ready"
-    | "refreshing";
-  tags: never;
+    | "ready.pristine"
+    | "ready.dirty"
+    | "refreshing"
+    | { ready?: "pristine" | "dirty" };
+  tags: "dirty";
 }

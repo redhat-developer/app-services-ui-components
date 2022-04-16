@@ -1,6 +1,5 @@
 import {
   differenceInDays,
-  differenceInMonths,
   formatDistanceToNow,
   formatDuration,
   intervalToDuration,
@@ -27,6 +26,8 @@ const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
       }
     );
   },
+  long: (date) => format(date, "Pp"),
+  epoch: (date) => `${Math.floor(date.getTime() / 1000)}`,
 };
 
 type FormatDateProps = {
