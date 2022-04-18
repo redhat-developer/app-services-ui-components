@@ -1,6 +1,7 @@
 import {
   Button,
   ButtonVariant,
+  Flex,
   Grid,
   GridItem,
   Stack,
@@ -29,16 +30,27 @@ export const DataSciencePage: FunctionComponent = () => {
         tagLine={t("datascienceoverview:heroTagline")}
         description={t("datascienceoverview:heroDescription")}
         cta={
-          <Button
-            data-testid="hero-buttonLearnMore"
-            variant={ButtonVariant.secondary}
-            component="a"
-            href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
-            target="_blank"
-          >
-            {t("datascienceoverview:heroCallToActionButton")}{" "}
-            <ExternalLinkAltIcon className="pf-u-ml-sm" />
-          </Button>
+          <Flex>
+            <Button
+              data-testid="hero-buttonTryIt"
+              ouiaId="button-rhods-tryit"
+              variant={ButtonVariant.secondary}
+              component="a"
+              target="_blank"
+            >
+              {t("datascienceoverview:heroTryItButton")}
+            </Button>
+            <Button
+              data-testid="hero-buttonLearnMore"
+              variant={ButtonVariant.link}
+              component="a"
+              href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
+              target="_blank"
+            >
+              {t("datascienceoverview:heroCallToActionButton")}{" "}
+              <ExternalLinkAltIcon className="pf-u-ml-sm" />
+            </Button>
+          </Flex>
         }
         heroImage={RhodsMlTechnology}
         heroImageSize={478}

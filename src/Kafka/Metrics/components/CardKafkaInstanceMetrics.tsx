@@ -92,7 +92,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
               <>
                 <ChartTitle
                   title={t("used_disk_space")}
-                  helperText={"used_disk_space_help_text"}
+                  helperText={t("used_disk_space_help_text")}
                 />
                 <CardBody>
                   <ChartLinearWithOptionalLimit
