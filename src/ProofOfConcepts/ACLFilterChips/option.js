@@ -6,6 +6,8 @@ import TransactionalIdLabel from "./TrasactionalIdLabel";
 import KafkaInstanceLabel from "./KafkaInstanceLabel";
 import { Chip, ChipGroup, Text } from "@patternfly/react-core";
 
+// TODO
+// Clicking on exit 'x' button for entire chip group doesn't remove the chip group as expected.
 class Chips extends React.Component {
   constructor(props) {
     super(props);
@@ -128,10 +130,7 @@ class Chips extends React.Component {
           </Chip>
 
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup
-              // className="lightgrey"
-              categoryName={<KafkaInstanceLabel />}
-            >
+            <ChipGroup categoryName={<KafkaInstanceLabel />}>
               {chipsSet3.map((currentChip) => (
                 <Chip
                   key={currentChip}
@@ -144,10 +143,7 @@ class Chips extends React.Component {
           </Chip>
 
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup
-              // className="lightgreen"
-              categoryName={<ConsumerGroupLabel />}
-            >
+            <ChipGroup categoryName={<ConsumerGroupLabel />}>
               {chipsSet4.map((currentChip) => (
                 <Chip
                   key={currentChip}

@@ -36,8 +36,27 @@
   --pf-c-label--BackgroundColor: var(--pf-global--palette--orange-400);
 }
 
+.box {
+  inline-size: 750px;
+  padding-left: 1rem;
+}
+
 .child {
   display: inline-block;
+}
+
+.myTextColor span {
+  color: rgb(234, 0, 255);
+}
+
+.pf-c-chip-group.bkg-color {
+  background-color: var(--pf-c-label--BackgroundColor);
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-100);
+}
+
+.pf-c-chip-group__close {
+  display: flex;
+  align-self: center;
 }
 
 .pf-c-chip.custom-c-chip {
@@ -53,4 +72,13 @@
 
 .pf-c-chip.custom-c-chip {
   --pf-c-chip__text--MaxWidth: auto;
+}
+
+.pf-c-chip-group.bar {
+  --pf-c-chip-group--m-category--BackgroundColor: darkgray;
+}
+
+.pf-m-overflow:not(.pf-c-chip__text *) {
+  background-color: white !important;
+  line-height: 2.05;
 }
