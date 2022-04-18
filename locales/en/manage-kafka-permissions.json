@@ -53,14 +53,14 @@
   "resource_type_operation_filter_placeholder": "Filter by resource type operation",
   "resourcePrefix": {
     "create_text": "Use",
+    "invalid_consumer_group": "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - ).",
+    "invalid_length": "Cannot exceed 32 characters",
+    "invalid_topic": "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
+    "invalid_topic_length": "A topic name must contain at least 3 periods (...) if periods are the only characters used",
+    "name_aria_label": "{{value}} name",
     "placeholder_text_is": "Enter name",
     "placeholder_text_starts_with": "Enter prefix",
-    "name_aria_label": "{{value}} name",
-    "prefix_aria_label": "{{value}} prefix",
-    "invalid_topic_length": "A topic name must contain at least 3 periods (...) if periods are the only characters used",
-    "invalid_topic": "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
-    "invalid_consumer_group": "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - ).",
-    "invalid_length": "Cannot exceed 32 characters"
+    "prefix_aria_label": "{{value}} prefix"
   },
   "resourceTypes": {
     "consumer_group": "Consumer group",
