@@ -1,10 +1,10 @@
 import { composeStories } from "@storybook/testing-react";
-import * as stories from "./ResourcePrefix.stories";
+import * as stories from "./ResourceName.stories";
 import { userEvent } from "@storybook/testing-library";
 import { render, waitForI18n, waitForPopper } from "../../../test-utils";
 
 const {
-  InvalidTopicLength,
+  InvalidTopicName,
   InvalidConsumerGroupCharacters,
   InvalidLength,
   InvalidTopicCharacters,
@@ -13,7 +13,7 @@ const {
 
 describe("Resource Prefix", () => {
   it("should render a select with validation message for invalid topic length", async () => {
-    const comp = render(<InvalidTopicLength />);
+    const comp = render(<InvalidTopicName />);
     await waitForI18n(comp);
     const select = comp.getByPlaceholderText("Enter name");
     userEvent.click(select);

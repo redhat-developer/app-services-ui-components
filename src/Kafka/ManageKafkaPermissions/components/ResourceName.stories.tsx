@@ -1,11 +1,11 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { ResourcePrefix } from "./ResourcePrefix";
+import { ResourceName } from "./ResourceName";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";
 import { fakeApi } from "../../../shared/storiesHelpers";
 
 export default {
-  component: ResourcePrefix,
+  component: ResourceName,
   args: {
     value: undefined,
     onFetchOptions: (filter) =>
@@ -19,25 +19,25 @@ export default {
     resourcePrefixRule: "is",
     resourceType: "topic",
   },
-} as ComponentMeta<typeof ResourcePrefix>;
+} as ComponentMeta<typeof ResourceName>;
 
-const Template: ComponentStory<typeof ResourcePrefix> = (args) => (
+const Template: ComponentStory<typeof ResourceName> = (args) => (
   <div style={{ maxWidth: 200 }}>
     <Form>
-      <ResourcePrefix {...args} />
+      <ResourceName {...args} />
     </Form>
   </div>
 );
 
-export const InvalidTopicLength = Template.bind({});
-InvalidTopicLength.args = {};
+export const InvalidTopicName = Template.bind({});
+InvalidTopicName.args = {};
 
-InvalidTopicLength.play = async ({ canvasElement }) => {
+InvalidTopicName.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
 };
 
-InvalidTopicLength.parameters = {
+InvalidTopicName.parameters = {
   docs: {
     description: {
       story: `A user types a value that is either '.' or '..' while selecting resource for a 'Topic' that has a resource prefix condition 'Is' `,

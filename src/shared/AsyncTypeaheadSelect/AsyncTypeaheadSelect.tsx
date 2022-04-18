@@ -119,6 +119,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       fieldId={id}
     >
       <Select
+        aria-describedby={id}
         id={id}
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel={ariaLabel}

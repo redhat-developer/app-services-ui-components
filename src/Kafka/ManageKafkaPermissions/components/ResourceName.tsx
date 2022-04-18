@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { ResourceType, ResourceTypeValue } from "./ResourceType";
+import { ResourceTypeValue } from "./ResourceType";
 import { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 import { AsyncTypeaheadSelect } from "../../../shared";
 
-type ResourcePrefixProps = {
+type ResourceNameProps = {
   value: string | undefined;
   onChangeValue: (value: string | undefined) => void;
   onCreate: (value: string) => void;
@@ -13,7 +13,7 @@ type ResourcePrefixProps = {
   resourcePrefixRule: ResourcePrefixRuleValue;
 };
 
-export const ResourcePrefix: React.VFC<ResourcePrefixProps> = ({
+export const ResourceName: React.VFC<ResourceNameProps> = ({
   value,
   onChangeValue,
   submitted,
@@ -67,11 +67,11 @@ export const ResourcePrefix: React.VFC<ResourcePrefixProps> = ({
 
   return (
     <AsyncTypeaheadSelect
-      id="Resource prefix typeahead"
+      id="resource-name"
       ariaLabel={
-        ResourceType === undefined
-          ? t("resourcePrefix.prefix_aria_label")
-          : t("resourcePrefix.select_prefix_aria_label", { resourceType })
+        resourcePrefixRule === "is"
+          ? t("resourcePrefix.name_aria_label", { resourceType })
+          : t("resourcePrefix.prefix_aria_label", { resourceType })
       }
       value={value}
       placeholderText={
