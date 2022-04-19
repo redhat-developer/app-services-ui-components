@@ -72,7 +72,7 @@ export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
     >
       <Select
         id={"resource-operation-select"}
-        aria-label={t("operations.aria_label")}
+        aria-label={t("operations.aria_label", value)}
         data-testid="acls-resource-operation-select"
         variant={SelectVariant.single}
         onToggle={onToggle}

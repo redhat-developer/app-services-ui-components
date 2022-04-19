@@ -16,7 +16,7 @@
     "all": "All",
     "alter": "Alter",
     "alter_configs": "Alter configs",
-    "aria_label": "Resource type operation value",
+    "aria_label": "Resource operation {{value}}",
     "create": "Create",
     "delete": "Delete",
     "describe": "Describe",
@@ -25,8 +25,8 @@
     "read": "Read",
     "write": "Write"
   },
-  "pattern_type_literal": "",
-  "pattern_type_prefixed": "",
+  "pattern_type_literal": "Is",
+  "pattern_type_prefixed": "Starts with",
   "permissions": {
     "allow": "Allow",
     "aria_label": "Resource permission {{value}}",
@@ -56,11 +56,11 @@
     "invalid_consumer_group": "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - ).",
     "invalid_length": "Cannot exceed 32 characters",
     "invalid_topic": "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
-    "invalid_topic_length": "A topic name must contain at least 3 periods (...) if periods are the only characters used",
-    "name_aria_label": "{{value}} name",
-    "placeholder_text_is": "Enter name",
-    "placeholder_text_starts_with": "Enter prefix",
-    "prefix_aria_label": "{{value}} prefix"
+    "invalid_topic_name": "A topic name must contain at least 3 periods (...) if periods are the only characters used",
+    "aria_label_name_is": "{{value}} name",
+    "placeholder_name_is": "Enter name",
+    "placeholder_name_starts_with": "Enter prefix",
+    "aria_label_name_starts_with": "{{value}} prefix"
   },
   "resourceTypes": {
     "consumer_group": "Consumer group",

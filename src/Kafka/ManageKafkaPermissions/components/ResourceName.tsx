@@ -36,7 +36,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
       if (filter == "." || filter == "..")
         return {
           isValid: false,
-          message: t("resourcePrefix.invalid_topic_length"),
+          message: t("resourcePrefix.invalid_topic_name"),
         };
     }
     if (resourceType == "topic" && !regExp.test(filter))
@@ -70,14 +70,14 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
       id="resource-name"
       ariaLabel={
         resourcePrefixRule === "is"
-          ? t("resourcePrefix.name_aria_label", { resourceType })
-          : t("resourcePrefix.prefix_aria_label", { resourceType })
+          ? t("resourcePrefix.aria_label_name_is", { resourceType })
+          : t("resourcePrefix.aria_label_name_starts_with", { resourceType })
       }
       value={value}
       placeholderText={
         resourcePrefixRule === "is"
-          ? t("resourcePrefix.placeholder_text_is")
-          : t("resourcePrefix.placeholder_text_starts_with")
+          ? t("resourcePrefix.placeholder_name_is")
+          : t("resourcePrefix.placeholder_name_starts_with")
       }
       onChange={onChangeValue}
       onCreate={onCreate}
