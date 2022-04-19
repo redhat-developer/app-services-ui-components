@@ -17,7 +17,7 @@ const consumer: ConsumerRow[] = [
   },
   {
     groupId: "2",
-    topic: "test-topic",
+    topic: "test",
     partition: 1,
     offset: 3,
     logEndOffset: 1,
