@@ -25,6 +25,8 @@ import {
   LimitSelector,
   MessageDetails,
   MessageDetailsProps,
+  NoDataEmptyState,
+  NoResultsEmptyState,
   OffsetRange,
   PartitionSelector,
   UnknownValuePreview,
@@ -189,7 +191,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
     case isFirstLoad:
       return <Loading />;
     case isNoData:
-      return <>TODO: no data empty state</>;
+      return <NoDataEmptyState onRefresh={refresh} />;
     default:
       return (
         <Drawer isInline={true} isExpanded={selectedMessage !== undefined}>
@@ -330,7 +332,15 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                 setDefaultTab("value");
                 selectMessage(row);
               }}
-            />
+            >
+              <NoResultsEmptyState
+                onReset={() => {
+                  setLatest();
+                  setPartition(undefined);
+                  refresh();
+                }}
+              />
+            </ResponsiveTable>
           </DrawerContent>
         </Drawer>
       );

@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { userEvent, within } from "@storybook/testing-library";
 import { fakeApi } from "../../shared/storiesHelpers";
 import { KafkaMessageBrowser } from "./KafkaMessageBrowser";
 import { Message } from "./types";
@@ -21,13 +22,42 @@ InitialLoading.args = {
   getMessages: () => new Promise(() => false),
 };
 
-export const NoResults = Template.bind({});
-NoResults.args = {
+export const NoData = Template.bind({});
+NoData.args = {
   getMessages: () =>
     fakeApi<{ messages: Message[]; partitions: number }>(
       { messages: [], partitions: 0 },
-      100
+      500
     ),
+};
+
+export const NoMatch = Template.bind({});
+NoMatch.args = {
+  getMessages: (args) => {
+    return args.offset === undefined &&
+      args.partition === undefined &&
+      args.timestamp === undefined
+      ? sampleData(args)
+      : fakeApi<{ messages: Message[]; partitions: number }>(
+          { messages: [], partitions: 0 },
+          500
+        );
+  },
+};
+NoMatch.play = async ({ canvasElement }) => {
+  const container = within(canvasElement);
+  await userEvent.type(
+    await container.findByLabelText("Select partition value"),
+    "1337"
+  );
+  await userEvent.keyboard("[ArrowDown][Enter]");
+  await userEvent.click(await container.findByText("Select latest"));
+  await userEvent.click((await container.findAllByText("Offset"))[0]);
+  await userEvent.type(
+    await container.findByLabelText("Select offset"),
+    "1337"
+  );
+  await userEvent.click(await container.findByLabelText("Search"));
 };
 
 function sampleData(args) {

@@ -15,7 +15,7 @@
   "kafka": "Kafka",
   "owner": "Owner",
   "progress_stepper_current_step": "{{currentStep}} of {{total}} steps completed",
-  "refresh_button_label": "Search",
+  "refresh_button_label": "Refresh",
   "region": "Region",
   "required": "Required",
   "return_to_home_page": "Return to home page",

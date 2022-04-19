@@ -79,7 +79,11 @@ export const MessageBrowserMachine = createMachine(
       verifyMessages: {
         always: [{ cond: "noMessages", target: "noData" }, { target: "ready" }],
       },
-      noData: {},
+      noData: {
+        on: {
+          refresh: "initialLoading",
+        },
+      },
       error: {},
       ready: {
         initial: "pristine",
