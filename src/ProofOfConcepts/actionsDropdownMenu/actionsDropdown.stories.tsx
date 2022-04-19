@@ -1,10 +1,10 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-
+import { ActionsTable } from "./kebabDropdown";
 import { ActionsDropdown } from "./actionsDropdown";
 
 export default {
-  title: "Proof Of Concepts/ActionsDropdown ",
+  title: "Proof Of Concepts/Dropdown/ActionsDropdown ",
   component: ActionsDropdown,
   args: {},
 } as ComponentMeta<typeof ActionsDropdown>;
@@ -12,6 +12,11 @@ export default {
 const Template: ComponentStory<typeof ActionsDropdown> = (args) => (
   <ActionsDropdown {...args} />
 );
+export const ActionsMenu = Template.bind({});
+ActionsMenu.args = {};
 
-export const Story = Template.bind({});
-Story.args = {};
+const Template2: ComponentStory<typeof ActionsTable> = (args) => (
+  <ActionsTable {...args} />
+);
+export const KebabMenu = Template2.bind({});
+KebabMenu.args = {};
