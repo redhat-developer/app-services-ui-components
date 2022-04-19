@@ -1,5 +1,3 @@
-import { KafkaInstanceStatus } from "../../Kafka";
-import { IAction } from "@patternfly/react-table";
 import {
   Button,
   SearchInput,
@@ -7,8 +5,19 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from "@patternfly/react-core";
+import { IAction } from "@patternfly/react-table";
+import { KafkaInstanceStatus } from "../../Kafka";
 
-export const columnLabels: { [key: string]: string } = {
+export const columns = [
+  "name",
+  "owner",
+  "timeCreated",
+  "cloudProvider",
+  "region",
+  "status",
+] as const;
+
+export const columnLabels: { [key in typeof columns[number]]: string } = {
   name: "Name",
   owner: "Owner",
   timeCreated: "Time created",

@@ -29,5 +29,6 @@
   "partitions_hidden_other": "And {{count}} more partitions",
   "select_partition_of_count": "of {{partitions}}",
   "select_partition_typeahead": "Select partition value",
-  "show_more": "Show more"
+  "show_more": "Show more",
+  "table_aria_label": "Messages table"
 }

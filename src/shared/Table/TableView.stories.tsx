@@ -1,6 +1,3 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { actions } from "@storybook/addon-actions";
-import { DEFAULT_PERPAGE, TableView, TableViewProps } from "./TableView";
 import {
   Button,
   EmptyState,
@@ -13,20 +10,24 @@ import {
   ToolbarItem,
 } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
+import { actions } from "@storybook/addon-actions";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useMemo, VoidFunctionComponent } from "react";
 import {
   columnLabels,
+  columns,
   defaultActions,
   deletingSign,
   sampleData,
   SampleDataType,
   sampleToolbarWithFilter,
 } from "./storybookHelpers";
+import { DEFAULT_PERPAGE, TableView, TableViewProps } from "./TableView";
 
 const eventsFromNames = actions("onRowClick");
 
 const TableViewSampleType: VoidFunctionComponent<
-  TableViewProps<SampleDataType>
+  TableViewProps<SampleDataType, typeof columns[number]>
 > = (props) => <TableView {...props} />;
 
 export default {
@@ -58,7 +59,9 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
   const slicedData = useMemo(() => {
     if (data) {
       if (data.length > 0) {
-        return new Array(Math.min(perPage, itemCount - (page - 1) * perPage))
+        return new Array(
+          Math.min(perPage, (itemCount || 0) - (page - 1) * perPage)
+        )
           .fill(0)
           .map((_, index) => {
             return data[index % sampleData.length];
@@ -72,17 +75,17 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
     <TableView
       {...args}
       data={slicedData}
-      columns={Object.keys(columnLabels)}
+      columns={columns}
       renderHeader={({ column, Th, key }) => (
         <Th key={key}>{columnLabels[column]}</Th>
       )}
-      renderCell={({ column, rowData, colIndex, Td, key }) => (
+      renderCell={({ column, row, colIndex, Td, key }) => (
         <Td key={key} dataLabel={columnLabels[column]}>
-          {rowData[colIndex]}
+          {row[colIndex]}
         </Td>
       )}
-      renderActions={({ rowData, ActionsColumn }) => (
-        <ActionsColumn items={defaultActions(rowData)} />
+      renderActions={({ row, ActionsColumn }) => (
+        <ActionsColumn items={defaultActions(row)} />
       )}
       isRowSelected={
         args.selectedRow

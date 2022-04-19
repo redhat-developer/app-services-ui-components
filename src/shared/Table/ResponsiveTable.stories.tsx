@@ -1,6 +1,3 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { actions } from "@storybook/addon-actions";
-import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
 import {
   EmptyState,
   EmptyStateBody,
@@ -9,9 +6,13 @@ import {
   Title,
 } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
+import { actions } from "@storybook/addon-actions";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { VoidFunctionComponent } from "react";
+import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
 import {
   columnLabels,
+  columns,
   defaultActions,
   deletingSign,
   sampleData,
@@ -21,7 +22,7 @@ import {
 const eventsFromNames = actions("onRowClick");
 
 const ResponsiveTableSampleType: VoidFunctionComponent<
-  ResponsiveTableProps<SampleDataType>
+  ResponsiveTableProps<SampleDataType, typeof columns[number]>
 > = (props) => <ResponsiveTable {...props} />;
 
 export default {
@@ -30,7 +31,7 @@ export default {
     ariaLabel: "Table title",
     minimumColumnWidth: 250,
     data: sampleData,
-    columns: Object.keys(columnLabels),
+    columns,
     hasActions: true,
     isRowClickable: true,
     selectedRow: 3,

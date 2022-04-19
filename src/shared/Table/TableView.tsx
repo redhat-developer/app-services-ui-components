@@ -1,19 +1,19 @@
-import { PropsWithChildren, ReactNode } from "react";
 import { Toolbar, ToolbarContent, ToolbarGroup } from "@patternfly/react-core";
+import { PropsWithChildren, ReactNode } from "react";
 import { Pagination } from "../Pagination";
 import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
 
 export const DEFAULT_PERPAGE = 10;
 
-export type TableViewProps<TRow> = {
+export type TableViewProps<TRow, TCol> = {
   toolbarContent: ReactNode;
   itemCount: number | undefined;
   page: number;
   perPage?: number;
   onPageChange: (page: number, perPage: number) => void;
   onClearAllFilters?: () => void;
-} & ResponsiveTableProps<TRow>;
-export const TableView = <TRow,>({
+} & ResponsiveTableProps<TRow, TCol>;
+export const TableView = <TRow, TCol>({
   toolbarContent,
   itemCount,
   page,
@@ -21,7 +21,7 @@ export const TableView = <TRow,>({
   onPageChange,
   onClearAllFilters,
   ...tableProps
-}: PropsWithChildren<TableViewProps<TRow>>) => {
+}: PropsWithChildren<TableViewProps<TRow, TCol>>) => {
   const { data } = tableProps;
   const showPagination =
     data?.length !== 0 && itemCount && itemCount > DEFAULT_PERPAGE;

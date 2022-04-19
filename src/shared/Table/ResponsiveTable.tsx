@@ -1,14 +1,4 @@
-import {
-  forwardRef,
-  FunctionComponent,
-  memo,
-  PropsWithChildren,
-  ReactElement,
-  useCallback,
-  useMemo,
-  useState,
-  VoidFunctionComponent,
-} from "react";
+import { Skeleton } from "@patternfly/react-core";
 import {
   ActionsColumn,
   ActionsColumnProps,
@@ -21,40 +11,50 @@ import {
   ThProps,
   Tr,
 } from "@patternfly/react-table";
+import {
+  forwardRef,
+  FunctionComponent,
+  memo,
+  PropsWithChildren,
+  ReactElement,
+  useCallback,
+  useMemo,
+  useState,
+  VoidFunctionComponent,
+} from "react";
 import useResizeObserver from "use-resize-observer";
 import "./ResponsiveTable.css";
-import { Skeleton } from "@patternfly/react-core";
 
-export type RenderHeaderCb = (props: {
+export type RenderHeaderCb<TCol> = (props: {
   Th: typeof Th;
   key: string;
-  column: string;
+  column: TCol;
   colIndex: number;
 }) => ReactElement<ResponsiveThProps>;
 
-export type RenderCellCb<TRow> = (props: {
+export type RenderCellCb<TRow, TCol> = (props: {
   Td: typeof Td;
   key: string;
-  column: string;
+  column: TCol;
   colIndex: number;
   rowIndex: number;
   row: TRow;
 }) => ReactElement<ResponsiveTdProps>;
 
-export type RenderActionsCb<TRow> = (props: {
+export type RenderActionsCb = <TRow>(props: {
   ActionsColumn: typeof ActionsColumn;
   row: TRow;
   rowIndex: number;
 }) => ReactElement<ActionsColumnProps> | undefined;
 
-export type ResponsiveTableProps<TRow> = {
+export type ResponsiveTableProps<TRow, TCol> = {
   ariaLabel: string;
   minimumColumnWidth?: number;
-  columns: readonly string[];
-  data: readonly TRow[] | undefined;
-  renderHeader: RenderHeaderCb;
-  renderCell: RenderCellCb<TRow>;
-  renderActions?: RenderActionsCb<TRow>;
+  columns: readonly TCol[];
+  data: TRow[] | undefined;
+  renderHeader: RenderHeaderCb<TCol>;
+  renderCell: RenderCellCb<TRow, TCol>;
+  renderActions?: RenderActionsCb;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
@@ -63,7 +63,7 @@ export type ResponsiveTableProps<TRow> = {
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
 
-export const ResponsiveTable = <TRow,>({
+export const ResponsiveTable = <TRow, TCol>({
   ariaLabel,
   minimumColumnWidth = 250,
   columns,
@@ -76,7 +76,7 @@ export const ResponsiveTable = <TRow,>({
   expectedLength = 3,
   onRowClick,
   children,
-}: PropsWithChildren<ResponsiveTableProps<TRow>>) => {
+}: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
   /**

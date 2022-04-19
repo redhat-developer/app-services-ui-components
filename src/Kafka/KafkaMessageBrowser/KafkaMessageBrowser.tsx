@@ -12,14 +12,13 @@ import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
 import { BaseCellProps } from "@patternfly/react-table";
 import { useMachine } from "@xstate/react";
-import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
+import { useMemo, useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FormatDate,
   Loading,
   RefreshButton,
   ResponsiveTable,
-  ResponsiveTableProps,
 } from "../../shared";
 import {
   FilterGroup,
@@ -38,8 +37,8 @@ const columns = [
   "offset",
   "timestamp",
   "key",
-  "value",
   "headers",
+  "value",
 ] as const;
 
 const columnWidths: BaseCellProps["width"][] = [10, 10, 15, 10, undefined, 30];
@@ -166,7 +165,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
   const [defaultTab, setDefaultTab] =
     useState<MessageDetailsProps["defaultTab"]>("value");
 
-  const columnLabels: { [key: string]: string } = useMemo(
+  const columnLabels: { [key in typeof columns[number]]: string } = useMemo(
     () =>
       ({
         partition: t("field.partition"),
@@ -177,80 +176,6 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
         headers: t("field.headers"),
       } as const),
     [t]
-  );
-
-  const renderHeader: ResponsiveTableProps<Message>["renderHeader"] =
-    useCallback(
-      ({ column, Th, key }) => <Th key={key}>{columnLabels[column]}</Th>,
-      [columnLabels]
-    );
-
-  const renderCell: ResponsiveTableProps<Message>["renderCell"] = useCallback(
-    ({ column, row, colIndex, Td, key }) => (
-      <Td
-        key={key}
-        dataLabel={columnLabels[column]}
-        width={columnWidths[colIndex]}
-      >
-        {(() => {
-          switch (colIndex) {
-            case 0:
-              return row.partition;
-            case 1:
-              return row.offset;
-            case 2:
-              return (
-                row.timestamp && (
-                  <FormatDate date={row.timestamp} format={"long"} />
-                )
-              );
-            case 3:
-              return (
-                <UnknownValuePreview value={row.key || ""} truncateAt={40} />
-              );
-            case 4:
-              return (
-                <UnknownValuePreview
-                  value={beautifyUnknownValue(row.value || "")}
-                  onClick={() => {
-                    setDefaultTab("value");
-                    selectMessage(row);
-                  }}
-                />
-              );
-
-            case 5:
-              return (
-                <UnknownValuePreview
-                  value={beautifyUnknownValue(JSON.stringify(row.headers))}
-                  onClick={() => {
-                    setDefaultTab("headers");
-                    selectMessage(row);
-                  }}
-                />
-              );
-            default:
-              return;
-          }
-        })()}
-      </Td>
-    ),
-    [columnLabels, selectMessage]
-  );
-
-  const isRowSelected: ResponsiveTableProps<Message>["isRowSelected"] =
-    useCallback(
-      ({ row }) =>
-        selectedMessage !== undefined && isSameMessage(row, selectedMessage),
-      [selectedMessage]
-    );
-
-  const onRowClick: ResponsiveTableProps<Message>["onRowClick"] = useCallback(
-    ({ row }) => {
-      setDefaultTab("value");
-      selectMessage(row);
-    },
-    [selectMessage]
   );
 
   switch (true) {
@@ -322,15 +247,73 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                 </ToolbarGroup>
               </ToolbarContent>
             </Toolbar>
-            <ResponsiveTable<Message>
-              ariaLabel={t("TODO")}
+            <ResponsiveTable
+              ariaLabel={t("table_aria_label")}
               columns={columns}
               data={response?.messages}
               expectedLength={response?.messages?.length}
-              renderHeader={renderHeader}
-              renderCell={renderCell}
-              isRowSelected={isRowSelected}
-              onRowClick={onRowClick}
+              renderHeader={({ column, Th, key }) => (
+                <Th key={key}>{columnLabels[column]}</Th>
+              )}
+              renderCell={({ column, row, colIndex, Td, key }) => (
+                <Td
+                  key={key}
+                  dataLabel={columnLabels[column]}
+                  width={columnWidths[colIndex]}
+                >
+                  {(() => {
+                    switch (column) {
+                      case "partition":
+                        return row.partition;
+                      case "offset":
+                        return row.offset;
+                      case "timestamp":
+                        return (
+                          row.timestamp && (
+                            <FormatDate date={row.timestamp} format={"long"} />
+                          )
+                        );
+                      case "key":
+                        return (
+                          <UnknownValuePreview
+                            value={row.key || ""}
+                            truncateAt={40}
+                          />
+                        );
+                      case "headers":
+                        return (
+                          <UnknownValuePreview
+                            value={beautifyUnknownValue(
+                              JSON.stringify(row.headers)
+                            )}
+                            onClick={() => {
+                              setDefaultTab("headers");
+                              selectMessage(row);
+                            }}
+                          />
+                        );
+                      case "value":
+                        return (
+                          <UnknownValuePreview
+                            value={beautifyUnknownValue(row.value || "")}
+                            onClick={() => {
+                              setDefaultTab("value");
+                              selectMessage(row);
+                            }}
+                          />
+                        );
+                    }
+                  })()}
+                </Td>
+              )}
+              isRowSelected={({ row }) =>
+                selectedMessage !== undefined &&
+                isSameMessage(row, selectedMessage)
+              }
+              onRowClick={({ row }) => {
+                setDefaultTab("value");
+                selectMessage(row);
+              }}
             />
           </DrawerContent>
         </Drawer>
