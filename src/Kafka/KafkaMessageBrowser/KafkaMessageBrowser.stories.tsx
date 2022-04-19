@@ -32,7 +32,7 @@ NoResults.args = {
 
 function sampleData(args) {
   console.log("fakeApi", args);
-  const numberOfMessages = 10;
+  const numberOfMessages = args.limit;
   const messages: Message[] = [
     {
       partition: 0,
@@ -92,9 +92,10 @@ function sampleData(args) {
         .flatMap((_, i) =>
           messages.map((m, j) => ({
             ...m,
-            offset: args.partition
-              ? (args.offset || 0) + i * messages.length + j
-              : m.offset,
+            offset:
+              args.partition !== undefined
+                ? (args.offset || 0) + i * messages.length + j
+                : m.offset,
             partition: args.partition || m.partition,
             _: `${i}-${j}`,
           }))

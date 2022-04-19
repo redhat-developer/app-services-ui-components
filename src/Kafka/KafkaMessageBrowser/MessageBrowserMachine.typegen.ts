@@ -9,6 +9,7 @@ export interface Typegen0 {
     setTimestamp: "setTimestamp";
     setOffset: "setOffset";
     setLatest: "setLatest";
+    setLimit: "setLimit";
     selectMessage: "selectMessage";
     deselectMessage: "deselectMessage" | "";
   };

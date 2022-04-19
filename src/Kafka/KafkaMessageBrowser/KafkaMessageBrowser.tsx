@@ -22,6 +22,7 @@ import {
 } from "../../shared";
 import {
   FilterGroup,
+  LimitSelector,
   MessageDetails,
   MessageDetailsProps,
   OffsetRange,
@@ -51,6 +52,7 @@ export type KafkaMessageBrowserProps = {
     partition?: number;
     offset?: number;
     timestamp?: number;
+    limit: number;
   }) => Promise<{ messages: Message[]; partitions: number }>;
 };
 export const KafkaMessageBrowser: VoidFunctionComponent<
@@ -65,6 +67,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
             partition: context.partition,
             offset: context.offset,
             timestamp: context.timestamp,
+            limit: context.limit,
           })
             .then(({ messages, partitions }) =>
               send({
@@ -94,6 +97,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
       response={state.context.response}
       lastUpdated={state.context.response?.lastUpdated}
       partition={state.context.partition}
+      limit={state.context.limit}
       filterOffset={state.context.offset}
       filterTimestamp={state.context.timestamp}
       setPartition={(value: number | undefined) =>
@@ -109,6 +113,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
         send({ type: "setEpoch", value })
       }
       setLatest={() => send({ type: "setLatest" })}
+      setLimit={(value: number) => send({ type: "setLimit", value })}
       refresh={() => send({ type: "refresh" })}
       selectMessage={(message: Message) =>
         send({ type: "selectMessage", message })
@@ -127,6 +132,7 @@ export type KafkaMessageBrowserConnectedProps = {
   lastUpdated: Date | undefined;
   response: MessageApiResponse | undefined;
   partition: number | undefined;
+  limit: number;
   filterOffset: number | undefined;
   filterTimestamp: number | undefined;
   setPartition: (value: number | undefined) => void;
@@ -134,6 +140,7 @@ export type KafkaMessageBrowserConnectedProps = {
   setTimestamp: (value: Date | undefined) => void;
   setEpoch: (value: number | undefined) => void;
   setLatest: () => void;
+  setLimit: (value: number) => void;
   refresh: () => void;
   selectMessage: (message: Message) => void;
   deselectMessage: () => void;
@@ -148,6 +155,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
   selectedMessage,
   response,
   partition,
+  limit,
   filterOffset,
   filterTimestamp,
   setPartition,
@@ -155,6 +163,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
   setTimestamp,
   setEpoch,
   setLatest,
+  setLimit,
   refresh,
   selectMessage,
   deselectMessage,
@@ -215,6 +224,13 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                       onTimestampChange={setTimestamp}
                       onEpochChange={setEpoch}
                       onLatest={setLatest}
+                    />
+                  </ToolbarGroup>
+                  <ToolbarGroup>
+                    <LimitSelector
+                      value={limit}
+                      onChange={setLimit}
+                      isDisabled={isRefreshing}
                     />
                   </ToolbarGroup>
                 </ToolbarToggleGroup>

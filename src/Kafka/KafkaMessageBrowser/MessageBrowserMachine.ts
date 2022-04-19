@@ -25,6 +25,7 @@ export const MessageBrowserMachine = createMachine(
         // response
         response: MessageApiResponse | undefined;
 
+        limit: number;
         // optional input
         partition: number | undefined;
         offset: number | undefined;
@@ -46,6 +47,7 @@ export const MessageBrowserMachine = createMachine(
         | { type: "setTimestamp"; value: Date | undefined }
         | { type: "setEpoch"; value: number | undefined }
         | { type: "setLatest" }
+        | { type: "setLimit"; value: number }
         | { type: "selectMessage"; message: Message }
         | { type: "deselectMessage" },
     },
@@ -54,6 +56,7 @@ export const MessageBrowserMachine = createMachine(
       // response
       response: undefined,
 
+      limit: 10,
       // optional input
       partition: undefined,
       offset: undefined,
@@ -114,6 +117,10 @@ export const MessageBrowserMachine = createMachine(
             target: ".dirty",
             actions: "setLatest",
           },
+          setLimit: {
+            target: ".dirty",
+            actions: "setLimit",
+          },
           selectMessage: {
             actions: "selectMessage",
           },
@@ -162,6 +169,9 @@ export const MessageBrowserMachine = createMachine(
       })),
       setOffset: assign((_, { value }) => ({
         offset: value,
+      })),
+      setLimit: assign((_, { value }) => ({
+        limit: value,
       })),
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       setLatest: assign((_) => ({
