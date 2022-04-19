@@ -1,4 +1,3 @@
-import { FunctionComponent, ReactElement, Suspense } from "react";
 import {
   act,
   render,
@@ -6,6 +5,7 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
+import { FunctionComponent, ReactElement, Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { I18nProvider } from "./I18n";
 

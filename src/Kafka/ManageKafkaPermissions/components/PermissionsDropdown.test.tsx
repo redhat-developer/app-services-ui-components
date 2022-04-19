@@ -1,10 +1,10 @@
+import { userEvent } from "@storybook/testing-library";
 import {
   render,
   waitForI18n,
   waitForPopper,
   within,
 } from "../../../test-utils";
-import { userEvent } from "@storybook/testing-library";
 import { PermissionsDropdown } from "./PermissionsDropdown";
 
 describe("PermissionsDropdown", () => {
@@ -48,8 +48,7 @@ describe("PermissionsDropdown", () => {
 
     await openMenu();
 
-    const menubars = await comp.queryAllByRole("menubar");
-    const menu = within(menubars[0]);
+    const menu = within(await comp.queryAllByRole("menu")[0]);
     userEvent.click(await menu.findByText("Add permission"));
     expect(onAddPermission).toBeCalled();
 
