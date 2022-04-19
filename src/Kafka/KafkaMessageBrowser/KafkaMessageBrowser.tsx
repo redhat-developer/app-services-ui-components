@@ -28,7 +28,10 @@ import {
   PartitionSelector,
   UnknownValuePreview,
 } from "./components";
-import { MessageBrowserMachine } from "./MessageBrowserMachine";
+import {
+  MessageApiResponse,
+  MessageBrowserMachine,
+} from "./MessageBrowserMachine";
 import { Message } from "./types";
 import { beautifyUnknownValue, isSameMessage } from "./utils";
 
@@ -45,7 +48,7 @@ const columnWidths: BaseCellProps["width"][] = [10, 10, 15, 10, undefined, 30];
 
 export type KafkaMessageBrowserProps = {
   getMessages: (props: {
-    partition: number;
+    partition?: number;
     offset?: number;
     timestamp?: number;
   }) => Promise<{ messages: Message[]; partitions: number }>;
@@ -60,8 +63,8 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
         return (send) => {
           getMessages({
             partition: context.partition,
-            offset: context.offset || undefined,
-            timestamp: context.timestamp || undefined,
+            offset: context.offset,
+            timestamp: context.timestamp,
           })
             .then(({ messages, partitions }) =>
               send({
@@ -93,7 +96,9 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
       partition={state.context.partition}
       filterOffset={state.context.offset}
       filterTimestamp={state.context.timestamp}
-      setPartition={(value: number) => send({ type: "setPartition", value })}
+      setPartition={(value: number | undefined) =>
+        send({ type: "setPartition", value })
+      }
       setOffset={(value: number | undefined) =>
         send({ type: "setOffset", value })
       }
@@ -120,19 +125,12 @@ export type KafkaMessageBrowserConnectedProps = {
   requiresSearch: boolean;
   selectedMessage: Message | undefined;
   lastUpdated: Date | undefined;
-  response:
-    | {
-        messages: Message[];
-        partitions: number;
-        offsetMin: number;
-        offsetMax: number;
-      }
-    | undefined;
-  partition: number;
+  response: MessageApiResponse | undefined;
+  partition: number | undefined;
   filterOffset: number | undefined;
   filterTimestamp: number | undefined;
-  setPartition: (value: number) => void;
-  setOffset: (value: number) => void;
+  setPartition: (value: number | undefined) => void;
+  setOffset: (value: number | undefined) => void;
   setTimestamp: (value: Date | undefined) => void;
   setEpoch: (value: number | undefined) => void;
   setLatest: () => void;
@@ -240,10 +238,12 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                   </ToolbarItem>
                 </ToolbarGroup>
                 <ToolbarGroup alignment={{ default: "alignRight" }}>
-                  <OffsetRange
-                    min={response?.offsetMin || 0}
-                    max={response?.offsetMax || 0}
-                  />
+                  {response?.filter.partition !== undefined && (
+                    <OffsetRange
+                      min={response?.offsetMin || 0}
+                      max={response?.offsetMax || 0}
+                    />
+                  )}
                 </ToolbarGroup>
               </ToolbarContent>
             </Toolbar>

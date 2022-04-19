@@ -2,6 +2,20 @@ import { assign, createMachine } from "xstate";
 import { Message } from "./types";
 import { isSameMessage } from "./utils";
 
+export type MessageApiResponse = {
+  lastUpdated: Date;
+  messages: Message[];
+  partitions: number;
+  offsetMin: number;
+  offsetMax: number;
+
+  filter: {
+    partition: number | undefined;
+    offset: number | undefined;
+    timestamp: number | undefined;
+  };
+};
+
 export const MessageBrowserMachine = createMachine(
   {
     id: "message-browser",
@@ -9,20 +23,10 @@ export const MessageBrowserMachine = createMachine(
     schema: {
       context: {} as {
         // response
-        response:
-          | {
-              lastUpdated: Date;
-              messages: Message[];
-              partitions: number;
-              offsetMin: number;
-              offsetMax: number;
-            }
-          | undefined;
-
-        // required input
-        partition: number;
+        response: MessageApiResponse | undefined;
 
         // optional input
+        partition: number | undefined;
         offset: number | undefined;
         timestamp: number | undefined;
         selectedMessage: Message | undefined;
@@ -37,7 +41,7 @@ export const MessageBrowserMachine = createMachine(
           }
         | { type: "fetchFail" }
         | { type: "refresh" }
-        | { type: "setPartition"; value: number }
+        | { type: "setPartition"; value: number | undefined }
         | { type: "setOffset"; value: number | undefined }
         | { type: "setTimestamp"; value: Date | undefined }
         | { type: "setEpoch"; value: number | undefined }
@@ -50,10 +54,8 @@ export const MessageBrowserMachine = createMachine(
       // response
       response: undefined,
 
-      // required input
-      partition: 0,
-
       // optional input
+      partition: undefined,
       offset: undefined,
       timestamp: undefined,
       selectedMessage: undefined,
@@ -136,13 +138,18 @@ export const MessageBrowserMachine = createMachine(
   {
     actions: {
       setMessages: assign(
-        (_, { messages, partitions, offsetMin, offsetMax }) => ({
+        (context, { messages, partitions, offsetMin, offsetMax }) => ({
           response: {
             lastUpdated: new Date(),
             messages,
             partitions,
             offsetMin,
             offsetMax,
+            filter: {
+              partition: context.partition,
+              timestamp: context.timestamp,
+              offset: context.offset,
+            },
           },
         })
       ),

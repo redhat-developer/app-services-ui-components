@@ -33,7 +33,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
   onLatest,
 }) => {
   const { t } = useTranslation("message-browser");
-  const [currentCategory, setCurrentCategory] = useState<Category>("offset");
+  const [currentCategory, setCurrentCategory] = useState<Category>("latest");
   const [isOpen, setIsOpen] = useState(false);
   const labels: { [key in Category]: string } = {
     offset: t("filter.offset"),

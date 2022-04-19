@@ -46,8 +46,8 @@ function sampleData(args) {
     },
     {
       key: "this-is-a-very-long-key-that-might-cause-some-trouble-figuring-out-column-widths",
-      partition: 0,
-      offset: 1,
+      partition: 4,
+      offset: 16,
       timestamp: new Date("2022-03-15T14:11:57.103Z"),
       headers: {
         "post-office-box": "string",
@@ -62,8 +62,8 @@ function sampleData(args) {
         '{"order":{"address":{"street":"123 any st","city":"Austin","state":"TX","zip":"78626"},"contact":{"firstName":"james","lastName":"smith","phone":"512-123-1234"},"orderId":"123"},"primitives":{"stringPrimitive":"some value","booleanPrimitive":true,"numberPrimitive":24},"addressList":[{"street":"123 any st","city":"Austin","state":"TX","zip":"78626"},{"street":"123 any st","city":"Austin","state":"TX","zip":"78626"},{"street":"123 any st","city":"Austin","state":"TX","zip":"78626"},{"street":"123 any st","city":"Austin","state":"TX","zip":"78626"}]}',
     },
     {
-      partition: 0,
-      offset: 2,
+      partition: 2,
+      offset: 21,
       timestamp: new Date("2022-03-15T14:10:57.103Z"),
       headers: {
         never: `change`,
@@ -71,15 +71,15 @@ function sampleData(args) {
       value: '{"foo": "bar", "baz": "???"}',
     },
     {
-      partition: 0,
+      partition: 3,
       offset: 3,
       timestamp: new Date("2022-03-15T14:10:57.103Z"),
       headers: {},
       value: "random string",
     },
     {
-      partition: 0,
-      offset: 4,
+      partition: 5,
+      offset: 44,
       timestamp: new Date("2022-03-15T14:10:57.103Z"),
       headers: {},
       value: "",
@@ -92,8 +92,10 @@ function sampleData(args) {
         .flatMap((_, i) =>
           messages.map((m, j) => ({
             ...m,
-            offset: (args.offset || 0) + i * messages.length + j,
-            partition: args.partition,
+            offset: args.partition
+              ? (args.offset || 0) + i * messages.length + j
+              : m.offset,
+            partition: args.partition || m.partition,
             _: `${i}-${j}`,
           }))
         )

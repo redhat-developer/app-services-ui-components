@@ -13,10 +13,10 @@ import { useTranslation } from "react-i18next";
 const MAX_OPTIONS = 20;
 
 export type PartitionSelectorProps = {
-  value: number;
-  partitions: number;
+  value: number | undefined;
+  partitions: number | undefined;
   isDisabled: boolean;
-  onChange: (value: number) => void;
+  onChange: (value: number | undefined) => void;
 };
 export const PartitionSelector: VoidFunctionComponent<
   PartitionSelectorProps
@@ -27,9 +27,12 @@ export const PartitionSelector: VoidFunctionComponent<
   const titleId = "partition-selector";
 
   const handleChange = useCallback(
-    (value: number | undefined) => {
-      if (value && Number.isInteger(value)) {
-        onChange(value);
+    (value: string) => {
+      if (value !== "") {
+        const valueAsNum = parseInt(value, 10);
+        if (Number.isInteger(valueAsNum)) {
+          onChange(valueAsNum);
+        }
       }
       setIsOpen(false);
     },
@@ -89,8 +92,8 @@ export const PartitionSelector: VoidFunctionComponent<
           variant={SelectVariant.typeahead}
           typeAheadAriaLabel={t("select_partition_typeahead")}
           onToggle={toggleOpen}
-          onSelect={(_, value) => handleChange(parseInt(value as string, 10))}
-          selections={[`${value}`]}
+          onSelect={(_, value) => handleChange(value as string)}
+          selections={value !== undefined ? [`${value}`] : undefined}
           isOpen={isOpen}
           aria-labelledby={titleId}
           maxHeight={200}
@@ -98,6 +101,8 @@ export const PartitionSelector: VoidFunctionComponent<
           onFilter={handleFilter}
           isInputValuePersisted={false}
           isDisabled={isDisabled}
+          placeholderText={t("partition_placeholder")}
+          onClear={() => onChange(undefined)}
         >
           {options}
         </Select>
