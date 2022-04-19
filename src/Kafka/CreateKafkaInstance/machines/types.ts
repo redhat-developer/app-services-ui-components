@@ -3,12 +3,17 @@ export type InstanceAvailability =
   | "trial"
   | "over-quota"
   | "trial-used"
+  | "instance-unavailable"
+  | "regions-unavailable"
+  /** @deprecated replaced by `instance-unavailable` */
   | "trial-unavailable";
+
 export type Provider = string;
 export type Region = string;
 export type RegionInfo = {
   id: Region;
   displayName: string;
+  isDisabled?: boolean;
 };
 export type AZ = "single" | "multi";
 export type ProviderInfo = {

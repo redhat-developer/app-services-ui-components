@@ -1,0 +1,86 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: "Node version to use"
+        required: true
+        type: string
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: ${{ inputs.node-version }}
+
+  test:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Run the test suite
+        run: npm run test-storybook:ci
+      - name: Generate coverage report
+        uses: codecov/codecov-action@v2
+
+  lintandformat:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm run lint
+
+  build:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: ${{ inputs.node-version }}
+      - run: npm run build
+
+  chromatic:
+    needs:
+      - build
+    # Operating System
+    runs-on: ubuntu-latest
+    # Job steps
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: 16.6.2
+
+      - name: Generate the Jest output
+        run: npm run test:generate-output
+
+        #👇 Adds Chromatic as a step in the workflow
+      - uses: chromaui/action@v1
+        # Options required for Chromatic's GitHub Action
+        with:
+          #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/en/deploy/ to obtain it
+          projectToken: 233963c78c8a
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exitOnceUploaded: true

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { inspect, Inspector } from "@xstate/inspect";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Args, ReactFramework } from "@storybook/react/types-6-0";
@@ -10,18 +10,22 @@ export const withMas = (
   Story: PartialStoryFn<ReactFramework, Args>,
   { globals }: StoryContext<ReactFramework, Args>
 ) => {
+  const xstateInspectorRef = useRef(false);
   useEffect(() => {
     document.body.classList.toggle("show-ouia", JSON.parse(globals.ouia));
   }, [globals.ouia]);
   useEffect(() => {
     let inspector: Inspector | undefined = undefined;
-
-    if (JSON.parse(globals.xstate) === true) {
-      inspector = inspect({
-        // options
-        url: "https://stately.ai/viz?inspect", // (default)
-        iframe: false, // open in new window
-      });
+    const showInspector = JSON.parse(globals.xstate) === true;
+    if (showInspector !== xstateInspectorRef.current) {
+      xstateInspectorRef.current = showInspector;
+      if (showInspector) {
+        inspector = inspect({
+          // options
+          url: "https://stately.ai/viz?inspect", // (default)
+          iframe: false, // open in new window
+        });
+      }
     }
     return () => {
       if (inspector) {
@@ -44,9 +48,12 @@ export const withMas = (
             overview: () => import("../locales/en/overview.json"),
             datascienceoverview: () =>
               import("../locales/en/datascienceoverview.json"),
+            kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
             apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
             "manage-kafka-permissions": () =>
               import("../locales/en/manage-kafka-permissions.json"),
+            "service-account": () =>
+              import("../locales/en/service-account.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

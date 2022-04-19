@@ -1,11 +1,12 @@
 {
   "alpha": "Alpha",
   "banner": "Reduce operational costs and complexity for application development teams with hosted and managed OpenShift Application Services.",
-  "beta": "Beta",
+  "dataService": "Data service",
   "dbaasMainText": "OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge and CockroachDB.",
   "dbaasSecondaryText": "This service is hosted and managed by Red Hat as an add-on for managed",
   "dbaasTitle": "Red Hat OpenShift Database Access",
   "developmentPreview": "Development preview",
+  "fieldTrial": "Field trial",
   "getStarted": "Get started",
   "heroCallToActionButton": "Try OpenShift Streams for Apache Kafka",
   "heroDescription": "Red Hat OpenShift Application Services deliver a streamlined developer experience for building,deploying, and scaling cloud-native applications.",
@@ -27,5 +28,6 @@
   "rhosrMainText": "Service Registry provides a metadata layer for developers and applications to publish, discover and evolve schema definitions and API designs.",
   "rhosrSecondaryText": "This service is fully hosted and managed by Red Hat and offered at no cost to Streams for Apache Kafka and API Management users.",
   "rhosrTitle": "Red Hat OpenShift Service Registry",
-  "servicePreview": "Service Preview"
+  "servicePreview": "Service Preview",
+  "tryIt": "Try it"
 }

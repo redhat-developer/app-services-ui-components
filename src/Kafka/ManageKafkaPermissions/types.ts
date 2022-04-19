@@ -57,3 +57,13 @@ export interface AclBinding {
    */
   permission: AclPermissionType;
 }
+export enum PrincipalType {
+  UserAccount = "USER_ACCOUNT",
+  ServiceAccount = "SERVICE_ACCOUNT",
+}
+
+export type Account = {
+  id: string;
+  principalType: PrincipalType;
+  displayName: string;
+};

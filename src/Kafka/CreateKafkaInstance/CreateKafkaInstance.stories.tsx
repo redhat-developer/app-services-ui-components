@@ -87,10 +87,14 @@ const Template: ComponentStory<typeof CreateKafkaInstance> = (args, { id }) => {
   };
 
   return (
-    <div id={id} style={{ transform: "scale(1)", minHeight: 850 }}>
+    <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
       <CreateKafkaInstance
         {...args}
-        appendTo={() => document.getElementById(id) || document.body}
+        appendTo={() =>
+          document.getElementById(`story--${id}`) ||
+          document.getElementById("root") ||
+          document.body
+        }
         isModalOpen={isModalOpen}
         onCancel={onCloseModal}
         onCreate={onCreate}
@@ -198,6 +202,97 @@ TrialUsedOnFormLoad.args = {
   }),
 } as CreateKafkaInstanceProps;
 
+export const SomeRegionsDisabledOnFormLoad = Template.bind({});
+SomeRegionsDisabledOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "quota",
+      defaultAZ: "multi",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: p.regions.map((r, idx) => ({ ...r, isDisabled: idx === 0 })),
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+SomeRegionsDisabledOnFormLoad.parameters = {
+  docs: {
+    description: {
+      story: `Some regions could be disabled because they can't accept new instances, but we still want to show them
+      in the list in a disabled state.`,
+    },
+  },
+};
+
+export const AllRegionsDisabledOnFormLoad = Template.bind({});
+AllRegionsDisabledOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "quota",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: p.regions.map((r) => ({ ...r, isDisabled: true })),
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+
+export const NoRegionsReturnedFromApiForAProviderOnFormLoad = Template.bind({});
+NoRegionsReturnedFromApiForAProviderOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "quota",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p, idx) =>
+      idx === 0
+        ? {
+            ...p,
+            regions: [],
+          }
+        : { ...p }
+    )
+  ),
+} as CreateKafkaInstanceProps;
+NoRegionsReturnedFromApiForAProviderOnFormLoad.parameters = {
+  docs: {
+    description: {
+      story: `If a provider doesn't have any region, it will still be displayed but the regions select will contain an 
+      unselectable information message.`,
+    },
+  },
+};
+
+export const NoRegionsReturnedFromApiOnFormLoad = Template.bind({});
+NoRegionsReturnedFromApiOnFormLoad.args = {
+  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
+    {
+      instanceAvailability: "quota",
+      defaultProvider: "aws",
+      providers: ["aws", "azure"],
+      defaultAZ: "multi",
+    },
+    PROVIDERS.map((p) => ({
+      ...p,
+      regions: [],
+    }))
+  ),
+} as CreateKafkaInstanceProps;
+NoRegionsReturnedFromApiOnFormLoad.parameters = {
+  docs: {
+    description: {
+      story: `If for any reason we don't get any region at all, we still provide the user with an informative message.`,
+    },
+  },
+};
+
 export const ErrorOnFormLoad = Template.bind({});
 ErrorOnFormLoad.args = {
   getAvailableProvidersAndDefaults: async () => {
@@ -251,7 +346,7 @@ export const VariantCanCustomizeDefaultProvider = Template.bind({});
 VariantCanCustomizeDefaultProvider.args = {
   getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
     defaultProvider: "azure",
-    instanceAvailability: "trial",
+    instanceAvailability: "quota",
     defaultAZ: "multi",
     providers: ["aws", "azure"],
   }),
@@ -292,19 +387,6 @@ VariantOnlySingleAZEnabledWithRightTooltip.args = {
       defaultAZ: "single",
     },
     PROVIDERS.map((p) => ({ ...p, AZ: { multi: false, single: true } }))
-  ),
-} as CreateKafkaInstanceProps;
-
-export const VariantBothAZEnabledWithRightTooltip = Template.bind({});
-VariantBothAZEnabledWithRightTooltip.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      defaultProvider: "aws",
-      providers: ["aws"],
-      instanceAvailability: "quota",
-      defaultAZ: "single",
-    },
-    PROVIDERS.map((p) => ({ ...p, AZ: { multi: true, single: true } }))
   ),
 } as CreateKafkaInstanceProps;
 
