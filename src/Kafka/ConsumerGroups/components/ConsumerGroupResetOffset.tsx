@@ -36,6 +36,7 @@ export type ConsumerRow = Consumer & {
 };
 
 export type ConsumerGroupResetOffsetProps = {
+  isModalOpen: boolean;
   isDisconnected: boolean;
   groupId: string;
   selectedTopic: string;
@@ -69,8 +70,9 @@ export const ConsumerGroupResetOffset: FunctionComponent<
   onConfirmationChange,
   consumers,
   onClickClose,
+  isModalOpen,
 }) => {
-  const { t } = useTranslation(["kafka", "common"]);
+  const { t } = useTranslation(["kafka"]);
 
   const [newConsumers, setNewConsumer] = useState<ConsumerRow[]>(consumers);
 
@@ -161,7 +163,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
   return (
     <Modal
       variant={ModalVariant.large}
-      isOpen={true}
+      isOpen={isModalOpen}
       aria-label={"Modal for resetting offset of Kafka consumergroup"}
       title={t("consumerGroup.reset_offset")}
       showClose={true}

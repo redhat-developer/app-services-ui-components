@@ -35,13 +35,6 @@ export default {
     isDisconnected: true,
     customOffsetValue: "2",
   },
-  argTypes: {
-    isModalOpen: {
-      control: {
-        type: null,
-      },
-    },
-  },
 } as ComponentMeta<typeof ConsumerGroupResetOffset>;
 
 const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (args) => (
@@ -49,8 +42,12 @@ const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (args) => (
 );
 
 export const ResetOffset = Template.bind({});
+ResetOffset.args = {
+  isModalOpen: true,
+};
 
 export const ResetOffsetErrorMessage = Template.bind({});
 ResetOffsetErrorMessage.args = {
   isDisconnected: false,
+  isModalOpen: true,
 };
