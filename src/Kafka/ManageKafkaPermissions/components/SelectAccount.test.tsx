@@ -1,7 +1,7 @@
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./SelectAccount.stories";
 import { userEvent } from "@storybook/testing-library";
-import { render, waitForI18n } from "../../../test-utils";
+import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n, waitForPopper } from "../../../test-utils";
+import * as stories from "./SelectAccount.stories";
 
 const {
   EmptyState,
@@ -24,11 +24,12 @@ describe("Select Account", () => {
 
     await waitForI18n(comp);
     userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
 
-    expect(await comp.findByText("All accounts")).toBeInTheDocument();
-    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
-    expect(await comp.findByText("User accounts")).toBeInTheDocument();
-    expect(await comp.findByText("id2")).toBeInTheDocument();
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
+    expect(comp.getByText("id2")).toBeInTheDocument();
   });
 
   it("should show empty list of options", async () => {
@@ -43,11 +44,12 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
 
-    expect(await comp.findByText("All accounts")).toBeInTheDocument();
-    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
-    expect(await comp.findByText("User accounts")).toBeInTheDocument();
-    expect(await comp.findAllByText("No results found")).toHaveLength(2);
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
+    expect(comp.queryAllByText("No results found")).toHaveLength(2);
   });
 
   it("should show list of service accounts while showing empty user accounts", async () => {
@@ -62,12 +64,13 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
 
-    expect(await comp.findByText("All accounts")).toBeInTheDocument();
-    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
-    expect(await comp.findByText("User accounts")).toBeInTheDocument();
-    expect(await comp.findByText("No results found")).toBeInTheDocument();
-    expect(await comp.findByText("id5")).toBeInTheDocument();
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
+    expect(comp.getByText("No results found")).toBeInTheDocument();
+    expect(comp.getByText("id5")).toBeInTheDocument();
   });
 
   it("should show list of user accounts while showing empty service accounts", async () => {
@@ -82,12 +85,13 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
 
-    expect(await comp.findByText("All accounts")).toBeInTheDocument();
-    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
-    expect(await comp.findByText("User accounts")).toBeInTheDocument();
-    expect(await comp.findByText("No results found")).toBeInTheDocument();
-    expect(await comp.findByText("id6")).toBeInTheDocument();
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
+    expect(comp.getByText("No results found")).toBeInTheDocument();
+    expect(comp.getByText("id6")).toBeInTheDocument();
   });
 
   it("should show a select component ", async () => {
@@ -103,14 +107,15 @@ describe("Select Account", () => {
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
 
-    expect(await comp.findByText("All accounts")).toBeInTheDocument();
-    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
-    expect(await comp.findByText("User accounts")).toBeInTheDocument();
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
     userEvent.type(
       comp.getByPlaceholderText("Select an account"),
       "ServiceAccount2"
     );
-    userEvent.click(await comp.findByText("ServiceAccount2"));
+    userEvent.click(comp.getByText("ServiceAccount2"));
   });
 });
