@@ -11,7 +11,7 @@ import {
   TextInput,
   Title,
 } from "@patternfly/react-core";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "../ConsumerGroup.css";
 import { Consumer } from "../types";
@@ -39,19 +39,13 @@ export type ConsumerGroupResetOffsetProps = {
   isModalOpen: boolean;
   isDisconnected: boolean;
   groupId: string;
-  selectedTopic: string;
-  setSelectedTopic: (selectedTopic: string) => void;
   topics: string[];
-  selectedOffset: OffsetValue;
-  setSelectedOffset: (value: OffsetValue) => void;
   customOffsetValue: string;
   setcustomOffsetValue: (customOffsetValue: string) => void;
-  confirmCheckboxChecked: boolean;
-  onConfirmationChange: (value: boolean) => void;
   consumers: ConsumerRow[];
-  setConsumers: (value: ConsumerRow[]) => void;
   isSelected: boolean;
   onClickClose: () => void;
+  onClickResetOffset: () => void;
 };
 
 export const ConsumerGroupResetOffset: FunctionComponent<
@@ -59,22 +53,30 @@ export const ConsumerGroupResetOffset: FunctionComponent<
 > = ({
   isDisconnected,
   groupId,
-  selectedTopic,
-  setSelectedTopic,
   topics,
-  selectedOffset,
-  setSelectedOffset,
   customOffsetValue,
   setcustomOffsetValue,
-  confirmCheckboxChecked,
-  onConfirmationChange,
   consumers,
   onClickClose,
   isModalOpen,
+  onClickResetOffset,
 }) => {
   const { t } = useTranslation(["kafka"]);
+  const [selectedTopic, setSelectedTopic] = useState<string>("");
+
+  const [selectedOffset, setSelectedOffset] = useState<OffsetValue>();
 
   const [newConsumers, setNewConsumer] = useState<ConsumerRow[]>(consumers);
+
+  const [confirmCheckboxChecked, setConfirmCheckboxChecked] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    const filteredConsumers = consumers.filter(
+      (consumer) => consumer.topic === selectedTopic
+    );
+    setNewConsumer(filteredConsumers || []);
+  }, [consumers, selectedTopic]);
 
   const getTopics = (topics: string[]) => {
     const distinctTopics = topics.filter(
@@ -93,7 +95,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       !confirmCheckboxChecked ||
       !isDisconnected ||
       !selectedOffset ||
-      consumers.filter(({ selected }) => selected === true).length === 0
+      newConsumers.filter(({ selected }) => selected === true).length === 0
     );
   };
 
@@ -129,6 +131,10 @@ export const ConsumerGroupResetOffset: FunctionComponent<
     const selectedConsumers = [...newConsumers];
     selectedConsumers[rowId].selected = !selecting;
     setNewConsumer(selectedConsumers);
+  };
+
+  const onConfirmationChange = () => {
+    setConfirmCheckboxChecked(!confirmCheckboxChecked);
   };
 
   const offsetOptions: IDropdownOption[] = [
@@ -169,7 +175,12 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       showClose={true}
       aria-describedby="modal-message"
       actions={[
-        <Button variant="danger" key={1} isDisabled={isResetOffsetDisabled()}>
+        <Button
+          variant="danger"
+          key={1}
+          isDisabled={isResetOffsetDisabled()}
+          onClick={onClickResetOffset}
+        >
           {t("consumerGroup.reset_offset")}
         </Button>,
         <Button variant="link" key={2} onClick={onClickClose}>
@@ -240,7 +251,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
           )}
         </StackItem>
         <StackItem>
-          {isDisconnected && consumers.length > 0 && selectedTopic && (
+          {isDisconnected && newConsumers.length > 0 && selectedTopic && (
             <Stack hasGutter>
               <StackItem>
                 <TableComposable
@@ -254,7 +265,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                           onSelect: (_event, isSelecting) =>
                             onSelectAllConsumer(isSelecting),
                           isSelected:
-                            consumers.length ===
+                            newConsumers.length ===
                             newConsumers.filter(
                               (consumer) => consumer.selected === true
                             ).length,
@@ -280,7 +291,6 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                                 onSelect(index, consumer.selected || false),
                             }}
                           />
-                          <Td>{consumer.selected}</Td>
                           <Td dataLabel={tableColumns.partition}>
                             {consumer.partition}
                           </Td>
