@@ -50,6 +50,7 @@ export type ConsumerGroupResetOffsetProps = {
   consumers: ConsumerRow[];
   setConsumers: (value: ConsumerRow[]) => void;
   isSelected: boolean;
+  onClickClose: () => void;
 };
 
 export const ConsumerGroupResetOffset: FunctionComponent<
@@ -67,10 +68,11 @@ export const ConsumerGroupResetOffset: FunctionComponent<
   confirmCheckboxChecked,
   onConfirmationChange,
   consumers,
-  isSelected,
-  setConsumers,
+  onClickClose,
 }) => {
   const { t } = useTranslation(["kafka", "common"]);
+
+  const [newConsumers, setNewConsumer] = useState<ConsumerRow[]>(consumers);
 
   const getTopics = (topics: string[]) => {
     const distinctTopics = topics.filter(
@@ -88,7 +90,8 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       selectedTopic === "" ||
       !confirmCheckboxChecked ||
       !isDisconnected ||
-      !selectedOffset
+      !selectedOffset ||
+      consumers.filter(({ selected }) => selected === true).length === 0
     );
   };
 
@@ -104,27 +107,26 @@ export const ConsumerGroupResetOffset: FunctionComponent<
     setSelectedOffset(value as OffsetValue);
   };
 
-  const onSelect = (
-    _: React.FormEvent<HTMLInputElement>,
-    isSelected: boolean,
-    rowId: number
-  ) => {
-    let newConsumers = consumers;
-    if (rowId === -1) {
-      newConsumers = consumers.map((consumer) => {
-        consumer.selected = isSelected;
-        return consumer;
-      });
-    } else {
-      newConsumers[rowId].selected = isSelected;
-    }
-    setConsumers(newConsumers);
-  };
-
   const offsetValueOption: { [key in OffsetValue]: string } = {
     absolute: t("consumerGroup.offset.absolute"),
     latest: t("consumerGroup.offset.latest"),
     earliest: t("consumerGroup.offset.earliest"),
+  };
+
+  const onSelectAllConsumer = (isSelecting = true) => {
+    console.log(isSelecting);
+    setNewConsumer(
+      newConsumers.map((consumer) => {
+        consumer.selected = isSelecting;
+        return consumer;
+      })
+    );
+  };
+
+  const onSelect = (rowId: number, selecting: boolean) => {
+    const selectedConsumers = [...newConsumers];
+    selectedConsumers[rowId].selected = !selecting;
+    setNewConsumer(selectedConsumers);
   };
 
   const offsetOptions: IDropdownOption[] = [
@@ -168,8 +170,8 @@ export const ConsumerGroupResetOffset: FunctionComponent<
         <Button variant="danger" key={1} isDisabled={isResetOffsetDisabled()}>
           {t("consumerGroup.reset_offset")}
         </Button>,
-        <Button variant="link" key={2}>
-          {t("cancel")}
+        <Button variant="link" key={2} onClick={onClickClose}>
+          {t("common:cancel")}
         </Button>,
       ]}
     >
@@ -190,7 +192,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                   onSelectOption={onTopicSelect}
                   items={getTopics(topics)}
                   name="cleanup-policy"
-                  value={selectedTopic ? selectedTopic : t("select")}
+                  value={selectedTopic ? selectedTopic : t("common:select")}
                   menuAppendTo={"parent"}
                 />
               </FormGroup>
@@ -204,7 +206,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                   onSelectOption={onOffsetSelect}
                   items={offsetOptions}
                   name="offset-dropdown"
-                  value={selectedOffset ? selectedOffset : t("select")}
+                  value={selectedOffset ? selectedOffset : t("common:select")}
                   menuAppendTo={"parent"}
                 />
               </FormGroup>
@@ -247,8 +249,13 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                     <Tr>
                       <Th
                         select={{
-                          onSelect: onSelect,
-                          isSelected: isSelected,
+                          onSelect: (_event, isSelecting) =>
+                            onSelectAllConsumer(isSelecting),
+                          isSelected:
+                            consumers.length ===
+                            newConsumers.filter(
+                              (consumer) => consumer.selected === true
+                            ).length,
                         }}
                       />
                       <Th>{tableColumns.partition}</Th>
@@ -260,15 +267,15 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {consumers.map((consumer, index) => {
+                    {newConsumers.map((consumer, index) => {
                       return (
                         <Tr key={index}>
                           <Td
                             select={{
                               rowIndex: index,
-                              onSelect: (_event, isSelecting) =>
-                                onSelect(_event, isSelected, index),
-                              isSelected: isSelected,
+                              isSelected: consumer.selected || false,
+                              onSelect: (_event) =>
+                                onSelect(index, consumer.selected || false),
                             }}
                           />
                           <Td>{consumer.selected}</Td>
