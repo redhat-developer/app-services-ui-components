@@ -1,8 +1,7 @@
 import { ToolbarItem } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate } from "../../../shared";
-import { RefreshButton } from "../../../shared/RefreshButton/RefreshButton";
+import { FormatDate, RefreshButton } from "../../../shared";
 
 export type ToolbarRefreshProps = {
   isRefreshing: boolean;
