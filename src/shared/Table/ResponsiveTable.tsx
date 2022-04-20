@@ -22,6 +22,7 @@ import {
   useState,
   VoidFunctionComponent,
 } from "react";
+import { useTranslation } from "react-i18next";
 import useResizeObserver from "use-resize-observer";
 import "./ResponsiveTable.css";
 
@@ -312,6 +313,9 @@ export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
         onRowClick={onClick}
         isRowSelected={isSelected}
         className={isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined}
+        data-testid={[isSelected && "row-selected", isDeleted && "row-deleted"]
+          .filter((v) => !!v)
+          .join(" ")}
       >
         {children}
       </Tr>
@@ -325,11 +329,18 @@ const TableSkeleton: VoidFunctionComponent<{
   rows: number;
   getTd: (index: number) => typeof Td;
 }> = ({ columns, rows, getTd }) => {
+  const { t } = useTranslation();
   const skeletonCells = new Array(columns).fill(0).map((_, index) => {
     const Td = getTd(index);
     return (
       <Td key={`cell_${index}`}>
-        <Skeleton />
+        <Skeleton
+          screenreaderText={
+            index === 0
+              ? t("common:skeleton_loader_screenreader_text")
+              : undefined
+          }
+        />
       </Td>
     );
   });

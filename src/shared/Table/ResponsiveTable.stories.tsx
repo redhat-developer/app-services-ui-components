@@ -63,7 +63,8 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
         : undefined
     }
     isRowDeleted={({ row }) => row[5] === deletingSign}
-    {...(args.isRowClickable ? eventsFromNames : {})}
+    onRowClick={args.onRowClick}
+    {...(args.isRowClickable && !args.onRowClick ? eventsFromNames : {})}
   >
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={InfoIcon} />
