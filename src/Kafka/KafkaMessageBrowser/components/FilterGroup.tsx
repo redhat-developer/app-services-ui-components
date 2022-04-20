@@ -18,7 +18,7 @@ export type FilterGroupProps = {
   isDisabled: boolean;
   offset: number | undefined;
   timestamp: number | undefined;
-  onOffsetChange: (value: number) => void;
+  onOffsetChange: (value: number | undefined) => void;
   onTimestampChange: (value: Date | undefined) => void;
   onEpochChange: (value: number | undefined) => void;
   onLatest: () => void;
@@ -104,6 +104,8 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
                 if (Number.isInteger(newOffset)) {
                   onOffsetChange(newOffset);
                 }
+              } else {
+                onOffsetChange(undefined);
               }
             }}
             value={offset || ""}

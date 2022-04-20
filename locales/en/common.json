@@ -24,6 +24,7 @@
   "skeleton_loader_screenreader_text": "Loading content",
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
+  "table_cell_no_data": "No {{column}}",
   "time_created": "Time created",
   "time_updated": "Time updated",
   "type_value_to_confirm_html": "Type <i>{{value}}</i> to confirm",

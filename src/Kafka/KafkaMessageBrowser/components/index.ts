@@ -2,6 +2,7 @@ export * from "./DateTimePicker";
 export * from "./FilterGroup";
 export * from "./LimitSelector";
 export * from "./MessageDetails";
+export * from "./NoDataCell";
 export * from "./NoDataEmptyState";
 export * from "./NoResultsEmptyState";
 export * from "./OffsetRange";

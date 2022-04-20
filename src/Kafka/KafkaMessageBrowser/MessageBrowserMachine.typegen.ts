@@ -34,6 +34,7 @@ export interface Typegen0 {
   eventsCausingGuards: {
     noMessages: "";
     selectedMessageNotAvailable: "";
+    areFiltersChanged: "";
   };
   eventsCausingDelays: {};
   matchesStates:
@@ -44,7 +45,8 @@ export interface Typegen0 {
     | "ready"
     | "ready.pristine"
     | "ready.dirty"
+    | "ready.shouldSearch"
     | "refreshing"
-    | { ready?: "pristine" | "dirty" };
+    | { ready?: "pristine" | "dirty" | "shouldSearch" };
   tags: "dirty";
 }

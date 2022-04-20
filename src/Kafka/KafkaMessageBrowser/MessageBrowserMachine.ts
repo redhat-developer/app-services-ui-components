@@ -1,3 +1,4 @@
+import { shouldShowDate } from "./../Metrics/components/utils";
 import { assign, createMachine } from "xstate";
 import { Message } from "./types";
 import { isSameMessage } from "./utils";
@@ -92,6 +93,15 @@ export const MessageBrowserMachine = createMachine(
           dirty: {
             tags: "dirty",
           },
+          shouldSearch: {
+            always: [
+              {
+                cond: "areFiltersChanged",
+                target: "dirty",
+              },
+              { target: "pristine" },
+            ],
+          },
         },
         always: [
           {
@@ -102,27 +112,27 @@ export const MessageBrowserMachine = createMachine(
         on: {
           refresh: "refreshing",
           setPartition: {
-            target: ".dirty",
+            target: ".shouldSearch",
             actions: "setPartition",
           },
           setEpoch: {
             actions: "setEpoch",
-            target: ".dirty",
+            target: ".shouldSearch",
           },
           setTimestamp: {
-            target: ".dirty",
+            target: ".shouldSearch",
             actions: "setTimestamp",
           },
           setOffset: {
-            target: ".dirty",
+            target: ".shouldSearch",
             actions: "setOffset",
           },
           setLatest: {
-            target: ".dirty",
+            target: ".shouldSearch",
             actions: "setLatest",
           },
           setLimit: {
-            target: ".dirty",
+            target: ".shouldSearch",
             actions: "setLimit",
           },
           selectMessage: {
@@ -191,9 +201,12 @@ export const MessageBrowserMachine = createMachine(
         response === undefined || response.messages.length === 0,
       selectedMessageNotAvailable: ({ response, selectedMessage }) =>
         selectedMessage !== undefined &&
-        response !== undefined &&
-        response.messages.find((m) => isSameMessage(m, selectedMessage)) ===
+        response?.messages.find((m) => isSameMessage(m, selectedMessage)) ===
           undefined,
+      areFiltersChanged: (context) =>
+        context.response?.filter.offset !== context.offset ||
+        context.response?.filter.partition !== context.partition ||
+        context.response?.filter.timestamp !== context.timestamp,
     },
   }
 );

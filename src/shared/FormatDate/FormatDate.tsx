@@ -1,5 +1,7 @@
 import {
   differenceInDays,
+  differenceInMonths,
+  format,
   formatDistanceToNow,
   formatDuration,
   intervalToDuration,
@@ -7,7 +9,12 @@ import {
 import { useState, VoidFunctionComponent } from "react";
 import { useInterval } from "../../utils";
 
-type SupportedFormats = "distanceToNow" | "expiration";
+type SupportedFormats =
+  | "distanceToNow"
+  | "expiration"
+  | "long"
+  | "longWithMilliseconds"
+  | "epoch";
 
 const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
   distanceToNow: formatDistanceToNow,
@@ -26,8 +33,9 @@ const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
       }
     );
   },
-  long: (date) => format(date, "Pp"),
-  epoch: (date) => `${Math.floor(date.getTime() / 1000)}`,
+  long: (date) => format(date, "PPp"),
+  longWithMilliseconds: (date) => format(date, "PP hh:mm:ss.SSS a"),
+  epoch: (date) => format(date, "t"),
 };
 
 type FormatDateProps = {

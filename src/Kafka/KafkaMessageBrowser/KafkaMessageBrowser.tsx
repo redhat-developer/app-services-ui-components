@@ -25,6 +25,7 @@ import {
   LimitSelector,
   MessageDetails,
   MessageDetailsProps,
+  NoDataCell,
   NoDataEmptyState,
   NoResultsEmptyState,
   OffsetRange,
@@ -280,26 +281,34 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                   width={columnWidths[colIndex]}
                 >
                   {(() => {
+                    const empty = (
+                      <NoDataCell columnLabel={columnLabels[column]} />
+                    );
                     switch (column) {
                       case "partition":
                         return row.partition;
                       case "offset":
                         return row.offset;
                       case "timestamp":
-                        return (
-                          row.timestamp && (
-                            <FormatDate date={row.timestamp} format={"long"} />
-                          )
+                        return row.timestamp ? (
+                          <FormatDate
+                            date={row.timestamp}
+                            format={"longWithMilliseconds"}
+                          />
+                        ) : (
+                          empty
                         );
                       case "key":
-                        return (
+                        return row.key ? (
                           <UnknownValuePreview
-                            value={row.key || ""}
+                            value={row.key}
                             truncateAt={40}
                           />
+                        ) : (
+                          empty
                         );
                       case "headers":
-                        return (
+                        return Object.keys(row.headers).length > 0 ? (
                           <UnknownValuePreview
                             value={beautifyUnknownValue(
                               JSON.stringify(row.headers)
@@ -309,9 +318,11 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                               selectMessage(row);
                             }}
                           />
+                        ) : (
+                          empty
                         );
                       case "value":
-                        return (
+                        return row.value ? (
                           <UnknownValuePreview
                             value={beautifyUnknownValue(row.value || "")}
                             onClick={() => {
@@ -319,6 +330,8 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                               selectMessage(row);
                             }}
                           />
+                        ) : (
+                          empty
                         );
                     }
                   })()}

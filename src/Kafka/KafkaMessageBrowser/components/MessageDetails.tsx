@@ -1,6 +1,3 @@
-import { VoidFunctionComponent } from "react";
-import { Message } from "../types";
-import { useTranslation } from "react-i18next";
 import {
   ClipboardCopy,
   DescriptionList,
@@ -21,18 +18,22 @@ import {
   TextContent,
   TextVariants,
 } from "@patternfly/react-core";
+import { VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../../shared";
+import { Message } from "../types";
 import { beautifyUnknownValue } from "../utils";
+import { NoDataCell } from "./NoDataCell";
 
 export type MessageDetailsProps = {
   onClose: () => void;
-  message: Message | undefined;
   defaultTab: MessageDetailsBodyProps["defaultTab"];
+  message: Message | undefined;
 };
 export const MessageDetails: VoidFunctionComponent<MessageDetailsProps> = ({
-  message,
-  defaultTab,
   onClose,
+  defaultTab,
+  message,
 }) => {
   const { t } = useTranslation("message-browser");
 
@@ -48,22 +49,25 @@ export const MessageDetails: VoidFunctionComponent<MessageDetailsProps> = ({
       </DrawerHead>
       <DrawerContentBody>
         {message && (
-          <MessageDetailsBody message={message} defaultTab={defaultTab} />
+          <MessageDetailsBody
+            defaultTab={defaultTab}
+            messageKey={message.key}
+            {...message}
+          />
         )}
-        {!message && "TODO: empty state"}
       </DrawerContentBody>
     </DrawerPanelContent>
   );
 };
 
 export type MessageDetailsBodyProps = {
-  message: Message;
   defaultTab: "value" | "headers";
-};
-const MessageDetailsBody: VoidFunctionComponent<MessageDetailsBodyProps> = ({
-  message,
-  defaultTab,
-}) => {
+  messageKey: Message["key"];
+} & Omit<Message, "key">;
+
+export const MessageDetailsBody: VoidFunctionComponent<
+  MessageDetailsBodyProps
+> = ({ defaultTab, ...message }) => {
   const { t } = useTranslation("message-browser");
 
   return (
@@ -85,29 +89,34 @@ const MessageDetailsBody: VoidFunctionComponent<MessageDetailsBodyProps> = ({
           <DescriptionListGroup>
             <DescriptionListTerm>{t("field.timestamp")}</DescriptionListTerm>
             <DescriptionListDescription>
-              {message.timestamp && (
-                <FormatDate date={message.timestamp} format={"long"} />
+              {message.timestamp ? (
+                <FormatDate
+                  date={message.timestamp}
+                  format={"longWithMilliseconds"}
+                />
+              ) : (
+                <NoDataCell columnLabel={t("field.timestamp")} />
               )}
             </DescriptionListDescription>
           </DescriptionListGroup>
           <DescriptionListGroup>
             <DescriptionListTerm>{t("field.epoch")}</DescriptionListTerm>
             <DescriptionListDescription>
-              {message.timestamp && (
+              {message.timestamp ? (
                 <FormatDate date={message.timestamp} format={"epoch"} />
+              ) : (
+                <NoDataCell columnLabel={t("field.epoch")} />
               )}
             </DescriptionListDescription>
           </DescriptionListGroup>
           <DescriptionListGroup>
             <DescriptionListTerm>{t("field.key")}</DescriptionListTerm>
             <DescriptionListDescription>
-              {message.key}
-            </DescriptionListDescription>
-          </DescriptionListGroup>
-          <DescriptionListGroup>
-            <DescriptionListTerm>{t("field.size")}</DescriptionListTerm>
-            <DescriptionListDescription>
-              {message.value?.length || 0} bytes
+              {message.messageKey ? (
+                message.messageKey
+              ) : (
+                <NoDataCell columnLabel={t("field.key")} />
+              )}
             </DescriptionListDescription>
           </DescriptionListGroup>
         </DescriptionList>
