@@ -19,7 +19,7 @@ exports[`ConnectionTab renders 1`] = `
           Your application or tool initially connects to the Kafka instance using the bootstrap server and authenticates with your service account credentials.
         </small>
         <h3
-          class="pf-u-mt-lg"
+          class="pf-u-mt-xl"
           data-ouia-component-id="OUIA-Generated-Text-2"
           data-ouia-component-type="PF4/Text"
           data-ouia-safe="true"
@@ -51,6 +51,7 @@ exports[`ConnectionTab renders 1`] = `
               data-ouia-component-type="PF4/TextInput"
               data-ouia-safe="true"
               id="text-input-0"
+              readonly=""
               type="text"
               value="hema-test-c-k-l-kafka-stage.rhcloud.com:443"
             />
@@ -86,7 +87,7 @@ exports[`ConnectionTab renders 1`] = `
         class="pf-c-content pf-u-pb-sm"
       >
         <h3
-          class="pf-u-mt-lg"
+          class="pf-u-mt-xl"
           data-ouia-component-id="OUIA-Generated-Text-4"
           data-ouia-component-type="PF4/Text"
           data-ouia-safe="true"
@@ -148,6 +149,7 @@ exports[`ConnectionTab renders 1`] = `
               data-ouia-component-type="PF4/TextInput"
               data-ouia-safe="true"
               id="text-input-1"
+              readonly=""
               type="text"
               value="https://console.redhat.com/docs/api"
             />

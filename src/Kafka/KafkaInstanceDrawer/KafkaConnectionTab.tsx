@@ -45,7 +45,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         <Text component={TextVariants.small}>
           {t("kafka:connection_tab.drawer_resource_tab_body_description_1")}
         </Text>
-        <Text component={TextVariants.h3} className="pf-u-mt-lg">
+        <Text component={TextVariants.h3} className="pf-u-mt-xl">
           {t("kafka:connection_tab.bootstrap_server")}
         </Text>
         <Text component={TextVariants.small}>
@@ -57,19 +57,20 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           <ClipboardCopy
             data-testid="drawerStreams-copyBootstrapURL"
             textAriaLabel={t("kafka:connection_tab.bootstrap_server")}
+            isReadOnly
           >
             {externalServer}
           </ClipboardCopy>
         )}
       </TextContent>
       <TextContent className="pf-u-pb-sm">
-        <Text component={TextVariants.h3} className="pf-u-mt-lg">
+        <Text component={TextVariants.h3} className="pf-u-mt-xl">
           {t("kafka:connection_tab.rest_api")}{" "}
           <Popover
             aria-label={t("kafka:connection_tab.rest_api_popover_label")}
             bodyContent={
-              <div>
-                <div>
+              <TextContent>
+                <p>
                   {
                     <Trans
                       i18nKey={
@@ -80,8 +81,8 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
                       }}
                     />
                   }
-                </div>
-                <div>
+                </p>
+                <p>
                   {
                     <Trans
                       i18nKey={
@@ -92,8 +93,8 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
                       }}
                     />
                   }
-                </div>
-              </div>
+                </p>
+              </TextContent>
             }
           >
             <Button
@@ -120,6 +121,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           <ClipboardCopy
             data-testid="drawerStreams-copyRestApiURL"
             textAriaLabel={t("kafka:connection_tab.rest_api")}
+            isReadOnly
           >
             {restAPIUrl}
           </ClipboardCopy>
