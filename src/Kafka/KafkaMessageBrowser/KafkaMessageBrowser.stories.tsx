@@ -61,7 +61,6 @@ NoMatch.play = async ({ canvasElement }) => {
 };
 
 function sampleData(args) {
-  console.log("fakeApi", args);
   const numberOfMessages = args.limit;
   const messages: Message[] = [
     {

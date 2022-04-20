@@ -316,6 +316,7 @@ export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
         data-testid={[isSelected && "row-selected", isDeleted && "row-deleted"]
           .filter((v) => !!v)
           .join(" ")}
+        role={"row"}
       >
         {children}
       </Tr>
