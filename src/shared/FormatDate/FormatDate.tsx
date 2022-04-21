@@ -1,5 +1,6 @@
 import {
   differenceInDays,
+  differenceInMonths,
   formatDistanceToNow,
   formatDuration,
   intervalToDuration,
@@ -12,10 +13,18 @@ type SupportedFormats = "distanceToNow" | "expiration";
 const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
   distanceToNow: formatDistanceToNow,
   expiration: (date: Date) => {
+    const months = differenceInMonths(date, Date.now());
     const days = differenceInDays(date, Date.now());
     return formatDuration(
       intervalToDuration({ start: date, end: Date.now() }),
-      { format: days > 0 ? ["days", "hours"] : ["hours", "minutes"] }
+      {
+        format:
+          months > 0
+            ? ["months", "days"]
+            : days > 0
+            ? ["days", "hours"]
+            : ["hours", "minutes"],
+      }
     );
   },
 };
