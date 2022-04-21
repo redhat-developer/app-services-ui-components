@@ -16,7 +16,9 @@ type SupportedFormats =
   | "longWithMilliseconds"
   | "epoch";
 
-const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
+export const FormatMapping: {
+  [name in SupportedFormats]: (date: Date) => string;
+} = {
   distanceToNow: formatDistanceToNow,
   expiration: (date: Date) => {
     const months = differenceInMonths(date, Date.now());

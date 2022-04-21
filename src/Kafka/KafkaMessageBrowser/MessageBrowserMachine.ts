@@ -1,4 +1,3 @@
-import { shouldShowDate } from "./../Metrics/components/utils";
 import { assign, createMachine } from "xstate";
 import { Message } from "./types";
 import { isSameMessage } from "./utils";
@@ -14,6 +13,7 @@ export type MessageApiResponse = {
     partition: number | undefined;
     offset: number | undefined;
     timestamp: number | undefined;
+    limit: number | undefined;
   };
 };
 
@@ -85,7 +85,11 @@ export const MessageBrowserMachine = createMachine(
           refresh: "initialLoading",
         },
       },
-      error: {},
+      error: {
+        on: {
+          refresh: "initialLoading",
+        },
+      },
       ready: {
         initial: "pristine",
         states: {
@@ -204,6 +208,7 @@ export const MessageBrowserMachine = createMachine(
         response?.messages.find((m) => isSameMessage(m, selectedMessage)) ===
           undefined,
       areFiltersChanged: (context) =>
+        context.response?.filter.limit !== context.limit ||
         context.response?.filter.offset !== context.offset ||
         context.response?.filter.partition !== context.partition ||
         context.response?.filter.timestamp !== context.timestamp,

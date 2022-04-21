@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
-import { fakeApi } from "../../shared/storiesHelpers";
+import { apiError, fakeApi } from "../../shared/storiesHelpers";
 import { KafkaMessageBrowser } from "./KafkaMessageBrowser";
 import { Message } from "./types";
 
@@ -29,6 +29,11 @@ NoData.args = {
       { messages: [], partitions: 0 },
       500
     ),
+};
+
+export const ApiError = Template.bind({});
+ApiError.args = {
+  getMessages: () => apiError<{ messages: Message[]; partitions: number }>(),
 };
 
 export const NoMatch = Template.bind({});

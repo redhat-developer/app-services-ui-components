@@ -94,7 +94,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
   return (
     <KafkaMessageBrowserConnected
       isFirstLoad={state.matches("initialLoading")}
-      isNoData={state.matches("noData")}
+      isNoData={state.matches("noData") || state.matches("error")}
       isRefreshing={state.matches("refreshing")}
       requiresSearch={state.hasTag("dirty")}
       selectedMessage={state.context.selectedMessage}
@@ -206,7 +206,10 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
               />
             }
           >
-            <Toolbar className={"mas-KafkaMessageBrowser-Toolbar"}>
+            <Toolbar
+              className={"mas-KafkaMessageBrowser-Toolbar"}
+              data-testid={"message-browser-toolbar"}
+            >
               <ToolbarContent>
                 <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
                   <ToolbarGroup variant="filter-group">

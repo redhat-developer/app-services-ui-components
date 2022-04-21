@@ -38,6 +38,7 @@ export const LimitSelector: VoidFunctionComponent<LimitSelectorProps> = ({
           selections={value !== undefined ? [t("limit", { value })] : undefined}
           isOpen={isOpen}
           isDisabled={isDisabled}
+          onSelect={() => setIsOpen(false)}
         >
           {[10, 20, 50].map((value, idx) => (
             <SelectOption

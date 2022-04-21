@@ -83,10 +83,12 @@ export const PartitionSelector: VoidFunctionComponent<
 
   return (
     <InputGroup>
-      <InputGroupText className="pf-c-content">Partition</InputGroupText>
+      <InputGroupText className="pf-c-content">
+        {t("field.partition")}
+      </InputGroupText>
       <div>
         <span id={titleId} hidden>
-          Select a state
+          {t("select_partition_aria_label")}
         </span>
         <Select
           variant={SelectVariant.typeahead}

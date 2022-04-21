@@ -71,7 +71,7 @@ export const MessageDetailsBody: VoidFunctionComponent<
   const { t } = useTranslation("message-browser");
 
   return (
-    <Flex direction={{ default: "column" }}>
+    <Flex direction={{ default: "column" }} data-testid={"message-details"}>
       <FlexItem>
         <DescriptionList isHorizontal isCompact>
           <DescriptionListGroup>

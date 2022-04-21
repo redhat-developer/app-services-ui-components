@@ -12,15 +12,11 @@ import "./DateTimePicker.css";
 export type DateTimePickerProps = {
   isDisabled: boolean;
   value: number | undefined;
-  dateFormat?: string;
-  timeFormat?: string;
   onChange: (value: Date) => void;
 };
 export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
   isDisabled,
   value,
-  dateFormat = "yyyy-MM-dd",
-  timeFormat = "hh:mm:ss.SSS",
   onChange,
 }) => {
   const date = value ? new Date(value) : undefined;
@@ -55,7 +51,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
     <InputGroup>
       <DatePicker
         isDisabled={isDisabled}
-        value={date ? format(date, dateFormat) : undefined}
+        value={date ? format(date, "yyyy-MM-dd") : undefined}
         onChange={onSelectCalendar}
       />
       <TimePicker
