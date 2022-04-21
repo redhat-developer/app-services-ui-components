@@ -32,6 +32,7 @@ import {
   PartitionSelector,
   UnknownValuePreview,
 } from "./components";
+import "./KafkaMessageBrowser.css";
 import {
   MessageApiResponse,
   MessageBrowserMachine,
@@ -205,7 +206,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
               />
             }
           >
-            <Toolbar>
+            <Toolbar className={"mas-KafkaMessageBrowser-Toolbar"}>
               <ToolbarContent>
                 <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
                   <ToolbarGroup variant="filter-group">

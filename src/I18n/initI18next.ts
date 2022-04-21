@@ -36,6 +36,10 @@ export function initI18next(
       postProcess: [`markdownPostprocessor`],
       interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
+        format: function (value, format, _lng) {
+          if (format === "lowercase") return value.toLocaleLowerCase();
+          return value;
+        },
       },
       react: {
         useSuspense: true,

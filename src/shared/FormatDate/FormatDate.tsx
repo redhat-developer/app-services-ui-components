@@ -34,7 +34,7 @@ const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
     );
   },
   long: (date) => format(date, "PPp"),
-  longWithMilliseconds: (date) => format(date, "PP hh:mm:ss.SSS a"),
+  longWithMilliseconds: (date) => format(date, "PP, hh:mm:ss.SSS a"),
   epoch: (date) => format(date, "t"),
 };
 
