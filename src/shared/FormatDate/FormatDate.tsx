@@ -4,6 +4,7 @@ import {
   format,
   formatDistanceToNow,
   formatDuration,
+  formatISO,
   intervalToDuration,
 } from "date-fns";
 import { useState, VoidFunctionComponent } from "react";
@@ -58,5 +59,5 @@ export const FormatDate: VoidFunctionComponent<FormatDateProps> = ({
     setDistance(formatFn(date));
   }, interval);
 
-  return <time dateTime={date.toISOString()}>{distance}</time>;
+  return <time dateTime={formatISO(date)}>{distance}</time>;
 };

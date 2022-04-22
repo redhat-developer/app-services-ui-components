@@ -71,7 +71,7 @@ function sampleData(args) {
     {
       partition: 0,
       offset: 0,
-      timestamp: new Date("2022-03-15T14:11:57.102Z"),
+      timestamp: "2022-03-15T14:11:57.102Z",
       headers: {
         random: `${Math.random()}`,
       },
@@ -82,7 +82,7 @@ function sampleData(args) {
       key: "this-is-a-very-long-key-that-might-cause-some-trouble-figuring-out-column-widths",
       partition: 4,
       offset: 16,
-      timestamp: new Date("2022-03-15T14:11:57.103Z"),
+      timestamp: "2022-03-15T14:11:57.103Z",
       headers: {
         "post-office-box": "string",
         "extended-address": "string",
@@ -98,7 +98,7 @@ function sampleData(args) {
     {
       partition: 2,
       offset: 21,
-      timestamp: new Date("2022-03-15T14:10:57.103Z"),
+      timestamp: "2022-03-15T14:10:57.103Z",
       headers: {
         never: `change`,
       },
@@ -107,14 +107,14 @@ function sampleData(args) {
     {
       partition: 3,
       offset: 3,
-      timestamp: new Date("2022-03-15T14:10:57.103Z"),
+      timestamp: "2022-03-15T14:10:57.103Z",
       headers: {},
       value: "random string",
     },
     {
       partition: 5,
       offset: 44,
-      timestamp: new Date("2022-03-15T14:10:57.103Z"),
+      timestamp: "2022-03-15T14:10:57.103Z",
       headers: {},
       value: "",
     },

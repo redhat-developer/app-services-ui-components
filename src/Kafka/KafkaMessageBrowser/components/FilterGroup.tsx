@@ -8,19 +8,21 @@ import {
   TextInput,
   ToolbarItem,
 } from "@patternfly/react-core";
+import { format, formatISO, parse, parseISO } from "date-fns";
 
 import { useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { DateIsoString } from "../types";
 import { DateTimePicker } from "./DateTimePicker";
 
 type Category = "offset" | "timestamp" | "epoch" | "latest";
 export type FilterGroupProps = {
   isDisabled: boolean;
   offset: number | undefined;
-  timestamp: number | undefined;
+  timestamp: DateIsoString | undefined;
   onOffsetChange: (value: number | undefined) => void;
-  onTimestampChange: (value: Date | undefined) => void;
-  onEpochChange: (value: number | undefined) => void;
+  onTimestampChange: (value: DateIsoString | undefined) => void;
+  onEpochChange: (value: DateIsoString | undefined) => void;
   onLatest: () => void;
 };
 export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
@@ -118,7 +120,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
         {currentCategory === "timestamp" && (
           <DateTimePicker
             isDisabled={isDisabled}
-            value={timestamp ? timestamp * 1000 : undefined}
+            value={timestamp}
             onChange={onTimestampChange}
           />
         )}
@@ -131,12 +133,16 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
             onChange={(value) => {
               if (value !== "") {
                 const epoch = parseInt(value, 10);
-                onEpochChange(epoch);
+                const newDate = parse(`${epoch}`, "t", new Date());
+                const dateIso = formatISO(newDate);
+                if (dateIso) {
+                  onEpochChange(dateIso);
+                }
               } else {
                 onEpochChange(undefined);
               }
             }}
-            value={timestamp || ""}
+            value={timestamp ? format(parseISO(timestamp), "t") : ""}
           />
         )}
       </InputGroup>

@@ -18,6 +18,7 @@ import {
   TextContent,
   TextVariants,
 } from "@patternfly/react-core";
+import { parseISO } from "date-fns";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../../shared";
@@ -91,7 +92,7 @@ export const MessageDetailsBody: VoidFunctionComponent<
             <DescriptionListDescription>
               {message.timestamp ? (
                 <FormatDate
-                  date={message.timestamp}
+                  date={parseISO(message.timestamp)}
                   format={"longWithMilliseconds"}
                 />
               ) : (
@@ -103,7 +104,10 @@ export const MessageDetailsBody: VoidFunctionComponent<
             <DescriptionListTerm>{t("field.epoch")}</DescriptionListTerm>
             <DescriptionListDescription>
               {message.timestamp ? (
-                <FormatDate date={message.timestamp} format={"epoch"} />
+                <FormatDate
+                  date={parseISO(message.timestamp)}
+                  format={"epoch"}
+                />
               ) : (
                 <NoDataCell columnLabel={t("field.epoch")} />
               )}

@@ -12,6 +12,7 @@ import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
 import { BaseCellProps } from "@patternfly/react-table";
 import { useMachine } from "@xstate/react";
+import { parseISO } from "date-fns";
 import { useMemo, useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -37,7 +38,7 @@ import {
   MessageApiResponse,
   MessageBrowserMachine,
 } from "./MessageBrowserMachine";
-import { Message } from "./types";
+import { DateIsoString, Message } from "./types";
 import { beautifyUnknownValue, isSameMessage } from "./utils";
 
 const columns = [
@@ -55,7 +56,7 @@ export type KafkaMessageBrowserProps = {
   getMessages: (props: {
     partition?: number;
     offset?: number;
-    timestamp?: number;
+    timestamp?: DateIsoString;
     limit: number;
   }) => Promise<{ messages: Message[]; partitions: number }>;
 };
@@ -110,10 +111,10 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
       setOffset={(value: number | undefined) =>
         send({ type: "setOffset", value })
       }
-      setTimestamp={(value: Date | undefined) =>
+      setTimestamp={(value: DateIsoString | undefined) =>
         send({ type: "setTimestamp", value })
       }
-      setEpoch={(value: number | undefined) =>
+      setEpoch={(value: DateIsoString | undefined) =>
         send({ type: "setEpoch", value })
       }
       setLatest={() => send({ type: "setLatest" })}
@@ -138,11 +139,11 @@ export type KafkaMessageBrowserConnectedProps = {
   partition: number | undefined;
   limit: number;
   filterOffset: number | undefined;
-  filterTimestamp: number | undefined;
+  filterTimestamp: DateIsoString | undefined;
   setPartition: (value: number | undefined) => void;
   setOffset: (value: number | undefined) => void;
-  setTimestamp: (value: Date | undefined) => void;
-  setEpoch: (value: number | undefined) => void;
+  setTimestamp: (value: DateIsoString | undefined) => void;
+  setEpoch: (value: DateIsoString | undefined) => void;
   setLatest: () => void;
   setLimit: (value: number) => void;
   refresh: () => void;
@@ -296,7 +297,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                       case "timestamp":
                         return row.timestamp ? (
                           <FormatDate
-                            date={row.timestamp}
+                            date={parseISO(row.timestamp)}
                             format={"longWithMilliseconds"}
                           />
                         ) : (

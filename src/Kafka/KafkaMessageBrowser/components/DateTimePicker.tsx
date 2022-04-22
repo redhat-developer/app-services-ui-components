@@ -5,14 +5,15 @@ import {
   TimePicker,
   TimePickerProps,
 } from "@patternfly/react-core";
-import { format, setHours, setMinutes } from "date-fns";
+import { format, formatISO, setHours, setMinutes } from "date-fns";
 import { VoidFunctionComponent } from "react";
+import { DateIsoString } from "../types";
 import "./DateTimePicker.css";
 
 export type DateTimePickerProps = {
   isDisabled: boolean;
-  value: number | undefined;
-  onChange: (value: Date) => void;
+  value: DateIsoString | undefined;
+  onChange: (value: DateIsoString) => void;
 };
 export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
   isDisabled,
@@ -21,9 +22,9 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
 }) => {
   const date = value ? new Date(value) : undefined;
 
-  const onSelectCalendar: DatePickerProps["onChange"] = (_, newValueDate) => {
-    if (newValueDate) {
-      onChange(newValueDate);
+  const onSelectCalendar: DatePickerProps["onChange"] = (_, newDate) => {
+    if (newDate) {
+      onChange(formatISO(newDate));
     }
   };
 
@@ -43,7 +44,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
       if (minute !== undefined) {
         newDate = setMinutes(newDate, minute);
       }
-      onChange(newDate);
+      onChange(formatISO(newDate));
     }
   };
 
@@ -59,7 +60,6 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
         isDisabled={!date || isDisabled}
         time={date}
         onChange={onSelectTime}
-        menuAppendTo={"parent"}
       />
     </InputGroup>
   );

@@ -147,7 +147,7 @@ describe("KafkaMessageBrowser", () => {
     userEvent.click(toolbar.getByText("Timestamp"));
     userEvent.type(toolbar.getByLabelText("Date picker"), "2022-04-12");
     userEvent.click(toolbar.getByLabelText("Time picker"));
-    userEvent.click(await toolbar.findByText("6:00 AM"));
+    userEvent.click(await toolbar.findByText("6:00 PM"));
     await waitForPopper();
 
     // check for the buttons' states
@@ -158,7 +158,7 @@ describe("KafkaMessageBrowser", () => {
       limit: 10,
       partition: undefined,
       offset: undefined,
-      timestamp: 1649743200,
+      timestamp: "2022-04-12T18:00:00Z",
     });
   });
 
@@ -179,7 +179,7 @@ describe("KafkaMessageBrowser", () => {
     userEvent.click(toolbar.getByText("Epoch timestamp"));
     userEvent.type(
       toolbar.getByLabelText("Select epoch timestamp"),
-      "1649736000"
+      "1650637783"
     );
 
     // check for the buttons' states
@@ -190,7 +190,7 @@ describe("KafkaMessageBrowser", () => {
       limit: 10,
       partition: undefined,
       offset: undefined,
-      timestamp: 1649736000,
+      timestamp: "2022-04-22T14:29:43Z",
     });
 
     await waitFor(() => expect(filterGroup).not.toBeDisabled());

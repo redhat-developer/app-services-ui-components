@@ -1,5 +1,5 @@
 import { assign, createMachine } from "xstate";
-import { Message } from "./types";
+import { DateIsoString, Message } from "./types";
 import { isSameMessage } from "./utils";
 
 export type MessageApiResponse = {
@@ -12,7 +12,7 @@ export type MessageApiResponse = {
   filter: {
     partition: number | undefined;
     offset: number | undefined;
-    timestamp: number | undefined;
+    timestamp: DateIsoString | undefined;
     limit: number | undefined;
   };
 };
@@ -30,7 +30,7 @@ export const MessageBrowserMachine = createMachine(
         // optional input
         partition: number | undefined;
         offset: number | undefined;
-        timestamp: number | undefined;
+        timestamp: DateIsoString | undefined;
         selectedMessage: Message | undefined;
       },
       events: {} as
@@ -45,8 +45,8 @@ export const MessageBrowserMachine = createMachine(
         | { type: "refresh" }
         | { type: "setPartition"; value: number | undefined }
         | { type: "setOffset"; value: number | undefined }
-        | { type: "setTimestamp"; value: Date | undefined }
-        | { type: "setEpoch"; value: number | undefined }
+        | { type: "setTimestamp"; value: DateIsoString | undefined }
+        | { type: "setEpoch"; value: DateIsoString | undefined }
         | { type: "setLatest" }
         | { type: "setLimit"; value: number }
         | { type: "selectMessage"; message: Message }
@@ -156,6 +156,9 @@ export const MessageBrowserMachine = createMachine(
             actions: "setMessages",
             target: "ready",
           },
+          fetchFail: {
+            target: "ready",
+          },
         },
       },
     },
@@ -184,7 +187,7 @@ export const MessageBrowserMachine = createMachine(
         timestamp: value,
       })),
       setTimestamp: assign((_, { value }) => ({
-        timestamp: value ? Math.floor(value.getTime() / 1000) : undefined,
+        timestamp: value,
       })),
       setOffset: assign((_, { value }) => ({
         offset: value,
