@@ -265,12 +265,13 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                   </ToolbarItem>
                 </ToolbarGroup>
                 <ToolbarGroup alignment={{ default: "alignRight" }}>
-                  {response?.filter.partition !== undefined && (
-                    <OffsetRange
-                      min={response?.offsetMin || 0}
-                      max={response?.offsetMax || 0}
-                    />
-                  )}
+                  {response?.filter.partition !== undefined &&
+                    response?.messages.length > 0 && (
+                      <OffsetRange
+                        min={response?.offsetMin || 0}
+                        max={response?.offsetMax || 0}
+                      />
+                    )}
                 </ToolbarGroup>
               </ToolbarContent>
             </Toolbar>
