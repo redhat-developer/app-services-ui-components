@@ -174,6 +174,7 @@ export const MessageBrowserMachine = createMachine(
               partition: context.partition,
               timestamp: context.timestamp,
               offset: context.offset,
+              limit: context.limit,
             },
           },
         })
