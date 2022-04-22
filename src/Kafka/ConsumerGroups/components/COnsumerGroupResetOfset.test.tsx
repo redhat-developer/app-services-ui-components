@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { renderDialog, waitForI18n } from "../../../test-utils";
+import { renderDialog, waitForI18n, waitForPopper } from "../../../test-utils";
 import * as stories from "./ConsumerGroupResetOffset.stories";
 import { userEvent, within } from "@storybook/testing-library";
 
@@ -34,5 +34,25 @@ describe("Consumer group reset offset Modal", () => {
     ).toBeInTheDocument();
 
     expect(comp.getByRole("button", { name: "Reset offset" })).toBeDisabled();
+  });
+
+  it("Reset offset when consumer group is disconnected", async () => {
+    const comp = renderDialog(<ResetOffset />);
+
+    await waitForI18n(comp);
+
+    const openDropdown = async () => {
+      userEvent.click(await comp.findByTestId("topic-dropdowntoggle"));
+      await waitForPopper();
+    };
+
+    await openDropdown();
+
+    const menubars = await comp.queryAllByRole("menu");
+    const menu = within(menubars[0]);
+
+    userEvent.click(await menu.findByText("test-topic"));
+
+    expect(await comp.queryByText("test-topic")).toBeInTheDocument();
   });
 });
