@@ -212,7 +212,10 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
               data-testid={"message-browser-toolbar"}
             >
               <ToolbarContent>
-                <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
+                <ToolbarToggleGroup
+                  toggleIcon={<FilterIcon />}
+                  breakpoint="2xl"
+                >
                   <ToolbarGroup variant="filter-group">
                     <ToolbarItem>
                       <PartitionSelector
