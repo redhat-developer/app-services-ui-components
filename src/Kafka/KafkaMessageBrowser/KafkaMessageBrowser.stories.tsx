@@ -52,14 +52,14 @@ NoMatch.args = {
 NoMatch.play = async ({ canvasElement }) => {
   const container = within(canvasElement);
   await userEvent.type(
-    await container.findByLabelText("Select partition value"),
+    await container.findByLabelText("Specify partition value"),
     "1337"
   );
   await userEvent.keyboard("[ArrowDown][Enter]");
-  await userEvent.click(await container.findByText("Select latest"));
+  await userEvent.click(await container.findByText("Latest messages"));
   await userEvent.click((await container.findAllByText("Offset"))[0]);
   await userEvent.type(
-    await container.findByLabelText("Select offset"),
+    await container.findByLabelText("Specify offset"),
     "1337"
   );
   await userEvent.click(await container.findByLabelText("Search"));

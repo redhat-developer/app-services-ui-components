@@ -56,7 +56,13 @@ export const FormatDate: VoidFunctionComponent<FormatDateProps> = ({
     typeof format === "function" ? format : FormatMapping[format];
   const [distance, setDistance] = useState<string>("");
   useInterval(() => {
-    setDistance(formatFn(date));
+    try {
+      setDistance(formatFn(date));
+    } catch (e) {
+      console.warn(
+        `FormatDate can't format date "${date}" with format "${format}"`
+      );
+    }
   }, interval);
 
   return <time dateTime={formatISO(date)}>{distance}</time>;

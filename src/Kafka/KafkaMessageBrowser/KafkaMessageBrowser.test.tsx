@@ -76,14 +76,14 @@ describe("KafkaMessageBrowser", () => {
 
     // change partition
     userEvent.type(
-      await toolbar.findByLabelText("Select partition value"),
+      await toolbar.findByLabelText("Specify partition value"),
       "1337"
     );
     userEvent.keyboard("[ArrowDown][Enter]");
     userEvent.click(filterGroup);
     // change offset
     userEvent.click(toolbar.getByText("Offset"));
-    userEvent.type(toolbar.getByLabelText("Select offset"), "1337");
+    userEvent.type(toolbar.getByLabelText("Specify offset"), "1337");
 
     const search = await toolbar.findByLabelText("Search");
     const refresh = await toolbar.findByLabelText("Refresh");
@@ -118,7 +118,7 @@ describe("KafkaMessageBrowser", () => {
     await waitFor(() => expect(filterGroup).not.toBeDisabled());
     userEvent.click(filterGroup);
     // change offset
-    userEvent.click(toolbar.getByText("Select latest"));
+    userEvent.click(toolbar.getByText("Latest messages"));
     expect(search).toBeEnabled();
     expect(refresh).toBeDisabled();
     userEvent.click(search);
@@ -178,7 +178,7 @@ describe("KafkaMessageBrowser", () => {
     userEvent.click(filterGroup);
     userEvent.click(toolbar.getByText("Epoch timestamp"));
     userEvent.type(
-      toolbar.getByLabelText("Select epoch timestamp"),
+      toolbar.getByLabelText("Specify epoch timestamp"),
       "1650637783"
     );
 
@@ -194,7 +194,7 @@ describe("KafkaMessageBrowser", () => {
     });
 
     await waitFor(() => expect(filterGroup).not.toBeDisabled());
-    userEvent.clear(toolbar.getByLabelText("Select epoch timestamp"));
+    userEvent.clear(toolbar.getByLabelText("Specify epoch timestamp"));
     userEvent.click(search);
     expect(getMessages).toHaveBeenLastCalledWith({
       limit: 10,

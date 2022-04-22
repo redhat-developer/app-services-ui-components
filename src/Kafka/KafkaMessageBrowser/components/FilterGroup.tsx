@@ -130,6 +130,8 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
             type={"number"}
             aria-label={t("filter.epoch_aria_label")}
             placeholder={t("filter.epoch_placeholder")}
+            className="pf-u-flex-basis-auto pf-u-flex-grow-0 pf-u-w-initial"
+            size={t("filter.epoch_placeholder").length}
             onChange={(value) => {
               if (value !== "") {
                 const epoch = parseInt(value, 10);
