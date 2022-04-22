@@ -16,7 +16,7 @@
     "static/"
   ],
   "scripts": {
-    "build-storybook": "build-storybook --quiet --loglevel silent",
+    "build-storybook": "build-storybook",
     "prebuild": "npm run parse-i18n",
     "build": "rollup -c",
     "chromatic": "chromatic",
