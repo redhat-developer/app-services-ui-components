@@ -7,7 +7,7 @@ import {
   DropdownSeparator,
 } from "@patternfly/react-core";
 
-export class ActionsDropdown extends React.Component {
+export class AllActionsDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,21 +34,27 @@ export class ActionsDropdown extends React.Component {
     const { isOpen } = this.state;
     const dropdownItems = [
       <DropdownGroup label="View information" key="View information">
-        <DropdownItem key="View information:Details">Details</DropdownItem>
-        <DropdownItem key="View information:Connection">
-          Connection
-        </DropdownItem>
-        <DropdownItem key="topics">Topics? have on toolbar..</DropdownItem>
-        <DropdownItem key="metrics">
-          Metrics/Dashboard?have on toolbar..
-        </DropdownItem>
+        <DropdownItem key="Start">Start</DropdownItem>
+        <DropdownItem key="Stop">Stop</DropdownItem>
+        <DropdownItem key="Resume">Resume</DropdownItem>
         <DropdownSeparator key="dropdown separator" />
       </DropdownGroup>,
-      <DropdownGroup key="Actions">
-        <DropdownItem key="Actions:Change owner">
-          Change instance owner
+      <DropdownGroup label="View information" key="View information">
+        <DropdownItem key="Edit">Edit</DropdownItem>
+        <DropdownItem key="Duplicate">Duplicate</DropdownItem>
+        <DropdownItem key="Delete">Delete</DropdownItem>
+        <DropdownItem key="Change owner">Change owner</DropdownItem>
+        <DropdownItem key="Reset credentials">Reset credentials</DropdownItem>
+        <DropdownSeparator key="dropdown separator" />
+      </DropdownGroup>,
+      <DropdownGroup label="View information" key="View information">
+        <DropdownItem key="Connection">Connecton</DropdownItem>
+        <DropdownItem key="Details">Details</DropdownItem>
+        <DropdownItem key="primary data plane tab">
+          [Primary data plane tab]
         </DropdownItem>
-        <DropdownItem key="Actions:Delete">Delete instance</DropdownItem>
+        <DropdownItem key="[drawer tab label]">[drawer tab label]</DropdownItem>
+        <DropdownItem key="access tab">[Access tab]</DropdownItem>
       </DropdownGroup>,
     ];
     return (
