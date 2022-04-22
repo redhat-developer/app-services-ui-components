@@ -22,15 +22,15 @@ export const DevelopmentPreview: FunctionComponent<DevelopmentPreviewProps> = ({
         <Banner isSticky variant="info">
           <Bullseye>
             <Popover
-              aria-label="Development Preview Button"
+              aria-label="Service Preview Button"
               hasAutoWidth
-              bodyContent={<div>{t("common:developmentPreviewTooltip")}</div>}
+              bodyContent={<div>{t("common:servicePreviewTooltip")}</div>}
               position="bottom"
               minWidth="300px"
               maxWidth="25%"
             >
               <Button className="appserv-devpreview__button" variant="link">
-                {t("common:developmentPreview")}
+                {t("common:servicePreview")}
               </Button>
             </Popover>
           </Bullseye>
