@@ -29,7 +29,7 @@
     "parse-i18n": "i18next 'src/**/*.tsx'",
     "prepare": "npm run clean && npm run package && husky install",
     "storybook": "start-storybook -p 6006",
-    "test-storybook": "test-storybook",
+    "test-storybook": "test-storybook --maxWorkers=1",
     "test-storybook:ci": "concurrently -k -s first -n \"SB,TEST\" -c \"magenta,blue\" \"npm run build-storybook && npx http-server storybook-static --port 6006 --silent\" \"wait-on tcp:6006 && npm run test-storybook\"",
     "test": "TZ=UTC jest --runInBand",
     "test:generate-output": "npm run test -- --json --outputFile=.jest-test-results.json",

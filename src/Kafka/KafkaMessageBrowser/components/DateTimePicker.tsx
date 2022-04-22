@@ -8,7 +8,6 @@ import {
 import { format, formatISO, parseISO, setHours, setMinutes } from "date-fns";
 import { VoidFunctionComponent } from "react";
 import { DateIsoString } from "../types";
-import "./DateTimePicker.css";
 
 export type DateTimePickerProps = {
   isDisabled: boolean;

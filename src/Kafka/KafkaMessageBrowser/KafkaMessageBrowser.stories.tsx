@@ -51,6 +51,7 @@ NoMatch.args = {
 };
 NoMatch.play = async ({ canvasElement }) => {
   const container = within(canvasElement);
+  await userEvent.click(await container.findByLabelText("Show Filters"));
   await userEvent.type(
     await container.findByLabelText("Specify partition value"),
     "1337"
