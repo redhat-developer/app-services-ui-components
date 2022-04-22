@@ -5,7 +5,7 @@ import {
   TimePicker,
   TimePickerProps,
 } from "@patternfly/react-core";
-import { format, formatISO, setHours, setMinutes } from "date-fns";
+import { format, formatISO, parseISO, setHours, setMinutes } from "date-fns";
 import { VoidFunctionComponent } from "react";
 import { DateIsoString } from "../types";
 import "./DateTimePicker.css";
@@ -20,7 +20,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
   value,
   onChange,
 }) => {
-  const date = value ? new Date(value) : undefined;
+  const date = value ? parseISO(value) : undefined;
 
   const onSelectCalendar: DatePickerProps["onChange"] = (_, newDate) => {
     if (newDate) {
@@ -28,15 +28,9 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
     }
   };
 
-  const onSelectTime: TimePickerProps["onChange"] = (
-    _,
-    hour,
-    minute,
-    __,
-    isValid
-  ) => {
+  const onSelectTime: TimePickerProps["onChange"] = (_, hour, minute, __) => {
     //onChange();
-    if (isValid && date) {
+    if (date) {
       let newDate = date;
       if (hour !== undefined) {
         newDate = setHours(newDate, hour);
@@ -56,9 +50,8 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
         onChange={onSelectCalendar}
       />
       <TimePicker
-        key={value}
         isDisabled={!date || isDisabled}
-        time={date}
+        time={date || "00:00 AM"}
         onChange={onSelectTime}
       />
     </InputGroup>
