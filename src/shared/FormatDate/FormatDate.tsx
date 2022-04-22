@@ -1,16 +1,25 @@
 import {
   differenceInDays,
   differenceInMonths,
+  format,
   formatDistanceToNow,
   formatDuration,
+  formatISO,
   intervalToDuration,
 } from "date-fns";
 import { useState, VoidFunctionComponent } from "react";
 import { useInterval } from "../../utils";
 
-type SupportedFormats = "distanceToNow" | "expiration";
+type SupportedFormats =
+  | "distanceToNow"
+  | "expiration"
+  | "long"
+  | "longWithMilliseconds"
+  | "epoch";
 
-const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
+export const FormatMapping: {
+  [name in SupportedFormats]: (date: Date) => string;
+} = {
   distanceToNow: formatDistanceToNow,
   expiration: (date: Date) => {
     const months = differenceInMonths(date, Date.now());
@@ -27,6 +36,9 @@ const FormatMapping: { [name in SupportedFormats]: (date: Date) => string } = {
       }
     );
   },
+  long: (date) => format(date, "PPp"),
+  longWithMilliseconds: (date) => format(date, "PP, hh:mm:ss.SSS a"),
+  epoch: (date) => format(date, "t"),
 };
 
 type FormatDateProps = {
@@ -44,8 +56,14 @@ export const FormatDate: VoidFunctionComponent<FormatDateProps> = ({
     typeof format === "function" ? format : FormatMapping[format];
   const [distance, setDistance] = useState<string>("");
   useInterval(() => {
-    setDistance(formatFn(date));
+    try {
+      setDistance(formatFn(date));
+    } catch (e) {
+      console.warn(
+        `FormatDate can't format date "${date}" with format "${format}"`
+      );
+    }
   }, interval);
 
-  return <time dateTime={date.toISOString()}>{distance}</time>;
+  return <time dateTime={formatISO(date)}>{distance}</time>;
 };

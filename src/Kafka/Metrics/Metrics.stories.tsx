@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { Metrics } from "./Metrics";
+import { apiError, fakeApi } from "../../shared/storiesHelpers";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-import { GetMetricsKpiResponse } from "./types";
+import { Metrics } from "./Metrics";
 import {
   getKafkaInstanceMetrics,
   getMetricsKpi,
@@ -9,7 +9,11 @@ import {
   getTopicsMetricsOneTopic,
   getTopicsMetricsWithDeletedTopicMetric,
 } from "./storiesHelpers";
-import { apiError, fakeApi } from "../../shared/storiesHelpers";
+import {
+  GetKafkaInstanceMetricsResponse,
+  GetMetricsKpiResponse,
+  GetTopicsMetricsResponse,
+} from "./types";
 
 export default {
   component: Metrics,
@@ -81,9 +85,9 @@ the specific APIs (described down here).
 
 export const AllApiError = Template.bind({});
 AllApiError.args = {
-  getMetricsKpi: apiError,
-  getKafkaInstanceMetrics: apiError,
-  getTopicsMetrics: apiError,
+  getMetricsKpi: () => apiError<GetMetricsKpiResponse>(),
+  getKafkaInstanceMetrics: () => apiError<GetKafkaInstanceMetricsResponse>(),
+  getTopicsMetrics: () => apiError<GetTopicsMetricsResponse>(),
 };
 AllApiError.parameters = {
   previewHeight: 200,
@@ -103,7 +107,7 @@ respond with a code 200 but will not provide any metric.
 export const KafkaInstanceApiError = Template.bind({});
 KafkaInstanceApiError.args = {
   getMetricsKpi,
-  getKafkaInstanceMetrics: apiError,
+  getKafkaInstanceMetrics: () => apiError<GetKafkaInstanceMetricsResponse>(),
   getTopicsMetrics,
 };
 KafkaInstanceApiError.parameters = {
@@ -123,7 +127,7 @@ export const TopicsApiError = Template.bind({});
 TopicsApiError.args = {
   getMetricsKpi,
   getKafkaInstanceMetrics,
-  getTopicsMetrics: apiError,
+  getTopicsMetrics: () => apiError<GetTopicsMetricsResponse>(),
 };
 TopicsApiError.parameters = {};
 TopicsApiError.parameters = {
@@ -141,7 +145,7 @@ The toolbar is disabled, but the refresh button can be clicked.
 
 export const KpiApiError = Template.bind({});
 KpiApiError.args = {
-  getMetricsKpi: apiError,
+  getMetricsKpi: () => apiError<GetMetricsKpiResponse>(),
   getKafkaInstanceMetrics,
   getTopicsMetrics,
 };

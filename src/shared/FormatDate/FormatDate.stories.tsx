@@ -53,3 +53,18 @@ TimeToExpiry.args = {
   date: add(Date.now(), { hours: 48 }),
   format: "expiration",
 };
+
+export const LongFormat = Template.bind({});
+LongFormat.args = {
+  format: "long",
+};
+
+export const LongFormatWithMilliseconds = Template.bind({});
+LongFormatWithMilliseconds.args = {
+  format: "longWithMilliseconds",
+};
+
+export const Epoch = Template.bind({});
+Epoch.args = {
+  format: "epoch",
+};

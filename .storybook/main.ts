@@ -10,6 +10,7 @@ module.exports = {
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "@storybook/addon-jest",
+    "storybook-xstate-addon/preset",
     "./ouia-addon/preset",
   ],
   features: {

@@ -101,7 +101,7 @@ export const DateTimePicker = () => {
         <InputGroup>
           <TextInput
             className="pf-c-form-control custom-new"
-            type="'datetime-local"
+            type="datetime-local"
             id="date-time"
             aria-label="date and time picker"
             // placeholder="YYYY-MM-DDThh:mm:ss.s"

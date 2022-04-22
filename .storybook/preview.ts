@@ -16,6 +16,13 @@ import results from "../.jest-test-results.json";
 import { withMas } from "./withMas";
 
 export const parameters: Parameters = {
+  xstate: {
+    height: "1000px",
+  },
+  xstateInspectOptions: {
+    url: "https://stately.ai/viz?inspect",
+    serialize: null,
+  },
   options: {},
   previewTabs: { "storybook/docs/panel": { index: -1 } },
   ouia: "false",
@@ -115,18 +122,6 @@ export const globalTypes = {
       items: [
         { value: "true", title: "Show OUIA ids" },
         { value: "false", title: "Hide OUIA ids" },
-      ],
-      showName: true,
-    },
-  },
-  xstate: {
-    name: "XState",
-    description: "Open the XState inspector",
-    defaultValue: "false",
-    toolbar: {
-      items: [
-        { value: "true", title: "Enabled" },
-        { value: "false", title: "Disabled" },
       ],
       showName: true,
     },
