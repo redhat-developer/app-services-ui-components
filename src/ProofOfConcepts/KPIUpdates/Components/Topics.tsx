@@ -2,20 +2,11 @@ import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/o
 import { VoidFunctionComponent } from "react";
 import React from "react";
 import {
-  Bullseye,
   Card,
   CardBody,
-  CardFooter,
   CardTitle,
-  Flex,
-  FlexItem,
-  Stack,
-  StackItem,
   Title,
   Popover,
-  Text,
-  TextContent,
-  TextListVariants,
 } from "@patternfly/react-core";
 
 export const Topics: VoidFunctionComponent = () => {

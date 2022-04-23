@@ -1,24 +1,18 @@
-import { Alert } from "@patternfly/react-core";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
 
 import { VoidFunctionComponent } from "react";
 import React from "react";
 import {
-  Bullseye,
+  Alert,
   Card,
   CardBody,
   CardFooter,
   CardTitle,
-  Flex,
-  FlexItem,
-  Stack,
-  StackItem,
   Title,
   Popover,
   Text,
   TextContent,
-  TextListVariants,
 } from "@patternfly/react-core";
 
 export const TopicPartitionsApproachingLimit: VoidFunctionComponent = () => {
@@ -52,9 +46,12 @@ export const TopicPartitionsApproachingLimit: VoidFunctionComponent = () => {
             title="This Kafka instance is close to reaching the partition limit"
           >
             <p>
-              This Kafka instance is approaching the partition limit. If the
-              Kafka instance exceeds 1000 partitions, it might experience
-              degraded performance. 
+              This Kafka Instance is approaching the partition limit. If the
+              Kafka Instance exceeds 1000 partitions, it might experience
+              degraded performance.
+              <p></p>
+              To create more partitions, consider migrating to a larger Kafka
+              Instance or splitting your workloads across multiple instances.
             </p>
           </Alert>
         </CardFooter>
