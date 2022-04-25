@@ -12,7 +12,7 @@ export type PaginationProps = {
   perPage: number;
   isCompact?: boolean;
   onChange: (page: number, perPage: number) => void;
-} & PFPaginationProps;
+} & Pick<PFPaginationProps, "variant">;
 export const Pagination: FunctionComponent<PaginationProps> = ({
   itemCount,
   page,

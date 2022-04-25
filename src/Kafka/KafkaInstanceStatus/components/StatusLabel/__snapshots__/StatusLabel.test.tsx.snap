@@ -11,6 +11,7 @@ exports[`Renders Accepted story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -120,6 +121,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -188,6 +190,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -256,6 +259,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -325,6 +329,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -409,6 +414,7 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -563,6 +569,7 @@ exports[`Renders CreatingOver15Minutes story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -645,6 +652,7 @@ exports[`Renders CreatingOver30Minutes story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -793,6 +801,7 @@ exports[`Renders Preparing story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"
@@ -860,6 +869,7 @@ exports[`Renders Provisioning story 1`] = `
           class="pf-l-split__item"
         >
           <span
+            aria-label="Contents"
             aria-valuetext="Loading..."
             class="pf-c-spinner pf-m-md"
             role="progressbar"

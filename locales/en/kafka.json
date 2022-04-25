@@ -18,7 +18,13 @@
     "sasl_oauthbearer_popover_content": "OpenShift Streams for Apache Kafka uses the industry-standard OAuth protocol via the SASL/OAUTHBEARER provided by Apache Kafka.",
     "sasl_plain": "SASL/PLAIN",
     "sasl_plain_description": "Use your service account credentials (Client ID and Client secret) as the user name and password to authenticate your client with the Kafka instance.",
-    "token_endpoint_url": "Token endpoint URL"
+    "token_endpoint_url": "Token endpoint URL",
+    "rest_api": "REST API",
+    "rest_api_help_button_label": "More information about the REST API",
+    "rest_api_url_description": "Use the REST API URL to connect to this Kafka instance over HTTPS. Refer to the <value>API documentation</value> for available endpoints.",
+    "rest_api_popover_content_1": "Use the REST API URL to connect to this Kafka instance and perform tasks like configuring topics and consumer groups. Refer to the <value>API documentation</value> for available endpoints.",
+    "rest_api_popover_label": "API",
+    "rest_api_popover_content_2": "<value>Learn more</value> about how to use the API."
   },
   "consumerGroup": {
     "active_members": "Active members",

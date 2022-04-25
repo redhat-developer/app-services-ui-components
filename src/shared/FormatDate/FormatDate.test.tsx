@@ -1,5 +1,6 @@
-import { render } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
+import { render } from "../../test-utils";
+import { FormatMapping } from "./FormatDate";
 import * as stories from "./FormatDate.stories";
 
 const {
@@ -11,6 +12,9 @@ const {
   OneYearAgo,
   CustomFormat,
   TimeToExpiry,
+  LongFormat,
+  LongFormatWithMilliseconds,
+  Epoch,
 } = composeStories(stories);
 
 describe("FormatDate", () => {
@@ -54,5 +58,30 @@ describe("FormatDate", () => {
   it("TimeToExpiry", () => {
     const comp = render(<TimeToExpiry />);
     expect(comp.getByText("1 day 23 hours")).toBeTruthy();
+  });
+
+  it("LongFormat", () => {
+    const comp = render(<LongFormat />);
+    expect(
+      comp.getByText(FormatMapping["long"](LongFormat.args!.date!))
+    ).toBeTruthy();
+  });
+
+  it("LongFormatWithMilliseconds", () => {
+    const comp = render(<LongFormatWithMilliseconds />);
+    expect(
+      comp.getByText(
+        FormatMapping["longWithMilliseconds"](
+          LongFormatWithMilliseconds.args!.date!
+        )
+      )
+    ).toBeTruthy();
+  });
+
+  it("Epoch", () => {
+    const comp = render(<Epoch />);
+    expect(
+      comp.getByText(FormatMapping["epoch"](Epoch.args!.date!))
+    ).toBeTruthy();
   });
 });

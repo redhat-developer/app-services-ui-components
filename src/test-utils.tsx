@@ -1,4 +1,3 @@
-import { FunctionComponent, ReactElement, Suspense } from "react";
 import {
   act,
   render,
@@ -6,6 +5,7 @@ import {
   RenderResult,
   waitFor,
 } from "@testing-library/react";
+import { FunctionComponent, ReactElement, Suspense } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { I18nProvider } from "./I18n";
 
@@ -32,6 +32,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
               import("../locales/en/manage-kafka-permissions.json"),
             "service-account": () =>
               import("../locales/en/service-account.json"),
+            "message-browser": () =>
+              import("../locales/en/message-browser.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

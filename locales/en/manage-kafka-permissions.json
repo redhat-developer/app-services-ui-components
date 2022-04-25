@@ -16,22 +16,17 @@
     "all": "All",
     "alter": "Alter",
     "alter_configs": "Alter configs",
+    "aria_label": "Resource type operation value",
     "create": "Create",
     "delete": "Delete",
     "describe": "Describe",
     "describe_configs": "Describe configs",
+    "placeholder_text": "Select operation",
     "read": "Read",
-    "write": "Write",
-    "aria_label": "Resource type operation value",
-    "placeholder_text": "Select operation"
+    "write": "Write"
   },
-  "resource_prefix_rule": {
-    "is": "Is",
-    "starts_with": "Starts with",
-    "aria_label": "Resource prefix rule {{value}}",
-    "starts_with_description": "Refers to the prefix of the name in the API",
-    "is_description": "Refers to the literal name in the API"
-  },
+  "pattern_type_literal": "",
+  "pattern_type_prefixed": "",
   "permissions": {
     "allow": "Allow",
     "aria_label": "Resource permission {{value}}",
@@ -48,7 +43,21 @@
     "task_based_permission": "Task-based permissions"
   },
   "remove_permission_tooltip": "Remove permission",
+  "resource_prefix_rule": {
+    "aria_label": "Resource prefix rule {{value}}",
+    "is": "Is",
+    "is_description": "Refers to the literal name in the API",
+    "starts_with": "Starts with",
+    "starts_with_description": "Refers to the prefix of the name in the API"
+  },
   "resource_type_operation_filter_placeholder": "Filter by resource type operation",
+  "resourcePrefix": {
+    "create_text": "Use",
+    "placeholder_text_is": "Enter name",
+    "placeholder_text_starts_with": "Enter prefix",
+    "prefix_aria_label": "Resource prefix",
+    "select_prefix_aria_label": "{{value}} prefix"
+  },
   "resourceTypes": {
     "consumer_group": "Consumer group",
     "kafka_instance": "$t(common:kafka) instance",
@@ -57,20 +66,6 @@
     "resource_type_selected": "{{value}} Resource type",
     "topic": "Topic",
     "transactional_id": "Transactional ID"
-  },
-  "resourcePrefix": {
-    "placeholder_text_starts_with": "Enter prefix",
-    "placeholder_text_is": "Enter name",
-    "prefix_aria_label": "Resource prefix",
-    "select_prefix_aria_label": "{{value}} prefix",
-    "create_text": "Use"
-  },
-  "resourcePrefix": {
-    "placeholder_text_starts_with": "Enter prefix",
-    "placeholder_text_is": "Enter name",
-    "prefix_aria_label": "Resource prefix",
-    "select_prefix_aria_label": "{{value}} prefix",
-    "create_text": "Use"
   },
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
