@@ -84,8 +84,8 @@ exports[`KafkaPage renders 1`] = `
             >
               <a
                 aria-disabled="false"
-                class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+                class="pf-c-button pf-m-link pf-m-inline pf-m-display-lg"
+                data-ouia-component-id="OUIA-Generated-Button-link-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardPurchase-buttonCTA"
@@ -143,12 +143,12 @@ exports[`KafkaPage renders 1`] = `
             >
               <a
                 aria-disabled="false"
-                class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                class="pf-c-button pf-m-link pf-m-inline pf-m-display-lg"
+                data-ouia-component-id="OUIA-Generated-Button-link-2"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardContactSales-buttonCTA"
-                href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka#contact-sales"
+                href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka#contact-us"
                 target="_blank"
               >
                 Contact sales
@@ -170,6 +170,491 @@ exports[`KafkaPage renders 1`] = `
             </div>
           </article>
         </div>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-limit-width appsrv-marketing--page-section--marketing"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <article
+          class="pf-c-card"
+          data-ouia-component-id="OUIA-Generated-Card-3"
+          data-ouia-component-type="PF4/Card"
+          data-ouia-safe="true"
+          id=""
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <h3
+              class="pf-c-title pf-m-lg"
+              data-ouia-component-id="OUIA-Generated-Title-4"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
+            >
+              Pricing model
+            </h3>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-flex"
+            >
+              <div
+                class="pf-l-flex pf-m-flex-1"
+              >
+                <div
+                  class=""
+                >
+                  <dl
+                    class="pf-c-description-list pf-m-horizontal description-list-spacer"
+                  >
+                    <div
+                      class="pf-c-description-list__group description-list-spacer"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Streaming Unit
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          $1.49/hour
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-c-description-list__group description-list-spacer"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Data Transfer
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          $0.09/GB
+                        </div>
+                      </dd>
+                    </div>
+                    <div
+                      class="pf-c-description-list__group description-list-spacer"
+                    >
+                      <dt
+                        class="pf-c-description-list__term"
+                      >
+                        <span
+                          class="pf-c-description-list__text"
+                        >
+                          Storage
+                        </span>
+                      </dt>
+                      <dd
+                        class="pf-c-description-list__description"
+                      >
+                        <div
+                          class="pf-c-description-list__text"
+                        >
+                          $0.10/GB
+                        </div>
+                      </dd>
+                    </div>
+                  </dl>
+                </div>
+              </div>
+              <hr
+                class="pf-c-divider pf-m-vertical"
+              />
+              <div
+                class="pf-l-flex pf-m-flex-1"
+              >
+                <div
+                  class=""
+                >
+                  <div
+                    class="pf-c-content"
+                  >
+                    <p>
+                      A 
+                      <strong>
+                        Streaming Unit
+                      </strong>
+                       determines the default maximum capacity of a Kafka Instance. The number Streaming Units that your Kafka Instance has determines its maximum capacity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-limit-width appsrv-marketing--page-section--marketing"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <article
+          class="pf-c-card"
+          data-ouia-component-id="OUIA-Generated-Card-4"
+          data-ouia-component-type="PF4/Card"
+          data-ouia-safe="true"
+          id=""
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <h3
+              class="pf-c-title pf-m-lg"
+              data-ouia-component-id="OUIA-Generated-Title-5"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
+            >
+              Kafka instance capacity
+            </h3>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-stack pf-m-gutter"
+            >
+              <p
+                class=""
+                data-ouia-component-id="OUIA-Generated-Text-3"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
+                data-pf-content="true"
+              >
+                OpenShift Streams offers instances in the following sizes with the following capacity
+              </p>
+              <table
+                class="pf-c-table pf-m-grid-md"
+                data-ouia-component-id="OUIA-Generated-Table-1"
+                data-ouia-component-type="PF4/Table"
+                data-ouia-safe="true"
+                role="grid"
+              >
+                <thead
+                  class=""
+                >
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-1"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <th
+                      class=""
+                    />
+                    <th
+                      class=""
+                      scope="col"
+                    >
+                      1 streaming unit
+                    </th>
+                    <th
+                      class=""
+                      scope="col"
+                    >
+                      2 streaming unit
+                    </th>
+                  </tr>
+                </thead>
+                <tbody
+                  class=""
+                  role="rowgroup"
+                >
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-2"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Ingress (MB/second)
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 50
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 100
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-3"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Egress (MB/second)
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 100
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 200
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-4"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Storage* (GB)
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 1000
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 2000
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-5"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Topic partitions
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 1500
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 3000
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-6"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Client connections
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 3000
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 6000
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-7"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Connection rate (connections/second)
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 100
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 200
+                    </td>
+                  </tr>
+                  <tr
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-TableRow-8"
+                    data-ouia-component-type="PF4/TableRow"
+                    data-ouia-safe="true"
+                  >
+                    <td
+                      class=""
+                      data-label=""
+                    >
+                      Message size (MB)
+                    </td>
+                    <td
+                      class=""
+                      data-label="1 streaming unit"
+                    >
+                      up to 1
+                    </td>
+                    <td
+                      class=""
+                      data-label="2 streaming unit"
+                    >
+                      up to 1
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div
+            class="pf-c-card__footer"
+          >
+            <div
+              class="pf-c-content"
+            >
+              <p
+                class=""
+                data-ouia-component-id="OUIA-Generated-Text-4"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
+                data-pf-content="true"
+              >
+                *Storage can be extended to up to 54 TB. If you wish to increase the storage limit for a Kafka instance, contact 
+                <a
+                  href="/https://access.redhat.com/support"
+                >
+                  Red Hat Support
+                </a>
+                 to discuss your options. You can check your current storage usage by 
+                <a
+                  href="/https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                >
+                  monitoring disk space metrics
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-limit-width appsrv-marketing--page-section--marketing"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <article
+          class="pf-c-card"
+          data-ouia-component-id="OUIA-Generated-Card-5"
+          data-ouia-component-type="PF4/Card"
+          data-ouia-safe="true"
+          id=""
+        >
+          <div
+            class="pf-c-card__title"
+          >
+            <h3
+              class="pf-c-title pf-m-lg"
+              data-ouia-component-id="OUIA-Generated-Title-6"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
+            >
+              Cloud providers
+            </h3>
+          </div>
+          <div
+            class="pf-c-card__body"
+          >
+            <div
+              class="pf-l-stack pf-m-gutter"
+            >
+              <p
+                class=""
+                data-ouia-component-id="OUIA-Generated-Text-5"
+                data-ouia-component-type="PF4/Text"
+                data-ouia-safe="true"
+                data-pf-content="true"
+              >
+                OpenShift Streams is currently available in the following cloud provider.
+              </p>
+              <div
+                class="pf-l-bullseye"
+              >
+                <img
+                  alt="Amazon Web Services"
+                  style="height: 60px;"
+                />
+                <h3
+                  class="pf-c-title pf-m-lg"
+                  data-ouia-component-id="OUIA-Generated-Title-7"
+                  data-ouia-component-type="PF4/Title"
+                  data-ouia-safe="true"
+                >
+                  Amazon Web Services
+                </h3>
+              </div>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   </div>
