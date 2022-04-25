@@ -43,7 +43,7 @@ export const TopicPartitionsApproachingLimit: VoidFunctionComponent = () => {
             isExpandable
             isInline
             variant="warning"
-            title="This Kafka instance is close to reaching the partition limit"
+            title="This Kafka Instance is close to reaching the partition limit"
           >
             <p>
               This Kafka Instance is approaching the partition limit. If the
