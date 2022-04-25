@@ -26,8 +26,10 @@ export const parameters: Parameters = {
     url: "https://stately.ai/viz?inspect",
     serialize: null,
   },
+  layout: "fullscreen",
   options: {},
   previewTabs: { "storybook/docs/panel": { index: -1 } },
+  withInsightsChrome: "false",
   ouia: "false",
   locale: "en_US",
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -115,6 +117,18 @@ export const globalTypes = {
         },
         { value: "cimode", right: "🤓", title: "Show translation keys" },
       ],
+    },
+  },
+  withInsightsChrome: {
+    name: "Insights Chrome",
+    description: "Show the console.redhat.com chrome UI",
+    defaultValue: "false",
+    toolbar: {
+      items: [
+        { value: "true", title: "Show layout" },
+        { value: "false", title: "Hide layout" },
+      ],
+      showName: true,
     },
   },
   ouia: {

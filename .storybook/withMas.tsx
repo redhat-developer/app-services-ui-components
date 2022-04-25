@@ -1,9 +1,10 @@
+import { PartialStoryFn, StoryContext } from "@storybook/csf";
+import { Args, ReactFramework } from "@storybook/react/types-6-0";
 import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Args, ReactFramework } from "@storybook/react/types-6-0";
-import { PartialStoryFn, StoryContext } from "@storybook/csf";
 
 import { AppServicesLoading, I18nProvider } from "../src";
+import { InsightsChromeLayout } from "./InsightsChromeLayout";
 
 export const withMas = (
   Story: PartialStoryFn<ReactFramework, Args>,
@@ -14,38 +15,41 @@ export const withMas = (
   }, [globals.ouia]);
 
   return (
-    <Router>
-      <I18nProvider
-        lng={globals.locale}
-        resources={{
-          en: {
-            common: () => import("../locales/en/common.json"),
-            "create-kafka-instance": () =>
-              import("../locales/en/create-kafka-instance.json"),
-            kafka: () => import("../locales/en/kafka.json"),
-            metrics: () => import("../locales/en/metrics.json"),
-            overview: () => import("../locales/en/overview.json"),
-            datascienceoverview: () =>
-              import("../locales/en/datascienceoverview.json"),
-            kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
-            apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
-            "manage-kafka-permissions": () =>
-              import("../locales/en/manage-kafka-permissions.json"),
-            "service-account": () =>
-              import("../locales/en/service-account.json"),
-            "message-browser": () =>
-              import("../locales/en/message-browser.json"),
-          },
-          it: {
-            common: () => Promise.resolve({ delete: "Elimina" }),
-          },
-        }}
-        debug={true}
-      >
-        <React.Suspense fallback={<AppServicesLoading />}>
-          <Story />
-        </React.Suspense>
-      </I18nProvider>
-    </Router>
+    <InsightsChromeLayout withLayout={globals.withInsightsChrome === "true"}>
+      <Router>
+        <I18nProvider
+          lng={globals.locale}
+          resources={{
+            en: {
+              common: () => import("../locales/en/common.json"),
+              "create-kafka-instance": () =>
+                import("../locales/en/create-kafka-instance.json"),
+              kafka: () => import("../locales/en/kafka.json"),
+              metrics: () => import("../locales/en/metrics.json"),
+              overview: () => import("../locales/en/overview.json"),
+              datascienceoverview: () =>
+                import("../locales/en/datascienceoverview.json"),
+              kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
+              apimgmtoverview: () =>
+                import("../locales/en/apimgmtoverview.json"),
+              "manage-kafka-permissions": () =>
+                import("../locales/en/manage-kafka-permissions.json"),
+              "service-account": () =>
+                import("../locales/en/service-account.json"),
+              "message-browser": () =>
+                import("../locales/en/message-browser.json"),
+            },
+            it: {
+              common: () => Promise.resolve({ delete: "Elimina" }),
+            },
+          }}
+          debug={true}
+        >
+          <React.Suspense fallback={<AppServicesLoading />}>
+            <Story />
+          </React.Suspense>
+        </I18nProvider>
+      </Router>
+    </InsightsChromeLayout>
   );
 };
