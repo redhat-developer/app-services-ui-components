@@ -33,28 +33,29 @@ export class AllActionsDropdown extends React.Component {
   render() {
     const { isOpen } = this.state;
     const dropdownItems = [
-      <DropdownGroup label="View information" key="View information">
+      <DropdownGroup label="Edit [thing] state" key="Edit [thing] state">
         <DropdownItem key="Start">Start</DropdownItem>
         <DropdownItem key="Stop">Stop</DropdownItem>
         <DropdownItem key="Resume">Resume</DropdownItem>
         <DropdownSeparator key="dropdown separator" />
       </DropdownGroup>,
-      <DropdownGroup label="View information" key="View information">
-        <DropdownItem key="Edit">Edit</DropdownItem>
-        <DropdownItem key="Duplicate">Duplicate</DropdownItem>
-        <DropdownItem key="Delete">Delete</DropdownItem>
-        <DropdownItem key="Change owner">Change owner</DropdownItem>
-        <DropdownItem key="Reset credentials">Reset credentials</DropdownItem>
-        <DropdownSeparator key="dropdown separator" />
-      </DropdownGroup>,
-      <DropdownGroup label="View information" key="View information">
-        <DropdownItem key="Connection">Connecton</DropdownItem>
+      <DropdownGroup label="View [thing] information" key="View information">
+        <DropdownItem key="Connection">Connection</DropdownItem>
         <DropdownItem key="Details">Details</DropdownItem>
         <DropdownItem key="primary data plane tab">
           [Primary data plane tab]
         </DropdownItem>
-        <DropdownItem key="[drawer tab label]">[drawer tab label]</DropdownItem>
-        <DropdownItem key="access tab">[Access tab]</DropdownItem>
+        <DropdownSeparator key="dropdown separator" />
+      </DropdownGroup>,
+      <DropdownGroup
+        label="[Thing] administration"
+        key="[Thing] administration"
+      >
+        <DropdownItem key="Edit">Edit</DropdownItem>
+        <DropdownItem key="Duplicate">Duplicate</DropdownItem>
+        <DropdownItem key="Reset credentials">Reset credentials</DropdownItem>
+        <DropdownItem key="Change owner">Change owner</DropdownItem>
+        <DropdownItem key="Delete">Delete</DropdownItem>
       </DropdownGroup>,
     ];
     return (

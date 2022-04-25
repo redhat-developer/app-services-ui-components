@@ -33,22 +33,22 @@ export class ActionsDropdown extends React.Component {
   render() {
     const { isOpen } = this.state;
     const dropdownItems = [
-      <DropdownGroup label="View information" key="View information">
+      <DropdownGroup label="View instance information" key="View information">
         <DropdownItem key="View information:Details">Details</DropdownItem>
         <DropdownItem key="View information:Connection">
           Connection
         </DropdownItem>
-        <DropdownItem key="topics">Topics? have on toolbar..</DropdownItem>
         <DropdownItem key="metrics">
-          Metrics/Dashboard?have on toolbar..
+          [Primary data plane tab](Metrics?)
         </DropdownItem>
         <DropdownSeparator key="dropdown separator" />
       </DropdownGroup>,
-      <DropdownGroup key="Actions">
-        <DropdownItem key="Actions:Change owner">
-          Change instance owner
-        </DropdownItem>
-        <DropdownItem key="Actions:Delete">Delete instance</DropdownItem>
+      <DropdownGroup
+        label="Instance administration"
+        key="Instance administration"
+      >
+        <DropdownItem key="Actions:Change owner">Change owner</DropdownItem>
+        <DropdownItem key="Actions:Delete">Delete</DropdownItem>
       </DropdownGroup>,
     ];
     return (

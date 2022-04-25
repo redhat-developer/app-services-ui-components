@@ -3,7 +3,7 @@ import React from "react";
 import { ActionsTable } from "./kebabDropdown";
 import { ActionsDropdown } from "./actionsDropdown";
 import { AllActionsDropdown } from "./allActions";
-import { ActionsDescriptors } from "./allActionsDescriptors";
+
 export default {
   title: "Proof Of Concepts/Dropdown/ActionsDropdown ",
   component: ActionsDropdown,
@@ -13,8 +13,8 @@ export default {
 const Template: ComponentStory<typeof ActionsDropdown> = (args) => (
   <ActionsDropdown {...args} />
 );
-export const ActionsMenu = Template.bind({});
-ActionsMenu.args = {};
+export const KafkaInstanceActionsMenu = Template.bind({});
+KafkaInstanceActionsMenu.args = {};
 
 const Template2: ComponentStory<typeof ActionsTable> = (args) => (
   <ActionsTable {...args} />
@@ -27,9 +27,3 @@ const Template3: ComponentStory<typeof AllActionsDropdown> = (args) => (
 );
 export const AllActions = Template3.bind({});
 AllActions.args = {};
-
-const Template4: ComponentStory<typeof ActionsDescriptors> = (args) => (
-  <ActionsDescriptors {...args} />
-);
-export const ActionDescriptors = Template4.bind({});
-ActionDescriptors.args = {};
