@@ -21,15 +21,15 @@ import {
   Bullseye,
   Stack,
   TextVariants,
+  Split,
+  SplitItem,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { MarketingPageHero, MarketingPageSection } from "../components";
 import { AppSpeedKeyArt } from "../../images";
-import "./KafkaPage.css";
 import { KafkaInstanceCapacityTable } from "./component";
-import { Link } from "react-router-dom";
 import { AWSLogoRGBAWSLogo } from "../../images";
 
 export const KafkaPage: FunctionComponent = () => {
@@ -101,14 +101,15 @@ export const KafkaPage: FunctionComponent = () => {
             <Title headingLevel="h3">{t("pricingModalTitle")}</Title>
           </CardTitle>
           <CardBody>
-            <Flex>
-              <Flex flex={{ default: "flex_1" }}>
+            <Flex spaceItems={{ default: "spaceItemsXl" }}>
+              <Flex
+                alignSelf={{ default: "alignSelfCenter" }}
+                justifyContent={{ default: "justifyContentCenter" }}
+                flex={{ default: "flex_1" }}
+              >
                 <FlexItem>
-                  <DescriptionList
-                    isHorizontal
-                    className="description-list-spacer"
-                  >
-                    <DescriptionListGroup className="description-list-spacer">
+                  <DescriptionList isHorizontal>
+                    <DescriptionListGroup>
                       <DescriptionListTerm>
                         {t("steamingUnit")}
                       </DescriptionListTerm>
@@ -116,7 +117,7 @@ export const KafkaPage: FunctionComponent = () => {
                         {"$1.49/hour"}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
-                    <DescriptionListGroup className="description-list-spacer">
+                    <DescriptionListGroup>
                       <DescriptionListTerm>
                         {t("dataTransfer")}
                       </DescriptionListTerm>
@@ -124,7 +125,7 @@ export const KafkaPage: FunctionComponent = () => {
                         {"$0.09/GB"}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
-                    <DescriptionListGroup className="description-list-spacer">
+                    <DescriptionListGroup>
                       <DescriptionListTerm>{t("storage")}</DescriptionListTerm>
                       <DescriptionListDescription>
                         {"$0.10/GB"}
@@ -134,18 +135,18 @@ export const KafkaPage: FunctionComponent = () => {
                 </FlexItem>
               </Flex>
               <Divider isVertical />
-              <Flex flex={{ default: "flex_1" }}>
-                <FlexItem>
-                  <TextContent>
-                    <p>
-                      A <strong>Streaming Unit</strong> determines the default
-                      maximum capacity of a Kafka Instance. The number Streaming
-                      Units that your Kafka Instance has determines its maximum
-                      capacity.
-                    </p>
-                  </TextContent>
-                </FlexItem>
-              </Flex>
+              <FlexItem flex={{ default: "flex_1" }}>
+                <TextContent>
+                  <Text component={TextVariants.p}>
+                    <Trans
+                      i18nKey={"kafkaoverview:streamingUnitText"}
+                      values={{
+                        value: "streaming unit",
+                      }}
+                    />
+                  </Text>
+                </TextContent>
+              </FlexItem>
             </Flex>
           </CardBody>
         </Card>
@@ -165,16 +166,22 @@ export const KafkaPage: FunctionComponent = () => {
           </CardBody>
           <CardFooter>
             <TextContent>
-              <Text>
+              <Text className={"pf-u-font-size-sm"}>
                 {
                   <Trans
                     i18nKey={"kafkaoverview:kafkaInstanceCapacityfooter"}
                     components={{
                       support: (
-                        <Link to="https://access.redhat.com/support"></Link>
+                        <a
+                          href="https://access.redhat.com/support"
+                          target="_blank"
+                        />
                       ),
                       value: (
-                        <Link to="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"></Link>
+                        <a
+                          href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                          target="_blank"
+                        />
                       ),
                     }}
                   />
@@ -195,12 +202,18 @@ export const KafkaPage: FunctionComponent = () => {
                 {t("cloudProvidersDescription")}
               </Text>
               <Bullseye>
-                <img
-                  src={AWSLogoRGBAWSLogo}
-                  alt={"Amazon Web Services"}
-                  style={{ height: "60px" }}
-                />
-                <Title headingLevel="h3">{"Amazon Web Services"}</Title>
+                <Split hasGutter className="pf-u-p-xl">
+                  <SplitItem>
+                    <img
+                      src={AWSLogoRGBAWSLogo}
+                      alt={""}
+                      style={{ height: "60px" }}
+                    />
+                  </SplitItem>
+                  <SplitItem>
+                    <Title headingLevel="h3">{"Amazon Web Services"}</Title>
+                  </SplitItem>
+                </Split>
               </Bullseye>
             </Stack>
           </CardBody>

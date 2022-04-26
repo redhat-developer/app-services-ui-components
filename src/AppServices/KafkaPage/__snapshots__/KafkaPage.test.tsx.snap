@@ -77,7 +77,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-card__body"
             >
-              Use Red Hat Marketplace to purchase a pay-as-you-go subscription for up to 25 streaming units. Purchasing through Red Hat Marketplace is only available in the United States and Canada.
+              In the United States or Canada, purchase a pay-as-you-go subscription for up to 25 streaming units through Red Hat Marketplace.
             </div>
             <div
               class="pf-c-card__footer"
@@ -136,7 +136,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-card__body"
             >
-              Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers in any location, including locations outside the United States and Canada.
+              Contact sales to get a pre-paid subscription or modify limits of your current subscription.
             </div>
             <div
               class="pf-c-card__footer"
@@ -201,19 +201,19 @@ exports[`KafkaPage renders 1`] = `
             class="pf-c-card__body"
           >
             <div
-              class="pf-l-flex"
+              class="pf-l-flex pf-m-space-items-xl"
             >
               <div
-                class="pf-l-flex pf-m-flex-1"
+                class="pf-l-flex pf-m-flex-1 pf-m-align-self-center pf-m-justify-content-center"
               >
                 <div
                   class=""
                 >
                   <dl
-                    class="pf-c-description-list pf-m-horizontal description-list-spacer"
+                    class="pf-c-description-list pf-m-horizontal"
                   >
                     <div
-                      class="pf-c-description-list__group description-list-spacer"
+                      class="pf-c-description-list__group"
                     >
                       <dt
                         class="pf-c-description-list__term"
@@ -221,7 +221,7 @@ exports[`KafkaPage renders 1`] = `
                         <span
                           class="pf-c-description-list__text"
                         >
-                          Streaming Unit
+                          Streaming unit
                         </span>
                       </dt>
                       <dd
@@ -235,7 +235,7 @@ exports[`KafkaPage renders 1`] = `
                       </dd>
                     </div>
                     <div
-                      class="pf-c-description-list__group description-list-spacer"
+                      class="pf-c-description-list__group"
                     >
                       <dt
                         class="pf-c-description-list__term"
@@ -243,7 +243,7 @@ exports[`KafkaPage renders 1`] = `
                         <span
                           class="pf-c-description-list__text"
                         >
-                          Data Transfer
+                          Data transfer
                         </span>
                       </dt>
                       <dd
@@ -257,7 +257,7 @@ exports[`KafkaPage renders 1`] = `
                       </dd>
                     </div>
                     <div
-                      class="pf-c-description-list__group description-list-spacer"
+                      class="pf-c-description-list__group"
                     >
                       <dt
                         class="pf-c-description-list__term"
@@ -285,22 +285,24 @@ exports[`KafkaPage renders 1`] = `
                 class="pf-c-divider pf-m-vertical"
               />
               <div
-                class="pf-l-flex pf-m-flex-1"
+                class="pf-m-flex-1"
               >
                 <div
-                  class=""
+                  class="pf-c-content"
                 >
-                  <div
-                    class="pf-c-content"
+                  <p
+                    class=""
+                    data-ouia-component-id="OUIA-Generated-Text-3"
+                    data-ouia-component-type="PF4/Text"
+                    data-ouia-safe="true"
+                    data-pf-content="true"
                   >
-                    <p>
-                      A 
-                      <strong>
-                        Streaming Unit
-                      </strong>
-                       determines the default maximum capacity of a Kafka Instance. The number Streaming Units that your Kafka Instance has determines its maximum capacity.
-                    </p>
-                  </div>
+                    A 
+                    <strong>
+                      streaming unit
+                    </strong>
+                     determines the default maximum capacity of a Kafka instance. The more streaming units your Kafka instance has, the larger its capacity will be.
+                  </p>
                 </div>
               </div>
             </div>
@@ -341,12 +343,12 @@ exports[`KafkaPage renders 1`] = `
             >
               <p
                 class=""
-                data-ouia-component-id="OUIA-Generated-Text-3"
+                data-ouia-component-id="OUIA-Generated-Text-4"
                 data-ouia-component-type="PF4/Text"
                 data-ouia-safe="true"
                 data-pf-content="true"
               >
-                OpenShift Streams offers instances in the following sizes with the following capacity
+                OpenShift Streams offers instances in the following sizes with the following capacity.
               </p>
               <table
                 class="pf-c-table pf-m-grid-md"
@@ -571,21 +573,23 @@ exports[`KafkaPage renders 1`] = `
               class="pf-c-content"
             >
               <p
-                class=""
-                data-ouia-component-id="OUIA-Generated-Text-4"
+                class="pf-u-font-size-sm"
+                data-ouia-component-id="OUIA-Generated-Text-5"
                 data-ouia-component-type="PF4/Text"
                 data-ouia-safe="true"
                 data-pf-content="true"
               >
-                *Storage can be extended to up to 54 TB. If you wish to increase the storage limit for a Kafka instance, contact 
+                *Storage can be extended. If you wish to increase the storage limit for a Kafka instance, contact 
                 <a
-                  href="/https://access.redhat.com/support"
+                  href="https://access.redhat.com/support"
+                  target="_blank"
                 >
                   Red Hat Support
                 </a>
                  to discuss your options. You can check your current storage usage by 
                 <a
-                  href="/https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                  href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                  target="_blank"
                 >
                   monitoring disk space metrics
                 </a>
@@ -629,7 +633,7 @@ exports[`KafkaPage renders 1`] = `
             >
               <p
                 class=""
-                data-ouia-component-id="OUIA-Generated-Text-5"
+                data-ouia-component-id="OUIA-Generated-Text-6"
                 data-ouia-component-type="PF4/Text"
                 data-ouia-safe="true"
                 data-pf-content="true"
@@ -639,18 +643,30 @@ exports[`KafkaPage renders 1`] = `
               <div
                 class="pf-l-bullseye"
               >
-                <img
-                  alt="Amazon Web Services"
-                  style="height: 60px;"
-                />
-                <h3
-                  class="pf-c-title pf-m-lg"
-                  data-ouia-component-id="OUIA-Generated-Title-7"
-                  data-ouia-component-type="PF4/Title"
-                  data-ouia-safe="true"
+                <div
+                  class="pf-l-split pf-m-gutter pf-u-p-xl"
                 >
-                  Amazon Web Services
-                </h3>
+                  <div
+                    class="pf-l-split__item"
+                  >
+                    <img
+                      alt=""
+                      style="height: 60px;"
+                    />
+                  </div>
+                  <div
+                    class="pf-l-split__item"
+                  >
+                    <h3
+                      class="pf-c-title pf-m-lg"
+                      data-ouia-component-id="OUIA-Generated-Title-7"
+                      data-ouia-component-type="PF4/Title"
+                      data-ouia-safe="true"
+                    >
+                      Amazon Web Services
+                    </h3>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
