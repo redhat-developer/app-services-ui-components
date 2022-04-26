@@ -30,7 +30,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { MarketingPageHero, MarketingPageSection } from "../components";
 import { AppSpeedKeyArt } from "../../images";
 import { KafkaInstanceCapacityTable } from "./component";
-import { AWSLogoRGBAWSLogo } from "../../images";
+import { LogoAWS } from "../../images";
 
 export const KafkaPage: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview"]);
@@ -204,11 +204,7 @@ export const KafkaPage: FunctionComponent = () => {
               <Bullseye>
                 <Split hasGutter className="pf-u-p-xl">
                   <SplitItem>
-                    <img
-                      src={AWSLogoRGBAWSLogo}
-                      alt={""}
-                      style={{ height: "60px" }}
-                    />
+                    <img src={LogoAWS} alt={""} style={{ height: "60px" }} />
                   </SplitItem>
                   <SplitItem>
                     <Title headingLevel="h3">{"Amazon Web Services"}</Title>
