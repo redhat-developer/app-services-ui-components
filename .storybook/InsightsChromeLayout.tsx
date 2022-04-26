@@ -1,4 +1,5 @@
 import { FunctionComponent, useState } from "react";
+import "./InsightsChromeLayout.css";
 
 export const InsightsChromeLayout: FunctionComponent<{
   withLayout: boolean;
@@ -723,8 +724,47 @@ export const InsightsChromeLayout: FunctionComponent<{
                                   <main
                                     role="main"
                                     className="chr-scope__default-layout applicationServices"
+                                    style={{ height: "100%" }}
                                   >
-                                    {children}
+                                    <div
+                                      className="pf-c-drawer kas-drawer"
+                                      data-testid="mk--instance__drawer"
+                                    >
+                                      <div className="pf-c-drawer__main">
+                                        <div className="pf-c-drawer__content pf-m-no-background">
+                                          <div className="pf-c-drawer__body pf-u-display-flex pf-u-flex-direction-column">
+                                            <div className={"pf-c-page"}>
+                                              <main className="pf-c-page__main">
+                                                <section className="pf-c-page__main-section pf-m-light">
+                                                  <div className="pf-l-level">
+                                                    <div>
+                                                      <div className="pf-c-content">
+                                                        <h1
+                                                          data-ouia-component-type="PF4/Text"
+                                                          data-ouia-safe="true"
+                                                          data-ouia-component-id="OUIA-Generated-Text-1"
+                                                          data-pf-content="true"
+                                                          className=""
+                                                        >
+                                                          Sample title
+                                                        </h1>
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </section>
+                                                <section className="pf-c-page__main-section pf-m-overflow-scroll">
+                                                  {children}
+                                                </section>
+                                              </main>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div
+                                          className="pf-c-drawer__panel pf-m-width-50"
+                                          hidden
+                                        />
+                                      </div>
+                                    </div>
                                   </main>
                                   <main
                                     className="pf-c-page__main"

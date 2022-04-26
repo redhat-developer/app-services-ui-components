@@ -1,4 +1,8 @@
 import { Toolbar, ToolbarContent, ToolbarGroup } from "@patternfly/react-core";
+import {
+  InnerScrollContainer,
+  OuterScrollContainer,
+} from "@patternfly/react-table";
 import { PropsWithChildren, ReactNode } from "react";
 import { Pagination } from "../Pagination";
 import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
@@ -26,7 +30,7 @@ export const TableView = <TRow, TCol>({
   const showPagination =
     data?.length !== 0 && itemCount && itemCount > DEFAULT_PERPAGE;
   return (
-    <>
+    <OuterScrollContainer>
       {(toolbarContent || showPagination) && (
         <Toolbar clearAllFilters={onClearAllFilters}>
           <ToolbarContent>
@@ -45,7 +49,9 @@ export const TableView = <TRow, TCol>({
           </ToolbarContent>
         </Toolbar>
       )}
-      <ResponsiveTable {...tableProps} />
+      <InnerScrollContainer>
+        <ResponsiveTable {...tableProps} />
+      </InnerScrollContainer>
       {showPagination && (
         <Toolbar>
           <ToolbarContent>
@@ -60,6 +66,6 @@ export const TableView = <TRow, TCol>({
           </ToolbarContent>
         </Toolbar>
       )}
-    </>
+    </OuterScrollContainer>
   );
 };
