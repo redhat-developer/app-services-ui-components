@@ -18,7 +18,6 @@ import {
   Divider,
   TextContent,
   Text,
-  Bullseye,
   Stack,
   TextVariants,
   Split,
@@ -30,7 +29,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { MarketingPageHero, MarketingPageSection } from "../components";
 import { AppSpeedKeyArt } from "../../images";
 import { KafkaInstanceCapacityTable } from "./component";
-import { LogoAWS } from "../../images";
+import { LogoAWS, LogoAzure } from "../../images";
 
 export const KafkaPage: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview"]);
@@ -197,21 +196,59 @@ export const KafkaPage: FunctionComponent = () => {
             <Title headingLevel="h3">{t("cloudProvidersTitle")}</Title>
           </CardTitle>
           <CardBody>
-            <Stack hasGutter>
-              <Text component={TextVariants.p}>
-                {t("cloudProvidersDescription")}
-              </Text>
-              <Bullseye>
-                <Split hasGutter className="pf-u-p-xl">
-                  <SplitItem>
-                    <img src={LogoAWS} alt={""} style={{ height: "60px" }} />
-                  </SplitItem>
-                  <SplitItem>
-                    <Title headingLevel="h3">{"Amazon Web Services"}</Title>
-                  </SplitItem>
-                </Split>
-              </Bullseye>
-            </Stack>
+            <Flex spaceItems={{ default: "spaceItemsXl" }}>
+              <Flex
+                alignSelf={{ default: "alignSelfCenter" }}
+                justifyContent={{ default: "justifyContentCenter" }}
+                flex={{ default: "flex_1" }}
+              >
+                <FlexItem>
+                  <Stack hasGutter>
+                    <Text component={TextVariants.p}>
+                      {t("aswDescription")}
+                    </Text>
+                    <Split hasGutter className="pf-u-p-xl">
+                      <SplitItem>
+                        <img
+                          src={LogoAWS}
+                          alt={""}
+                          style={{ height: "60px" }}
+                        />
+                      </SplitItem>
+                      <SplitItem>
+                        <Title headingLevel="h3">{"Amazon Web Services"}</Title>
+                      </SplitItem>
+                    </Split>
+                  </Stack>
+                </FlexItem>
+              </Flex>
+              <Divider isVertical />
+              <Flex
+                alignSelf={{ default: "alignSelfCenter" }}
+                justifyContent={{ default: "justifyContentCenter" }}
+                flex={{ default: "flex_1" }}
+              >
+                <FlexItem>
+                  <Stack hasGutter>
+                    <Text component={TextVariants.p}>
+                      {t("microsoftAzureDescription")}
+                    </Text>
+                    <Split hasGutter className="pf-u-p-xl">
+                      <SplitItem>
+                        <img
+                          src={LogoAzure}
+                          alt={""}
+                          style={{ height: "60px" }}
+                        />
+                      </SplitItem>
+                      <SplitItem>
+                        <Title headingLevel="h3">{"Microsoft Azure"}</Title>
+                      </SplitItem>
+                    </Split>
+                  </Stack>
+                </FlexItem>
+              </Flex>
+            </Flex>
           </CardBody>
         </Card>
       </MarketingPageSection>
