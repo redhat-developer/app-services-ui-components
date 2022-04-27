@@ -583,7 +583,7 @@ exports[`KafkaPage renders 1`] = `
                   data-ouia-component-id="OUIA-Generated-Button-link-3"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
-                  data-testid="cardRHODS-linkOpenShift"
+                  data-testid="redhatSupport-buttonCTA"
                   href="https://access.redhat.com/support"
                   target="_blank"
                 >
@@ -612,7 +612,7 @@ exports[`KafkaPage renders 1`] = `
                   data-ouia-component-id="OUIA-Generated-Button-link-4"
                   data-ouia-component-type="PF4/Button"
                   data-ouia-safe="true"
-                  data-testid="cardRHODS-linkOpenShift"
+                  data-testid="diskSpaceMetrics-buttonCTA"
                   href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
                   target="_blank"
                 >
