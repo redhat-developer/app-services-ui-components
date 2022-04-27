@@ -3,12 +3,11 @@ import { render, waitForI18n } from "../../../test-utils";
 import * as stories from "./ConsumerGroupTable.stories";
 import { fireEvent, userEvent, within } from "@storybook/testing-library";
 
-const { ConsumerGroupTableAtKafkaLevel, ConsumerGroupTableAtTopicLevel } =
-  composeStories(stories);
+const { DefaultConsumerGroupTable } = composeStories(stories);
 
 describe("Consumer group table", () => {
-  it("Consumer group table at kafka level should have kebab menu", async () => {
-    const comp = render(<ConsumerGroupTableAtKafkaLevel />);
+  it("Consumer group table should have kebab menu", async () => {
+    const comp = render(<DefaultConsumerGroupTable />);
     await waitForI18n(comp);
 
     const firstRow = await comp.getAllByRole("row")[1];
@@ -21,18 +20,8 @@ describe("Consumer group table", () => {
     expect(await comp.findByText("Reset offset")).toBeInTheDocument();
   });
 
-  it("Consumer group table at topic level should not have kebab menu", async () => {
-    const comp = render(<ConsumerGroupTableAtTopicLevel />);
-
-    await waitForI18n(comp);
-
-    const firstRow = await comp.getAllByRole("row")[1];
-
-    expect(within(firstRow).queryByRole("button")).not.toBeInTheDocument();
-  });
-
   it("Consumer group table sorted in ascending order based on consumer group id", async () => {
-    const comp = render(<ConsumerGroupTableAtTopicLevel />);
+    const comp = render(<DefaultConsumerGroupTable />);
 
     await waitForI18n(comp);
 
@@ -47,17 +36,15 @@ describe("Consumer group table", () => {
     expect(
       within(firstRow).getByText("Completing rebalance")
     ).toBeInTheDocument();
-    expect(within(firstRow).queryByRole("button")).not.toBeInTheDocument();
 
     expect(within(secondRow).getByText("consumer-233")).toBeInTheDocument();
     expect(within(secondRow).getByText(2)).toBeInTheDocument();
     expect(within(secondRow).getByText(3)).toBeInTheDocument();
     expect(within(secondRow).getByText("Stable")).toBeInTheDocument();
-    expect(within(secondRow).queryByRole("button")).not.toBeInTheDocument();
   });
 
   it("Consumer group table sorted in descending order based on consumer group id", async () => {
-    const comp = render(<ConsumerGroupTableAtKafkaLevel />);
+    const comp = render(<DefaultConsumerGroupTable />);
     await waitForI18n(comp);
 
     userEvent.click(await comp.findByText("Consumer group ID"));
@@ -86,7 +73,7 @@ describe("Consumer group table", () => {
     const onClickResetoffset = jest.fn();
 
     const comp = render(
-      <ConsumerGroupTableAtKafkaLevel
+      <DefaultConsumerGroupTable
         onClickDeleteModal={onDelete}
         onClickPartitionoffset={onClickPartitionoffset}
         onClickResetoffset={onClickResetoffset}

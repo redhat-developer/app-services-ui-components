@@ -5,3 +5,4 @@ export * from "./KafkaMessageBrowser";
 export * from "./ManageKafkaPermissions";
 export * from "./Metrics";
 export * from "./ServiceAccount";
+export * from "./ConsumerGroups";
