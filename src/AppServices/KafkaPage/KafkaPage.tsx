@@ -20,8 +20,7 @@ import {
   Text,
   Stack,
   TextVariants,
-  Split,
-  SplitItem,
+  StackItem,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
@@ -73,7 +72,7 @@ export const KafkaPage: FunctionComponent = () => {
           <Card>
             <CardHeader>
               <CardTitle>
-                <Title headingLevel="h3">{t("contactSalesCardTitle")}</Title>
+                <Title headingLevel="h2">{t("contactSalesCardTitle")}</Title>
               </CardTitle>
             </CardHeader>
             <CardBody>{t("contactSalesCardMainText")}</CardBody>
@@ -97,7 +96,7 @@ export const KafkaPage: FunctionComponent = () => {
       <MarketingPageSection>
         <Card>
           <CardTitle>
-            <Title headingLevel="h3">{t("pricingModalTitle")}</Title>
+            <Title headingLevel="h2">{t("pricingModalTitle")}</Title>
           </CardTitle>
           <CardBody>
             <Flex spaceItems={{ default: "spaceItemsXl" }}>
@@ -153,7 +152,7 @@ export const KafkaPage: FunctionComponent = () => {
       <MarketingPageSection>
         <Card>
           <CardTitle>
-            <Title headingLevel="h3">{t("kafkaInstanceCapacityTitle")}</Title>
+            <Title headingLevel="h2">{t("kafkaInstanceCapacityTitle")}</Title>
           </CardTitle>
           <CardBody>
             <Stack hasGutter>
@@ -164,36 +163,44 @@ export const KafkaPage: FunctionComponent = () => {
             </Stack>
           </CardBody>
           <CardFooter>
-            <TextContent>
-              <Text className={"pf-u-font-size-sm"}>
-                {
-                  <Trans
-                    i18nKey={"kafkaoverview:kafkaInstanceCapacityfooter"}
-                    components={{
-                      support: (
-                        <a
-                          href="https://access.redhat.com/support"
-                          target="_blank"
-                        />
-                      ),
-                      value: (
-                        <a
-                          href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
-                          target="_blank"
-                        />
-                      ),
-                    }}
-                  />
-                }
-              </Text>
-            </TextContent>
+            <Stack hasGutter className={"pf-u-font-size-sm"}>
+              <StackItem>
+                {t("kafkaInstanceCapacityfooter1")}{" "}
+                <Button
+                  data-testid="cardRHODS-linkOpenShift"
+                  isInline
+                  variant={ButtonVariant.link}
+                  component="a"
+                  target="_blank"
+                  href="https://access.redhat.com/support"
+                >
+                  {" "}
+                  Redhat support
+                  <ExternalLinkAltIcon className="pf-u-ml-xs" />
+                </Button>{" "}
+                {t("kafkaInstanceCapacityfooter2")}
+                <Button
+                  data-testid="cardRHODS-linkOpenShift"
+                  isInline
+                  variant={ButtonVariant.link}
+                  component="a"
+                  target="_blank"
+                  href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                >
+                  {" "}
+                  monitoring disk space metrics
+                  <ExternalLinkAltIcon className="pf-u-ml-xs" />
+                </Button>
+                .
+              </StackItem>
+            </Stack>
           </CardFooter>
         </Card>
       </MarketingPageSection>
       <MarketingPageSection>
         <Card>
           <CardTitle>
-            <Title headingLevel="h3">{t("cloudProvidersTitle")}</Title>
+            <Title headingLevel="h2">{t("cloudProvidersTitle")}</Title>
           </CardTitle>
           <CardBody>
             <Flex spaceItems={{ default: "spaceItemsXl" }}>
@@ -203,22 +210,15 @@ export const KafkaPage: FunctionComponent = () => {
                 flex={{ default: "flex_1" }}
               >
                 <FlexItem>
-                  <Stack hasGutter>
-                    <Text component={TextVariants.p}>
-                      {t("aswDescription")}
-                    </Text>
-                    <Split hasGutter className="pf-u-p-xl">
-                      <SplitItem>
-                        <img
-                          src={LogoAWS}
-                          alt={""}
-                          style={{ height: "60px" }}
-                        />
-                      </SplitItem>
-                      <SplitItem>
-                        <Title headingLevel="h3">{"Amazon Web Services"}</Title>
-                      </SplitItem>
-                    </Split>
+                  <Stack>
+                    <StackItem>
+                      <img src={LogoAWS} alt={""} style={{ height: "60px" }} />
+                    </StackItem>
+                    <StackItem>
+                      <Title headingLevel="h2" className={"pf-u-pt-sm"}>
+                        {"Amazon Web Services"}
+                      </Title>
+                    </StackItem>
                   </Stack>
                 </FlexItem>
               </Flex>
@@ -229,22 +229,27 @@ export const KafkaPage: FunctionComponent = () => {
                 flex={{ default: "flex_1" }}
               >
                 <FlexItem>
-                  <Stack hasGutter>
-                    <Text component={TextVariants.p}>
-                      {t("microsoftAzureDescription")}
-                    </Text>
-                    <Split hasGutter className="pf-u-p-xl">
-                      <SplitItem>
-                        <img
-                          src={LogoAzure}
-                          alt={""}
-                          style={{ height: "60px" }}
-                        />
-                      </SplitItem>
-                      <SplitItem>
-                        <Title headingLevel="h3">{"Microsoft Azure"}</Title>
-                      </SplitItem>
-                    </Split>
+                  <Stack>
+                    <StackItem>
+                      <img
+                        src={LogoAzure}
+                        alt={""}
+                        style={{ height: "60px" }}
+                      />
+                    </StackItem>
+                    <StackItem>
+                      <Title headingLevel="h2" className={"pf-u-pt-sm"}>
+                        {"Microsoft Azure"}
+                      </Title>
+                    </StackItem>
+                    <StackItem>
+                      <Text
+                        component={TextVariants.p}
+                        className={"pf-u-color-200"}
+                      >
+                        {t("microsoftAzureDescription")}
+                      </Text>
+                    </StackItem>
                   </Stack>
                 </FlexItem>
               </Flex>
