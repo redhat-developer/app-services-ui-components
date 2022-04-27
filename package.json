@@ -89,7 +89,7 @@
     "concurrently": "7.1.0",
     "eslint": "8.14.0",
     "eslint-config-prettier": "8.5.0",
-    "eslint-plugin-react-hooks": "4.4.0",
+    "eslint-plugin-react-hooks": "4.5.0",
     "eslint-plugin-storybook": "0.5.11",
     "http-server": "14.1.0",
     "husky": "7.0.4",
