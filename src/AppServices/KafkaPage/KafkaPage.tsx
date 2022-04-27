@@ -167,7 +167,7 @@ export const KafkaPage: FunctionComponent = () => {
               <StackItem>
                 {t("kafkaInstanceCapacityfooter1")}{" "}
                 <Button
-                  data-testid="cardRHODS-linkOpenShift"
+                  data-testid="redhatSupport-buttonCTA"
                   isInline
                   variant={ButtonVariant.link}
                   component="a"
@@ -180,7 +180,7 @@ export const KafkaPage: FunctionComponent = () => {
                 </Button>{" "}
                 {t("kafkaInstanceCapacityfooter2")}
                 <Button
-                  data-testid="cardRHODS-linkOpenShift"
+                  data-testid="diskSpaceMetrics-buttonCTA"
                   isInline
                   variant={ButtonVariant.link}
                   component="a"
