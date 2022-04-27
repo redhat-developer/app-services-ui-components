@@ -1,13 +1,13 @@
-import { VoidFunctionComponent } from "react";
 import {
   Alert,
-  AlertVariant,
-  Spinner,
   AlertGroup,
+  AlertVariant,
   Button,
   ButtonVariant,
+  Spinner,
 } from "@patternfly/react-core";
-import { useTranslation, Trans } from "react-i18next";
+import { VoidFunctionComponent } from "react";
+import { Trans, useTranslation } from "react-i18next";
 import { InstanceAvailability } from "../machines";
 
 export type ModalAlertsProps = {
@@ -16,8 +16,7 @@ export type ModalAlertsProps = {
   isLoading: boolean;
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
-  allowedStreamingUnits: number;
-  isAllRegionsUnavailable: boolean;
+  maxStreamingUnits: number;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
@@ -26,8 +25,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   isLoading,
   onClickKafkaOverview,
   onClickContactUs,
-  allowedStreamingUnits,
-  isAllRegionsUnavailable,
+  maxStreamingUnits,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
@@ -107,7 +105,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                       isInline
                     />,
                   ]}
-                  values={{ allowedStreamingUnits }}
+                  values={{ maxStreamingUnits }}
                 />
               </Alert>
             );
@@ -147,7 +145,6 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
               </Alert>
             );
           case instanceAvailability === "regions-unavailable":
-          case isAllRegionsUnavailable:
             return (
               <Alert
                 role={"alert"}

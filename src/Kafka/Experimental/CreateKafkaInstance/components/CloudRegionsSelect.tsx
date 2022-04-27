@@ -1,17 +1,17 @@
+import {
+  Select,
+  SelectOption,
+  SelectProps,
+  SelectVariant,
+} from "@patternfly/react-core";
 import { FunctionComponent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  SelectProps,
-  Select,
-  SelectVariant,
-  SelectOption,
-} from "@patternfly/react-core";
 import { Region, RegionInfo } from "../machines";
 
 export type CloudRegionProps = {
   value: Region | undefined;
   regions: RegionInfo[];
-  isDisabled?: boolean;
+  isDisabled: boolean;
   onChange: (region: string) => void;
   validated?: SelectProps["validated"];
   placeholderText: SelectProps["placeholderText"];
@@ -48,9 +48,11 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
         isDisabled={isDisabled}
         key={index}
         value={id}
-        {...(isDisabled && {
-          description: t("create-kafka-instance-exp:temporarily_unavailable"),
-        })}
+        description={
+          isDisabled
+            ? t("create-kafka-instance-exp:temporarily_unavailable")
+            : undefined
+        }
       >
         {displayName}
       </SelectOption>

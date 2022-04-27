@@ -26,13 +26,15 @@ export type ProviderInfo = {
 };
 export type Regions = Array<RegionInfo>;
 export type Providers = Array<ProviderInfo>;
+export type Size = { id: string; streamingUnits: number };
 export type CreateKafkaInstanceError =
   | "over-quota"
   | "name-taken"
   | "trial-unavailable"
   | "form-invalid"
-  | "unknown"
-  | "region-unavailable";
+  | "standard-region-unavailable"
+  | "trial-region-unavailable"
+  | "unknown";
 
 export type CreateKafkaInitializationData = {
   defaultProvider: Provider | undefined;
@@ -40,8 +42,6 @@ export type CreateKafkaInitializationData = {
   defaultAZ: AZ | undefined;
   availableProviders: Providers;
   instanceAvailability: InstanceAvailability;
-  allowedStreamingUnits?: number;
-  remainingStreamingUnits?: number | undefined;
 };
 export type CreateKafkaFormData = {
   name: string;

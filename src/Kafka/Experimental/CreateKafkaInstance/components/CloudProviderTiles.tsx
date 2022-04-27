@@ -8,19 +8,19 @@ import {
 import { AzureIcon } from "@patternfly/react-icons";
 import AwsIcon from "@patternfly/react-icons/dist/esm/icons/aws-icon";
 import { VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import { Provider, ProviderInfo } from "../machines";
 import "./CloudProviderTiles.css";
-import { useTranslation } from "react-i18next";
 
-export type CloudProvidersTileProps = {
+export type CloudProvidersTilesProps = {
   providers: ProviderInfo[];
   value: Provider | undefined;
   onChange: (provider: Provider) => void;
-  isDisabled?: boolean;
+  isDisabled: boolean;
   validated?: SelectProps["validated"];
 };
 export const CloudProvidersTiles: VoidFunctionComponent<
-  CloudProvidersTileProps
+  CloudProvidersTilesProps
 > = ({ providers, value, onChange, isDisabled, validated }) => {
   const { t } = useTranslation();
   return (

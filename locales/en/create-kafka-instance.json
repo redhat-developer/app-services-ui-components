@@ -14,9 +14,9 @@
   "cloud_region_description": "More cloud regions are available with a subscription.",
   "connection_rate_value": "up to {{value}} connections/second",
   "create_instance": "Create instance",
-  "create_instance_title": "Create a $t(common:kafka) instance",
   "create_instance_name_helper_text": "Must start with a letter and end with a letter or number. Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "create_instance_name_helper_text_name_taken": "{{name}} already exists. Try a different name.",
+  "create_instance_title": "Create a $t(common:kafka) instance",
   "duration_value": "{{value}} hours",
   "egress_value": "up to {{value}} MiB/second each",
   "form_errors": {
@@ -83,5 +83,6 @@
     "deleting": "Deleting",
     "ready": "Ready"
   },
-  "storage_value": "up to {{value}} GiB"
+  "storage_value": "up to {{value}} GiB",
+  "streaming_size_value": ""
 }

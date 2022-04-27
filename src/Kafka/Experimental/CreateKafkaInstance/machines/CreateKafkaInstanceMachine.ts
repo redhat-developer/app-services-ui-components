@@ -1,5 +1,3 @@
-import { useMachine } from "@xstate/react";
-import { useCallback } from "react";
 import { assign, createMachine, send } from "xstate";
 import {
   AZ,
@@ -10,25 +8,26 @@ import {
   Provider,
   Providers,
   Region,
+  Size,
 } from "./types";
 
-const NAME_EMPTY = "nameEmpty";
-const NAME_INVALID = "nameInvalid";
-const NAME_UNTOUCHED = "nameUntouched";
-const NAME_VALID = "nameValid";
-const PROVIDER_UNTOUCHED = "providerUntouched";
-const PROVIDER_VALID = "providerValid";
-const PROVIDER_INVALID = "providerInvalid";
-const REGION_UNTOUCHED = "regionUntouched";
-const REGION_VALID = "regionValid";
-const REGION_INVALID = "regionInvalid";
-const AZ_UNTOUCHED = "azUntouched";
-const AZ_VALID = "azValid";
-const AZ_INVALID = "azInvalid";
-const SYSTEM_UNAVAILABLE = "systemUnavailable";
-const SIZE_VALID = "sizeValid";
-const SIZE_INVALID = "sizeInvalid";
-const SIZE_UNTOUCHED = "sizeUntouched";
+export const NAME_EMPTY = "nameEmpty";
+export const NAME_INVALID = "nameInvalid";
+export const NAME_UNTOUCHED = "nameUntouched";
+export const NAME_VALID = "nameValid";
+export const PROVIDER_UNTOUCHED = "providerUntouched";
+export const PROVIDER_VALID = "providerValid";
+export const PROVIDER_INVALID = "providerInvalid";
+export const REGION_UNTOUCHED = "regionUntouched";
+export const REGION_VALID = "regionValid";
+export const REGION_INVALID = "regionInvalid";
+export const AZ_UNTOUCHED = "azUntouched";
+export const AZ_VALID = "azValid";
+export const AZ_INVALID = "azInvalid";
+export const SYSTEM_UNAVAILABLE = "systemUnavailable";
+export const SIZE_VALID = "sizeValid";
+export const SIZE_INVALID = "sizeInvalid";
+export const SIZE_UNTOUCHED = "sizeUntouched";
 
 const CreateKafkaInstanceMachine = createMachine(
   {
@@ -39,10 +38,7 @@ const CreateKafkaInstanceMachine = createMachine(
         provider: Provider | undefined;
         region: Region | undefined;
         az: AZ | undefined;
-        size?: number | undefined;
-        allowedStreamingUnits: number;
-        remainingStreamingUnits: number | undefined;
-
+        size: Size | undefined;
         defaultProvider: Provider | undefined;
         defaultRegion: Region | undefined;
         defaultAZ: AZ | undefined;
@@ -57,7 +53,7 @@ const CreateKafkaInstanceMachine = createMachine(
         | { type: "providerChange"; provider: Provider }
         | { type: "regionChange"; region: Region }
         | { type: "azChange"; az: AZ }
-        | { type: "sizeChange"; size: number }
+        | { type: "sizeChange"; size: Size }
         | { type: "nameIsValid" }
         | { type: "nameIsInvalid" }
         | { type: "nameIsTaken" }
@@ -77,9 +73,7 @@ const CreateKafkaInstanceMachine = createMachine(
       provider: undefined,
       region: undefined,
       az: undefined,
-      size: 1,
-      allowedStreamingUnits: 0,
-      remainingStreamingUnits: undefined,
+      size: undefined,
 
       defaultProvider: undefined,
       defaultRegion: undefined,
@@ -297,18 +291,34 @@ const CreateKafkaInstanceMachine = createMachine(
     actions: {
       setAvailableProvidersAndDefault: assign((_context, event) => {
         const {
+          availableProviders,
           defaultProvider,
           instanceAvailability,
           defaultAZ,
           defaultRegion,
         } = event.data;
 
+        const allRegions = availableProviders.flatMap((p) => p.regions);
+
+        const noRegionsAvailable =
+          allRegions.every(({ isDisabled }) => isDisabled === true) ||
+          allRegions.length === 0;
+
+        const isDefaultRegionInDefaultProviderRegions =
+          availableProviders
+            .find((p) => defaultProvider === p.id)
+            ?.regions.find((r) => r.id === defaultRegion) !== undefined;
+
         return {
           ...event.data,
           provider: defaultProvider,
+          region: isDefaultRegionInDefaultProviderRegions
+            ? defaultRegion
+            : undefined,
           az: defaultAZ,
-          instanceAvailability,
-          region: defaultRegion,
+          instanceAvailability: noRegionsAvailable
+            ? "regions-unavailable"
+            : instanceAvailability,
         };
       }),
       formChange: send("formChange"),
@@ -428,108 +438,4 @@ export function makeCreateKafkaInstanceMachine({
       },
     },
   });
-}
-
-export function useCreateKafkaInstanceMachine({
-  getAvailableProvidersAndDefaults,
-  onCreate,
-}: MakeCreateKafkaInstanceMachine) {
-  const [state, send] = useMachine(
-    () =>
-      makeCreateKafkaInstanceMachine({
-        getAvailableProvidersAndDefaults,
-        onCreate,
-      }),
-    { devTools: true }
-  );
-
-  const selectedProviderInfo = state.context.availableProviders.find(
-    (p) => p.id === state.context.provider
-  );
-
-  const setName = useCallback(
-    (name: string) => send({ type: "nameChange", name }),
-    [send]
-  );
-  const setProvider = useCallback(
-    (provider: Provider) => send({ type: "providerChange", provider }),
-    [send]
-  );
-  const setRegion = useCallback(
-    (region: Region) => send({ type: "regionChange", region }),
-    [send]
-  );
-  const setAZ = useCallback((az: AZ) => send({ type: "azChange", az }), [send]);
-  const create = useCallback(() => send("create"), [send]);
-  const setSize = useCallback(
-    (size: number) => send({ type: "sizeChange", size }),
-    [send]
-  );
-
-  const isFormInvalid = state.context.creationError === "form-invalid";
-  const isNameTaken = state.context.creationError === "name-taken";
-
-  const {
-    size,
-    name,
-    provider,
-    region,
-    az,
-    availableProviders,
-    instanceAvailability,
-    allowedStreamingUnits,
-    remainingStreamingUnits,
-  } = state.context;
-
-  return {
-    name,
-    provider,
-    region,
-    az,
-    size,
-    allowedStreamingUnits,
-    remainingStreamingUnits,
-
-    azOptions: selectedProviderInfo?.AZ,
-    regions: selectedProviderInfo?.regions,
-
-    availableProviders,
-    instanceAvailability,
-
-    isNameInvalid: state.hasTag(NAME_INVALID),
-    isNameEmpty: state.hasTag(NAME_EMPTY),
-    isNameError:
-      state.hasTag(NAME_INVALID) ||
-      isNameTaken ||
-      (!state.hasTag(NAME_VALID) && isFormInvalid),
-    isNameTaken,
-    isSizeInvalid: state.hasTag(SIZE_INVALID),
-    isSizeError:
-      state.hasTag(SIZE_INVALID) ||
-      (!state.hasTag(SIZE_VALID) && isFormInvalid),
-
-    isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
-    isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,
-    isAzError: !state.hasTag(AZ_VALID) && isFormInvalid,
-
-    isTrial:
-      state.context.instanceAvailability === undefined ||
-      ["trial", "trial-used", "trial-unavailable"].includes(
-        state.context.instanceAvailability
-      ),
-    isLoading: state.matches("loading"),
-    isSaving: state.matches("saving"),
-    canCreate: state.matches("configuring"),
-    canSave: state.can("create"),
-    isSystemUnavailable: state.hasTag(SYSTEM_UNAVAILABLE),
-
-    error: state.context.creationError,
-
-    setName,
-    setProvider,
-    setRegion,
-    setAZ,
-    create,
-    setSize,
-  };
 }

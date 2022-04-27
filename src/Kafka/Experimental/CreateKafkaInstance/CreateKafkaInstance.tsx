@@ -3,27 +3,45 @@ import {
   Button,
   Flex,
   FlexItem,
+  Form,
   Modal,
   ModalVariant,
 } from "@patternfly/react-core";
-import { FormEvent, FunctionComponent, useCallback } from "react";
-import { useTranslation } from "react-i18next";
+import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 import {
-  FormAlerts,
-  InstanceInfo,
-  InstanceInfoLimitsProps,
-  ModalAlerts,
-  TrialKafkaForm,
-  StandardKafkaForm,
-} from "./components";
+  FormEvent,
+  FunctionComponent,
+  useCallback,
+  VoidFunctionComponent,
+} from "react";
+import { useTranslation } from "react-i18next";
+import { FormAlerts, InstanceInfo, ModalAlerts } from "./components";
+import { FieldAZ } from "./components/FieldAZ";
+import { FieldCloudProvider } from "./components/FieldCloudProvider";
+import { FieldCloudRegion } from "./components/FieldCloudRegion";
+import { FieldInstanceName } from "./components/FieldInstanceName";
+import { FieldSize, FieldSizeProps } from "./components/FieldSize";
 import "./CreateKafkaInstance.css";
 import {
+  CreateKafkaInstanceProvider,
   MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
 } from "./machines";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
-export type CreateKafkaInstanceProps = {
+export type CreateKafkaInstanceProps = ConnectedCreateKafkaInstanceProps &
+  MakeCreateKafkaInstanceMachine;
+export const CreateKafkaInstance: FunctionComponent<
+  CreateKafkaInstanceProps
+> = ({ getAvailableProvidersAndDefaults, onCreate, ...props }) => (
+  <CreateKafkaInstanceProvider
+    getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+    onCreate={onCreate}
+  >
+    <ConnectedCreateKafkaInstance {...props} />
+  </CreateKafkaInstanceProvider>
+);
+
+export type ConnectedCreateKafkaInstanceProps = {
   /**
    *
    * Flag to show the modal
@@ -47,73 +65,41 @@ export type CreateKafkaInstanceProps = {
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   onClickLearnMoreAboutRegions: () => void;
-} & MakeCreateKafkaInstanceMachine &
-  Partial<InstanceInfoLimitsProps>;
-
-export const CreateKafkaInstance: FunctionComponent<
-  CreateKafkaInstanceProps
+  onLearnHowToAddStreamingUnits: () => void;
+  onLearnMoreAboutSizes: () => void;
+};
+export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
+  ConnectedCreateKafkaInstanceProps
 > = ({
-  getAvailableProvidersAndDefaults,
   isModalOpen,
   appendTo,
   onClickQuickStart,
   onCancel,
-  onCreate,
   disableFocusTrap,
-  trialDurationInHours = 48,
-  ingresEgress = 30,
-  storage = 1000,
-  maxPartitions = 1000,
-  connections = 2000,
-  connectionRate = 100,
-  messageSize = 1,
   onClickKafkaOverview,
   onClickContactUs,
-  onClickLearnMoreAboutRegions,
+  //onClickLearnMoreAboutRegions,
+  onLearnHowToAddStreamingUnits,
+  onLearnMoreAboutSizes,
 }) => {
   const FORM_ID = "create_instance_-form";
   const { t } = useTranslation("create-kafka-instance-exp");
 
   const {
-    name,
-    provider,
-    region,
-    az,
-    regions,
-    azOptions,
-    availableProviders,
     instanceAvailability,
     size,
-    allowedStreamingUnits,
-    remainingStreamingUnits,
-
-    isNameTaken,
-    isNameInvalid,
-    isNameError,
-    isProviderError,
-    isRegionError,
-    isAzError,
-    isSizeError,
 
     isTrial,
     isLoading,
     isSaving,
-    canCreate,
     canSave,
     isSystemUnavailable,
-
     error,
-
-    setName,
-    setProvider,
-    setRegion,
-    setAZ,
     create,
-    setSize,
-  } = useCreateKafkaInstanceMachine({
-    getAvailableProvidersAndDefaults,
-    onCreate,
-  });
+
+    maxStreamingUnits,
+    remainingStreamingUnits,
+  } = useCreateKafkaInstanceMachine();
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -122,27 +108,6 @@ export const CreateKafkaInstance: FunctionComponent<
     },
     [create]
   );
-
-  const disableControls = isLoading || isSaving || !canCreate;
-
-  const nameValidation = isNameError ? "error" : "default";
-  const providerValidation = isProviderError ? "error" : "default";
-  const allRegionsUnavailable =
-    regions?.every(({ isDisabled }) => isDisabled === true) ||
-    (regions && regions?.length <= 0);
-  const someRegionsUnavailable =
-    regions && regions?.some(({ isDisabled }) => isDisabled === true);
-  const regionValidation =
-    isRegionError || (allRegionsUnavailable && !disableControls)
-      ? "error"
-      : someRegionsUnavailable && !disableControls
-      ? "warning"
-      : "default";
-  const azValidation = isAzError ? "error" : "default";
-  const disableAZTooltip =
-    azOptions === undefined || (azOptions?.multi === true && azOptions.single);
-  const isDisabledSize = instanceAvailability === "trial" || disableControls;
-  const sizeValidation = isSizeError ? "error" : "default";
 
   return (
     <Modal
@@ -183,9 +148,8 @@ export const CreateKafkaInstance: FunctionComponent<
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
         onClickKafkaOverview={onClickKafkaOverview}
-        allowedStreamingUnits={allowedStreamingUnits}
+        maxStreamingUnits={maxStreamingUnits}
         onClickContactUs={onClickContactUs}
-        isAllRegionsUnavailable={allRegionsUnavailable}
       />
       <Flex
         direction={{ default: "column", lg: "row" }}
@@ -194,74 +158,20 @@ export const CreateKafkaInstance: FunctionComponent<
         <FlexItem flex={{ default: "flex_2" }}>
           <FormAlerts
             error={error}
-            isTrial={isTrial}
             onClickContactUS={onClickContactUs}
-            totalStreamingUnits={allowedStreamingUnits}
+            maxStreamingUnits={maxStreamingUnits}
             streamingUnits={remainingStreamingUnits}
           />
-          {isTrial && instanceAvailability ? (
-            <>
-              <TrialKafkaForm
-                FORM_ID={FORM_ID}
-                isNameTaken={isNameTaken}
-                isNameInvalid={isNameInvalid}
-                nameValidation={nameValidation}
-                name={name}
-                disableControls={disableControls}
-                providerValidation={providerValidation}
-                availableProviders={availableProviders}
-                provider={provider}
-                regionValidation={regionValidation}
-                regions={regions}
-                region={region}
-                azValidation={azValidation}
-                azOptions={azOptions}
-                az={az}
-                disableAZTooltip={disableAZTooltip}
-                isDisabledSize={isDisabledSize}
-                size={size}
-                setSize={setSize}
-                setRegion={setRegion}
-                setAZ={setAZ}
-                setProvider={setProvider}
-                setName={setName}
-                onSubmit={onSubmit}
-                instanceAvailability={instanceAvailability}
-                onClickLearnMoreAboutRegions={onClickLearnMoreAboutRegions}
-              />
-            </>
-          ) : (
-            <StandardKafkaForm
-              FORM_ID={FORM_ID}
-              isNameTaken={isNameTaken}
-              isNameInvalid={isNameInvalid}
-              nameValidation={nameValidation}
-              name={name}
-              disableControls={disableControls}
-              providerValidation={providerValidation}
-              availableProviders={availableProviders}
-              provider={provider}
-              regionValidation={regionValidation}
-              regions={regions}
-              region={region}
-              azValidation={azValidation}
-              azOptions={azOptions}
-              az={az}
-              disableAZTooltip={disableAZTooltip}
-              isDisabledSize={isDisabledSize}
-              size={size}
-              setSize={setSize}
-              setRegion={setRegion}
-              setAZ={setAZ}
-              setProvider={setProvider}
-              setName={setName}
-              onSubmit={onSubmit}
-              remainingStreamingUnits={remainingStreamingUnits}
-              allowedStreamingUnits={allowedStreamingUnits}
-              sizeValidation={sizeValidation}
-              instanceAvailability={instanceAvailability}
+          <Form onSubmit={onSubmit} id={FORM_ID}>
+            <ConnectedFieldInstanceName />
+            <ConnectedFieldCloudProvider />
+            <ConnectedFieldCloudRegion />
+            <ConnectedFieldAZ />
+            <ConnectedFieldSize
+              onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+              onLearnMoreAboutSizes={onLearnMoreAboutSizes}
             />
-          )}
+          </Form>
         </FlexItem>
         <FlexItem
           flex={{ default: "flex_1" }}
@@ -270,15 +180,15 @@ export const CreateKafkaInstance: FunctionComponent<
           <InstanceInfo
             isLoading={isLoading}
             isTrial={isTrial}
-            trialDurationInHours={trialDurationInHours}
-            ingresEgress={ingresEgress}
-            storage={storage}
-            maxPartitions={maxPartitions}
-            connections={connections}
-            connectionRate={connectionRate}
-            messageSize={messageSize}
+            trialDurationInHours={0}
+            ingresEgress={0}
+            storage={0}
+            maxPartitions={0}
+            connections={0}
+            connectionRate={0}
+            messageSize={0}
             onClickQuickStart={onClickQuickStart}
-            streamingUnits={size}
+            streamingUnits={size?.streamingUnits}
           />
         </FlexItem>
       </Flex>
@@ -291,5 +201,119 @@ export const CreateKafkaInstance: FunctionComponent<
         title={t("instance_creation_time_alert")}
       />
     </Modal>
+  );
+};
+
+export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
+  const {
+    name,
+    isNameTaken,
+    isNameInvalid,
+    isNameEmpty,
+    isFormEnabled,
+    setName,
+  } = useCreateKafkaInstanceMachine();
+
+  return (
+    <FieldInstanceName
+      value={name || ""}
+      validity={
+        isNameTaken
+          ? "taken"
+          : isNameInvalid
+          ? "invalid"
+          : isNameEmpty
+          ? "required"
+          : "valid"
+      }
+      isDisabled={!isFormEnabled}
+      onChange={setName}
+    />
+  );
+};
+
+export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
+  const {
+    provider,
+    availableProviders,
+    isProviderError,
+    isFormEnabled,
+    setProvider,
+  } = useCreateKafkaInstanceMachine();
+
+  return (
+    <FieldCloudProvider
+      isValid={!isProviderError}
+      providers={availableProviders}
+      value={provider}
+      isDisabled={!isFormEnabled}
+      onChange={setProvider}
+    />
+  );
+};
+
+export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
+  const { region, regions, isRegionError, isFormEnabled, setRegion } =
+    useCreateKafkaInstanceMachine();
+
+  return (
+    <FieldCloudRegion
+      validity={isRegionError ? "required" : "valid"}
+      regions={regions || []}
+      value={region}
+      isDisabled={!isFormEnabled}
+      onChange={setRegion}
+    />
+  );
+};
+
+export const ConnectedFieldAZ: VoidFunctionComponent = () => {
+  const { az, isAzError, setAZ, isTrial, isFormEnabled } =
+    useCreateKafkaInstanceMachine();
+
+  return (
+    <FieldAZ
+      validity={isAzError ? "required" : "valid"}
+      options={isTrial ? "single" : "multi"}
+      value={az}
+      isDisabled={!isFormEnabled}
+      onChange={setAZ}
+    />
+  );
+};
+
+export const ConnectedFieldSize: VoidFunctionComponent<
+  Pick<
+    FieldSizeProps,
+    "onLearnHowToAddStreamingUnits" | "onLearnMoreAboutSizes"
+  >
+> = () => {
+  const {
+    size,
+    remainingStreamingUnits,
+    isSizeInvalid,
+    isFormEnabled,
+    isTrial,
+    setSize,
+  } = useCreateKafkaInstanceMachine();
+
+  return (
+    <FieldSize
+      value={size?.streamingUnits || 1}
+      sizes={[
+        { id: "x1", streamingUnits: 1 },
+        { id: "x2", streamingUnits: 2 },
+      ]}
+      remainingStreamingUnits={remainingStreamingUnits}
+      isDisabled={!isFormEnabled}
+      validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
+      onChange={setSize}
+      onLearnHowToAddStreamingUnits={function (): void {
+        throw new Error("Function not implemented.");
+      }}
+      onLearnMoreAboutSizes={function (): void {
+        throw new Error("Function not implemented.");
+      }}
+    />
   );
 };

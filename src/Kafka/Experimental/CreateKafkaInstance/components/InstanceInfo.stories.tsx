@@ -1,6 +1,5 @@
 import { FlexItem } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 
 import { InstanceInfo } from "./InstanceInfo";
 

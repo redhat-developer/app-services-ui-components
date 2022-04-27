@@ -13,18 +13,18 @@
     "drawer_resource_tab_body_description_1": "Your application or tool initially connects to the Kafka instance using the bootstrap server and authenticates with your service account credentials.",
     "more_info_about_sasl_oauthbearer": "More information about SASL/OAUTHBEARER",
     "recommended": "Recommended",
+    "rest_api": "REST API",
+    "rest_api_help_button_label": "More information about the REST API",
+    "rest_api_popover_content_1": "Use the REST API URL to connect to this Kafka instance and perform tasks like configuring topics and consumer groups. Refer to the <value>API documentation</value> for available endpoints.",
+    "rest_api_popover_content_2": "<value>Learn more</value> about how to use the API.",
+    "rest_api_popover_label": "API",
+    "rest_api_url_description": "Use the REST API URL to connect to this Kafka instance over HTTPS. Refer to the <value>API documentation</value> for available endpoints.",
     "sasl_oauthbearer": "SASL/OAUTHBEARER",
     "sasl_oauthbearer_description": "Use your service account credentials and a token endpoint URL to authenticate your client with the Kafka instance.",
     "sasl_oauthbearer_popover_content": "OpenShift Streams for Apache Kafka uses the industry-standard OAuth protocol via the SASL/OAUTHBEARER provided by Apache Kafka.",
     "sasl_plain": "SASL/PLAIN",
     "sasl_plain_description": "Use your service account credentials (Client ID and Client secret) as the user name and password to authenticate your client with the Kafka instance.",
-    "token_endpoint_url": "Token endpoint URL",
-    "rest_api": "REST API",
-    "rest_api_help_button_label": "More information about the REST API",
-    "rest_api_url_description": "Use the REST API URL to connect to this Kafka instance over HTTPS. Refer to the <value>API documentation</value> for available endpoints.",
-    "rest_api_popover_content_1": "Use the REST API URL to connect to this Kafka instance and perform tasks like configuring topics and consumer groups. Refer to the <value>API documentation</value> for available endpoints.",
-    "rest_api_popover_label": "API",
-    "rest_api_popover_content_2": "<value>Learn more</value> about how to use the API."
+    "token_endpoint_url": "Token endpoint URL"
   },
   "consumerGroup": {
     "active_members": "Active members",
@@ -84,6 +84,7 @@
   "filter_by_owner": "Filter by owner",
   "filter_by_short_description": "Filter by short description",
   "ingress": "Ingress",
+  "ingress_egress": "Ingress/Egress",
   "ingress_value": "up to 30 MiB/second each",
   "input_field_invalid_message": "Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "max_filter_message": "Maximum number of filters reached. Clear a filter before adding another.",
@@ -100,6 +101,5 @@
   "topic": {
     "topic": "Topic"
   },
-  "will_expire": "This trial instance will expire in <time>{{time}}</time>",
-  "ingress_egress": "Ingress/Egress"
+  "will_expire": "This trial instance will expire in <time>{{time}}</time>"
 }
