@@ -1,4 +1,4 @@
-import { FormGroup } from "@patternfly/react-core";
+import { FormGroup, HelperText, HelperTextItem } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { CloudRegionProps, CloudRegionSelect } from "./CloudRegionsSelect";
@@ -15,46 +15,27 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
-  const allRegionsUnavailable =
-    regions.length > 0 &&
-    regions.every(({ isDisabled }) => isDisabled === true);
+  const allRegionsUnavailable = regions.every(
+    ({ isDisabled }) => isDisabled === true
+  );
 
   const disableControl =
     isDisabled || allRegionsUnavailable || regions.length === 0;
-
-  const validation =
-    validity !== "valid" || allRegionsUnavailable ? "error" : "default";
 
   const someRegionsUnavailable = regions.some(
     ({ isDisabled }) => isDisabled === true
   );
 
+  const validation =
+    validity !== "valid" || allRegionsUnavailable ? "error" : "default";
+
   const placeholder = allRegionsUnavailable
     ? t("regions_temporarily_unavailable")
     : t("select_region");
 
-  const helperTextInvalid = (() => {
-    switch (true) {
-      case allRegionsUnavailable:
-        return (
-          <div className="pf-c-form__helper-text pf-m-error">
-            {t("all_region_unavailable_helper_text")}
-          </div>
-        );
-      case someRegionsUnavailable:
-        return (
-          <div className="pf-c-form__helper-text pf-m-warning">
-            {t("some_region_unavailable_helper_text")}
-          </div>
-        );
-      default:
-        return (
-          <div className="pf-c-form__helper-text pf-m-error">
-            {t("common:required")}
-          </div>
-        );
-    }
-  })();
+  const helperTextInvalid = allRegionsUnavailable
+    ? t("all_region_unavailable_helper_text")
+    : t("common:required");
 
   return (
     <FormGroup
@@ -63,7 +44,16 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
       fieldId="form-cloud-region-option"
       isRequired
       validated={validation}
-      helperTextInvalid={helperTextInvalid}
+      helperText={
+        someRegionsUnavailable ? (
+          <HelperText>
+            <HelperTextItem variant="warning" hasIcon>
+              {t("some_region_unavailable_helper_text")}
+            </HelperTextItem>
+          </HelperText>
+        ) : undefined
+      }
+      helperTextInvalid={isDisabled ? undefined : helperTextInvalid}
     >
       <CloudRegionSelect
         value={value}

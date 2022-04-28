@@ -1,6 +1,11 @@
 import { ComponentMeta } from "@storybook/react";
 import { CreateKafkaInstance as CreateKafkaInstanceComponent } from "./CreateKafkaInstance";
-import { argTypes, PROVIDERS, Template } from "./Stories/storiesHelpers";
+import {
+  argTypes,
+  parameters,
+  PROVIDERS,
+  Template,
+} from "./Stories/storiesHelpers";
 
 export default {
   component: CreateKafkaInstanceComponent,
@@ -11,12 +16,11 @@ export default {
     apiRegionsAvailability: "full",
     apiMaxStreamingUnits: 5,
     apiRemainingStreamingUnits: 3,
+    apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
   argTypes,
-  parameters: {
-    controls: { include: /^api/ },
-  },
+  parameters,
 } as ComponentMeta<typeof CreateKafkaInstanceComponent>;
 
 export const CreateKafkaInstance = Template.bind({});

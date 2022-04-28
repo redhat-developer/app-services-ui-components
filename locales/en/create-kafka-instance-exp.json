@@ -58,6 +58,8 @@
   "select_region": "",
   "size_field_aria": "",
   "size_help_content": "",
+  "sizes_loading": "",
+  "sizes_missing": "",
   "some_region_unavailable_helper_text": "",
   "standard_kafka_size_description": "",
   "standard_kafka_size_dscription": "",

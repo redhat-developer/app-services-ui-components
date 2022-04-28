@@ -8,3 +8,4 @@ export * from "./ModalAlerts";
 export * from "./FieldInstanceName";
 export * from "./InstanceInfo";
 export * from "./FieldSize";
+export { InstanceInfoSkeleton } from "./InstanceInfoSkeleton";

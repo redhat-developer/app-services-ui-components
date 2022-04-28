@@ -67,7 +67,6 @@ export interface Typegen0 {
     azIsValid: "";
     noProviderAndRegion: "";
     noSizes: "";
-    sizeIsUntouched: "";
     sizeIsValid: "";
   };
   eventsCausingDelays: {};
@@ -99,7 +98,6 @@ export interface Typegen0 {
     | "configuring.az.invalid"
     | "configuring.az.valid"
     | "configuring.size"
-    | "configuring.size.untouched"
     | "configuring.size.validate"
     | "configuring.size.idle"
     | "configuring.size.invalid"
@@ -121,13 +119,7 @@ export interface Typegen0 {
               provider?: "untouched" | "validate" | "invalid" | "valid";
               region?: "untouched" | "validate" | "invalid" | "valid";
               az?: "untouched" | "validate" | "invalid" | "valid";
-              size?:
-                | "untouched"
-                | "validate"
-                | "idle"
-                | "invalid"
-                | "valid"
-                | "loading";
+              size?: "validate" | "idle" | "invalid" | "valid" | "loading";
             };
       };
   tags:
@@ -145,7 +137,6 @@ export interface Typegen0 {
     | "azUntouched"
     | "azInvalid"
     | "azValid"
-    | "sizeUntouched"
     | "sizeIndle"
     | "sizeInvalid"
     | "sizeValid"

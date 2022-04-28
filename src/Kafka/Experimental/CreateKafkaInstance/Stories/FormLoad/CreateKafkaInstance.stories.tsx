@@ -1,110 +1,55 @@
 import { ComponentMeta } from "@storybook/react";
-import {
-  CreateKafkaInstance,
-  CreateKafkaInstanceProps,
-} from "../../CreateKafkaInstance";
-import {
-  makeAvailableProvidersAndDefaults,
-  PROVIDERS,
-  Template,
-} from "../storiesHelpers";
+import { CreateKafkaInstance } from "../../CreateKafkaInstance";
+import { argTypes, parameters, PROVIDERS, Template } from "../storiesHelpers";
 
 export default {
   component: CreateKafkaInstance,
   args: {
-    getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-      instanceAvailability: "quota",
-      defaultAZ: "multi",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-    }),
+    apiScenario: "quota",
+    apiProviders: PROVIDERS.map((p) => p.id),
+    apiDefaultProvider: "aws",
+    apiRegionsAvailability: "full",
+    apiMaxStreamingUnits: 5,
+    apiRemainingStreamingUnits: 3,
+    apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
+  argTypes,
+  parameters,
 } as ComponentMeta<typeof CreateKafkaInstance>;
-
-export const Default = Template.bind({});
-Default.storyName = "Standard";
-Default.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    defaultProvider: "aws",
-    providers: ["aws"],
-    instanceAvailability: "quota",
-    defaultAZ: "multi",
-    defaultRegion: "eu-west-1",
-  }),
-};
 
 export const QuotaAvailableOnFormLoad = Template.bind({});
 QuotaAvailableOnFormLoad.storyName = "Quota Available - Standard";
-QuotaAvailableOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    defaultProvider: "aws",
-    providers: ["aws", "azure"],
-    instanceAvailability: "quota",
-    defaultAZ: "multi",
-  }),
-};
 
 export const TrialAvailableOnFormLoad = Template.bind({});
 TrialAvailableOnFormLoad.storyName = "Quota Available - Trial";
 TrialAvailableOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    instanceAvailability: "trial",
-    defaultAZ: "multi",
-    defaultProvider: "",
-    providers: ["aws", "azure"],
-  }),
-} as CreateKafkaInstanceProps;
+  apiScenario: "trial",
+};
 
 export const OverQuotaOnFormLoad = Template.bind({});
 OverQuotaOnFormLoad.storyName = "Over Quota - Standard";
 OverQuotaOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    instanceAvailability: "over-quota",
-    defaultAZ: "multi",
-    defaultProvider: "",
-    providers: ["aws", "azure"],
-  }),
-} as CreateKafkaInstanceProps;
+  apiScenario: "over-quota",
+};
 
 export const TrialUnavailableOnFormLoad = Template.bind({});
 TrialUnavailableOnFormLoad.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    instanceAvailability: "trial-unavailable",
-    defaultAZ: "multi",
-    defaultProvider: "",
-    providers: ["aws", "azure"],
-  }),
-} as CreateKafkaInstanceProps;
+  apiScenario: "instance-unavailable",
+};
 
 export const TrialUsedOnFormLoad = Template.bind({});
 TrialUsedOnFormLoad.storyName = "Over Quota - Trial";
 TrialUsedOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-    instanceAvailability: "trial-used",
-    defaultAZ: "multi",
-    defaultProvider: "",
-    providers: ["aws", "azure"],
-  }),
-} as CreateKafkaInstanceProps;
+  apiScenario: "trial-used",
+};
 
 export const SomeRegionsDisabledOnFormLoad = Template.bind({});
 SomeRegionsDisabledOnFormLoad.storyName = "Some regions disabled - Standard";
 SomeRegionsDisabledOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "quota",
-      defaultAZ: "multi",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-    },
-    PROVIDERS.map((p) => ({
-      ...p,
-      regions: p.regions.map((r, idx) => ({ ...r, isDisabled: idx === 0 })),
-    }))
-  ),
-} as CreateKafkaInstanceProps;
+  apiRegionsAvailability: "someRegionsUnavailable",
+};
 SomeRegionsDisabledOnFormLoad.parameters = {
   docs: {
     description: {
@@ -117,19 +62,9 @@ SomeRegionsDisabledOnFormLoad.parameters = {
 export const TrialSomeRegionsDisabledOnFormLoad = Template.bind({});
 TrialSomeRegionsDisabledOnFormLoad.storyName = "Some regions disabled - Trial";
 TrialSomeRegionsDisabledOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "trial",
-      defaultAZ: "multi",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-    },
-    PROVIDERS.map((p) => ({
-      ...p,
-      regions: p.regions.map((r, idx) => ({ ...r, isDisabled: idx === 0 })),
-    }))
-  ),
-} as CreateKafkaInstanceProps;
+  apiScenario: "trial",
+  apiRegionsAvailability: "someRegionsUnavailable",
+};
 TrialSomeRegionsDisabledOnFormLoad.parameters = {
   docs: {
     description: {
@@ -142,58 +77,22 @@ TrialSomeRegionsDisabledOnFormLoad.parameters = {
 export const AllRegionsDisabledOnFormLoad = Template.bind({});
 AllRegionsDisabledOnFormLoad.storyName = "All Regions Unavailable - Standard";
 AllRegionsDisabledOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "quota",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-      defaultAZ: "multi",
-    },
-    PROVIDERS.map((p) => ({
-      ...p,
-      regions: p.regions.map((r) => ({ ...r, isDisabled: true })),
-    }))
-  ),
-} as CreateKafkaInstanceProps;
+  apiRegionsAvailability: "regionsDisabled",
+};
 
 export const TrialAllRegionsDisabledOnFormLoad = Template.bind({});
 TrialAllRegionsDisabledOnFormLoad.storyName = "All regions Unavailable - Trial";
 TrialAllRegionsDisabledOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "trial",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-      defaultAZ: "multi",
-    },
-    PROVIDERS.map((p) => ({
-      ...p,
-      regions: p.regions.map((r) => ({ ...r, isDisabled: true })),
-    }))
-  ),
-} as CreateKafkaInstanceProps;
+  apiScenario: "trial",
+  apiRegionsAvailability: "regionsDisabled",
+};
 
 export const NoRegionsReturnedFromApiForAProviderOnFormLoad = Template.bind({});
 NoRegionsReturnedFromApiForAProviderOnFormLoad.storyName =
   "No regions returned from API for a provider - Standard";
 NoRegionsReturnedFromApiForAProviderOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "quota",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-      defaultAZ: "multi",
-    },
-    PROVIDERS.map((p, idx) =>
-      idx === 0
-        ? {
-            ...p,
-            regions: [],
-          }
-        : { ...p }
-    )
-  ),
-} as CreateKafkaInstanceProps;
+  apiRegionsAvailability: "regionsMissingForOneProvider",
+};
 NoRegionsReturnedFromApiForAProviderOnFormLoad.parameters = {
   docs: {
     description: {
@@ -203,47 +102,12 @@ NoRegionsReturnedFromApiForAProviderOnFormLoad.parameters = {
   },
 };
 
-export const NoRegionsReturnedFromApiForAllProviderOnFormLoad = Template.bind(
-  {}
-);
-NoRegionsReturnedFromApiForAllProviderOnFormLoad.storyName =
-  "No regions returned from API for all providers - Standard";
-NoRegionsReturnedFromApiForAllProviderOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "regions-unavailable",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-      defaultAZ: "multi",
-    },
-    PROVIDERS.map((p) => ({ ...p, regions: [] }))
-  ),
-} as CreateKafkaInstanceProps;
-NoRegionsReturnedFromApiForAllProviderOnFormLoad.parameters = {
-  docs: {
-    description: {
-      story: `If all provider doesn't have any region, form will be disabled.`,
-    },
-  },
-};
-
 export const NoRegionsReturnedFromApiOnFormLoad = Template.bind({});
 NoRegionsReturnedFromApiOnFormLoad.storyName =
   "No regions returned from API - Standard";
 NoRegionsReturnedFromApiOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: "quota",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-      defaultAZ: "multi",
-    },
-    PROVIDERS.map((p) => ({
-      ...p,
-      regions: [],
-    }))
-  ),
-} as CreateKafkaInstanceProps;
+  apiRegionsAvailability: "regionsMissing",
+};
 NoRegionsReturnedFromApiOnFormLoad.parameters = {
   docs: {
     description: {
@@ -255,7 +119,5 @@ NoRegionsReturnedFromApiOnFormLoad.parameters = {
 export const ErrorOnFormLoad = Template.bind({});
 ErrorOnFormLoad.storyName = "Generic Error";
 ErrorOnFormLoad.args = {
-  getAvailableProvidersAndDefaults: async () => {
-    return Promise.reject();
-  },
-} as CreateKafkaInstanceProps;
+  apiScenario: "backend-error",
+};

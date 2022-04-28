@@ -1,10 +1,9 @@
 import { ComponentMeta } from "@storybook/react";
+import { CreateKafkaInstance } from "../../CreateKafkaInstance";
 import {
-  CreateKafkaInstance,
-  CreateKafkaInstanceProps,
-} from "../../CreateKafkaInstance";
-import {
-  makeAvailableProvidersAndDefaults,
+  argTypes,
+  parameters,
+  PROVIDERS,
   sampleSubmit,
   Template,
 } from "../storiesHelpers";
@@ -12,25 +11,24 @@ import {
 export default {
   component: CreateKafkaInstance,
   args: {
-    getAvailableProvidersAndDefaults: makeAvailableProvidersAndDefaults({
-      instanceAvailability: "quota",
-      defaultAZ: "multi",
-      defaultProvider: "aws",
-      providers: ["aws", "azure"],
-    }),
+    apiScenario: "quota",
+    apiProviders: PROVIDERS.map((p) => p.id),
+    apiDefaultProvider: "aws",
+    apiRegionsAvailability: "full",
+    apiMaxStreamingUnits: 5,
+    apiRemainingStreamingUnits: 3,
+    apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
+  argTypes,
+  parameters,
 } as ComponentMeta<typeof CreateKafkaInstance>;
 
 export const LoadingData = Template.bind({});
 LoadingData.storyName = "Loading Data";
 LoadingData.args = {
-  getAvailableProvidersAndDefaults: async () => {
-    return new Promise(() => {
-      // never resolve to simulate loading
-    });
-  },
-} as CreateKafkaInstanceProps;
+  apiLatency: 999999,
+};
 
 export const CreationInProgress = Template.bind({});
 CreationInProgress.storyName = "Creation in Progress";

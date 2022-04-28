@@ -1,6 +1,8 @@
 import {
   Button,
   ButtonVariant,
+  HelperText,
+  HelperTextItem,
   Slider,
   SliderProps,
   Spinner,
@@ -87,21 +89,23 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   );
 
   const helperTextOverQuota = (
-    <div className="pf-c-form__helper-text pf-m-error" aria-live={"polite"}>
-      <div>
-        {t("standard_kafka_streaming_unit", {
-          count: remainingStreamingUnits,
-        })}
-      </div>
-      <Button
-        className="pf-c-form__helper-text"
-        variant={ButtonVariant.link}
-        isInline
-        onClick={onLearnHowToAddStreamingUnits}
-      >
-        {t("standard_kafka_size_description")}
-      </Button>
-    </div>
+    <HelperText>
+      <HelperTextItem variant="error" hasIcon>
+        <div>
+          {t("standard_kafka_streaming_unit", {
+            count: remainingStreamingUnits,
+          })}
+        </div>
+        <Button
+          className="pf-c-form__helper-text"
+          variant={ButtonVariant.link}
+          isInline
+          onClick={onLearnHowToAddStreamingUnits}
+        >
+          {t("standard_kafka_size_description")}
+        </Button>
+      </HelperTextItem>
+    </HelperText>
   );
 
   return (
@@ -126,11 +130,11 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     >
       <div className="pf-c-input-group pf-u-w-50">
         <Slider
+          data-testid={"size-slider"}
           max={steps.length - 1}
           value={valueIndex}
           showTicks={true}
           customSteps={steps}
-          label={t("streaming_unit")}
           className="pf-u-w-100"
           isDisabled={isDisabled || validity === "trial"}
           onChange={handleChange}
@@ -138,7 +142,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         />
         <span
           className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
-          id="plain-example"
+          id="streaming-size"
         >
           {t("streaming_unit")}
         </span>

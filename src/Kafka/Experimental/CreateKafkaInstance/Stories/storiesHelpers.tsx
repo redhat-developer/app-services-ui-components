@@ -1,10 +1,12 @@
 import { Button } from "@patternfly/react-core";
+import { actions } from "@storybook/addon-actions";
 import { PlayFunction } from "@storybook/csf";
+import { expect } from "@storybook/jest";
 import { ComponentStory } from "@storybook/react";
 import { ReactFramework } from "@storybook/react/types-6-0";
-import { userEvent, within } from "@storybook/testing-library";
+import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
-import { fakeApi } from "../../../../shared/storiesHelpers";
+import { apiError, fakeApi } from "../../../../shared/storiesHelpers";
 import {
   CreateKafkaInstance,
   CreateKafkaInstanceProps,
@@ -63,7 +65,8 @@ const SIZES: { [key: string]: Size[] } = {
     {
       id: "x1",
       streamingUnits: 1,
-      ingressEgress: 3,
+      ingress: 3,
+      egress: 31,
       storage: 5,
       connections: 6,
       connectionRate: 7,
@@ -73,7 +76,8 @@ const SIZES: { [key: string]: Size[] } = {
     {
       id: "x2",
       streamingUnits: 2,
-      ingressEgress: 30,
+      ingress: 30,
+      egress: 301,
       storage: 50,
       connections: 60,
       connectionRate: 70,
@@ -83,7 +87,8 @@ const SIZES: { [key: string]: Size[] } = {
     {
       id: "x3",
       streamingUnits: 5,
-      ingressEgress: 300,
+      ingress: 300,
+      egress: 3001,
       storage: 500,
       connections: 600,
       connectionRate: 700,
@@ -95,7 +100,8 @@ const SIZES: { [key: string]: Size[] } = {
     {
       id: "x1",
       streamingUnits: 3,
-      ingressEgress: 3,
+      ingress: 3,
+      egress: 31,
       storage: 5,
       connections: 6,
       connectionRate: 7,
@@ -105,7 +111,8 @@ const SIZES: { [key: string]: Size[] } = {
     {
       id: "x2",
       streamingUnits: 9,
-      ingressEgress: 30,
+      ingress: 30,
+      egress: 301,
       storage: 50,
       connections: 60,
       connectionRate: 70,
@@ -125,7 +132,8 @@ export function makeAvailableProvidersAndDefaults(
     maxStreamingUnits: number;
     remainingStreamingUnits: number;
   },
-  allProviders = PROVIDERS
+  allProviders = PROVIDERS,
+  latency = 500
 ): () => Promise<CreateKafkaInitializationData> {
   const {
     instanceAvailability,
@@ -140,24 +148,28 @@ export function makeAvailableProvidersAndDefaults(
     providers.includes(p.id)
   );
 
-  return async (): Promise<CreateKafkaInitializationData> => {
-    return {
-      defaultProvider,
-      defaultAZ,
-      availableProviders,
-      instanceAvailability,
-      defaultRegion,
-      maxStreamingUnits,
-      remainingStreamingUnits,
-    };
-  };
+  return () =>
+    fakeApi<CreateKafkaInitializationData>(
+      {
+        defaultProvider,
+        defaultAZ,
+        availableProviders,
+        instanceAvailability,
+        defaultRegion,
+        maxStreamingUnits,
+        remainingStreamingUnits,
+      },
+      latency
+    );
 }
 
 const regionsScenario = {
   full: "All regions available",
-  oneProviderUnavailable: "One provider with no available regions",
+  oneProviderUnavailable: "One provider with no all regions disabled",
   someRegionsUnavailable: "Some regions disabled for all providers",
-  regionsUnavailable: "All regions disabled for all providers",
+  regionsDisabled: "All regions disabled for all providers",
+  regionsMissingForOneProvider: "No regions returned from API for a provider",
+  regionsMissing: "No regions returned from API for all providers",
 };
 
 export const argTypes = {
@@ -171,6 +183,7 @@ export const argTypes = {
       "trial-used",
       "instance-unavailable",
       "regions-unavailable",
+      "backend-error",
     ],
   },
   apiProviders: {
@@ -219,6 +232,13 @@ export const argTypes = {
       max: 9,
     },
   },
+  apiLatency: {
+    control: "number",
+  },
+};
+
+export const parameters = {
+  controls: { include: /^api/ },
 };
 
 export const Template: ComponentStory<typeof CreateKafkaInstance> = (
@@ -250,12 +270,13 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
 
   const {
     apiProviders = PROVIDERS.map((p) => p.id),
-    apiScenario = "quota" as InstanceAvailability,
-    apiDefaultProvider = PROVIDERS[0].id,
-    apiDefaultRegion = PROVIDERS[0].regions[0].id,
+    apiScenario = "quota",
+    apiDefaultProvider,
+    apiDefaultRegion,
     apiRegionsAvailability = "full",
     apiRemainingStreamingUnits = 3,
     apiMaxStreamingUnits = 5,
+    apiLatency = 500,
   } = args as { [key: string]: any };
 
   const providers =
@@ -271,23 +292,37 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
           ...p,
           regions: p.regions.map((r, idx) => ({ ...r, isDisabled: idx === 0 })),
         }))
-      : PROVIDERS.map((p) => ({
+      : apiRegionsAvailability === "regionsDisabled"
+      ? PROVIDERS.map((p) => ({
           ...p,
           regions: p.regions.map((r) => ({ ...r, isDisabled: true })),
+        }))
+      : apiRegionsAvailability === "regionsMissingForOneProvider"
+      ? PROVIDERS.map((p, idx) => ({
+          ...p,
+          regions: idx === 0 ? [] : p.regions,
+        }))
+      : PROVIDERS.map((p) => ({
+          ...p,
+          regions: [],
         }));
 
-  const getAvailableProvidersAndDefaults = makeAvailableProvidersAndDefaults(
-    {
-      instanceAvailability: apiScenario,
-      defaultAZ: "multi",
-      defaultProvider: apiDefaultProvider,
-      defaultRegion: apiDefaultRegion,
-      providers: apiProviders,
-      remainingStreamingUnits: apiRemainingStreamingUnits,
-      maxStreamingUnits: apiMaxStreamingUnits,
-    },
-    providers
-  );
+  const getAvailableProvidersAndDefaults =
+    apiScenario === "backend-error"
+      ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
+      : makeAvailableProvidersAndDefaults(
+          {
+            instanceAvailability: apiScenario,
+            defaultAZ: apiScenario === "trial" ? "single" : "multi",
+            defaultProvider: apiDefaultProvider,
+            defaultRegion: apiDefaultRegion,
+            providers: apiProviders,
+            remainingStreamingUnits: apiRemainingStreamingUnits,
+            maxStreamingUnits: apiMaxStreamingUnits,
+          },
+          providers,
+          apiLatency
+        );
 
   const getSizes: CreateKafkaInstanceProps["getSizes"] = (provider, region) => {
     console.log("getSizes", provider, region);
@@ -295,7 +330,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
       {
         sizes: SIZES[provider],
       },
-      500
+      apiLatency
     );
   };
 
@@ -303,7 +338,6 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
     <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
       <CreateKafkaInstance
         key={JSON.stringify(args)}
-        {...args}
         getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
         getSizes={getSizes}
         appendTo={() =>
@@ -315,6 +349,14 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
         onCancel={onCloseModal}
         onCreate={onCreate}
         disableFocusTrap={true}
+        {...actions(
+          "onClickQuickStart",
+          "onClickKafkaOverview",
+          "onClickContactUs",
+          "onClickLearnMoreAboutRegions",
+          "onLearnHowToAddStreamingUnits",
+          "onLearnMoreAboutSizes"
+        )}
       />
       <div>
         <Button onClick={() => onOpenModal()}>Open modal</Button>
@@ -329,12 +371,17 @@ export const sampleSubmit: PlayFunction<
 > = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
+  await waitFor(() => expect(canvas.getByLabelText("Name *")).toBeEnabled());
+
   await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
 
-  const regionSelect = await canvas.findByText("Select region");
+  const regionSelect = await canvas.findByText("Cloud region");
   await userEvent.click(regionSelect);
-  await userEvent.click(await canvas.findByText("EU, Ireland"));
+  await userEvent.click(await canvas.findByText("US East, N. Virginia"));
 
+  await waitFor(() =>
+    expect(canvas.getByTestId("size-slider")).toBeInTheDocument()
+  );
   await userEvent.click(
     await canvas.findByTestId("modalCreateKafka-buttonSubmit")
   );

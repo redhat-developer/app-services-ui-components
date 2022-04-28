@@ -1,10 +1,10 @@
 import { FlexItem } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { InstanceInfo } from "./InstanceInfo";
+import { InstanceInfoSkeleton as InstanceInfoSkeletonComp } from "./InstanceInfoSkeleton";
 
 export default {
-  component: InstanceInfo,
+  component: InstanceInfoSkeletonComp,
   args: {
     isTrial: false,
     trialDurationInHours: 123,
@@ -17,20 +17,15 @@ export default {
     messageSize: 123,
     streamingUnits: 1,
   },
-} as ComponentMeta<typeof InstanceInfo>;
+} as ComponentMeta<typeof InstanceInfoSkeletonComp>;
 
-const Template: ComponentStory<typeof InstanceInfo> = (args) => (
+const Template: ComponentStory<typeof InstanceInfoSkeletonComp> = (args) => (
   <FlexItem
     flex={{ default: "flex_1" }}
     className="mas--CreateKafkaInstance__sidebar"
   >
-    <InstanceInfo {...args} />
+    <InstanceInfoSkeletonComp {...args} />
   </FlexItem>
 );
 
-export const QuotaInstance = Template.bind({});
-
-export const TrialInstance = Template.bind({});
-TrialInstance.args = {
-  isTrial: true,
-};
+export const InstanceInfoSkeleton = Template.bind({});

@@ -29,7 +29,6 @@ export const SIZE_IDLE = "sizeIndle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
 export const SIZE_INVALID = "sizeInvalid";
-export const SIZE_UNTOUCHED = "sizeUntouched";
 
 const CreateKafkaInstanceMachine = createMachine(
   {
@@ -238,12 +237,10 @@ const CreateKafkaInstanceMachine = createMachine(
           size: {
             initial: "validate",
             states: {
-              untouched: { tags: SIZE_UNTOUCHED },
               validate: {
                 always: [
                   { cond: "noProviderAndRegion", target: "idle" },
                   { cond: "noSizes", target: "loading" },
-                  { cond: "sizeIsUntouched", target: "untouched" },
                   { cond: "sizeIsValid", target: "valid" },
                   { target: "invalid" },
                 ],
@@ -355,7 +352,9 @@ const CreateKafkaInstanceMachine = createMachine(
             provider: defaultProvider,
             region: isDefaultRegionInDefaultProviderRegions
               ? defaultRegion
-              : undefined,
+              : selectedProvider?.regions.filter(
+                  (r) => r.isDisabled === false
+                )[0]?.id,
             az: defaultAZ,
             size: undefined,
           },
@@ -390,9 +389,9 @@ const CreateKafkaInstanceMachine = createMachine(
       formChange: send("formChange"),
       setName: assign((context, { name }) => {
         if (context.creationError === "name-taken") {
-          return { name, creationError: undefined };
+          return { form: { ...context.form, name }, creationError: undefined };
         }
-        return { name };
+        return { form: { ...context.form, name } };
       }),
       setProvider: assign((context, { provider }) => {
         const selectedProvider = context.capabilities?.availableProviders.find(
@@ -402,7 +401,9 @@ const CreateKafkaInstanceMachine = createMachine(
           form: {
             ...context.form,
             provider,
-            region: undefined,
+            region: selectedProvider?.regions.filter(
+              (r) => r.isDisabled === false
+            )[0]?.id,
           },
           selectedProvider,
           sizes: undefined,
@@ -484,7 +485,6 @@ const CreateKafkaInstanceMachine = createMachine(
       noProviderAndRegion: ({ form }) =>
         form.provider === undefined || form.region === undefined,
       noSizes: ({ sizes }) => sizes === undefined || sizes.length === 0,
-      sizeIsUntouched: ({ form }) => form.size === undefined,
       sizeIsValid: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&
@@ -498,7 +498,8 @@ const CreateKafkaInstanceMachine = createMachine(
           meta.state.hasTag(NAME_VALID) &&
           meta.state.hasTag(PROVIDER_VALID) &&
           meta.state.hasTag(REGION_VALID) &&
-          meta.state.hasTag(AZ_VALID)
+          meta.state.hasTag(AZ_VALID) &&
+          meta.state.hasTag(SIZE_VALID)
         );
       },
     },

@@ -54,7 +54,6 @@ export type ConnectedCreateKafkaInstanceProps = {
    */
   isModalOpen: boolean;
 
-  onClickQuickStart: () => void;
   /**
    * Set this to `true` on Storybook when there are multiple modals open at a time.
    */
@@ -68,6 +67,7 @@ export type ConnectedCreateKafkaInstanceProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
+  onClickQuickStart: () => void;
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   onClickLearnMoreAboutRegions: () => void;
@@ -187,7 +187,8 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
             <InstanceInfo
               isTrial={isTrial}
               trialDurationInHours={48}
-              ingresEgress={selectedSize.ingressEgress}
+              ingress={selectedSize.ingress}
+              egress={selectedSize.egress}
               storage={selectedSize.storage}
               maxPartitions={selectedSize.maxPartitions}
               connections={selectedSize.connections}

@@ -29,7 +29,8 @@ export type Providers = Array<ProviderInfo>;
 export type Size = {
   id: string;
   streamingUnits: number;
-  ingressEgress: number;
+  ingress: number;
+  egress: number;
   storage: number;
   connections: number;
   connectionRate: number;
