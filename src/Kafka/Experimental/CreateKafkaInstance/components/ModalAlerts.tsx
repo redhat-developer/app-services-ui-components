@@ -8,7 +8,7 @@ import {
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { InstanceAvailability } from "../machines";
+import { InstanceAvailability } from "../types";
 
 export type ModalAlertsProps = {
   instanceAvailability: InstanceAvailability | undefined;
@@ -16,7 +16,7 @@ export type ModalAlertsProps = {
   isLoading: boolean;
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
-  maxStreamingUnits: number;
+  maxStreamingUnits: number | undefined;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({

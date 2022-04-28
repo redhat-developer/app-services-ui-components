@@ -1,22 +1,21 @@
-import { VFC } from "react";
-import { useTranslation, Trans } from "react-i18next";
-
 import {
   Button,
+  ButtonVariant,
   Form,
   FormGroup,
+  Slider,
+  Text,
   TextInput,
+  TextVariants,
   ToggleGroup,
   ToggleGroupItem,
   Tooltip,
-  Slider,
-  Text,
-  TextVariants,
-  ButtonVariant,
 } from "@patternfly/react-core";
-import { CloudRegionSelect } from "./CloudRegionsSelect";
+import { VFC } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import { FormGroupWithPopover } from "../../../shared";
 import { CloudProvidersTiles } from "./CloudProviderTiles";
-import { FormGroupWithPopover } from "../../../../shared/FormGroupWithPopover";
+import { CloudRegionSelect } from "./CloudRegionsSelect";
 import { StandardKafkaFormProps } from "./StandardKafkaForm";
 
 export type TrialKafkaFormProps = Omit<

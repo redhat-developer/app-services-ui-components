@@ -1,5 +1,6 @@
 import { Form } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Size } from "../types";
 
 import { FieldSize as FieldSizeComp } from "./FieldSize";
 
@@ -9,12 +10,12 @@ const sizes = [
   { id: "x3", streamingUnits: 5 },
   { id: "x4", streamingUnits: 10 },
   { id: "x5", streamingUnits: 15 },
-];
+] as Size[];
 
 const summitSizes = [
   { id: "x1", streamingUnits: 1 },
   { id: "x2", streamingUnits: 2 },
-];
+] as Size[];
 
 export default {
   component: FieldSizeComp,
@@ -24,6 +25,7 @@ export default {
     remainingStreamingUnits: 4,
     validity: "valid",
     isDisabled: false,
+    isLoading: false,
   },
   parameters: {
     backgrounds: {
@@ -39,6 +41,17 @@ const Template: ComponentStory<typeof FieldSizeComp> = (args) => (
 );
 
 export const Default = Template.bind({});
+
+export const NoSizes = Template.bind({});
+NoSizes.args = {
+  sizes: undefined,
+};
+
+export const LoadingSizes = Template.bind({});
+LoadingSizes.args = {
+  sizes: undefined,
+  isLoading: true,
+};
 
 export const OverQuota = Template.bind({});
 OverQuota.args = {

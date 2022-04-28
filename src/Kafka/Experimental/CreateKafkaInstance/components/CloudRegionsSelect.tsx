@@ -6,7 +6,7 @@ import {
 } from "@patternfly/react-core";
 import { FunctionComponent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Region, RegionInfo } from "../machines";
+import { Region, RegionInfo } from "../types";
 
 export type CloudRegionProps = {
   value: Region | undefined;
@@ -35,11 +35,6 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     setIsOpen((prevState) => !prevState);
     onChange(value as string);
-  };
-
-  const clearSelection = () => {
-    setIsOpen(false);
-    onChange("");
   };
 
   const makeRegionOptions = regions?.map(
@@ -78,7 +73,6 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
       onToggle={onToggle}
       onSelect={onSelect}
       validated={validated}
-      onClear={clearSelection}
       selections={value}
       isOpen={isOpen}
       isDisabled={isDisabled}

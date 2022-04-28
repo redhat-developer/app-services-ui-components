@@ -6,7 +6,7 @@ import {
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { AZ } from "../machines";
+import { AZ } from "../types";
 
 export type FieldAZProps = {
   value: AZ | undefined;

@@ -15,7 +15,12 @@ import {
   VoidFunctionComponent,
 } from "react";
 import { useTranslation } from "react-i18next";
-import { FormAlerts, InstanceInfo, ModalAlerts } from "./components";
+import {
+  FormAlerts,
+  InstanceInfo,
+  InstanceInfoSkeleton,
+  ModalAlerts,
+} from "./components";
 import { FieldAZ } from "./components/FieldAZ";
 import { FieldCloudProvider } from "./components/FieldCloudProvider";
 import { FieldCloudRegion } from "./components/FieldCloudRegion";
@@ -24,17 +29,18 @@ import { FieldSize, FieldSizeProps } from "./components/FieldSize";
 import "./CreateKafkaInstance.css";
 import {
   CreateKafkaInstanceProvider,
-  MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
-} from "./machines";
+} from "./CreateKafkaInstanceProvider";
+import { MakeCreateKafkaInstanceMachine } from "./types";
 
 export type CreateKafkaInstanceProps = ConnectedCreateKafkaInstanceProps &
   MakeCreateKafkaInstanceMachine;
 export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstanceProps
-> = ({ getAvailableProvidersAndDefaults, onCreate, ...props }) => (
+> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) => (
   <CreateKafkaInstanceProvider
     getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+    getSizes={getSizes}
     onCreate={onCreate}
   >
     <ConnectedCreateKafkaInstance {...props} />
@@ -86,19 +92,17 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   const { t } = useTranslation("create-kafka-instance-exp");
 
   const {
-    instanceAvailability,
-    size,
-
     isTrial,
     isLoading,
+    isLoadingSizes,
     isSaving,
     canSave,
     isSystemUnavailable,
     error,
     create,
 
-    maxStreamingUnits,
-    remainingStreamingUnits,
+    capabilities,
+    selectedSize,
   } = useCreateKafkaInstanceMachine();
 
   const onSubmit = useCallback(
@@ -144,11 +148,11 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
       ]}
     >
       <ModalAlerts
-        instanceAvailability={instanceAvailability}
+        instanceAvailability={capabilities?.instanceAvailability}
         isSystemUnavailable={isSystemUnavailable}
         isLoading={isLoading}
         onClickKafkaOverview={onClickKafkaOverview}
-        maxStreamingUnits={maxStreamingUnits}
+        maxStreamingUnits={capabilities?.maxStreamingUnits}
         onClickContactUs={onClickContactUs}
       />
       <Flex
@@ -159,8 +163,8 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
           <FormAlerts
             error={error}
             onClickContactUS={onClickContactUs}
-            maxStreamingUnits={maxStreamingUnits}
-            streamingUnits={remainingStreamingUnits}
+            maxStreamingUnits={capabilities?.maxStreamingUnits}
+            streamingUnits={capabilities?.remainingStreamingUnits}
           />
           <Form onSubmit={onSubmit} id={FORM_ID}>
             <ConnectedFieldInstanceName />
@@ -177,19 +181,22 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
           flex={{ default: "flex_1" }}
           className="mas--CreateKafkaInstance__sidebar"
         >
-          <InstanceInfo
-            isLoading={isLoading}
-            isTrial={isTrial}
-            trialDurationInHours={0}
-            ingresEgress={0}
-            storage={0}
-            maxPartitions={0}
-            connections={0}
-            connectionRate={0}
-            messageSize={0}
-            onClickQuickStart={onClickQuickStart}
-            streamingUnits={size?.streamingUnits}
-          />
+          {isLoadingSizes || selectedSize === undefined ? (
+            <InstanceInfoSkeleton onClickQuickStart={onClickQuickStart} />
+          ) : (
+            <InstanceInfo
+              isTrial={isTrial}
+              trialDurationInHours={48}
+              ingresEgress={selectedSize.ingressEgress}
+              storage={selectedSize.storage}
+              maxPartitions={selectedSize.maxPartitions}
+              connections={selectedSize.connections}
+              connectionRate={selectedSize.connectionRate}
+              messageSize={selectedSize.messageSize}
+              onClickQuickStart={onClickQuickStart}
+              streamingUnits={selectedSize.streamingUnits}
+            />
+          )}
         </FlexItem>
       </Flex>
       <Alert
@@ -206,7 +213,7 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
 
 export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
   const {
-    name,
+    form,
     isNameTaken,
     isNameInvalid,
     isNameEmpty,
@@ -216,7 +223,7 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
 
   return (
     <FieldInstanceName
-      value={name || ""}
+      value={form.name || ""}
       validity={
         isNameTaken
           ? "taken"
@@ -233,19 +240,14 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
-  const {
-    provider,
-    availableProviders,
-    isProviderError,
-    isFormEnabled,
-    setProvider,
-  } = useCreateKafkaInstanceMachine();
+  const { form, capabilities, isProviderError, isFormEnabled, setProvider } =
+    useCreateKafkaInstanceMachine();
 
   return (
     <FieldCloudProvider
       isValid={!isProviderError}
-      providers={availableProviders}
-      value={provider}
+      providers={capabilities?.availableProviders || []}
+      value={form.provider}
       isDisabled={!isFormEnabled}
       onChange={setProvider}
     />
@@ -253,14 +255,14 @@ export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
-  const { region, regions, isRegionError, isFormEnabled, setRegion } =
+  const { form, selectedProvider, isRegionError, isFormEnabled, setRegion } =
     useCreateKafkaInstanceMachine();
 
   return (
     <FieldCloudRegion
       validity={isRegionError ? "required" : "valid"}
-      regions={regions || []}
-      value={region}
+      regions={selectedProvider?.regions || []}
+      value={form.region}
       isDisabled={!isFormEnabled}
       onChange={setRegion}
     />
@@ -268,14 +270,14 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldAZ: VoidFunctionComponent = () => {
-  const { az, isAzError, setAZ, isTrial, isFormEnabled } =
+  const { form, isAzError, setAZ, isTrial, isFormEnabled } =
     useCreateKafkaInstanceMachine();
 
   return (
     <FieldAZ
       validity={isAzError ? "required" : "valid"}
       options={isTrial ? "single" : "multi"}
-      value={az}
+      value={form.az}
       isDisabled={!isFormEnabled}
       onChange={setAZ}
     />
@@ -289,23 +291,24 @@ export const ConnectedFieldSize: VoidFunctionComponent<
   >
 > = () => {
   const {
-    size,
-    remainingStreamingUnits,
+    form,
+    capabilities,
+    sizes,
+    isSizeAvailable,
     isSizeInvalid,
     isFormEnabled,
+    isLoadingSizes,
     isTrial,
     setSize,
   } = useCreateKafkaInstanceMachine();
 
   return (
     <FieldSize
-      value={size?.streamingUnits || 1}
-      sizes={[
-        { id: "x1", streamingUnits: 1 },
-        { id: "x2", streamingUnits: 2 },
-      ]}
-      remainingStreamingUnits={remainingStreamingUnits}
-      isDisabled={!isFormEnabled}
+      value={form.size?.streamingUnits || 1}
+      sizes={isSizeAvailable ? sizes : undefined}
+      remainingStreamingUnits={capabilities?.remainingStreamingUnits || 0}
+      isDisabled={!isFormEnabled || sizes === undefined}
+      isLoading={isLoadingSizes}
       validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
       onChange={setSize}
       onLearnHowToAddStreamingUnits={function (): void {

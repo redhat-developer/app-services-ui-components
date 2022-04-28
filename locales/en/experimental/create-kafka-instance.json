@@ -89,6 +89,8 @@
   "standard_kafka_streaming_unit_other": "Your organization has {{count}} streaming units remaining",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
+  "sizes_missing": "Select a cloud provider and region to find the available sizes",
+  "sizes_loading": "Loading available sizes for the selected cloud provider and region",
   "statuses": {
     "creating": "Creating",
     "degraded": "Degraded",

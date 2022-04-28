@@ -9,7 +9,7 @@ import { AzureIcon } from "@patternfly/react-icons";
 import AwsIcon from "@patternfly/react-icons/dist/esm/icons/aws-icon";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Provider, ProviderInfo } from "../machines";
+import { Provider, ProviderInfo } from "../types";
 import "./CloudProviderTiles.css";
 
 export type CloudProvidersTilesProps = {

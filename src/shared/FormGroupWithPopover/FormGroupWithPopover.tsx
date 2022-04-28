@@ -4,7 +4,6 @@ import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 
 export type FormGroupWithPopoverProps = {
-  children: ReactNode;
   labelHead: string;
   fieldId: string;
   fieldLabel?: string;

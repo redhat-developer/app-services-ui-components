@@ -1,2 +1,2 @@
 export * from "./CreateKafkaInstance";
-export * from "./machines/types";
+export * from "./types";

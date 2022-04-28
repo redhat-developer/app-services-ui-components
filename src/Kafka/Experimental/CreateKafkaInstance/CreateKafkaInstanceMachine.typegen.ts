@@ -16,6 +16,7 @@ export interface Typegen0 {
     setRegion: "regionChange";
     setAZ: "azChange";
     setSize: "sizeChange";
+    setSizes: "done.invoke.createKafkaInstance.configuring.size.loading:invocation[0]";
     setCreationError: "createError";
     markRequiredFields: "";
   };
@@ -26,20 +27,30 @@ export interface Typegen0 {
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
     "": { type: "" };
+    "done.invoke.createKafkaInstance.configuring.size.loading:invocation[0]": {
+      type: "done.invoke.createKafkaInstance.configuring.size.loading:invocation[0]";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
     "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {
     getAvailableProvidersAndDefaults: "done.invoke.createKafkaInstance.loading:invocation[0]";
+    getSizes: "done.invoke.createKafkaInstance.configuring.size.loading:invocation[0]";
     createInstance: "done.invoke.createKafkaInstance.saving:invocation[0]";
   };
   missingImplementations: {
     actions: never;
-    services: "getAvailableProvidersAndDefaults" | "createInstance";
+    services:
+      | "getAvailableProvidersAndDefaults"
+      | "getSizes"
+      | "createInstance";
     guards: never;
     delays: never;
   };
   eventsCausingServices: {
     getAvailableProvidersAndDefaults: "xstate.init";
+    getSizes: "";
     createInstance: "";
   };
   eventsCausingGuards: {
@@ -54,6 +65,8 @@ export interface Typegen0 {
     regionIsValid: "";
     azIsUntouched: "";
     azIsValid: "";
+    noProviderAndRegion: "";
+    noSizes: "";
     sizeIsUntouched: "";
     sizeIsValid: "";
   };
@@ -88,8 +101,10 @@ export interface Typegen0 {
     | "configuring.size"
     | "configuring.size.untouched"
     | "configuring.size.validate"
+    | "configuring.size.idle"
     | "configuring.size.invalid"
     | "configuring.size.valid"
+    | "configuring.size.loading"
     | "submit"
     | "formInvalid"
     | "saving"
@@ -106,7 +121,13 @@ export interface Typegen0 {
               provider?: "untouched" | "validate" | "invalid" | "valid";
               region?: "untouched" | "validate" | "invalid" | "valid";
               az?: "untouched" | "validate" | "invalid" | "valid";
-              size?: "untouched" | "validate" | "invalid" | "valid";
+              size?:
+                | "untouched"
+                | "validate"
+                | "idle"
+                | "invalid"
+                | "valid"
+                | "loading";
             };
       };
   tags:
@@ -125,6 +146,8 @@ export interface Typegen0 {
     | "azInvalid"
     | "azValid"
     | "sizeUntouched"
+    | "sizeIndle"
     | "sizeInvalid"
-    | "sizeValid";
+    | "sizeValid"
+    | "sizeLoading";
 }

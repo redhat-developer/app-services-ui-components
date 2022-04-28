@@ -1,30 +1,29 @@
-import { VFC, FormEvent } from "react";
-import { useTranslation } from "react-i18next";
-
 import {
+  Button,
+  ButtonVariant,
   Form,
   FormGroup,
+  Slider,
+  Text,
   TextInput,
+  TextVariants,
   ToggleGroup,
   ToggleGroupItem,
   Tooltip,
-  Slider,
-  Text,
-  TextVariants,
-  Button,
-  ButtonVariant,
 } from "@patternfly/react-core";
-import { CloudRegionSelect } from "./CloudRegionsSelect";
-import { CloudProvidersTiles } from "./CloudProviderTiles";
-import { FormGroupWithPopover } from "../../../../shared/FormGroupWithPopover";
+import { FormEvent, VFC } from "react";
+import { useTranslation } from "react-i18next";
+import { FormGroupWithPopover } from "../../../shared";
 import {
   AZ,
+  InstanceAvailability,
   Provider,
   Providers,
   Region,
   RegionInfo,
-  InstanceAvailability,
 } from "../machines/types";
+import { CloudProvidersTiles } from "./CloudProviderTiles";
+import { CloudRegionSelect } from "./CloudRegionsSelect";
 
 type validate = "error" | "default" | "warning";
 

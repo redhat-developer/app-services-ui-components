@@ -3,17 +3,19 @@ import {
   ButtonVariant,
   Slider,
   SliderProps,
+  Spinner,
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormGroupWithPopover } from "../../../../shared";
-import { Size } from "../machines";
+import { Size } from "../types";
 
 export type FieldSizeProps = {
   value: number;
-  sizes: Size[];
+  sizes: Size[] | undefined;
   remainingStreamingUnits: number;
   isDisabled: boolean;
+  isLoading: boolean;
   validity: "valid" | "required" | "over-quota" | "trial";
   onChange: (size: Size) => void;
   onLearnHowToAddStreamingUnits: () => void;
@@ -24,12 +26,35 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   sizes,
   remainingStreamingUnits,
   isDisabled,
+  isLoading,
   validity,
   onChange,
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
+
+  if (sizes === undefined || isLoading) {
+    return (
+      <FormGroupWithPopover
+        labelHead={t("common:size")}
+        fieldId="streaming-size"
+        fieldLabel={t("common:size")}
+        labelBody={t("size_help_content")}
+        buttonAriaLabel={t("size_field_aria")}
+        isRequired={true}
+        helperText={
+          isLoading ? (
+            <div className="pf-c-form__helper-text" aria-live={"polite"}>
+              <Spinner isSVG size="sm" /> {t("sizes_loading")}
+            </div>
+          ) : (
+            t("sizes_missing")
+          )
+        }
+      />
+    );
+  }
 
   const valueIndex = sizes.findIndex((size) => size.streamingUnits === value);
   const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({

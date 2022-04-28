@@ -14,7 +14,9 @@ import {
   NAME_VALID,
   PROVIDER_VALID,
   REGION_VALID,
+  SIZE_IDLE,
   SIZE_INVALID,
+  SIZE_LOADING,
   SIZE_VALID,
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
@@ -32,11 +34,12 @@ const CreateKafkaInstanceMachineContext = createContext<{
 
 export const CreateKafkaInstanceProvider: FunctionComponent<
   MakeCreateKafkaInstanceMachine
-> = ({ onCreate, getAvailableProvidersAndDefaults, children }) => {
+> = ({ onCreate, getAvailableProvidersAndDefaults, getSizes, children }) => {
   const service = useInterpret(
     () =>
       makeCreateKafkaInstanceMachine({
         getAvailableProvidersAndDefaults,
+        getSizes,
         onCreate,
       }),
     { devTools: true }
@@ -75,42 +78,24 @@ export function useCreateKafkaInstanceMachine() {
 
   const selector = useCallback(
     (state: typeof service.state) => {
-      const selectedProviderInfo = state.context.availableProviders.find(
-        (p) => p.id === state.context.provider
-      );
-
       const isFormInvalid = state.context.creationError === "form-invalid";
       const isNameTaken = state.context.creationError === "name-taken";
-
-      const {
-        size,
-        name,
-        provider,
-        region,
-        az,
-        availableProviders,
-        instanceAvailability,
-      } = state.context;
 
       const isLoading = state.matches("loading");
       const isSaving = state.matches("saving");
       const canCreate = state.matches("configuring");
+      const isLoadingSizes = state.hasTag(SIZE_LOADING);
+
+      const selectedSize = state.context.sizes?.find(
+        (s) => state.context.form.size?.id === s.id
+      );
 
       return {
-        name,
-        provider,
-        region,
-        az,
-        size,
-        usedStreamingUnits: 3,
-        maxStreamingUnits: 5,
-        remainingStreamingUnits: 2,
-
-        azOptions: selectedProviderInfo?.AZ,
-        regions: selectedProviderInfo?.regions,
-
-        availableProviders,
-        instanceAvailability,
+        form: state.context.form,
+        capabilities: state.context.capabilities,
+        selectedProvider: state.context.selectedProvider,
+        selectedSize,
+        sizes: state.context.sizes,
 
         isFormEnabled: !isLoading && !isSaving && canCreate,
 
@@ -125,17 +110,19 @@ export function useCreateKafkaInstanceMachine() {
         isSizeError:
           state.hasTag(SIZE_INVALID) ||
           (!state.hasTag(SIZE_VALID) && isFormInvalid),
+        isSizeAvailable: !state.hasTag(SIZE_IDLE),
 
         isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
         isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,
         isAzError: !state.hasTag(AZ_VALID) && isFormInvalid,
 
         isTrial:
-          state.context.instanceAvailability === undefined ||
+          state.context.capabilities?.instanceAvailability === undefined ||
           ["trial", "trial-used", "trial-unavailable"].includes(
-            state.context.instanceAvailability
+            state.context.capabilities.instanceAvailability
           ),
         isLoading,
+        isLoadingSizes,
         isSaving,
         canCreate,
         canSave: state.can("create"),
