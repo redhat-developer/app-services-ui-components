@@ -68,7 +68,7 @@
     "@storybook/jest": "0.0.10",
     "@storybook/manager-webpack5": "6.4.22",
     "@storybook/react": "6.4.22",
-    "@storybook/test-runner": "0.0.7",
+    "@storybook/test-runner": "0.0.8",
     "@storybook/testing-library": "0.0.11",
     "@storybook/testing-react": "1.2.4",
     "@testing-library/jest-dom": "5.16.4",
@@ -112,7 +112,7 @@
     "rollup-plugin-terser": "7.0.2",
     "rollup-plugin-typescript2": "0.31.2",
     "storybook-xstate-addon": "2.1.0",
-    "typescript": "4.6.3",
+    "typescript": "4.6.4",
     "wait-on": "6.0.1",
     "webpack": "5.72.0"
   },
