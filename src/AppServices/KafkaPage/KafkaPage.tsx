@@ -93,7 +93,7 @@ export const KafkaPage: FunctionComponent = () => {
           </Card>
         </Grid>
       </MarketingPageSection>
-      <MarketingPageSection>
+      <MarketingPageSection kafkaOverviewPage={true}>
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("pricingModalTitle")}</Title>
@@ -149,7 +149,7 @@ export const KafkaPage: FunctionComponent = () => {
           </CardBody>
         </Card>
       </MarketingPageSection>
-      <MarketingPageSection>
+      <MarketingPageSection kafkaOverviewPage={true}>
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("kafkaInstanceCapacityTitle")}</Title>
@@ -163,41 +163,39 @@ export const KafkaPage: FunctionComponent = () => {
             </Stack>
           </CardBody>
           <CardFooter>
-            <Stack hasGutter className={"pf-u-font-size-sm"}>
-              <StackItem>
-                {t("kafkaInstanceCapacityfooter1")}{" "}
-                <Button
-                  data-testid="redhatSupport-buttonCTA"
-                  isInline
-                  variant={ButtonVariant.link}
-                  component="a"
-                  target="_blank"
-                  href="https://access.redhat.com/support"
-                >
-                  {" "}
-                  Redhat support
-                  <ExternalLinkAltIcon className="pf-u-ml-xs" />
-                </Button>{" "}
-                {t("kafkaInstanceCapacityfooter2")}
-                <Button
-                  data-testid="diskSpaceMetrics-buttonCTA"
-                  isInline
-                  variant={ButtonVariant.link}
-                  component="a"
-                  target="_blank"
-                  href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
-                >
-                  {" "}
-                  monitoring disk space metrics
-                  <ExternalLinkAltIcon className="pf-u-ml-xs" />
-                </Button>
-                .
-              </StackItem>
-            </Stack>
+            <TextContent className={"pf-u-font-size-sm"}>
+              {t("kafkaInstanceCapacityfooter1")}{" "}
+              <Button
+                data-testid="redhatSupport-buttonCTA"
+                isInline
+                variant={ButtonVariant.link}
+                component="a"
+                target="_blank"
+                href="https://access.redhat.com/support"
+              >
+                {" "}
+                Redhat support
+                <ExternalLinkAltIcon className="pf-u-ml-xs" />
+              </Button>{" "}
+              {t("kafkaInstanceCapacityfooter2")}
+              <Button
+                data-testid="diskSpaceMetrics-buttonCTA"
+                isInline
+                variant={ButtonVariant.link}
+                component="a"
+                target="_blank"
+                href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+              >
+                {" "}
+                monitoring disk space metrics
+                <ExternalLinkAltIcon className="pf-u-ml-xs" />
+              </Button>
+              .
+            </TextContent>
           </CardFooter>
         </Card>
       </MarketingPageSection>
-      <MarketingPageSection>
+      <MarketingPageSection kafkaOverviewPage={true}>
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("cloudProvidersTitle")}</Title>
