@@ -82,7 +82,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.danger}
-                title={t("form_errors.instance_unavailable_title")}
+                title={t("form_errors.region_unavailable_title")}
                 isInline
               >
                 {t("form_errors.region_unavailable_message")}

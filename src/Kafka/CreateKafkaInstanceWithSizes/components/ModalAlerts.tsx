@@ -157,6 +157,18 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 {t("modal_alerts.regions_unavailable_message")}
               </Alert>
             );
+          case instanceAvailability === "instance-unavailable":
+            return (
+              <Alert
+                role={"alert"}
+                className="pf-u-mb-md"
+                variant={AlertVariant.warning}
+                title={t("modal_alerts.instance_unavailable_title")}
+                isInline
+              >
+                {t("modal_alerts.instance_unavailable_message")}
+              </Alert>
+            );
         }
         return null;
       })()}
