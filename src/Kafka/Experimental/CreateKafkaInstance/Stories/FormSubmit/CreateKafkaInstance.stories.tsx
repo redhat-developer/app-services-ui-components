@@ -13,7 +13,8 @@ import {
 export default {
   component: CreateKafkaInstance,
   args: {
-    apiScenario: "quota",
+    apiPlan: "standard",
+    apiScenario: "standard-available",
     apiProviders: PROVIDERS.map((p) => p.id),
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",
@@ -36,7 +37,8 @@ OverQuotaOnFormSubmit.play = sampleSubmit;
 export const TrialUnavailableOnFormSubmit = Template.bind({});
 TrialUnavailableOnFormSubmit.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormSubmit.args = {
-  apiScenario: "trial",
+  apiPlan: "trial",
+  apiScenario: "trial-available",
   onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
 };
 TrialUnavailableOnFormSubmit.play = sampleSubmit;
@@ -45,8 +47,7 @@ export const SelectedRegionUnavailableOnFormSubmit = Template.bind({});
 SelectedRegionUnavailableOnFormSubmit.storyName =
   "Selected region unavailable - Standard";
 SelectedRegionUnavailableOnFormSubmit.args = {
-  onCreate: (_data, _onSuccess, onError) =>
-    onError("standard-region-unavailable"),
+  onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
 };
 SelectedRegionUnavailableOnFormSubmit.play = sampleSubmit;
 
@@ -54,8 +55,9 @@ export const TrialSelectedRegionUnavailableOnFormSubmit = Template.bind({});
 TrialSelectedRegionUnavailableOnFormSubmit.storyName =
   "Selected region unavailable - Trial";
 TrialSelectedRegionUnavailableOnFormSubmit.args = {
-  apiScenario: "trial",
-  onCreate: (_data, _onSuccess, onError) => onError("trial-region-unavailable"),
+  apiPlan: "trial",
+  apiScenario: "trial-available",
+  onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
 };
 TrialSelectedRegionUnavailableOnFormSubmit.play = sampleSubmit;
 

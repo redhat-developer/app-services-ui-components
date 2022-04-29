@@ -5,7 +5,8 @@ import { argTypes, parameters, PROVIDERS, Template } from "../storiesHelpers";
 export default {
   component: CreateKafkaInstance,
   args: {
-    apiScenario: "quota",
+    apiPlan: "standard",
+    apiScenario: "standard-available",
     apiProviders: PROVIDERS.map((p) => p.id),
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",
@@ -24,7 +25,8 @@ QuotaAvailableOnFormLoad.storyName = "Quota Available - Standard";
 export const TrialAvailableOnFormLoad = Template.bind({});
 TrialAvailableOnFormLoad.storyName = "Quota Available - Trial";
 TrialAvailableOnFormLoad.args = {
-  apiScenario: "trial",
+  apiPlan: "trial",
+  apiScenario: "trial-available",
 };
 
 export const OverQuotaOnFormLoad = Template.bind({});
@@ -36,12 +38,14 @@ OverQuotaOnFormLoad.args = {
 export const TrialUnavailableOnFormLoad = Template.bind({});
 TrialUnavailableOnFormLoad.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormLoad.args = {
-  apiScenario: "instance-unavailable",
+  apiPlan: "trial",
+  apiScenario: "trial-unavailable",
 };
 
 export const TrialUsedOnFormLoad = Template.bind({});
 TrialUsedOnFormLoad.storyName = "Over Quota - Trial";
 TrialUsedOnFormLoad.args = {
+  apiPlan: "trial",
   apiScenario: "trial-used",
 };
 
@@ -62,7 +66,8 @@ SomeRegionsDisabledOnFormLoad.parameters = {
 export const TrialSomeRegionsDisabledOnFormLoad = Template.bind({});
 TrialSomeRegionsDisabledOnFormLoad.storyName = "Some regions disabled - Trial";
 TrialSomeRegionsDisabledOnFormLoad.args = {
-  apiScenario: "trial",
+  apiPlan: "trial",
+  apiScenario: "trial-available",
   apiRegionsAvailability: "someRegionsUnavailable",
 };
 TrialSomeRegionsDisabledOnFormLoad.parameters = {
@@ -83,7 +88,8 @@ AllRegionsDisabledOnFormLoad.args = {
 export const TrialAllRegionsDisabledOnFormLoad = Template.bind({});
 TrialAllRegionsDisabledOnFormLoad.storyName = "All regions Unavailable - Trial";
 TrialAllRegionsDisabledOnFormLoad.args = {
-  apiScenario: "trial",
+  apiPlan: "trial",
+  apiScenario: "trial-available",
   apiRegionsAvailability: "regionsDisabled",
 };
 

@@ -49,3 +49,10 @@ Disabled.args = {
   value: PROVIDERS[0].regions[0].id,
   isDisabled: true,
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  value: undefined,
+  regions: undefined,
+  isDisabled: true,
+};

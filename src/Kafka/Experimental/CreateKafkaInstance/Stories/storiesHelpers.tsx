@@ -12,14 +12,12 @@ import {
   CreateKafkaInstanceProps,
 } from "../CreateKafkaInstance";
 import {
-  AZ,
   CreateKafkaInitializationData,
   GetSizesData,
   InstanceAvailability,
   Provider,
   ProviderInfo,
   Providers,
-  Region,
   Size,
 } from "../types";
 
@@ -33,10 +31,6 @@ export const AWS: ProviderInfo = {
       displayName: "US East, N. Virginia",
     },
   ],
-  AZ: {
-    multi: true,
-    single: false,
-  },
 };
 
 export const AZURE: ProviderInfo = {
@@ -52,10 +46,6 @@ export const AZURE: ProviderInfo = {
       displayName: "Europe North",
     },
   ],
-  AZ: {
-    multi: true,
-    single: false,
-  },
 };
 
 export const PROVIDERS: Providers = [AWS, AZURE];
@@ -124,10 +114,9 @@ const SIZES: { [key: string]: Size[] } = {
 
 export function makeAvailableProvidersAndDefaults(
   options: {
+    plan: "trial" | "standard";
     instanceAvailability: InstanceAvailability;
-    defaultAZ: AZ | undefined;
     defaultProvider: Provider | undefined;
-    defaultRegion?: Region;
     providers: string[];
     maxStreamingUnits: number;
     remainingStreamingUnits: number;
@@ -138,11 +127,10 @@ export function makeAvailableProvidersAndDefaults(
   const {
     instanceAvailability,
     defaultProvider,
-    defaultAZ,
     providers,
-    defaultRegion,
     maxStreamingUnits,
     remainingStreamingUnits,
+    plan,
   } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
@@ -151,11 +139,10 @@ export function makeAvailableProvidersAndDefaults(
   return () =>
     fakeApi<CreateKafkaInitializationData>(
       {
+        plan,
         defaultProvider,
-        defaultAZ,
         availableProviders,
         instanceAvailability,
-        defaultRegion,
         maxStreamingUnits,
         remainingStreamingUnits,
       },
@@ -173,12 +160,16 @@ const regionsScenario = {
 };
 
 export const argTypes = {
-  apiScenario: {
+  apiPlan: {
     description: "Subscription type",
     control: "radio",
+    options: ["standard", "trial"],
+  },
+  apiScenario: {
+    control: "radio",
     options: [
-      "quota",
-      "trial",
+      "standard-available",
+      "trial-available",
       "over-quota",
       "trial-used",
       "instance-unavailable",
@@ -270,7 +261,8 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
 
   const {
     apiProviders = PROVIDERS.map((p) => p.id),
-    apiScenario = "quota",
+    apiPlan = "standard",
+    apiScenario = "standard-available",
     apiDefaultProvider,
     apiDefaultRegion,
     apiRegionsAvailability = "full",
@@ -312,10 +304,9 @@ export const Template: ComponentStory<typeof CreateKafkaInstance> = (
       ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
       : makeAvailableProvidersAndDefaults(
           {
+            plan: apiPlan,
             instanceAvailability: apiScenario,
-            defaultAZ: apiScenario === "trial" ? "single" : "multi",
             defaultProvider: apiDefaultProvider,
-            defaultRegion: apiDefaultRegion,
             providers: apiProviders,
             remainingStreamingUnits: apiRemainingStreamingUnits,
             maxStreamingUnits: apiMaxStreamingUnits,

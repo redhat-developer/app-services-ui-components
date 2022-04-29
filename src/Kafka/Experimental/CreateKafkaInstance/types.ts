@@ -1,13 +1,13 @@
 export type InstanceAvailability =
-  | "quota"
-  | "trial"
+  | "standard-available"
+  | "trial-available"
   | "over-quota"
   | "trial-used"
   | "instance-unavailable"
   | "regions-unavailable"
-  /** @deprecated replaced by `instance-unavailable` */
   | "trial-unavailable";
 
+export type Plan = "trial" | "standard";
 export type Provider = string;
 export type Region = string;
 export type RegionInfo = {
@@ -20,9 +20,7 @@ export type ProviderInfo = {
   id: Provider;
   displayName: string;
   regions: Array<RegionInfo>;
-  AZ: {
-    [az in AZ]: boolean;
-  };
+  defaultRegion?: Region;
 };
 export type Regions = Array<RegionInfo>;
 export type Providers = Array<ProviderInfo>;
@@ -43,18 +41,16 @@ export type CreateKafkaInstanceError =
   | "name-taken"
   | "trial-unavailable"
   | "form-invalid"
-  | "standard-region-unavailable"
-  | "trial-region-unavailable"
+  | "region-unavailable"
   | "unknown";
 
 export type CreateKafkaInitializationData = {
   defaultProvider: Provider | undefined;
-  defaultRegion: Region | undefined;
-  defaultAZ: AZ | undefined;
   availableProviders: Providers;
   instanceAvailability: InstanceAvailability;
   maxStreamingUnits: number;
   remainingStreamingUnits: number;
+  plan: Plan;
 };
 
 export type GetSizesData = {
@@ -65,7 +61,6 @@ export type CreateKafkaFormData = {
   name: string;
   provider: Provider;
   region: Region;
-  az: AZ;
   sizeId: string;
 };
 

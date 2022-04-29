@@ -11,7 +11,8 @@ import {
 export default {
   component: CreateKafkaInstance,
   args: {
-    apiScenario: "quota",
+    apiPlan: "standard",
+    apiScenario: "standard-available",
     apiProviders: PROVIDERS.map((p) => p.id),
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",

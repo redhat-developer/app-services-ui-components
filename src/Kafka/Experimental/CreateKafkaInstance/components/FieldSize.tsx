@@ -3,9 +3,9 @@ import {
   ButtonVariant,
   HelperText,
   HelperTextItem,
+  Skeleton,
   Slider,
   SliderProps,
-  Spinner,
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
@@ -36,7 +36,53 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
-  if (sizes === undefined || isLoading) {
+  const isRequired = validity !== "trial";
+
+  const helperTextTrial = (
+    <>
+      <HelperText className={"pf-c-form__helper-text"}>
+        <HelperTextItem>{t("trial_kafka_size_description")}</HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem>
+          <Button
+            className="pf-c-form__helper-text"
+            variant={ButtonVariant.link}
+            isInline
+            onClick={onLearnMoreAboutSizes}
+          >
+            {t("learn_about_sizes")}
+          </Button>
+        </HelperTextItem>
+      </HelperText>
+    </>
+  );
+
+  const helperTextOverQuota = (
+    <>
+      <HelperText className={"pf-c-form__helper-text"}>
+        <HelperTextItem variant="error" hasIcon>
+          {t("standard_kafka_streaming_unit", {
+            count: remainingStreamingUnits,
+          })}
+        </HelperTextItem>
+      </HelperText>
+      <HelperText>
+        <HelperTextItem>
+          <Button
+            className="pf-c-form__helper-text"
+            variant={ButtonVariant.link}
+            isInline
+            onClick={onLearnHowToAddStreamingUnits}
+          >
+            {t("standard_kafka_size_description")}
+          </Button>
+        </HelperTextItem>
+      </HelperText>
+    </>
+  );
+
+  if (isLoading) {
     return (
       <FormGroupWithPopover
         labelHead={t("common:size")}
@@ -44,21 +90,29 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         fieldLabel={t("common:size")}
         labelBody={t("size_help_content")}
         buttonAriaLabel={t("size_field_aria")}
-        isRequired={true}
-        helperText={
-          isLoading ? (
-            <div className="pf-c-form__helper-text" aria-live={"polite"}>
-              <Spinner isSVG size="sm" /> {t("sizes_loading")}
-            </div>
-          ) : (
-            t("sizes_missing")
-          )
-        }
+        isRequired={isRequired}
+        helperText={<Skeleton width={"50%"} />}
       />
     );
   }
 
-  const valueIndex = sizes.findIndex((size) => size.streamingUnits === value);
+  if (sizes === undefined) {
+    return (
+      <FormGroupWithPopover
+        labelHead={t("common:size")}
+        fieldId="streaming-size"
+        fieldLabel={t("common:size")}
+        labelBody={t("size_help_content")}
+        buttonAriaLabel={t("size_field_aria")}
+        isRequired={isRequired}
+        helperText={validity === "trial" ? helperTextTrial : t("sizes_missing")}
+      />
+    );
+  }
+  const valueIndex =
+    validity !== "trial"
+      ? sizes.findIndex((size) => size.streamingUnits === value)
+      : -1;
   const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({
     value: index,
     label: `${s.streamingUnits}`,
@@ -74,40 +128,6 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       ? "error"
       : "default";
 
-  const helperTextTrial = (
-    <div className="pf-c-form__helper-text" aria-live={"polite"}>
-      <div>{t("trial_kafka_size_description")}</div>
-      <Button
-        className="pf-c-form__helper-text"
-        variant={ButtonVariant.link}
-        isInline
-        onClick={onLearnMoreAboutSizes}
-      >
-        {t("learn_about_sizes")}
-      </Button>
-    </div>
-  );
-
-  const helperTextOverQuota = (
-    <HelperText>
-      <HelperTextItem variant="error" hasIcon>
-        <div>
-          {t("standard_kafka_streaming_unit", {
-            count: remainingStreamingUnits,
-          })}
-        </div>
-        <Button
-          className="pf-c-form__helper-text"
-          variant={ButtonVariant.link}
-          isInline
-          onClick={onLearnHowToAddStreamingUnits}
-        >
-          {t("standard_kafka_size_description")}
-        </Button>
-      </HelperTextItem>
-    </HelperText>
-  );
-
   return (
     <FormGroupWithPopover
       labelHead={t("common:size")}
@@ -115,7 +135,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       fieldLabel={t("common:size")}
       labelBody={t("size_help_content")}
       buttonAriaLabel={t("size_field_aria")}
-      isRequired={true}
+      isRequired={isRequired}
       validated={validation}
       helperText={
         validity !== "trial"

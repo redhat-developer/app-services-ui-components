@@ -8,9 +8,10 @@ import {
 } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { InstanceAvailability } from "../types";
+import { InstanceAvailability, Plan } from "../types";
 
 export type ModalAlertsProps = {
+  plan: Plan;
   instanceAvailability: InstanceAvailability | undefined;
   isSystemUnavailable: boolean;
   isLoading: boolean;
@@ -20,6 +21,7 @@ export type ModalAlertsProps = {
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
+  plan,
   instanceAvailability,
   isSystemUnavailable,
   isLoading,
@@ -31,6 +33,29 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
 
   return (
     <AlertGroup>
+      {plan === "trial" && (
+        <Alert
+          role={"alert"}
+          className="pf-u-mb-md"
+          variant={AlertVariant.info}
+          title={t("modal_alerts.trial_available_title")}
+          isInline
+        >
+          <Trans
+            ns={["create-kafka-instance-exp"]}
+            i18nKey="modal_alerts.trial_available_message"
+            components={[
+              <Button
+                key="btn-pricing-purchasing"
+                variant={ButtonVariant.link}
+                onClick={onClickKafkaOverview}
+                isInline
+              />,
+            ]}
+            values={{ time: 48 }}
+          />
+        </Alert>
+      )}
       {(() => {
         switch (true) {
           case isLoading:
@@ -59,30 +84,6 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 isInline
               >
                 {t("modal_alerts.system_unavailable_message")}
-              </Alert>
-            );
-          case instanceAvailability === "trial":
-            return (
-              <Alert
-                role={"alert"}
-                className="pf-u-mb-md"
-                variant={AlertVariant.info}
-                title={t("modal_alerts.trial_available_title")}
-                isInline
-              >
-                <Trans
-                  ns={["create-kafka-instance-exp"]}
-                  i18nKey="modal_alerts.trial_available_message"
-                  components={[
-                    <Button
-                      key="btn-pricing-purchasing"
-                      variant={ButtonVariant.link}
-                      onClick={onClickKafkaOverview}
-                      isInline
-                    />,
-                  ]}
-                  values={{ time: 48 }}
-                />
               </Alert>
             );
           case instanceAvailability === "over-quota":
@@ -138,7 +139,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.warning}
-                title={t("modal_alerts.instance_unavailable_title")}
+                title={t("modal_alerts.trial_unavailable_title")}
                 isInline
               >
                 {t("modal_alerts.trial_unavailable_message")}

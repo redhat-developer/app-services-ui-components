@@ -27,7 +27,6 @@
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)",
-    "trial_region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again in a few hours.",
     "region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again later.",
     "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation"
   },
@@ -89,8 +88,7 @@
   "standard_kafka_streaming_unit_other": "Your organization has {{count}} streaming units remaining",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
-  "sizes_missing": "Select a cloud provider and region to find the available sizes",
-  "sizes_loading": "Loading available sizes for the selected cloud provider and region",
+  "sizes_missing": "Size options display when a cloud provider and region are selected",
   "statuses": {
     "creating": "Creating",
     "degraded": "Degraded",

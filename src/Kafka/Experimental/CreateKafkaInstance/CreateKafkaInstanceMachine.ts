@@ -1,12 +1,11 @@
 import { assign, createMachine, send } from "xstate";
-import { ProviderInfo } from "./../../CreateKafkaInstance/machines/types";
 import {
-  AZ,
   CreateKafkaInitializationData,
   CreateKafkaInstanceError,
   GetSizesData,
   MakeCreateKafkaInstanceMachine,
   Provider,
+  ProviderInfo,
   Region,
   Size,
 } from "./types";
@@ -21,11 +20,8 @@ export const PROVIDER_INVALID = "providerInvalid";
 export const REGION_UNTOUCHED = "regionUntouched";
 export const REGION_VALID = "regionValid";
 export const REGION_INVALID = "regionInvalid";
-export const AZ_UNTOUCHED = "azUntouched";
-export const AZ_VALID = "azValid";
-export const AZ_INVALID = "azInvalid";
 export const SYSTEM_UNAVAILABLE = "systemUnavailable";
-export const SIZE_IDLE = "sizeIndle";
+export const SIZE_IDLE = "sizeIdle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
 export const SIZE_INVALID = "sizeInvalid";
@@ -36,14 +32,15 @@ const CreateKafkaInstanceMachine = createMachine(
     schema: {
       context: {} as {
         // initial data coming from the APIs
-        capabilities: CreateKafkaInitializationData | undefined;
+        capabilities:
+          | (CreateKafkaInitializationData & { plan: "standard" | "trial" })
+          | undefined;
 
         // what the user is selecting
         form: {
           name?: string;
           provider?: Provider;
           region?: Region;
-          az?: AZ;
           size?: Size;
         };
 
@@ -60,7 +57,6 @@ const CreateKafkaInstanceMachine = createMachine(
         | { type: "nameChange"; name: string }
         | { type: "providerChange"; provider: Provider }
         | { type: "regionChange"; region: Region }
-        | { type: "azChange"; az: AZ }
         | { type: "sizeChange"; size: Size }
         | { type: "nameIsValid" }
         | { type: "nameIsInvalid" }
@@ -86,7 +82,6 @@ const CreateKafkaInstanceMachine = createMachine(
         name: undefined,
         provider: undefined,
         region: undefined,
-        az: undefined,
         size: undefined,
       },
 
@@ -111,12 +106,34 @@ const CreateKafkaInstanceMachine = createMachine(
       systemUnavailable: { type: "final", tags: SYSTEM_UNAVAILABLE },
       verifyAvailability: {
         always: [
+          { cond: "isOverQuota", target: "cantCreate.over-quota" },
+          { cond: "isTrialUsed", target: "cantCreate.trial-used" },
+          {
+            cond: "isInstanceUnavailable",
+            target: "cantCreate.instance-unavailable",
+          },
+          {
+            cond: "isRegionsUnavailable",
+            target: "cantCreate.regions-unavailable",
+          },
+          {
+            cond: "isTrialUnavailable",
+            target: "cantCreate.trial-unavailable",
+          },
           { cond: "canCreateInstances", target: "configuring" },
           { target: "cantCreate" },
         ],
       },
       cantCreate: {
-        type: "final",
+        initial: "unknown-error",
+        states: {
+          "unknown-error": {},
+          "over-quota": {},
+          "trial-used": {},
+          "instance-unavailable": {},
+          "regions-unavailable": {},
+          "trial-unavailable": {},
+        },
       },
       configuring: {
         type: "parallel",
@@ -205,31 +222,6 @@ const CreateKafkaInstanceMachine = createMachine(
             on: {
               regionChange: {
                 actions: ["setRegion", "formChange"],
-                target: ".validate",
-              },
-            },
-          },
-          az: {
-            initial: "validate",
-            states: {
-              untouched: { tags: AZ_UNTOUCHED },
-              validate: {
-                always: [
-                  { cond: "azIsUntouched", target: "untouched" },
-                  { cond: "azIsValid", target: "valid" },
-                  { target: "invalid" },
-                ],
-              },
-              invalid: {
-                tags: AZ_INVALID,
-              },
-              valid: {
-                tags: AZ_VALID,
-              },
-            },
-            on: {
-              azChange: {
-                actions: ["setAZ", "formChange"],
                 target: ".validate",
               },
             },
@@ -325,10 +317,9 @@ const CreateKafkaInstanceMachine = createMachine(
           availableProviders,
           defaultProvider,
           instanceAvailability,
-          defaultAZ,
-          defaultRegion,
           remainingStreamingUnits,
           maxStreamingUnits,
+          plan,
         } = event.data;
 
         const allRegions = availableProviders.flatMap((p) => p.regions);
@@ -337,38 +328,43 @@ const CreateKafkaInstanceMachine = createMachine(
           allRegions.every(({ isDisabled }) => isDisabled === true) ||
           allRegions.length === 0;
 
-        const isDefaultRegionInDefaultProviderRegions =
-          availableProviders
-            .find((p) => defaultProvider === p.id)
-            ?.regions.find((r) => r.id === defaultRegion) !== undefined;
+        const computedInstanceAvailability = noRegionsAvailable
+          ? "regions-unavailable"
+          : instanceAvailability;
 
-        const selectedProvider = availableProviders.find(
-          (p) => p.id === defaultProvider
-        );
+        const canCreate =
+          computedInstanceAvailability === "standard-available" ||
+          computedInstanceAvailability === "trial-available";
+
+        const selectedProvider = canCreate
+          ? availableProviders.find((p) => p.id === defaultProvider)
+          : undefined;
 
         return {
-          form: {
-            name: undefined,
-            provider: defaultProvider,
-            region: isDefaultRegionInDefaultProviderRegions
-              ? defaultRegion
-              : selectedProvider?.regions.filter(
-                  (r) => r.isDisabled === false
-                )[0]?.id,
-            az: defaultAZ,
-            size: undefined,
-          },
+          form: canCreate
+            ? {
+                name: undefined,
+                provider: defaultProvider,
+                region:
+                  selectedProvider?.defaultRegion ||
+                  selectedProvider?.regions.filter(
+                    (r) => !!r.isDisabled === false
+                  )[0]?.id,
+                size: undefined,
+              }
+            : {
+                name: undefined,
+                provider: undefined,
+                region: undefined,
+                size: undefined,
+              },
           capabilities: {
             availableProviders,
             defaultProvider,
-            defaultAZ,
-            defaultRegion,
             remainingStreamingUnits,
             maxStreamingUnits,
-
-            instanceAvailability: noRegionsAvailable
-              ? "regions-unavailable"
-              : instanceAvailability,
+            plan,
+            instanceAvailability: computedInstanceAvailability,
           },
           selectedProvider,
         };
@@ -401,26 +397,30 @@ const CreateKafkaInstanceMachine = createMachine(
           form: {
             ...context.form,
             provider,
-            region: selectedProvider?.regions.filter(
-              (r) => r.isDisabled === false
-            )[0]?.id,
+            region:
+              selectedProvider?.defaultRegion ||
+              selectedProvider?.regions.filter(
+                (r) => !!r.isDisabled === false
+              )[0]?.id,
           },
           selectedProvider,
           sizes: undefined,
         };
       }),
-      setRegion: assign((context, { region }) => ({
-        form: {
-          ...context.form,
-          region,
-        },
-      })),
-      setAZ: assign((context, { az }) => ({
-        form: {
-          ...context.form,
-          az,
-        },
-      })),
+      setRegion: assign((context, { region }) => {
+        if (context.creationError === "region-unavailable") {
+          return {
+            form: { ...context.form, region },
+            creationError: undefined,
+          };
+        }
+        return {
+          form: {
+            ...context.form,
+            region,
+          },
+        };
+      }),
       setSize: assign((context, { size }) => ({
         form: {
           ...context.form,
@@ -440,6 +440,21 @@ const CreateKafkaInstanceMachine = createMachine(
       })),
     },
     guards: {
+      isOverQuota: ({ capabilities }) =>
+        capabilities === undefined ||
+        capabilities.instanceAvailability === "over-quota",
+      isTrialUsed: ({ capabilities }) =>
+        capabilities === undefined ||
+        capabilities.instanceAvailability === "trial-used",
+      isInstanceUnavailable: ({ capabilities }) =>
+        capabilities === undefined ||
+        capabilities.instanceAvailability === "instance-unavailable",
+      isRegionsUnavailable: ({ capabilities }) =>
+        capabilities === undefined ||
+        capabilities.instanceAvailability === "regions-unavailable",
+      isTrialUnavailable: ({ capabilities }) =>
+        capabilities === undefined ||
+        capabilities.instanceAvailability === "trial-unavailable",
       nameIsUntouched: ({ form }) => form.name === undefined,
       nameIsEmpty: ({ form }) =>
         form.name !== undefined && form.name.length === 0,
@@ -470,18 +485,6 @@ const CreateKafkaInstanceMachine = createMachine(
             undefined
         );
       },
-      azIsUntouched: ({ form }) => form.az === undefined,
-      azIsValid: ({ capabilities, form }) => {
-        const selectedProviderInfo = capabilities?.availableProviders.find(
-          (p) => p.id === form.provider
-        );
-        return (
-          // must have selected an AZ
-          form.az !== undefined &&
-          // and it must be enabled in the capabilities for the provider
-          selectedProviderInfo?.AZ[form.az] === true
-        );
-      },
       noProviderAndRegion: ({ form }) =>
         form.provider === undefined || form.region === undefined,
       noSizes: ({ sizes }) => sizes === undefined || sizes.length === 0,
@@ -491,14 +494,13 @@ const CreateKafkaInstanceMachine = createMachine(
         form.size.streamingUnits <= capabilities.remainingStreamingUnits,
       canCreateInstances: ({ capabilities }) =>
         capabilities !== undefined &&
-        capabilities.instanceAvailability !== undefined &&
-        ["quota", "trial"].includes(capabilities.instanceAvailability),
+        capabilities.plan !== undefined &&
+        ["standard", "trial"].includes(capabilities.plan),
       canSave: (_context, _event, meta) => {
         return (
           meta.state.hasTag(NAME_VALID) &&
           meta.state.hasTag(PROVIDER_VALID) &&
           meta.state.hasTag(REGION_VALID) &&
-          meta.state.hasTag(AZ_VALID) &&
           meta.state.hasTag(SIZE_VALID)
         );
       },
@@ -532,7 +534,6 @@ export function makeCreateKafkaInstanceMachine({
               name: form.name,
               provider: form.provider,
               region: form.region,
-              az: form.az,
               sizeId: form.size.id,
             },
             onSuccess,

@@ -1,4 +1,6 @@
 import {
+  Flex,
+  FlexItem,
   FormSelect,
   FormSelectOption,
   SelectProps,
@@ -31,17 +33,29 @@ export const CloudProvidersTiles: VoidFunctionComponent<
           screenreaderText="Loading contents"
         />
       )}
-      {providers.map(({ id, displayName }) => (
-        <Tile
-          key={id}
-          className={"mas--CreateKafkaInstance__CloudProviderTile"}
-          title={displayName}
-          icon={tiles[id]}
-          isSelected={value === id}
-          isDisabled={isDisabled}
-          onClick={() => onChange(id)}
-        />
-      ))}
+      <div
+        role="listbox"
+        aria-label={t("create-kafka-instance:select_cloud_provider")}
+      >
+        <Flex
+          justifyContent={{ default: "justifyContentSpaceBetween" }}
+          spacer={{ default: "spacerNone" }}
+          spaceItems={{ default: "spaceItemsXs" }}
+        >
+          {providers.map(({ id, displayName }) => (
+            <FlexItem grow={{ default: "grow" }} key={id}>
+              <Tile
+                className={"pf-u-w-100"}
+                title={displayName}
+                icon={tiles[id]}
+                isSelected={value === id}
+                isDisabled={isDisabled}
+                onClick={() => onChange(id)}
+              />
+            </FlexItem>
+          ))}
+        </Flex>
+      </div>
       <FormSelect
         className={"mas--CreateKafkaInstance__CloudProviderTile--select"}
         value={value}

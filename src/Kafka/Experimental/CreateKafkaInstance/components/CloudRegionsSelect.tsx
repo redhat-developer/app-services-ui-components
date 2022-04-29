@@ -10,7 +10,7 @@ import { Region, RegionInfo } from "../types";
 
 export type CloudRegionProps = {
   value: Region | undefined;
-  regions: RegionInfo[];
+  regions: RegionInfo[] | undefined;
   isDisabled: boolean;
   onChange: (region: string) => void;
   validated?: SelectProps["validated"];
@@ -53,16 +53,6 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
       </SelectOption>
     )
   );
-
-  // makeRegionOptions.unshift(
-  //   <SelectOption
-  //     key="placeholder"
-  //     value={t("create-kafka-instance:select_region")}
-  //     isPlaceholder
-  //   >
-  //     {t("create-kafka-instance:select_region")}
-  //   </SelectOption>
-  // );
 
   return (
     <Select

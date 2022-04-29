@@ -16,16 +16,18 @@ import {
 } from "react";
 import { useTranslation } from "react-i18next";
 import {
+  FieldAZ,
+  FieldCloudProvider,
+  FieldCloudRegion,
+  FieldInstanceName,
+  FieldSize,
+  FieldSizeProps,
   FormAlerts,
   InstanceInfo,
   InstanceInfoSkeleton,
   ModalAlerts,
 } from "./components";
-import { FieldAZ } from "./components/FieldAZ";
-import { FieldCloudProvider } from "./components/FieldCloudProvider";
-import { FieldCloudRegion } from "./components/FieldCloudRegion";
-import { FieldInstanceName } from "./components/FieldInstanceName";
-import { FieldSize, FieldSizeProps } from "./components/FieldSize";
+
 import "./CreateKafkaInstance.css";
 import {
   CreateKafkaInstanceProvider,
@@ -147,14 +149,17 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
         </Button>,
       ]}
     >
-      <ModalAlerts
-        instanceAvailability={capabilities?.instanceAvailability}
-        isSystemUnavailable={isSystemUnavailable}
-        isLoading={isLoading}
-        onClickKafkaOverview={onClickKafkaOverview}
-        maxStreamingUnits={capabilities?.maxStreamingUnits}
-        onClickContactUs={onClickContactUs}
-      />
+      {capabilities && (
+        <ModalAlerts
+          plan={capabilities.plan}
+          instanceAvailability={capabilities.instanceAvailability}
+          isSystemUnavailable={isSystemUnavailable}
+          isLoading={isLoading}
+          onClickKafkaOverview={onClickKafkaOverview}
+          maxStreamingUnits={capabilities.maxStreamingUnits}
+          onClickContactUs={onClickContactUs}
+        />
+      )}
       <Flex
         direction={{ default: "column", lg: "row" }}
         alignItems={{ lg: "alignItemsFlexStart" }}
@@ -256,13 +261,27 @@ export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
-  const { form, selectedProvider, isRegionError, isFormEnabled, setRegion } =
-    useCreateKafkaInstanceMachine();
+  const {
+    form,
+    selectedProvider,
+    isRegionError,
+    isFormEnabled,
+    capabilities,
+    error,
+    setRegion,
+  } = useCreateKafkaInstanceMachine();
 
   return (
     <FieldCloudRegion
-      validity={isRegionError ? "required" : "valid"}
-      regions={selectedProvider?.regions || []}
+      validity={
+        isRegionError
+          ? "required"
+          : error === "region-unavailable" ||
+            capabilities?.instanceAvailability === "regions-unavailable"
+          ? "region-unavailable"
+          : "valid"
+      }
+      regions={selectedProvider?.regions}
       value={form.region}
       isDisabled={!isFormEnabled}
       onChange={setRegion}
@@ -271,16 +290,15 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldAZ: VoidFunctionComponent = () => {
-  const { form, isAzError, setAZ, isTrial, isFormEnabled } =
-    useCreateKafkaInstanceMachine();
+  const { isTrial, isFormEnabled } = useCreateKafkaInstanceMachine();
 
   return (
     <FieldAZ
-      validity={isAzError ? "required" : "valid"}
+      validity={"valid"}
       options={isTrial ? "single" : "multi"}
-      value={form.az}
+      value={isTrial ? "single" : "multi"}
       isDisabled={!isFormEnabled}
-      onChange={setAZ}
+      onChange={() => false} // AZ is defined by the backend, we just visualize the value here
     />
   );
 };

@@ -76,19 +76,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 {t("form_errors.trial_unavailable_message")}
               </Alert>
             );
-          case "trial-region-unavailable":
-            return (
-              <Alert
-                role={"alert"}
-                className="pf-u-mb-md"
-                variant={AlertVariant.danger}
-                title={t("form_errors.instance_unavailable_title")}
-                isInline
-              >
-                {t("form_errors.trial_region_unavailable_message")}
-              </Alert>
-            );
-          case "standard-region-unavailable":
+          case "region-unavailable":
             return (
               <Alert
                 role={"alert"}

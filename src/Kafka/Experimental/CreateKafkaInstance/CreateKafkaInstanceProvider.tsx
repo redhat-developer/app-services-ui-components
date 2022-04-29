@@ -7,7 +7,6 @@ import {
 } from "react";
 import { ActorRefFrom } from "xstate";
 import {
-  AZ_VALID,
   makeCreateKafkaInstanceMachine,
   NAME_EMPTY,
   NAME_INVALID,
@@ -21,7 +20,6 @@ import {
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
 import {
-  AZ,
   MakeCreateKafkaInstanceMachine,
   Provider,
   Region,
@@ -64,10 +62,6 @@ export function useCreateKafkaInstanceMachine() {
   );
   const setRegion = useCallback(
     (region: Region) => service.send({ type: "regionChange", region }),
-    [service]
-  );
-  const setAZ = useCallback(
-    (az: AZ) => service.send({ type: "azChange", az }),
     [service]
   );
   const create = useCallback(() => service.send("create"), [service]);
@@ -114,13 +108,10 @@ export function useCreateKafkaInstanceMachine() {
 
         isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
         isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,
-        isAzError: !state.hasTag(AZ_VALID) && isFormInvalid,
 
         isTrial:
-          state.context.capabilities?.instanceAvailability === undefined ||
-          ["trial", "trial-used", "trial-unavailable"].includes(
-            state.context.capabilities.instanceAvailability
-          ),
+          state.context.capabilities === undefined ||
+          state.context.capabilities.plan === "trial",
         isLoading,
         isLoadingSizes,
         isSaving,
@@ -133,12 +124,11 @@ export function useCreateKafkaInstanceMachine() {
         setName,
         setProvider,
         setRegion,
-        setAZ,
         create,
         setSize,
       };
     },
-    [create, service, setAZ, setName, setProvider, setRegion, setSize]
+    [create, service, setName, setProvider, setRegion, setSize]
   );
 
   return useSelector(service, selector);

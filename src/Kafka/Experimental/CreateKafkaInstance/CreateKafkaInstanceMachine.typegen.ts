@@ -6,15 +6,9 @@ export interface Typegen0 {
     setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
     resetCreationErrorMessage: "formChange" | "";
     setName: "nameChange";
-    formChange:
-      | "nameChange"
-      | "providerChange"
-      | "regionChange"
-      | "azChange"
-      | "sizeChange";
+    formChange: "nameChange" | "providerChange" | "regionChange" | "sizeChange";
     setProvider: "providerChange";
     setRegion: "regionChange";
-    setAZ: "azChange";
     setSize: "sizeChange";
     setSizes: "done.invoke.createKafkaInstance.configuring.size.loading:invocation[0]";
     setCreationError: "createError";
@@ -54,6 +48,11 @@ export interface Typegen0 {
     createInstance: "";
   };
   eventsCausingGuards: {
+    isOverQuota: "";
+    isTrialUsed: "";
+    isInstanceUnavailable: "";
+    isRegionsUnavailable: "";
+    isTrialUnavailable: "";
     canCreateInstances: "";
     canSave: "formChange" | "";
     nameIsUntouched: "";
@@ -63,8 +62,6 @@ export interface Typegen0 {
     providerIsValid: "";
     regionIsUntouched: "";
     regionIsValid: "";
-    azIsUntouched: "";
-    azIsValid: "";
     noProviderAndRegion: "";
     noSizes: "";
     sizeIsValid: "";
@@ -75,6 +72,12 @@ export interface Typegen0 {
     | "systemUnavailable"
     | "verifyAvailability"
     | "cantCreate"
+    | "cantCreate.unknown-error"
+    | "cantCreate.over-quota"
+    | "cantCreate.trial-used"
+    | "cantCreate.instance-unavailable"
+    | "cantCreate.regions-unavailable"
+    | "cantCreate.trial-unavailable"
     | "configuring"
     | "configuring.name"
     | "configuring.name.untouched"
@@ -92,11 +95,6 @@ export interface Typegen0 {
     | "configuring.region.validate"
     | "configuring.region.invalid"
     | "configuring.region.valid"
-    | "configuring.az"
-    | "configuring.az.untouched"
-    | "configuring.az.validate"
-    | "configuring.az.invalid"
-    | "configuring.az.valid"
     | "configuring.size"
     | "configuring.size.validate"
     | "configuring.size.idle"
@@ -108,17 +106,22 @@ export interface Typegen0 {
     | "saving"
     | "complete"
     | {
+        cantCreate?:
+          | "unknown-error"
+          | "over-quota"
+          | "trial-used"
+          | "instance-unavailable"
+          | "regions-unavailable"
+          | "trial-unavailable";
         configuring?:
           | "name"
           | "provider"
           | "region"
-          | "az"
           | "size"
           | {
               name?: "untouched" | "empty" | "invalid" | "valid" | "validate";
               provider?: "untouched" | "validate" | "invalid" | "valid";
               region?: "untouched" | "validate" | "invalid" | "valid";
-              az?: "untouched" | "validate" | "invalid" | "valid";
               size?: "validate" | "idle" | "invalid" | "valid" | "loading";
             };
       };
@@ -134,10 +137,7 @@ export interface Typegen0 {
     | "regionUntouched"
     | "regionInvalid"
     | "regionValid"
-    | "azUntouched"
-    | "azInvalid"
-    | "azValid"
-    | "sizeIndle"
+    | "sizeIdle"
     | "sizeInvalid"
     | "sizeValid"
     | "sizeLoading";

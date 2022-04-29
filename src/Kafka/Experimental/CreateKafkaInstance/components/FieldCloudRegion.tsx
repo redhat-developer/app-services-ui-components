@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { CloudRegionProps, CloudRegionSelect } from "./CloudRegionsSelect";
 
 export type FieldCloudRegionProps = {
-  validity: "valid" | "required";
+  validity: "valid" | "region-unavailable" | "required";
 } & Omit<CloudRegionProps, "validated" | "placeholderText">;
 export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
   value,
@@ -15,23 +15,28 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
 }) => {
   const { t } = useTranslation("create-kafka-instance-exp");
 
-  const allRegionsUnavailable = regions.every(
-    ({ isDisabled }) => isDisabled === true
-  );
+  const allRegionsUnavailable = regions
+    ? regions.every(({ isDisabled }) => isDisabled === true)
+    : true;
 
   const disableControl =
-    isDisabled || allRegionsUnavailable || regions.length === 0;
+    isDisabled || allRegionsUnavailable || regions?.length === 0;
 
-  const someRegionsUnavailable = regions.some(
-    ({ isDisabled }) => isDisabled === true
-  );
+  const someRegionsUnavailable =
+    !allRegionsUnavailable &&
+    regions?.some(({ isDisabled }) => isDisabled === true);
 
   const validation =
-    validity !== "valid" || allRegionsUnavailable ? "error" : "default";
+    validity !== "valid"
+      ? value !== undefined
+        ? "error"
+        : "default"
+      : "default";
 
-  const placeholder = allRegionsUnavailable
-    ? t("regions_temporarily_unavailable")
-    : t("select_region");
+  const placeholder =
+    allRegionsUnavailable && regions
+      ? t("regions_temporarily_unavailable")
+      : t("select_region");
 
   const helperTextInvalid = allRegionsUnavailable
     ? t("all_region_unavailable_helper_text")
@@ -45,15 +50,25 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
       isRequired
       validated={validation}
       helperText={
-        someRegionsUnavailable ? (
-          <HelperText>
+        regions && (allRegionsUnavailable || someRegionsUnavailable) ? (
+          <HelperText className={"pf-c-form__helper-text"}>
             <HelperTextItem variant="warning" hasIcon>
               {t("some_region_unavailable_helper_text")}
             </HelperTextItem>
           </HelperText>
         ) : undefined
       }
-      helperTextInvalid={isDisabled ? undefined : helperTextInvalid}
+      helperTextInvalid={
+        isDisabled ? undefined : validity === "region-unavailable" ? (
+          <HelperText className={"pf-c-form__helper-text"}>
+            <HelperTextItem variant="error" hasIcon>
+              {t("form_errors.region_unavailable_message")}
+            </HelperTextItem>
+          </HelperText>
+        ) : (
+          helperTextInvalid
+        )
+      }
     >
       <CloudRegionSelect
         value={value}
