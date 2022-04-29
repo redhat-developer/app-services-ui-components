@@ -20,6 +20,8 @@ import {
   Text,
   Stack,
   TextVariants,
+  SplitItem,
+  Split,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
@@ -177,7 +179,7 @@ export const KafkaPageV2: FunctionComponent = () => {
                 href="https://access.redhat.com/support"
               >
                 {" "}
-                Redhat support
+                Red Hat support
                 <ExternalLinkAltIcon className="pf-u-ml-xs" />
                 &nbsp;
               </Button>{" "}
@@ -214,10 +216,16 @@ export const KafkaPageV2: FunctionComponent = () => {
                 flex={{ default: "flex_1" }}
               >
                 <FlexItem>
-                  <img src={LogoAWS} alt={""} style={{ height: "60px" }} />
-                  <Title headingLevel="h2" className={"pf-u-pt-sm"}>
-                    {"Amazon Web Services"}
-                  </Title>
+                  <Split hasGutter>
+                    <SplitItem>
+                      <img src={LogoAWS} alt={""} style={{ height: "60px" }} />
+                    </SplitItem>
+                    <SplitItem>
+                      <Title headingLevel="h2" className={"pf-u-pt-sm"}>
+                        {t("awsWebServiceTitle")}
+                      </Title>
+                    </SplitItem>
+                  </Split>
                 </FlexItem>
               </Flex>
               <Divider isVertical />
@@ -226,13 +234,26 @@ export const KafkaPageV2: FunctionComponent = () => {
                 flex={{ default: "flex_1" }}
               >
                 <FlexItem>
-                  <img src={LogoAzure} alt={""} style={{ height: "60px" }} />
-                  <Title headingLevel="h2" className={"pf-u-pt-sm"}>
-                    {"Microsoft Azure"}
-                  </Title>
-                  <Text component={TextVariants.p} className={"pf-u-color-200"}>
-                    {t("microsoftAzureDescription")}
-                  </Text>
+                  <Split hasGutter>
+                    <SplitItem>
+                      <img
+                        src={LogoAzure}
+                        alt={""}
+                        style={{ height: "60px" }}
+                      />
+                    </SplitItem>
+                    <SplitItem>
+                      <Title headingLevel="h2" className={"pf-u-pt-sm"}>
+                        {t("microsoftAzureTitle")}
+                      </Title>
+                      <Text
+                        component={TextVariants.p}
+                        className={"pf-u-color-200"}
+                      >
+                        {t("microsoftAzureDescription")}
+                      </Text>
+                    </SplitItem>
+                  </Split>
                 </FlexItem>
               </Flex>
             </Flex>

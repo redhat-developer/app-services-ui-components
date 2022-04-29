@@ -23,5 +23,6 @@
   "steamingUnit": "Streaming unit",
   "storage": "Storage",
   "streamingUnitText": "A <strong>{{value}}</strong> determines the default maximum capacity of a Kafka instance. The more streaming units your Kafka instance has, the larger its capacity will be.",
-  "viewDocumentation": ""
+  "awsWebServiceTitle": "Amazon Web Services",
+  "microsoftAzureTitle": "Microsoft Azure"
 }
