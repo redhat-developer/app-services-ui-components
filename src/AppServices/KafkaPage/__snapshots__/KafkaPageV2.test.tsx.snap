@@ -585,7 +585,7 @@ exports[`KafkaPage renders 1`] = `
                 target="_blank"
               >
                  
-                 Redhat support
+                Redhat support
                 <svg
                   aria-hidden="true"
                   class="pf-u-ml-xs"
