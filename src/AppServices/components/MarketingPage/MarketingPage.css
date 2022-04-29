@@ -142,7 +142,7 @@
 }
 
 .kafka-overview--page-section--marketing {
-  --pf-c-page__main-section--PaddingTop: var(--pf-global--spacer--xs);
+  --pf-c-page__main-section--PaddingTop: 0;
   --pf-c-page__main-section--PaddingRight: var(--pf-global--spacer--lg);
   --pf-c-page__main-section--PaddingBottom: var(--pf-global--spacer--xl);
   --pf-c-page__main-section--PaddingLeft: var(--pf-global--spacer--lg);
