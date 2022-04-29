@@ -105,6 +105,6 @@
   "streaming_unit": "streaming units",
   "temporarily_unavailable": "Temporarily unavailable",
   "trial_all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider or try again later.",
-  "trial_kafka_size_description": "With a subscription, you can select a size for your instance. Changing the size allows you to increase limits such as ingress, egress, and storage. The limits that you get with a trial instance are listed under Details.",
+  "trial_kafka_size_description": "With a subscription, you can change the capacity of your instance by selecting a size. The capacity that you get with a trial instance is listed under Details.",
   "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
 }
