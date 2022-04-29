@@ -93,7 +93,7 @@
     "eslint-plugin-storybook": "0.5.11",
     "http-server": "14.1.0",
     "husky": "7.0.4",
-    "i18next-parser": "6.3.0",
+    "i18next-parser": "6.4.0",
     "jest": "27.5.1",
     "jest-environment-jsdom": "27.5.1",
     "jest-fail-on-console": "2.4.1",
