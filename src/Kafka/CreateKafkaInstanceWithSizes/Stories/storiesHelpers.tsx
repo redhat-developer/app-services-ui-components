@@ -318,7 +318,6 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     provider,
     region
   ) => {
-    console.log("getSizes", provider, region);
     return fakeApi<GetSizesData>(
       {
         sizes: SIZES[provider],

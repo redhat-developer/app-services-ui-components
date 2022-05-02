@@ -5,6 +5,10 @@ import "regenerator-runtime/runtime";
 
 failOnConsole({
   silenceMessage: (errorMessage) => {
+    // workarounds for the Select component setting state after unmount
+    if (/at CloudRegionSelect/g.test(errorMessage)) {
+      return true;
+    }
     if (/at AsyncTypeaheadSelect/g.test(errorMessage)) {
       return true;
     }

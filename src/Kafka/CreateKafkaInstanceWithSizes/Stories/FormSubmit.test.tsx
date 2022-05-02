@@ -1,10 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import {
-  renderDialog,
-  waitForI18n,
-  waitForPopper,
-  within,
-} from "../../../test-utils";
+import { renderDialog, waitForI18n, waitForPopper } from "../../../test-utils";
 import * as stories from "./FormSubmit.stories";
 
 const {
@@ -26,18 +21,10 @@ describe("CreateKafkaInstanceWithSizes", () => {
 
     expect(
       await comp.queryByText(
-        "The selected size requires more streaming units. Your organization has 1 of 2 streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first",
+        "The selected size requires more streaming units. Your organization has 3 of 5 streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first",
         { exact: false }
       )
     ).toBeInTheDocument();
-
-    expect(comp.getByLabelText("Name *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(
-      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[1]
-    ).toBeEnabled();
-    expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
-    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
 
   it("should show an alert when trial instances are unavailable after submitting the form", async () => {
@@ -53,14 +40,6 @@ describe("CreateKafkaInstanceWithSizes", () => {
         "You can create a trial instance to evaluate this service."
       )
     ).toBeInTheDocument();
-
-    expect(comp.getByLabelText("Name *")).toBeEnabled();
-    expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
-    expect(
-      within(comp.getByTestId("cloudRegion")).getAllByRole("button")[1]
-    ).toBeEnabled();
-    expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
-    expect(comp.getByRole("button", { name: "Multi" })).toBeEnabled();
   });
 
   it("should show a error alert if the instance name is already taken", async () => {
@@ -97,12 +76,5 @@ describe("CreateKafkaInstanceWithSizes", () => {
     ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();
-    expect(comp.getByLabelText("Cloud provider *")).toBeInvalid();
-    expect(
-      await within(comp.getByTestId("cloudRegion")).findByText("Required")
-    ).toBeInTheDocument();
-    expect(
-      await within(comp.getByTestId("az")).findByText("Required")
-    ).toBeInTheDocument();
   });
 });

@@ -41,6 +41,7 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
     ({ id, displayName, isDisabled }, index) => (
       <SelectOption
         isDisabled={isDisabled}
+        disabled={isDisabled}
         key={index}
         value={id}
         description={
