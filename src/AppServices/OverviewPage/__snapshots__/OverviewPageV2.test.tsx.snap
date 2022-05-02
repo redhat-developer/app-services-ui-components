@@ -1,0 +1,883 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverviewPage renders 1`] = `
+<body>
+  <div>
+    <section
+      class="pf-c-page__main-section pf-m-dark-200 appsrv-marketing--banner pf-u-background-color-dark-100"
+      style="--appsrv-marketing--banner--before--BackgroundImage: url(dummyimage); --appsrv-marketing--banner--before--BackgroundSize: 678px; --appsrv-marketing--banner--before--BackgroundRepeat: repeat; --appsrv-marketing--banner--before--BackgroundPositionY: 0px;"
+    >
+      <div
+        class="pf-l-stack pf-m-gutter"
+      >
+        <h1
+          class="pf-c-title pf-m-2xl"
+          data-ouia-component-id="OUIA-Generated-Title-1"
+          data-ouia-component-type="PF4/Title"
+          data-ouia-safe="true"
+        >
+          Get started with Red Hat OpenShift Application and Data Services
+        </h1>
+        <p
+          class="appsrv-marketing--banner__tagline "
+          data-ouia-component-id="OUIA-Generated-Text-1"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Cloud services for managed OpenShift
+        </p>
+        <p
+          class=""
+          data-ouia-component-id="OUIA-Generated-Text-2"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Red Hat OpenShift Application and Data Services streamline the hybrid cloud experience, reducing the operational cost and complexity of delivering cloud-native applications.
+        </p>
+        <p
+          class="pf-u-mt-md"
+          data-ouia-component-id="OUIA-Generated-Text-3"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Don't miss your chance to try one of our new application services.
+        </p>
+        <div
+          class="pf-l-stack__item"
+        >
+          <a
+            aria-disabled="false"
+            class="pf-c-button pf-m-primary pf-m-display-lg"
+            data-ouia-component-id="button-primary"
+            data-ouia-component-type="PF4/Button"
+            data-ouia-safe="true"
+            data-testid="hero-buttonTryKafka"
+            href="/to-kafka"
+          >
+            Try OpenShift Streams for Apache Kafka
+          </a>
+        </div>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-light appsrv-marketing--page-section--marketing pf-u-background-color-100"
+    >
+      <div
+        class="pf-l-bullseye"
+      >
+        <p
+          class="appsrv-marketing--banner--text-only"
+          data-ouia-component-id="OUIA-Generated-Text-4"
+          data-ouia-component-type="PF4/Text"
+          data-ouia-safe="true"
+          data-pf-content="true"
+        >
+          Reduce operational costs and complexity for application development teams with hosted and managed OpenShift Application and Data Services.
+        </p>
+      </div>
+    </section>
+    <section
+      class="pf-c-page__main-section pf-m-limit-width appsrv-marketing--page-section--marketing"
+    >
+      <div
+        class="pf-c-page__main-body"
+      >
+        <div
+          class="pf-l-grid pf-m-all-6-col-on-md pf-m-all-3-col-on-lg pf-m-gutter"
+        >
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift API Management logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-2"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift API Management
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  API Management supports application development teams that want to take an API-first approach to building microservices-based applications.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is hosted and managed by Red Hat as an add-on for managed
+                   
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-id="OUIA-Generated-Button-link-1"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardRHOAM-linkOpenShift"
+                    href="https://openshift.com"
+                    target="_blank"
+                  >
+                    OpenShift
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-xs"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                  .
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHOAM-buttonCTA"
+                href="https://developers.redhat.com/products/rhoam/getting-started"
+                target="_blank"
+              >
+                Get started
+                 
+                <svg
+                  aria-hidden="true"
+                  class="pf-u-ml-sm"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="card-rhosak"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Streams for Apache Kafka logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-3"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Streams for Apache Kafka
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-green"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Data service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  Streams for Apache Kafka enables IT development teams to capture, process, and stream real-time data across hybrid cloud environments.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is fully hosted and managed by Red Hat for stream-based applications
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="button-create"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHOSAK-buttonCreateKafka"
+                href="/to-kafka"
+              >
+                Create an instance
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Service Registry logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-4"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Service Registry
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  Service Registry provides a metadata layer for developers and applications to publish, discover and evolve schema definitions and API designs.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is fully hosted and managed by Red Hat and offered at no cost to Streams for Apache Kafka and API Management users.
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="hero-buttonTryKafka"
+                href="/to-service"
+              >
+                Create an instance
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-3"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Connectors logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-5"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Connectors
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-blue"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Application service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Service Preview
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  Connectors provides pre-built integrations to enable connectivity from data, services, and systems to Red Hat OpenShift Streams for Apache Kafka.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is hosted and managed by Red Hat as an add-on for managed
+                   
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-id="OUIA-Generated-Button-link-2"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardRHOC-linkOpenShift"
+                    href="https://openshift.com"
+                    target="_blank"
+                  >
+                    OpenShift
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-xs"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                  , and is offered to Streams for Apache Kafka users.
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-3"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHOC-buttonCTA"
+                href="/to-connectors"
+                target="_blank"
+              >
+                Get started
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-4"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Data Science logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-6"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Database Access
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-green"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Data service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Service Preview
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge and CockroachDB.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is hosted and managed by Red Hat as an add-on for managed
+                   
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-id="OUIA-Generated-Button-link-3"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardRHODS-linkOpenShift"
+                    href="https://openshift.com"
+                    target="_blank"
+                  >
+                     
+                    OpenShift
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-xs"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                  .
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-4"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHODS-buttonCTA"
+                href="https://console.redhat.com/application-services/databases"
+                target="_blank"
+              >
+                Learn more
+                 
+                <svg
+                  aria-hidden="true"
+                  class="pf-u-ml-sm"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </article>
+          <article
+            class="pf-c-card"
+            data-ouia-component-id="OUIA-Generated-Card-5"
+            data-ouia-component-type="PF4/Card"
+            data-ouia-safe="true"
+            id=""
+          >
+            <div
+              class="pf-c-card__header"
+            >
+              <div
+                class=""
+              >
+                <img
+                  alt="Red Hat OpenShift Data Science logo"
+                  src="dummyimage"
+                  style="height: 50px;"
+                />
+              </div>
+            </div>
+            <div
+              class="pf-c-card__title"
+            >
+              <h2
+                class="pf-c-title pf-m-xl"
+                data-ouia-component-id="OUIA-Generated-Title-7"
+                data-ouia-component-type="PF4/Title"
+                data-ouia-safe="true"
+              >
+                Red Hat OpenShift Data Science
+              </h2>
+            </div>
+            <div
+              class="pf-c-card__body"
+            >
+              <div
+                class="pf-l-stack pf-m-gutter"
+              >
+                <div
+                  class="pf-l-stack__item pf-u-mb-lg"
+                >
+                  <div
+                    class="pf-c-label-group"
+                  >
+                    <div
+                      class="pf-c-label-group__main"
+                    >
+                      
+                      <ul
+                        aria-label="Label group category"
+                        class="pf-c-label-group__list"
+                        role="list"
+                      >
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label pf-m-green"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Data service
+                            </span>
+                          </span>
+                        </li>
+                        <li
+                          class="pf-c-label-group__list-item"
+                        >
+                          <span
+                            class="pf-c-label"
+                          >
+                            <span
+                              class="pf-c-label__content"
+                            >
+                              Field trial
+                            </span>
+                          </span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="pf-l-stack__item"
+                >
+                  Data Science provides a fully-supported sandbox to rapidly develop, train, and test containerized machine learning models in the public cloud before deploying in production.
+                </div>
+                <div
+                  class="pf-l-stack__item pf-u-color-200"
+                >
+                  This service is hosted and managed by Red Hat as an add-on for managed
+                   
+                  <a
+                    aria-disabled="false"
+                    class="pf-c-button pf-m-link pf-m-inline"
+                    data-ouia-component-id="OUIA-Generated-Button-link-4"
+                    data-ouia-component-type="PF4/Button"
+                    data-ouia-safe="true"
+                    data-testid="cardRHODS-linkOpenShift"
+                    href="https://openshift.com"
+                    target="_blank"
+                  >
+                     
+                    OpenShift
+                    <svg
+                      aria-hidden="true"
+                      class="pf-u-ml-xs"
+                      fill="currentColor"
+                      height="1em"
+                      role="img"
+                      style="vertical-align: -0.125em;"
+                      viewBox="0 0 512 512"
+                      width="1em"
+                    >
+                      <path
+                        d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                      />
+                    </svg>
+                  </a>
+                  .
+                </div>
+              </div>
+            </div>
+            <div
+              class="pf-c-card__footer"
+            >
+              <a
+                aria-disabled="false"
+                class="pf-c-button pf-m-secondary"
+                data-ouia-component-id="button-rhods-tryit"
+                data-ouia-component-type="PF4/Button"
+                data-ouia-safe="true"
+                data-testid="cardRHODS-buttonTryIt"
+                target="_blank"
+              >
+                Try it
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+`;
