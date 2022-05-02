@@ -30,7 +30,7 @@ import { KafkaInstanceCapacityTable } from "./component";
 import { LogoAWS, LogoAzure } from "../../images";
 
 export const KafkaPageV2: FunctionComponent = () => {
-  const { t } = useTranslation(["kafkaoverview"]);
+  const { t } = useTranslation(["kafkaoverview-v2"]);
   return (
     <>
       <MarketingPageHero
@@ -92,7 +92,9 @@ export const KafkaPageV2: FunctionComponent = () => {
           </Card>
         </Grid>
       </MarketingPageSection>
-      <MarketingPageSection kafkaOverviewPage={true}>
+      <MarketingPageSection
+        className={"kafka-overview--page-section--marketing"}
+      >
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("pricingModalTitle")}</Title>
@@ -136,7 +138,7 @@ export const KafkaPageV2: FunctionComponent = () => {
                 <TextContent>
                   <Text component={TextVariants.p}>
                     <Trans
-                      i18nKey={"kafkaoverview:streamingUnitText"}
+                      i18nKey={"kafkaoverview-v2:streamingUnitText"}
                       values={{
                         value: "streaming unit",
                       }}
@@ -148,7 +150,9 @@ export const KafkaPageV2: FunctionComponent = () => {
           </CardBody>
         </Card>
       </MarketingPageSection>
-      <MarketingPageSection kafkaOverviewPage={true}>
+      <MarketingPageSection
+        className={"kafka-overview--page-section--marketing"}
+      >
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("kafkaInstanceCapacityTitle")}</Title>
@@ -196,7 +200,9 @@ export const KafkaPageV2: FunctionComponent = () => {
           </CardFooter>
         </Card>
       </MarketingPageSection>
-      <MarketingPageSection kafkaOverviewPage={true}>
+      <MarketingPageSection
+        className={"kafka-overview--page-section--marketing"}
+      >
         <Card>
           <CardTitle>
             <Title headingLevel="h2">{t("cloudProvidersTitle")}</Title>

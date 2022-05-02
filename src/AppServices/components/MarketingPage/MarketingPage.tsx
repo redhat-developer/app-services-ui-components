@@ -108,25 +108,24 @@ export const MarketingPageBanner: FunctionComponent = ({ children }) => {
 };
 
 export type MarketingPageSectionProps = {
-  kafkaOverviewPage?: boolean;
+  className?: string;
 };
 
 export const MarketingPageSection: FunctionComponent<
   MarketingPageSectionProps & {
     variant?: "dark" | "light" | "default";
   }
-> = ({ kafkaOverviewPage = false, variant = "default", children }) => (
+> = ({
+  className = "appsrv-marketing--page-section--marketing",
+  variant = "default",
+  children,
+}) => (
   <PageSection
     isWidthLimited
-    className={css(
-      kafkaOverviewPage
-        ? "kafka-overview--page-section--marketing"
-        : "appsrv-marketing--page-section--marketing",
-      {
-        "pf-u-background-color-dark-100": variant === "dark",
-        "pf-u-background-color-100": variant === "light",
-      }
-    )}
+    className={css(className, {
+      "pf-u-background-color-dark-100": variant === "dark",
+      "pf-u-background-color-100": variant === "light",
+    })}
     variant={
       variant === "dark"
         ? PageSectionVariants.dark

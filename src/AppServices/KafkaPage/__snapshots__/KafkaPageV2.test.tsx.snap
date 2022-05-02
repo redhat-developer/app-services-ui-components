@@ -373,13 +373,13 @@ exports[`KafkaPage renders 1`] = `
                       class=""
                       scope="col"
                     >
-                      1 streaming unit
+                      firstStreamingUnit
                     </th>
                     <th
                       class=""
                       scope="col"
                     >
-                      2 streaming unit
+                      secondStreamingUnit
                     </th>
                   </tr>
                 </thead>
@@ -401,13 +401,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 50
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 100
                     </td>
@@ -426,13 +426,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 100
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 200
                     </td>
@@ -451,13 +451,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 1000
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 2000
                     </td>
@@ -476,13 +476,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 1500
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 3000
                     </td>
@@ -501,13 +501,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 3000
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 6000
                     </td>
@@ -526,13 +526,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 100
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 200
                     </td>
@@ -551,13 +551,13 @@ exports[`KafkaPage renders 1`] = `
                     </td>
                     <td
                       class=""
-                      data-label="1 streaming unit"
+                      data-label="firstStreamingUnit"
                     >
                       up to 1
                     </td>
                     <td
                       class=""
-                      data-label="2 streaming unit"
+                      data-label="secondStreamingUnit"
                     >
                       up to 1
                     </td>

@@ -77,7 +77,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-card__body"
             >
-              In the United States or Canada, purchase a pay-as-you-go subscription for up to 25 streaming units through Red Hat Marketplace.
+              Use Red Hat Marketplace to purchase a pay-as-you-go subscription for up to 25 streaming units. Purchasing through Red Hat Marketplace is only available in the United States and Canada.
             </div>
             <div
               class="pf-c-card__footer"
@@ -136,7 +136,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-card__body"
             >
-              Contact sales to get a pre-paid subscription or modify limits of your current subscription.
+              Contact sales to get a pre-paid subscription or modify limits of your current subscription. Pre-paid subscriptions are available to customers in any location, including locations outside the United States and Canada.
             </div>
             <div
               class="pf-c-card__footer"
