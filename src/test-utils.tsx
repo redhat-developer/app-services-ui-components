@@ -35,6 +35,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             "message-browser": () =>
               import("../locales/en/message-browser.json"),
             "overview-v2": () => import("../locales/en/overview-v2.json"),
+            "kafkaoverview-v2": () =>
+              import("../locales/en/kafkaoverview-v2.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

@@ -79,3 +79,9 @@ export const NotFoundIcon = new URL(
   "../static/images/NotFound-Icon.svg",
   import.meta.url
 ).href;
+export const LogoAWS = new URL("../static/images/Logo-AWS.svg", import.meta.url)
+  .href;
+export const LogoAzure = new URL(
+  "../static/images/Logo-Azure.svg",
+  import.meta.url
+).href;
