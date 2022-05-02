@@ -88,7 +88,7 @@ export const StandardKafkaForm: VFC<StandardKafkaFormProps> = ({
   setName,
   onSubmit,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-exp");
+  const { t } = useTranslation("create-kafka-instance");
 
   const allRegionsUnavailable =
     regions?.every(({ isDisabled }) => isDisabled === true) ||

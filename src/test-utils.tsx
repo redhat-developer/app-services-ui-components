@@ -34,8 +34,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
               import("../locales/en/service-account.json"),
             "message-browser": () =>
               import("../locales/en/message-browser.json"),
-            "create-kafka-instance-exp": () =>
-              import("../locales/en/experimental/create-kafka-instance.json"),
+            "create-kafka-instance-with-sizes": () =>
+              import("../locales/en/create-kafka-instance-with-sizes.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

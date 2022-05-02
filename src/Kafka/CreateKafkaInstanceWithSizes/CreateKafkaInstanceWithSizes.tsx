@@ -317,6 +317,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     isSizeInvalid,
     isFormEnabled,
     isLoadingSizes,
+    isLoading,
     isTrial,
     setSize,
   } = useCreateKafkaInstanceMachine();
@@ -327,7 +328,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       sizes={isSizeAvailable ? sizes : undefined}
       remainingStreamingUnits={capabilities?.remainingStreamingUnits || 0}
       isDisabled={!isFormEnabled || sizes === undefined}
-      isLoading={isLoadingSizes}
+      isLoading={isLoading || isLoadingSizes}
       validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
       onChange={setSize}
       onLearnHowToAddStreamingUnits={function (): void {

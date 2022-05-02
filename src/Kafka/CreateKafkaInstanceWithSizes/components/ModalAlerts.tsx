@@ -33,29 +33,6 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
 
   return (
     <AlertGroup>
-      {plan === "trial" && (
-        <Alert
-          role={"alert"}
-          className="pf-u-mb-md"
-          variant={AlertVariant.info}
-          title={t("modal_alerts.trial_available_title")}
-          isInline
-        >
-          <Trans
-            ns={["create-kafka-instance-with-sizes"]}
-            i18nKey="modal_alerts.trial_available_message"
-            components={[
-              <Button
-                key="btn-pricing-purchasing"
-                variant={ButtonVariant.link}
-                onClick={onClickKafkaOverview}
-                isInline
-              />,
-            ]}
-            values={{ time: 48 }}
-          />
-        </Alert>
-      )}
       {(() => {
         switch (true) {
           case isLoading:
@@ -166,7 +143,33 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                 title={t("modal_alerts.instance_unavailable_title")}
                 isInline
               >
-                {t("modal_alerts.instance_unavailable_message")}
+                {plan === "trial"
+                  ? t("modal_alerts.trial_unavailable_message")
+                  : t("modal_alerts.instance_unavailable_message")}
+              </Alert>
+            );
+          case plan === "trial":
+            return (
+              <Alert
+                role={"alert"}
+                className="pf-u-mb-md"
+                variant={AlertVariant.info}
+                title={t("modal_alerts.trial_available_title")}
+                isInline
+              >
+                <Trans
+                  ns={["create-kafka-instance-with-sizes"]}
+                  i18nKey="modal_alerts.trial_available_message"
+                  components={[
+                    <Button
+                      key="btn-pricing-purchasing"
+                      variant={ButtonVariant.link}
+                      onClick={onClickKafkaOverview}
+                      isInline
+                    />,
+                  ]}
+                  values={{ time: 48 }}
+                />
               </Alert>
             );
         }

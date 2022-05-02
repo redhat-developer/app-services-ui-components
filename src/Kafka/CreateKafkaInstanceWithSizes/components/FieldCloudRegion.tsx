@@ -16,7 +16,8 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
   const { t } = useTranslation("create-kafka-instance-with-sizes");
 
   const allRegionsUnavailable = regions
-    ? regions.every(({ isDisabled }) => isDisabled === true)
+    ? regions.every(({ isDisabled }) => isDisabled === true) ||
+      regions.length === 0
     : true;
 
   const disableControl =
@@ -53,7 +54,9 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
         regions && (allRegionsUnavailable || someRegionsUnavailable) ? (
           <HelperText className={"pf-c-form__helper-text"}>
             <HelperTextItem variant="warning" hasIcon>
-              {t("some_region_unavailable_helper_text")}
+              {someRegionsUnavailable
+                ? t("some_region_unavailable_helper_text")
+                : t("all_region_unavailable_helper_text")}
             </HelperTextItem>
           </HelperText>
         ) : undefined

@@ -1,4 +1,5 @@
 {
+  "all_region_unavailable_helper_text": "",
   "availability_zone_selection": "Availability zone selection",
   "availability_zones": "Availability zones",
   "availability_zones_tooltip_message": "At this time, only {{enabledZone}} availability zones are available.",
@@ -75,8 +76,15 @@
   "no_regions_available": "No regions available",
   "partitions_value": "up to {{value}}",
   "quick_start_guide_message": "Need help getting started? Follow our quick start guide.",
+  "regions_temporarily_unavailable": "",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
+  "size_field_aria": "",
+  "size_help_content": "",
+  "some_region_unavailable_helper_text": "",
+  "standard_kafka_size_dscription": "",
+  "standard_kafka_streaming_unit_one": "",
+  "standard_kafka_streaming_unit_other": "",
   "statuses": {
     "creating": "Creating",
     "degraded": "Degraded",
@@ -84,5 +92,9 @@
     "ready": "Ready"
   },
   "storage_value": "up to {{value}} GiB",
-  "streaming_size_value": ""
+  "streaming_size_value": "",
+  "streaming_unit": "",
+  "trial_all_region_unavailable_helper_text": "",
+  "trial_kafka_size_description": "",
+  "trial_some_region_unavailable_helper_text": ""
 }

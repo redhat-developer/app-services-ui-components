@@ -24,8 +24,8 @@
     "form_invalid": "Address form errors to proceed.",
     "over_quota_message": "The selected size requires more streaming units. Your organization has {{streamingUnits}} of {{maxStreamingUnits}} streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first, or <0>contact us</0> to add more streaming units to your account.",
     "over_quota_title": "$t(common:kafka) instance can't be created",
-    "region_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
-    "region_unavailable_message": "The selected cloud provider region is temporarily unavailable. Select another region or try again later.",
+    "region_unavailable_message": "Select another region or try again later.",
+    "region_unavailable_title": "The selected cloud provider region is temporarily unavailable.",
     "trial_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "trial_unavailable_title": "$t(common:kafka) instance can't be created",
     "unknown_error_message": "$t(common:unexpected_error)",
@@ -62,8 +62,8 @@
   "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
-    "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "instance_unavailable_message": "$t(common:kafka) instances are temporarily available. Try again in a few hours.",
+    "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "over_quota_message": "Your organization has {{maxStreamingUnits}} streaming units available which are already in use. To deploy a new instance, delete an existing one first or <0>contact us</0> to add more streaming units to your account.",
     "over_quota_title": "Your organization has no streaming units remaining.",
     "regions_unavailable_message": "Cloud provider regions are temporarily unavailable. Try again later.",
@@ -105,6 +105,6 @@
   "streaming_unit": "streaming units",
   "temporarily_unavailable": "Temporarily unavailable",
   "trial_all_region_unavailable_helper_text": "All regions in the selected cloud provider are temporarily unavailable. Select another cloud provider or try again later.",
-  "trial_kafka_size_description": "With a subscription, you can change the capacity of your instance by selecting a size. The capacity that you get with a trial instance is listed under Details.",
+  "trial_kafka_size_description": "Size selection is available with a subscription. Trial instances have limited capacity, and their limits are listed under Details.",
   "trial_some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
 }
