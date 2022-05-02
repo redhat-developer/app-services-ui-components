@@ -236,7 +236,6 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
   args,
   { id }
 ) => {
-  console.table(args);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -328,6 +327,15 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     );
   };
 
+  const onClickHandlers = actions(
+    "onClickQuickStart",
+    "onClickKafkaOverview",
+    "onClickContactUs",
+    "onClickLearnMoreAboutRegions",
+    "onLearnHowToAddStreamingUnits",
+    "onLearnMoreAboutSizes"
+  );
+
   return (
     <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
       <CreateKafkaInstanceWithSizes
@@ -343,14 +351,26 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
         onCancel={onCloseModal}
         onCreate={onCreate}
         disableFocusTrap={true}
-        {...actions(
-          "onClickQuickStart",
-          "onClickKafkaOverview",
-          "onClickContactUs",
-          "onClickLearnMoreAboutRegions",
-          "onLearnHowToAddStreamingUnits",
-          "onLearnMoreAboutSizes"
-        )}
+        onClickQuickStart={
+          args.onClickQuickStart || onClickHandlers.onClickQuickStart
+        }
+        onClickKafkaOverview={
+          args.onClickKafkaOverview || onClickHandlers.onClickKafkaOverview
+        }
+        onClickContactUs={
+          args.onClickContactUs || onClickHandlers.onClickContactUs
+        }
+        onClickLearnMoreAboutRegions={
+          args.onClickLearnMoreAboutRegions ||
+          onClickHandlers.onClickLearnMoreAboutRegions
+        }
+        onLearnHowToAddStreamingUnits={
+          args.onLearnHowToAddStreamingUnits ||
+          onClickHandlers.onLearnHowToAddStreamingUnits
+        }
+        onLearnMoreAboutSizes={
+          args.onLearnMoreAboutSizes || onClickHandlers.onLearnMoreAboutSizes
+        }
       />
       <div>
         <Button onClick={() => onOpenModal()}>Open modal</Button>

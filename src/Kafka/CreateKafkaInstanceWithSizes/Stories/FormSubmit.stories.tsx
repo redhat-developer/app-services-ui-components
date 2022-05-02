@@ -1,14 +1,14 @@
 import { expect } from "@storybook/jest";
 import { ComponentMeta } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { CreateKafkaInstanceWithSizes } from "../../CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
 import {
   argTypes,
   parameters,
   PROVIDERS,
   sampleSubmit,
   Template,
-} from "../storiesHelpers";
+} from "./storiesHelpers";
 
 export default {
   component: CreateKafkaInstanceWithSizes,

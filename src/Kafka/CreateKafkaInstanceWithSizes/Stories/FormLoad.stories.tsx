@@ -1,6 +1,6 @@
 import { ComponentMeta } from "@storybook/react";
-import { CreateKafkaInstanceWithSizes } from "../../CreateKafkaInstanceWithSizes";
-import { argTypes, parameters, PROVIDERS, Template } from "../storiesHelpers";
+import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import { argTypes, parameters, PROVIDERS, Template } from "./storiesHelpers";
 
 export default {
   component: CreateKafkaInstanceWithSizes,
