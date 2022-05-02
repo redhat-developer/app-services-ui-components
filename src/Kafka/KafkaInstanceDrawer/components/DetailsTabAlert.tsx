@@ -5,14 +5,14 @@ import { Trans } from "react-i18next";
 import { FormatDate } from "../../../shared";
 
 type DetailsTabAlertProps = {
-  expiryDate?: Date;
+  expiryDate: Date;
 };
 
 export const DetailsTabAlert: FunctionComponent<DetailsTabAlertProps> = ({
   expiryDate,
 }) => {
   const hoursLeft = expiryDate ? differenceInHours(expiryDate, Date.now()) : 0;
-  return expiryDate ? (
+  return (
     <Alert
       variant={
         hoursLeft > 24
@@ -33,7 +33,5 @@ export const DetailsTabAlert: FunctionComponent<DetailsTabAlertProps> = ({
       isInline
       className="pf-u-mb-lg"
     />
-  ) : (
-    <></>
   );
 };

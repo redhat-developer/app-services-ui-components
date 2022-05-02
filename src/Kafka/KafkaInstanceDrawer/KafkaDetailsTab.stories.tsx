@@ -30,7 +30,7 @@ const instanceInfo = {
 export const StandardInstanceCreated = Template.bind({});
 StandardInstanceCreated.args = {
   instanceType: "standard",
-  size: 1,
+  size: "x1",
   ...instanceInfo,
   isTesting: true,
 };
@@ -40,7 +40,6 @@ TrialInstanceJustCreated.args = {
   expiryDate: addHours(new Date(), 48),
   instanceType: "eval",
   ...instanceInfo,
-  isTesting: true,
 };
 TrialInstanceJustCreated.doc = {};
 
@@ -48,7 +47,6 @@ export const TrialIntsanceRecentlyCreated = Template.bind({});
 TrialIntsanceRecentlyCreated.args = {
   expiryDate: addHours(new Date(), 22),
   instanceType: "eval",
-  isTesting: true,
   ...instanceInfo,
 };
 
@@ -56,6 +54,5 @@ export const TrialInstanceNearExpiration = Template.bind({});
 TrialInstanceNearExpiration.args = {
   expiryDate: addHours(new Date(), 2),
   instanceType: "eval",
-  isTesting: true,
   ...instanceInfo,
 };
