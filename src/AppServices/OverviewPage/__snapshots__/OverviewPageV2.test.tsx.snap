@@ -75,7 +75,7 @@ exports[`OverviewPage renders 1`] = `
           data-ouia-safe="true"
           data-pf-content="true"
         >
-          Reduce operational costs and complexity for application development teams with hosted and managed OpenShift Application Services.
+          Reduce operational costs and complexity for application development teams with hosted and managed OpenShift Application and Data Services.
         </p>
       </div>
     </section>
