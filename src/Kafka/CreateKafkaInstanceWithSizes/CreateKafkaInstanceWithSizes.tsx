@@ -315,6 +315,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     sizes,
     isSizeAvailable,
     isSizeInvalid,
+    isSizeError,
     isFormEnabled,
     isLoadingSizes,
     isLoading,
@@ -329,6 +330,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       remainingStreamingUnits={capabilities?.remainingStreamingUnits || 0}
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
+      isError={isSizeError}
       validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
       onChange={setSize}
       onLearnHowToAddStreamingUnits={function (): void {

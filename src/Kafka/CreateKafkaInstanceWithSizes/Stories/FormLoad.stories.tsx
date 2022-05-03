@@ -127,3 +127,29 @@ ErrorOnFormLoad.storyName = "Generic Error";
 ErrorOnFormLoad.args = {
   apiScenario: "backend-error",
 };
+
+export const UnableToRetrieveSizes = Template.bind({});
+UnableToRetrieveSizes.storyName = "No sizes returned from API - Standard";
+UnableToRetrieveSizes.args = {
+  apiSizes: "error",
+};
+UnableToRetrieveSizes.parameters = {
+  docs: {
+    description: {
+      story: `If for any reason we don't get any size at all, we still provide the user with an informative message.`,
+    },
+  },
+};
+
+export const GotEmptySizes = Template.bind({});
+GotEmptySizes.storyName = "Empty list of sizes returned from API - Standard";
+GotEmptySizes.args = {
+  apiSizes: "no-sizes",
+};
+GotEmptySizes.parameters = {
+  docs: {
+    description: {
+      story: `If for any reason we don't get any size at all, we still provide the user with an informative message.`,
+    },
+  },
+};

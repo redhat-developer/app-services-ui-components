@@ -13,10 +13,10 @@ import {
   NAME_VALID,
   PROVIDER_VALID,
   REGION_VALID,
+  SIZE_ERROR,
   SIZE_IDLE,
   SIZE_INVALID,
   SIZE_LOADING,
-  SIZE_VALID,
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
 import {
@@ -101,9 +101,7 @@ export function useCreateKafkaInstanceMachine() {
           (!state.hasTag(NAME_VALID) && isFormInvalid),
         isNameTaken,
         isSizeInvalid: state.hasTag(SIZE_INVALID),
-        isSizeError:
-          state.hasTag(SIZE_INVALID) ||
-          (!state.hasTag(SIZE_VALID) && isFormInvalid),
+        isSizeError: state.hasTag(SIZE_ERROR),
         isSizeAvailable: !state.hasTag(SIZE_IDLE),
 
         isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,

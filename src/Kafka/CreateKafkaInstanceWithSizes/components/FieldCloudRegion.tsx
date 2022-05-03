@@ -39,9 +39,18 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
       ? t("regions_temporarily_unavailable")
       : t("select_region");
 
-  const helperTextInvalid = allRegionsUnavailable
-    ? t("all_region_unavailable_helper_text")
-    : t("common:required");
+  const helperTextInvalid = isDisabled ? undefined : validity ===
+    "region-unavailable" ? (
+    <HelperText className={"pf-c-form__helper-text"}>
+      <HelperTextItem variant="error" hasIcon>
+        {t("form_errors.region_unavailable_message")}
+      </HelperTextItem>
+    </HelperText>
+  ) : allRegionsUnavailable ? (
+    t("all_region_unavailable_helper_text")
+  ) : (
+    t("common:required")
+  );
 
   return (
     <FormGroup
@@ -53,7 +62,10 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
       helperText={
         regions && (allRegionsUnavailable || someRegionsUnavailable) ? (
           <HelperText className={"pf-c-form__helper-text"}>
-            <HelperTextItem variant="warning" hasIcon>
+            <HelperTextItem
+              variant={someRegionsUnavailable ? "warning" : "error"}
+              hasIcon
+            >
               {someRegionsUnavailable
                 ? t("some_region_unavailable_helper_text")
                 : t("all_region_unavailable_helper_text")}
@@ -61,17 +73,7 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
           </HelperText>
         ) : undefined
       }
-      helperTextInvalid={
-        isDisabled ? undefined : validity === "region-unavailable" ? (
-          <HelperText className={"pf-c-form__helper-text"}>
-            <HelperTextItem variant="error" hasIcon>
-              {t("form_errors.region_unavailable_message")}
-            </HelperTextItem>
-          </HelperText>
-        ) : (
-          helperTextInvalid
-        )
-      }
+      helperTextInvalid={helperTextInvalid}
     >
       <CloudRegionSelect
         value={value}

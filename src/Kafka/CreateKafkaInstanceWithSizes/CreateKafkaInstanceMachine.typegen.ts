@@ -64,6 +64,7 @@ export interface Typegen0 {
     regionIsValid: "";
     noProviderAndRegion: "";
     noSizes: "";
+    emptySizes: "";
     sizeIsValid: "";
   };
   eventsCausingDelays: {};
@@ -100,6 +101,7 @@ export interface Typegen0 {
     | "configuring.size.idle"
     | "configuring.size.invalid"
     | "configuring.size.valid"
+    | "configuring.size.error"
     | "configuring.size.loading"
     | "submit"
     | "formInvalid"
@@ -122,7 +124,13 @@ export interface Typegen0 {
               name?: "untouched" | "empty" | "invalid" | "valid" | "validate";
               provider?: "untouched" | "validate" | "invalid" | "valid";
               region?: "untouched" | "validate" | "invalid" | "valid";
-              size?: "validate" | "idle" | "invalid" | "valid" | "loading";
+              size?:
+                | "validate"
+                | "idle"
+                | "invalid"
+                | "valid"
+                | "error"
+                | "loading";
             };
       };
   tags:
@@ -140,5 +148,6 @@ export interface Typegen0 {
     | "sizeIdle"
     | "sizeInvalid"
     | "sizeValid"
+    | "sizeError"
     | "sizeLoading";
 }

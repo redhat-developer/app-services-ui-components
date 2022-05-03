@@ -25,6 +25,7 @@ export const SIZE_IDLE = "sizeIdle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
 export const SIZE_INVALID = "sizeInvalid";
+export const SIZE_ERROR = "sizeError";
 
 const CreateKafkaInstanceMachine = createMachine(
   {
@@ -233,6 +234,7 @@ const CreateKafkaInstanceMachine = createMachine(
                 always: [
                   { cond: "noProviderAndRegion", target: "idle" },
                   { cond: "noSizes", target: "loading" },
+                  { cond: "emptySizes", target: "error" },
                   { cond: "sizeIsValid", target: "valid" },
                   { target: "invalid" },
                 ],
@@ -246,6 +248,9 @@ const CreateKafkaInstanceMachine = createMachine(
               valid: {
                 tags: SIZE_VALID,
               },
+              error: {
+                tags: SIZE_ERROR,
+              },
               loading: {
                 tags: SIZE_LOADING,
                 invoke: {
@@ -254,7 +259,7 @@ const CreateKafkaInstanceMachine = createMachine(
                     target: "validate",
                     actions: "setSizes",
                   },
-                  onError: "validate",
+                  onError: "error",
                 },
                 description:
                   "Fetch the data required to show the available sizes and limits",
@@ -487,7 +492,8 @@ const CreateKafkaInstanceMachine = createMachine(
       },
       noProviderAndRegion: ({ form }) =>
         form.provider === undefined || form.region === undefined,
-      noSizes: ({ sizes }) => sizes === undefined || sizes.length === 0,
+      noSizes: ({ sizes }) => sizes === undefined,
+      emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
       sizeIsValid: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&

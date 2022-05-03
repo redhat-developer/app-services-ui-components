@@ -191,6 +191,10 @@ export const argTypes = {
       labels: regionsScenario,
     },
   },
+  apiSizes: {
+    options: ["normal", "no-sizes", "error"],
+    control: "radio",
+  },
   apiDefaultProvider: {
     options: PROVIDERS.map((p) => p.id),
     control: {
@@ -265,6 +269,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     apiDefaultProvider,
     apiDefaultRegion,
     apiRegionsAvailability = "full",
+    apiSizes = "normal",
     apiRemainingStreamingUnits = 3,
     apiMaxStreamingUnits = 5,
     apiLatency = 500,
@@ -318,12 +323,21 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     provider,
     region
   ) => {
-    return fakeApi<GetSizesData>(
-      {
-        sizes: SIZES[provider],
-      },
-      apiLatency
-    );
+    return apiSizes === "normal"
+      ? fakeApi<GetSizesData>(
+          {
+            sizes: SIZES[provider],
+          },
+          apiLatency
+        )
+      : apiSizes === "no-sizes"
+      ? fakeApi<GetSizesData>(
+          {
+            sizes: [],
+          },
+          apiLatency
+        )
+      : apiError<GetSizesData>(apiLatency);
   };
 
   const onClickHandlers = actions(

@@ -18,6 +18,7 @@ export type FieldSizeProps = {
   remainingStreamingUnits: number;
   isDisabled: boolean;
   isLoading: boolean;
+  isError: boolean;
   validity: "valid" | "required" | "over-quota" | "trial";
   onChange: (size: Size) => void;
   onLearnHowToAddStreamingUnits: () => void;
@@ -29,6 +30,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   remainingStreamingUnits,
   isDisabled,
   isLoading,
+  isError,
   validity,
   onChange,
   onLearnHowToAddStreamingUnits,
@@ -82,7 +84,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     </>
   );
 
-  if (isLoading) {
+  if (isLoading || isError) {
     return (
       <FormGroupWithPopover
         labelHead={t("common:size")}
@@ -92,6 +94,8 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         buttonAriaLabel={t("size_field_aria")}
         isRequired={isRequired}
         helperText={<Skeleton width={"50%"} />}
+        validated={isError ? "error" : "default"}
+        helperTextInvalid={t("sizes_error")}
       />
     );
   }

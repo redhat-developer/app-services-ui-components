@@ -22,6 +22,8 @@ const {
   ErrorOnFormLoad,
   TrialSomeRegionsDisabledOnFormLoad,
   TrialAllRegionsDisabledOnFormLoad,
+  UnableToRetrieveSizes,
+  GotEmptySizes,
 } = composeStories(stories);
 
 describe("CreateKafkaInstanceWithSizes", () => {
@@ -339,5 +341,43 @@ describe("CreateKafkaInstanceWithSizes", () => {
     ).toBeDisabled();
     expect(comp.getByRole("button", { name: "Single" })).toBeDisabled();
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
+  });
+
+  it("should show an error when we can't fetch the sizes", async () => {
+    const comp = renderDialog(<UnableToRetrieveSizes />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(
+        comp.getByText(
+          "Something went wrong while fetching the available sizes. Select another cloud provider or cloud region, or try again later."
+        )
+      ).toBeInTheDocument()
+    );
+  });
+
+  it("should show an error when we can't fetch the sizes (ok response, empty array)", async () => {
+    const comp = renderDialog(<GotEmptySizes />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(
+        comp.getByText(
+          "Something went wrong while fetching the available sizes. Select another cloud provider or cloud region, or try again later."
+        )
+      ).toBeInTheDocument()
+    );
   });
 });
