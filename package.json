@@ -82,7 +82,7 @@
     "@typescript-eslint/eslint-plugin": "5.22.0",
     "@typescript-eslint/parser": "5.22.0",
     "@web/rollup-plugin-import-meta-assets": "1.0.7",
-    "@xstate/inspect": "0.6.4",
+    "@xstate/inspect": "0.6.5",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.5",
     "chromatic": "6.5.4",
@@ -126,7 +126,7 @@
     "react-i18next": "11.16.7",
     "tslib": "2.4.0",
     "use-resize-observer": "8.0.0",
-    "xstate": "4.30.6"
+    "xstate": "4.31.0"
   },
   "peerDependencies": {
     "@patternfly/patternfly": "4.185.1",
