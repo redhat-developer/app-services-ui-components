@@ -54,7 +54,7 @@
     "@rhoas/app-services-ui-shared": "0.15.4",
     "@rollup/plugin-commonjs": "21.1.0",
     "@rollup/plugin-json": "4.1.0",
-    "@rollup/plugin-node-resolve": "13.2.1",
+    "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "4.0.0",
     "@rollup/plugin-typescript": "8.3.2",
     "@storybook/addon-a11y": "6.4.22",
@@ -79,10 +79,10 @@
     "@types/react-dom": "17.0.16",
     "@types/react-router-dom": "5.3.3",
     "@types/rollup-plugin-auto-external": "2.0.2",
-    "@typescript-eslint/eslint-plugin": "5.21.0",
-    "@typescript-eslint/parser": "5.21.0",
+    "@typescript-eslint/eslint-plugin": "5.22.0",
+    "@typescript-eslint/parser": "5.22.0",
     "@web/rollup-plugin-import-meta-assets": "1.0.7",
-    "@xstate/inspect": "0.6.4",
+    "@xstate/inspect": "0.6.5",
     "babel-jest": "27.5.1",
     "babel-loader": "8.2.5",
     "chromatic": "6.5.4",
@@ -126,7 +126,7 @@
     "react-i18next": "11.16.7",
     "tslib": "2.4.0",
     "use-resize-observer": "8.0.0",
-    "xstate": "4.30.6"
+    "xstate": "4.31.0"
   },
   "peerDependencies": {
     "@patternfly/patternfly": "4.185.1",
