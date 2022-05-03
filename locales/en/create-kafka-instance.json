@@ -1,5 +1,4 @@
 {
-  "all_region_unavailable_helper_text": "",
   "availability_zone_selection": "Availability zone selection",
   "availability_zones": "Availability zones",
   "availability_zones_tooltip_message": "At this time, only {{enabledZone}} availability zones are available.",
@@ -12,12 +11,10 @@
   "client_connections_value": "up to {{value}}",
   "cloud_provider": "Cloud provider",
   "cloud_region": "Cloud region",
-  "cloud_region_description": "More cloud regions are available with a subscription.",
   "connection_rate_value": "up to {{value}} connections/second",
   "create_instance": "Create instance",
   "create_instance_name_helper_text": "Must start with a letter and end with a letter or number. Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "create_instance_name_helper_text_name_taken": "{{name}} already exists. Try a different name.",
-  "create_instance_title": "Create a $t(common:kafka) instance",
   "duration_value": "{{value}} hours",
   "egress_value": "up to {{value}} MiB/second each",
   "form_errors": {
@@ -29,7 +26,6 @@
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
-  "ingress_egress": "Ingress/Egress",
   "ingress_egress_value": "up to {{value}} MiB/second each",
   "ingress_value": "up to {{value}} MiB/second each",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
@@ -56,8 +52,6 @@
     "warning_or_error_title": "$t(kafka_status_warning_or_error_title)"
   },
   "kafka_status_warning_or_error_title": "This is taking longer than expected.",
-  "learn_about_cloud_regions": "Learn more about cloud regions",
-  "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
   "modal_alerts": {
     "instance_or_region_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
@@ -66,25 +60,15 @@
     "over_quota_title": "$t(common:kafka) instances are unavailable for creation",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
-    "trial_available_message": "The trial has a duration of {{time}} hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
     "trial_available_title": "Your instance will expire after 48 hours.",
-    "trial_unavailable_message": "$t(common:kafka) instances are no longer available. Try again in a few hours.",
-    "trial_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "trial_used_message": "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first.",
     "trial_used_title": "You already have an instance running"
   },
   "no_regions_available": "No regions available",
   "partitions_value": "up to {{value}}",
   "quick_start_guide_message": "Need help getting started? Follow our quick start guide.",
-  "regions_temporarily_unavailable": "",
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
-  "size_field_aria": "",
-  "size_help_content": "",
-  "some_region_unavailable_helper_text": "",
-  "standard_kafka_size_dscription": "",
-  "standard_kafka_streaming_unit_one": "",
-  "standard_kafka_streaming_unit_other": "",
   "statuses": {
     "creating": "Creating",
     "degraded": "Degraded",
@@ -92,9 +76,5 @@
     "ready": "Ready"
   },
   "storage_value": "up to {{value}} GiB",
-  "streaming_size_value": "",
-  "streaming_unit": "",
-  "trial_all_region_unavailable_helper_text": "",
-  "trial_kafka_size_description": "",
-  "trial_some_region_unavailable_helper_text": ""
+  "streaming_size_value": "{{value}} streaming unit"
 }
