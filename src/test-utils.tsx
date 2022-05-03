@@ -37,6 +37,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             "overview-v2": () => import("../locales/en/overview-v2.json"),
             "kafkaoverview-v2": () =>
               import("../locales/en/kafkaoverview-v2.json"),
+            "create-kafka-instance-with-sizes": () =>
+              import("../locales/en/create-kafka-instance-with-sizes.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

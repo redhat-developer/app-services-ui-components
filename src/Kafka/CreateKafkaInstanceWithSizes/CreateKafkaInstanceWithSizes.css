@@ -1,0 +1,10 @@
+/* TextContent dl customizations */
+.mas--CreateKafkaInstanceWithSizes__sidebar .pf-c-content dl {
+  display: block;
+}
+.mas--CreateKafkaInstanceWithSizes__sidebar dt {
+  font-size: var(--pf-global--FontSize--sm);
+}
+.mas--CreateKafkaInstanceWithSizes__creationTimeAlert {
+  margin-top: var(--pf-global--spacer--md);
+}
