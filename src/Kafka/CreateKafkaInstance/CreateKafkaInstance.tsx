@@ -65,11 +65,11 @@ export const CreateKafkaInstance: FunctionComponent<
   onCreate,
   disableFocusTrap,
   trialDurationInHours = 48,
-  ingresEgress = 30,
-  storage = 1000,
-  maxPartitions = 1000,
-  connections = 2000,
-  connectionRate = 100,
+  ingresEgress = 1,
+  storage = 10,
+  maxPartitions = 100,
+  connections = 100,
+  connectionRate = 50,
   messageSize = 1,
 }) => {
   const FORM_ID = "create_instance_-form";
@@ -118,6 +118,16 @@ export const CreateKafkaInstance: FunctionComponent<
     },
     [create]
   );
+
+  if (!isTrial) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ingresEgress = "100/50" as any;
+    storage = 1000;
+    maxPartitions = 1500;
+    connections = 3000;
+    connectionRate = 100;
+    messageSize = 1;
+  }
 
   const disableControls = isLoading || isSaving || !canCreate;
 
