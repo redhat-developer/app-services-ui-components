@@ -32,7 +32,6 @@ StandardInstanceCreated.args = {
   instanceType: "standard",
   size: "x1",
   ...instanceInfo,
-  isTesting: true,
 };
 
 export const TrialInstanceJustCreated = Template.bind({});

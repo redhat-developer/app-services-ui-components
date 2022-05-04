@@ -66,7 +66,7 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
           {instanceType === "standard" &&
             renderTextListItem(
               t("common:size"),
-              t("create-kafka-instance:streaming_size_value", {
+              t("create-kafka-instance:size_value", {
                 value: size,
               })
             )}

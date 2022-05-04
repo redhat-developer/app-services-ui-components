@@ -76,5 +76,6 @@
     "ready": "Ready"
   },
   "storage_value": "up to {{value}} GiB",
-  "streaming_size_value": "{{value}}"
+  "streaming_size_value": "{{value}} streaming unit",
+  "size_value": "{{value}}"
 }
