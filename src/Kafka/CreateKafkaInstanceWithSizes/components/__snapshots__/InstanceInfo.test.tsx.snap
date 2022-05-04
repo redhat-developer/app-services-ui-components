@@ -78,7 +78,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          up to 123 MiB/second each
+                          up to 123 MiB/second
                         </div>
                       </dd>
                     </div>
@@ -100,7 +100,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          up to 123 MiB/second each
+                          up to 123 MiB/second
                         </div>
                       </dd>
                     </div>
@@ -349,7 +349,7 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          up to 123 MiB/second each
+                          up to 123 MiB/second
                         </div>
                       </dd>
                     </div>
@@ -371,7 +371,7 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          up to 123 MiB/second each
+                          up to 123 MiB/second
                         </div>
                       </dd>
                     </div>
