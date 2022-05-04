@@ -16,7 +16,7 @@ interface CapacityTable {
 }
 
 export const KafkaInstanceCapacityTable: FunctionComponent = () => {
-  const { t } = useTranslation("kafkaoverview");
+  const { t } = useTranslation("kafkaoverview-v2");
 
   const capacityTable: CapacityTable[] = [
     {
