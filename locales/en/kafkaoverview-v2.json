@@ -1,4 +1,5 @@
 {
+  "awsWebServiceTitle": "Amazon Web Services",
   "cloudProvidersTitle": "Cloud providers",
   "contactSalesCardCallToActionButton": "Contact sales",
   "contactSalesCardMainText": "Contact sales to get a pre-paid subscription or modify limits of your current subscription.",
@@ -15,14 +16,13 @@
   "kafkaInstanceCapacityfooter2": "to discuss your options. You can check your current storage usage by",
   "kafkaInstanceCapacityTitle": "Kafka instance capacity",
   "microsoftAzureDescription": "Coming soon",
+  "microsoftAzureTitle": "Microsoft Azure",
   "pricingModalTitle": "Pricing model",
   "purchaseCardCallToActionButton": "Purchase now",
   "purchaseCardMainText": "In the United States or Canada, purchase a pay-as-you-go subscription for up to 25 streaming units through Red Hat Marketplace.",
   "purchaseCardTitle": "Purchase now",
-  "secondStreamingUnit": "2 streaming unit",
+  "secondStreamingUnit": "2 streaming units",
   "steamingUnit": "Streaming unit",
   "storage": "Storage",
-  "streamingUnitText": "A <strong>{{value}}</strong> determines the default maximum capacity of a Kafka instance. The more streaming units your Kafka instance has, the larger its capacity will be.",
-  "awsWebServiceTitle": "Amazon Web Services",
-  "microsoftAzureTitle": "Microsoft Azure"
+  "streamingUnitText": "A <strong>{{value}}</strong> determines the default maximum capacity of a Kafka instance. The more streaming units your Kafka instance has, the larger its capacity will be."
 }
