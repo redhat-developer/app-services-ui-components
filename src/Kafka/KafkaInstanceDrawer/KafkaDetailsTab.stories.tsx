@@ -8,8 +8,8 @@ export default {
     id: "c7tkgchgb2d04561srg",
     owner: "snaithan_kafka_devexp",
     region: "US East, N. Virginia",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(2022, 6, 2),
+    updatedAt: new Date(2022, 6, 2),
   },
 } as ComponentMeta<typeof KafkaDetailsTab>;
 

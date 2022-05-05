@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Details Tab renders standard instance 1`] = `
+<body>
+  <div>
+    <div
+      class="mas--details__drawer--tab-content"
+    >
+      <div
+        class="pf-c-content"
+      >
+        <dl
+          class=""
+          data-pf-content="true"
+        >
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Size
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            x1
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Ingress
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 50 MiB/second
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Egress
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 50 MiB/second
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Storage
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 50 GiB
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Partitions
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 1500
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Client connections
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 2000
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Connection rate
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 100 connections/second
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Message size
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            up to 1 MiB
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            ID
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            c7tkgchgb2d04561srg
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Owner
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            snaithan_kafka_devexp
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Time created
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            Saturday, July 2nd, 2022 12:00 AM
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Time updated
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            Saturday, July 2nd, 2022 12:00 AM
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Cloud provider
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            Amazon Web Services
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Region
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            US East, N. Virginia
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+</body>
+`;
