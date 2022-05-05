@@ -51,6 +51,9 @@ JustCreated.args = {
         usedDiskSpaceMetrics: {},
         clientConnectionsMetrics: {},
         connectionAttemptRateMetrics: {},
+        connectionsLimit: 100,
+        diskSpaceLimit: 1000,
+        connectionRateLimit: 50,
       },
       700
     ),
@@ -273,6 +276,9 @@ SomeMissingMetricsButApiOk.args = {
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
+      connectionsLimit: 100,
+      diskSpaceLimit: 1000,
+      connectionRateLimit: 50,
     }),
   getTopicsMetrics: ({ duration }) =>
     fakeApi({
@@ -309,6 +315,9 @@ LimitsReached.args = {
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 60, 170, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 4, 130, 1),
+      connectionsLimit: 100,
+      diskSpaceLimit: 100,
+      connectionRateLimit: 50,
     }),
   getTopicsMetrics: getTopicsMetricsOneTopic,
 };

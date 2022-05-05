@@ -1,11 +1,11 @@
+import { fakeApi } from "../../shared/storiesHelpers";
+import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import {
   DurationOptions,
   GetKafkaInstanceMetricsResponse,
   GetMetricsKpiResponse,
   GetTopicsMetricsResponse,
 } from "./types";
-import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-import { fakeApi } from "../../shared/storiesHelpers";
 
 export const getKafkaInstanceMetrics = ({
   duration,
@@ -21,6 +21,9 @@ export const getKafkaInstanceMetrics = ({
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9, offset),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1, offset),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1, offset),
+      connectionsLimit: 100,
+      diskSpaceLimit: 1000,
+      connectionRateLimit: 50,
     },
     waitLengthMs
   );
