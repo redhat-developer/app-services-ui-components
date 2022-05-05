@@ -107,12 +107,22 @@ export const MarketingPageBanner: FunctionComponent = ({ children }) => {
   );
 };
 
-export const MarketingPageSection: FunctionComponent<{
-  variant?: "dark" | "light" | "default";
-}> = ({ variant = "default", children }) => (
+export type MarketingPageSectionProps = {
+  className?: string;
+};
+
+export const MarketingPageSection: FunctionComponent<
+  MarketingPageSectionProps & {
+    variant?: "dark" | "light" | "default";
+  }
+> = ({
+  className = "appsrv-marketing--page-section--marketing",
+  variant = "default",
+  children,
+}) => (
   <PageSection
     isWidthLimited
-    className={css("appsrv-marketing--page-section--marketing", {
+    className={css(className, {
       "pf-u-background-color-dark-100": variant === "dark",
       "pf-u-background-color-100": variant === "light",
     })}

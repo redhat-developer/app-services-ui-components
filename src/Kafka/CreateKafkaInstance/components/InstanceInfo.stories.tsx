@@ -1,6 +1,5 @@
 import { FlexItem } from "@patternfly/react-core";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import React from "react";
 
 import { InstanceInfo } from "./InstanceInfo";
 
@@ -10,7 +9,8 @@ export default {
     isLoading: false,
     isTrial: false,
     trialDurationInHours: 123,
-    ingresEgress: 123,
+    ingress: 123,
+    egress: 123,
     storage: 123,
     maxPartitions: 123,
     connections: 123,

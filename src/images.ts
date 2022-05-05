@@ -18,6 +18,10 @@ export const LogoRedHatOpenShiftApplicationServicesAReverseRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift-Application_Services-A-Reverse-RGB.svg",
   import.meta.url
 ).href;
+export const LogoRedHatOpenShiftConnectorsBStandardRgb = new URL(
+  "../static/images/Logo-Red_Hat-OpenShift_Connectors-B-Standard-RGB.svg",
+  import.meta.url
+).href;
 export const LogoRedHatOpenShiftDataScienceAStandardRgb = new URL(
   "../static/images/Logo-Red_Hat-OpenShift-Data_Science-A-Standard-RGB.svg",
   import.meta.url
@@ -73,5 +77,11 @@ export const RhLogoWhite = new URL(
 ).href;
 export const NotFoundIcon = new URL(
   "../static/images/NotFound-Icon.svg",
+  import.meta.url
+).href;
+export const LogoAWS = new URL("../static/images/Logo-AWS.svg", import.meta.url)
+  .href;
+export const LogoAzure = new URL(
+  "../static/images/Logo-Azure.svg",
   import.meta.url
 ).href;

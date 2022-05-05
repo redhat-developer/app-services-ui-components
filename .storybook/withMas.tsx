@@ -32,12 +32,17 @@ export const withMas = (
               kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
               apimgmtoverview: () =>
                 import("../locales/en/apimgmtoverview.json"),
+              "kafkaoverview-v2": () =>
+                import("../locales/en/kafkaoverview-v2.json"),
               "manage-kafka-permissions": () =>
                 import("../locales/en/manage-kafka-permissions.json"),
               "service-account": () =>
                 import("../locales/en/service-account.json"),
               "message-browser": () =>
                 import("../locales/en/message-browser.json"),
+              "overview-v2": () => import("../locales/en/overview-v2.json"),
+              "create-kafka-instance-with-sizes": () =>
+                import("../locales/en/create-kafka-instance-with-sizes.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),

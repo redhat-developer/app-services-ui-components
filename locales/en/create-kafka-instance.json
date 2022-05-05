@@ -28,6 +28,8 @@
   },
   "ingress_egress_value": "up to {{value}} MiB/second each",
   "ingress_value": "up to {{value}} MiB/second",
+  "ingress": "Ingress",
+  "egress": "Egress",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
   "instance_information": "Instance information",
   "instance_name": "Name",
