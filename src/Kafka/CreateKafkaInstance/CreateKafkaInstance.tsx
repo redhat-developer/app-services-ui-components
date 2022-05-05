@@ -13,6 +13,7 @@ import {
   ToggleGroupItem,
   Tooltip,
 } from "@patternfly/react-core";
+import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -28,7 +29,6 @@ import {
   MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
 } from "./machines";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -65,10 +65,11 @@ export const CreateKafkaInstance: FunctionComponent<
   onCreate,
   disableFocusTrap,
   trialDurationInHours = 48,
-  ingresEgress = 30,
+  ingress = 50,
+  egress = 100,
   storage = 1000,
-  maxPartitions = 1000,
-  connections = 2000,
+  maxPartitions = 1500,
+  connections = 3000,
   connectionRate = 100,
   messageSize = 1,
 }) => {
@@ -127,6 +128,16 @@ export const CreateKafkaInstance: FunctionComponent<
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
+
+  if (isTrial) {
+    ingress = 1;
+    egress = 1;
+    storage = 10;
+    maxPartitions = 100;
+    connections = 100;
+    connectionRate = 50;
+    messageSize = 1;
+  }
 
   return (
     <Modal
@@ -281,7 +292,8 @@ export const CreateKafkaInstance: FunctionComponent<
             isLoading={isLoading}
             isTrial={isTrial}
             trialDurationInHours={trialDurationInHours}
-            ingresEgress={ingresEgress}
+            ingress={ingress}
+            egress={egress}
             storage={storage}
             maxPartitions={maxPartitions}
             connections={connections}

@@ -19,7 +19,7 @@
   "create_instance_name_helper_text_name_taken": "{{name}} already exists. Try a different name.",
   "create_instance_title": "Create a $t(common:kafka) instance",
   "duration_value": "{{value}} hours",
-  "egress_value": "up to {{value}} MiB/second each",
+  "egress_value": "up to {{value}} MiB/second",
   "form_errors": {
     "form_invalid": "Address form errors to proceed.",
     "over_quota_message": "The selected size requires more streaming units. Your organization has {{streamingUnits}} of {{maxStreamingUnits}} streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first, or <0>contact us</0> to add more streaming units to your account.",
@@ -31,9 +31,7 @@
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
-  "ingress_egress": "Ingress/Egress",
-  "ingress_egress_value": "up to {{value}} MiB/second each",
-  "ingress_value": "up to {{value}} MiB/second each",
+  "ingress_value": "up to {{value}} MiB/second",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
   "instance_information": "Details",
   "instance_name": "Name",
