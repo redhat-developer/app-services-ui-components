@@ -161,13 +161,34 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                 class=""
                 data-pf-content="true"
               >
-                Ingress/Egress
+                Ingress
               </dt>
               <dd
                 class=""
                 data-pf-content="true"
               >
-                up to 123 MiB/second each
+                up to 123 MiB/second
+              </dd>
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Egress
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB/second
               </dd>
             </dl>
           </div>
@@ -349,13 +370,34 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
                 class=""
                 data-pf-content="true"
               >
-                Ingress/Egress
+                Ingress
               </dt>
               <dd
                 class=""
                 data-pf-content="true"
               >
-                up to 123 MiB/second each
+                up to 123 MiB/second
+              </dd>
+            </dl>
+          </div>
+          <div
+            class="pf-l-grid__item"
+          >
+            <dl
+              class=""
+              data-pf-content="true"
+            >
+              <dt
+                class=""
+                data-pf-content="true"
+              >
+                Egress
+              </dt>
+              <dd
+                class=""
+                data-pf-content="true"
+              >
+                up to 123 MiB/second
               </dd>
             </dl>
           </div>

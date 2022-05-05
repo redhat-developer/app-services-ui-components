@@ -65,12 +65,12 @@ export const CreateKafkaInstance: FunctionComponent<
   onCreate,
   disableFocusTrap,
   trialDurationInHours = 48,
-  ingress = 1,
-  egress = 1,
-  storage = 10,
-  maxPartitions = 100,
-  connections = 100,
-  connectionRate = 50,
+  ingress = 50,
+  egress = 100,
+  storage = 1000,
+  maxPartitions = 1500,
+  connections = 3000,
+  connectionRate = 100,
   messageSize = 1,
 }) => {
   const FORM_ID = "create_instance_-form";
@@ -128,6 +128,16 @@ export const CreateKafkaInstance: FunctionComponent<
   const azValidation = isAzError ? "error" : "default";
   const disableAZTooltip =
     azOptions === undefined || (azOptions?.multi === true && azOptions.single);
+
+  if (isTrial) {
+    ingress = 1;
+    egress = 1;
+    storage = 10;
+    maxPartitions = 100;
+    connections = 100;
+    connectionRate = 50;
+    messageSize = 1;
+  }
 
   return (
     <Modal

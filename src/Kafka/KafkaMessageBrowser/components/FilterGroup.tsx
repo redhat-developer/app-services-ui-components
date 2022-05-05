@@ -114,7 +114,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
                 onOffsetChange(undefined);
               }
             }}
-            value={offset || ""}
+            value={offset === undefined ? "" : offset}
           />
         )}
         {currentCategory === "timestamp" && (
