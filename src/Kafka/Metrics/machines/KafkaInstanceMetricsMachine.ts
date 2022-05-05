@@ -46,6 +46,9 @@ export const KafkaInstanceMetricsMachine = createMachine(
         usedDiskSpaceMetrics: TimeSeriesMetrics;
         clientConnectionsMetrics: TimeSeriesMetrics;
         connectionAttemptRateMetrics: TimeSeriesMetrics;
+        diskSpaceLimit: number | undefined;
+        connectionsLimit: number | undefined;
+        connectionRateLimit: number | undefined;
         // how many time did we try a fetch (that combines more api)
         fetchFailures: number;
       },
@@ -65,6 +68,9 @@ export const KafkaInstanceMetricsMachine = createMachine(
       usedDiskSpaceMetrics: {},
       clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: {},
+      diskSpaceLimit: undefined,
+      connectionsLimit: undefined,
+      connectionRateLimit: undefined,
       fetchFailures: 0,
     },
     initial: "initialLoading",
@@ -155,11 +161,17 @@ export const KafkaInstanceMetricsMachine = createMachine(
           usedDiskSpaceMetrics,
           clientConnectionsMetrics,
           connectionAttemptRateMetrics,
+          diskSpaceLimit,
+          connectionsLimit,
+          connectionRateLimit,
         } = event;
         return {
           usedDiskSpaceMetrics,
           clientConnectionsMetrics,
           connectionAttemptRateMetrics,
+          diskSpaceLimit: diskSpaceLimit * 1024 ** 3, // convert it to GiB
+          connectionsLimit,
+          connectionRateLimit,
         };
       }),
       incrementRetries: assign({

@@ -1,3 +1,5 @@
+import { CardKafkaInstanceMetricsLimits } from "./components";
+
 export type TimeSeriesMetrics = { [timestamp: number]: number };
 export type PartitionBytesMetric = { [partition: string]: TimeSeriesMetrics };
 
@@ -27,7 +29,7 @@ export type GetKafkaInstanceMetricsResponse = {
   usedDiskSpaceMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
-};
+} & CardKafkaInstanceMetricsLimits;
 
 export type GetMetricsKpiResponse = {
   topics: number;

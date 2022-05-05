@@ -1,11 +1,15 @@
 import { useInterpret } from "@xstate/react";
 import { createContext, FunctionComponent } from "react";
+import { ActorRefFrom } from "xstate";
 import { timeIntervalsMapping } from "./consts";
-import { KafkaInstanceMetricsMachine } from "./machines";
+import {
+  KafkaInstanceMetricsMachine,
+  KafkaInstanceMetricsMachineType,
+} from "./machines";
 import { DurationOptions, GetKafkaInstanceMetricsResponse } from "./types";
 
 export const KafkaInstanceMetricsContext = createContext<{
-  service: ReturnType<typeof useInterpret>;
+  service: ActorRefFrom<KafkaInstanceMetricsMachineType>;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 

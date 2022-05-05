@@ -1,11 +1,12 @@
 import { useInterpret } from "@xstate/react";
 import { createContext, FunctionComponent } from "react";
+import { ActorRefFrom } from "xstate";
 import { timeIntervalsMapping } from "./consts";
-import { TopicsMetricsMachine } from "./machines";
+import { TopicsMetricsMachine, TopicsMetricsMachineType } from "./machines";
 import { DurationOptions, GetTopicsMetricsResponse } from "./types";
 
 export const TopicsMetricsContext = createContext<{
-  service: ReturnType<typeof useInterpret>;
+  service: ActorRefFrom<TopicsMetricsMachineType>;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
