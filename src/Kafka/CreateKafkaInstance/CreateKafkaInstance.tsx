@@ -13,6 +13,7 @@ import {
   ToggleGroupItem,
   Tooltip,
 } from "@patternfly/react-core";
+import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 import { FormEvent, FunctionComponent, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -28,7 +29,6 @@ import {
   MakeCreateKafkaInstanceMachine,
   useCreateKafkaInstanceMachine,
 } from "./machines";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
 
 export type CreateKafkaInstanceProps = {
   /**
@@ -65,7 +65,8 @@ export const CreateKafkaInstance: FunctionComponent<
   onCreate,
   disableFocusTrap,
   trialDurationInHours = 48,
-  ingresEgress = 1,
+  ingress = 1,
+  egress = 1,
   storage = 10,
   maxPartitions = 100,
   connections = 100,
@@ -118,16 +119,6 @@ export const CreateKafkaInstance: FunctionComponent<
     },
     [create]
   );
-
-  if (!isTrial) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ingresEgress = "100/50" as any;
-    storage = 1000;
-    maxPartitions = 1500;
-    connections = 3000;
-    connectionRate = 100;
-    messageSize = 1;
-  }
 
   const disableControls = isLoading || isSaving || !canCreate;
 
@@ -291,7 +282,8 @@ export const CreateKafkaInstance: FunctionComponent<
             isLoading={isLoading}
             isTrial={isTrial}
             trialDurationInHours={trialDurationInHours}
-            ingresEgress={ingresEgress}
+            ingress={ingress}
+            egress={egress}
             storage={storage}
             maxPartitions={maxPartitions}
             connections={connections}

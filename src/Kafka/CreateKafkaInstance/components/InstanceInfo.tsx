@@ -1,5 +1,3 @@
-import { VoidFunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
 import {
   Button,
   ButtonVariant,
@@ -14,6 +12,8 @@ import {
   TextListVariants,
   TextVariants,
 } from "@patternfly/react-core";
+import { VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 
 export type InstanceInfoProps = {
   isLoading: boolean;
@@ -23,7 +23,8 @@ export type InstanceInfoProps = {
 
 export type InstanceInfoLimitsProps = {
   trialDurationInHours: number;
-  ingresEgress: number;
+  ingress: number;
+  egress: number;
   /**
    * Max storage in GiB
    */
@@ -46,7 +47,8 @@ export const InstanceInfo: VoidFunctionComponent<
   isLoading,
   isTrial,
   trialDurationInHours,
-  ingresEgress,
+  ingress,
+  egress,
   storage,
   maxPartitions,
   connections,
@@ -80,11 +82,23 @@ export const InstanceInfo: VoidFunctionComponent<
           <GridItem>
             <TextList component={TextListVariants.dl}>
               <TextListItem component={TextListItemVariants.dt}>
-                {t("kafka:ingress_egress")}
+                {t("kafka:ingress")}
               </TextListItem>
               <TextListItem component={TextListItemVariants.dd}>
-                {t("create-kafka-instance:ingress_egress_value", {
-                  value: ingresEgress,
+                {t("create-kafka-instance:ingress_value", {
+                  value: ingress,
+                })}
+              </TextListItem>
+            </TextList>
+          </GridItem>
+          <GridItem>
+            <TextList component={TextListVariants.dl}>
+              <TextListItem component={TextListItemVariants.dt}>
+                {t("kafka:egress")}
+              </TextListItem>
+              <TextListItem component={TextListItemVariants.dd}>
+                {t("create-kafka-instance:egress_value", {
+                  value: egress,
                 })}
               </TextListItem>
             </TextList>
