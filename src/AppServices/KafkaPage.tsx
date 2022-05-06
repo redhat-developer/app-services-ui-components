@@ -13,8 +13,8 @@ import {
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { MarketingPageHero, MarketingPageSection } from "../components";
-import { AppSpeedKeyArt } from "../../images";
+import { AppSpeedKeyArt } from "../images";
+import { MarketingPageHero, MarketingPageSection } from "./components";
 
 export const KafkaPage: FunctionComponent = () => {
   const { t } = useTranslation();

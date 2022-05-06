@@ -11,25 +11,27 @@ import {
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
-  Grid,
-  Title,
+  Divider,
   Flex,
   FlexItem,
-  Divider,
-  TextContent,
-  Text,
-  Stack,
-  TextVariants,
-  SplitItem,
+  Grid,
   Split,
+  SplitItem,
+  Stack,
+  Text,
+  TextContent,
+  TextVariants,
+  Title,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { MarketingPageHero, MarketingPageSection } from "../components";
-import { AppSpeedKeyArt } from "../../images";
-import { KafkaInstanceCapacityTable } from "./component";
-import { LogoAWS, LogoAzure } from "../../images";
+import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";
+import {
+  KafkaInstanceCapacityTable,
+  MarketingPageHero,
+  MarketingPageSection,
+} from "./components";
 
 export const KafkaPageV2: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview-v2"]);

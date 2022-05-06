@@ -1,28 +1,23 @@
-import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
-import * as stories from "./OverviewPageV2.stories";
+import { render, waitForI18n } from "../test-utils";
+import * as stories from "./OverviewPage.stories";
 
-const { Example } = composeStories(stories);
+const { OverviewPage } = composeStories(stories);
 
 describe("OverviewPage", () => {
   it("renders", async () => {
-    const comp = render(<Example />);
+    const comp = render(<OverviewPage />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
     expect(
       comp.getByText("Try OpenShift Streams for Apache Kafka")
-    ).toHaveAttribute("href", Example.args!.toKafkaHref);
-    const [createKafka, createServiceRegistry] =
+    ).toHaveAttribute("href", OverviewPage.args!.toKafkaHref);
+    const [createServiceRegistry, createKafka] =
       comp.getAllByText("Create an instance");
-    expect(createKafka).toHaveAttribute("href", Example.args!.toKafkaHref);
+    expect(createKafka).toHaveAttribute("href", OverviewPage.args!.toKafkaHref);
     expect(createServiceRegistry).toHaveAttribute(
       "href",
-      Example.args!.toServiceRegistryHref
-    );
-    const createConnectors = comp.getByTestId("cardRHOC-buttonCTA");
-    expect(createConnectors).toHaveAttribute(
-      "href",
-      Example.args!.toConnectorsHref
+      OverviewPage.args!.toServiceRegistryHref
     );
 
     expect(comp.getByTestId("cardRHODS-buttonTryIt")).toHaveAttribute(

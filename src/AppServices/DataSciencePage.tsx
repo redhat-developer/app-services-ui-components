@@ -14,12 +14,12 @@ import {
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { RhodsMlTechnology } from "../images";
 import {
   MarketingPageHero,
   MarketingPageSection,
   MarketingPageVideoCard,
-} from "../components";
-import { RhodsMlTechnology } from "../../images";
+} from "./components";
 
 export const DataSciencePage: FunctionComponent = () => {
   const { t } = useTranslation();
