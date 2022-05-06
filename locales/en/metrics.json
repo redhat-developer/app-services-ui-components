@@ -53,5 +53,12 @@
   "total_bytes": "Bytes incoming and outgoing",
   "total_bytes_popover_header": "Bytes incoming and outgoing",
   "used_disk_space": "Used disk space",
-  "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed."
+  "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed.",
+  "partition_limit": "Limit 1000 partitions.",
+  "partition_limit_approaching_description_1": "This Kafka Instance is approaching the partition limit. If the Kafka Instance exceeds 1000 partitions, it might experience degraded performance.",
+  "partition_limit_approaching_description_2": "To create more partitions, consider migrating to a larger Kafka Instance or splitting your workloads across multiple instances.",
+  "partition_limit_reached_description_1": "This Kafka Instance has reached its maximum partition limit and might experience degraded performance.",
+  "partition_limit_reached_description_2": "To create more partitions, consider migrating to a larger Kafka Instance or splitting your workloads across multiple instances.",
+  "partition_limit_approaching_title": "This Kafka Instance is close to reaching the partition limit",
+  "partition_limit_reached_title": "This Kafka Instance reached the partition limit"
 }

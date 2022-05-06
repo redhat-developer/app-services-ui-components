@@ -226,7 +226,7 @@ The toolbar is disabled, but the refresh button can be clicked.
 export const TopicsRecentlyCreated = Template.bind({});
 TopicsRecentlyCreated.args = {
   getMetricsKpi: () =>
-    fakeApi({ topics: 1, topicPartitions: 3, consumerGroups: 0 }),
+    fakeApi({ topics: 1, topicPartitions: 6, consumerGroups: 0 }),
   getKafkaInstanceMetrics: (props) =>
     getKafkaInstanceMetrics({ ...props, offset: 3 }),
   getTopicsMetrics: (props) =>
@@ -309,7 +309,8 @@ _Data unavailable_ empty state is shown in place of the charts with missing
 
 export const LimitsReached = Template.bind({});
 LimitsReached.args = {
-  getMetricsKpi,
+  getMetricsKpi: () =>
+    fakeApi({ topics: 1, topicPartitions: 1000, consumerGroups: 0 }),
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),

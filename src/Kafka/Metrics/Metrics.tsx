@@ -23,6 +23,7 @@ import {
 import { useKafkaInstanceMetrics } from "./useKafkaInstanceMetrics";
 import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";
+import { PartitionCard } from "./components/PartitionCard";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
@@ -84,11 +85,9 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
             />
           }
           topicPartitionsKpi={
-            <CardKpi
+            <PartitionCard
               metric={metricsKpi.topicPartitions}
               isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics:metric_kpi_topicPartitions_name")}
-              popover={t("metrics:metric_kpi_topicPartitions_description")}
             />
           }
           consumerGroupKpi={
