@@ -35,6 +35,7 @@ InvalidTopicName.args = {};
 InvalidTopicName.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
+  await userEvent.click(await canvas.findByText('Use ".."'));
 };
 
 InvalidTopicName.parameters = {

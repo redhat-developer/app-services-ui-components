@@ -14,13 +14,11 @@ const {
 describe("Async typeahead", () => {
   jest.useFakeTimers();
   it("should render an async typeahead", async () => {
-    const onCreate = jest.fn();
     const onChangeValue = jest.fn();
     const onFetchOptions = jest.fn(InitialState.args!.onFetchOptions);
     const onValidationCheck = jest.fn();
     const comp = render(
       <InitialState
-        onCreate={onCreate}
         onChange={onChangeValue}
         onFetchOptions={onFetchOptions}
         onValidationCheck={onValidationCheck}
@@ -30,7 +28,6 @@ describe("Async typeahead", () => {
 
     expect(await comp.queryByText("bar")).not.toBeInTheDocument();
 
-    expect(onCreate).not.toBeCalled();
     expect(onChangeValue).not.toBeCalled();
     expect(onFetchOptions).not.toBeCalled();
     expect(onValidationCheck).not.toBeCalled();
@@ -72,23 +69,18 @@ describe("Async typeahead", () => {
   });
 
   it("should show an option to 'Use {{input value}}' if a valid value is typed ", async () => {
-    const onCreate = jest.fn();
     const onChange = jest.fn();
     await act(async () => {
-      const comp = render(
-        <CreatableText onCreate={onCreate} onChange={onChange} />
-      );
+      const comp = render(<CreatableText onChange={onChange} />);
       const select = await focusSelect(comp);
 
       userEvent.type(select, "test-topic-name");
       const option = await comp.findByText('Use "test-topic-name"');
       expect(option).toBeInTheDocument();
 
-      expect(onCreate).not.toBeCalled();
       expect(onChange).not.toBeCalled();
 
       userEvent.click(option);
-      expect(onCreate).toBeCalledTimes(1);
       expect(onChange).toBeCalledTimes(1);
     });
   });

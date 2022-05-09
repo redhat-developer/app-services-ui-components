@@ -20,9 +20,11 @@ export type AsyncTypeaheadSelectProps = {
   ariaLabel: string;
   placeholderText: string;
   onChange: (value: string | undefined) => void;
-  onCreate: (value: string) => void;
   onFetchOptions: (filter: string) => Promise<string[]>;
-  onValidationCheck: (filterValue: string | undefined) => Validation;
+  onValidationCheck: (
+    filterValue: string | undefined,
+    isCreated?: boolean
+  ) => Validation;
   submitted?: boolean;
   required?: boolean;
 };
@@ -32,7 +34,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   value,
   ariaLabel,
   onChange,
-  onCreate,
   onFetchOptions,
   placeholderText,
   onValidationCheck,
@@ -111,7 +112,10 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     (filterValue === undefined || filterValue === "")
       ? t("common:required")
       : validation?.message;
-
+  const onCreateOption = (value: string) => {
+    setIsOpen(false);
+    setValidation(onValidationCheck(value, true));
+  };
   return (
     <FormGroup
       validated={formGroupValidated}
@@ -134,7 +138,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
-        onCreateOption={onCreate}
+        onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
         onTypeaheadInputChanged={onTypeahead}
         onFilter={() => undefined}

@@ -12,17 +12,22 @@ const {
 } = composeStories(stories);
 
 describe("Resource Name", () => {
-  it("should render a select with validation message for invalid topic length", async () => {
-    const comp = render(<InvalidTopicName />);
+  it("should render a select with validation message for invalid topic name", async () => {
+    const onChangeValue = jest.fn();
+    const comp = render(<InvalidTopicName onChangeValue={onChangeValue} />);
     await waitForI18n(comp);
     const select = comp.getByPlaceholderText("Enter name");
     userEvent.click(select);
     await waitForPopper();
     userEvent.type(select, "..");
+    await waitForPopper();
+    userEvent.click(await comp.findByText('Use ".."'));
+    await waitForPopper();
     const option = await comp.findByText(
       "A topic name must contain at least 3 periods (...) if periods are the only characters used"
     );
     expect(option).toBeInTheDocument();
+    expect(onChangeValue).toBeCalledTimes(1);
   });
   it("should render a select with validation message for invalid consumer group characters", async () => {
     const comp = render(<InvalidConsumerGroupCharacters />);
@@ -36,13 +41,14 @@ describe("Resource Name", () => {
     );
     expect(option).toBeInTheDocument();
   });
-  xit("should render a select with validation message for invalid length of input value", async () => {
+  it("should render a select with validation message for invalid length of input value", async () => {
     const comp = render(<InvalidLength />);
     await waitForI18n(comp);
     const select = comp.getByPlaceholderText("Enter name");
     userEvent.click(select);
     await waitForPopper();
     userEvent.type(select, "this-is-a-very-long-and-ivalid-topic-name");
+    await waitForPopper();
     const option = await comp.findByText("Cannot exceed 32 characters");
     expect(option).toBeInTheDocument();
   });
@@ -52,12 +58,13 @@ describe("Resource Name", () => {
     const option = await comp.findByText("Required");
     expect(option).toBeInTheDocument();
   });
-  xit("should render a select with validation message for invalid topic characters used", async () => {
+  it("should render a select with validation message for invalid topic characters used", async () => {
     const comp = render(<InvalidTopicCharacters />);
     await waitForI18n(comp);
     const select = comp.getByPlaceholderText("Enter name");
     userEvent.click(select);
     userEvent.type(select, "$!");
+    await waitForPopper();
     const option = await comp.findByText(
       "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - )."
     );

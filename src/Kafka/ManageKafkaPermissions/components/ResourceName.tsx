@@ -6,7 +6,6 @@ import { AsyncTypeaheadSelect } from "../../../shared";
 type ResourceNameProps = {
   value: string | undefined;
   onChangeValue: (value: string | undefined) => void;
-  onCreate: (value: string) => void;
   onFetchOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
   resourceType: ResourceTypeValue | undefined;
@@ -19,26 +18,31 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
   submitted,
   resourceType,
   resourcePrefixRule,
-  onCreate,
   onFetchOptions,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const validationCheck = (
     resourceType: ResourceTypeValue | undefined,
     resourcePreixCondition: "starts-with" | "is",
-    filter: string | undefined
+    filter: string | undefined,
+    isCreated?: boolean
   ) => {
     const regExp = new RegExp("^[0-9A-Za-z_.-]+$");
 
     if (filter === undefined || filter === "")
       return { isValid: true, message: undefined };
-    if (resourcePreixCondition == "is" && resourceType == "topic") {
+    if (
+      resourcePreixCondition == "is" &&
+      resourceType == "topic" &&
+      isCreated
+    ) {
       if (filter == "." || filter == "..")
         return {
           isValid: false,
           message: t("resourcePrefix.invalid_topic_name"),
         };
     }
+
     if (resourceType == "topic" && !regExp.test(filter))
       return {
         isValid: false,
@@ -56,11 +60,12 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
     return { isValid: true, message: undefined };
   };
 
-  const onValidation = (filter: string | undefined) => {
+  const onValidation = (filter: string | undefined, isCreated?: boolean) => {
     const validationMessage = validationCheck(
       resourceType,
       resourcePrefixRule,
-      filter
+      filter,
+      isCreated
     );
     return validationMessage;
   };
@@ -80,7 +85,6 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
           : t("resourcePrefix.placeholder_name_starts_with")
       }
       onChange={onChangeValue}
-      onCreate={onCreate}
       required={true}
       submitted={submitted}
       onFetchOptions={onFetchOptions}
