@@ -1,10 +1,11 @@
 import { useInterpret } from "@xstate/react";
 import { createContext, FunctionComponent } from "react";
-import { MetricsKpiMachine } from "./machines";
+import { ActorRefFrom } from "xstate";
+import { MetricsKpiMachine, MetricsKpiMachineType } from "./machines";
 import { GetMetricsKpiResponse } from "./types";
 
 export const MetricsKpiContext = createContext<{
-  service: ReturnType<typeof useInterpret>;
+  service: ActorRefFrom<MetricsKpiMachineType>;
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
