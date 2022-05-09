@@ -166,7 +166,12 @@ empty state is shown inside each KPI card.
 export const NoTopics = Template.bind({});
 NoTopics.args = {
   getMetricsKpi: () =>
-    fakeApi({ topics: 0, topicPartitions: 0, consumerGroups: 0 }),
+    fakeApi({
+      topics: 0,
+      topicPartitions: 0,
+      consumerGroups: 0,
+      topicPartitionsLimit: 1000,
+    }),
   getKafkaInstanceMetrics,
   getTopicsMetrics: () =>
     fakeApi({
@@ -196,7 +201,12 @@ The toolbar is disabled, but the refresh button can be clicked.
 export const TopicsJustCreated = Template.bind({});
 TopicsJustCreated.args = {
   getMetricsKpi: () =>
-    fakeApi({ topics: 1, topicPartitions: 3, consumerGroups: 0 }),
+    fakeApi({
+      topics: 1,
+      topicPartitions: 3,
+      consumerGroups: 0,
+      topicPartitionsLimit: 1000,
+    }),
   getKafkaInstanceMetrics,
   getTopicsMetrics: () =>
     fakeApi({
@@ -226,7 +236,12 @@ The toolbar is disabled, but the refresh button can be clicked.
 export const TopicsRecentlyCreated = Template.bind({});
 TopicsRecentlyCreated.args = {
   getMetricsKpi: () =>
-    fakeApi({ topics: 1, topicPartitions: 6, consumerGroups: 0 }),
+    fakeApi({
+      topics: 1,
+      topicPartitions: 6,
+      consumerGroups: 0,
+      topicPartitionsLimit: 1000,
+    }),
   getKafkaInstanceMetrics: (props) =>
     getKafkaInstanceMetrics({ ...props, offset: 3 }),
   getTopicsMetrics: (props) =>
@@ -310,7 +325,12 @@ _Data unavailable_ empty state is shown in place of the charts with missing
 export const LimitsReached = Template.bind({});
 LimitsReached.args = {
   getMetricsKpi: () =>
-    fakeApi({ topics: 1, topicPartitions: 1000, consumerGroups: 0 }),
+    fakeApi({
+      topics: 1,
+      topicPartitions: 950,
+      consumerGroups: 0,
+      topicPartitionsLimit: 1000,
+    }),
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),

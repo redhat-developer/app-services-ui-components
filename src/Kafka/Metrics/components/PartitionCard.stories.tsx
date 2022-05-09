@@ -4,8 +4,8 @@ import { PartitionCard } from "./PartitionCard";
 export default {
   component: PartitionCard,
   args: {
-    metric: 100,
     isLoading: false,
+    topicPartitionsLimit: 1000,
   },
 } as ComponentMeta<typeof PartitionCard>;
 
@@ -14,7 +14,12 @@ const Template: ComponentStory<typeof PartitionCard> = (args) => (
 );
 
 export const TopicPartitionCard = Template.bind({});
-TopicPartitionCard.args = {};
+TopicPartitionCard.args = {
+  metric: 100,
+};
+
+export const TopicPartitionUndefined = Template.bind({});
+TopicPartitionUndefined.args = {};
 
 export const TopicPartitionsLimitReached = Template.bind({});
 TopicPartitionsLimitReached.args = {

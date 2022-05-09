@@ -88,6 +88,7 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
             <PartitionCard
               metric={metricsKpi.topicPartitions}
               isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
+              topicPartitionsLimit={metricsKpi.topicPartitionsLimit}
             />
           }
           consumerGroupKpi={

@@ -37,6 +37,7 @@ export const MetricsKpiMachine = createMachine(
         topics: number | undefined;
         topicPartitions: number | undefined;
         consumerGroups: number | undefined;
+        topicPartitionsLimit: number | undefined;
 
         // how many time did we try a fetch (that combines more api)
         fetchFailures: number;
@@ -52,6 +53,7 @@ export const MetricsKpiMachine = createMachine(
       topics: undefined,
       topicPartitions: undefined,
       consumerGroups: undefined,
+      topicPartitionsLimit: undefined,
       fetchFailures: 0,
     },
     initial: "initialLoading",
@@ -130,11 +132,17 @@ export const MetricsKpiMachine = createMachine(
   {
     actions: {
       setMetrics: assign((_, event) => {
-        const { topics, topicPartitions, consumerGroups } = event;
+        const {
+          topics,
+          topicPartitions,
+          consumerGroups,
+          topicPartitionsLimit,
+        } = event;
         return {
           topics,
           topicPartitions,
           consumerGroups,
+          topicPartitionsLimit,
         };
       }),
 
@@ -154,7 +162,8 @@ export const MetricsKpiMachine = createMachine(
           return (
             event.topics !== undefined ||
             event.topicPartitions !== undefined ||
-            event.consumerGroups !== undefined
+            event.consumerGroups !== undefined ||
+            event.topicPartitionsLimit !== undefined
           );
         }
         return false;

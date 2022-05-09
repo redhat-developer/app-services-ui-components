@@ -19,6 +19,7 @@ export function useMetricsKpi() {
   const {
     topics,
     topicPartitions,
+    topicPartitionsLimit,
     consumerGroups,
     isInitialLoading,
     isLoading,
@@ -38,6 +39,7 @@ export function useMetricsKpi() {
     topics,
     topicPartitions,
     consumerGroups,
+    topicPartitionsLimit,
     onRefresh,
   };
 }

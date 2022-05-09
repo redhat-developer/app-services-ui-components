@@ -29,21 +29,21 @@ export const CardKpi: VoidFunctionComponent<CardKpiProps> = ({
         {name} <ChartPopover title={name} description={popover} />
       </CardTitle>
       <CardBody>
-        <Bullseye>
-          {!isLoading &&
-            (metric === undefined ? (
+        {!isLoading &&
+          (metric === undefined ? (
+            <Bullseye>
               <EmptyStateNoMetricsData />
-            ) : (
-              <Title
-                headingLevel="h3"
-                size="4xl"
-                aria-valuetext={`${metric} ${name}`}
-              >
-                {metric}
-              </Title>
-            ))}
-          {isLoading && <Skeleton width="50px" shape="square" />}
-        </Bullseye>
+            </Bullseye>
+          ) : (
+            <Title
+              headingLevel="h3"
+              size="4xl"
+              aria-valuetext={`${metric} ${name}`}
+            >
+              {metric}
+            </Title>
+          ))}
+        {isLoading && <Skeleton width="50px" shape="square" />}
       </CardBody>
     </Card>
   );

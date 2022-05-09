@@ -35,4 +35,5 @@ export type GetMetricsKpiResponse = {
   topics: number;
   topicPartitions: number;
   consumerGroups: number;
+  topicPartitionsLimit: number;
 };

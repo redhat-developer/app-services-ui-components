@@ -13,7 +13,7 @@ describe("Topic partition", () => {
 
     expect(
       await comp.findByText(
-        "This Kafka Instance is close to reaching the partition limit"
+        "This Kafka instance is close to reaching the partition limit"
       )
     ).toBeInTheDocument();
     userEvent.click(
@@ -22,12 +22,12 @@ describe("Topic partition", () => {
 
     expect(
       await comp.findByText(
-        "This Kafka Instance is approaching the partition limit. If the Kafka Instance exceeds 1000 partitions, it might experience degraded performance."
+        "This Kafka instance is approaching the partition limit. If the Kafka instance exceeds 1000 partitions, it might experience degraded performance."
       )
     ).toBeInTheDocument();
     expect(
       await comp.findByText(
-        "To create more partitions, consider migrating to a larger Kafka Instance or splitting your workloads across multiple instances."
+        "To create more partitions, consider migrating to a larger Kafka instance or splitting your workloads across multiple instances."
       )
     ).toBeInTheDocument();
   });
@@ -37,7 +37,7 @@ describe("Topic partition", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.findByText("This Kafka Instance reached the partition limit")
+      await comp.findByText("This Kafka instance reached the partition limit")
     ).toBeInTheDocument();
     userEvent.click(
       await comp.getByRole("button", { name: "Danger alert details" })
@@ -45,12 +45,12 @@ describe("Topic partition", () => {
 
     expect(
       await comp.findByText(
-        "This Kafka Instance has reached its maximum partition limit and might experience degraded performance."
+        "This Kafka instance has reached its maximum partition limit and might experience degraded performance."
       )
     ).toBeInTheDocument();
     expect(
       await comp.findByText(
-        "To create more partitions, consider migrating to a larger Kafka Instance or splitting your workloads across multiple instances."
+        "To create more partitions, consider migrating to a larger Kafka instance or splitting your workloads across multiple instances."
       )
     ).toBeInTheDocument();
   });
