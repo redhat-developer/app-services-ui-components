@@ -20,9 +20,9 @@ type KafkaDetailsTabProps = {
   region: string;
   instanceType: InstanceType;
   size?: string;
-  ingress: string;
-  egress: string;
-  storage: string;
+  ingress: number;
+  egress: number;
+  storage: number;
   maxPartitions: number;
   connections: number;
   connectionRate: number;
