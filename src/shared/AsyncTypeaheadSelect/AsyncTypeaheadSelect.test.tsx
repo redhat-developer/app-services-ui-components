@@ -9,6 +9,7 @@ const {
   PlaceHolderVariation,
   LoadingSuggestions,
   CreatableText,
+  RequiredField,
 } = composeStories(stories);
 
 describe("Async typeahead", () => {
@@ -44,6 +45,14 @@ describe("Async typeahead", () => {
     await waitForI18n(comp);
 
     expect(comp.getByPlaceholderText("Enter prefix")).toBeInTheDocument();
+    const select = comp.getByPlaceholderText("Enter prefix");
+    userEvent.click(select);
+    await waitForPopper();
+    const option = await comp.findByText("foo");
+    expect(option).toBeInTheDocument();
+    userEvent.click(select);
+    await waitForPopper();
+    expect(option).not.toBeInTheDocument();
   });
 
   it("should show a loading spinner when typeahead suggestions are loading ", async () => {
@@ -85,6 +94,26 @@ describe("Async typeahead", () => {
     });
   });
 });
+
+it("should show a validation error ", async () => {
+  await act(async () => {
+    const onChange = jest.fn();
+    const comp = render(<RequiredField onChange={onChange} />);
+    await waitForI18n(comp);
+    await waitForPopper();
+    const required = await comp.findByText("Required");
+    expect(required).toBeInTheDocument();
+    const select = await focusSelect(comp);
+    userEvent.type(select, "foo");
+    await waitForPopper();
+    const clearBtn = comp.getAllByRole("button");
+    expect(onChange).not.toBeCalled();
+    await userEvent.click(clearBtn[0]);
+    await waitForPopper();
+    expect(onChange).toBeCalledTimes(1);
+  });
+});
+
 async function focusSelect(comp: ReturnType<typeof render>) {
   await waitForI18n(comp);
   const select = comp.getByPlaceholderText("Enter name");

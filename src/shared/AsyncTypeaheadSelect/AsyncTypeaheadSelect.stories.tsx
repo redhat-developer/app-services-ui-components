@@ -91,3 +91,12 @@ CreatableText.parameters = {
     },
   },
 };
+export const RequiredField = Template.bind({});
+RequiredField.args = { submitted: true, required: true };
+RequiredField.parameters = {
+  docs: {
+    description: {
+      story: `Validation error for typeahead select when a value is required and submitted as undefined`,
+    },
+  },
+};

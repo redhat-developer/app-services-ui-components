@@ -17,10 +17,16 @@ describe("Resource Name", () => {
     const comp = render(<InvalidTopicName onChangeValue={onChangeValue} />);
     await waitForI18n(comp);
     const select = comp.getByPlaceholderText("Enter name");
+    expect(select).toBeInTheDocument();
     userEvent.click(select);
     await waitForPopper();
     userEvent.type(select, "..");
     await waitForPopper();
+    const inputValue = comp.getByDisplayValue("..");
+    expect(inputValue).toBeInTheDocument();
+    const createText = await comp.findByText('Use ".."');
+    await waitForPopper();
+    expect(createText).toBeInTheDocument();
     userEvent.click(await comp.findByText('Use ".."'));
     await waitForPopper();
     const option = await comp.findByText(
@@ -32,10 +38,17 @@ describe("Resource Name", () => {
   it("should render a select with validation message for invalid consumer group characters", async () => {
     const comp = render(<InvalidConsumerGroupCharacters />);
     await waitForI18n(comp);
-    const select = comp.getByPlaceholderText("Enter name");
-    userEvent.click(select);
     await waitForPopper();
-    userEvent.type(select, "$!");
+    const placeHolderText = await comp.findByPlaceholderText("Enter name");
+    await waitForPopper();
+    expect(placeHolderText).toBeInTheDocument();
+    userEvent.click(placeHolderText);
+    await waitForPopper();
+    userEvent.type(placeHolderText, "$!");
+    await waitForPopper();
+    const invalidConsumerGroupName = await comp.findByDisplayValue("$!");
+    await waitForPopper();
+    expect(invalidConsumerGroupName).toBeInTheDocument();
     const option = await comp.findByText(
       "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
     );
@@ -44,11 +57,22 @@ describe("Resource Name", () => {
   it("should render a select with validation message for invalid length of input value", async () => {
     const comp = render(<InvalidLength />);
     await waitForI18n(comp);
-    const select = comp.getByPlaceholderText("Enter name");
-    userEvent.click(select);
     await waitForPopper();
-    userEvent.type(select, "this-is-a-very-long-and-ivalid-topic-name");
+    const placeHolderText = await comp.findByPlaceholderText("Enter name");
     await waitForPopper();
+    expect(placeHolderText).toBeInTheDocument();
+    userEvent.click(placeHolderText);
+    await waitForPopper();
+    userEvent.type(
+      placeHolderText,
+      "this-is-a-very-long-and-ivalid-topic-name"
+    );
+    await waitForPopper();
+    const invalidLengthName = await comp.findByDisplayValue(
+      "this-is-a-very-long-and-ivalid-topic-name"
+    );
+    await waitForPopper();
+    expect(invalidLengthName).toBeInTheDocument();
     const option = await comp.findByText("Cannot exceed 32 characters");
     expect(option).toBeInTheDocument();
   });
@@ -61,10 +85,17 @@ describe("Resource Name", () => {
   it("should render a select with validation message for invalid topic characters used", async () => {
     const comp = render(<InvalidTopicCharacters />);
     await waitForI18n(comp);
-    const select = comp.getByPlaceholderText("Enter name");
-    userEvent.click(select);
-    userEvent.type(select, "$!");
     await waitForPopper();
+    const placeHolderText = await comp.findByPlaceholderText("Enter name");
+    await waitForPopper();
+    expect(placeHolderText).toBeInTheDocument();
+    userEvent.click(placeHolderText);
+    await waitForPopper();
+    userEvent.type(placeHolderText, "$!");
+    await waitForPopper();
+    const invalidTopicName = await comp.findByDisplayValue("$!");
+    await waitForPopper();
+    expect(invalidTopicName).toBeInTheDocument();
     const option = await comp.findByText(
       "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - )."
     );
