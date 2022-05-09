@@ -51,7 +51,7 @@ exports[`OverviewPage renders 1`] = `
           <a
             aria-disabled="false"
             class="pf-c-button pf-m-primary pf-m-display-lg"
-            data-ouia-component-id="button-primary"
+            data-ouia-component-id="button-try-kafka"
             data-ouia-component-type="PF4/Button"
             data-ouia-safe="true"
             data-testid="hero-buttonTryKafka"

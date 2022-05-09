@@ -53,7 +53,7 @@ export const OverviewPage: FunctionComponent<OverviewPageProps> = ({
         cta={
           <Button
             variant={ButtonVariant.primary}
-            ouiaId="button-primary"
+            ouiaId="button-try-kafka"
             isLarge
             component={(props) => (
               <Link
