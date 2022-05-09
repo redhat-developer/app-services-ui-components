@@ -49,7 +49,7 @@ exports[`KafkaPage renders 1`] = `
         >
           <article
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-id="card-overview-purchase-now"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -85,7 +85,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-1"
+                data-ouia-component-id="link-purchase-now"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardPurchase-buttonCTA"
@@ -112,7 +112,7 @@ exports[`KafkaPage renders 1`] = `
           </article>
           <article
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-id="card-overview-contact-sales"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -144,7 +144,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
+                data-ouia-component-id="link-contact-sales"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardContactSales-buttonCTA"
