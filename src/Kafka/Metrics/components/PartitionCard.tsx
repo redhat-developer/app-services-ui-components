@@ -62,7 +62,7 @@ export const PartitionCard: VoidFunctionComponent<PartitionCardProps> = ({
               >
                 {metric}{" "}
                 {(() => {
-                  if (metric === topicPartitionsLimit) {
+                  if (metric >= topicPartitionsLimit) {
                     return (
                       <ExclamationCircleIcon color="var(--pf-global--danger-color--100)" />
                     );
@@ -87,7 +87,7 @@ export const PartitionCard: VoidFunctionComponent<PartitionCardProps> = ({
         {isLoading && <Skeleton width="50px" shape="square" />}
       </CardBody>
       {(() => {
-        if (metric && metric === topicPartitionsLimit) {
+        if (metric && metric >= topicPartitionsLimit) {
           return (
             <CardFooter>
               <Alert

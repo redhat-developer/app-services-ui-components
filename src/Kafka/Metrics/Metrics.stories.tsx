@@ -327,7 +327,7 @@ LimitsReached.args = {
   getMetricsKpi: () =>
     fakeApi({
       topics: 1,
-      topicPartitions: 950,
+      topicPartitions: 1001,
       consumerGroups: 0,
       topicPartitionsLimit: 1000,
     }),
@@ -348,6 +348,32 @@ LimitsReached.parameters = {
     description: {
       story: `
 Sample data that show the charts with data over the limits.
+      `,
+    },
+  },
+};
+
+export const TopicPartitionCardNearToLimit = Template.bind({});
+TopicPartitionCardNearToLimit.args = {
+  getMetricsKpi: () =>
+    fakeApi({
+      topics: 1,
+      topicPartitions: 960,
+      consumerGroups: 0,
+      topicPartitionsLimit: 1000,
+    }),
+  getKafkaInstanceMetrics: (props) =>
+    getKafkaInstanceMetrics({ ...props, offset: 3 }),
+  getTopicsMetrics: (props) =>
+    getTopicsMetricsOneTopic({ ...props, offset: 3 }),
+};
+TopicPartitionCardNearToLimit.storyName =
+  "Topics Partition count near to the limit";
+TopicPartitionCardNearToLimit.parameters = {
+  docs: {
+    description: {
+      story: `
+When the Topics partition count is near to the limit
       `,
     },
   },
