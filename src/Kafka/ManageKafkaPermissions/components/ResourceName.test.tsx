@@ -9,6 +9,7 @@ const {
   InvalidLength,
   InvalidTopicCharacters,
   RequiredField,
+  PrefixRuleVariation,
 } = composeStories(stories);
 
 describe("Resource Name", () => {
@@ -100,5 +101,13 @@ describe("Resource Name", () => {
       "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - )."
     );
     expect(option).toBeInTheDocument();
+  });
+  it("should render a select with placeholder 'Enter prefix' with resource prefix rule: starts-with", async () => {
+    const comp = render(<PrefixRuleVariation />);
+    await waitForI18n(comp);
+    await waitForPopper();
+    const placeHolderText = await comp.findByPlaceholderText("Enter prefix");
+    await waitForPopper();
+    expect(placeHolderText).toBeInTheDocument();
   });
 });

@@ -105,3 +105,17 @@ InvalidTopicCharacters.parameters = {
     },
   },
 };
+
+export const PrefixRuleVariation = Template.bind({});
+PrefixRuleVariation.args = { resourcePrefixRule: "starts-with" };
+PrefixRuleVariation.play = async ({ canvasElement }) => {
+  const canvas = within(canvasElement);
+  await canvas.findByPlaceholderText("Enter prefix");
+};
+PrefixRuleVariation.parameters = {
+  docs: {
+    description: {
+      story: `Resource name variation when prefix rule is 'starts-with'`,
+    },
+  },
+};
