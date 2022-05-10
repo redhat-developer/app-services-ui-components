@@ -23,7 +23,7 @@ exports[`Details Tab renders standard instance 1`] = `
             class=""
             data-pf-content="true"
           >
-            x1
+            1 streaming unit
           </dd>
           <dt
             class=""

@@ -30,7 +30,7 @@ const instanceInfo = {
 export const StandardInstanceCreated = Template.bind({});
 StandardInstanceCreated.args = {
   instanceType: "standard",
-  size: "x1",
+  size: "1",
   ...instanceInfo,
 };
 

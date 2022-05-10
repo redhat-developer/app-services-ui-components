@@ -16,7 +16,6 @@
   "create_instance_name_helper_text": "Must start with a letter and end with a letter or number. Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
   "create_instance_name_helper_text_name_taken": "{{name}} already exists. Try a different name.",
   "duration_value": "{{value}} hours",
-  "egress_value": "up to {{value}} MiB/second",
   "form_errors": {
     "form_invalid": "Address form errors to proceed.",
     "over_quota_message": "Your organization reached the limit of $t(common:kafka) instances available for creation.",
@@ -26,9 +25,8 @@
     "unknown_error_message": "$t(common:unexpected_error)",
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
-  "ingress_egress_value": "up to {{value}} MiB/second each",
-  "ingress_value": "up to {{value}} MiB/second",
   "ingress": "Ingress",
+  "ingress_value": "up to {{value}} MiB/second",
   "egress": "Egress",
   "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
   "instance_information": "Instance information",
@@ -78,6 +76,5 @@
     "ready": "Ready"
   },
   "storage_value": "up to {{value}} GiB",
-  "streaming_size_value": "{{value}} streaming unit",
-  "size_value": "{{value}}"
+  "streaming_size_value": "{{value}} streaming unit"
 }
