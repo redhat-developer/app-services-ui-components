@@ -37,7 +37,7 @@
   "metric_not_available": "Data unavailable",
   "outgoing_bytes": "Outgoing bytes ({{topic}})",
   "outgoing_bytes_all_topics": "Outgoing bytes (all topics)",
-  "partition_limit": "Limit {{topic}} partitions.",
+  "partition_limit": "Limit {{topic}} partitions",
   "partition_limit_approaching_description_1": "This Kafka instance is approaching the partition limit. If the Kafka instance exceeds {{limit}} partitions, it might experience degraded performance.",
   "partition_limit_approaching_description_2": "To create more partitions, consider migrating to a larger Kafka instance or splitting your workloads across multiple instances.",
   "partition_limit_approaching_title": "This Kafka instance is close to reaching the partition limit",

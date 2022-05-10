@@ -30,6 +30,7 @@ describe("Metrics", () => {
 
     const partitionsKpi = within(await comp.findByTestId("Topic partitions"));
     expect(await partitionsKpi.findByText("6")).toBeInTheDocument();
+    expect(await comp.findByText("Limit 1000 partitions")).toBeInTheDocument();
 
     const consumerGroups = within(await comp.findByTestId("Consumer groups"));
     expect(await consumerGroups.findByText("12")).toBeInTheDocument();

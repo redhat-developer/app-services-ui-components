@@ -1,10 +1,13 @@
-import { render, waitForI18n, within } from "../../../test-utils";
+import { render, waitForI18n } from "../../../test-utils";
 import { composeStories } from "@storybook/testing-react";
 import * as stories from "./PartitionCard.stories";
-import { fireEvent, userEvent } from "@storybook/testing-library";
+import { userEvent } from "@storybook/testing-library";
 
-const { TopicPartitionsLimitApproaching, TopicPartitionsLimitReached } =
-  composeStories(stories);
+const {
+  TopicPartitionsLimitApproaching,
+  TopicPartitionsLimitReached,
+  TopicPartitionUndefined,
+} = composeStories(stories);
 
 describe("Topic partition", () => {
   it("Topic partition when limit is approaching", async () => {
@@ -53,5 +56,12 @@ describe("Topic partition", () => {
         "To create more partitions, consider migrating to a larger Kafka instance or splitting your workloads across multiple instances."
       )
     ).toBeInTheDocument();
+  });
+
+  it("Topic partition is undefined", async () => {
+    const comp = render(<TopicPartitionUndefined />);
+    await waitForI18n(comp);
+
+    expect(await comp.findByText("Data unavailable")).toBeInTheDocument();
   });
 });
