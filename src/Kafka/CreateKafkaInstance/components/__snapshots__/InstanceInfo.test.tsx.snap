@@ -188,7 +188,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                 class=""
                 data-pf-content="true"
               >
-                egress_value
+                up to 123 MiB/second
               </dd>
             </dl>
           </div>
@@ -397,7 +397,7 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
                 class=""
                 data-pf-content="true"
               >
-                egress_value
+                up to 123 MiB/second
               </dd>
             </dl>
           </div>
