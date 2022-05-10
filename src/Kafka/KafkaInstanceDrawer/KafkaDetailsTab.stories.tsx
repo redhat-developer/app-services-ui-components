@@ -8,8 +8,8 @@ export default {
     id: "c7tkgchgb2d04561srg",
     owner: "snaithan_kafka_devexp",
     region: "US East, N. Virginia",
-    createdAt: new Date(),
-    updatedAt: new Date(),
+    createdAt: new Date(2022, 6, 2),
+    updatedAt: new Date(2022, 6, 2),
   },
 } as ComponentMeta<typeof KafkaDetailsTab>;
 
@@ -30,9 +30,8 @@ const instanceInfo = {
 export const StandardInstanceCreated = Template.bind({});
 StandardInstanceCreated.args = {
   instanceType: "standard",
-  size: 1,
+  size: "1",
   ...instanceInfo,
-  isTesting: true,
 };
 
 export const TrialInstanceJustCreated = Template.bind({});
@@ -40,7 +39,6 @@ TrialInstanceJustCreated.args = {
   expiryDate: addHours(new Date(), 48),
   instanceType: "eval",
   ...instanceInfo,
-  isTesting: true,
 };
 TrialInstanceJustCreated.doc = {};
 
@@ -48,7 +46,6 @@ export const TrialIntsanceRecentlyCreated = Template.bind({});
 TrialIntsanceRecentlyCreated.args = {
   expiryDate: addHours(new Date(), 22),
   instanceType: "eval",
-  isTesting: true,
   ...instanceInfo,
 };
 
@@ -56,6 +53,5 @@ export const TrialInstanceNearExpiration = Template.bind({});
 TrialInstanceNearExpiration.args = {
   expiryDate: addHours(new Date(), 2),
   instanceType: "eval",
-  isTesting: true,
   ...instanceInfo,
 };
