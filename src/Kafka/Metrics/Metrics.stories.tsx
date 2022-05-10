@@ -353,8 +353,8 @@ Sample data that show the charts with data over the limits.
   },
 };
 
-export const TopicPartitionCardNearToLimit = Template.bind({});
-TopicPartitionCardNearToLimit.args = {
+export const LimitsNearing = Template.bind({});
+LimitsNearing.args = {
   getMetricsKpi: () =>
     fakeApi({
       topics: 1,
@@ -366,17 +366,6 @@ TopicPartitionCardNearToLimit.args = {
     getKafkaInstanceMetrics({ ...props, offset: 3 }),
   getTopicsMetrics: (props) =>
     getTopicsMetricsOneTopic({ ...props, offset: 3 }),
-};
-TopicPartitionCardNearToLimit.storyName =
-  "Topics Partition count near to the limit";
-TopicPartitionCardNearToLimit.parameters = {
-  docs: {
-    description: {
-      story: `
-When the Topics partition count is near to the limit
-      `,
-    },
-  },
 };
 
 // TODO: story disabled since testing this in Storybook is too flaky. We should write a unit test for this instead

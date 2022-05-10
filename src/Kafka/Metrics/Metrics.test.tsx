@@ -3,7 +3,7 @@ import { composeStories } from "@storybook/testing-react";
 import * as stories from "./Metrics.stories";
 import { userEvent } from "@storybook/testing-library";
 
-const { AllReady, NoTopics } = composeStories(stories);
+const { AllReady, NoTopics, LimitsNearing } = composeStories(stories);
 
 describe("Metrics", () => {
   it("Renders the data and allows for selecting different time ranges and refreshing", async () => {
@@ -54,5 +54,50 @@ describe("Metrics", () => {
     await waitForI18n(comp);
     userEvent.click(await comp.findByText("Create topic"));
     expect(onCreateTopic).toBeCalled();
+  });
+
+  it("Topic partition count limits nearing", async () => {
+    const getKafkaInstanceMetrics = jest.fn(
+      LimitsNearing.args!.getKafkaInstanceMetrics
+    );
+    const getMetricsKpi = jest.fn(LimitsNearing.args!.getMetricsKpi);
+    const getTopicsMetrics = jest.fn(LimitsNearing.args!.getTopicsMetrics);
+    const comp = render(
+      <LimitsNearing
+        getKafkaInstanceMetrics={getKafkaInstanceMetrics}
+        getMetricsKpi={getMetricsKpi}
+        getTopicsMetrics={getTopicsMetrics}
+      />
+    );
+    await waitForI18n(comp);
+    const topicsKpi = within(await comp.findByTestId("Topics"));
+    expect(await topicsKpi.findByText("1")).toBeInTheDocument();
+
+    const partitionsKpi = within(await comp.findByTestId("Topic partitions"));
+    expect(await partitionsKpi.findByText("960")).toBeInTheDocument();
+    expect(await comp.findByText("Limit 1000 partitions")).toBeInTheDocument();
+
+    expect(
+      await comp.findByText(
+        "This Kafka instance is close to reaching the partition limit"
+      )
+    ).toBeInTheDocument();
+    userEvent.click(
+      await comp.getByRole("button", { name: "Warning alert details" })
+    );
+
+    expect(
+      await comp.findByText(
+        "This Kafka instance is approaching the partition limit. If the Kafka instance exceeds 1000 partitions, it might experience degraded performance."
+      )
+    ).toBeInTheDocument();
+    expect(
+      await comp.findByText(
+        "To create more partitions, consider migrating to a larger Kafka instance or splitting your workloads across multiple instances."
+      )
+    ).toBeInTheDocument();
+
+    const consumerGroups = within(await comp.findByTestId("Consumer groups"));
+    expect(await consumerGroups.findByText("0")).toBeInTheDocument();
   });
 });
