@@ -8,7 +8,7 @@ import {
   SelectVariant,
 } from "@patternfly/react-core";
 
-type ResourcePrefixRuleValue = "is" | "starts-with";
+export type ResourcePrefixRuleValue = "is" | "starts-with";
 
 type ResourcePrefixRuleProps = {
   value: ResourcePrefixRuleValue;

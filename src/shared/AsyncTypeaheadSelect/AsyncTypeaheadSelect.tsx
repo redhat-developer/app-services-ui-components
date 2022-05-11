@@ -20,9 +20,13 @@ export type AsyncTypeaheadSelectProps = {
   ariaLabel: string;
   placeholderText: string;
   onChange: (value: string | undefined) => void;
-  onCreate: (value: string) => void;
   onFetchOptions: (filter: string) => Promise<string[]>;
-  onValidationCheck: (filterValue: string | undefined) => Validation;
+  onValidationCheck: (
+    filterValue: string | undefined,
+    isCreated?: boolean
+  ) => Validation;
+  submitted?: boolean;
+  required?: boolean;
 };
 
 export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
@@ -30,10 +34,11 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   value,
   ariaLabel,
   onChange,
-  onCreate,
   onFetchOptions,
   placeholderText,
   onValidationCheck,
+  submitted,
+  required,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -42,12 +47,13 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     []
   );
   const [validation, setValidation] = useState<Validation | undefined>();
+  const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
 
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
-
   const onTypeahead = (filter: string | undefined) => {
+    setFilterValue(filter);
     function doFetch() {
       onFetchOptions(filter || "")
         .then(setTypeAheadSuggestions)
@@ -69,6 +75,9 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
+    submitted && required
+      ? setValidation({ isValid: false, message: t("common:required") })
+      : null;
     setIsOpen((isOpen) => {
       if (isOpen !== newState && newState === true) {
         onTypeahead(undefined);
@@ -78,24 +87,43 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   };
   const clearSelection = () => {
     onChange(undefined);
+    submitted && required
+      ? setValidation({ isValid: false, message: t("common:required") })
+      : setValidation({ isValid: true, message: undefined });
     setIsOpen(false);
   };
 
+  const isCreatable = !loading && validation && validation.isValid;
+
   const formGroupValidated =
-    validation && !validation.isValid
+    submitted &&
+    required &&
+    (value === undefined || value === "") &&
+    (filterValue === undefined || filterValue === "")
+      ? ValidatedOptions.error
+      : validation && !validation.isValid
       ? ValidatedOptions.error
       : ValidatedOptions.default;
 
-  const isCreatable = !loading && validation && validation.isValid;
-
+  const formGroupValidatedText =
+    submitted &&
+    required &&
+    (value === undefined || value === "") &&
+    (filterValue === undefined || filterValue === "")
+      ? t("common:required")
+      : validation?.message;
+  const onCreateOption = (value: string) => {
+    setIsOpen(false);
+    setValidation(onValidationCheck(value, true));
+  };
   return (
     <FormGroup
       validated={formGroupValidated}
-      helperTextInvalid={validation?.message}
+      helperTextInvalid={formGroupValidatedText}
       fieldId={id}
-      style={{ maxWidth: 200 }}
     >
       <Select
+        aria-describedby={id}
         id={id}
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel={ariaLabel}
@@ -103,15 +131,14 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         onSelect={onSelect}
         onClear={clearSelection}
         selections={value}
-        isOpen={isOpen}
+        isOpen={validation && !validation.isValid ? false : isOpen}
         loadingVariant={loading ? "spinner" : undefined}
         placeholderText={placeholderText}
         isCreatable={isCreatable}
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
-        width={200}
-        onCreateOption={onCreate}
+        onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
         onTypeaheadInputChanged={onTypeahead}
         onFilter={() => undefined}
