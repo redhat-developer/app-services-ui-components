@@ -31,7 +31,7 @@ describe("Resource Name", () => {
     userEvent.click(await comp.findByText('Use ".."'));
     await waitForPopper();
     const option = await comp.findByText(
-      "A topic name must contain at least 3 periods (...) if periods are the only characters used"
+      "A topic name must contain at least 3 periods (...) if periods are the only characters used."
     );
     expect(option).toBeInTheDocument();
     expect(onChangeValue).toBeCalledTimes(1);
