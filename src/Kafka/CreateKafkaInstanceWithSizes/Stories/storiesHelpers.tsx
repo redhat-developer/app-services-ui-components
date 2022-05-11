@@ -54,7 +54,9 @@ const SIZES: { [key: string]: Size[] } = {
   aws: [
     {
       id: "x1",
-      streamingUnits: 1,
+      displayName: "1",
+      quota: 1,
+      status: "stable",
       ingress: 3,
       egress: 31,
       storage: 5,
@@ -65,7 +67,9 @@ const SIZES: { [key: string]: Size[] } = {
     },
     {
       id: "x2",
-      streamingUnits: 2,
+      displayName: "2",
+      quota: 2,
+      status: "preview",
       ingress: 30,
       egress: 301,
       storage: 50,
@@ -76,7 +80,9 @@ const SIZES: { [key: string]: Size[] } = {
     },
     {
       id: "x3",
-      streamingUnits: 5,
+      displayName: "3",
+      quota: 5,
+      status: "preview",
       ingress: 300,
       egress: 3001,
       storage: 500,
@@ -89,7 +95,9 @@ const SIZES: { [key: string]: Size[] } = {
   azure: [
     {
       id: "x1",
-      streamingUnits: 3,
+      displayName: "1",
+      quota: 3,
+      status: "preview",
       ingress: 3,
       egress: 31,
       storage: 5,
@@ -100,7 +108,9 @@ const SIZES: { [key: string]: Size[] } = {
     },
     {
       id: "x2",
-      streamingUnits: 9,
+      displayName: "2",
+      quota: 9,
+      status: "preview",
       ingress: 30,
       egress: 301,
       storage: 50,
@@ -119,7 +129,7 @@ export function makeAvailableProvidersAndDefaults(
     defaultProvider: Provider | undefined;
     providers: string[];
     maxStreamingUnits: number;
-    remainingStreamingUnits: number;
+    remainingQuota: number;
   },
   allProviders = PROVIDERS,
   latency = 500
@@ -129,7 +139,7 @@ export function makeAvailableProvidersAndDefaults(
     defaultProvider,
     providers,
     maxStreamingUnits,
-    remainingStreamingUnits,
+    remainingQuota,
     plan,
   } = options;
   const availableProviders = allProviders.filter((p) =>
@@ -144,7 +154,7 @@ export function makeAvailableProvidersAndDefaults(
         availableProviders,
         instanceAvailability,
         maxStreamingUnits,
-        remainingStreamingUnits,
+        remainingQuota,
       },
       latency
     );
@@ -220,7 +230,7 @@ export const argTypes = {
       max: 9,
     },
   },
-  apiRemainingStreamingUnits: {
+  apiRemainingQuota: {
     control: {
       type: "range",
       min: 0,
@@ -270,7 +280,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     apiDefaultRegion,
     apiRegionsAvailability = "full",
     apiSizes = "normal",
-    apiRemainingStreamingUnits = 3,
+    apiRemainingQuota = 3,
     apiMaxStreamingUnits = 5,
     apiLatency = 500,
   } = args as { [key: string]: any };
@@ -312,7 +322,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
             instanceAvailability: apiScenario,
             defaultProvider: apiDefaultProvider,
             providers: apiProviders,
-            remainingStreamingUnits: apiRemainingStreamingUnits,
+            remainingQuota: apiRemainingQuota,
             maxStreamingUnits: apiMaxStreamingUnits,
           },
           providers,

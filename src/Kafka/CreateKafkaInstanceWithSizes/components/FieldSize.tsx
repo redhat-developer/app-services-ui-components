@@ -15,7 +15,7 @@ import { Size } from "../types";
 export type FieldSizeProps = {
   value: number;
   sizes: Size[] | undefined;
-  remainingStreamingUnits: number;
+  remainingQuota: number;
   isDisabled: boolean;
   isLoading: boolean;
   isError: boolean;
@@ -27,7 +27,7 @@ export type FieldSizeProps = {
 export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   value,
   sizes,
-  remainingStreamingUnits,
+  remainingQuota,
   isDisabled,
   isLoading,
   isError,
@@ -65,7 +65,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       <HelperText className={"pf-c-form__helper-text"}>
         <HelperTextItem variant="error" hasIcon>
           {t("standard_kafka_streaming_unit", {
-            count: remainingStreamingUnits,
+            count: remainingQuota,
           })}
         </HelperTextItem>
       </HelperText>
@@ -114,12 +114,10 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     );
   }
   const valueIndex =
-    validity !== "trial"
-      ? sizes.findIndex((size) => size.streamingUnits === value)
-      : -1;
+    validity !== "trial" ? sizes.findIndex((size) => size.quota === value) : -1;
   const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({
     value: index,
-    label: `${s.streamingUnits}`,
+    label: `${s.quota}`,
   }));
 
   const handleChange = (index: number) => {
@@ -127,8 +125,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   };
 
   const validation =
-    (validity !== "valid" || remainingStreamingUnits < value) &&
-    validity !== "trial"
+    (validity !== "valid" || remainingQuota < value) && validity !== "trial"
       ? "error"
       : "default";
 
@@ -144,7 +141,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       helperText={
         validity !== "trial"
           ? t("standard_kafka_streaming_unit", {
-              count: remainingStreamingUnits,
+              count: remainingQuota,
             })
           : helperTextTrial
       }

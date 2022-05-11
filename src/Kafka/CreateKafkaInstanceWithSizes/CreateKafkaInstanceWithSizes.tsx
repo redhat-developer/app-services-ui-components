@@ -169,7 +169,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
             error={error}
             onClickContactUS={onClickContactUs}
             maxStreamingUnits={capabilities?.maxStreamingUnits}
-            streamingUnits={capabilities?.remainingStreamingUnits}
+            streamingUnits={capabilities?.remainingQuota}
           />
           <Form onSubmit={onSubmit} id={FORM_ID}>
             <ConnectedFieldInstanceName />
@@ -200,7 +200,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
               connectionRate={selectedSize.connectionRate}
               messageSize={selectedSize.messageSize}
               onClickQuickStart={onClickQuickStart}
-              streamingUnits={selectedSize.streamingUnits}
+              streamingUnits={selectedSize.displayName}
             />
           )}
         </FlexItem>
@@ -325,9 +325,9 @@ export const ConnectedFieldSize: VoidFunctionComponent<
 
   return (
     <FieldSize
-      value={form.size?.streamingUnits || 1}
+      value={form.size?.quota || 1}
       sizes={isSizeAvailable ? sizes : undefined}
-      remainingStreamingUnits={capabilities?.remainingStreamingUnits || 0}
+      remainingQuota={capabilities?.remainingQuota || 0}
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}

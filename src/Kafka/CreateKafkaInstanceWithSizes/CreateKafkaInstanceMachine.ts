@@ -322,7 +322,7 @@ const CreateKafkaInstanceMachine = createMachine(
           availableProviders,
           defaultProvider,
           instanceAvailability,
-          remainingStreamingUnits,
+          remainingQuota,
           maxStreamingUnits,
           plan,
         } = event.data;
@@ -366,7 +366,7 @@ const CreateKafkaInstanceMachine = createMachine(
           capabilities: {
             availableProviders,
             defaultProvider,
-            remainingStreamingUnits,
+            remainingQuota,
             maxStreamingUnits,
             plan,
             instanceAvailability: computedInstanceAvailability,
@@ -376,9 +376,7 @@ const CreateKafkaInstanceMachine = createMachine(
       }),
       setSizes: assign((context, event) => {
         const sizes: Size[] = [...event.data.sizes];
-        const smallestSize = sizes.sort(
-          (a, b) => a.streamingUnits - b.streamingUnits
-        )[0];
+        const smallestSize = sizes.sort((a, b) => a.quota - b.quota)[0];
         return {
           sizes,
           form: {
@@ -497,7 +495,7 @@ const CreateKafkaInstanceMachine = createMachine(
       sizeIsValid: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&
-        form.size.streamingUnits <= capabilities.remainingStreamingUnits,
+        form.size.quota <= capabilities.remainingQuota,
       canCreateInstances: ({ capabilities }) =>
         capabilities !== undefined &&
         capabilities.plan !== undefined &&
