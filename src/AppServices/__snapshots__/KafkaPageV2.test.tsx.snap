@@ -232,7 +232,7 @@ exports[`KafkaPage renders 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          $1.49/hour
+                          $1.49 / hour
                         </div>
                       </dd>
                     </div>
@@ -254,7 +254,7 @@ exports[`KafkaPage renders 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          $0.09/GB
+                          $0.09 / GB
                         </div>
                       </dd>
                     </div>
@@ -276,7 +276,7 @@ exports[`KafkaPage renders 1`] = `
                         <div
                           class="pf-c-description-list__text"
                         >
-                          $0.10/GB
+                          $0.10 / GB month
                         </div>
                       </dd>
                     </div>
@@ -574,8 +574,7 @@ exports[`KafkaPage renders 1`] = `
             <div
               class="pf-c-content pf-u-font-size-sm"
             >
-              *Storage can be extended. If you wish to increase the storage limit for a Kafka instance, contact
-               
+              *Storage can be extended. If you wish to increase the storage limit for a Kafka instance, contact 
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline"
@@ -586,7 +585,6 @@ exports[`KafkaPage renders 1`] = `
                 href="https://access.redhat.com/support"
                 target="_blank"
               >
-                 
                 Red Hat support
                 <svg
                   aria-hidden="true"
@@ -602,10 +600,8 @@ exports[`KafkaPage renders 1`] = `
                     d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
                   />
                 </svg>
-                 
               </a>
-               
-              to discuss your options. You can check your current storage usage by
+               to discuss your options. You can check your current storage usage by 
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline"
@@ -616,7 +612,6 @@ exports[`KafkaPage renders 1`] = `
                 href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
                 target="_blank"
               >
-                 
                 monitoring disk space metrics
                 <svg
                   aria-hidden="true"
@@ -632,7 +627,6 @@ exports[`KafkaPage renders 1`] = `
                     d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
                   />
                 </svg>
-                 
               </a>
               .
             </div>
