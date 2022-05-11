@@ -11,4 +11,13 @@ module.exports = {
     "node_modules/(?!@patternfly/react-icons|@patternfly/react-tokens|@novnc|@popperjs|lodash|monaco-editor|react-monaco-editor|byte-size)",
   ],
   setupFilesAfterEnv: ["<rootDir>/setupJest.ts"],
+  coveragePathIgnorePatterns: [
+    "node_modules",
+    "__mocks__",
+    "setupJest.ts",
+    "<rootDir>/src/ProofOfConcepts",
+    "<rootDir>/src/test-utils.tsx",
+    "storiesHelpers.ts",
+    ".*.stories.tsx",
+  ],
 };

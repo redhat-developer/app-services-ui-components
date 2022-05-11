@@ -308,7 +308,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     FieldSizeProps,
     "onLearnHowToAddStreamingUnits" | "onLearnMoreAboutSizes"
   >
-> = () => {
+> = ({ onLearnHowToAddStreamingUnits, onLearnMoreAboutSizes }) => {
   const {
     form,
     capabilities,
@@ -333,12 +333,8 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isError={isSizeError}
       validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
       onChange={setSize}
-      onLearnHowToAddStreamingUnits={function (): void {
-        throw new Error("Function not implemented.");
-      }}
-      onLearnMoreAboutSizes={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+      onLearnMoreAboutSizes={onLearnMoreAboutSizes}
     />
   );
 };
