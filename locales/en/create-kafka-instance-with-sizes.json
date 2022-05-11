@@ -32,7 +32,7 @@
     "unknown_error_title": "$t(common:something_went_wrong)"
   },
   "ingress_value": "up to {{value}} MiB/second",
-  "instance_creation_time_alert": "Your Kafka instance will be ready for use shortly after creation.",
+  "instance_creation_time_alert": "Your $t(common:kafka) instance will be ready for use shortly after creation.",
   "instance_information": "Details",
   "instance_name": "Name",
   "kafka_status_created_shortly_help": "This will be ready shortly.",
@@ -49,7 +49,7 @@
       "title": "Preparing"
     },
     "provisioning": {
-      "description": "Creating Kafka instance",
+      "description": "Creating $t(common:kafka) instance",
       "title": "Provisioning"
     },
     "title": "Creating instance",
@@ -83,9 +83,11 @@
   "select_cloud_provider": "Select cloud provider",
   "select_region": "Select region",
   "size_field_aria": "More info for Size field",
-  "size_help_content": "Size of a Kafka instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
-  "sizes_missing": "Size options display when a cloud provider and region are selected",
+  "size_help_content": "Size of a $t(common:kafka) instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
+  "size_preview_message": "The selected $t(common:kafka) instance size is available only as a Technology Preview at this time. Refer to the <0>service definition</0> for more details.",
+  "size_preview_title": "Technology Preview",
   "sizes_error": "$t(common:something_went_wrong) while fetching the available sizes. Select another cloud provider or cloud region, or try again later.",
+  "sizes_missing": "Size options display when a cloud provider and region are selected",
   "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later.",
   "standard_kafka_size_description": "Learn how to add streaming units to your account",
   "standard_kafka_streaming_unit": "Your organization has {{count}} streaming unit remaining",

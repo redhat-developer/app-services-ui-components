@@ -1,16 +1,11 @@
-import {
-  Button,
-  ButtonVariant,
-  HelperText,
-  HelperTextItem,
-  Skeleton,
-  Slider,
-  SliderProps,
-} from "@patternfly/react-core";
+import { Skeleton, Slider, SliderProps } from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormGroupWithPopover } from "../../../shared";
 import { Size } from "../types";
+import { FieldSizeHelperText } from "./FieldSizeHelperText";
+import { FieldSizeHelperTextOverQuota } from "./FieldSizeHelperTextOverQuota";
+import { FieldSizeHelperTextTrial } from "./FieldSizeHelperTextTrial";
 
 export type FieldSizeProps = {
   value: number;
@@ -41,47 +36,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   const isRequired = validity !== "trial";
 
   const helperTextTrial = (
-    <>
-      <HelperText className={"pf-c-form__helper-text"}>
-        <HelperTextItem>{t("trial_kafka_size_description")}</HelperTextItem>
-      </HelperText>
-      <HelperText>
-        <HelperTextItem>
-          <Button
-            className="pf-c-form__helper-text"
-            variant={ButtonVariant.link}
-            isInline
-            onClick={onLearnMoreAboutSizes}
-          >
-            {t("learn_about_sizes")}
-          </Button>
-        </HelperTextItem>
-      </HelperText>
-    </>
-  );
-
-  const helperTextOverQuota = (
-    <>
-      <HelperText className={"pf-c-form__helper-text"}>
-        <HelperTextItem variant="error" hasIcon>
-          {t("standard_kafka_streaming_unit", {
-            count: remainingQuota,
-          })}
-        </HelperTextItem>
-      </HelperText>
-      <HelperText>
-        <HelperTextItem>
-          <Button
-            className="pf-c-form__helper-text"
-            variant={ButtonVariant.link}
-            isInline
-            onClick={onLearnHowToAddStreamingUnits}
-          >
-            {t("standard_kafka_size_description")}
-          </Button>
-        </HelperTextItem>
-      </HelperText>
-    </>
+    <FieldSizeHelperTextTrial onClick={onLearnMoreAboutSizes} />
   );
 
   if (isLoading || isError) {
@@ -113,12 +68,27 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       />
     );
   }
+
   const valueIndex =
     validity !== "trial" ? sizes.findIndex((size) => size.quota === value) : -1;
+
   const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({
     value: index,
     label: `${s.quota}`,
   }));
+
+  const helperText = (
+    <FieldSizeHelperText
+      remainingQuota={remainingQuota}
+      isPreview={sizes[valueIndex]?.status === "preview"}
+    />
+  );
+  const helperTextOverQuota = (
+    <FieldSizeHelperTextOverQuota
+      remainingQuota={remainingQuota}
+      onClick={onLearnHowToAddStreamingUnits}
+    />
+  );
 
   const handleChange = (index: number) => {
     onChange(sizes[index]);
@@ -138,13 +108,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       buttonAriaLabel={t("size_field_aria")}
       isRequired={isRequired}
       validated={validation}
-      helperText={
-        validity !== "trial"
-          ? t("standard_kafka_streaming_unit", {
-              count: remainingQuota,
-            })
-          : helperTextTrial
-      }
+      helperText={validity !== "trial" ? helperText : helperTextTrial}
       helperTextInvalid={
         validity === "over-quota" ? helperTextOverQuota : undefined
       }

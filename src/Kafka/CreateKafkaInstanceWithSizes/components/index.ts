@@ -9,3 +9,6 @@ export * from "./FieldInstanceName";
 export * from "./InstanceInfo";
 export * from "./FieldSize";
 export { InstanceInfoSkeleton } from "./InstanceInfoSkeleton";
+export { FieldSizeHelperText } from "./FieldSizeHelperText";
+export { FieldSizeHelperTextTrial } from "./FieldSizeHelperTextTrial";
+export { FieldSizeHelperTextOverQuota } from "./FieldSizeHelperTextOverQuota";

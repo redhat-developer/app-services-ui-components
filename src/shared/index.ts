@@ -1,6 +1,7 @@
 export * from "./DeleteModal";
 export * from "./DevelopmentPreview";
 export * from "./EmptyState";
+export * from "./ExternalLink";
 export * from "./FormGroupWithPopover";
 export * from "./FormatDate";
 export * from "./Loading";

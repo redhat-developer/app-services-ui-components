@@ -42,6 +42,11 @@ const Template: ComponentStory<typeof FieldSizeComp> = (args) => (
 
 export const Default = Template.bind({});
 
+export const TechPreview = Template.bind({});
+TechPreview.args = {
+  value: 3,
+};
+
 export const NoSizes = Template.bind({});
 NoSizes.args = {
   sizes: undefined,
