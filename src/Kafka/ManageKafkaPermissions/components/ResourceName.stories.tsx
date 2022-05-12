@@ -10,7 +10,7 @@ export default {
     value: undefined,
     onFetchOptions: (filter) =>
       fakeApi<string[]>(
-        ["foo-topic", "test", ",my-test", "random-topic-name"].filter((v) =>
+        ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
           v.includes(filter)
         ),
         100
