@@ -40,15 +40,16 @@ export type CreateKafkaInstancePropsWithSizes =
   ConnectedCreateKafkaInstanceWithSizesProps & MakeCreateKafkaInstanceMachine;
 export const CreateKafkaInstanceWithSizes: FunctionComponent<
   CreateKafkaInstancePropsWithSizes
-> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) => (
-  <CreateKafkaInstanceProvider
-    getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
-    getSizes={getSizes}
-    onCreate={onCreate}
-  >
-    <ConnectedCreateKafkaInstanceWithSizes {...props} />
-  </CreateKafkaInstanceProvider>
-);
+> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) =>
+  props.isModalOpen ? (
+    <CreateKafkaInstanceProvider
+      getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+      getSizes={getSizes}
+      onCreate={onCreate}
+    >
+      <ConnectedCreateKafkaInstanceWithSizes {...props} />
+    </CreateKafkaInstanceProvider>
+  ) : null;
 
 export type ConnectedCreateKafkaInstanceWithSizesProps = {
   /**
