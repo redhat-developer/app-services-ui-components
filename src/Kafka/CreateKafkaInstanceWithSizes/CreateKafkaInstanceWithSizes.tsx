@@ -314,7 +314,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     capabilities,
     sizes,
     isSizeAvailable,
-    isSizeInvalid,
+    isSizeOverQuota,
     isSizeError,
     isFormEnabled,
     isLoadingSizes,
@@ -331,7 +331,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
-      validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
+      validity={isTrial ? "trial" : isSizeOverQuota ? "over-quota" : "valid"}
       onChange={setSize}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}

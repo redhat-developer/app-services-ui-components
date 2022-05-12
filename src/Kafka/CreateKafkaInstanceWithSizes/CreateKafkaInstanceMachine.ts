@@ -24,7 +24,7 @@ export const SYSTEM_UNAVAILABLE = "systemUnavailable";
 export const SIZE_IDLE = "sizeIdle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
-export const SIZE_INVALID = "sizeInvalid";
+export const SIZE_OVER_QUOTA = "sizeOverQuota";
 export const SIZE_ERROR = "sizeError";
 
 const CreateKafkaInstanceMachine = createMachine(
@@ -235,15 +235,15 @@ const CreateKafkaInstanceMachine = createMachine(
                   { cond: "noProviderAndRegion", target: "idle" },
                   { cond: "noSizes", target: "loading" },
                   { cond: "emptySizes", target: "error" },
-                  { cond: "sizeIsValid", target: "valid" },
-                  { target: "invalid" },
+                  { cond: "sizeIsInQuota", target: "valid" },
+                  { target: "overQuota" },
                 ],
               },
               idle: {
                 tags: SIZE_IDLE,
               },
-              invalid: {
-                tags: SIZE_INVALID,
+              overQuota: {
+                tags: SIZE_OVER_QUOTA,
               },
               valid: {
                 tags: SIZE_VALID,
@@ -492,7 +492,7 @@ const CreateKafkaInstanceMachine = createMachine(
         form.provider === undefined || form.region === undefined,
       noSizes: ({ sizes }) => sizes === undefined,
       emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
-      sizeIsValid: ({ form, capabilities }) =>
+      sizeIsInQuota: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&
         form.size.quota <= capabilities.remainingQuota,

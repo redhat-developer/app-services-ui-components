@@ -1,5 +1,8 @@
+import { composeStories } from "@storybook/testing-react";
 import { renderDialog, waitForI18n } from "../../test-utils";
-import { CreateKafkaInstanceWithSizes } from "./CreateKafkaInstanceWithSizes.stories";
+import * as stories from "./CreateKafkaInstanceWithSizes.stories";
+
+const { CreateKafkaInstanceWithSizes } = composeStories(stories);
 
 describe("CreateKafkaInstanceWithSizes", () => {
   it("should persist ouiaComponentId of create instance button", async () => {

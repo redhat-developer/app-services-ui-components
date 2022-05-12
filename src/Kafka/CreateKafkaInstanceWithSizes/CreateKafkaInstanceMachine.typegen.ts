@@ -65,7 +65,7 @@ export interface Typegen0 {
     noProviderAndRegion: "";
     noSizes: "";
     emptySizes: "";
-    sizeIsValid: "";
+    sizeIsInQuota: "";
   };
   eventsCausingDelays: {};
   matchesStates:
@@ -99,7 +99,7 @@ export interface Typegen0 {
     | "configuring.size"
     | "configuring.size.validate"
     | "configuring.size.idle"
-    | "configuring.size.invalid"
+    | "configuring.size.overQuota"
     | "configuring.size.valid"
     | "configuring.size.error"
     | "configuring.size.loading"
@@ -127,7 +127,7 @@ export interface Typegen0 {
               size?:
                 | "validate"
                 | "idle"
-                | "invalid"
+                | "overQuota"
                 | "valid"
                 | "error"
                 | "loading";
@@ -146,7 +146,7 @@ export interface Typegen0 {
     | "regionInvalid"
     | "regionValid"
     | "sizeIdle"
-    | "sizeInvalid"
+    | "sizeOverQuota"
     | "sizeValid"
     | "sizeError"
     | "sizeLoading";

@@ -15,8 +15,8 @@ import {
   REGION_VALID,
   SIZE_ERROR,
   SIZE_IDLE,
-  SIZE_INVALID,
   SIZE_LOADING,
+  SIZE_OVER_QUOTA,
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
 import {
@@ -100,7 +100,7 @@ export function useCreateKafkaInstanceMachine() {
           isNameTaken ||
           (!state.hasTag(NAME_VALID) && isFormInvalid),
         isNameTaken,
-        isSizeInvalid: state.hasTag(SIZE_INVALID),
+        isSizeOverQuota: state.hasTag(SIZE_OVER_QUOTA),
         isSizeError: state.hasTag(SIZE_ERROR),
         isSizeAvailable: !state.hasTag(SIZE_IDLE),
 
