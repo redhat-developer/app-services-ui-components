@@ -11,29 +11,24 @@ describe("KafkaPage", () => {
     expect(comp.baseElement).toMatchSnapshot();
   });
 
-  it("should persist ouiaComponentId of purchase card", async () => {
+  it("should persist ouia ids", async () => {
     const comp = render(<Example />);
     await waitForI18n(comp);
-
-    const purchaseCard = comp.getByRole("article", { name: "Purchase now" });
-    expect(purchaseCard.dataset.ouiaComponentId).toBe(
+    expect(comp.getByRole("article", { name: "Purchase now" })).toHaveAttribute(
+      "data-ouia-component-id",
       "card-overview-purchase-now"
     );
-
-    const link = comp.getByRole("link", { name: "Purchase now" });
-    expect(link.dataset.ouiaComponentId).toBe("link-purchase-now");
-  });
-
-  it("should persist ouiaComponentId of contact card", async () => {
-    const comp = render(<Example />);
-    await waitForI18n(comp);
-
-    const purchaseCard = comp.getByRole("article", { name: "Contact sales" });
-    expect(purchaseCard.dataset.ouiaComponentId).toBe(
-      "card-overview-contact-sales"
+    expect(comp.getByRole("link", { name: "Purchase now" })).toHaveAttribute(
+      "data-ouia-component-id",
+      "link-purchase-now"
     );
 
-    const link = comp.getByRole("link", { name: "Contact sales" });
-    expect(link.dataset.ouiaComponentId).toBe("link-contact-sales");
+    expect(
+      comp.getByRole("article", { name: "Contact sales" })
+    ).toHaveAttribute("data-ouia-component-id", "card-overview-contact-sales");
+    expect(comp.getByRole("link", { name: "Contact sales" })).toHaveAttribute(
+      "data-ouia-component-id",
+      "link-contact-sales"
+    );
   });
 });
