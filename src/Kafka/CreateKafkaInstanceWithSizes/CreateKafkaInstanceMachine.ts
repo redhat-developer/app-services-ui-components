@@ -414,6 +414,7 @@ const CreateKafkaInstanceMachine = createMachine(
         if (context.creationError === "region-unavailable") {
           return {
             form: { ...context.form, region },
+            sizes: undefined,
             creationError: undefined,
           };
         }
@@ -422,6 +423,7 @@ const CreateKafkaInstanceMachine = createMachine(
             ...context.form,
             region,
           },
+          sizes: undefined,
         };
       }),
       setSize: assign((context, { size }) => ({
