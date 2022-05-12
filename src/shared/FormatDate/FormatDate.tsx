@@ -1,12 +1,12 @@
 import {
   differenceInDays,
   differenceInMonths,
-  format,
   formatDistanceToNow,
   formatDuration,
   formatISO,
   intervalToDuration,
 } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { useState, VoidFunctionComponent } from "react";
 import { useInterval } from "../../utils";
 
@@ -36,9 +36,10 @@ export const FormatMapping: {
       }
     );
   },
-  long: (date) => format(date, "PPp"),
-  longWithMilliseconds: (date) => format(date, "PP, hh:mm:ss.SSS a"),
-  epoch: (date) => format(date, "t"),
+  long: (date) => formatInTimeZone(date, "UTC", "PPp zzz"),
+  longWithMilliseconds: (date) =>
+    formatInTimeZone(date, "UTC", "PP, hh:mm:ss.SSS a zzz"),
+  epoch: (date) => formatInTimeZone(date, "UTC", "t"),
 };
 
 type FormatDateProps = {
