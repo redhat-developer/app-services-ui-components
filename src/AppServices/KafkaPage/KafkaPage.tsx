@@ -31,7 +31,10 @@ export const KafkaPage: FunctionComponent = () => {
       />
       <MarketingPageSection>
         <Grid hasGutter lg={6}>
-          <Card ouiaId="card-overview-purchase-now">
+          <Card
+            ouiaId="card-overview-purchase-now"
+            aria-label={t("kafkaoverview:purchaseCardTitle")}
+          >
             <CardHeader>
               <CardHeaderMain>
                 <CardTitle>
@@ -56,7 +59,10 @@ export const KafkaPage: FunctionComponent = () => {
               </Button>
             </CardFooter>
           </Card>
-          <Card ouiaId="card-overview-contact-sales">
+          <Card
+            ouiaId="card-overview-contact-sales"
+            aria-label={t("kafkaoverview:contactSalesCardTitle")}
+          >
             <CardHeader>
               <CardTitle>
                 <Title headingLevel="h3">

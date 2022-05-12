@@ -22,5 +22,10 @@ describe("OverviewPage", () => {
 
     const btnSubmit = comp.getByTestId("cardRHODS-buttonTryIt");
     expect(btnSubmit.dataset.ouiaComponentId).toBe("button-rhods-tryit");
+
+    const InstanceButton = comp.getByText(
+      "Try OpenShift Streams for Apache Kafka"
+    );
+    expect(InstanceButton.dataset.ouiaComponentId).toBe("button-try-kafka");
   });
 });

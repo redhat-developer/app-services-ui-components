@@ -48,6 +48,7 @@ exports[`KafkaPage renders 1`] = `
           class="pf-l-grid pf-m-all-6-col-on-lg pf-m-gutter"
         >
           <article
+            aria-label="Purchase now"
             class="pf-c-card"
             data-ouia-component-id="card-overview-purchase-now"
             data-ouia-component-type="PF4/Card"
@@ -111,6 +112,7 @@ exports[`KafkaPage renders 1`] = `
             </div>
           </article>
           <article
+            aria-label="Contact sales"
             class="pf-c-card"
             data-ouia-component-id="card-overview-contact-sales"
             data-ouia-component-type="PF4/Card"
