@@ -24,7 +24,7 @@ export const SYSTEM_UNAVAILABLE = "systemUnavailable";
 export const SIZE_IDLE = "sizeIdle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
-export const SIZE_INVALID = "sizeInvalid";
+export const SIZE_OVER_QUOTA = "sizeOverQuota";
 export const SIZE_ERROR = "sizeError";
 
 const CreateKafkaInstanceMachine = createMachine(
@@ -54,6 +54,7 @@ const CreateKafkaInstanceMachine = createMachine(
         creationError: CreateKafkaInstanceError | undefined;
       },
       events: {} as
+        | { type: "fieldChange" }
         | { type: "formChange" }
         | { type: "nameChange"; name: string }
         | { type: "providerChange"; provider: Provider }
@@ -172,7 +173,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               nameChange: {
-                actions: ["setName", "formChange"],
+                actions: ["setName", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -197,7 +198,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               providerChange: {
-                actions: ["setProvider", "formChange"],
+                actions: ["setProvider", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -222,7 +223,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               regionChange: {
-                actions: ["setRegion", "formChange"],
+                actions: ["setRegion", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -235,15 +236,15 @@ const CreateKafkaInstanceMachine = createMachine(
                   { cond: "noProviderAndRegion", target: "idle" },
                   { cond: "noSizes", target: "loading" },
                   { cond: "emptySizes", target: "error" },
-                  { cond: "sizeIsValid", target: "valid" },
-                  { target: "invalid" },
+                  { cond: "sizeIsInQuota", target: "valid" },
+                  { target: "overQuota" },
                 ],
               },
               idle: {
                 tags: SIZE_IDLE,
               },
-              invalid: {
-                tags: SIZE_INVALID,
+              overQuota: {
+                tags: SIZE_OVER_QUOTA,
               },
               valid: {
                 tags: SIZE_VALID,
@@ -266,11 +267,14 @@ const CreateKafkaInstanceMachine = createMachine(
               },
             },
             on: {
-              formChange: {
+              providerChange: {
+                target: ".validate",
+              },
+              regionChange: {
                 target: ".validate",
               },
               sizeChange: {
-                actions: ["setSize", "formChange"],
+                actions: ["setSize", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -322,7 +326,7 @@ const CreateKafkaInstanceMachine = createMachine(
           availableProviders,
           defaultProvider,
           instanceAvailability,
-          remainingStreamingUnits,
+          remainingQuota,
           maxStreamingUnits,
           plan,
         } = event.data;
@@ -366,7 +370,7 @@ const CreateKafkaInstanceMachine = createMachine(
           capabilities: {
             availableProviders,
             defaultProvider,
-            remainingStreamingUnits,
+            remainingQuota,
             maxStreamingUnits,
             plan,
             instanceAvailability: computedInstanceAvailability,
@@ -376,9 +380,7 @@ const CreateKafkaInstanceMachine = createMachine(
       }),
       setSizes: assign((context, event) => {
         const sizes: Size[] = [...event.data.sizes];
-        const smallestSize = sizes.sort(
-          (a, b) => a.streamingUnits - b.streamingUnits
-        )[0];
+        const smallestSize = sizes.sort((a, b) => a.quota - b.quota)[0];
         return {
           sizes,
           form: {
@@ -387,7 +389,7 @@ const CreateKafkaInstanceMachine = createMachine(
           },
         };
       }),
-      formChange: send("formChange"),
+      fieldChange: send("formChange"),
       setName: assign((context, { name }) => {
         if (context.creationError === "name-taken") {
           return { form: { ...context.form, name }, creationError: undefined };
@@ -416,6 +418,7 @@ const CreateKafkaInstanceMachine = createMachine(
         if (context.creationError === "region-unavailable") {
           return {
             form: { ...context.form, region },
+            sizes: undefined,
             creationError: undefined,
           };
         }
@@ -424,6 +427,7 @@ const CreateKafkaInstanceMachine = createMachine(
             ...context.form,
             region,
           },
+          sizes: undefined,
         };
       }),
       setSize: assign((context, { size }) => ({
@@ -494,10 +498,10 @@ const CreateKafkaInstanceMachine = createMachine(
         form.provider === undefined || form.region === undefined,
       noSizes: ({ sizes }) => sizes === undefined,
       emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
-      sizeIsValid: ({ form, capabilities }) =>
+      sizeIsInQuota: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&
-        form.size.streamingUnits <= capabilities.remainingStreamingUnits,
+        form.size.quota <= capabilities.remainingQuota,
       canCreateInstances: ({ capabilities }) =>
         capabilities !== undefined &&
         capabilities.plan !== undefined &&

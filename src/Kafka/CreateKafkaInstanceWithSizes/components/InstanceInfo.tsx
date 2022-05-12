@@ -41,7 +41,7 @@ export type InstanceInfoLimitsProps = {
    * Message size in MiB
    */
   messageSize: number;
-  streamingUnits: number | undefined;
+  streamingUnits: string | undefined;
 };
 
 export const InstanceInfo: VoidFunctionComponent<

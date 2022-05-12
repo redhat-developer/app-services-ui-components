@@ -40,15 +40,16 @@ export type CreateKafkaInstancePropsWithSizes =
   ConnectedCreateKafkaInstanceWithSizesProps & MakeCreateKafkaInstanceMachine;
 export const CreateKafkaInstanceWithSizes: FunctionComponent<
   CreateKafkaInstancePropsWithSizes
-> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) => (
-  <CreateKafkaInstanceProvider
-    getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
-    getSizes={getSizes}
-    onCreate={onCreate}
-  >
-    <ConnectedCreateKafkaInstanceWithSizes {...props} />
-  </CreateKafkaInstanceProvider>
-);
+> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) =>
+  props.isModalOpen ? (
+    <CreateKafkaInstanceProvider
+      getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+      getSizes={getSizes}
+      onCreate={onCreate}
+    >
+      <ConnectedCreateKafkaInstanceWithSizes {...props} />
+    </CreateKafkaInstanceProvider>
+  ) : null;
 
 export type ConnectedCreateKafkaInstanceWithSizesProps = {
   /**
@@ -169,7 +170,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
             error={error}
             onClickContactUS={onClickContactUs}
             maxStreamingUnits={capabilities?.maxStreamingUnits}
-            streamingUnits={capabilities?.remainingStreamingUnits}
+            streamingUnits={capabilities?.remainingQuota}
           />
           <Form onSubmit={onSubmit} id={FORM_ID}>
             <ConnectedFieldInstanceName />
@@ -200,7 +201,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
               connectionRate={selectedSize.connectionRate}
               messageSize={selectedSize.messageSize}
               onClickQuickStart={onClickQuickStart}
-              streamingUnits={selectedSize.streamingUnits}
+              streamingUnits={selectedSize.displayName}
             />
           )}
         </FlexItem>
@@ -308,13 +309,13 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     FieldSizeProps,
     "onLearnHowToAddStreamingUnits" | "onLearnMoreAboutSizes"
   >
-> = () => {
+> = ({ onLearnHowToAddStreamingUnits, onLearnMoreAboutSizes }) => {
   const {
     form,
     capabilities,
     sizes,
     isSizeAvailable,
-    isSizeInvalid,
+    isSizeOverQuota,
     isSizeError,
     isFormEnabled,
     isLoadingSizes,
@@ -325,20 +326,16 @@ export const ConnectedFieldSize: VoidFunctionComponent<
 
   return (
     <FieldSize
-      value={form.size?.streamingUnits || 1}
+      value={form.size?.quota || 1}
       sizes={isSizeAvailable ? sizes : undefined}
-      remainingStreamingUnits={capabilities?.remainingStreamingUnits || 0}
+      remainingQuota={capabilities?.remainingQuota || 0}
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
-      validity={isTrial ? "trial" : isSizeInvalid ? "over-quota" : "valid"}
+      validity={isTrial ? "trial" : isSizeOverQuota ? "over-quota" : "valid"}
       onChange={setSize}
-      onLearnHowToAddStreamingUnits={function (): void {
-        throw new Error("Function not implemented.");
-      }}
-      onLearnMoreAboutSizes={function (): void {
-        throw new Error("Function not implemented.");
-      }}
+      onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+      onLearnMoreAboutSizes={onLearnMoreAboutSizes}
     />
   );
 };

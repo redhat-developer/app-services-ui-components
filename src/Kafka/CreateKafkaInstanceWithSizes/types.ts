@@ -26,7 +26,9 @@ export type Regions = Array<RegionInfo>;
 export type Providers = Array<ProviderInfo>;
 export type Size = {
   id: string;
-  streamingUnits: number;
+  displayName: string;
+  status: "stable" | "preview";
+  quota: number;
   ingress: number;
   egress: number;
   storage: number;
@@ -49,7 +51,7 @@ export type CreateKafkaInitializationData = {
   availableProviders: Providers;
   instanceAvailability: InstanceAvailability;
   maxStreamingUnits: number;
-  remainingStreamingUnits: number;
+  remainingQuota: number;
   plan: Plan;
 };
 

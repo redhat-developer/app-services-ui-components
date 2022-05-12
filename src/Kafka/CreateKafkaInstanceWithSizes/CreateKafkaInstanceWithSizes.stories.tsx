@@ -16,7 +16,7 @@ export default {
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",
     apiMaxStreamingUnits: 5,
-    apiRemainingStreamingUnits: 3,
+    apiRemainingQuota: 3,
     apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
   },
