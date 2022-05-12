@@ -25,7 +25,13 @@ describe("OverviewPage", () => {
       Example.args!.toConnectorsHref
     );
 
-    const btnSubmit = comp.getByTestId("cardRHODS-buttonTryIt");
-    expect(btnSubmit.dataset.ouiaComponentId).toBe("button-rhods-tryit");
+    expect(comp.getByTestId("cardRHODS-buttonTryIt")).toHaveAttribute(
+      "data-ouia-component-id",
+      "button-rhods-tryit"
+    );
+
+    expect(
+      comp.getByText("Try OpenShift Streams for Apache Kafka")
+    ).toHaveAttribute("data-ouia-component-id", "button-try-kafka");
   });
 });

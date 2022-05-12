@@ -46,7 +46,10 @@ export const KafkaPageV2: FunctionComponent = () => {
       />
       <MarketingPageSection>
         <Grid hasGutter lg={6}>
-          <Card>
+          <Card
+            ouiaId="card-overview-purchase-now"
+            aria-label={t("kafkaoverview:purchaseCardTitle")}
+          >
             <CardHeader>
               <CardHeaderMain>
                 <CardTitle>
@@ -64,13 +67,17 @@ export const KafkaPageV2: FunctionComponent = () => {
                 component="a"
                 href="https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
                 target="_blank"
+                ouiaId="link-purchase-now"
               >
                 {t("purchaseCardCallToActionButton")}
                 <ExternalLinkAltIcon className="pf-u-ml-md" />
               </Button>
             </CardFooter>
           </Card>
-          <Card>
+          <Card
+            ouiaId="card-overview-contact-sales"
+            aria-label={t("kafkaoverview:contactSalesCardTitle")}
+          >
             <CardHeader>
               <CardTitle>
                 <Title headingLevel="h2">{t("contactSalesCardTitle")}</Title>
@@ -86,6 +93,7 @@ export const KafkaPageV2: FunctionComponent = () => {
                 component="a"
                 href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka#contact-us"
                 target="_blank"
+                ouiaId="link-contact-sales"
               >
                 {t("contactSalesCardCallToActionButton")}
                 <ExternalLinkAltIcon className="pf-u-ml-md" />

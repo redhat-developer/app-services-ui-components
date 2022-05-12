@@ -48,8 +48,9 @@ exports[`KafkaPage renders 1`] = `
           class="pf-l-grid pf-m-all-6-col-on-lg pf-m-gutter"
         >
           <article
+            aria-label="Purchase now"
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-1"
+            data-ouia-component-id="card-overview-purchase-now"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -85,7 +86,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline pf-m-display-lg"
-                data-ouia-component-id="OUIA-Generated-Button-link-1"
+                data-ouia-component-id="link-purchase-now"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardPurchase-buttonCTA"
@@ -111,8 +112,9 @@ exports[`KafkaPage renders 1`] = `
             </div>
           </article>
           <article
+            aria-label="Contact sales"
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-2"
+            data-ouia-component-id="card-overview-contact-sales"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -144,7 +146,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline pf-m-display-lg"
-                data-ouia-component-id="OUIA-Generated-Button-link-2"
+                data-ouia-component-id="link-contact-sales"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardContactSales-buttonCTA"
@@ -180,7 +182,7 @@ exports[`KafkaPage renders 1`] = `
       >
         <article
           class="pf-c-card"
-          data-ouia-component-id="OUIA-Generated-Card-3"
+          data-ouia-component-id="OUIA-Generated-Card-1"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           id=""
@@ -318,7 +320,7 @@ exports[`KafkaPage renders 1`] = `
       >
         <article
           class="pf-c-card"
-          data-ouia-component-id="OUIA-Generated-Card-4"
+          data-ouia-component-id="OUIA-Generated-Card-2"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           id=""
@@ -577,7 +579,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline"
-                data-ouia-component-id="OUIA-Generated-Button-link-3"
+                data-ouia-component-id="OUIA-Generated-Button-link-1"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="redhatSupport-buttonCTA"
@@ -607,7 +609,7 @@ exports[`KafkaPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-link pf-m-inline"
-                data-ouia-component-id="OUIA-Generated-Button-link-4"
+                data-ouia-component-id="OUIA-Generated-Button-link-2"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="diskSpaceMetrics-buttonCTA"
@@ -646,7 +648,7 @@ exports[`KafkaPage renders 1`] = `
       >
         <article
           class="pf-c-card"
-          data-ouia-component-id="OUIA-Generated-Card-5"
+          data-ouia-component-id="OUIA-Generated-Card-3"
           data-ouia-component-type="PF4/Card"
           data-ouia-safe="true"
           id=""
