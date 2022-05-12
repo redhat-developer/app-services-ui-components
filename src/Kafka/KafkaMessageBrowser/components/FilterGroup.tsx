@@ -8,7 +8,8 @@ import {
   TextInput,
   ToolbarItem,
 } from "@patternfly/react-core";
-import { format, formatISO, parse, parseISO } from "date-fns";
+import { formatISO, parse, parseISO } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 
 import { useState, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
@@ -144,7 +145,9 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
                 onEpochChange(undefined);
               }
             }}
-            value={timestamp ? format(parseISO(timestamp), "t") : ""}
+            value={
+              timestamp ? formatInTimeZone(parseISO(timestamp), "UTC", "t") : ""
+            }
           />
         )}
       </InputGroup>
