@@ -23,6 +23,9 @@ export const ExternalLink: FunctionComponent<ExternaLinkProps> = ({
     href={href}
   >
     {children}
-    <ExternalLinkAltIcon className="pf-u-ml-xs" />
+    <span style={{ whiteSpace: "nowrap" }}>
+      &nbsp;
+      <ExternalLinkAltIcon className="pf-u-ml-xs" />
+    </span>
   </Button>
 );
