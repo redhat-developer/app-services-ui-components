@@ -54,6 +54,7 @@ const CreateKafkaInstanceMachine = createMachine(
         creationError: CreateKafkaInstanceError | undefined;
       },
       events: {} as
+        | { type: "fieldChange" }
         | { type: "formChange" }
         | { type: "nameChange"; name: string }
         | { type: "providerChange"; provider: Provider }
@@ -172,7 +173,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               nameChange: {
-                actions: ["setName", "formChange"],
+                actions: ["setName", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -197,7 +198,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               providerChange: {
-                actions: ["setProvider", "formChange"],
+                actions: ["setProvider", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -222,7 +223,7 @@ const CreateKafkaInstanceMachine = createMachine(
             },
             on: {
               regionChange: {
-                actions: ["setRegion", "formChange"],
+                actions: ["setRegion", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -266,11 +267,14 @@ const CreateKafkaInstanceMachine = createMachine(
               },
             },
             on: {
-              formChange: {
+              providerChange: {
+                target: ".validate",
+              },
+              regionChange: {
                 target: ".validate",
               },
               sizeChange: {
-                actions: ["setSize", "formChange"],
+                actions: ["setSize", "fieldChange"],
                 target: ".validate",
               },
             },
@@ -385,7 +389,7 @@ const CreateKafkaInstanceMachine = createMachine(
           },
         };
       }),
-      formChange: send("formChange"),
+      fieldChange: send("formChange"),
       setName: assign((context, { name }) => {
         if (context.creationError === "name-taken") {
           return { form: { ...context.form, name }, creationError: undefined };

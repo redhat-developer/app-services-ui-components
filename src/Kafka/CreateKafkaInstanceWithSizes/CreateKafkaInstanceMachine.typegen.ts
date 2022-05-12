@@ -6,7 +6,11 @@ export interface Typegen0 {
     setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
     resetCreationErrorMessage: "formChange" | "";
     setName: "nameChange";
-    formChange: "nameChange" | "providerChange" | "regionChange" | "sizeChange";
+    fieldChange:
+      | "nameChange"
+      | "providerChange"
+      | "regionChange"
+      | "sizeChange";
     setProvider: "providerChange";
     setRegion: "regionChange";
     setSize: "sizeChange";
