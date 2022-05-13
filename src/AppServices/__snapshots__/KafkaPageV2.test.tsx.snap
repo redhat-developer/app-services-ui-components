@@ -350,7 +350,7 @@ exports[`KafkaPage renders 1`] = `
                 data-ouia-safe="true"
                 data-pf-content="true"
               >
-                OpenShift Streams offers instances in the following sizes with the following capacity.
+                Streams for Apache Kafka offers instances in the following sizes with the following capacity.
               </p>
               <table
                 class="pf-c-table pf-m-grid-md"

@@ -12,7 +12,7 @@ describe("KafkaPage", () => {
   });
 
   it("should persist ouia ids", async () => {
-    const comp = render(<Example />);
+    const comp = render(<KafkaPage />);
     await waitForI18n(comp);
     expect(comp.getByRole("article", { name: "Purchase now" })).toHaveAttribute(
       "data-ouia-component-id",
