@@ -68,14 +68,18 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       />
     );
   }
+  const atLeastTwoSizes =
+    sizes.length > 1 ? sizes : [{ id: "", quota: "" }, ...sizes];
 
-  const valueIndex =
-    validity !== "trial" ? sizes.findIndex((size) => size.quota === value) : -1;
-
-  const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({
+  const steps: SliderProps["customSteps"] = atLeastTwoSizes.map((s, index) => ({
     value: index,
     label: `${s.quota}`,
   }));
+
+  const valueIndex =
+    validity !== "trial"
+      ? atLeastTwoSizes.findIndex((size) => size.quota === value)
+      : -1;
 
   const helperText = (
     <FieldSizeHelperText
@@ -121,7 +125,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
           showTicks={true}
           customSteps={steps}
           className="pf-u-w-100"
-          isDisabled={isDisabled || validity === "trial"}
+          isDisabled={isDisabled || validity === "trial" || sizes.length === 1}
           onChange={handleChange}
           aria-describedby="streaming-size"
         />

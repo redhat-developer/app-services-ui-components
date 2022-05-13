@@ -81,7 +81,14 @@ MvpOverQuota.args = {
 export const Trial = Template.bind({});
 Trial.args = {
   value: 1,
-  sizes: summitSizes,
+  sizes: [{ id: "x1", quota: 1, displayName: "1", status: "stable" }],
   remainingQuota: 1,
   validity: "trial",
+};
+
+export const SingleSize = Template.bind({});
+SingleSize.args = {
+  value: 1,
+  sizes: [{ id: "x1", quota: 1, displayName: "1", status: "stable" }],
+  remainingQuota: 1,
 };
