@@ -1,12 +1,12 @@
-import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n } from "../test-utils";
 import * as stories from "./DataSciencePage.stories";
 
-const { Example } = composeStories(stories);
+const { DataSciencePage } = composeStories(stories);
 
 describe("DataSciencePage", () => {
   it("renders", async () => {
-    const comp = render(<Example />);
+    const comp = render(<DataSciencePage />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
 

@@ -1,18 +1,18 @@
-import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
-import * as stories from "./KafkaPageV2.stories";
+import { render, waitForI18n } from "../test-utils";
+import * as stories from "./KafkaPage.stories";
 
-const { Example } = composeStories(stories);
+const { KafkaPage } = composeStories(stories);
 
 describe("KafkaPage", () => {
   it("renders", async () => {
-    const comp = render(<Example />);
+    const comp = render(<KafkaPage />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
   });
 
   it("should persist ouia ids", async () => {
-    const comp = render(<Example />);
+    const comp = render(<KafkaPage />);
     await waitForI18n(comp);
     expect(comp.getByRole("article", { name: "Purchase now" })).toHaveAttribute(
       "data-ouia-component-id",

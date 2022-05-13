@@ -52,15 +52,15 @@
   },
   "resource_type_operation_filter_placeholder": "Filter by resource type operation",
   "resourcePrefix": {
+    "aria_label_name_is": "{{value}} name",
+    "aria_label_name_starts_with": "{{value}} prefix",
     "create_text": "Use",
     "invalid_consumer_group": "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - ).",
     "invalid_length": "Cannot exceed 32 characters",
     "invalid_topic": "Valid characters in a topic name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
     "invalid_topic_name": "A topic name must contain at least 3 periods (...) if periods are the only characters used.",
-    "aria_label_name_is": "{{value}} name",
     "placeholder_name_is": "Enter name",
-    "placeholder_name_starts_with": "Enter prefix",
-    "aria_label_name_starts_with": "{{value}} prefix"
+    "placeholder_name_starts_with": "Enter prefix"
   },
   "resourceTypes": {
     "consumer_group": "Consumer group",

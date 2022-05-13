@@ -21,12 +21,12 @@ import {
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ApiManagementMechApiFullColorPink } from "../../images";
+import { ApiManagementMechApiFullColorPink } from "../images";
 import {
   MarketingPageHero,
   MarketingPageSection,
   MarketingPageVideoCard,
-} from "../components";
+} from "./components";
 
 export const APIManagementPage: FunctionComponent = () => {
   const { t } = useTranslation();

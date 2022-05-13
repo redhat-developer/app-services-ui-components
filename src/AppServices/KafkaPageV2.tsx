@@ -11,25 +11,27 @@ import {
   DescriptionListDescription,
   DescriptionListGroup,
   DescriptionListTerm,
-  Grid,
-  Title,
+  Divider,
   Flex,
   FlexItem,
-  Divider,
-  TextContent,
-  Text,
-  Stack,
-  TextVariants,
-  SplitItem,
+  Grid,
   Split,
+  SplitItem,
+  Stack,
+  Text,
+  TextContent,
+  TextVariants,
+  Title,
 } from "@patternfly/react-core";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { MarketingPageHero, MarketingPageSection } from "../components";
-import { AppSpeedKeyArt } from "../../images";
-import { KafkaInstanceCapacityTable } from "./component";
-import { LogoAWS, LogoAzure } from "../../images";
+import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";
+import {
+  KafkaInstanceCapacityTable,
+  MarketingPageHero,
+  MarketingPageSection,
+} from "./components";
 
 export const KafkaPageV2: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview-v2"]);
@@ -123,7 +125,7 @@ export const KafkaPageV2: FunctionComponent = () => {
                         {t("steamingUnit")}
                       </DescriptionListTerm>
                       <DescriptionListDescription>
-                        {"$1.49/hour"}
+                        {t("streamingUnit_price")}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
@@ -131,13 +133,13 @@ export const KafkaPageV2: FunctionComponent = () => {
                         {t("dataTransfer")}
                       </DescriptionListTerm>
                       <DescriptionListDescription>
-                        {"$0.09/GB"}
+                        {t("dataTransfer_price")}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                     <DescriptionListGroup>
                       <DescriptionListTerm>{t("storage")}</DescriptionListTerm>
                       <DescriptionListDescription>
-                        {"$0.10/GB"}
+                        {t("storage_price")}
                       </DescriptionListDescription>
                     </DescriptionListGroup>
                   </DescriptionList>
@@ -148,10 +150,9 @@ export const KafkaPageV2: FunctionComponent = () => {
                 <TextContent>
                   <Text component={TextVariants.p}>
                     <Trans
-                      i18nKey={"kafkaoverview-v2:streamingUnitText"}
-                      values={{
-                        value: "streaming unit",
-                      }}
+                      ns={"kafkaoverview-v2"}
+                      i18nKey={"streamingUnitText"}
+                      components={{ bold: <strong /> }}
                     />
                   </Text>
                 </TextContent>
@@ -177,35 +178,11 @@ export const KafkaPageV2: FunctionComponent = () => {
           </CardBody>
           <CardFooter>
             <TextContent className={"pf-u-font-size-sm"}>
-              {t("kafkaInstanceCapacityfooter1")}{" "}
-              <Button
-                data-testid="redhatSupport-buttonCTA"
-                isInline
-                variant={ButtonVariant.link}
-                component="a"
-                target="_blank"
-                href="https://access.redhat.com/support"
-              >
-                {" "}
-                Red Hat support
-                <ExternalLinkAltIcon className="pf-u-ml-xs" />
-                &nbsp;
-              </Button>{" "}
-              {t("kafkaInstanceCapacityfooter2")}
-              <Button
-                data-testid="diskSpaceMetrics-buttonCTA"
-                isInline
-                variant={ButtonVariant.link}
-                component="a"
-                target="_blank"
-                href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
-              >
-                {" "}
-                monitoring disk space metrics
-                <ExternalLinkAltIcon className="pf-u-ml-xs" />
-                &nbsp;
-              </Button>
-              .
+              <Trans
+                ns={"kafkaoverview-v2"}
+                i18nKey={"kafkaInstanceCapacityfooter"}
+                components={[<SupportLink />, <MonitoringDiskSpaceLink />]}
+              />
             </TextContent>
           </CardFooter>
         </Card>
@@ -271,3 +248,31 @@ export const KafkaPageV2: FunctionComponent = () => {
     </>
   );
 };
+
+const SupportLink: FunctionComponent = ({ children }) => (
+  <Button
+    data-testid="redhatSupport-buttonCTA"
+    isInline
+    variant={ButtonVariant.link}
+    component="a"
+    target="_blank"
+    href="https://access.redhat.com/support"
+  >
+    {children}
+    <ExternalLinkAltIcon className="pf-u-ml-xs" />
+  </Button>
+);
+
+const MonitoringDiskSpaceLink: FunctionComponent = ({ children }) => (
+  <Button
+    data-testid="diskSpaceMetrics-buttonCTA"
+    isInline
+    variant={ButtonVariant.link}
+    component="a"
+    target="_blank"
+    href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+  >
+    {children}
+    <ExternalLinkAltIcon className="pf-u-ml-xs" />
+  </Button>
+);
