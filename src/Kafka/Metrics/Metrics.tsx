@@ -30,6 +30,7 @@ import { MetricsLagAlert } from "./components/MetricsLagAlert";
 export type MetricsProps = {
   onCreateTopic: () => void;
   onClickClose: () => void;
+  isClosed: boolean;
 } & KafkaInstanceMetricsProviderProps &
   TopicsMetricsProviderProps &
   MetricsKpiProviderProps;
@@ -40,6 +41,7 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
   getMetricsKpi,
   onCreateTopic,
   onClickClose,
+  isClosed,
 }) => {
   return (
     <TopicsMetricsProvider getTopicsMetrics={getTopicsMetrics}>
@@ -50,6 +52,7 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
           <ConnectedMetrics
             onCreateTopic={onCreateTopic}
             onClickClose={onClickClose}
+            isClosed={isClosed}
           />
         </MetricsKpiProvider>
       </KafkaInstanceMetricsProvider>
@@ -60,10 +63,12 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
 type ConnectedMetricsProps = {
   onCreateTopic: () => void;
   onClickClose: () => void;
+  isClosed: boolean;
 };
 const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
   onClickClose,
+  isClosed,
 }) => {
   const { t } = useTranslation();
   const kafkaInstanceMetrics = useKafkaInstanceMetrics();
@@ -86,7 +91,7 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
       return (
         <Stack hasGutter>
           <StackItem>
-            <MetricsLagAlert onClickClose={onClickClose} />
+            <MetricsLagAlert onClickClose={onClickClose} isClosed={isClosed} />
           </StackItem>
           <StackItem>
             <MetricsLayout
