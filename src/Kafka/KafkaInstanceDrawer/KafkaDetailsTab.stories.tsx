@@ -32,6 +32,7 @@ StandardInstanceCreated.args = {
   instanceType: "standard",
   size: "1",
   ...instanceInfo,
+  isLoadingSize: false,
 };
 
 export const TrialInstanceJustCreated = Template.bind({});
@@ -39,6 +40,7 @@ TrialInstanceJustCreated.args = {
   expiryDate: addHours(new Date(), 48),
   instanceType: "eval",
   ...instanceInfo,
+  isLoadingSize: false,
 };
 TrialInstanceJustCreated.doc = {};
 
@@ -47,6 +49,7 @@ TrialIntsanceRecentlyCreated.args = {
   expiryDate: addHours(new Date(), 22),
   instanceType: "eval",
   ...instanceInfo,
+  isLoadingSize: false,
 };
 
 export const TrialInstanceNearExpiration = Template.bind({});
@@ -54,4 +57,13 @@ TrialInstanceNearExpiration.args = {
   expiryDate: addHours(new Date(), 2),
   instanceType: "eval",
   ...instanceInfo,
+  isLoadingSize: false,
+};
+
+export const KafkaDetailsWithSkeleton = Template.bind({});
+KafkaDetailsWithSkeleton.args = {
+  instanceType: "standard",
+  size: "1",
+  ...instanceInfo,
+  isLoadingSize: true,
 };

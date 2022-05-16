@@ -10,8 +10,9 @@ import {
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 import { format } from "date-fns";
 import { InstanceType } from "../utils";
+import { KafkaSizeSkeleton } from "./KafkaSizeSkeleton";
 
-type KafkaDetailsTabProps = {
+export type KafkaDetailsTabProps = {
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -27,6 +28,7 @@ type KafkaDetailsTabProps = {
   connections: number;
   connectionRate: number;
   messageSize: number;
+  isLoadingSize: boolean;
 };
 
 export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
@@ -45,6 +47,7 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
   connections,
   connectionRate,
   messageSize,
+  isLoadingSize,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -61,57 +64,63 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
       {instanceType !== "standard" && expiryDate && (
         <DetailsTabAlert expiryDate={expiryDate} />
       )}
+      {isLoadingSize && <KafkaSizeSkeleton />}
       <TextContent>
         <TextList component={TextListVariants.dl}>
-          {instanceType === "standard" &&
-            renderTextListItem(
-              t("common:size"),
-              t("create-kafka-instance-with-sizes:streaming_size_value", {
-                value: size,
-              })
-            )}
-          {renderTextListItem(
-            t("ingress"),
-            t("create-kafka-instance-with-sizes:ingress_value", {
-              value: ingress,
-            })
+          {!isLoadingSize && (
+            <>
+              {instanceType === "standard" &&
+                renderTextListItem(
+                  t("common:size"),
+                  t("create-kafka-instance-with-sizes:streaming_size_value", {
+                    value: size,
+                  })
+                )}
+              {renderTextListItem(
+                t("ingress"),
+                t("create-kafka-instance-with-sizes:ingress_value", {
+                  value: ingress,
+                })
+              )}
+              {renderTextListItem(
+                t("egress"),
+                t("create-kafka-instance-with-sizes:egress_value", {
+                  value: egress,
+                })
+              )}
+              {renderTextListItem(
+                t("storage"),
+                t("create-kafka-instance-with-sizes:storage_value", {
+                  value: storage,
+                })
+              )}
+              {renderTextListItem(
+                t("partitions"),
+                t("create-kafka-instance-with-sizes:partitions_value", {
+                  value: maxPartitions,
+                })
+              )}
+              {renderTextListItem(
+                t("client_connections"),
+                t("create-kafka-instance-with-sizes:client_connections_value", {
+                  value: connections,
+                })
+              )}
+              {renderTextListItem(
+                t("connection_rate"),
+                t("create-kafka-instance-with-sizes:connection_rate_value", {
+                  value: connectionRate,
+                })
+              )}
+              {renderTextListItem(
+                t("message_size"),
+                t("create-kafka-instance-with-sizes:message_size_value", {
+                  value: messageSize,
+                })
+              )}
+            </>
           )}
-          {renderTextListItem(
-            t("egress"),
-            t("create-kafka-instance-with-sizes:egress_value", {
-              value: egress,
-            })
-          )}
-          {renderTextListItem(
-            t("storage"),
-            t("create-kafka-instance-with-sizes:storage_value", {
-              value: storage,
-            })
-          )}
-          {renderTextListItem(
-            t("partitions"),
-            t("create-kafka-instance-with-sizes:partitions_value", {
-              value: maxPartitions,
-            })
-          )}
-          {renderTextListItem(
-            t("client_connections"),
-            t("create-kafka-instance-with-sizes:client_connections_value", {
-              value: connections,
-            })
-          )}
-          {renderTextListItem(
-            t("connection_rate"),
-            t("create-kafka-instance-with-sizes:connection_rate_value", {
-              value: connectionRate,
-            })
-          )}
-          {renderTextListItem(
-            t("message_size"),
-            t("create-kafka-instance-with-sizes:message_size_value", {
-              value: messageSize,
-            })
-          )}
+
           {renderTextListItem(t("common:id"), id)}
           {renderTextListItem(t("common:owner"), owner)}
           {renderTextListItem(
