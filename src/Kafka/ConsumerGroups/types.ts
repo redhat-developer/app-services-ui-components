@@ -22,3 +22,5 @@ export interface ConsumerGroup {
   partitionsWithLag: number;
   state: ConsumerGroupState;
 }
+
+export type OffsetValue = "absolute" | "latest" | "earliest" | "timestamp";

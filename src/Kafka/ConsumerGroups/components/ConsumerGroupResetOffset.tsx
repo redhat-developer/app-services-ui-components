@@ -11,15 +11,10 @@ import {
   TextInput,
   Title,
 } from "@patternfly/react-core";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import "../ConsumerGroup.css";
-import { Consumer } from "../types";
-import {
-  DropdownWithToggle,
-  IDropdownOption,
-  IDropdownWithToggleProps,
-} from "./DropdownToggle";
+import { Consumer, OffsetValue } from "../types";
 import {
   TableComposable,
   Tbody,
@@ -28,8 +23,8 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
-
-type OffsetValue = "absolute" | "latest" | "earliest";
+import { TopicDropdown } from "./TopicsDropdown";
+import { OffsetDropdown } from "./OffsetDropdown";
 
 export type ConsumerRow = Consumer & {
   selected?: boolean;
@@ -40,12 +35,21 @@ export type ConsumerGroupResetOffsetProps = {
   isDisconnected: boolean;
   groupId: string;
   topics: string[];
+  selectedTopic: string;
   customOffsetValue: string;
   setcustomOffsetValue: (customOffsetValue: string) => void;
   consumers: ConsumerRow[];
   isSelected: boolean;
   onClickClose: () => void;
   onClickResetOffset: () => void;
+  onChangeTopic: (value: string) => void;
+  selectedOffset: OffsetValue;
+  onChangeOffsetValue: (value: OffsetValue) => void;
+  confirmCheckboxChecked: boolean;
+  onConfirmationChange: (value: boolean) => void;
+  SelectAllConsumer: (consumer: ConsumerRow[]) => void;
+  onSelectAll: (isSelected: boolean) => void;
+  onSelectRow: (index: number, select: boolean) => void;
 };
 
 export const ConsumerGroupResetOffset: FunctionComponent<
@@ -60,34 +64,17 @@ export const ConsumerGroupResetOffset: FunctionComponent<
   onClickClose,
   isModalOpen,
   onClickResetOffset,
+  selectedTopic,
+  onChangeTopic,
+  selectedOffset,
+  onChangeOffsetValue,
+  confirmCheckboxChecked,
+  onConfirmationChange,
+  isSelected,
+  onSelectAll,
+  onSelectRow,
 }) => {
   const { t } = useTranslation(["kafka"]);
-  const [selectedTopic, setSelectedTopic] = useState<string>("");
-
-  const [selectedOffset, setSelectedOffset] = useState<OffsetValue>();
-
-  const [newConsumers, setNewConsumer] = useState<ConsumerRow[]>(consumers);
-
-  const [confirmCheckboxChecked, setConfirmCheckboxChecked] =
-    useState<boolean>(false);
-
-  useEffect(() => {
-    const filteredConsumers = consumers.filter(
-      (consumer) => consumer.topic === selectedTopic
-    );
-    setNewConsumer(filteredConsumers || []);
-  }, [consumers, selectedTopic]);
-
-  const getTopics = (topics: string[]) => {
-    const distinctTopics = topics.filter(
-      (topic: string, i: number) => topics.indexOf(topic) === i
-    );
-    return distinctTopics.map((topic: string) => ({
-      key: topic,
-      value: topic,
-      isDisabled: false,
-    }));
-  };
 
   const isResetOffsetDisabled = (): boolean => {
     return (
@@ -95,65 +82,9 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       !confirmCheckboxChecked ||
       !isDisconnected ||
       !selectedOffset ||
-      newConsumers.filter(({ selected }) => selected === true).length === 0
+      consumers.filter(({ selected }) => selected === true).length === 0
     );
   };
-
-  const onTopicSelect: IDropdownWithToggleProps["onSelectOption"] = (
-    selectedTopic
-  ) => {
-    setSelectedTopic(selectedTopic);
-  };
-
-  const onOffsetSelect: IDropdownWithToggleProps["onSelectOption"] = (
-    value
-  ) => {
-    setSelectedOffset(value as OffsetValue);
-  };
-
-  const offsetValueOption: { [key in OffsetValue]: string } = {
-    absolute: t("consumerGroup.offset.absolute"),
-    latest: t("consumerGroup.offset.latest"),
-    earliest: t("consumerGroup.offset.earliest"),
-  };
-
-  const onSelectAllConsumer = (isSelecting = true) => {
-    console.log(isSelecting);
-    setNewConsumer(
-      newConsumers.map((consumer) => {
-        consumer.selected = isSelecting;
-        return consumer;
-      })
-    );
-  };
-
-  const onSelect = (rowId: number, selecting: boolean) => {
-    const selectedConsumers = [...newConsumers];
-    selectedConsumers[rowId].selected = !selecting;
-    setNewConsumer(selectedConsumers);
-  };
-
-  const onConfirmationChange = () => {
-    setConfirmCheckboxChecked(!confirmCheckboxChecked);
-  };
-
-  const offsetOptions: IDropdownOption[] = [
-    {
-      key: offsetValueOption.absolute,
-      value: offsetValueOption.absolute,
-      isDisabled: false,
-    },
-    {
-      key: offsetValueOption.earliest,
-      value: offsetValueOption.earliest,
-      isDisabled: false,
-    },
-    {
-      key: offsetValueOption.latest,
-      value: offsetValueOption.latest,
-      isDisabled: false,
-    },
-  ];
 
   const tableColumns = {
     partition: t("consumerGroup.partition"),
@@ -198,44 +129,31 @@ export const ConsumerGroupResetOffset: FunctionComponent<
             </FormGroup>
             {isDisconnected && (
               <FormGroup label="Topic" fieldId="horizontal-form-name">
-                <DropdownWithToggle
-                  id="topic-dropdown"
-                  toggleId="topic-dropdowntoggle"
-                  ariaLabel="topic-select-dropdown"
-                  onSelectOption={onTopicSelect}
-                  items={getTopics(topics)}
-                  name="cleanup-policy"
+                <TopicDropdown
                   value={selectedTopic ? selectedTopic : t("common:select")}
-                  menuAppendTo={"parent"}
+                  topics={topics}
+                  onChange={onChangeTopic}
                 />
               </FormGroup>
             )}
             {isDisconnected && selectedTopic && (
               <FormGroup label="New offset" fieldId="offset-dropdown">
-                <DropdownWithToggle
-                  id="offset-dropdown"
-                  toggleId="offset-dropdowntoggle"
-                  ariaLabel="offset-select-dropdown"
-                  onSelectOption={onOffsetSelect}
-                  items={offsetOptions}
-                  name="offset-dropdown"
+                <OffsetDropdown
                   value={selectedOffset ? selectedOffset : t("common:select")}
-                  menuAppendTo={"parent"}
+                  onChange={onChangeOffsetValue}
                 />
               </FormGroup>
             )}
-            {isDisconnected &&
-              selectedTopic &&
-              selectedOffset === offsetValueOption.absolute && (
-                <FormGroup label="Custom offset" fieldId="custom-offset-input">
-                  <TextInput
-                    id="custom-offset-input"
-                    value={customOffsetValue}
-                    onChange={setcustomOffsetValue}
-                    type="number"
-                  />
-                </FormGroup>
-              )}
+            {isDisconnected && selectedTopic && selectedOffset === "absolute" && (
+              <FormGroup label="Custom offset" fieldId="custom-offset-input">
+                <TextInput
+                  id="custom-offset-input"
+                  value={customOffsetValue}
+                  onChange={setcustomOffsetValue}
+                  type="number"
+                />
+              </FormGroup>
+            )}
           </Form>
         </StackItem>
         <StackItem>
@@ -251,7 +169,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
           )}
         </StackItem>
         <StackItem>
-          {isDisconnected && newConsumers.length > 0 && selectedTopic && (
+          {isDisconnected && consumers.length > 0 && selectedTopic && (
             <Stack hasGutter>
               <StackItem>
                 <TableComposable
@@ -262,13 +180,9 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                     <Tr>
                       <Th
                         select={{
-                          onSelect: (_event, isSelecting) =>
-                            onSelectAllConsumer(isSelecting),
-                          isSelected:
-                            newConsumers.length ===
-                            newConsumers.filter(
-                              (consumer) => consumer.selected === true
-                            ).length,
+                          isSelected: isSelected,
+                          onSelect: (_event, isSelected) =>
+                            onSelectAll(isSelected),
                         }}
                       />
                       <Th>{tableColumns.partition}</Th>
@@ -280,15 +194,15 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                     </Tr>
                   </Thead>
                   <Tbody>
-                    {newConsumers.map((consumer, index) => {
+                    {consumers.map((consumer, index) => {
                       return (
                         <Tr key={index}>
                           <Td
                             select={{
                               rowIndex: index,
-                              isSelected: consumer.selected || false,
+                              isSelected: isSelected,
                               onSelect: (_event) =>
-                                onSelect(index, consumer.selected || false),
+                                onSelectRow(index, isSelected),
                             }}
                           />
                           <Td dataLabel={tableColumns.partition}>
@@ -308,7 +222,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                           </Td>
                           <Td dataLabel={tableColumns.offset_lag}>
                             {consumer.selected && selectedOffset
-                              ? selectedOffset === offsetValueOption.absolute
+                              ? selectedOffset === "absolute"
                                 ? customOffsetValue
                                 : selectedOffset
                               : "-"}

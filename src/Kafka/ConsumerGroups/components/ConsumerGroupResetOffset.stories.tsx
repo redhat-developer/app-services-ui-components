@@ -30,7 +30,11 @@ export default {
   component: ConsumerGroupResetOffset,
   args: {
     groupId: "console",
-    topics: ["test-topic", "test-value"],
+    topics: consumer.map((consumer) => consumer.topic),
+    selectedTopic: "test",
+    selectedOffset: "absolute",
+    confirmCheckboxChecked: true,
+    isSelected: true,
     consumers: consumer,
     isDisconnected: true,
     customOffsetValue: "2",
