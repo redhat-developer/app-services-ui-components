@@ -220,21 +220,18 @@ const CreateKafkaInstanceMachine = createMachine(
           },
         },
         on: {
-          create: "submit",
+          create: [
+            {
+              cond: "canSave",
+              target: "saving",
+            },
+            { target: "formInvalid" },
+          ],
           formChange: {
             actions: "resetCreationErrorMessage",
             cond: "canSave",
           },
         },
-      },
-      submit: {
-        always: [
-          {
-            cond: "canSave",
-            target: "saving",
-          },
-          { target: "formInvalid" },
-        ],
       },
       formInvalid: {
         entry: "markRequiredFields",
