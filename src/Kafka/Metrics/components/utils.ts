@@ -18,7 +18,7 @@ export const dateToChartValue = (
   { showDate }: { showDate: boolean } = { showDate: false }
 ): string => {
   const date = fromUnixTime(timestamp / 1000);
-  return formatInTimeZone(date, "utc", showDate ? "HH:mm'\n'MM/dd" : "HH:mm");
+  return formatInTimeZone(date, "utc", showDate ? "HH:mm'\n'MMM dd" : "HH:mm");
 };
 
 export function timestampsToTicks(

@@ -1,6 +1,3 @@
-import { TimeSeriesMetrics } from "../types";
-import { timeIntervalsMapping } from "../consts";
-
 import {
   Chart,
   ChartAxis,
@@ -14,15 +11,16 @@ import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_
 import chart_color_orange_300 from "@patternfly/react-tokens/dist/esm/chart_color_orange_300";
 import { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
-import { chartHeight, chartPadding } from "../consts";
-import {
-  dateToChartValue,
-  shouldShowDate,
-  formatBytes,
-  timestampsToTicks,
-} from "./utils";
+import { chartHeight, chartPadding, timeIntervalsMapping } from "../consts";
+import { TimeSeriesMetrics } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
+import {
+  dateToChartValue,
+  formatBytes,
+  shouldShowDate,
+  timestampsToTicks,
+} from "./utils";
 
 type ChartData = {
   color: string;
@@ -113,12 +111,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
             width={width}
           >
             <ChartAxis
-              label={
-                "\n" +
-                (showDate
-                  ? t("metrics:axis-label-time-full")
-                  : t("metrics:axis-label-time"))
-              }
+              label={"\n" + t("metrics:axis-label-time")}
               tickValues={tickValues}
               tickCount={timeIntervalsMapping[duration].ticks}
               tickFormat={(d) =>

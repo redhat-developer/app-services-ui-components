@@ -95,12 +95,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
                 legendAllowWrap={true}
               >
                 <ChartAxis
-                  label={
-                    "\n" +
-                    (showDate
-                      ? t("metrics:axis-label-time-full")
-                      : t("metrics:axis-label-time"))
-                  }
+                  label={"\n" + t("metrics:axis-label-time")}
                   tickValues={tickValues}
                   tickFormat={(d) =>
                     dateToChartValue(d, {
