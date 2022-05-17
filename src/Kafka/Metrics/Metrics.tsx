@@ -23,9 +23,14 @@ import {
 import { useKafkaInstanceMetrics } from "./useKafkaInstanceMetrics";
 import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";
+import { PartitionCard } from "./components/PartitionCard";
+import { Stack, StackItem } from "@patternfly/react-core";
+import { MetricsLagAlert } from "./components/MetricsLagAlert";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
+  onClickClose: () => void;
+  isClosed: boolean;
 } & KafkaInstanceMetricsProviderProps &
   TopicsMetricsProviderProps &
   MetricsKpiProviderProps;
@@ -35,6 +40,8 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
   getTopicsMetrics,
   getMetricsKpi,
   onCreateTopic,
+  onClickClose,
+  isClosed,
 }) => {
   return (
     <TopicsMetricsProvider getTopicsMetrics={getTopicsMetrics}>
@@ -42,7 +49,11 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
         getKafkaInstanceMetrics={getKafkaInstanceMetrics}
       >
         <MetricsKpiProvider getMetricsKpi={getMetricsKpi}>
-          <ConnectedMetrics onCreateTopic={onCreateTopic} />
+          <ConnectedMetrics
+            onCreateTopic={onCreateTopic}
+            onClickClose={onClickClose}
+            isClosed={isClosed}
+          />
         </MetricsKpiProvider>
       </KafkaInstanceMetricsProvider>
     </TopicsMetricsProvider>
@@ -51,9 +62,13 @@ export const Metrics: VoidFunctionComponent<MetricsProps> = ({
 
 type ConnectedMetricsProps = {
   onCreateTopic: () => void;
+  onClickClose: () => void;
+  isClosed: boolean;
 };
 const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
   onCreateTopic,
+  onClickClose,
+  isClosed,
 }) => {
   const { t } = useTranslation();
   const kafkaInstanceMetrics = useKafkaInstanceMetrics();
@@ -74,36 +89,48 @@ const ConnectedMetrics: VoidFunctionComponent<ConnectedMetricsProps> = ({
       return <EmptyStateMetricsUnavailable />;
     default:
       return (
-        <MetricsLayout
-          topicsKpi={
-            <CardKpi
-              metric={metricsKpi.topics}
-              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics:metric_kpi_topics_name")}
-              popover={t("metrics:metric_kpi_topics_description")}
+        <Stack hasGutter>
+          <StackItem>
+            <MetricsLagAlert onClickClose={onClickClose} isClosed={isClosed} />
+          </StackItem>
+          <StackItem>
+            <MetricsLayout
+              topicsKpi={
+                <CardKpi
+                  metric={metricsKpi.topics}
+                  isLoading={
+                    metricsKpi.isInitialLoading || metricsKpi.isLoading
+                  }
+                  name={t("metrics:metric_kpi_topics_name")}
+                  popover={t("metrics:metric_kpi_topics_description")}
+                />
+              }
+              topicPartitionsKpi={
+                <PartitionCard
+                  metric={metricsKpi.topicPartitions}
+                  isLoading={
+                    metricsKpi.isInitialLoading || metricsKpi.isLoading
+                  }
+                  topicPartitionsLimit={metricsKpi.topicPartitionsLimit}
+                />
+              }
+              consumerGroupKpi={
+                <CardKpi
+                  metric={metricsKpi.consumerGroups}
+                  isLoading={
+                    metricsKpi.isInitialLoading || metricsKpi.isLoading
+                  }
+                  name={t("metrics:metric_kpi_consumerGroup_name")}
+                  popover={t("metrics:metric_kpi_consumerGroup_description")}
+                />
+              }
+              diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
+              topicMetrics={
+                <ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />
+              }
             />
-          }
-          topicPartitionsKpi={
-            <CardKpi
-              metric={metricsKpi.topicPartitions}
-              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics:metric_kpi_topicPartitions_name")}
-              popover={t("metrics:metric_kpi_topicPartitions_description")}
-            />
-          }
-          consumerGroupKpi={
-            <CardKpi
-              metric={metricsKpi.consumerGroups}
-              isLoading={metricsKpi.isInitialLoading || metricsKpi.isLoading}
-              name={t("metrics:metric_kpi_consumerGroup_name")}
-              popover={t("metrics:metric_kpi_consumerGroup_description")}
-            />
-          }
-          diskSpaceMetrics={<ConnectedKafkaInstanceMetrics />}
-          topicMetrics={
-            <ConnectedTopicsMetrics onCreateTopic={onCreateTopic} />
-          }
-        />
+          </StackItem>
+        </Stack>
       );
   }
 };

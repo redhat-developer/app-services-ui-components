@@ -33,7 +33,12 @@ export const getMetricsKpi = ({
   waitLengthMs,
 }: { waitLengthMs?: number } = {}) => {
   return fakeApi<GetMetricsKpiResponse>(
-    { topics: 3, topicPartitions: 6, consumerGroups: 12 },
+    {
+      topics: 3,
+      topicPartitions: 6,
+      consumerGroups: 12,
+      topicPartitionsLimit: 1000,
+    },
     waitLengthMs
   );
 };
