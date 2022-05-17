@@ -24,7 +24,7 @@ export type InstanceInfoProps = {
 };
 
 export type InstanceInfoLimitsProps = {
-  trialDurationInHours: number;
+  trialDurationInHours: number | undefined;
   ingress: number;
   egress: number;
   /**

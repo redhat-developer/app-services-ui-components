@@ -72,6 +72,9 @@ export function useCreateKafkaInstanceMachine() {
 
   const selector = useCallback(
     (state: typeof service.state) => {
+      const isTrial =
+        state.context.capabilities === undefined ||
+        state.context.capabilities.plan === "trial";
       const isFormInvalid = state.context.creationError === "form-invalid";
       const isNameTaken = state.context.creationError === "name-taken";
 
@@ -80,9 +83,11 @@ export function useCreateKafkaInstanceMachine() {
       const canCreate = state.matches("configuring");
       const isLoadingSizes = state.hasTag(SIZE_LOADING);
 
-      const selectedSize = state.context.sizes?.find(
-        (s) => state.context.form.size?.id === s.id
-      );
+      const selectedSize = isTrial
+        ? state.context.sizes?.trial
+        : state.context.sizes?.standard.find(
+            (s) => state.context.form.size?.id === s.id
+          );
 
       return {
         form: state.context.form,
@@ -107,9 +112,7 @@ export function useCreateKafkaInstanceMachine() {
         isProviderError: !state.hasTag(PROVIDER_VALID) && isFormInvalid,
         isRegionError: !state.hasTag(REGION_VALID) && isFormInvalid,
 
-        isTrial:
-          state.context.capabilities === undefined ||
-          state.context.capabilities.plan === "trial",
+        isTrial,
         isLoading,
         isLoadingSizes,
         isSaving,

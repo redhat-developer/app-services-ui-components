@@ -36,6 +36,7 @@ export type Size = {
   connectionRate: number;
   maxPartitions: number;
   messageSize: number;
+  trialDurationHours: number | undefined;
 };
 
 export type CreateKafkaInstanceError =
@@ -56,7 +57,8 @@ export type CreateKafkaInitializationData = {
 };
 
 export type GetSizesData = {
-  sizes: Size[];
+  standard: Size[];
+  trial: Size;
 };
 
 export type CreateKafkaFormData = {

@@ -192,7 +192,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
           ) : (
             <InstanceInfo
               isTrial={isTrial}
-              trialDurationInHours={48}
+              trialDurationInHours={selectedSize.trialDurationHours}
               ingress={selectedSize.ingress}
               egress={selectedSize.egress}
               storage={selectedSize.storage}
@@ -327,7 +327,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
   return (
     <FieldSize
       value={form.size?.quota || 1}
-      sizes={isSizeAvailable ? sizes : undefined}
+      sizes={isSizeAvailable ? sizes?.standard : undefined}
       remainingQuota={capabilities?.remainingQuota || 0}
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
