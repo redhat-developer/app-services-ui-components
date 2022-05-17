@@ -27,9 +27,10 @@ export const OffsetDropdown: FunctionComponent<OffsetDropdownProps> = ({
   };
 
   const onSelect = (
-    _: SyntheticEvent<HTMLDivElement, Event> | undefined,
-    value: OffsetValue
+    event?: SyntheticEvent<HTMLDivElement, Event> | undefined
   ) => {
+    const eventTarget = event?.target as HTMLElement;
+    const value = eventTarget.innerText;
     onChange(value as OffsetValue);
     setIsOpen((prevState) => !prevState);
   };
