@@ -49,7 +49,12 @@ const CreateKafkaInstanceMachine = createMachine(
         selectedProvider: ProviderInfo | undefined;
 
         // based on the form.provider and form.region selection
-        sizes: Size[] | undefined;
+        sizes:
+          | {
+              standard: Size[];
+              trial: Size;
+            }
+          | undefined;
 
         creationError: CreateKafkaInstanceError | undefined;
       },
@@ -378,8 +383,13 @@ const CreateKafkaInstanceMachine = createMachine(
         };
       }),
       setSizes: assign((context, event) => {
-        const sizes: Size[] = [...event.data.sizes];
-        const smallestSize = sizes.sort((a, b) => a.quota - b.quota)[0];
+        const sizes: { standard: Size[]; trial: Size } = {
+          standard: event.data.standard,
+          trial: event.data.trial,
+        };
+        const smallestSize = sizes.standard.sort(
+          (a, b) => a.quota - b.quota
+        )[0];
         return {
           sizes,
           form: {
@@ -496,7 +506,8 @@ const CreateKafkaInstanceMachine = createMachine(
       noProviderAndRegion: ({ form }) =>
         form.provider === undefined || form.region === undefined,
       noSizes: ({ sizes }) => sizes === undefined,
-      emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
+      emptySizes: ({ sizes }) =>
+        sizes !== undefined && sizes.standard.length === 0,
       sizeIsInQuota: ({ form, capabilities }) =>
         capabilities !== undefined &&
         form.size !== undefined &&

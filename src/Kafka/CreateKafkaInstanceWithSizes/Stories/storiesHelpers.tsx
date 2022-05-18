@@ -18,7 +18,6 @@ import {
   Provider,
   ProviderInfo,
   Providers,
-  Size,
 } from "../types";
 
 export const AWS: ProviderInfo = {
@@ -50,76 +49,113 @@ export const AZURE: ProviderInfo = {
 
 export const PROVIDERS: Providers = [AWS, AZURE];
 
-const SIZES: { [key: string]: Size[] } = {
-  aws: [
-    {
-      id: "x1",
+const SIZES: { [key: string]: GetSizesData } = {
+  aws: {
+    standard: [
+      {
+        id: "x1",
+        displayName: "1",
+        quota: 1,
+        status: "stable",
+        ingress: 3,
+        egress: 31,
+        storage: 5,
+        connections: 6,
+        connectionRate: 7,
+        maxPartitions: 8,
+        messageSize: 9,
+        trialDurationHours: undefined,
+      },
+      {
+        id: "x2",
+        displayName: "2",
+        quota: 2,
+        status: "preview",
+        ingress: 30,
+        egress: 301,
+        storage: 50,
+        connections: 60,
+        connectionRate: 70,
+        maxPartitions: 80,
+        messageSize: 90,
+        trialDurationHours: undefined,
+      },
+      {
+        id: "x3",
+        displayName: "3",
+        quota: 5,
+        status: "preview",
+        ingress: 300,
+        egress: 3001,
+        storage: 500,
+        connections: 600,
+        connectionRate: 700,
+        maxPartitions: 800,
+        messageSize: 900,
+        trialDurationHours: undefined,
+      },
+    ],
+    trial: {
+      id: "trialx1",
       displayName: "1",
-      quota: 1,
+      quota: 0,
       status: "stable",
-      ingress: 3,
-      egress: 31,
-      storage: 5,
-      connections: 6,
-      connectionRate: 7,
-      maxPartitions: 8,
-      messageSize: 9,
+      ingress: 1,
+      egress: 1,
+      storage: 1,
+      connections: 1,
+      connectionRate: 1,
+      maxPartitions: 1,
+      messageSize: 1,
+      trialDurationHours: 48,
     },
-    {
-      id: "x2",
-      displayName: "2",
-      quota: 2,
-      status: "preview",
-      ingress: 30,
-      egress: 301,
-      storage: 50,
-      connections: 60,
-      connectionRate: 70,
-      maxPartitions: 80,
-      messageSize: 90,
-    },
-    {
-      id: "x3",
-      displayName: "3",
-      quota: 5,
-      status: "preview",
-      ingress: 300,
-      egress: 3001,
-      storage: 500,
-      connections: 600,
-      connectionRate: 700,
-      maxPartitions: 800,
-      messageSize: 900,
-    },
-  ],
-  azure: [
-    {
-      id: "x1",
+  },
+  azure: {
+    standard: [
+      {
+        id: "x1",
+        displayName: "1",
+        quota: 3,
+        status: "preview",
+        ingress: 3,
+        egress: 31,
+        storage: 5,
+        connections: 6,
+        connectionRate: 7,
+        maxPartitions: 8,
+        messageSize: 9,
+        trialDurationHours: undefined,
+      },
+      {
+        id: "x2",
+        displayName: "2",
+        quota: 9,
+        status: "preview",
+        ingress: 30,
+        egress: 301,
+        storage: 50,
+        connections: 60,
+        connectionRate: 70,
+        maxPartitions: 80,
+        messageSize: 90,
+        trialDurationHours: undefined,
+      },
+    ],
+    trial: {
+      id: "trialx1",
       displayName: "1",
-      quota: 3,
-      status: "preview",
-      ingress: 3,
-      egress: 31,
-      storage: 5,
-      connections: 6,
-      connectionRate: 7,
-      maxPartitions: 8,
-      messageSize: 9,
+      quota: 0,
+      status: "stable",
+      ingress: 1,
+      egress: 1,
+      storage: 1,
+      connections: 1,
+      connectionRate: 1,
+      maxPartitions: 1,
+      messageSize: 1,
+      trialDurationHours: 24,
     },
-    {
-      id: "x2",
-      displayName: "2",
-      quota: 9,
-      status: "preview",
-      ingress: 30,
-      egress: 301,
-      storage: 50,
-      connections: 60,
-      connectionRate: 70,
-      maxPartitions: 80,
-      messageSize: 90,
-    },
-  ],
+  },
 };
 
 export function makeAvailableProvidersAndDefaults(
@@ -336,14 +372,15 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     return apiSizes === "normal"
       ? fakeApi<GetSizesData>(
           {
-            sizes: SIZES[provider],
+            ...SIZES[provider],
           },
           apiLatency
         )
       : apiSizes === "no-sizes"
       ? fakeApi<GetSizesData>(
           {
-            sizes: [],
+            standard: [],
+            trial: {},
           },
           apiLatency
         )
