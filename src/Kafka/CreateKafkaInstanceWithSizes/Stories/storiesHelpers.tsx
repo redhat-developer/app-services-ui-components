@@ -358,7 +358,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
             instanceAvailability: apiScenario,
             defaultProvider: apiDefaultProvider,
             providers: apiProviders,
-            remainingQuota: apiRemainingQuota,
+            remainingQuota: apiPlan === "trial" ? 0 : apiRemainingQuota,
             maxStreamingUnits: apiMaxStreamingUnits,
           },
           providers,
