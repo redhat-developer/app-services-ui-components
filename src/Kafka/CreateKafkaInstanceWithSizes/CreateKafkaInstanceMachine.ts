@@ -508,10 +508,14 @@ const CreateKafkaInstanceMachine = createMachine(
       noSizes: ({ sizes }) => sizes === undefined,
       emptySizes: ({ sizes }) =>
         sizes !== undefined && sizes.standard.length === 0,
-      sizeIsInQuota: ({ form, capabilities }) =>
-        capabilities !== undefined &&
-        form.size !== undefined &&
-        form.size.quota <= capabilities.remainingQuota,
+      sizeIsInQuota: ({ form, capabilities }) => {
+        if (capabilities === undefined) return false;
+        if (capabilities.plan === "trial") return true;
+        return (
+          form.size !== undefined &&
+          form.size.quota <= capabilities.remainingQuota
+        );
+      },
       canCreateInstances: ({ capabilities }) =>
         capabilities !== undefined &&
         capabilities.plan !== undefined &&
