@@ -5,7 +5,8 @@ import {
   TimePicker,
   TimePickerProps,
 } from "@patternfly/react-core";
-import { format, formatISO, parseISO, setHours, setMinutes } from "date-fns";
+import { formatISO, parseISO, setHours, setMinutes } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { VoidFunctionComponent } from "react";
 import { DateIsoString } from "../types";
 
@@ -45,7 +46,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
     <InputGroup>
       <DatePicker
         isDisabled={isDisabled}
-        value={date ? format(date, "yyyy-MM-dd") : undefined}
+        value={date ? formatInTimeZone(date, "UTC", "yyyy-MM-dd") : undefined}
         onChange={onSelectCalendar}
       />
       <TimePicker

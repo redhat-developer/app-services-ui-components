@@ -32,6 +32,11 @@
           {
             "name": "dayjs",
             "message": "Please use date-fns instead"
+          },
+          {
+            "name": "date-fns",
+            "importNames": ["format"],
+            "message": "Please use format or formatInTimeZone from date-fns-tz instead"
           }
         ]
       }

@@ -111,12 +111,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
             legendAllowWrap={true}
           >
             <ChartAxis
-              label={
-                "\n" +
-                (xLabel || showDate
-                  ? t("metrics:axis-label-time-full")
-                  : t("metrics:axis-label-time"))
-              }
+              label={"\n" + (xLabel || t("metrics:axis-label-time"))}
               tickValues={tickValues}
               tickFormat={(d) =>
                 dateToChartValue(d, {

@@ -1,5 +1,5 @@
 import byteSize from "byte-size";
-import { format, utcToZonedTime } from "date-fns-tz";
+import { formatInTimeZone } from "date-fns-tz";
 import fromUnixTime from "date-fns/fromUnixTime";
 import sub from "date-fns/sub";
 import { timeIntervalsMapping } from "../consts";
@@ -18,10 +18,7 @@ export const dateToChartValue = (
   { showDate }: { showDate: boolean } = { showDate: false }
 ): string => {
   const date = fromUnixTime(timestamp / 1000);
-  return format(
-    utcToZonedTime(date, "utc"),
-    showDate ? "HH:mm'\n'MM/dd" : "HH:mm"
-  );
+  return formatInTimeZone(date, "utc", showDate ? "HH:mm'\n'MMM dd" : "HH:mm");
 };
 
 export function timestampsToTicks(

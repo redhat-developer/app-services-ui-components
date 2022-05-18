@@ -1,5 +1,3 @@
-import { FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
 import {
   TextContent,
   TextList,
@@ -7,10 +5,12 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from "@patternfly/react-core";
-import { DetailsTabAlert } from "./components/DetailsTabAlert";
-import { format } from "date-fns";
+import { FunctionComponent, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { FormatDate } from "../../shared";
 import { InstanceType } from "../utils";
 import { KafkaSizeSkeleton } from "./KafkaSizeSkeleton";
+import { DetailsTabAlert } from "./components/DetailsTabAlert";
 
 export type KafkaDetailsTabProps = {
   id: string;
@@ -51,7 +51,7 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
 }) => {
   const { t } = useTranslation("kafka");
 
-  const renderTextListItem = (title: string, value?: string) =>
+  const renderTextListItem = (title: string, value?: ReactNode) =>
     value && (
       <>
         <TextListItem component={TextListItemVariants.dt}>{title}</TextListItem>
@@ -125,11 +125,11 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
           {renderTextListItem(t("common:owner"), owner)}
           {renderTextListItem(
             t("common:time_created"),
-            format(createdAt, "PPPP p")
+            <FormatDate date={createdAt} format={"long"} />
           )}
           {renderTextListItem(
             t("common:time_updated"),
-            format(updatedAt, "PPPP p")
+            <FormatDate date={updatedAt} format={"long"} />
           )}
           {renderTextListItem(
             t("common:cloud_provider"),
