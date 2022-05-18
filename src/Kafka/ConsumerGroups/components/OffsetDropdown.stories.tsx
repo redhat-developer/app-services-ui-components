@@ -17,5 +17,5 @@ const Template: ComponentStory<typeof OffsetDropdown> = (args) => (
   <OffsetDropdown {...args} />
 );
 
-export const TopicDropdownSelect = Template.bind({});
-TopicDropdownSelect.args = {};
+export const OffsetDropdownSelect = Template.bind({});
+OffsetDropdownSelect.args = {};

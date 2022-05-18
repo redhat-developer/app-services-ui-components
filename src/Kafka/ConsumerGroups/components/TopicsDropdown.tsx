@@ -23,7 +23,7 @@ export const TopicDropdown: FunctionComponent<TopicDropdown> = ({
   ) => {
     const eventTarget = event?.target as HTMLElement;
     const value = eventTarget.innerText;
-    onChange(value.toLowerCase());
+    onChange(value?.toLowerCase());
     setIsOpen((prevState) => !prevState);
   };
 
@@ -40,7 +40,7 @@ export const TopicDropdown: FunctionComponent<TopicDropdown> = ({
       isOpen={isOpen}
       menuAppendTo={"parent"}
       toggle={
-        <DropdownToggle id="topic-dropdowntoggle" onToggle={onToggle}>
+        <DropdownToggle data-testid="topic-dropdowntoggle" onToggle={onToggle}>
           {value}
         </DropdownToggle>
       }
