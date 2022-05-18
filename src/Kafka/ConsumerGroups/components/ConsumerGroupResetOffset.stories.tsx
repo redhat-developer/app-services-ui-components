@@ -32,7 +32,7 @@ export default {
     groupId: "console",
     topics: consumer.map((consumer) => consumer.topic),
     selectedTopic: "test",
-    selectedOffset: "absolute",
+    selectedOffset: "earliest",
     confirmCheckboxChecked: true,
     isSelected: true,
     consumers: consumer,
