@@ -1,4 +1,6 @@
 export * from "./APIManagementPage";
 export * from "./DataSciencePage";
-export * from "./OverviewPage";
 export * from "./KafkaPage";
+export * from "./KafkaPageV2";
+export * from "./OverviewPage";
+export * from "./OverviewPageV2";
