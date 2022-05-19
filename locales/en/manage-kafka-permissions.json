@@ -7,6 +7,7 @@
   "all_accounts_service_account_group": "Service accounts",
   "all_accounts_title": "All accounts",
   "all_accounts_user_account_group": "User accounts",
+  "is_kafka_instance": "is '{{value}}' ",
   "consumer_group": "Consumer group",
   "dialog_aria_label": "Manage access dialog",
   "dialog_title": "Manage access",

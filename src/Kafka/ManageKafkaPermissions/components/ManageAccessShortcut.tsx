@@ -2,31 +2,20 @@ import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
 import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
-import { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
+import { ResourceTypeLabel } from "./ResourceTypeLabel";
+import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 
-import { ProduceTopicRow } from "./ProduceTopicRow";
-
-export type ProduceTopicShortcutProps = {
-  onChange: (value: string) => void;
-  prefixRuleValue: ResourcePrefixRuleValue;
-  resourceNameValue: string | undefined;
-  onChangeResourceName: (value: string | undefined) => void;
-  onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
-  submitted: boolean;
+export type ManageAccessShortcutProps = {
   onDelete: () => void;
   multipleShorctutPermissions?: boolean;
+  instanceName: string;
 };
-export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
-  onChange,
+export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
   onDelete,
-  prefixRuleValue,
-  onChangeResourceName,
-  resourceNameValue,
-  submitted,
-  onFetchResourceNameOptions,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  instanceName,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -40,16 +29,16 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
             <Flex>
               <FlexItem>
                 <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_produce_topic")}
+                  {t("permissions_dropdown.shortcut_manage_access")}
                 </Title>
               </FlexItem>
               <FlexItem>
                 <Popover
                   headerContent={t(
-                    "permissions_dropdown.shortcut_produce_topic"
+                    "permissions_dropdown.shortcut_manage_access"
                   )}
                   bodyContent={t(
-                    "permissions_dropdown.shortcut_produce_topic_description"
+                    "permissions_dropdown.shortcut_manage_access_description"
                   )}
                 >
                   <OutlinedQuestionCircleIcon />
@@ -73,14 +62,23 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
           </Td>
         </Tr>
 
-        <ProduceTopicRow
-          onChange={onChange}
-          prefixRuleValue={prefixRuleValue}
-          resourceNameValue={resourceNameValue}
-          onChangeResourceName={onChangeResourceName}
-          onFetchResourceNameOptions={onFetchResourceNameOptions}
-          submitted={submitted}
-        />
+        <Tr>
+          <Td>
+            <ResourceTypeLabel variant={"CLUSTER"} />{" "}
+            <DisplayResourceName resourceType={"CLUSTER"} />{" "}
+            {t("is_kafka_instane", instanceName)}
+          </Td>
+
+          <Td />
+          <Td />
+
+          <Td>
+            <PermissionOperationCell
+              permission={"ALLOW"}
+              operation={["ALTER"]}
+            />
+          </Td>
+        </Tr>
       </Tbody>
     </>
   );
