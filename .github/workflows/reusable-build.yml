@@ -33,7 +33,7 @@ jobs:
       - name: Run the test suite
         run: npm run test -- --coverage
       - name: Generate coverage report
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
 
   test-storybook:
     needs: setup
