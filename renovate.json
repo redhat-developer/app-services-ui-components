@@ -6,5 +6,7 @@
       "groupName": "xstate"
     }
   ],
-  "ignoreDeps": ["@xstate/inspect"]
+  "ignoreDeps": ["@xstate/inspect"],
+  "separateMajorMinor": true,
+  "separateMultipleMajor": true
 }
