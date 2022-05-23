@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
 
-  test:
+  test-jest-with-coverage:
     needs: setup
     runs-on: ubuntu-latest
     steps:
@@ -31,13 +31,23 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
       - name: Run the test suite
-        run: |
-          npm run test -- --coverage
-          npm run test-storybook:ci
+        run: npm run test -- --coverage
       - name: Generate coverage report
         uses: codecov/codecov-action@v2
 
-  lintandformat:
+  test-storybook:
+    needs: setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/cache-restore
+        id: cache-node-modules
+        with:
+          node-version: ${{ inputs.node-version }}
+      - name: Run the test suite
+        run: npm run test-storybook:ci
+
+  lint-and-format:
     needs: setup
     runs-on: ubuntu-latest
     steps:
