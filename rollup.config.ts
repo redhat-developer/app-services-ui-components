@@ -1,14 +1,14 @@
-import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import typescript from "rollup-plugin-typescript2";
-import { terser } from "rollup-plugin-terser";
-import autoExternals from "rollup-plugin-auto-external";
-import renameNodeModules from "rollup-plugin-rename-node-modules";
-import postcss from "rollup-plugin-postcss";
-import replace from "@rollup/plugin-replace";
 import json from "@rollup/plugin-json";
+import resolve from "@rollup/plugin-node-resolve";
+import replace from "@rollup/plugin-replace";
 import { importMetaAssets } from "@web/rollup-plugin-import-meta-assets";
 import path from "path";
+import autoExternals from "rollup-plugin-auto-external";
+import postcss from "rollup-plugin-postcss";
+import renameNodeModules from "rollup-plugin-rename-node-modules";
+import { terser } from "rollup-plugin-terser";
+import typescript from "rollup-plugin-typescript2";
 
 import packageJson from "./package.json";
 
@@ -33,6 +33,14 @@ export default {
       preserveModulesRoot: "src",
     },
   ],
+  external: [
+    "react/jsx-runtime",
+    "@patternfly/react-icons/dist/js/icons/external-link-alt-icon",
+    "@patternfly/react-icons/dist/js/icons/search-icon",
+    "@patternfly/react-icons/dist/js/icons/help-icon",
+    "@patternfly/react-icons/dist/js/icons/outlined-clock-icon",
+    "@patternfly/react-icons/dist/js/icons/check-circle-icon",
+  ],
   plugins: [
     autoExternals(),
     renameNodeModules("external"),
@@ -53,4 +61,8 @@ export default {
     importMetaAssets(),
     terser(),
   ],
+  onwarn: (warning: Error) => {
+    // better fail on warnings
+    throw new Error("Warning as error: " + warning.message);
+  },
 };
