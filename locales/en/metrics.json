@@ -61,5 +61,5 @@
   "used_disk_space": "Used disk space",
   "used_disk_space_help_text": "Used disk space is the amount of disk space used by the Kafka broker in the instance. This metric enables you to assess available disk space relative to the limit. To reduce used disk space, you can adjust topic retention time or other topic properties as needed.",
   "metrics_lag_title": "Metrics experience lag",
-  "metrics_lag_description": "Metrics regularly experience lag, and do not automatically refresh.This might result in metrics appearing out-of-sync and with details displayed on other pages."
+  "metrics_lag_description": "Metrics regularly experience lag, and do not automatically refresh. This might result in metrics appearing out-of-sync and with details displayed on other pages."
 }
