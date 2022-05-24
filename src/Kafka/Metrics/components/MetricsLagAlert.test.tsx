@@ -1,7 +1,7 @@
-import { render, waitForI18n } from "../../../test-utils";
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./MetricsLagAlert.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n } from "../../../test-utils";
+import * as stories from "./MetricsLagAlert.stories";
 
 const { LagMessage } = composeStories(stories);
 
@@ -13,7 +13,7 @@ describe("Metric lag", () => {
     expect(await comp.findByText("Metrics experience lag")).toBeInTheDocument();
     expect(
       await comp.findByText(
-        "Metrics regularly experience lag, and do not automatically refresh.This might result in metrics appearing out-of-sync and with details displayed on other pages."
+        "Metrics regularly experience lag, and do not automatically refresh. This might result in metrics appearing out-of-sync and with details displayed on other pages."
       )
     ).toBeInTheDocument();
 
@@ -24,7 +24,7 @@ describe("Metric lag", () => {
     ).not.toBeInTheDocument();
     expect(
       await comp.queryByText(
-        "Metrics regularly experience lag, and do not automatically refresh.This might result in metrics appearing out-of-sync and with details displayed on other pages."
+        "Metrics regularly experience lag, and do not automatically refresh. This might result in metrics appearing out-of-sync and with details displayed on other pages."
       )
     ).not.toBeInTheDocument();
   });
