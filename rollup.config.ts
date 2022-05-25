@@ -61,7 +61,7 @@ export default {
     importMetaAssets(),
     terser(),
   ],
-  onwarn: (warning: Error) => {
+  onwarn: (warning) => {
     // better fail on warnings
     throw new Error("Warning as error: " + warning.message);
   },
