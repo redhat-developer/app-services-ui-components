@@ -1,4 +1,9 @@
-import { Alert, AlertVariant, HelperText } from "@patternfly/react-core";
+import {
+  Alert,
+  AlertVariant,
+  HelperText,
+  HelperTextItem,
+} from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { ExternalLink } from "../../../shared";
@@ -7,20 +12,23 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
   remainingQuota: number;
   isPreview: boolean;
   isUnavailable: boolean;
-}> = ({ remainingQuota, isPreview, isUnavailable }) => {
+  isError: boolean;
+}> = ({ remainingQuota, isPreview, isUnavailable, isError }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
   return (
     <HelperText className={"pf-c-form__helper-text"}>
-      {t("standard_kafka_streaming_unit", {
-        count: remainingQuota,
-      })}
+      <HelperTextItem>
+        {t("standard_kafka_streaming_unit", {
+          count: remainingQuota,
+        })}
+      </HelperTextItem>
 
       {isUnavailable && (
         <Alert
           aria-live="polite"
           role={"alert"}
           className="pf-u-mb-md pf-u-mt-lg"
-          variant={AlertVariant.warning}
+          variant={isError ? "danger" : "warning"}
           title={t("size_unavailable_title")}
           isInline
         >

@@ -20,7 +20,8 @@ export type FieldSizeProps = {
   isDisabled: boolean;
   isLoading: boolean;
   isError: boolean;
-  validity: "valid" | "required" | "over-quota" | "trial";
+  isLoadingError: boolean;
+  validity: "valid" | "required" | "over-quota" | "trial" | "disabled";
   onChange: (size: Size) => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
@@ -32,6 +33,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   isDisabled,
   isLoading,
   isError,
+  isLoadingError,
   validity,
   onChange,
   onLearnHowToAddStreamingUnits,
@@ -45,7 +47,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     <FieldSizeHelperTextTrial onClick={onLearnMoreAboutSizes} />
   );
 
-  if (isLoading || isError) {
+  if (isLoading || isLoadingError) {
     return (
       <FormGroupWithPopover
         labelHead={t("common:size")}
@@ -64,7 +66,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
             </GridItem>
           </Grid>
         }
-        validated={isError ? "error" : "default"}
+        validated={isLoadingError ? "error" : "default"}
         helperTextInvalid={t("sizes_error")}
       />
     );
@@ -99,6 +101,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       remainingQuota={remainingQuota}
       isPreview={sizes[valueIndex]?.status === "preview"}
       isUnavailable={sizes[valueIndex]?.isDisabled}
+      isError={isError}
     />
   );
   const helperTextOverQuota = (
@@ -115,7 +118,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   const validation =
     (validity !== "valid" || remainingQuota < value) &&
     validity !== "trial" &&
-    validity !== "required"
+    isError
       ? "error"
       : "default";
 

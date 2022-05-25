@@ -323,6 +323,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     isSizeOverQuota,
     isSizeDisabled,
     isSizeError,
+    isSizeLoadingError,
     isFormEnabled,
     isLoadingSizes,
     isLoading,
@@ -338,6 +339,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
+      isLoadingError={isSizeLoadingError}
       validity={
         isTrial
           ? "trial"
