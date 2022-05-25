@@ -18,6 +18,7 @@ export type ModalAlertsProps = {
   onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   maxStreamingUnits: number | undefined;
+  trialDurationInHours: number | undefined;
 };
 
 export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
@@ -28,6 +29,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
   onClickKafkaOverview,
   onClickContactUs,
   maxStreamingUnits,
+  trialDurationInHours,
 }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
 
@@ -168,7 +170,7 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                       isInline
                     />,
                   ]}
-                  values={{ time: 48 }}
+                  values={{ time: trialDurationInHours }}
                 />
               </Alert>
             );
