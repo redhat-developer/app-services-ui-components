@@ -24,10 +24,11 @@ export const AWS: ProviderInfo = {
   id: "aws",
   displayName: "Amazon Web Services",
   regions: [
-    { id: "eu-west-1", displayName: "EU, Ireland" },
+    { id: "eu-west-1", displayName: "EU, Ireland", isDisabled: false },
     {
       id: "us-east-1",
       displayName: "US East, N. Virginia",
+      isDisabled: false,
     },
   ],
 };
@@ -39,10 +40,12 @@ export const AZURE: ProviderInfo = {
     {
       id: "australiaeast",
       displayName: "Australia East",
+      isDisabled: false,
     },
     {
       id: "europenorth",
       displayName: "Europe North",
+      isDisabled: false,
     },
   ],
 };
@@ -65,6 +68,7 @@ const SIZES: { [key: string]: GetSizesData } = {
         maxPartitions: 8,
         messageSize: 9,
         trialDurationHours: undefined,
+        isDisabled: false,
       },
       {
         id: "x2",
@@ -79,10 +83,26 @@ const SIZES: { [key: string]: GetSizesData } = {
         maxPartitions: 80,
         messageSize: 90,
         trialDurationHours: undefined,
+        isDisabled: false,
       },
       {
         id: "x3",
         displayName: "3",
+        quota: 3,
+        status: "preview",
+        ingress: 300,
+        egress: 3001,
+        storage: 500,
+        connections: 600,
+        connectionRate: 700,
+        maxPartitions: 800,
+        messageSize: 900,
+        trialDurationHours: undefined,
+        isDisabled: true,
+      },
+      {
+        id: "x5",
+        displayName: "5",
         quota: 5,
         status: "preview",
         ingress: 300,
@@ -93,6 +113,7 @@ const SIZES: { [key: string]: GetSizesData } = {
         maxPartitions: 800,
         messageSize: 900,
         trialDurationHours: undefined,
+        isDisabled: false,
       },
     ],
     trial: {
@@ -108,6 +129,7 @@ const SIZES: { [key: string]: GetSizesData } = {
       maxPartitions: 1,
       messageSize: 1,
       trialDurationHours: 48,
+      isDisabled: false,
     },
   },
   azure: {
@@ -125,6 +147,7 @@ const SIZES: { [key: string]: GetSizesData } = {
         maxPartitions: 8,
         messageSize: 9,
         trialDurationHours: undefined,
+        isDisabled: false,
       },
       {
         id: "x2",
@@ -139,6 +162,7 @@ const SIZES: { [key: string]: GetSizesData } = {
         maxPartitions: 80,
         messageSize: 90,
         trialDurationHours: undefined,
+        isDisabled: false,
       },
     ],
     trial: {
@@ -154,6 +178,7 @@ const SIZES: { [key: string]: GetSizesData } = {
       maxPartitions: 1,
       messageSize: 1,
       trialDurationHours: 24,
+      isDisabled: false,
     },
   },
 };
@@ -453,9 +478,8 @@ export const sampleSubmit: PlayFunction<
   await userEvent.click(regionSelect);
   await userEvent.click(await canvas.findByText("US East, N. Virginia"));
 
-  await waitFor(() =>
-    expect(canvas.getByTestId("size-slider")).toBeInTheDocument()
-  );
+  expect(await canvas.findByTestId("size-slider")).not.toBeNull();
+
   await userEvent.click(
     await canvas.findByTestId("modalCreateKafka-buttonSubmit")
   );

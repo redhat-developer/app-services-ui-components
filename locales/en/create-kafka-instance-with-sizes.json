@@ -86,6 +86,8 @@
   "size_help_content": "Size of a $t(common:kafka) instance is based on streaming units. The number of streaming units defines the capacity, resources, and limits of an instance. An instance with a larger size can handle higher loads and process larger amounts of events, has more storage, and can handle more clients and connections.",
   "size_preview_message": "The selected size is available as a Technology Preview with limited capabilities at this time. To learn more, refer to the Workload Balancing section of the <0>Service Definition</0> page.",
   "size_preview_title": "Technology Preview",
+  "size_unavailable_message": "Try a different selection or try again later",
+  "size_unavailable_title": "The selected size is temporarily unavailable in the selected cloud region",
   "sizes_error": "$t(common:something_went_wrong) while fetching the available sizes. Select another cloud provider or cloud region, or try again later.",
   "sizes_missing": "Size options display when a cloud provider and region are selected",
   "some_region_unavailable_helper_text": "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later.",

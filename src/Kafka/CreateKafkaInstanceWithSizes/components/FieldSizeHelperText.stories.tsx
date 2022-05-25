@@ -25,3 +25,8 @@ export const TechPreview = Template.bind({});
 TechPreview.args = {
   isPreview: true,
 };
+
+export const Unavailable = Template.bind({});
+Unavailable.args = {
+  isUnavailable: true,
+};

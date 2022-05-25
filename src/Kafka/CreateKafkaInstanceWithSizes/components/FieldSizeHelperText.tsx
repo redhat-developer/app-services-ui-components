@@ -6,7 +6,8 @@ import { ExternalLink } from "../../../shared";
 export const FieldSizeHelperText: VoidFunctionComponent<{
   remainingQuota: number;
   isPreview: boolean;
-}> = ({ remainingQuota, isPreview }) => {
+  isUnavailable: boolean;
+}> = ({ remainingQuota, isPreview, isUnavailable }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
   return (
     <HelperText className={"pf-c-form__helper-text"}>
@@ -14,7 +15,19 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
         count: remainingQuota,
       })}
 
-      {isPreview && (
+      {isUnavailable && (
+        <Alert
+          aria-live="polite"
+          role={"alert"}
+          className="pf-u-mb-md pf-u-mt-lg"
+          variant={AlertVariant.warning}
+          title={t("size_unavailable_title")}
+          isInline
+        >
+          {t("size_unavailable_message")}
+        </Alert>
+      )}
+      {isPreview && !isUnavailable && (
         <Alert
           aria-live="polite"
           role={"alert"}

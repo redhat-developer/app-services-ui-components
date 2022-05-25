@@ -13,7 +13,7 @@ export type Region = string;
 export type RegionInfo = {
   id: Region;
   displayName: string;
-  isDisabled?: boolean;
+  isDisabled: boolean;
 };
 export type AZ = "single" | "multi";
 export type ProviderInfo = {
@@ -37,13 +37,13 @@ export type Size = {
   maxPartitions: number;
   messageSize: number;
   trialDurationHours: number | undefined;
+  isDisabled: boolean;
 };
 
 export type CreateKafkaInstanceError =
   | "over-quota"
   | "name-taken"
   | "trial-unavailable"
-  | "form-invalid"
   | "region-unavailable"
   | "unknown";
 

@@ -34,6 +34,8 @@
   "metric_kpi_topics_description": "Topics are event logs in a $t(common:kafka) instance. This metric shows the total number of topics in the $t(common:kafka) instance.",
   "metric_kpi_topics_name": "Topics",
   "metric_not_available": "Data unavailable",
+  "metrics_lag_description": "Metrics regularly experience lag, and do not automatically refresh.This might result in metrics appearing out-of-sync and with details displayed on other pages.",
+  "metrics_lag_title": "Metrics experience lag",
   "outgoing_bytes": "Outgoing bytes ({{topic}})",
   "outgoing_bytes_all_topics": "Outgoing bytes (all topics)",
   "partition_limit": "Limit {{topic}} partitions",

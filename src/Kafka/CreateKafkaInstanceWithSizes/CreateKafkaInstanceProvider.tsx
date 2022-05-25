@@ -13,6 +13,7 @@ import {
   NAME_VALID,
   PROVIDER_VALID,
   REGION_VALID,
+  SIZE_DISABLED,
   SIZE_ERROR,
   SIZE_IDLE,
   SIZE_LOADING,
@@ -20,6 +21,7 @@ import {
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
 import {
+  CreateKafkaInstanceError,
   MakeCreateKafkaInstanceMachine,
   Provider,
   Region,
@@ -72,15 +74,13 @@ export function useCreateKafkaInstanceMachine() {
 
   const selector = useCallback(
     (state: typeof service.state) => {
-      const isTrial =
-        state.context.capabilities === undefined ||
-        state.context.capabilities.plan === "trial";
-      const isFormInvalid = state.context.creationError === "form-invalid";
+      const isTrial = state.matches("trialPlan");
+      const isFormInvalid = state.hasTag("formInvalid");
       const isNameTaken = state.context.creationError === "name-taken";
 
       const isLoading = state.matches("loading");
-      const isSaving = state.matches("saving");
-      const canCreate = state.matches("configuring");
+      const isSaving = state.hasTag("formSaving");
+      const canCreate = state.hasTag("configurable");
       const isLoadingSizes = state.hasTag(SIZE_LOADING);
 
       const selectedSize = isTrial
@@ -88,6 +88,13 @@ export function useCreateKafkaInstanceMachine() {
         : state.context.sizes?.standard.find(
             (s) => state.context.form.size?.id === s.id
           );
+
+      const error: CreateKafkaInstanceError | "form-invalid" | undefined = state
+        .context.creationError
+        ? state.context.creationError
+        : state.hasTag("formInvalid")
+        ? "form-invalid"
+        : undefined;
 
       return {
         form: state.context.form,
@@ -105,6 +112,7 @@ export function useCreateKafkaInstanceMachine() {
           isNameTaken ||
           (!state.hasTag(NAME_VALID) && isFormInvalid),
         isNameTaken,
+        isSizeDisabled: state.hasTag(SIZE_DISABLED),
         isSizeOverQuota: state.hasTag(SIZE_OVER_QUOTA),
         isSizeError: state.hasTag(SIZE_ERROR),
         isSizeAvailable: !state.hasTag(SIZE_IDLE),
@@ -120,7 +128,7 @@ export function useCreateKafkaInstanceMachine() {
         canSave: state.can("create"),
         isSystemUnavailable: state.hasTag(SYSTEM_UNAVAILABLE),
 
-        error: state.context.creationError,
+        error,
 
         setName,
         setProvider,

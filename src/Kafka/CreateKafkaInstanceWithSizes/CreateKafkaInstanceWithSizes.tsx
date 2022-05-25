@@ -127,6 +127,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
       ouiaId="modal-create-kafka"
       onClose={onCancel}
       appendTo={appendTo}
+      position="top"
       actions={[
         <Button
           key="submit"
@@ -189,7 +190,10 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
           className="mas--CreateKafkaInstanceWithSizes__sidebar"
         >
           {isLoadingSizes || selectedSize === undefined ? (
-            <InstanceInfoSkeleton onClickQuickStart={onClickQuickStart} />
+            <InstanceInfoSkeleton
+              isTrial={isTrial}
+              onClickQuickStart={onClickQuickStart}
+            />
           ) : (
             <InstanceInfo
               isTrial={isTrial}
@@ -317,6 +321,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     sizes,
     isSizeAvailable,
     isSizeOverQuota,
+    isSizeDisabled,
     isSizeError,
     isFormEnabled,
     isLoadingSizes,
@@ -333,7 +338,15 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
-      validity={isTrial ? "trial" : isSizeOverQuota ? "over-quota" : "valid"}
+      validity={
+        isTrial
+          ? "trial"
+          : isSizeOverQuota
+          ? "over-quota"
+          : isSizeDisabled
+          ? "required"
+          : "valid"
+      }
       onChange={setSize}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}

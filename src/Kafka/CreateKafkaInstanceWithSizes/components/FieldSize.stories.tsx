@@ -12,6 +12,26 @@ const sizes = [
   { id: "x5", displayName: "5", status: "preview", quota: 15 },
 ] as Size[];
 
+const sizesWithDisabled = [
+  { id: "x1", displayName: "1", status: "stable", quota: 1 },
+  { id: "x2", displayName: "2", status: "preview", quota: 3, isDisabled: true },
+  { id: "x3", displayName: "3", status: "preview", quota: 5, isDisabled: true },
+  {
+    id: "x4",
+    displayName: "4",
+    status: "preview",
+    quota: 10,
+    isDisabled: true,
+  },
+  {
+    id: "x5",
+    displayName: "5",
+    status: "preview",
+    quota: 15,
+    isDisabled: true,
+  },
+] as Size[];
+
 const summitSizes = [
   { id: "x1", displayName: "1", status: "stable", quota: 1 },
   { id: "x2", displayName: "2", status: "preview", quota: 2 },
@@ -45,6 +65,13 @@ export const Default = Template.bind({});
 export const TechPreview = Template.bind({});
 TechPreview.args = {
   value: 3,
+};
+
+export const SomeSizeDisabled = Template.bind({});
+SomeSizeDisabled.args = {
+  value: 3,
+  sizes: sizesWithDisabled,
+  validity: "required",
 };
 
 export const NoSizes = Template.bind({});

@@ -1,4 +1,10 @@
-import { Skeleton, Slider, SliderProps } from "@patternfly/react-core";
+import {
+  Grid,
+  GridItem,
+  Skeleton,
+  Slider,
+  SliderProps,
+} from "@patternfly/react-core";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormGroupWithPopover } from "../../../shared";
@@ -48,7 +54,16 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         labelBody={t("size_help_content")}
         buttonAriaLabel={t("size_field_aria")}
         isRequired={isRequired}
-        helperText={<Skeleton width={"50%"} />}
+        helperText={
+          <Grid sm={6} lg={12} hasGutter data-testid={"size-loading"}>
+            <GridItem>
+              <Skeleton width={"50%"} fontSize={"3xl"} />
+            </GridItem>
+            <GridItem>
+              <Skeleton width={"40%"} fontSize={"sm"} />
+            </GridItem>
+          </Grid>
+        }
         validated={isError ? "error" : "default"}
         helperTextInvalid={t("sizes_error")}
       />
@@ -65,7 +80,9 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         buttonAriaLabel={t("size_field_aria")}
         isRequired={isRequired}
         helperText={validity === "trial" ? helperTextTrial : t("sizes_missing")}
-      />
+      >
+        <div data-testid={"size-slider"} />
+      </FormGroupWithPopover>
     );
   }
 
@@ -81,6 +98,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     <FieldSizeHelperText
       remainingQuota={remainingQuota}
       isPreview={sizes[valueIndex]?.status === "preview"}
+      isUnavailable={sizes[valueIndex]?.isDisabled}
     />
   );
   const helperTextOverQuota = (
@@ -95,7 +113,9 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   };
 
   const validation =
-    (validity !== "valid" || remainingQuota < value) && validity !== "trial"
+    (validity !== "valid" || remainingQuota < value) &&
+    validity !== "trial" &&
+    validity !== "required"
       ? "error"
       : "default";
 
@@ -110,7 +130,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       validated={validation}
       helperText={validity !== "trial" ? helperText : helperTextTrial}
       helperTextInvalid={
-        validity === "over-quota" ? helperTextOverQuota : undefined
+        validity === "over-quota" ? helperTextOverQuota : helperText
       }
     >
       <div className="pf-c-input-group pf-u-w-50">

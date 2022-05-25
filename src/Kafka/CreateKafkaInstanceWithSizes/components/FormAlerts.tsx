@@ -10,7 +10,7 @@ import { Trans, useTranslation } from "react-i18next";
 import { CreateKafkaInstanceError } from "../types";
 
 export type FormAlertsProps = {
-  error: CreateKafkaInstanceError | undefined;
+  error: CreateKafkaInstanceError | "form-invalid" | undefined;
   onClickContactUS: () => void;
   streamingUnits?: number;
   maxStreamingUnits?: number;

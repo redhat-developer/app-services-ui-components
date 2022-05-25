@@ -5,20 +5,24 @@ import {
   CardBody,
   CardTitle,
   DescriptionList,
+  DescriptionListDescription,
   DescriptionListGroup,
+  DescriptionListTerm,
   Grid,
   GridItem,
   Skeleton,
   Stack,
   StackItem,
 } from "@patternfly/react-core";
+import ClockIcon from "@patternfly/react-icons/dist/js/icons/outlined-clock-icon";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { InstanceInfoProps } from "./InstanceInfo";
 
-export const InstanceInfoSkeleton: VoidFunctionComponent<
-  Pick<InstanceInfoProps, "onClickQuickStart">
-> = ({ onClickQuickStart }) => {
+export const InstanceInfoSkeleton: VoidFunctionComponent<InstanceInfoProps> = ({
+  isTrial,
+  onClickQuickStart,
+}) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
   return (
     <Stack hasGutter data-testid={"instance-info"}>
@@ -29,29 +33,88 @@ export const InstanceInfoSkeleton: VoidFunctionComponent<
             <DescriptionList isCompact>
               <DescriptionListGroup>
                 <Grid sm={6} lg={12} hasGutter>
+                  {!isTrial && (
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("common:size")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        <Skeleton
+                          width="35%"
+                          screenreaderText="Loading contents"
+                        />
+                      </DescriptionListDescription>
+                    </GridItem>
+                  )}
+                  {isTrial && (
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("kafka:duration")}
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        <ClockIcon color="var(--pf-global--info-color--100)" />{" "}
+                        <Skeleton
+                          width="35%"
+                          screenreaderText="Loading contents"
+                        />
+                      </DescriptionListDescription>
+                    </GridItem>
+                  )}
                   <GridItem>
-                    <Skeleton width="75%" screenreaderText="Loading contents" />
+                    <DescriptionListTerm>
+                      {t("kafka:ingress")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="75%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="66%" />
+                    <DescriptionListTerm>
+                      {t("kafka:egress")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="66%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="66%" />
+                    <DescriptionListTerm>
+                      {t("kafka:storage")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="66%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="50%" />
+                    <DescriptionListTerm>
+                      {t("kafka:partitions")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="50%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="33%" />
+                    <DescriptionListTerm>
+                      {t("kafka:client_connections")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="33%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="25%" />
+                    <DescriptionListTerm>
+                      {t("kafka:connection_rate")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="25%" />
+                    </DescriptionListDescription>
                   </GridItem>
                   <GridItem>
-                    <Skeleton width="55%" />
-                  </GridItem>
-                  <GridItem>
-                    <Skeleton width="35%" />
+                    <DescriptionListTerm>
+                      {t("kafka:message_size")}
+                    </DescriptionListTerm>
+                    <DescriptionListDescription>
+                      <Skeleton width="55%" />
+                    </DescriptionListDescription>
                   </GridItem>
                 </Grid>
               </DescriptionListGroup>
