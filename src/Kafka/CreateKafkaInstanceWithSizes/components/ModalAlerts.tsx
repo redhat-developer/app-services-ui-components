@@ -113,6 +113,10 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
               </Alert>
             );
           case instanceAvailability === "trial-unavailable":
+          case plan === "trial" &&
+            instanceAvailability === "regions-unavailable":
+          case plan === "trial" &&
+            instanceAvailability === "instance-unavailable":
             return (
               <Alert
                 role={"alert"}

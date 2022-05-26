@@ -241,7 +241,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
 
     expect(
       await comp.queryByText(
-        "Cloud provider regions are temporarily unavailable. Try again later.",
+        "All available trial instances are currently in use. Try again later.",
         { exact: false }
       )
     ).toBeInTheDocument();

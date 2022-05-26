@@ -19,9 +19,7 @@ try {
 } catch (e) {}
 
 export const parameters: Parameters = {
-  xstate: {
-    height: "1000px",
-  },
+  xstate: {},
   xstateInspectOptions: {
     url: "https://stately.ai/viz?inspect",
     serialize: null,

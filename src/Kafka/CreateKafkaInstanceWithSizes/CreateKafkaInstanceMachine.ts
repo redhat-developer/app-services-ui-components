@@ -24,8 +24,200 @@ export const SYSTEM_UNAVAILABLE = "systemUnavailable";
 export const SIZE_IDLE = "sizeIdle";
 export const SIZE_LOADING = "sizeLoading";
 export const SIZE_VALID = "sizeValid";
+export const SIZE_DISABLED = "sizeDisabled";
 export const SIZE_OVER_QUOTA = "sizeOverQuota";
 export const SIZE_ERROR = "sizeError";
+
+const formStates = {
+  initial: "unsubmitted",
+  states: {
+    unsubmitted: {
+      tags: "formUnsubmitted",
+    },
+    invalid: {
+      tags: "formInvalid",
+    },
+    saving: {
+      tags: "formSaving",
+      entry: "resetCreationErrorMessage",
+      invoke: {
+        src: "createInstance",
+      },
+      on: {
+        createSuccess: "#complete",
+        createError: {
+          actions: "setCreationError",
+          target: "invalid",
+        },
+        create: undefined,
+      },
+    },
+  },
+  on: {
+    create: [
+      {
+        target: ".saving",
+        cond: "canSave",
+        actions: "formSubmit",
+      },
+      {
+        target: ".invalid",
+        actions: "formSubmit",
+      },
+    ],
+    formChange: {
+      actions: "resetCreationErrorMessage",
+      cond: "canSave",
+    },
+  },
+};
+
+const nameStates = {
+  initial: "untouched",
+  states: {
+    untouched: { tags: NAME_UNTOUCHED },
+    empty: {
+      tags: NAME_EMPTY,
+    },
+    invalid: {
+      tags: NAME_INVALID,
+    },
+    valid: {
+      tags: NAME_VALID,
+    },
+    validate: {
+      always: [
+        {
+          cond: "nameIsEmpty",
+          target: "empty",
+        },
+        {
+          cond: "nameIsValid",
+          target: "valid",
+        },
+        { target: "invalid" },
+      ],
+    },
+  },
+  on: {
+    formSubmit: ".validate",
+    nameChange: {
+      actions: ["setName", "formChange"],
+      target: ".validate",
+    },
+  },
+};
+
+const providerStates = {
+  initial: "untouched",
+  states: {
+    untouched: { tags: PROVIDER_UNTOUCHED },
+    validate: {
+      always: [
+        { cond: "providerIsValid", target: "valid" },
+        { target: "invalid" },
+      ],
+    },
+    invalid: {
+      tags: PROVIDER_INVALID,
+    },
+    valid: {
+      tags: PROVIDER_VALID,
+    },
+  },
+  on: {
+    initDone: ".validate",
+    formSubmit: ".validate",
+    providerChange: {
+      cond: "didProviderChange",
+      actions: ["setProvider", "formChange"],
+      target: ".validate",
+    },
+  },
+};
+
+const regionStates = {
+  initial: "untouched",
+  states: {
+    untouched: { tags: REGION_UNTOUCHED },
+    validate: {
+      always: [
+        { cond: "regionIsValid", target: "valid" },
+        { target: "invalid" },
+      ],
+    },
+    invalid: {
+      tags: REGION_INVALID,
+    },
+    valid: {
+      tags: REGION_VALID,
+    },
+  },
+  on: {
+    initDone: ".validate",
+    formSubmit: ".validate",
+    providerChange: ".validate",
+    regionChange: {
+      cond: "didRegionChange",
+      actions: ["setRegion", "formChange"],
+      target: ".validate",
+    },
+  },
+};
+
+const sizeStates = {
+  initial: "validate",
+  states: {
+    validate: {
+      always: [
+        { cond: "noProviderAndRegion", target: "idle" },
+        { cond: "noSizes", target: "loading" },
+        { cond: "emptySizes", target: "error" },
+        { cond: "sizeIsDisabled", target: "disabled" },
+        { cond: "sizeIsOverQuota", target: "overQuota" },
+        { target: "valid" },
+      ],
+    },
+    idle: {
+      tags: SIZE_IDLE,
+    },
+    disabled: {
+      tags: SIZE_DISABLED,
+    },
+    overQuota: {
+      tags: SIZE_OVER_QUOTA,
+    },
+    valid: {
+      tags: SIZE_VALID,
+    },
+    error: {
+      tags: SIZE_ERROR,
+    },
+    loading: {
+      tags: SIZE_LOADING,
+      invoke: {
+        src: "getSizes",
+        onDone: {
+          target: "validate",
+          actions: "setSizes",
+        },
+        onError: "error",
+      },
+      description:
+        "Fetch the data required to show the available sizes and limits",
+    },
+  },
+  on: {
+    formSubmit: ".validate",
+    providerChange: ".validate",
+    regionChange: ".validate",
+    sizeChange: {
+      cond: "didSizeChange",
+      actions: ["setSize", "formChange"],
+      target: ".validate",
+    },
+  },
+};
 
 const CreateKafkaInstanceMachine = createMachine(
   {
@@ -59,8 +251,9 @@ const CreateKafkaInstanceMachine = createMachine(
         creationError: CreateKafkaInstanceError | undefined;
       },
       events: {} as
-        | { type: "fieldChange" }
+        | { type: "initDone" }
         | { type: "formChange" }
+        | { type: "formSubmit" }
         | { type: "nameChange"; name: string }
         | { type: "providerChange"; provider: Provider }
         | { type: "regionChange"; region: Region }
@@ -103,222 +296,83 @@ const CreateKafkaInstanceMachine = createMachine(
         invoke: {
           src: "getAvailableProvidersAndDefaults",
           onDone: {
-            target: "verifyAvailability",
-            actions: "setAvailableProvidersAndDefault",
+            target: "selectPlan",
+            actions: ["setAvailableProvidersAndDefault", "initDone"],
           },
           onError: "systemUnavailable",
         },
         description: "Fetch the data required to drive the creation flow",
       },
       systemUnavailable: { type: "final", tags: SYSTEM_UNAVAILABLE },
-      verifyAvailability: {
+      selectPlan: {
         always: [
-          { cond: "isOverQuota", target: "cantCreate.over-quota" },
-          { cond: "isTrialUsed", target: "cantCreate.trial-used" },
-          {
-            cond: "isInstanceUnavailable",
-            target: "cantCreate.instance-unavailable",
-          },
-          {
-            cond: "isRegionsUnavailable",
-            target: "cantCreate.regions-unavailable",
-          },
-          {
-            cond: "isTrialUnavailable",
-            target: "cantCreate.trial-unavailable",
-          },
-          { cond: "canCreateInstances", target: "configuring" },
-          { target: "cantCreate" },
+          { cond: "canCreateStandardInstances", target: "standardPlan" },
+          { cond: "canCreateTrialInstances", target: "trialPlan" },
         ],
       },
-      cantCreate: {
-        initial: "unknown-error",
+      standardPlan: {
+        initial: "verifyAvailability",
         states: {
-          "unknown-error": {},
-          "over-quota": {},
-          "trial-used": {},
-          "instance-unavailable": {},
-          "regions-unavailable": {},
-          "trial-unavailable": {},
+          verifyAvailability: {
+            always: [
+              { cond: "isOverQuota", target: "overQuota" },
+              {
+                cond: "isInstanceUnavailable",
+                target: "instanceUnavailable",
+              },
+              {
+                cond: "isRegionsUnavailable",
+                target: "regionsUnavailable",
+              },
+              "configuring",
+            ],
+          },
+          overQuota: { type: "final" },
+          instanceUnavailable: { type: "final" },
+          regionsUnavailable: { type: "final" },
+          configuring: {
+            tags: "configurable",
+            type: "parallel",
+            states: {
+              name: nameStates,
+              provider: providerStates,
+              region: regionStates,
+              size: sizeStates,
+              form: formStates,
+            },
+          },
         },
       },
-      configuring: {
-        type: "parallel",
+      trialPlan: {
+        initial: "verifyAvailability",
         states: {
-          name: {
-            initial: "validate",
+          verifyAvailability: {
+            always: [
+              { cond: "isTrialUsed", target: "trialUsed" },
+              {
+                cond: "isTrialUnavailable",
+                target: "trialUnavailable",
+              },
+              "configuring",
+            ],
+          },
+          trialUsed: { type: "final" },
+          trialUnavailable: { type: "final" },
+          configuring: {
+            tags: "configurable",
+            type: "parallel",
             states: {
-              untouched: { tags: NAME_UNTOUCHED },
-              empty: {
-                tags: NAME_EMPTY,
-              },
-              invalid: {
-                tags: NAME_INVALID,
-              },
-              valid: {
-                tags: NAME_VALID,
-              },
-              validate: {
-                always: [
-                  {
-                    cond: "nameIsUntouched",
-                    target: "untouched",
-                  },
-                  {
-                    cond: "nameIsEmpty",
-                    target: "empty",
-                  },
-                  {
-                    cond: "nameIsValid",
-                    target: "valid",
-                  },
-                  { target: "invalid" },
-                ],
-              },
+              name: nameStates,
+              provider: providerStates,
+              region: regionStates,
+              form: formStates,
+              size: sizeStates,
             },
-            on: {
-              nameChange: {
-                actions: ["setName", "fieldChange"],
-                target: ".validate",
-              },
-            },
-          },
-          provider: {
-            initial: "validate",
-            states: {
-              untouched: { tags: PROVIDER_UNTOUCHED },
-              validate: {
-                always: [
-                  { cond: "providerIsUntouched", target: "untouched" },
-                  { cond: "providerIsValid", target: "valid" },
-                  { target: "invalid" },
-                ],
-              },
-              invalid: {
-                tags: PROVIDER_INVALID,
-              },
-              valid: {
-                tags: PROVIDER_VALID,
-              },
-            },
-            on: {
-              providerChange: {
-                actions: ["setProvider", "fieldChange"],
-                target: ".validate",
-              },
-            },
-          },
-          region: {
-            initial: "validate",
-            states: {
-              untouched: { tags: REGION_UNTOUCHED },
-              validate: {
-                always: [
-                  { cond: "regionIsUntouched", target: "untouched" },
-                  { cond: "regionIsValid", target: "valid" },
-                  { target: "invalid" },
-                ],
-              },
-              invalid: {
-                tags: REGION_INVALID,
-              },
-              valid: {
-                tags: REGION_VALID,
-              },
-            },
-            on: {
-              regionChange: {
-                actions: ["setRegion", "fieldChange"],
-                target: ".validate",
-              },
-            },
-          },
-          size: {
-            initial: "validate",
-            states: {
-              validate: {
-                always: [
-                  { cond: "noProviderAndRegion", target: "idle" },
-                  { cond: "noSizes", target: "loading" },
-                  { cond: "emptySizes", target: "error" },
-                  { cond: "sizeIsInQuota", target: "valid" },
-                  { target: "overQuota" },
-                ],
-              },
-              idle: {
-                tags: SIZE_IDLE,
-              },
-              overQuota: {
-                tags: SIZE_OVER_QUOTA,
-              },
-              valid: {
-                tags: SIZE_VALID,
-              },
-              error: {
-                tags: SIZE_ERROR,
-              },
-              loading: {
-                tags: SIZE_LOADING,
-                invoke: {
-                  src: "getSizes",
-                  onDone: {
-                    target: "validate",
-                    actions: "setSizes",
-                  },
-                  onError: "error",
-                },
-                description:
-                  "Fetch the data required to show the available sizes and limits",
-              },
-            },
-            on: {
-              providerChange: {
-                target: ".validate",
-              },
-              regionChange: {
-                target: ".validate",
-              },
-              sizeChange: {
-                actions: ["setSize", "fieldChange"],
-                target: ".validate",
-              },
-            },
-          },
-        },
-        on: {
-          create: [
-            {
-              target: "saving",
-              cond: "canSave",
-            },
-            {
-              target: "formInvalid",
-            },
-          ],
-          formChange: {
-            actions: "resetCreationErrorMessage",
-            cond: "canSave",
-          },
-        },
-      },
-      formInvalid: {
-        entry: "markRequiredFields",
-        always: "configuring",
-      },
-      saving: {
-        entry: "resetCreationErrorMessage",
-        invoke: {
-          src: "createInstance",
-        },
-        on: {
-          createSuccess: "complete",
-          createError: {
-            actions: "setCreationError",
-            target: "configuring",
           },
         },
       },
       complete: {
+        id: "complete",
         type: "final",
       },
     },
@@ -387,9 +441,10 @@ const CreateKafkaInstanceMachine = createMachine(
           standard: event.data.standard,
           trial: event.data.trial,
         };
-        const smallestSize = sizes.standard.sort(
-          (a, b) => a.quota - b.quota
-        )[0];
+        const smallestSize =
+          context.capabilities?.plan === "trial"
+            ? sizes.trial
+            : sizes.standard.sort((a, b) => a.quota - b.quota)[0];
         return {
           sizes,
           form: {
@@ -398,7 +453,9 @@ const CreateKafkaInstanceMachine = createMachine(
           },
         };
       }),
-      fieldChange: send("formChange"),
+      initDone: send("initDone"),
+      formChange: send("formChange"),
+      formSubmit: send("formSubmit"),
       setName: assign((context, { name }) => {
         if (context.creationError === "name-taken") {
           return { form: { ...context.form, name }, creationError: undefined };
@@ -452,10 +509,6 @@ const CreateKafkaInstanceMachine = createMachine(
       setCreationError: assign((_context, { error }) => ({
         creationError: error,
       })),
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      markRequiredFields: assign((_context) => ({
-        creationError: "form-invalid" as CreateKafkaInstanceError,
-      })),
     },
     guards: {
       isOverQuota: ({ capabilities }) =>
@@ -472,13 +525,11 @@ const CreateKafkaInstanceMachine = createMachine(
         capabilities.instanceAvailability === "regions-unavailable",
       isTrialUnavailable: ({ capabilities }) =>
         capabilities === undefined ||
-        capabilities.instanceAvailability === "trial-unavailable",
-      nameIsUntouched: ({ form }) => form.name === undefined,
+        capabilities.instanceAvailability !== "trial-available",
       nameIsEmpty: ({ form }) =>
-        form.name !== undefined && form.name.length === 0,
+        form.name === undefined || form.name.length === 0,
       nameIsValid: ({ form }) =>
         /^[a-z]([-a-z0-9]*[a-z0-9])?$/.test(form.name || ""),
-      providerIsUntouched: ({ form }) => form.provider === undefined,
       providerIsValid: ({ form, capabilities }) => {
         const selectedProviderInfo = capabilities?.availableProviders.find(
           (p) => p.id === form.provider
@@ -490,7 +541,6 @@ const CreateKafkaInstanceMachine = createMachine(
           selectedProviderInfo !== undefined
         );
       },
-      regionIsUntouched: ({ form }) => form.region === undefined,
       regionIsValid: ({ form, capabilities }) => {
         const selectedProviderInfo = capabilities?.availableProviders.find(
           (p) => p.id === form.provider
@@ -508,18 +558,19 @@ const CreateKafkaInstanceMachine = createMachine(
       noSizes: ({ sizes }) => sizes === undefined,
       emptySizes: ({ sizes }) =>
         sizes !== undefined && sizes.standard.length === 0,
-      sizeIsInQuota: ({ form, capabilities }) => {
-        if (capabilities === undefined) return false;
-        if (capabilities.plan === "trial") return true;
-        return (
-          form.size !== undefined &&
-          form.size.quota <= capabilities.remainingQuota
-        );
+      sizeIsDisabled: ({ form, capabilities }) => {
+        if (capabilities === undefined) return true;
+        return form.size?.isDisabled === true;
       },
-      canCreateInstances: ({ capabilities }) =>
-        capabilities !== undefined &&
-        capabilities.plan !== undefined &&
-        ["standard", "trial"].includes(capabilities.plan),
+      sizeIsOverQuota: ({ form, capabilities }) => {
+        if (capabilities === undefined || !form.size) return true;
+        if (capabilities.plan === "trial") return false;
+        return form.size.quota > capabilities.remainingQuota;
+      },
+      canCreateStandardInstances: ({ capabilities }) =>
+        capabilities !== undefined && capabilities.plan === "standard",
+      canCreateTrialInstances: ({ capabilities }) =>
+        capabilities !== undefined && capabilities.plan === "trial",
       canSave: (_context, _event, meta) => {
         return (
           meta.state.hasTag(NAME_VALID) &&
@@ -528,6 +579,11 @@ const CreateKafkaInstanceMachine = createMachine(
           meta.state.hasTag(SIZE_VALID)
         );
       },
+      didProviderChange: (context, event) =>
+        context.form.provider !== event.provider,
+      didRegionChange: (context, event) => context.form.region !== event.region,
+      didSizeChange: (context, event) =>
+        context.form.size?.id !== event.size.id,
     },
   }
 );

@@ -12,6 +12,7 @@ export type CloudRegionProps = {
   value: Region | undefined;
   regions: RegionInfo[] | undefined;
   isDisabled: boolean;
+  isSizeUnavailable: boolean;
   onChange: (region: string) => void;
   validated?: SelectProps["validated"];
   placeholderText: SelectProps["placeholderText"];
@@ -21,6 +22,7 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
   value,
   regions,
   isDisabled,
+  isSizeUnavailable,
   validated,
   onChange,
   placeholderText,
@@ -67,7 +69,11 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
       selections={value}
       isOpen={isOpen}
       isDisabled={isDisabled}
-      aria-labelledby="form-cloud-region-option"
+      aria-describedby={
+        isSizeUnavailable
+          ? "instance-size-unavailable"
+          : "form-cloud-region-option"
+      }
       placeholderText={placeholderText}
     >
       {makeRegionOptions}

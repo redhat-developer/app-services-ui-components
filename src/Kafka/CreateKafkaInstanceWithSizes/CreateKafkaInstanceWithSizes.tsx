@@ -127,6 +127,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
       ouiaId="modal-create-kafka"
       onClose={onCancel}
       appendTo={appendTo}
+      position="top"
       actions={[
         <Button
           key="submit"
@@ -189,7 +190,10 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
           className="mas--CreateKafkaInstanceWithSizes__sidebar"
         >
           {isLoadingSizes || selectedSize === undefined ? (
-            <InstanceInfoSkeleton onClickQuickStart={onClickQuickStart} />
+            <InstanceInfoSkeleton
+              isTrial={isTrial}
+              onClickQuickStart={onClickQuickStart}
+            />
           ) : (
             <InstanceInfo
               isTrial={isTrial}
@@ -266,6 +270,7 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
   const {
     form,
     selectedProvider,
+    selectedSize,
     isRegionError,
     isFormEnabled,
     capabilities,
@@ -286,6 +291,7 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
       regions={selectedProvider?.regions}
       value={form.region}
       isDisabled={!isFormEnabled}
+      isSizeUnavailable={selectedSize?.isDisabled || false}
       onChange={setRegion}
     />
   );
@@ -317,7 +323,9 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     sizes,
     isSizeAvailable,
     isSizeOverQuota,
+    isSizeDisabled,
     isSizeError,
+    isSizeLoadingError,
     isFormEnabled,
     isLoadingSizes,
     isLoading,
@@ -333,7 +341,16 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
-      validity={isTrial ? "trial" : isSizeOverQuota ? "over-quota" : "valid"}
+      isLoadingError={isSizeLoadingError}
+      validity={
+        isTrial
+          ? "trial"
+          : isSizeOverQuota
+          ? "over-quota"
+          : isSizeDisabled
+          ? "required"
+          : "valid"
+      }
       onChange={setSize}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}

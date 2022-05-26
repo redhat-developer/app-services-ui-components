@@ -7,6 +7,7 @@ export default {
   args: {
     remainingQuota: 4,
     isPreview: false,
+    isError: false,
   },
   parameters: {
     backgrounds: {
@@ -24,4 +25,28 @@ export const StableInstanceType = Template.bind({});
 export const TechPreview = Template.bind({});
 TechPreview.args = {
   isPreview: true,
+};
+
+export const Unavailable = Template.bind({});
+Unavailable.args = {
+  isUnavailable: true,
+};
+
+export const UnavailableSubmitted = Template.bind({});
+UnavailableSubmitted.args = {
+  isUnavailable: true,
+  isError: true,
+};
+
+export const UnavailableAndTechPreview = Template.bind({});
+UnavailableAndTechPreview.args = {
+  isUnavailable: true,
+  isPreview: true,
+};
+
+export const UnavailableAndTechPreviewSubmitted = Template.bind({});
+UnavailableAndTechPreviewSubmitted.args = {
+  isUnavailable: true,
+  isPreview: true,
+  isError: true,
 };
