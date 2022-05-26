@@ -173,7 +173,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText("The trial has a duration of 48 hours.", {
+      await comp.findByText("The trial has a duration of 48 hours.", {
         exact: false,
       })
     ).toBeInTheDocument();

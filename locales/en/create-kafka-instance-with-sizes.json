@@ -67,7 +67,7 @@
     "regions_unavailable_message": "Cloud provider regions are temporarily unavailable. Try again later.",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",
-    "trial_available_message": "The trial has a duration of {{time}} hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
+    "trial_available_message": "The trial has a duration of <1>{{time}}</1> hours. If you are interested in using this service in production, go to our <0>Streams for Apache Kafka Overview</0> page to see what options are available during creation and learn how to contact us.",
     "trial_available_title": "You can create a trial instance to evaluate this service.",
     "trial_unavailable_message": "All available trial instances are currently in use. Try again later.",
     "trial_unavailable_title": "$t(common:kafka) instances are unavailable for creation",

@@ -169,8 +169,11 @@ export const ModalAlerts: VoidFunctionComponent<ModalAlertsProps> = ({
                       onClick={onClickKafkaOverview}
                       isInline
                     />,
+                    trialDurationInHours ? <></> : <Spinner size={"sm"} />,
                   ]}
-                  values={{ time: trialDurationInHours }}
+                  values={{
+                    time: trialDurationInHours,
+                  }}
                 />
               </Alert>
             );
