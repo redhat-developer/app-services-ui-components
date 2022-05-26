@@ -1,5 +1,6 @@
 import { Dropdown, DropdownItem, DropdownToggle } from "@patternfly/react-core";
 import { FunctionComponent, SyntheticEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type TopicDropdown = {
   value: string;
@@ -12,6 +13,8 @@ export const TopicDropdown: FunctionComponent<TopicDropdown> = ({
   onChange,
   value,
 }) => {
+  const { t } = useTranslation();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onToggle = (isOpen: boolean) => {
@@ -41,7 +44,11 @@ export const TopicDropdown: FunctionComponent<TopicDropdown> = ({
       menuAppendTo={"parent"}
       toggle={
         <DropdownToggle data-testid="topic-dropdowntoggle" onToggle={onToggle}>
-          {value}
+          {topics.length === 1
+            ? topics.map((topic) => topic)
+            : value
+            ? value
+            : t("common:select")}
         </DropdownToggle>
       }
     ></Dropdown>
