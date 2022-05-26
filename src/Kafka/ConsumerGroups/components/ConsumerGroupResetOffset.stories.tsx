@@ -22,22 +22,25 @@ const consumer: ConsumerRow[] = [
     offset: 3,
     logEndOffset: 1,
     lag: 0,
-    selected: true,
+    selected: false,
   },
 ];
+
+const getTopics = () => {
+  const topics = consumer.map((consumer) => consumer.topic);
+  const distinctTopics = topics.filter(
+    (topic: string, i: number) => topics.indexOf(topic) === i
+  );
+  return distinctTopics;
+};
 
 export default {
   component: ConsumerGroupResetOffset,
   args: {
-    groupId: "console",
-    topics: consumer.map((consumer) => consumer.topic),
-    selectedTopic: "test",
-    selectedOffset: "earliest",
-    confirmCheckboxChecked: true,
-    isSelected: true,
-    consumers: consumer,
     isDisconnected: true,
-    customOffsetValue: "2",
+    groupId: "console",
+    topics: getTopics(),
+    consumers: consumer,
   },
 } as ComponentMeta<typeof ConsumerGroupResetOffset>;
 
@@ -45,9 +48,33 @@ const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (args) => (
   <ConsumerGroupResetOffset {...args} />
 );
 
-export const ResetOffset = Template.bind({});
-ResetOffset.args = {
+export const ResetOffsetWhenTopicisNotSelected = Template.bind({});
+ResetOffsetWhenTopicisNotSelected.args = {
   isModalOpen: true,
+};
+
+export const ResetOffsetWhenTopicIsSelected = Template.bind({});
+ResetOffsetWhenTopicIsSelected.args = {
+  isModalOpen: true,
+  selectedTopic: "test-topic",
+  selectedOffset: "latest",
+};
+
+export const ResetOffsetWhenOffsetIsAbsolute = Template.bind({});
+ResetOffsetWhenOffsetIsAbsolute.args = {
+  isModalOpen: true,
+  selectedTopic: "test-topic",
+  selectedOffset: "absolute",
+  customOffsetValue: "2",
+};
+
+export const ResetOffsetWhenAllFieldsSelected = Template.bind({});
+ResetOffsetWhenAllFieldsSelected.args = {
+  isModalOpen: true,
+  selectedTopic: "test-topic",
+  selectedOffset: "absolute",
+  customOffsetValue: "2",
+  confirmCheckboxChecked: true,
 };
 
 export const ResetOffsetErrorMessage = Template.bind({});

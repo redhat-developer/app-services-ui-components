@@ -15,7 +15,7 @@ describe("Offset Dropdown", () => {
     await waitForI18n(comp);
 
     const openDropdown = async () => {
-      userEvent.click(await comp.findByTestId("topic-dropdowntoggle"));
+      userEvent.click(await comp.getByRole("button"));
       await waitForPopper();
     };
 

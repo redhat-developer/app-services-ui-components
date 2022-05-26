@@ -49,7 +49,7 @@ export type ConsumerGroupResetOffsetProps = {
   onConfirmationChange: (value: boolean) => void;
   SelectAllConsumer: (consumer: ConsumerRow[]) => void;
   onSelectAll: (isSelected: boolean) => void;
-  onSelectRow: (index: number, select: boolean) => void;
+  onSelectRow: (index: number, isSelected: boolean) => void;
 };
 
 export const ConsumerGroupResetOffset: FunctionComponent<
@@ -78,10 +78,10 @@ export const ConsumerGroupResetOffset: FunctionComponent<
 
   const isResetOffsetDisabled = (): boolean => {
     return (
-      selectedTopic === "" ||
+      !selectedTopic ||
+      !selectedOffset ||
       !confirmCheckboxChecked ||
       !isDisconnected ||
-      !selectedOffset ||
       consumers.filter(({ selected }) => selected === true).length === 0
     );
   };
@@ -130,7 +130,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
             {isDisconnected && (
               <FormGroup label="Topic" fieldId="horizontal-form-name">
                 <TopicDropdown
-                  value={selectedTopic ? selectedTopic : t("common:select")}
+                  value={selectedTopic}
                   topics={topics}
                   onChange={onChangeTopic}
                 />
