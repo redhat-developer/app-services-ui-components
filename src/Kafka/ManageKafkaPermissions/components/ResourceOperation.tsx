@@ -9,7 +9,7 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 
-type ResourceOperationValue =
+export type ResourceOperationValue =
   | "all"
   | "read"
   | "write"

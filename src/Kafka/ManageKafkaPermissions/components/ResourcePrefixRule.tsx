@@ -57,21 +57,19 @@ export const ResourcePrefixRule: React.VFC<ResourcePrefixRuleProps> = ({
   };
 
   return (
-    <FormGroup fieldId={"resource-prefix-rule-select"}>
-      <Select
-        id={"resource-prefix-rule-select"}
-        aria-label={t("resource_prefix_rule.aria_label", { value })}
-        data-testid="acls-resource-prefix-rule-select"
-        variant={SelectVariant.single}
-        onToggle={onToggle}
-        onSelect={onSelect}
-        isOpen={isOpen}
-        width={200}
-        selections={value}
-        menuAppendTo={"parent"}
-      >
-        {makeOptions()}
-      </Select>
-    </FormGroup>
+    <Select
+      id={"resource-prefix-rule-select"}
+      aria-label={t("resource_prefix_rule.aria_label", { value })}
+      data-testid="acls-resource-prefix-rule-select"
+      variant={SelectVariant.single}
+      onToggle={onToggle}
+      onSelect={onSelect}
+      isOpen={isOpen}
+      width={200}
+      selections={value}
+      menuAppendTo={"parent"}
+    >
+      {makeOptions()}
+    </Select>
   );
 };
