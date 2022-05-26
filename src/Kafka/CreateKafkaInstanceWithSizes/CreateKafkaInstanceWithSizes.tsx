@@ -159,6 +159,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
         onClickKafkaOverview={onClickKafkaOverview}
         maxStreamingUnits={capabilities?.maxStreamingUnits}
         onClickContactUs={onClickContactUs}
+        trialDurationInHours={selectedSize?.trialDurationHours}
       />
 
       <Flex
