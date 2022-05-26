@@ -35,11 +35,11 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
           {t("size_unavailable_message")}
         </Alert>
       )}
-      {isPreview && !isUnavailable && (
+      {isPreview && (
         <Alert
           aria-live="polite"
           role={"alert"}
-          className="pf-u-mb-md pf-u-mt-lg"
+          className={`pf-u-mb-md ${isUnavailable ? "" : "pf-u-mt-lg"}`}
           variant={AlertVariant.info}
           title={t("size_preview_title")}
           isInline

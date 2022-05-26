@@ -37,3 +37,16 @@ UnavailableSubmitted.args = {
   isUnavailable: true,
   isError: true,
 };
+
+export const UnavailableAndTechPreview = Template.bind({});
+UnavailableAndTechPreview.args = {
+  isUnavailable: true,
+  isPreview: true,
+};
+
+export const UnavailableAndTechPreviewSubmitted = Template.bind({});
+UnavailableAndTechPreviewSubmitted.args = {
+  isUnavailable: true,
+  isPreview: true,
+  isError: true,
+};
