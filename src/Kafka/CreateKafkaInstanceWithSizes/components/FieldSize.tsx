@@ -96,11 +96,13 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     label: `${s.quota}`,
   }));
 
+  const isUnavailable = sizes[valueIndex]?.isDisabled;
+
   const helperText = (
     <FieldSizeHelperText
       remainingQuota={remainingQuota}
       isPreview={sizes[valueIndex]?.status === "preview"}
-      isUnavailable={sizes[valueIndex]?.isDisabled}
+      isUnavailable={isUnavailable}
       isError={isError}
     />
   );
@@ -146,7 +148,9 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
           className="pf-u-w-100"
           isDisabled={isDisabled || validity === "trial"}
           onChange={handleChange}
-          aria-describedby="streaming-size"
+          aria-describedby={
+            isUnavailable ? "instance-size-unavailable" : "streaming-size"
+          }
         />
         <span
           className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"

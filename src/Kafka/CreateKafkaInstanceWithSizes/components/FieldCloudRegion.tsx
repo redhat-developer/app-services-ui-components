@@ -11,6 +11,7 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
   regions,
   onChange,
   isDisabled,
+  isSizeUnavailable,
   validity,
 }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
@@ -80,6 +81,7 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
         regions={regions}
         onChange={onChange}
         isDisabled={disableControl}
+        isSizeUnavailable={isSizeUnavailable}
         validated={validation}
         placeholderText={placeholder}
       />

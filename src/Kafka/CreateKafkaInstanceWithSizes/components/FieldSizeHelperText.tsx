@@ -25,6 +25,7 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
 
       {isUnavailable && (
         <Alert
+          id="instance-size-unavailable"
           aria-live="polite"
           role={"alert"}
           className="pf-u-mb-md pf-u-mt-lg"

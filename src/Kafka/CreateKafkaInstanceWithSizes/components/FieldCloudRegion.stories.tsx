@@ -8,6 +8,7 @@ export default {
   component: FieldCloudRegionComp,
   args: {
     validity: "valid",
+    isSizeUnavailable: false,
     regions: PROVIDERS[0].regions,
   },
 } as ComponentMeta<typeof FieldCloudRegionComp>;

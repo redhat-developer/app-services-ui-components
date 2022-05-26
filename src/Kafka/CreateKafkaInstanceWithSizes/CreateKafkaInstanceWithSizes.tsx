@@ -270,6 +270,7 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
   const {
     form,
     selectedProvider,
+    selectedSize,
     isRegionError,
     isFormEnabled,
     capabilities,
@@ -290,6 +291,7 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
       regions={selectedProvider?.regions}
       value={form.region}
       isDisabled={!isFormEnabled}
+      isSizeUnavailable={selectedSize?.isDisabled || false}
       onChange={setRegion}
     />
   );
