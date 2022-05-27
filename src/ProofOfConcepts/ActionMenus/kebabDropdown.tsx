@@ -42,6 +42,7 @@ export class ActionsTable extends React.Component {
       </DropdownGroup>,
       <DropdownGroup>
         <DropdownItem>Change instance owner</DropdownItem>
+        <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>
         <DropdownItem>Delete instance</DropdownItem>
