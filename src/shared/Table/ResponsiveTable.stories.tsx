@@ -8,7 +8,7 @@ import {
 import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { VoidFunctionComponent } from "react";
+import { useState, VoidFunctionComponent } from "react";
 import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
 import {
   columnLabels,
@@ -105,4 +105,81 @@ UndefinedDataShowsSkeleton.args = {
 export const NoResults = Template.bind({});
 NoResults.args = {
   data: [],
+};
+
+export const SelectableWithCheckboxes: ComponentStory<
+  typeof ResponsiveTableSampleType
+> = (args) => {
+  const [checkedIndexes, setCheckedIndexes] = useState<number[] | "all">([]);
+  return (
+    <ResponsiveTable
+      {...args}
+      renderHeader={({ column, Th, key, colIndex }) =>
+        colIndex === 0 ? (
+          <Th
+            key={key}
+            select={{
+              isSelected: checkedIndexes === "all",
+              onSelect: (_event, isSelected) =>
+                setCheckedIndexes(isSelected ? "all" : []),
+            }}
+          />
+        ) : (
+          <Th key={key}>{columnLabels[column]}</Th>
+        )
+      }
+      renderCell={({ column, row, rowIndex, colIndex, Td, key }) =>
+        colIndex === 0 ? (
+          <Td
+            key={key}
+            select={{
+              rowIndex: rowIndex,
+              isSelected:
+                checkedIndexes === "all" || checkedIndexes.includes(rowIndex),
+              onSelect: (_event, isSelected) =>
+                setCheckedIndexes(
+                  checkedIndexes === "all"
+                    ? new Array(args.data.length)
+                        .fill(0)
+                        .map((_, idx) => idx)
+                        .filter((idx) => idx !== rowIndex)
+                    : isSelected
+                    ? [...checkedIndexes, rowIndex]
+                    : checkedIndexes.filter((idx) => idx !== rowIndex)
+                ),
+            }}
+          />
+        ) : (
+          <Td key={key} dataLabel={columnLabels[column]}>
+            {row[colIndex]}
+          </Td>
+        )
+      }
+      renderActions={({ row, ActionsColumn }) =>
+        args.hasActions && <ActionsColumn items={defaultActions(row)} />
+      }
+      isRowSelected={
+        args.selectedRow
+          ? ({ rowIndex }) => rowIndex === args.selectedRow - 1
+          : undefined
+      }
+      isRowDeleted={({ row }) => row[5] === deletingSign}
+      onRowClick={args.onRowClick}
+      {...(args.isRowClickable && !args.onRowClick ? eventsFromNames : {})}
+    >
+      <EmptyState variant={EmptyStateVariant.large}>
+        <EmptyStateIcon icon={InfoIcon} />
+        <Title headingLevel="h4" size="lg">
+          Empty state to show when the data is filtered but has no results
+        </Title>
+        <EmptyStateBody>
+          The <code>children</code> property will be used when no data is
+          available as the empty state.
+        </EmptyStateBody>
+      </EmptyState>
+    </ResponsiveTable>
+  );
+};
+SelectableWithCheckboxes.args = {
+  columns: ["select", ...columns],
 };
