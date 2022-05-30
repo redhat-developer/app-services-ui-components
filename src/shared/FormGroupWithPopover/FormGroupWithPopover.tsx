@@ -1,5 +1,5 @@
 import { FormGroup, Popover } from "@patternfly/react-core";
-import HelpIcon from "@patternfly/react-icons/dist/js/icons/help-icon";
+import { HelpIcon } from "@patternfly/react-icons";
 import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 

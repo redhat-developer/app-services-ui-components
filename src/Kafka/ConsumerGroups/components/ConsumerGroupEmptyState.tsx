@@ -6,7 +6,7 @@ import {
   Title,
   TitleSizes,
 } from "@patternfly/react-core";
-import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
+import { CubesIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 

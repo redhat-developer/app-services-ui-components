@@ -1,18 +1,20 @@
-import "./customStyles.css";
-import React from "react";
 import {
-  Dropdown,
-  DropdownToggle,
-  DropdownItem,
-  CalendarMonth,
-  InputGroup,
-  TextInput,
   Button,
+  CalendarMonth,
+  Dropdown,
+  DropdownItem,
+  DropdownToggle,
+  InputGroup,
   Popover,
+  TextInput,
   yyyyMMddFormat,
 } from "@patternfly/react-core";
-import OutlinedCalendarAltIcon from "@patternfly/react-icons/dist/esm/icons/outlined-calendar-alt-icon";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
+import {
+  OutlinedCalendarAltIcon,
+  OutlinedClockIcon,
+} from "@patternfly/react-icons";
+import React from "react";
+import "./customStyles.css";
 
 export const DateTimePicker = () => {
   const [isCalendarOpen, setIsCalendarOpen] = React.useState(false);

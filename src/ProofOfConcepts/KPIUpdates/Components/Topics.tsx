@@ -1,13 +1,12 @@
-import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
-import { VoidFunctionComponent } from "react";
-import React from "react";
 import {
   Card,
   CardBody,
   CardTitle,
-  Title,
   Popover,
+  Title,
 } from "@patternfly/react-core";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import React, { VoidFunctionComponent } from "react";
 
 export const Topics: VoidFunctionComponent = () => {
   return (

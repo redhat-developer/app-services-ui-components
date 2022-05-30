@@ -1,7 +1,3 @@
-import "./customStyles.css";
-import { DateTimePicker } from "./dateAndTimePicker";
-
-import React from "react";
 import {
   Dropdown,
   DropdownItem,
@@ -16,7 +12,11 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
+import { FilterIcon } from "@patternfly/react-icons";
+
+import React from "react";
+import "./customStyles.css";
+import { DateTimePicker } from "./dateAndTimePicker";
 
 export class OffsetSelectorGroupClass extends React.Component {
   constructor(props) {

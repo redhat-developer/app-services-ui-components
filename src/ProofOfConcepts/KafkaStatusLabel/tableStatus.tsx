@@ -9,9 +9,11 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
+import {
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+} from "@patternfly/react-icons";
 import { VoidFunctionComponent } from "react";
-import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
-import ExclamationTriangleIcon from "@patternfly/react-icons/dist/js/icons/exclamation-triangle-icon";
 import "./style.css";
 
 type KafkaStatus =

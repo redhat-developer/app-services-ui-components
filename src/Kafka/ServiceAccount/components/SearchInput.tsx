@@ -5,7 +5,7 @@ import {
   Tooltip,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
+import { SearchIcon } from "@patternfly/react-icons";
 import {
   KeyboardEvent,
   useCallback,

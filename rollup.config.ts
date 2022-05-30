@@ -33,14 +33,7 @@ export default {
       preserveModulesRoot: "src",
     },
   ],
-  external: [
-    "react/jsx-runtime",
-    "@patternfly/react-icons/dist/js/icons/external-link-alt-icon",
-    "@patternfly/react-icons/dist/js/icons/search-icon",
-    "@patternfly/react-icons/dist/js/icons/help-icon",
-    "@patternfly/react-icons/dist/js/icons/outlined-clock-icon",
-    "@patternfly/react-icons/dist/js/icons/check-circle-icon",
-  ],
+  external: ["react/jsx-runtime"],
   plugins: [
     autoExternals(),
     renameNodeModules("external"),

@@ -6,7 +6,7 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/js/icons/search-icon";
+import { SearchIcon } from "@patternfly/react-icons";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
