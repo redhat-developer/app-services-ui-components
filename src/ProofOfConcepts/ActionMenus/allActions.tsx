@@ -47,7 +47,6 @@ export class AllActionsDropdown extends React.Component {
       </DropdownGroup>,
       <DropdownGroup>
         <DropdownItem>Edit instance configuration</DropdownItem>
-        <DropdownItem>Reset instance credentials</DropdownItem>
         <DropdownItem>Change instance owner</DropdownItem>
         <DropdownItem>Duplicate instance</DropdownItem>
         <DropdownSeparator />
