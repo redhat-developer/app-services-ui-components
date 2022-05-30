@@ -7,7 +7,7 @@ import {
   Modal,
   ModalVariant,
 } from "@patternfly/react-core";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
+import { OutlinedClockIcon } from "@patternfly/react-icons";
 import {
   FormEvent,
   FunctionComponent,

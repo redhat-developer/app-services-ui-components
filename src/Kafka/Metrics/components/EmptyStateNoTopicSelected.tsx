@@ -1,11 +1,11 @@
 import {
   EmptyState,
-  EmptyStateVariant,
-  EmptyStateIcon,
-  Title,
   EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStateVariant,
+  Title,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
+import { FilterIcon } from "@patternfly/react-icons";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 

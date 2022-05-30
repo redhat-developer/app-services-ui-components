@@ -1,32 +1,23 @@
 import React from "react";
 import {
-  Toolbar,
-  ToolbarItem,
-  ToolbarContent,
-  ToolbarFilter,
-  ToolbarToggleGroup,
-  ToolbarGroup,
-} from "@patternfly/react-core";
-import {
   Button,
   ButtonVariant,
-  InputGroup,
-  Select,
-  SelectOption,
-  SelectVariant,
   Dropdown,
   DropdownItem,
   DropdownSeparator,
   KebabToggle,
+  Select,
+  SelectVariant,
   Text,
+  Toolbar,
+  ToolbarContent,
+  ToolbarFilter,
+  ToolbarGroup,
+  ToolbarItem,
+  ToolbarToggleGroup,
 } from "@patternfly/react-core";
 
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
-import CheckIcon from "@patternfly/react-icons/dist/esm/icons/check-icon";
-import EditIcon from "@patternfly/react-icons/dist/esm/icons/edit-icon";
-import CloneIcon from "@patternfly/react-icons/dist/esm/icons/clone-icon";
-import SyncIcon from "@patternfly/react-icons/dist/esm/icons/sync-icon";
+import { CheckIcon, FilterIcon } from "@patternfly/react-icons";
 import CheckboxTreeView from "./treeviewDropdown";
 import BulkSelector from "./bulkSelectButton";
 

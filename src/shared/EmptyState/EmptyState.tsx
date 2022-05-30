@@ -1,10 +1,4 @@
 import {
-  ComponentType,
-  MouseEvent as ReactMouseEvent,
-  ReactNode,
-  VoidFunctionComponent,
-} from "react";
-import {
   Button,
   ButtonProps,
   ButtonVariant,
@@ -19,14 +13,22 @@ import {
   TitleProps,
   TitleSizes,
 } from "@patternfly/react-core";
-import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
-import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shuttle-icon";
-import LockIcon from "@patternfly/react-icons/dist/esm/icons/lock-icon";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
+import {
+  ExclamationCircleIcon,
+  LockIcon,
+  PlusCircleIcon,
+  SearchIcon,
+  SpaceShuttleIcon,
+} from "@patternfly/react-icons";
 import { css } from "@patternfly/react-styles";
-import "./EmptyState.css";
+import {
+  ComponentType,
+  MouseEvent as ReactMouseEvent,
+  ReactNode,
+  VoidFunctionComponent,
+} from "react";
 import { NotFoundIcon } from "../../images";
+import "./EmptyState.css";
 
 export enum EmptyStateVariant {
   GettingStarted = "GettingStarted",
