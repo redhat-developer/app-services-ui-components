@@ -1,12 +1,13 @@
 import React from "react";
 import {
-  Button,
   Toolbar,
   ToolbarContent,
   ToolbarGroup,
   ToolbarItem,
 } from "@patternfly/react-core";
-import { SearchIcon, SyncIcon } from "@patternfly/react-icons";
+import { Button } from "@patternfly/react-core";
+import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
+import SyncIcon from "@patternfly/react-icons/dist/esm/icons/sync-icon";
 
 export class ToolbarIconsClass extends React.Component {
   render() {

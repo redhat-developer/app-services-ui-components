@@ -1,12 +1,12 @@
 import React from "react";
 import {
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
   Title,
+  EmptyState,
+  EmptyStateVariant,
+  EmptyStateIcon,
+  EmptyStateBody,
 } from "@patternfly/react-core";
-import { CubesIcon } from "@patternfly/react-icons";
+import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
 
 export class EmptyStateMessageClass extends React.Component {
   render() {

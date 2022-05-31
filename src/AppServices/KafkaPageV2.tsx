@@ -23,7 +23,7 @@ import {
   TextVariants,
   Title,
 } from "@patternfly/react-core";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";

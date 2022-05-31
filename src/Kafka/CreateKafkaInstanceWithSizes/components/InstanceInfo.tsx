@@ -14,7 +14,7 @@ import {
   StackItem,
 } from "@patternfly/react-core";
 
-import { ClockIcon } from "@patternfly/react-icons";
+import ClockIcon from "@patternfly/react-icons/dist/js/icons/outlined-clock-icon";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 

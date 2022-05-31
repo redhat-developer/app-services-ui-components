@@ -9,10 +9,8 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
-import {
-  CheckCircleIcon,
-  ExclamationTriangleIcon,
-} from "@patternfly/react-icons";
+import CheckCircleIcon from "@patternfly/react-icons/dist/js/icons/check-circle-icon";
+import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import { KafkaStatus } from "../../types";
