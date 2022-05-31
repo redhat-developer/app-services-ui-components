@@ -11,7 +11,7 @@ import {
   Title,
   TitleSizes,
 } from "@patternfly/react-core";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/js/icons/external-link-alt-icon";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/esm/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { RhodsMlTechnology } from "../images";

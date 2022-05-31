@@ -37,8 +37,16 @@
             "name": "date-fns",
             "importNames": ["format"],
             "message": "Please use format or formatInTimeZone from date-fns-tz instead"
+          },
+          {
+            "name": "@patternfly/react-icons",
+            "message": "Please import the icon using the absolute import path, eg. `import TimesIcon from '@patternfly/react-icons/dist/esm/icons/times-icon';` instead of `import { TimesIcon } from '@patternfly/react/icon'"
           }
-        ]
+        ],
+        "patterns": [{
+          "group": ["@patternfly/react-icons/dist/js/*"],
+          "message": "Please use the ESM version of the icon."
+        }]
       }
     ]
   },

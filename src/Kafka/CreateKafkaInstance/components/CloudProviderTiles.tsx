@@ -5,12 +5,12 @@ import {
   Skeleton,
   Tile,
 } from "@patternfly/react-core";
-import { AzureIcon } from "@patternfly/react-icons";
 import AwsIcon from "@patternfly/react-icons/dist/esm/icons/aws-icon";
+import AzureIcon from "@patternfly/react-icons/dist/esm/icons/azure-icon";
 import { VoidFunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 import { Provider, ProviderInfo } from "../machines";
 import "./CloudProviderTiles.css";
-import { useTranslation } from "react-i18next";
 
 export type CloudProvidersTileProps = {
   providers: ProviderInfo[];

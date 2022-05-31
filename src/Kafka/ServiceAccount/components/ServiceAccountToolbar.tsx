@@ -6,12 +6,12 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import { FilterIcon } from "@patternfly/react-icons";
+import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
 import { useEffect, useReducer, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { SearchCategory } from "../types";
 import { SearchProps } from "./Search";
 import { SearchChips } from "./SearchChips";
-import { SearchCategory } from "../types";
 
 const initialState: State = {
   clientid: [],
