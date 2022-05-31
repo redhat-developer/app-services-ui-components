@@ -41,9 +41,6 @@ describe("Multiple shortcuts view", () => {
     expect(await comp.getByText("Read")).toBeInTheDocument();
     expect(await comp.getByText("Describe")).toBeInTheDocument();
     expect(await comp.getByText("Alter")).toBeInTheDocument();
-    expect(
-      await comp.getByText("Kafka instance story-instance")
-    ).toBeInTheDocument();
     expect(await comp.queryByText("Required")).not.toBeInTheDocument();
   });
 
