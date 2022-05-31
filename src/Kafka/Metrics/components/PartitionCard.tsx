@@ -1,20 +1,18 @@
 import {
+  Alert,
+  AlertVariant,
   Bullseye,
   Card,
   CardBody,
+  CardFooter,
   CardTitle,
   Skeleton,
+  Text,
   TextContent,
   Title,
-  Text,
-  CardFooter,
-  Alert,
-  AlertVariant,
 } from "@patternfly/react-core";
-import {
-  ExclamationCircleIcon,
-  ExclamationTriangleIcon,
-} from "@patternfly/react-icons";
+import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
+import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { ChartPopover } from "./ChartPopover";

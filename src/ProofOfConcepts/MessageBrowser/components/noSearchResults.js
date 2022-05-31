@@ -1,22 +1,22 @@
 import React from "react";
 import {
   TableComposable,
-  Tbody,
-  Td,
-  Th,
   Thead,
   Tr,
+  Th,
+  Tbody,
+  Td,
 } from "@patternfly/react-table";
 import {
   Bullseye,
-  Button,
   EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
   EmptyStateVariant,
+  EmptyStateIcon,
   Title,
+  EmptyStateBody,
+  Button,
 } from "@patternfly/react-core";
-import { SearchIcon } from "@patternfly/react-icons";
+import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
 
 // This example has been simplified to focus on the empty state. In real usage,
 // you may want to derive your rows from typed underlying data and minimal state. See other examples.

@@ -2,20 +2,20 @@ import React from "react";
 import {
   Button,
   DescriptionList,
-  DescriptionListDescription,
-  DescriptionListGroup,
   DescriptionListTerm,
+  DescriptionListGroup,
+  DescriptionListDescription,
+  TextContent,
+  Text,
+  TextVariants,
+  Tabs,
+  Tab,
+  TabTitleText,
+  Tooltip,
   Grid,
   GridItem,
-  Tab,
-  Tabs,
-  TabTitleText,
-  Text,
-  TextContent,
-  TextVariants,
-  Tooltip,
 } from "@patternfly/react-core";
-import { CopyIcon } from "@patternfly/react-icons";
+import CopyIcon from "@patternfly/react-icons/dist/esm/icons/copy-icon";
 
 export const OverlayDrawerClass = () => {
   const [showSuccessContent, setShowSuccessContent] = React.useState(false);

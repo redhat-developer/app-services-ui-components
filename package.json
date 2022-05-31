@@ -5,10 +5,7 @@
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./types/src/index.d.ts",
-  "sideEffects": [
-    "*.svg",
-    "*.css"
-  ],
+  "sideEffects": false,
   "files": [
     "dist/",
     "types/",

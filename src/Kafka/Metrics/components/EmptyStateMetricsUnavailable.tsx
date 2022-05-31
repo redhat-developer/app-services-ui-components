@@ -1,11 +1,11 @@
 import {
   EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
   EmptyStateVariant,
+  EmptyStateIcon,
   Title,
+  EmptyStateBody,
 } from "@patternfly/react-core";
-import { TachometerAltIcon } from "@patternfly/react-icons";
+import TachometerAltIcon from "@patternfly/react-icons/dist/esm/icons/tachometer-alt-icon";
 import { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
