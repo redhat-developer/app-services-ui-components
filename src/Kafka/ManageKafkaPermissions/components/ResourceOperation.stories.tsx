@@ -8,6 +8,17 @@ export default {
   args: {
     value: undefined,
     invalid: false,
+    resourceTypeOptions: [
+      "All",
+      "Read",
+      "Write",
+      "Create",
+      "Delete",
+      "Alter",
+      "Describe",
+      "Describe configs",
+      "Alter configs",
+    ],
   },
 } as ComponentMeta<typeof ResourceOperation>;
 

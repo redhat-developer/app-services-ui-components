@@ -103,8 +103,10 @@ export const PermissionOperationCell: VFC<PermissionOperationCellProps> = ({
         </Label>
       )}
       {Array.isArray(operation) ? (
-        operation.map((value) => (
-          <Label variant="outline">{operations[value]}</Label>
+        operation.map((value, key) => (
+          <Label key={key} variant="outline">
+            {operations[value]}
+          </Label>
         ))
       ) : (
         <Label variant="outline">{operations[operation]}</Label>

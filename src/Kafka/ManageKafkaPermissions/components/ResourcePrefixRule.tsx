@@ -1,6 +1,5 @@
 import type { SelectProps } from "@patternfly/react-core";
 import {
-  FormGroup,
   Select,
   SelectOption,
   SelectVariant,

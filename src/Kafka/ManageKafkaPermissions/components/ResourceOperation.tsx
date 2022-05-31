@@ -25,6 +25,7 @@ type ResourceOperationProps = {
   onChangeValue: (value: ResourceOperationValue | undefined) => void;
   initialOpen?: boolean;
   invalid: boolean;
+  resourceTypeOptions: string[];
 };
 
 export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
@@ -32,23 +33,13 @@ export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
   onChangeValue,
   initialOpen = false,
   invalid,
+  resourceTypeOptions,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   // for Storybook, allows opening the select programmatically respecting the initialization needed by the modal and Popper.js
   useLayoutEffect(() => setIsOpen(initialOpen), [initialOpen]);
 
-  const resourceTypeOptions: { [key in ResourceOperationValue]: string } = {
-    all: t("operations.all"),
-    read: t("operations.read"),
-    write: t("operations.write"),
-    create: t("operations.create"),
-    delete: t("operations.delete"),
-    alter: t("operations.alter"),
-    describe: t("operations.describe"),
-    "describe-configs": t("operations.describe_configs"),
-    "alter-configs": t("operations.alter_configs"),
-  };
   const onToggle = (value: boolean) => {
     setIsOpen(value);
   };
@@ -57,9 +48,9 @@ export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
     setIsOpen(false);
   };
   const makeOptions = () => {
-    return Object.entries(resourceTypeOptions).map(([value, label]) => (
-      <SelectOption key={value} value={value}>
-        {label}
+    return resourceTypeOptions.map((value, index) => (
+      <SelectOption key={index} value={value}>
+        {value}
       </SelectOption>
     ));
   };

@@ -1,7 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { ProduceTopicShortcut } from "./ProduceTopicShortcut";
-import { Form } from "@patternfly/react-core";
 import { TableComposable } from "@patternfly/react-table";
 
 export default {
@@ -24,11 +23,9 @@ export default {
 } as ComponentMeta<typeof ProduceTopicShortcut>;
 
 const Template: ComponentStory<typeof ProduceTopicShortcut> = (args) => (
-  <Form>
-    <TableComposable variant="compact" />
+  <TableComposable variant="compact">
     <ProduceTopicShortcut {...args} />
-    <TableComposable />
-  </Form>
+  </TableComposable>
 );
 
 export const OnlyRowInTheTable = Template.bind({});

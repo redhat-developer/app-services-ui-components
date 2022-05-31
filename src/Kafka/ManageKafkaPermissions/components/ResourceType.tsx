@@ -55,25 +55,31 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
   };
 
   return (
-    <Select
-      id={"resource-type-select"}
-      aria-label={
-        value != undefined
-          ? t("resourceTypes.resource_type_selected", { value })
-          : t("resourceTypes.resource_type")
-      }
-      data-testid="acls-resource-type-select"
-      variant={SelectVariant.single}
-      onToggle={onToggle}
-      onSelect={onSelect}
-      isOpen={isOpen}
-      width={200}
-      placeholderText={t("resourceTypes.placeholder_text")}
+    <FormGroup
       validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
-      selections={value}
-      menuAppendTo={"parent"}
+      helperTextInvalid={t("common:required")}
+      fieldId={"resource-type-select"}
     >
-      {makeOptions()}
-    </Select>
+      <Select
+        id={"resource-type-select"}
+        aria-label={
+          value != undefined
+            ? t("resourceTypes.resource_type_selected", { value })
+            : t("resourceTypes.resource_type")
+        }
+        data-testid="acls-resource-type-select"
+        variant={SelectVariant.single}
+        onToggle={onToggle}
+        onSelect={onSelect}
+        isOpen={isOpen}
+        width={200}
+        placeholderText={t("resourceTypes.placeholder_text")}
+        validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
+        selections={value}
+        menuAppendTo={"parent"}
+      >
+        {makeOptions()}
+      </Select>
+    </FormGroup>
   );
 };

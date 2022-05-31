@@ -15,16 +15,11 @@ export default {
         100
       ),
     resourceType: undefined,
-    // onChangeResourceType: (value: ResourceTypeValue | undefined) => void;
     submitted: false,
     resourcePrefix: "is",
-    // onChangeResourcePrefix: (value: ResourcePrefixRuleValue) => void;
     resourceName: undefined,
-    // onChangeResource: (value: string | undefined) => void;
     resourcePermission: "allow",
-    // onChangeResourcePermission: (value: ResourcePermissionValue) => void,
     resourceOperation: undefined,
-    //onChangeResourceOperation: (value: ResourceOperationValue | undefined ) => void;
     multipleShorctutPermissions: false,
   },
 } as ComponentMeta<typeof AssignPermissionsManual>;
@@ -34,7 +29,7 @@ const Template: ComponentStory<typeof AssignPermissionsManual> = (args) => (
     <TableComposable variant="compact">
       <AssignPermissionsManual {...args} />
       {args.multipleShorctutPermissions && (
-        <AssignPermissionsManual {...args} resourceType={"kafka-instance"} />
+        <AssignPermissionsManual {...args} />
       )}
     </TableComposable>
   </Form>
@@ -52,33 +47,79 @@ OnlyRowInTheTable.parameters = {
   },
 };
 
-export const MultipleRowsExist = Template.bind({});
-MultipleRowsExist.args = { multipleShorctutPermissions: true };
+export const MultiplePermissionsExist = Template.bind({});
+MultiplePermissionsExist.args = { multipleShorctutPermissions: true };
 
-MultipleRowsExist.parameters = {
+MultiplePermissionsExist.parameters = {
   docs: {
     description: {
-      story:
-        "Rows in assign permission already exist, in this scenario table header is not visible",
+      story: "Multiple rows exist in assign permissions",
     },
   },
 };
 
-/*
 export const PrefixRuleVariant = Template.bind({});
 PrefixRuleVariant.args = {
-  topicPrefixRuleValue: "is",
-  consumerPrefixRuleValue: "is",
-  multipleShorctutPermissions: false,
+  resourcePrefix: "Starts with",
 };
 
 PrefixRuleVariant.parameters = {
   docs: {
     description: {
-      story: `Story variant when the prefix rule is set to 'is'`,
+      story: `Story variant when the prefix rule is set to 'starts-with'`,
     },
   },
 };
+
+export const KafkaInstancePermission = Template.bind({});
+KafkaInstancePermission.args = {
+  resourceType: "kafka-instance",
+};
+
+KafkaInstancePermission.parameters = {
+  docs: {
+    description: {
+      story: `Story variant when the resource type is 'Kafka Instance'`,
+    },
+  },
+};
+export const TopicPermission = Template.bind({});
+TopicPermission.args = {
+  resourceType: "topic",
+};
+
+TopicPermission.parameters = {
+  docs: {
+    description: {
+      story: `Story variant when the resource type is 'Topic'`,
+    },
+  },
+};
+export const ConsumerGroupPermission = Template.bind({});
+ConsumerGroupPermission.args = {
+  resourceType: "consumer-group",
+};
+
+ConsumerGroupPermission.parameters = {
+  docs: {
+    description: {
+      story: `Story variant when the resource type is 'Consumer group'`,
+    },
+  },
+};
+export const TransactionalIdPermission = Template.bind({});
+TransactionalIdPermission.args = {
+  resourceType: "transactional-id",
+};
+
+TransactionalIdPermission.parameters = {
+  docs: {
+    description: {
+      story: `Story variant when the resource type is 'Transactional-id'`,
+    },
+  },
+};
+
 export const FormSubmitted = Template.bind({});
 FormSubmitted.args = {
   submitted: true,
@@ -91,4 +132,3 @@ FormSubmitted.parameters = {
     },
   },
 };
-*/
