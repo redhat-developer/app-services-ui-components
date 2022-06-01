@@ -1,5 +1,5 @@
-import { ComponentMeta } from "@storybook/react";
 import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import type { StoryMeta } from "./storiesHelpers";
 import { argTypes, parameters, PROVIDERS, Template } from "./storiesHelpers";
 
 export default {
@@ -17,7 +17,7 @@ export default {
   },
   argTypes,
   parameters,
-} as ComponentMeta<typeof CreateKafkaInstanceWithSizes>;
+} as StoryMeta;
 
 export const QuotaAvailableOnFormLoad = Template.bind({});
 QuotaAvailableOnFormLoad.storyName = "Quota Available - Standard";

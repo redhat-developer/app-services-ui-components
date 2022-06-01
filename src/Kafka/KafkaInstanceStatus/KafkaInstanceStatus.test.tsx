@@ -1,7 +1,7 @@
-import { render, waitForI18n, waitForPopper } from "../../test-utils";
 import { userEvent } from "@storybook/testing-library";
+import { sub } from "date-fns";
+import { render, waitForI18n, waitForPopper } from "../../test-utils";
 import { KafkaInstanceStatus } from "./KafkaInstanceStatus";
-import sub from "date-fns/sub";
 
 // Batch snapshot testing
 describe("KafkaInstanceStatus", () => {

@@ -15,9 +15,9 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Consumer, ConsumerGroupState } from "../types";
+import type { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
 

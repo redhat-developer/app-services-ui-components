@@ -23,8 +23,7 @@ import {
   TextVariants,
   Title,
 } from "@patternfly/react-core";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/esm/icons/external-link-alt-icon";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";
 import {
@@ -32,6 +31,7 @@ import {
   MarketingPageHero,
   MarketingPageSection,
 } from "./components";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
 
 export const KafkaPageV2: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview-v2"]);

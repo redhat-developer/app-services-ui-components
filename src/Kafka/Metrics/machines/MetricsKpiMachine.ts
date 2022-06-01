@@ -1,5 +1,5 @@
 import { assign, createMachine } from "xstate";
-import { GetMetricsKpiResponse } from "../types";
+import type { GetMetricsKpiResponse } from "../types";
 
 const MAX_RETRIES = 3;
 

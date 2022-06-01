@@ -1,8 +1,10 @@
 import { useInterpret } from "@xstate/react";
-import { createContext, FunctionComponent } from "react";
-import { ActorRefFrom } from "xstate";
-import { MetricsKpiMachine, MetricsKpiMachineType } from "./machines";
-import { GetMetricsKpiResponse } from "./types";
+import type { FunctionComponent } from "react";
+import { createContext } from "react";
+import type { ActorRefFrom } from "xstate";
+import type { MetricsKpiMachineType } from "./machines";
+import { MetricsKpiMachine } from "./machines";
+import type { GetMetricsKpiResponse } from "./types";
 
 export const MetricsKpiContext = createContext<{
   service: ActorRefFrom<MetricsKpiMachineType>;

@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { EmptyStateNoMetricsDataForSelection } from "./EmptyStateNoMetricsDataForSelection";
 
 export default {

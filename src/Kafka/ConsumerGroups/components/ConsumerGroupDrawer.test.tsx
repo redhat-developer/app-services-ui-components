@@ -21,12 +21,12 @@ describe("Consumer group Drawer", () => {
     );
     await waitForI18n(comp);
 
-    userEvent.click(await comp.getByRole("button", { name: "Actions" }));
+    userEvent.click(comp.getByRole("button", { name: "Actions" }));
 
     userEvent.click(await comp.findByText("Reset offset"));
     expect(onSelectResetOffsetConsumerGroup).toHaveBeenCalledTimes(1);
 
-    userEvent.click(await comp.getByRole("button", { name: "Actions" }));
+    userEvent.click(comp.getByRole("button", { name: "Actions" }));
     userEvent.click(await comp.findByText("Delete"));
     expect(onSelectDeleteConsumerGroup).toHaveBeenCalledTimes(1);
 

@@ -1,10 +1,8 @@
 import { useState } from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import {
-  ResourceTypeDataItem,
-  ResourceTypeOperationFilter,
-} from "./ResourceTypeOperationFilter";
+import type { ResourceTypeDataItem } from "./ResourceTypeOperationFilter";
+import { ResourceTypeOperationFilter } from "./ResourceTypeOperationFilter";
 
 export default {
   component: ResourceTypeOperationFilter,

@@ -1,23 +1,22 @@
+import type { FormGroupProps } from "@patternfly/react-core";
 import {
   Button,
   ButtonVariant,
   Form,
   FormGroup,
-  FormGroupProps,
   Modal,
   ModalBoxBody,
   ModalVariant,
   TextInput,
 } from "@patternfly/react-core";
+import type { FunctionComponent, VoidFunctionComponent } from "react";
 import {
   Children,
   createContext,
-  FunctionComponent,
   useCallback,
   useContext,
   useEffect,
   useState,
-  VoidFunctionComponent,
 } from "react";
 import { Trans, useTranslation } from "react-i18next";
 

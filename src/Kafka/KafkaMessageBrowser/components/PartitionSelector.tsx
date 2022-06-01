@@ -1,13 +1,14 @@
+import type { SelectProps } from "@patternfly/react-core";
 import {
   InputGroup,
   InputGroupText,
   InputGroupTextVariant,
   Select,
   SelectOption,
-  SelectProps,
   SelectVariant,
 } from "@patternfly/react-core";
-import { useCallback, useMemo, useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const MAX_OPTIONS = 20;
@@ -70,7 +71,7 @@ export const PartitionSelector: VoidFunctionComponent<
   }, [allPartitions, makeOptions]);
 
   const handleFilter: SelectProps["onFilter"] = useCallback(
-    (_, filter) => {
+    (_, filter: string) => {
       if (filter !== "") {
         return makeOptions(
           allPartitions.filter((partition) => partition.includes(filter))

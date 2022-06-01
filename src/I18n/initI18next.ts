@@ -1,4 +1,5 @@
-import i18next, { i18n, ResourceLanguage } from "i18next";
+import type { i18n, ResourceLanguage } from "i18next";
+import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import AsyncBackend from "./AsyncBackend";
 
@@ -14,7 +15,7 @@ export function initI18next(
   const instance = i18next.createInstance();
   const languages = Object.keys(resources);
   const namespaces = Object.keys(resources[lng] || resources[languages[0]]);
-  instance
+  void instance
     // pass the i18n instance to react-i18next.
     .use(AsyncBackend)
     .use(initReactI18next)
@@ -36,9 +37,10 @@ export function initI18next(
       postProcess: [`markdownPostprocessor`],
       interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
-        format: function (value, format, _lng) {
-          if (format === "lowercase") return value.toLocaleLowerCase();
-          return value;
+        format: function (value, format) {
+          if (format === "lowercase" && typeof value === "string")
+            return value.toLocaleLowerCase();
+          return value as string;
         },
       },
       react: {

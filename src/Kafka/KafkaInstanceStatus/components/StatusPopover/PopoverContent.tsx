@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import {
   Stack,
@@ -11,7 +11,8 @@ import {
   ButtonVariant,
 } from "@patternfly/react-core";
 import { StatusProgressStepper } from "./StatusProgressStepper";
-import { PopoverStatus, PopoverStatusOrder } from "../../types";
+import type { PopoverStatus } from "../../types";
+import { PopoverStatusOrder } from "../../types";
 
 export type PopoverContentProps = {
   currentStatus: PopoverStatus;

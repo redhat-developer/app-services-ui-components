@@ -1,3 +1,4 @@
+import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import {
   renderDialog,
@@ -6,7 +7,6 @@ import {
   within,
 } from "../../test-utils";
 import * as stories from "./CreateKafkaInstance.stories";
-import { userEvent } from "@storybook/testing-library";
 
 const {
   Default,
@@ -67,7 +67,7 @@ describe("CreateKafkaInstance", () => {
     const comp = renderDialog(<QuotaAvailableOnFormLoad />);
     await waitForI18n(comp);
 
-    expect(await comp.queryAllByRole("alert")).toHaveLength(0);
+    expect(comp.queryAllByRole("alert")).toHaveLength(0);
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud region *")).toBeEnabled();
@@ -88,7 +88,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText("Your instance will expire after 48 hours.")
+      comp.queryByText("Your instance will expire after 48 hours.")
     ).toBeInTheDocument();
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
@@ -102,7 +102,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Your organization reached the limit of Kafka instances available for creation."
       )
     ).toBeInTheDocument();
@@ -123,7 +123,7 @@ describe("CreateKafkaInstance", () => {
     });
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Your organization reached the limit of Kafka instances available for creation."
       )
     ).toBeInTheDocument();
@@ -140,7 +140,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Kafka instances are no longer available. Try again in a few hours."
       )
     ).toBeInTheDocument();
@@ -161,11 +161,11 @@ describe("CreateKafkaInstance", () => {
     });
 
     expect(
-      await comp.queryByText("Your instance will expire after 48 hours.")
+      comp.queryByText("Your instance will expire after 48 hours.")
     ).toBeInTheDocument();
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Kafka instances are no longer available. Try again in a few hours."
       )
     ).toBeInTheDocument();
@@ -182,7 +182,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "You can deploy 1 instance at a time. To deploy a new instance, delete your existing one first."
       )
     ).toBeInTheDocument();
@@ -208,7 +208,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Kafka instances are no longer available. Try again in a few hours."
       )
     ).toBeInTheDocument();
@@ -236,7 +236,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Kafka instances are no longer available. Try again in a few hours."
       )
     ).toBeInTheDocument();
@@ -253,7 +253,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "There was a problem processing the request. Please try again."
       )
     ).toBeInTheDocument();
@@ -270,7 +270,7 @@ describe("CreateKafkaInstance", () => {
     await waitForI18n(comp);
     await CreationInProgress.play({ canvasElement: comp.container });
 
-    expect(await comp.queryAllByRole("alert")).toHaveLength(0);
+    expect(comp.queryAllByRole("alert")).toHaveLength(0);
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
@@ -289,7 +289,7 @@ describe("CreateKafkaInstance", () => {
     await NameTakenOnFormSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText("Address form errors to proceed.")
+      comp.queryByText("Address form errors to proceed.")
     ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();
@@ -301,7 +301,7 @@ describe("CreateKafkaInstance", () => {
     await GenericErrorOnFormSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "There was a problem processing the request. Please try again."
       )
     ).toBeInTheDocument();
@@ -313,7 +313,7 @@ describe("CreateKafkaInstance", () => {
     await FormErrorsCantSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText("Address form errors to proceed.")
+      comp.queryByText("Address form errors to proceed.")
     ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();

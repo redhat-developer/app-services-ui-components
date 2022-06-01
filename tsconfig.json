@@ -5,9 +5,10 @@
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
+    "emitDeclarationOnly": true,
     "declaration": true,
     "declarationDir": "types",
-    "sourceMap": true,   
+    "sourceMap": true,
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -16,15 +17,10 @@
     "moduleResolution": "node",
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "target": "es6",
+    "target": "es2018",
     "noImplicitAny": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "include": ["src", "setupJest.ts"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "**/*.stories.tsx",
-    "**/*.test.ts*",
-  ]
+  "exclude": ["dist", "node_modules", "src/ProofOfConcepts"]
 }

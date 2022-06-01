@@ -28,7 +28,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     await waitForI18n(comp);
     await CreationInProgress.play({ canvasElement: comp.container });
 
-    expect(await comp.queryAllByRole("alert")).toHaveLength(0);
+    expect(comp.queryAllByRole("alert")).toHaveLength(0);
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();

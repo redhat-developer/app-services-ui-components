@@ -9,11 +9,13 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
-import CheckCircleIcon from "@patternfly/react-icons/dist/esm/icons/check-circle-icon";
-import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
+import {
+  CheckCircleIcon,
+  ExclamationTriangleIcon,
+} from "@patternfly/react-icons";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import { KafkaStatus } from "../../types";
+import type { KafkaStatus } from "../../types";
 import "./StatusLabel.css";
 
 type StatusLabelProps = {

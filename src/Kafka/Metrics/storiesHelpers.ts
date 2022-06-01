@@ -1,6 +1,6 @@
 import { fakeApi } from "../../shared/storiesHelpers";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
-import {
+import type {
   DurationOptions,
   GetKafkaInstanceMetricsResponse,
   GetMetricsKpiResponse,

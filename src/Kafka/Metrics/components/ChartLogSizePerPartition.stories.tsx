@@ -1,7 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ChartLogSizePerPartition } from "./ChartLogSizePerPartition";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
+import { ChartLogSizePerPartition } from "./ChartLogSizePerPartition";
 
 export default {
   component: ChartLogSizePerPartition,
@@ -30,11 +30,6 @@ export default {
     duration: DurationOptions.Last12hours,
     isLoading: false,
     emptyState: <div>this is the empty state</div>,
-  },
-  argTypes: {
-    duration: {
-      type: null,
-    },
   },
   parameters: {
     backgrounds: {

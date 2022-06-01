@@ -6,8 +6,8 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import CubesIcon from "@patternfly/react-icons/dist/esm/icons/cubes-icon";
-import { VoidFunctionComponent } from "react";
+import { CubesIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const NoDataEmptyState: VoidFunctionComponent<{

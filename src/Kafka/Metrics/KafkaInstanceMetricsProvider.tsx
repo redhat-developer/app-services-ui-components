@@ -1,12 +1,11 @@
 import { useInterpret } from "@xstate/react";
-import { createContext, FunctionComponent } from "react";
-import { ActorRefFrom } from "xstate";
+import type { FunctionComponent } from "react";
+import { createContext } from "react";
+import type { ActorRefFrom } from "xstate";
 import { timeIntervalsMapping } from "./consts";
-import {
-  KafkaInstanceMetricsMachine,
-  KafkaInstanceMetricsMachineType,
-} from "./machines";
-import { DurationOptions, GetKafkaInstanceMetricsResponse } from "./types";
+import type { KafkaInstanceMetricsMachineType } from "./machines";
+import { KafkaInstanceMetricsMachine } from "./machines";
+import type { DurationOptions, GetKafkaInstanceMetricsResponse } from "./types";
 
 export const KafkaInstanceMetricsContext = createContext<{
   service: ActorRefFrom<KafkaInstanceMetricsMachineType>;

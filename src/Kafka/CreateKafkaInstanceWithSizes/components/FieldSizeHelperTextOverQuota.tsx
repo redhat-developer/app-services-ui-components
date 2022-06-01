@@ -4,7 +4,7 @@ import {
   HelperText,
   HelperTextItem,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const FieldSizeHelperTextOverQuota: VoidFunctionComponent<{

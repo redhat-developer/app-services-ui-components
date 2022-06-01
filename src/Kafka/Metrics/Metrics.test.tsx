@@ -1,7 +1,7 @@
-import { render, waitForI18n, within } from "../../test-utils";
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./Metrics.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n, within } from "../../test-utils";
+import * as stories from "./Metrics.stories";
 
 const { AllReady, NoTopics, LimitsNearing } = composeStories(stories);
 
@@ -83,7 +83,7 @@ describe("Metrics", () => {
       )
     ).toBeInTheDocument();
     userEvent.click(
-      await comp.getByRole("button", { name: "Warning alert details" })
+      comp.getByRole("button", { name: "Warning alert details" })
     );
 
     expect(

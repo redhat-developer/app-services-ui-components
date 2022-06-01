@@ -9,11 +9,12 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import { FunctionComponent, useCallback, useState } from "react";
+import { FilterIcon, SearchIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Pagination, PaginationProps } from "../../../shared";
+import type { PaginationProps } from "../../../shared";
+import { Pagination } from "../../../shared";
 
 export type ConsumerGroupToolbarProps = {
   onSearch: (value: string) => void;

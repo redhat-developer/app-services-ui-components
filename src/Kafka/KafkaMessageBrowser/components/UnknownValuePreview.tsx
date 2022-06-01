@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { truncate } from "../utils";
 import { Flex, FlexItem } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";

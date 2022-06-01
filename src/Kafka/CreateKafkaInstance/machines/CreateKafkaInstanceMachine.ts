@@ -1,7 +1,7 @@
 import { useMachine } from "@xstate/react";
 import { useCallback } from "react";
 import { assign, createMachine, send } from "xstate";
-import {
+import type {
   AZ,
   CreateKafkaInitializationData,
   CreateKafkaInstanceError,

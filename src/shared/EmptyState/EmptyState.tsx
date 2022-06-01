@@ -1,32 +1,36 @@
+import type {
+  ButtonProps,
+  EmptyStateBodyProps,
+  EmptyStateIconProps,
+  EmptyStateProps as PFEmptyStateProps,
+  TitleProps,
+} from "@patternfly/react-core";
 import {
+  Button,
+  ButtonVariant,
+  EmptyState as PFEmptyState,
+  EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStateVariant as PFEmptyStateVariant,
+  Title,
+  TitleSizes,
+} from "@patternfly/react-core";
+import {
+  ExclamationCircleIcon,
+  LockIcon,
+  PlusCircleIcon,
+  SearchIcon,
+  SpaceShuttleIcon,
+} from "@patternfly/react-icons";
+import { css } from "@patternfly/react-styles";
+import type {
   ComponentType,
   MouseEvent as ReactMouseEvent,
   ReactNode,
   VoidFunctionComponent,
 } from "react";
-import {
-  Button,
-  ButtonProps,
-  ButtonVariant,
-  EmptyState as PFEmptyState,
-  EmptyStateBody,
-  EmptyStateBodyProps,
-  EmptyStateIcon,
-  EmptyStateIconProps,
-  EmptyStateProps as PFEmptyStateProps,
-  EmptyStateVariant as PFEmptyStateVariant,
-  Title,
-  TitleProps,
-  TitleSizes,
-} from "@patternfly/react-core";
-import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
-import SpaceShuttleIcon from "@patternfly/react-icons/dist/esm/icons/space-shuttle-icon";
-import LockIcon from "@patternfly/react-icons/dist/esm/icons/lock-icon";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import { css } from "@patternfly/react-styles";
-import "./EmptyState.css";
 import { NotFoundIcon } from "../../images";
+import "./EmptyState.css";
 
 export enum EmptyStateVariant {
   GettingStarted = "GettingStarted",
@@ -84,7 +88,14 @@ export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
   const getVariantConfig = () => {
     let variantConfig: {
       variant: PFEmptyStateVariant;
-      icon?: ComponentType<any>;
+      icon?:
+        | ComponentType<unknown>
+        | typeof SpaceShuttleIcon
+        | typeof LockIcon
+        | typeof PlusCircleIcon
+        | typeof SearchIcon
+        | typeof ExclamationCircleIcon
+        | typeof NotFoundImg;
       titleSize: TitleProps["size"];
       headingLevel: TitleProps["headingLevel"];
     };

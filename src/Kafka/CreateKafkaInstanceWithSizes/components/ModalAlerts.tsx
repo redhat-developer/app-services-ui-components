@@ -6,9 +6,9 @@ import {
   ButtonVariant,
   Spinner,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { InstanceAvailability, Plan } from "../types";
+import type { InstanceAvailability, Plan } from "../types";
 
 export type ModalAlertsProps = {
   plan?: Plan;

@@ -1,4 +1,4 @@
-import { ComponentMeta } from "@storybook/react";
+import type { ComponentMeta } from "@storybook/react";
 import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
 import {
   argTypes,
@@ -26,13 +26,11 @@ export default {
 } as ComponentMeta<typeof CreateKafkaInstanceWithSizes>;
 
 export const LoadingData = Template.bind({});
-LoadingData.storyName = "Loading Data";
 LoadingData.args = {
   apiLatency: 999999,
 };
 
 export const CreationInProgress = Template.bind({});
-CreationInProgress.storyName = "Creation in Progress";
 CreationInProgress.args = {
   onCreate: () => {
     // Doing nothing to showcase the loading

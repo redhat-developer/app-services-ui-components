@@ -1,7 +1,8 @@
 import { FormGroup, HelperText, HelperTextItem } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { CloudRegionProps, CloudRegionSelect } from "./CloudRegionsSelect";
+import type { CloudRegionProps } from "./CloudRegionsSelect";
+import { CloudRegionSelect } from "./CloudRegionsSelect";
 
 export type FieldCloudRegionProps = {
   validity: "valid" | "region-unavailable" | "required";

@@ -1,16 +1,12 @@
 import { Alert } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { PlayFunction } from "@storybook/csf";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ReactFramework } from "@storybook/react/types-6-0";
+import { userEvent, within } from "@storybook/testing-library";
 import { useMachine } from "@xstate/react";
 import { createMachine } from "xstate";
-
-import {
-  DeleteModal,
-  DeleteModalConfirmation,
-  DeleteModalProps,
-} from "./DeleteModal";
-import { userEvent, within } from "@storybook/testing-library";
-import { PlayFunction } from "@storybook/csf";
-import { ReactFramework } from "@storybook/react/types-6-0";
+import type { DeleteModalProps } from "./DeleteModal";
+import { DeleteModal, DeleteModalConfirmation } from "./DeleteModal";
 
 export default {
   component: DeleteModal,
@@ -113,8 +109,11 @@ const Template: ComponentStory<typeof DeleteModal> = (
     () =>
       makeModalStoryMachine({
         id,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         initial: parameters.initialState,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         isAsync: parameters.isDeleteAsync,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         willFail: parameters.willDeleteFail,
       }),
     { devTools: true }

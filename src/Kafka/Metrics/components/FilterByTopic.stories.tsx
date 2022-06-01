@@ -1,4 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { CSSProperties } from "react";
 import { FilterByTopic } from "./FilterByTopic";
 
 export default {
@@ -14,7 +15,7 @@ const Template: ComponentStory<typeof FilterByTopic> = (
   args,
   { parameters }
 ) => (
-  <div style={parameters.style}>
+  <div style={parameters.style as CSSProperties | undefined}>
     <FilterByTopic {...args} />
   </div>
 );

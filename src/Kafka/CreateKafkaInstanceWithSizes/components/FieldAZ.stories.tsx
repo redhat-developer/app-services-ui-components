@@ -1,5 +1,5 @@
 import { Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { FieldAZ as FieldAZComp } from "./FieldAZ";
 

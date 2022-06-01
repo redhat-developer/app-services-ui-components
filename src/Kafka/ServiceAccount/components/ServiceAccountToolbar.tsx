@@ -6,11 +6,12 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
-import { useEffect, useReducer, VoidFunctionComponent } from "react";
+import { FilterIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
+import { useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
-import { SearchCategory } from "../types";
-import { SearchProps } from "./Search";
+import type { SearchCategory } from "../types";
+import type { SearchProps } from "./Search";
 import { SearchChips } from "./SearchChips";
 
 const initialState: State = {

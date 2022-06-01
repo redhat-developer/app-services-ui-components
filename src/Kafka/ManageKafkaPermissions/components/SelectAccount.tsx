@@ -1,12 +1,13 @@
 import React, { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Account, PrincipalType } from "../types";
+import type { Account } from "../types";
+import { PrincipalType } from "../types";
+import type { SelectProps } from "@patternfly/react-core";
 import {
   Divider,
   Select,
   SelectGroup,
   SelectOption,
-  SelectProps,
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";

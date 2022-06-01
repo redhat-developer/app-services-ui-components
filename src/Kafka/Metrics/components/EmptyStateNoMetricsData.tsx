@@ -1,11 +1,11 @@
 import {
   EmptyState,
-  Title,
   EmptyStateIcon,
   EmptyStateVariant,
+  Title,
 } from "@patternfly/react-core";
-import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
-import { FunctionComponent } from "react";
+import { ExclamationTriangleIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const EmptyStateNoMetricsData: FunctionComponent = () => {

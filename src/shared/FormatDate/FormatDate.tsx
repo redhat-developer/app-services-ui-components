@@ -7,7 +7,8 @@ import {
   intervalToDuration,
 } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import { useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
 import { useInterval } from "../../utils";
 
 type SupportedFormats =
@@ -61,7 +62,7 @@ export const FormatDate: VoidFunctionComponent<FormatDateProps> = ({
       setDistance(formatFn(date));
     } catch (e) {
       console.warn(
-        `FormatDate can't format date "${date}" with format "${format}"`
+        `FormatDate can't format date "${date.toISOString()}" with format "${format.toString()}"`
       );
     }
   }, interval);

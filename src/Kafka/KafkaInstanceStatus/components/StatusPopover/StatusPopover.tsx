@@ -1,9 +1,12 @@
-import { RefObject, useCallback, useState, VoidFunctionComponent } from "react";
+import type { RefObject, VoidFunctionComponent } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-import { Popover, PopoverProps } from "@patternfly/react-core";
-import { PopoverContent, PopoverContentProps } from "./PopoverContent";
-import { PopoverStatus } from "../../types";
+import type { PopoverProps } from "@patternfly/react-core";
+import { Popover } from "@patternfly/react-core";
+import type { PopoverContentProps } from "./PopoverContent";
+import { PopoverContent } from "./PopoverContent";
+import type { PopoverStatus } from "../../types";
 
 export type StatusPopoverProps = {
   status: PopoverStatus;

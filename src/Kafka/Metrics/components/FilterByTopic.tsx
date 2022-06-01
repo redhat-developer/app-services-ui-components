@@ -1,13 +1,14 @@
-import { useEffect, useState, VoidFunctionComponent } from "react";
+import type { SelectProps } from "@patternfly/react-core";
 import {
-  ToolbarItem,
   Select,
-  SelectVariant,
   SelectGroup,
   SelectOption,
-  SelectProps,
+  SelectVariant,
+  ToolbarItem,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
+import { FilterIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./FilterByTopic.css";
 

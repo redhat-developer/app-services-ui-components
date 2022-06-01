@@ -1,4 +1,4 @@
-import { BackendModule, ReadCallback, Services } from "i18next";
+import type { BackendModule, ReadCallback, Services } from "i18next";
 
 type ResourceFetcher = () => Promise<Record<string, string>>;
 
@@ -33,7 +33,14 @@ export default class AsyncBackend
     if (resourceFetcher) {
       resourceFetcher()
         .then((resource) => callback(null, resource))
-        .catch((err) => callback(err, false));
+        .catch((err) =>
+          callback(
+            err instanceof Error
+              ? err
+              : new Error(typeof err === "string" ? err : "unknown error"),
+            false
+          )
+        );
     } else {
       callback(new Error("resource not found"), false);
     }

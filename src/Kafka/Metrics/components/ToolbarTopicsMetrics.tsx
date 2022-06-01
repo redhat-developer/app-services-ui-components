@@ -5,12 +5,13 @@ import {
   Toolbar,
   ToolbarContent,
 } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { DurationOptions } from "../types";
+import type { DurationOptions } from "../types";
 import { FilterByTime } from "./FilterByTime";
 import { FilterByTopic } from "./FilterByTopic";
-import { ToolbarRefresh, ToolbarRefreshProps } from "./ToolbarRefresh";
+import type { ToolbarRefreshProps } from "./ToolbarRefresh";
+import { ToolbarRefresh } from "./ToolbarRefresh";
 
 type ToolbarTopicsMetricsProps = {
   title: string;

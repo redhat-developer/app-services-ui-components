@@ -36,7 +36,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     });
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "You can create a trial instance to evaluate this service."
       )
     ).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     await NameTakenOnFormSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText("Address form errors to proceed.")
+      comp.queryByText("Address form errors to proceed.")
     ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();
@@ -60,7 +60,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     await GenericErrorOnFormSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "There was a problem processing the request. Please try again."
       )
     ).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     await FormErrorsCantSubmit.play({ canvasElement: comp.container });
 
     expect(
-      await comp.queryByText("Address form errors to proceed.")
+      comp.queryByText("Address form errors to proceed.")
     ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeInvalid();

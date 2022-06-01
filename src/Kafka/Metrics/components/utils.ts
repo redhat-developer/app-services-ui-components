@@ -1,9 +1,8 @@
 import byteSize from "byte-size";
+import { fromUnixTime, sub } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import fromUnixTime from "date-fns/fromUnixTime";
-import sub from "date-fns/sub";
 import { timeIntervalsMapping } from "../consts";
-import { DurationOptions } from "../types";
+import type { DurationOptions } from "../types";
 
 export function formatBytes(bytes: number): string {
   return byteSize(bytes, { units: "iec" }).toString();
@@ -33,7 +32,7 @@ export function timestampsToTicks(
     Math.max(timeIntervalsMapping[duration].ticks, allTimestamps.length)
   )
     .fill(mostRecentTs)
-    .map((d, index) =>
+    .map((d: number, index) =>
       sub(new Date(d), {
         seconds: timeIntervalsMapping[duration].interval * index,
       }).getTime()

@@ -6,8 +6,8 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import WrenchIcon from "@patternfly/react-icons/dist/esm/icons/wrench-icon";
-import { FunctionComponent } from "react";
+import { WrenchIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 type EmptyStateNoTopicsProps = {

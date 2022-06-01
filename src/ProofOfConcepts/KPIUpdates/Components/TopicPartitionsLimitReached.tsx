@@ -1,18 +1,19 @@
-import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import { VoidFunctionComponent } from "react";
-import React from "react";
 import {
   Alert,
   Card,
   CardBody,
   CardFooter,
   CardTitle,
-  Title,
   Popover,
   Text,
   TextContent,
+  Title,
 } from "@patternfly/react-core";
+import {
+  ExclamationCircleIcon,
+  OutlinedQuestionCircleIcon,
+} from "@patternfly/react-icons";
+import React, { VoidFunctionComponent } from "react";
 
 export const TopicPartitionsLimitReached: VoidFunctionComponent = () => {
   return (

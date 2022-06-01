@@ -1,6 +1,6 @@
 import { Alert } from "@patternfly/react-core";
 import { differenceInHours } from "date-fns";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Trans } from "react-i18next";
 import { FormatDate } from "../../../shared";
 

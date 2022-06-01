@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { addHours } from "date-fns";
 import { KafkaDetailsTab } from "./KafkaDetailsTab";
 
@@ -42,6 +42,7 @@ TrialInstanceJustCreated.args = {
   ...instanceInfo,
   isLoadingSize: false,
 };
+// @ts-ignore
 TrialInstanceJustCreated.doc = {};
 
 export const TrialIntsanceRecentlyCreated = Template.bind({});

@@ -1,10 +1,10 @@
 import { assign, createMachine } from "xstate";
-import {
-  DurationOptions,
+import type {
   TimeSeriesMetrics,
   PartitionBytesMetric,
   GetTopicsMetricsResponse,
 } from "../types";
+import { DurationOptions } from "../types";
 
 const MAX_RETRIES = 3;
 

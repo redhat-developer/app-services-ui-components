@@ -1,3 +1,4 @@
+import type { MenuProps } from "@patternfly/react-core";
 import {
   Divider,
   Dropdown,
@@ -8,17 +9,13 @@ import {
   MenuGroup,
   MenuItem,
   MenuList,
-  MenuProps,
   Popper,
 } from "@patternfly/react-core";
-import {
+import type {
   MouseEvent as ReactMouseEvent,
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
   VoidFunctionComponent,
 } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type PermissionsDropdownProps = {
@@ -88,8 +85,8 @@ export const PermissionsDropdown: VoidFunctionComponent<
       if (menuRef.current) {
         const firstElement = menuRef.current.querySelector(
           "li > button,input:not(:disabled)"
-        ) as HTMLElement | null;
-        firstElement && firstElement.focus();
+        );
+        firstElement && (firstElement as HTMLElement).focus();
       }
     }, 0);
     setIsOpen(open);

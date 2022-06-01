@@ -1,7 +1,7 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { Alert, AlertGroup, AlertVariant } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
-import { CreateKafkaInstanceError } from "../machines";
+import type { CreateKafkaInstanceError } from "../machines";
 
 export type FormAlertsProps = {
   error: CreateKafkaInstanceError | undefined;

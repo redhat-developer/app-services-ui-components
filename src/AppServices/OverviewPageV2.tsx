@@ -14,8 +14,8 @@ import {
   StackItem,
   Title,
 } from "@patternfly/react-core";
-import ExternalLinkAltIcon from "@patternfly/react-icons/dist/esm/icons/external-link-alt-icon";
-import { FunctionComponent } from "react";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {

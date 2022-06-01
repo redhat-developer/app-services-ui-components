@@ -14,10 +14,10 @@ import {
   Stack,
   StackItem,
 } from "@patternfly/react-core";
-import ClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
-import { VoidFunctionComponent } from "react";
+import { ClockIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { InstanceInfoProps } from "./InstanceInfo";
+import type { InstanceInfoProps } from "./InstanceInfo";
 
 export const InstanceInfoSkeleton: VoidFunctionComponent<InstanceInfoProps> = ({
   isTrial,

@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { PageSection, Button } from "@patternfly/react-core";
 import { useHistory } from "react-router-dom";

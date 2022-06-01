@@ -1,12 +1,12 @@
 import {
   EmptyState,
-  EmptyStateVariant,
-  EmptyStateIcon,
-  Title,
   EmptyStateBody,
+  EmptyStateIcon,
+  EmptyStateVariant,
+  Title,
 } from "@patternfly/react-core";
-import TachometerAltIcon from "@patternfly/react-icons/dist/esm/icons/tachometer-alt-icon";
-import { FunctionComponent } from "react";
+import { TachometerAltIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const EmptyStateMetricsUnavailable: FunctionComponent = () => {

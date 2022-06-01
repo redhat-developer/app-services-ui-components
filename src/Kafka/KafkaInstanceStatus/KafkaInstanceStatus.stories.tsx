@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as popoverStories from "./components/StatusPopover/StatusPopover.stories";
 import { StatusLabel, StatusPopover } from "./components";
 

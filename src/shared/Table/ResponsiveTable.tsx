@@ -1,27 +1,25 @@
 import { Skeleton } from "@patternfly/react-core";
+import type {
+  ActionsColumnProps,
+  TdProps,
+  ThProps,
+} from "@patternfly/react-table";
 import {
   ActionsColumn,
-  ActionsColumnProps,
   TableComposable,
   Tbody,
   Td,
-  TdProps,
   Th,
   Thead,
-  ThProps,
   Tr,
 } from "@patternfly/react-table";
-import {
-  forwardRef,
+import type {
   FunctionComponent,
-  memo,
   PropsWithChildren,
   ReactElement,
-  useCallback,
-  useMemo,
-  useState,
   VoidFunctionComponent,
 } from "react";
+import { forwardRef, memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import useResizeObserver from "use-resize-observer";
 import "./ResponsiveTable.css";
@@ -124,6 +122,7 @@ export const ResponsiveTable = <TRow, TCol>({
       Th.displayName = "ResponsiveThCurried";
       return renderHeader({
         Th,
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         key: `header_${column}`,
 
         column,
@@ -190,6 +189,7 @@ export const ResponsiveTable = <TRow, TCol>({
           const cells = columns.map((column, colIndex) => {
             return renderCell({
               Td: TdList[colIndex],
+              // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
               key: `row_${rowIndex}_cell_${column}`,
               column,
               colIndex,

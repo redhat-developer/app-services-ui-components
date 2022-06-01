@@ -1,7 +1,10 @@
-import { useCallback, useRef, useState, VoidFunctionComponent } from "react";
-import { StatusLabel, StatusPopover, StatusPopoverProps } from "./components";
+import type { VoidFunctionComponent } from "react";
+import { useCallback, useRef, useState } from "react";
+import type { StatusPopoverProps } from "./components";
+import { StatusLabel, StatusPopover } from "./components";
 
-import { KafkaStatus, KafkaToPopoverMapping } from "./types";
+import type { KafkaStatus } from "./types";
+import { KafkaToPopoverMapping } from "./types";
 import { differenceInMinutes } from "date-fns";
 import { useInterval } from "../../utils";
 

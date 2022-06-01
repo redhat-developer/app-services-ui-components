@@ -1,4 +1,5 @@
-import { RefObject, useEffect, useLayoutEffect, useRef, useState } from "react";
+import type { RefObject } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 export function useChartWidth(): [RefObject<HTMLDivElement>, number] {
   const containerRef = useRef<HTMLDivElement>(null);

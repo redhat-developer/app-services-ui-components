@@ -5,14 +5,9 @@ import {
   Tooltip,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import {
-  KeyboardEvent,
-  useCallback,
-  useRef,
-  useState,
-  VoidFunctionComponent,
-} from "react";
+import { SearchIcon } from "@patternfly/react-icons";
+import type { KeyboardEvent, VoidFunctionComponent } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type SearchInputProps = {

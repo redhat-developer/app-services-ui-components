@@ -1,3 +1,4 @@
+import type { ChartVoronoiContainerProps } from "@patternfly/react-charts";
 import {
   Chart,
   ChartAxis,
@@ -7,12 +8,14 @@ import {
   ChartThemeColor,
   ChartVoronoiContainer,
 } from "@patternfly/react-charts";
-import chart_color_blue_300 from "@patternfly/react-tokens/dist/esm/chart_color_blue_300";
-import chart_color_orange_300 from "@patternfly/react-tokens/dist/esm/chart_color_orange_300";
-import { FunctionComponent, ReactElement } from "react";
+import {
+  chart_color_blue_300,
+  chart_color_orange_300,
+} from "@patternfly/react-tokens";
+import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding, timeIntervalsMapping } from "../consts";
-import { TimeSeriesMetrics } from "../types";
+import type { TimeSeriesMetrics } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {
@@ -89,16 +92,16 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
       return <ChartSkeletonLoader />;
     case !hasMetrics:
       return emptyState;
-    default:
+    default: {
+      const labels: ChartVoronoiContainerProps["labels"] =
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions,@typescript-eslint/no-unsafe-argument
+        ({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`;
       return (
         <div ref={containerRef}>
           <Chart
             ariaTitle={t("metrics:total_bytes")}
             containerComponent={
-              <ChartVoronoiContainer
-                labels={({ datum }) => `${datum.name}: ${formatBytes(datum.y)}`}
-                constrainToVisibleArea
-              />
+              <ChartVoronoiContainer labels={labels} constrainToVisibleArea />
             }
             legendAllowWrap={true}
             legendPosition="bottom-left"
@@ -114,7 +117,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
               label={"\n" + t("metrics:axis-label-time")}
               tickValues={tickValues}
               tickCount={timeIntervalsMapping[duration].ticks}
-              tickFormat={(d) =>
+              tickFormat={(d: number) =>
                 dateToChartValue(d, {
                   showDate,
                 })
@@ -141,6 +144,7 @@ export const ChartTotalBytes: FunctionComponent<ChartTotalBytesProps> = ({
           </Chart>
         </div>
       );
+    }
   }
 };
 

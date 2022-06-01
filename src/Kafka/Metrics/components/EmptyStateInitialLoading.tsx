@@ -3,7 +3,7 @@ import {
   EmptyStateBody,
   EmptyStateVariant,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { AppServicesLoading } from "../../../shared";
 
 export const EmptyStateInitialLoading: VoidFunctionComponent = () => {

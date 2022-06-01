@@ -11,9 +11,10 @@ import {
 import { formatISO, parse, parseISO } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 
-import { useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { DateIsoString } from "../types";
+import type { DateIsoString } from "../types";
 import { DateTimePicker } from "./DateTimePicker";
 
 type Category = "offset" | "timestamp" | "epoch" | "latest";

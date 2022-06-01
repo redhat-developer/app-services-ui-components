@@ -5,7 +5,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from "@patternfly/react-core";
-import { IAction } from "@patternfly/react-table";
+import type { IAction } from "@patternfly/react-table";
 import { KafkaInstanceStatus } from "../../Kafka";
 
 export const columns = [
@@ -102,6 +102,7 @@ export const sampleData: Array<SampleDataType> = [
 export const defaultActions = (data: any): IAction[] => [
   {
     title: "Some action",
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     onClick: () => console.log(`clicked on Some action, on row ${data[0]}`),
   },
   {
@@ -112,6 +113,7 @@ export const defaultActions = (data: any): IAction[] => [
   },
   {
     title: "Third action",
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions
     onClick: () => console.log(`clicked on Third action, on row ${data[0]}`),
   },
 ];

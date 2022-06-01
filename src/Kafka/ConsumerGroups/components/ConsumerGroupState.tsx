@@ -1,6 +1,6 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ConsumerGroupState } from "../types";
+import type { ConsumerGroupState } from "../types";
 
 export type ConsumerGroupStateLabelProps = {
   state: ConsumerGroupState;

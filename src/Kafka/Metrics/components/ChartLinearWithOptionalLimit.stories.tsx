@@ -1,7 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
+import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 
 export default {
   component: ChartLinearWithOptionalLimit,
@@ -15,11 +15,6 @@ export default {
   parameters: {
     backgrounds: {
       default: "Background color 100",
-    },
-  },
-  argTypes: {
-    duration: {
-      type: null,
     },
   },
 } as ComponentMeta<typeof ChartLinearWithOptionalLimit>;

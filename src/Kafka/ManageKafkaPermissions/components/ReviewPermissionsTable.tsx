@@ -1,4 +1,4 @@
-import { VFC } from "react";
+import type { VFC } from "react";
 import { useTranslation } from "react-i18next";
 
 import {
@@ -11,7 +11,7 @@ import {
   Tr,
 } from "@patternfly/react-table";
 
-import { AclBinding } from "../types";
+import type { AclBinding } from "../types";
 import { PermissionOperationCell, PrincipalCell, ResourceCell } from "./Cells";
 
 export type ReviewPermissionsTableProps = {

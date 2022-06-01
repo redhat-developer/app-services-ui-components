@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { apiError, fakeApi } from "../../shared/storiesHelpers";
 import { makeGrowingMetrics, makeMetrics } from "./makeMetrics";
 import { Metrics } from "./Metrics";
@@ -9,7 +9,7 @@ import {
   getTopicsMetricsOneTopic,
   getTopicsMetricsWithDeletedTopicMetric,
 } from "./storiesHelpers";
-import {
+import type {
   GetKafkaInstanceMetricsResponse,
   GetMetricsKpiResponse,
   GetTopicsMetricsResponse,
@@ -28,7 +28,7 @@ export default {
 } as ComponentMeta<typeof Metrics>;
 
 const Template: ComponentStory<typeof Metrics> = (args, { parameters }) => (
-  <div style={{ height: parameters.previewHeight }}>
+  <div style={{ height: parameters.previewHeight as number | undefined }}>
     <Metrics {...args} />
   </div>
 );

@@ -1,4 +1,4 @@
-import { CardKafkaInstanceMetricsLimits } from "./components";
+import type { CardKafkaInstanceMetricsLimits } from "./components";
 
 export type TimeSeriesMetrics = { [timestamp: number]: number };
 export type PartitionBytesMetric = { [partition: string]: TimeSeriesMetrics };

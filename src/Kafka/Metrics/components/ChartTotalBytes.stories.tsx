@@ -1,7 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ChartTotalBytes } from "./ChartTotalBytes";
-import { DurationOptions } from "../types";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { makeMetrics } from "../makeMetrics";
+import { DurationOptions } from "../types";
+import { ChartTotalBytes } from "./ChartTotalBytes";
 
 export default {
   component: ChartTotalBytes,
@@ -15,11 +15,6 @@ export default {
   parameters: {
     backgrounds: {
       default: "Background color 100",
-    },
-  },
-  argTypes: {
-    duration: {
-      type: null,
     },
   },
 } as ComponentMeta<typeof ChartTotalBytes>;

@@ -5,10 +5,10 @@ import {
   TextListItemVariants,
   TextListVariants,
 } from "@patternfly/react-core";
-import { FunctionComponent, ReactNode } from "react";
+import type { FunctionComponent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../shared";
-import { InstanceType } from "../utils";
+import type { InstanceType } from "../utils";
 import { KafkaSizeSkeleton } from "./KafkaSizeSkeleton";
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 

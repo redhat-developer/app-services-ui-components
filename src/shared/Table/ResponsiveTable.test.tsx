@@ -19,7 +19,8 @@ describe("ResponsiveTable", () => {
     sampleData
       .flatMap((row) => row.slice(0, -1))
       .forEach((cell) => {
-        expect(comp.getByText(cell)).toBeInTheDocument();
+        if (typeof cell === "string")
+          expect(comp.getByText(cell)).toBeInTheDocument();
       });
     expect(comp.queryAllByTestId("row-selected")).toHaveLength(1);
     expect(comp.queryAllByTestId("row-deleted")).toHaveLength(1);

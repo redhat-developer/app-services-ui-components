@@ -1,5 +1,5 @@
 import { assign, createMachine } from "xstate";
-import { DateIsoString, Message } from "./types";
+import type { DateIsoString, Message } from "./types";
 import { isSameMessage } from "./utils";
 
 export type MessageApiResponse = {

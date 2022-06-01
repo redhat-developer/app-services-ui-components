@@ -5,24 +5,29 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import InfoIcon from "@patternfly/react-icons/dist/esm/icons/info-icon";
+import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { VoidFunctionComponent } from "react";
-import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { VoidFunctionComponent } from "react";
+import type { ResponsiveTableProps } from "./ResponsiveTable";
+import { ResponsiveTable } from "./ResponsiveTable";
+import type { SampleDataType } from "./storybookHelpers";
 import {
   columnLabels,
   columns,
   defaultActions,
   deletingSign,
   sampleData,
-  SampleDataType,
 } from "./storybookHelpers";
 
 const eventsFromNames = actions("onRowClick");
 
 const ResponsiveTableSampleType: VoidFunctionComponent<
-  ResponsiveTableProps<SampleDataType, typeof columns[number]>
+  ResponsiveTableProps<SampleDataType, typeof columns[number]> & {
+    hasActions?: boolean;
+    isRowClickable?: boolean;
+    selectedRow?: number;
+  }
 > = (props) => <ResponsiveTable {...props} />;
 
 export default {
@@ -55,16 +60,22 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
       </Td>
     )}
     renderActions={({ row, ActionsColumn }) =>
-      args.hasActions && <ActionsColumn items={defaultActions(row)} />
+      args.hasActions ? (
+        <ActionsColumn
+          items={
+            // @ts-ignore
+            defaultActions(row)
+          }
+        />
+      ) : undefined
     }
     isRowSelected={
       args.selectedRow
-        ? ({ rowIndex }) => rowIndex === args.selectedRow - 1
+        ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
         : undefined
     }
     isRowDeleted={({ row }) => row[5] === deletingSign}
-    onRowClick={args.onRowClick}
-    {...(args.isRowClickable && !args.onRowClick ? eventsFromNames : {})}
+    onRowClick={args.onRowClick || eventsFromNames["onRowClick"]}
   >
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={InfoIcon} />

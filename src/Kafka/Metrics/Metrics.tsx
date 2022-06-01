@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import {
   CardKafkaInstanceMetrics,
@@ -8,18 +8,12 @@ import {
   MetricsLayout,
 } from "./components";
 import { CardKpi } from "./components/CardKpi";
-import {
-  KafkaInstanceMetricsProvider,
-  KafkaInstanceMetricsProviderProps,
-} from "./KafkaInstanceMetricsProvider";
-import {
-  MetricsKpiProvider,
-  MetricsKpiProviderProps,
-} from "./MetricsKpiProvider";
-import {
-  TopicsMetricsProvider,
-  TopicsMetricsProviderProps,
-} from "./TopicsMetricsProvider";
+import type { KafkaInstanceMetricsProviderProps } from "./KafkaInstanceMetricsProvider";
+import { KafkaInstanceMetricsProvider } from "./KafkaInstanceMetricsProvider";
+import type { MetricsKpiProviderProps } from "./MetricsKpiProvider";
+import { MetricsKpiProvider } from "./MetricsKpiProvider";
+import type { TopicsMetricsProviderProps } from "./TopicsMetricsProvider";
+import { TopicsMetricsProvider } from "./TopicsMetricsProvider";
 import { useKafkaInstanceMetrics } from "./useKafkaInstanceMetrics";
 import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";

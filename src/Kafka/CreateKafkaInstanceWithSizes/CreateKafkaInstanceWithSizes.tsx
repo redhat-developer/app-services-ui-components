@@ -7,21 +7,21 @@ import {
   Modal,
   ModalVariant,
 } from "@patternfly/react-core";
-import OutlinedClockIcon from "@patternfly/react-icons/dist/esm/icons/outlined-clock-icon";
-import {
+import { OutlinedClockIcon } from "@patternfly/react-icons";
+import type {
   FormEvent,
   FunctionComponent,
-  useCallback,
   VoidFunctionComponent,
 } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import type { FieldSizeProps } from "./components";
 import {
   FieldAZ,
   FieldCloudProvider,
   FieldCloudRegion,
   FieldInstanceName,
   FieldSize,
-  FieldSizeProps,
   FormAlerts,
   InstanceInfo,
   InstanceInfoSkeleton,
@@ -34,7 +34,7 @@ import {
 } from "./CreateKafkaInstanceProvider";
 
 import "./CreateKafkaInstanceWithSizes.css";
-import { MakeCreateKafkaInstanceMachine } from "./types";
+import type { MakeCreateKafkaInstanceMachine } from "./types";
 
 export type CreateKafkaInstancePropsWithSizes =
   ConnectedCreateKafkaInstanceWithSizesProps & MakeCreateKafkaInstanceMachine;

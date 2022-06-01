@@ -1,5 +1,5 @@
-import { Modal, Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Form, Modal } from "@patternfly/react-core";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ResourcePermission } from "./ResourcePermission";
 
@@ -38,7 +38,7 @@ WorksWithModal.parameters = {
 };
 
 export const InitialState = Template.bind({});
-InitialState.args = { value: "Allow" };
+InitialState.args = { value: "allow" };
 InitialState.parameters = {
   docs: {
     description: {

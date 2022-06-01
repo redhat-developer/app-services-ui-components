@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AsyncTypeaheadSelect } from "./AsyncTypeaheadSelect";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";

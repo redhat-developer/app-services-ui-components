@@ -1,5 +1,5 @@
-import { Modal, Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Form, Modal } from "@patternfly/react-core";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ResourcePrefixRule } from "./ResourcePrefixRule";
 
@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof ResourcePrefixRule> = (args, { id }) => {
 };
 
 export const WorksWithModal = Template.bind({});
-WorksWithModal.args = { initialOpen: true, value: "Starts with" };
+WorksWithModal.args = { initialOpen: true, value: "starts-with" };
 WorksWithModal.parameters = {
   docs: {
     description: {
@@ -36,7 +36,7 @@ WorksWithModal.parameters = {
 };
 
 export const InitialState = Template.bind({});
-InitialState.args = { value: "Starts with" };
+InitialState.args = { value: "starts-with" };
 InitialState.parameters = {
   docs: {
     description: {

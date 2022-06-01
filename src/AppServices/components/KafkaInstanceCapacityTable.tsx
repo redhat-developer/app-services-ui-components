@@ -6,7 +6,7 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 interface CapacityTable {

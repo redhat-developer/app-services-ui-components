@@ -1,10 +1,6 @@
-import { FunctionComponent } from "react";
-import {
-  Bullseye,
-  BullseyeProps,
-  Spinner,
-  SpinnerProps,
-} from "@patternfly/react-core";
+import type { FunctionComponent } from "react";
+import type { BullseyeProps, SpinnerProps } from "@patternfly/react-core";
+import { Bullseye, Spinner } from "@patternfly/react-core";
 
 export type LoadingProps = {
   bullseyeProps?: Omit<BullseyeProps, "children">;

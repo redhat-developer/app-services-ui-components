@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { ResourceTypeValue } from "./ResourceType";
-import { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
+import type { ResourceTypeValue } from "./ResourceType";
+import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 import { AsyncTypeaheadSelect } from "../../../shared";
 
 type ResourceNameProps = {

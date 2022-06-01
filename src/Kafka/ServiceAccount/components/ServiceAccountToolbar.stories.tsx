@@ -1,7 +1,7 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ServiceAccountToolbar } from "./ServiceAccountToolbar";
-import { ValidClientId, ValidDescription, ValidOwner } from "./Search.stories";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
+import { ValidClientId, ValidDescription, ValidOwner } from "./Search.stories";
+import { ServiceAccountToolbar } from "./ServiceAccountToolbar";
 
 export default {
   component: ServiceAccountToolbar,
@@ -26,12 +26,14 @@ ToolbarFilter for ServiceAccount Search/filter functionality
 };
 
 export const ClientIdChips = Template.bind({});
+// @ts-ignore
 ClientIdChips.play = ValidClientId.play;
 
 export const CanDeleteClientIdChips = Template.bind({});
 CanDeleteClientIdChips.play = async (context) => {
   const story = within(context.canvasElement);
 
+  // @ts-ignore
   await ValidClientId.play(context);
 
   // delete the "foo" chip
@@ -43,12 +45,14 @@ CanDeleteClientIdChips.play = async (context) => {
 };
 
 export const DescriptionChips = Template.bind({});
+// @ts-ignore
 DescriptionChips.play = ValidDescription.play;
 
 export const CanDeleteDescriptionChips = Template.bind({});
 CanDeleteDescriptionChips.play = async (context) => {
   const story = within(context.canvasElement);
 
+  // @ts-ignore
   await ValidClientId.play(context);
 
   // delete the "foo" chip
@@ -60,12 +64,14 @@ CanDeleteDescriptionChips.play = async (context) => {
 };
 
 export const OwnerChips = Template.bind({});
+// @ts-ignore
 OwnerChips.play = ValidOwner.play;
 
 export const CanDeleteOwnerChips = Template.bind({});
 CanDeleteOwnerChips.play = async (context) => {
   const story = within(context.canvasElement);
 
+  // @ts-ignore
   await ValidClientId.play(context);
 
   // delete the "foo" chip
@@ -78,14 +84,18 @@ CanDeleteOwnerChips.play = async (context) => {
 
 export const AllChips = Template.bind({});
 AllChips.play = async (context) => {
+  // @ts-ignore
   await ValidDescription.play(context);
+  // @ts-ignore
   await ValidClientId.play(context);
+  // @ts-ignore
   await ValidOwner.play(context);
 };
 
 export const CanClearAllFilters = Template.bind({});
 CanClearAllFilters.play = async (context) => {
   const story = within(context.canvasElement);
+  // @ts-ignore
   await AllChips.play(context);
   const clearButtons = await story.findAllByText("Clear all filters");
   await userEvent.click(clearButtons[0]);

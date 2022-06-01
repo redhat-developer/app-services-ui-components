@@ -1,5 +1,5 @@
 import { expect } from "@storybook/jest";
-import { ComponentMeta } from "@storybook/react";
+import type { ComponentMeta } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
 import {
@@ -81,7 +81,12 @@ FormErrorsCantSubmit.args = {};
 FormErrorsCantSubmit.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
-  await waitFor(() => expect(canvas.getByLabelText("Name *")).toBeEnabled());
+  await waitFor(async () => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    await expect(canvas.getByLabelText("Name *")).toBeEnabled();
+  });
 
   await userEvent.type(await canvas.findByLabelText("Name *"), "%3-foo-;");
 

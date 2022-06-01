@@ -1,7 +1,7 @@
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./ResourcePrefixRule.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n } from "../../../test-utils";
+import * as stories from "./ResourcePrefixRule.stories";
 
 const { WorksWithModal, InitialState } = composeStories(stories);
 
@@ -10,7 +10,7 @@ describe("Resource type", () => {
     const onChangeValue = jest.fn();
     const comp = render(<WorksWithModal onChangeValue={onChangeValue} />);
     await waitForI18n(comp);
-    const permissionValue = await comp.getAllByText("Starts with");
+    const permissionValue = comp.getAllByText("Starts with");
     expect(permissionValue[0]).toBeInTheDocument();
     expect(permissionValue[1]).toBeInTheDocument();
     expect(await comp.findByText("Is")).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe("Resource type", () => {
 
     userEvent.click(await comp.findByText("Is"));
     expect(await comp.findByText("Starts with")).toBeInTheDocument();
-    expect(await comp.queryByText("Is")).not.toBeInTheDocument();
+    expect(comp.queryByText("Is")).not.toBeInTheDocument();
   });
   it("should show a select component for resource prefix rule in initial state ", async () => {
     const onChangeValue = jest.fn();
@@ -32,11 +32,11 @@ describe("Resource type", () => {
     expect(await comp.findByText("Starts with")).toBeInTheDocument();
     userEvent.click(await comp.findByText("Starts with"));
     expect(await comp.findByText("Is")).toBeInTheDocument();
-    const permissionValue = await comp.getAllByText("Starts with");
+    const permissionValue = comp.getAllByText("Starts with");
     expect(permissionValue[0]).toBeInTheDocument();
     expect(permissionValue[1]).toBeInTheDocument();
     userEvent.click(await comp.findByText("Is"));
     expect(await comp.findByText("Starts with")).toBeInTheDocument();
-    expect(await comp.queryByText("Is")).not.toBeInTheDocument();
+    expect(comp.queryByText("Is")).not.toBeInTheDocument();
   });
 });

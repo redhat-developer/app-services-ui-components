@@ -1,7 +1,7 @@
-import { act, render, waitForI18n, waitForPopper } from "../../test-utils";
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./AsyncTypeaheadSelect.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
+import { act, render, waitForI18n, waitForPopper } from "../../test-utils";
+import * as stories from "./AsyncTypeaheadSelect.stories";
 
 const {
   InitialState,
@@ -27,7 +27,7 @@ describe("Async typeahead", () => {
     );
     await waitForI18n(comp);
 
-    expect(await comp.queryByText("bar")).not.toBeInTheDocument();
+    expect(comp.queryByText("bar")).not.toBeInTheDocument();
 
     expect(onChangeValue).not.toBeCalled();
     expect(onFetchOptions).not.toBeCalled();
@@ -71,7 +71,7 @@ describe("Async typeahead", () => {
 
     await waitForPopper();
 
-    expect(await comp.getByRole("progressbar")).toBeInTheDocument();
+    expect(comp.getByRole("progressbar")).toBeInTheDocument();
     jest.advanceTimersByTime(1000);
     expect(onFetchOptions).toBeCalledTimes(1);
     expect(onValidationCheck).not.toBeCalled();
@@ -108,7 +108,7 @@ it("should show a validation error ", async () => {
     await waitForPopper();
     const clearBtn = comp.getAllByRole("button");
     expect(onChange).not.toBeCalled();
-    await userEvent.click(clearBtn[0]);
+    userEvent.click(clearBtn[0]);
     await waitForPopper();
     expect(onChange).toBeCalledTimes(1);
   });

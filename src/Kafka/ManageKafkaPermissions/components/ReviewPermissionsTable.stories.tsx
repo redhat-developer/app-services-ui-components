@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ReviewPermissionsTable } from "./ReviewPermissionsTable";
-import { AclBinding } from "../types";
+import type { AclBinding } from "../types";
 
 const permissionsForAllAccounts: AclBinding[] = [
   {

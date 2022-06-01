@@ -1,15 +1,11 @@
-import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
-import resolve from "@rollup/plugin-node-resolve";
 import replace from "@rollup/plugin-replace";
 import { importMetaAssets } from "@web/rollup-plugin-import-meta-assets";
 import path from "path";
 import autoExternals from "rollup-plugin-auto-external";
 import postcss from "rollup-plugin-postcss";
-import renameNodeModules from "rollup-plugin-rename-node-modules";
 import { terser } from "rollup-plugin-terser";
-import typescript from "rollup-plugin-typescript2";
-
+import { swc } from "rollup-plugin-swc3";
 import packageJson from "./package.json";
 
 export default {
@@ -33,20 +29,33 @@ export default {
       preserveModulesRoot: "src",
     },
   ],
-  external: ["react/jsx-runtime"],
+  external: [
+    "react/jsx-runtime",
+    "@swc/helpers/lib/_extends.js",
+    "@patternfly/react-styles",
+    "@patternfly/react-tokens",
+  ],
   plugins: [
     autoExternals(),
-    renameNodeModules("external"),
-    resolve({ browser: true, preferBuiltins: true, modulesOnly: true }),
-    commonjs({
-      requireReturnsDefault: "auto",
-    }),
     replace({
       "process.env.NODE_ENV": JSON.stringify("production"),
       preventAssignment: true,
     }),
     json(),
-    typescript({ useTsconfigDeclarationDir: true }),
+    swc({
+      sourceMaps: true,
+      jsc: {
+        parser: {
+          syntax: "typescript",
+        },
+        transform: {
+          react: {
+            runtime: "automatic",
+          },
+        },
+        externalHelpers: true,
+      },
+    }),
     postcss({
       extract: true,
       minimize: true,

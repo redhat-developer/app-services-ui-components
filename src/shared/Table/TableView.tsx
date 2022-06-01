@@ -3,9 +3,10 @@ import {
   InnerScrollContainer,
   OuterScrollContainer,
 } from "@patternfly/react-table";
-import { PropsWithChildren, ReactNode } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { Pagination } from "../Pagination";
-import { ResponsiveTable, ResponsiveTableProps } from "./ResponsiveTable";
+import type { ResponsiveTableProps } from "./ResponsiveTable";
+import { ResponsiveTable } from "./ResponsiveTable";
 
 export const DEFAULT_PERPAGE = 10;
 

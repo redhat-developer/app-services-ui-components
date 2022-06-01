@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { Alert, AlertActionCloseButton, Card } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 

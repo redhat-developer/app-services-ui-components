@@ -5,8 +5,8 @@ import {
   EmptyStateVariant,
   Title,
 } from "@patternfly/react-core";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
-import { FunctionComponent } from "react";
+import { SearchIcon } from "@patternfly/react-icons";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const EmptyStateNoMetricsDataForSelection: FunctionComponent = () => {

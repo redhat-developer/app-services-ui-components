@@ -1,7 +1,7 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CardKafkaInstanceMetrics } from "./CardKafkaInstanceMetrics";
-import { DurationOptions } from "../types";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { makeMetrics } from "../makeMetrics";
+import { DurationOptions } from "../types";
+import { CardKafkaInstanceMetrics } from "./CardKafkaInstanceMetrics";
 
 export default {
   component: CardKafkaInstanceMetrics,
@@ -18,11 +18,6 @@ export default {
     diskSpaceLimit: 1000 * 1024 ** 3,
     connectionsLimit: 100,
     connectionRateLimit: 100,
-  },
-  argTypes: {
-    duration: {
-      type: null,
-    },
   },
 } as ComponentMeta<typeof CardKafkaInstanceMetrics>;
 

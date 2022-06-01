@@ -1,5 +1,5 @@
 import { ManageKafkaPermissions } from "./ManageKafkaPermissions";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { PrincipalType } from "./types";
 
 export default {

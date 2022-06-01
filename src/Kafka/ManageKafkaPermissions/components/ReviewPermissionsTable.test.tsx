@@ -24,11 +24,11 @@ describe("ReviewPermissionsTable", () => {
     expect(await comp.findByText("Resource")).toBeInTheDocument();
     expect(await comp.findByText("Permission")).toBeInTheDocument();
     //header row
-    expect(await comp.getAllByRole("row")[0]).toBeDefined();
+    expect(comp.getAllByRole("row")[0]).toBeDefined();
     //table body data row
-    expect(await comp.getAllByRole("row")[1]).toBeDefined();
+    expect(comp.getAllByRole("row")[1]).toBeDefined();
     //row data
-    const firstRow = await comp.getAllByRole("row")[1];
+    const firstRow = comp.getAllByRole("row")[1];
 
     expect(within(firstRow).getByText("Kafka instance")).toBeInTheDocument();
     expect(within(firstRow).getByText("Allow")).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe("ReviewPermissionsTable", () => {
     expect(within(firstRow).getByRole("button")).toBeInTheDocument();
 
     //check deny permission
-    const denyPermissionRows = await comp.getAllByText("Deny");
+    const denyPermissionRows = comp.getAllByText("Deny");
 
     expect(denyPermissionRows[0]).toBeInTheDocument();
     expect(denyPermissionRows[1]).toBeInTheDocument();
@@ -47,12 +47,12 @@ describe("ReviewPermissionsTable", () => {
     await waitForI18n(comp);
 
     //check selected account rows
-    const deleteBtn = await comp.getAllByRole("button");
+    const deleteBtn = comp.getAllByRole("button");
     expect(deleteBtn[0]).toBeInTheDocument();
     expect(deleteBtn[1]).toBeInTheDocument();
 
     //check  for all accounts rows
-    const allAccountsRows = await comp.getAllByText("All accounts");
+    const allAccountsRows = comp.getAllByText("All accounts");
     expect(allAccountsRows[0]).toBeInTheDocument();
     expect(allAccountsRows[1]).toBeInTheDocument();
 
@@ -72,7 +72,7 @@ describe("ReviewPermissionsTable", () => {
     await waitForI18n(comp);
     await waitForPopper();
 
-    const firstRow = await comp.getAllByRole("row")[1];
+    const firstRow = comp.getAllByRole("row")[1];
     const firstRowDeleteBtn = within(firstRow).getByRole("button");
     userEvent.click(firstRowDeleteBtn);
 

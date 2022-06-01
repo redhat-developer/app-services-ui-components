@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
+import type { TreeViewDataItem } from "@patternfly/react-core";
 import {
   Menu,
   MenuContent,
@@ -10,10 +11,9 @@ import {
   MenuToggle,
   Popper,
   TreeView,
-  TreeViewDataItem,
 } from "@patternfly/react-core";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
-import { AclOperation, AclResourceType } from "../types";
+import type { AclOperation, AclResourceType } from "../types";
 
 export type ResourceTypeDataItem = TreeViewDataItem & {
   id: `${AclResourceType}` | `${AclResourceType}-${AclOperation}`;

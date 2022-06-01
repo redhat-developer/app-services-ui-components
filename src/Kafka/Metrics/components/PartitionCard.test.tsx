@@ -1,7 +1,7 @@
-import { render, waitForI18n } from "../../../test-utils";
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./PartitionCard.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n } from "../../../test-utils";
+import * as stories from "./PartitionCard.stories";
 
 const {
   TopicPartitionsLimitApproaching,
@@ -20,7 +20,7 @@ describe("Topic partition", () => {
       )
     ).toBeInTheDocument();
     userEvent.click(
-      await comp.getByRole("button", { name: "Warning alert details" })
+      comp.getByRole("button", { name: "Warning alert details" })
     );
 
     expect(
@@ -42,9 +42,7 @@ describe("Topic partition", () => {
     expect(
       await comp.findByText("This Kafka instance reached the partition limit")
     ).toBeInTheDocument();
-    userEvent.click(
-      await comp.getByRole("button", { name: "Danger alert details" })
-    );
+    userEvent.click(comp.getByRole("button", { name: "Danger alert details" }));
 
     expect(
       await comp.findByText(

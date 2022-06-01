@@ -12,7 +12,7 @@ import {
   TextListVariants,
   TextVariants,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export type InstanceInfoProps = {
