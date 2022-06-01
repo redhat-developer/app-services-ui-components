@@ -1,5 +1,3 @@
-import { useLayoutEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import type { SelectProps } from "@patternfly/react-core";
 import {
   FormGroup,
@@ -7,6 +5,8 @@ import {
   SelectOption,
   SelectVariant,
 } from "@patternfly/react-core";
+import { useLayoutEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export type ResourcePrefixRuleValue = "is" | "starts-with";
 
@@ -49,7 +49,7 @@ export const ResourcePrefixRule: React.VFC<ResourcePrefixRuleProps> = ({
   const makeOptions = () => {
     return Object.entries(resourcePrefixRuleOptions).map(
       ([key, { label, description }]) => (
-        <SelectOption key={key} value={label} description={description}>
+        <SelectOption key={key} value={key} description={description}>
           {label}
         </SelectOption>
       )
