@@ -49,7 +49,7 @@
     "@patternfly/react-icons": "4.53.16",
     "@patternfly/react-table": "4.71.16",
     "@rhoas/app-services-ui-shared": "0.16.0",
-    "@rollup/plugin-commonjs": "21.1.0",
+    "@rollup/plugin-commonjs": "22.0.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "13.3.0",
     "@rollup/plugin-replace": "4.0.0",
