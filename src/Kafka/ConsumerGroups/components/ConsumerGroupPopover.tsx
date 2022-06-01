@@ -1,6 +1,6 @@
 import { Popover } from "@patternfly/react-core";
 import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 
 type ConsumerGroupPopoverProps = {
   title: string;

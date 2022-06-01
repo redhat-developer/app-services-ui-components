@@ -1,11 +1,7 @@
 import { useInterpret, useSelector } from "@xstate/react";
-import {
-  createContext,
-  FunctionComponent,
-  useCallback,
-  useContext,
-} from "react";
-import { ActorRefFrom } from "xstate";
+import type { FunctionComponent } from "react";
+import { createContext, useCallback, useContext } from "react";
+import type { ActorRefFrom } from "xstate";
 import {
   makeCreateKafkaInstanceMachine,
   NAME_EMPTY,
@@ -31,6 +27,7 @@ import type {
 
 const CreateKafkaInstanceMachineContext = createContext<{
   service: ActorRefFrom<ReturnType<typeof makeCreateKafkaInstanceMachine>>;
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 }>(null!);
 
 export const CreateKafkaInstanceProvider: FunctionComponent<

@@ -1,12 +1,12 @@
 import { Button } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { PlayFunction } from "@storybook/csf";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, within } from "@storybook/testing-library";
 import { useState } from "react";
-import {
-  CreateKafkaInstance,
-  CreateKafkaInstanceProps,
-} from "./CreateKafkaInstance";
-import {
+import type { CreateKafkaInstanceProps } from "./CreateKafkaInstance";
+import { CreateKafkaInstance } from "./CreateKafkaInstance";
+import type {
   AZ,
   CreateKafkaInitializationData,
   InstanceAvailability,
@@ -14,8 +14,6 @@ import {
   ProviderInfo,
   Providers,
 } from "./machines";
-import { PlayFunction } from "@storybook/csf";
-import { ReactFramework } from "@storybook/react/types-6-0";
 
 const AWS: ProviderInfo = {
   id: "aws",
@@ -422,11 +420,11 @@ function makeAvailableProvidersAndDefaults(
   );
 
   return async (): Promise<CreateKafkaInitializationData> => {
-    return {
+    return Promise.resolve({
       defaultProvider,
       defaultAZ,
       availableProviders,
       instanceAvailability,
-    };
+    });
   };
 }

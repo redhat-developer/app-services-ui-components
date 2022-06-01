@@ -6,13 +6,8 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 import { SearchIcon } from "@patternfly/react-icons";
-import {
-  KeyboardEvent,
-  useCallback,
-  useRef,
-  useState,
-  VoidFunctionComponent,
-} from "react";
+import type { KeyboardEvent, VoidFunctionComponent } from "react";
+import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type SearchInputProps = {

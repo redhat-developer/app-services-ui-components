@@ -1,5 +1,5 @@
 import { SelectAccount } from "./SelectAccount";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useState } from "react";
 import { Form, Modal } from "@patternfly/react-core";
 import { PrincipalType } from "../types";

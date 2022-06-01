@@ -1,9 +1,11 @@
 import { useInterpret } from "@xstate/react";
-import { createContext, FunctionComponent } from "react";
-import { ActorRefFrom } from "xstate";
+import type { FunctionComponent } from "react";
+import { createContext } from "react";
+import type { ActorRefFrom } from "xstate";
 import { timeIntervalsMapping } from "./consts";
-import { TopicsMetricsMachine, TopicsMetricsMachineType } from "./machines";
-import { DurationOptions, GetTopicsMetricsResponse } from "./types";
+import type { TopicsMetricsMachineType } from "./machines";
+import { TopicsMetricsMachine } from "./machines";
+import type { DurationOptions, GetTopicsMetricsResponse } from "./types";
 
 export const TopicsMetricsContext = createContext<{
   service: ActorRefFrom<TopicsMetricsMachineType>;

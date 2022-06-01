@@ -1,7 +1,7 @@
-import { composeStories } from "@storybook/testing-react";
-import * as stories from "./ResourceOperation.stories";
 import { userEvent } from "@storybook/testing-library";
+import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n } from "../../../test-utils";
+import * as stories from "./ResourceOperation.stories";
 
 const { WorksWithModal, InvalidSelection, ValidSelection } =
   composeStories(stories);
@@ -25,16 +25,16 @@ describe("Resource type", () => {
     expect(await comp.findByText("Alter configs")).toBeInTheDocument();
     userEvent.click(await comp.findByText("Delete"));
     expect(await comp.findByText("Select operation")).toBeInTheDocument();
-    expect(await comp.queryByText("Delete")).not.toBeInTheDocument();
-    expect(await comp.queryByText("All")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Read")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Write")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Create")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Delete")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Alter")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Describe")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Describe configs")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Alter configs")).not.toBeInTheDocument();
+    expect(comp.queryByText("Delete")).not.toBeInTheDocument();
+    expect(comp.queryByText("All")).not.toBeInTheDocument();
+    expect(comp.queryByText("Read")).not.toBeInTheDocument();
+    expect(comp.queryByText("Write")).not.toBeInTheDocument();
+    expect(comp.queryByText("Create")).not.toBeInTheDocument();
+    expect(comp.queryByText("Delete")).not.toBeInTheDocument();
+    expect(comp.queryByText("Alter")).not.toBeInTheDocument();
+    expect(comp.queryByText("Describe")).not.toBeInTheDocument();
+    expect(comp.queryByText("Describe configs")).not.toBeInTheDocument();
+    expect(comp.queryByText("Alter configs")).not.toBeInTheDocument();
   });
   it("should show a select component for resource type with validation error ", async () => {
     const onChangeValue = jest.fn();
@@ -55,7 +55,7 @@ describe("Resource type", () => {
     expect(await comp.findByText("Alter configs")).toBeInTheDocument();
     userEvent.click(await comp.findByText("Delete"));
     expect(await comp.findByText("Select operation")).toBeInTheDocument();
-    expect(await comp.queryByText("Delete")).not.toBeInTheDocument();
+    expect(comp.queryByText("Delete")).not.toBeInTheDocument();
     expect(await comp.findByText("Select operation")).toBeInTheDocument();
     expect(await comp.findByText("Required")).toBeInTheDocument();
   });
@@ -65,7 +65,7 @@ describe("Resource type", () => {
     const comp = render(<ValidSelection onChangeValue={onChangeValue} />);
     await waitForI18n(comp);
     expect(await comp.findByText("All")).toBeInTheDocument();
-    expect(await comp.queryByText("Select operation")).not.toBeInTheDocument();
+    expect(comp.queryByText("Select operation")).not.toBeInTheDocument();
     userEvent.click(await comp.findByText("All"));
     expect(await comp.findByText("Read")).toBeInTheDocument();
     expect(await comp.findByText("Write")).toBeInTheDocument();
@@ -75,7 +75,7 @@ describe("Resource type", () => {
     expect(await comp.findByText("Describe")).toBeInTheDocument();
     expect(await comp.findByText("Describe configs")).toBeInTheDocument();
     expect(await comp.findByText("Alter configs")).toBeInTheDocument();
-    const operationValue = await comp.getAllByText("All");
+    const operationValue = comp.getAllByText("All");
     expect(operationValue[0]).toBeInTheDocument();
     expect(operationValue[1]).toBeInTheDocument();
   });

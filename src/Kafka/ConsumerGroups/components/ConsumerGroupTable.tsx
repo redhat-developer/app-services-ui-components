@@ -1,17 +1,16 @@
+import type { IActions, ISortBy, ThProps } from "@patternfly/react-table";
 import {
-  IActions,
-  ISortBy,
   TableComposable,
   Tbody,
   Td,
   Th,
   Thead,
-  ThProps,
   Tr,
 } from "@patternfly/react-table";
-import { FunctionComponent, useState } from "react";
+import type { FunctionComponent } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ConsumerGroup } from "../types";
+import type { ConsumerGroup } from "../types";
 import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
 
 export type ConsumerGroupTableProps = {

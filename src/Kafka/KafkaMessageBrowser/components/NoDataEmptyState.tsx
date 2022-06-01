@@ -7,7 +7,7 @@ import {
   Title,
 } from "@patternfly/react-core";
 import { CubesIcon } from "@patternfly/react-icons";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const NoDataEmptyState: VoidFunctionComponent<{

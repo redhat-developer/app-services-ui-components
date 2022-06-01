@@ -1,6 +1,6 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext, useMemo } from "react";
-import { DurationOptions } from "./types";
+import type { DurationOptions } from "./types";
 import { TopicsMetricsContext } from "./TopicsMetricsProvider";
 
 export function useTopicsMetrics() {

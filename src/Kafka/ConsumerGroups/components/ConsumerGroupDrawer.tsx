@@ -16,8 +16,9 @@ import {
   DropdownItem,
   DrawerContentBody,
 } from "@patternfly/react-core";
-import { FunctionComponent, ReactNode, useState } from "react";
-import { ConsumerGroupState, Consumer } from "../types";
+import type { FunctionComponent, ReactNode } from "react";
+import { useState } from "react";
+import type { ConsumerGroupState, Consumer } from "../types";
 import { ConsumerGroupDetails } from "./ConsumerGroupDetails";
 import { useTranslation } from "react-i18next";
 import "./ConsumerGroup.css";

@@ -1,5 +1,5 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Consumer } from "../types";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { Consumer } from "../types";
 import { ConsumerGroupDrawer } from "./ConsumerGroupDrawer";
 
 const consumer: Consumer[] = [

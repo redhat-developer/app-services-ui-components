@@ -1,8 +1,9 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { apiError, fakeApi } from "../../shared/storiesHelpers";
 import { KafkaMessageBrowser } from "./KafkaMessageBrowser";
-import { Message } from "./types";
+import type { Message } from "./types";
+import type { DateIsoString } from "./types";
 
 export default {
   component: KafkaMessageBrowser,
@@ -66,7 +67,12 @@ NoMatch.play = async ({ canvasElement }) => {
   await userEvent.click(await container.findByLabelText("Search"));
 };
 
-function sampleData(args) {
+function sampleData(args: {
+  partition?: number;
+  offset?: number;
+  timestamp?: DateIsoString;
+  limit: number;
+}) {
   const numberOfMessages = args.limit;
   const messages: Message[] = [
     {

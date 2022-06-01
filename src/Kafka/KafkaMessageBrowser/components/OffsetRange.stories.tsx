@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { OffsetRange } from "./OffsetRange";
 
 export default {

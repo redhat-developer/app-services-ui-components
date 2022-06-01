@@ -6,7 +6,7 @@ import {
   Skeleton,
   Title,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { ChartPopover } from "./ChartPopover";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 

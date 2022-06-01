@@ -1,14 +1,9 @@
-import {
-  DatePicker,
-  DatePickerProps,
-  InputGroup,
-  TimePicker,
-  TimePickerProps,
-} from "@patternfly/react-core";
+import type { DatePickerProps, TimePickerProps } from "@patternfly/react-core";
+import { DatePicker, InputGroup, TimePicker } from "@patternfly/react-core";
 import { formatISO, parseISO, setHours, setMinutes } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import { VoidFunctionComponent } from "react";
-import { DateIsoString } from "../types";
+import type { VoidFunctionComponent } from "react";
+import type { DateIsoString } from "../types";
 
 export type DateTimePickerProps = {
   isDisabled: boolean;
@@ -28,7 +23,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
     }
   };
 
-  const onSelectTime: TimePickerProps["onChange"] = (_, hour, minute, __) => {
+  const onSelectTime: TimePickerProps["onChange"] = (_, hour, minute) => {
     //onChange();
     if (date) {
       let newDate = date;

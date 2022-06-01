@@ -7,7 +7,7 @@ import {
   TitleSizes,
 } from "@patternfly/react-core";
 import { CubesIcon } from "@patternfly/react-icons";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const ConsumerGroupEmptyState: FunctionComponent = () => {

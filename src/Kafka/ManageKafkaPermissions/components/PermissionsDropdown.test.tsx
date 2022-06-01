@@ -48,7 +48,7 @@ describe("PermissionsDropdown", () => {
 
     await openMenu();
 
-    const menu = within(await comp.queryAllByRole("menu")[0]);
+    const menu = within(comp.queryAllByRole("menu")[0]);
     userEvent.click(await menu.findByText("Add permission"));
     expect(onAddPermission).toBeCalled();
 

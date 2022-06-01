@@ -1,8 +1,8 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 
+import type { PaginationProps as PFPaginationProps } from "@patternfly/react-core";
 import {
   Pagination as PFPagination,
-  PaginationProps as PFPaginationProps,
   PaginationVariant,
 } from "@patternfly/react-core";
 

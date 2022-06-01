@@ -1,16 +1,18 @@
+import type {
+  ButtonProps,
+  EmptyStateBodyProps,
+  EmptyStateIconProps,
+  EmptyStateProps as PFEmptyStateProps,
+  TitleProps,
+} from "@patternfly/react-core";
 import {
   Button,
-  ButtonProps,
   ButtonVariant,
   EmptyState as PFEmptyState,
   EmptyStateBody,
-  EmptyStateBodyProps,
   EmptyStateIcon,
-  EmptyStateIconProps,
-  EmptyStateProps as PFEmptyStateProps,
   EmptyStateVariant as PFEmptyStateVariant,
   Title,
-  TitleProps,
   TitleSizes,
 } from "@patternfly/react-core";
 import {
@@ -21,7 +23,7 @@ import {
   SpaceShuttleIcon,
 } from "@patternfly/react-icons";
 import { css } from "@patternfly/react-styles";
-import {
+import type {
   ComponentType,
   MouseEvent as ReactMouseEvent,
   ReactNode,
@@ -86,7 +88,14 @@ export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
   const getVariantConfig = () => {
     let variantConfig: {
       variant: PFEmptyStateVariant;
-      icon?: ComponentType<any>;
+      icon?:
+        | ComponentType<unknown>
+        | typeof SpaceShuttleIcon
+        | typeof LockIcon
+        | typeof PlusCircleIcon
+        | typeof SearchIcon
+        | typeof ExclamationCircleIcon
+        | typeof NotFoundImg;
       titleSize: TitleProps["size"];
       headingLevel: TitleProps["headingLevel"];
     };

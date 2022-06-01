@@ -1,7 +1,7 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CardTopicsMetrics } from "./CardTopicsMetrics";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { makeMetrics } from "../makeMetrics";
 import { DurationOptions } from "../types";
+import { CardTopicsMetrics } from "./CardTopicsMetrics";
 
 export default {
   component: CardTopicsMetrics,
@@ -18,11 +18,6 @@ export default {
     isLoading: false,
     isRefreshing: false,
     selectedTopic: undefined,
-  },
-  argTypes: {
-    duration: {
-      type: null,
-    },
   },
 } as ComponentMeta<typeof CardTopicsMetrics>;
 

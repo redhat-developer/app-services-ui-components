@@ -22,11 +22,5 @@
     "skipLibCheck": true
   },
   "include": ["src", "setupJest.ts"],
-  "exclude": [
-    "dist",
-    "node_modules",
-    "**/*.stories.tsx",
-    "**/*.test.ts*",
-    "src/ProofOfConcepts"
-  ]
+  "exclude": ["dist", "node_modules", "src/ProofOfConcepts"]
 }

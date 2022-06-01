@@ -1,7 +1,7 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { DurationOptions, TimeSeriesMetrics } from "../types";
+import type { DurationOptions, TimeSeriesMetrics } from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
@@ -9,7 +9,7 @@ import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
 import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
-import { ToolbarRefreshProps } from "./ToolbarRefresh";
+import type { ToolbarRefreshProps } from "./ToolbarRefresh";
 
 export type CardKafkaInstanceMetricsLimits = {
   diskSpaceLimit: number;

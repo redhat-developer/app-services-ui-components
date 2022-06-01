@@ -1,20 +1,16 @@
-import {
-  FunctionComponent,
-  Suspense,
-  MutableRefObject,
-  useRef,
-  useState,
-} from "react";
-import { Modal, ModalProps } from "@patternfly/react-core";
+import type { FunctionComponent, MutableRefObject } from "react";
+import { Suspense, useRef, useState } from "react";
+import type { ModalProps } from "@patternfly/react-core";
+import { Modal } from "@patternfly/react-core";
 import { Loading } from "../Loading";
-import {
+import type {
   ActiveModalProps,
-  ModalContext,
   ModalContextProps,
   ModalRegistry,
   ModalRegistryEntry,
   ModalType,
 } from "@rhoas/app-services-ui-shared";
+import { ModalContext } from "@rhoas/app-services-ui-shared";
 
 type ModalWrapperProps<T extends ModalType> = {
   activeModal?: ActiveModalProps<T>;

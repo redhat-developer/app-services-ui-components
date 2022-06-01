@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import {
   CardHeader,
   CardTitle,
@@ -7,9 +7,10 @@ import {
   ToolbarContent,
 } from "@patternfly/react-core";
 import { FilterByTime } from "./FilterByTime";
-import { DurationOptions } from "../types";
+import type { DurationOptions } from "../types";
 import { useTranslation } from "react-i18next";
-import { ToolbarRefresh, ToolbarRefreshProps } from "./ToolbarRefresh";
+import type { ToolbarRefreshProps } from "./ToolbarRefresh";
+import { ToolbarRefresh } from "./ToolbarRefresh";
 
 type ToolbarKafkaInstanceMetricProps = {
   title: string;

@@ -34,14 +34,14 @@ describe("Consumer group details", () => {
     const comp = render(<ConsumerGroupWithNoActiveMembers />);
     await waitForI18n(comp);
 
-    expect(await comp.getAllByRole("row")[1]).not.toBeDefined();
+    expect(comp.getAllByRole("row")[1]).not.toBeDefined();
   });
 
   it("Consumer group with 2 active consumers members", async () => {
     const comp = render(<ConsumerGroupWithActiveMembers />);
     await waitForI18n(comp);
 
-    expect(await comp.getAllByRole("row")[1]).toBeDefined();
-    expect(await comp.getAllByRole("row")[2]).toBeDefined();
+    expect(comp.getAllByRole("row")[1]).toBeDefined();
+    expect(comp.getAllByRole("row")[2]).toBeDefined();
   });
 });

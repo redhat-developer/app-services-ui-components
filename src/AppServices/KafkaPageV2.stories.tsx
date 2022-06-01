@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { KafkaPageV2 as KafkaPageV2Comp } from "./KafkaPageV2";
 
 export default {

@@ -23,7 +23,7 @@ import {
   TextVariants,
   Title,
 } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";
 import {

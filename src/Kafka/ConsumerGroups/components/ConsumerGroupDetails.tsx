@@ -1,5 +1,5 @@
-import { FunctionComponent } from "react";
-import { Consumer, ConsumerGroupState } from "../types";
+import type { FunctionComponent } from "react";
+import type { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupByTopic } from "./ConsumerGroupByTopic";
 import { ConsumerGroupByKafka } from "./ConsumerGroupByKafka";
 

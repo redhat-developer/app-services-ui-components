@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MessageDetailsBody } from "./MessageDetails";
 
 export default {
@@ -8,7 +8,7 @@ export default {
       "this-is-a-very-long-key-that-might-cause-some-trouble-figuring-out-column-widths",
     partition: 4,
     offset: 16,
-    timestamp: new Date("2022-03-15T14:11:57.103Z"),
+    timestamp: new Date("2022-03-15T14:11:57.103Z").toISOString(),
     headers: {
       "post-office-box": "string",
       "extended-address": "string",

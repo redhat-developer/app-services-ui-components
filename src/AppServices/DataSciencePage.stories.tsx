@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { DataSciencePage as DataSciencePageComp } from "./DataSciencePage";
 
 export default {

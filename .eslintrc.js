@@ -1,11 +1,16 @@
 module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
+  parserOptions: {
+    tsconfigRootDir: __dirname,
+    project: ["./tsconfig.json"],
+  },
   plugins: ["@typescript-eslint", "react-hooks"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
     "plugin:storybook/recommended",
     "prettier",
   ],
@@ -14,6 +19,8 @@ module.exports = {
     "react-hooks/exhaustive-deps": "error",
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/consistent-type-exports": "error",
     "no-restricted-imports": [
       "error",
       {
@@ -59,9 +66,23 @@ module.exports = {
   },
   overrides: [
     {
-      files: ["*.test.ts", "*.test.tsx"],
+      files: ["*.test.ts", "*.test.tsx", "*.stories.tsx"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
+      },
+    },
+    {
+      files: ["*.stories.tsx", "storybookHelpers.tsx"],
+      rules: {
+        "@typescript-eslint/ban-ts-comment": "off",
+        "@typescript-eslint/await-thenable": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+      },
+    },
+    {
+      files: ["*Machine.ts"],
+      rules: {
+        "@typescript-eslint/consistent-type-imports": "off",
       },
     },
   ],

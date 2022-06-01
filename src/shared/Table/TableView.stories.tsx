@@ -11,23 +11,27 @@ import {
 } from "@patternfly/react-core";
 import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { useMemo, VoidFunctionComponent } from "react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { VoidFunctionComponent } from "react";
+import { useMemo } from "react";
+import type { SampleDataType } from "./storybookHelpers";
 import {
   columnLabels,
   columns,
   defaultActions,
   deletingSign,
   sampleData,
-  SampleDataType,
   sampleToolbarWithFilter,
 } from "./storybookHelpers";
-import { DEFAULT_PERPAGE, TableView, TableViewProps } from "./TableView";
+import type { TableViewProps } from "./TableView";
+import { DEFAULT_PERPAGE, TableView } from "./TableView";
 
 const eventsFromNames = actions("onRowClick");
 
 const TableViewSampleType: VoidFunctionComponent<
-  TableViewProps<SampleDataType, typeof columns[number]>
+  TableViewProps<SampleDataType, typeof columns[number]> & {
+    selectedRow?: number;
+  }
 > = (props) => <TableView {...props} />;
 
 export default {
@@ -89,7 +93,7 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
       )}
       isRowSelected={
         args.selectedRow
-          ? ({ rowIndex }) => rowIndex === args.selectedRow - 1
+          ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
           : undefined
       }
       isRowDeleted={({ row }) => row[5] === deletingSign}

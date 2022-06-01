@@ -1,7 +1,8 @@
 import { ToolbarFilter, ToolbarGroup } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
-import { Search, SearchProps } from "./Search";
-import { SearchCategory } from "../types";
+import type { VoidFunctionComponent } from "react";
+import type { SearchProps } from "./Search";
+import { Search } from "./Search";
+import type { SearchCategory } from "../types";
 
 type SearchChipsProps = {
   clientIdChips: string[];

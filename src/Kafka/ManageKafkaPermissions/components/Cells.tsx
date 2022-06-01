@@ -1,9 +1,9 @@
-import { VFC } from "react";
+import type { VFC } from "react";
 import { useTranslation } from "react-i18next";
 
 import { Label, LabelGroup } from "@patternfly/react-core";
 
-import {
+import type {
   AclOperation,
   AclPatternType,
   AclPermissionType,

@@ -1,12 +1,13 @@
+import type { SelectProps } from "@patternfly/react-core";
 import {
   FormGroup,
   Select,
   SelectOption,
-  SelectProps,
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { useRef, useState, VFC } from "react";
+import type { VFC } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Validation = {

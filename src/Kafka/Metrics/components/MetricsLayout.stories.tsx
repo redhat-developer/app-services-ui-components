@@ -1,5 +1,5 @@
 import { Card, CardBody, CardTitle, TextContent } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { CardKpi } from "./CardKpi";
 import { MetricsLayout } from "./MetricsLayout";
 

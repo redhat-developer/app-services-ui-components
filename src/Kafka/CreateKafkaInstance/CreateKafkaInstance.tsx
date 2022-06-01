@@ -14,21 +14,20 @@ import {
   Tooltip,
 } from "@patternfly/react-core";
 import { OutlinedClockIcon } from "@patternfly/react-icons";
-import { FormEvent, FunctionComponent, useCallback } from "react";
+import type { FormEvent, FunctionComponent } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import type { InstanceInfoLimitsProps } from "./components";
 import {
   CloudProvidersTiles,
   CloudRegionSelect,
   FormAlerts,
   InstanceInfo,
-  InstanceInfoLimitsProps,
   ModalAlerts,
 } from "./components";
 import "./CreateKafkaInstance.css";
-import {
-  MakeCreateKafkaInstanceMachine,
-  useCreateKafkaInstanceMachine,
-} from "./machines";
+import type { MakeCreateKafkaInstanceMachine } from "./machines";
+import { useCreateKafkaInstanceMachine } from "./machines";
 
 export type CreateKafkaInstanceProps = {
   /**

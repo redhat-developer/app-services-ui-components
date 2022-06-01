@@ -1,16 +1,16 @@
+import type { SelectProps } from "@patternfly/react-core";
 import {
   Flex,
   FlexItem,
   FormSelect,
   FormSelectOption,
-  SelectProps,
   Skeleton,
   Tile,
 } from "@patternfly/react-core";
 import { AwsIcon, AzureIcon } from "@patternfly/react-icons";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { Provider, ProviderInfo } from "../types";
+import type { Provider, ProviderInfo } from "../types";
 import "./CloudProviderTiles.css";
 
 export type CloudProvidersTilesProps = {

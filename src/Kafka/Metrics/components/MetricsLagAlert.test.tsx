@@ -17,13 +17,11 @@ describe("Metric lag", () => {
       )
     ).toBeInTheDocument();
 
-    userEvent.click(await comp.getByRole("button"));
+    userEvent.click(comp.getByRole("button"));
 
+    expect(comp.queryByText("Metrics experience lag")).not.toBeInTheDocument();
     expect(
-      await comp.queryByText("Metrics experience lag")
-    ).not.toBeInTheDocument();
-    expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Metrics regularly experience lag, and do not automatically refresh. This might result in metrics appearing out-of-sync with details displayed on other pages."
       )
     ).not.toBeInTheDocument();

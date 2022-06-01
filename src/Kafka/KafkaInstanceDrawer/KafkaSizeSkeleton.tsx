@@ -5,7 +5,7 @@ import {
   Stack,
   StackItem,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 
 export const KafkaSizeSkeleton: VoidFunctionComponent = () => {
   return (

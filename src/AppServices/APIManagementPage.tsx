@@ -18,7 +18,7 @@ import {
   Title,
   TitleSizes,
 } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { ApiManagementMechApiFullColorPink } from "../images";
 import {

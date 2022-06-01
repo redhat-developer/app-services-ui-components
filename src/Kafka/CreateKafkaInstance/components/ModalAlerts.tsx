@@ -1,4 +1,4 @@
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import {
   Alert,
   AlertGroup,
@@ -6,7 +6,7 @@ import {
   Spinner,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
-import { InstanceAvailability } from "../machines";
+import type { InstanceAvailability } from "../machines";
 
 export type ModalAlertsProps = {
   instanceAvailability: InstanceAvailability | undefined;

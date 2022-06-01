@@ -5,9 +5,9 @@ import {
   Button,
   ButtonVariant,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { CreateKafkaInstanceError } from "../types";
+import type { CreateKafkaInstanceError } from "../types";
 
 export type FormAlertsProps = {
   error: CreateKafkaInstanceError | "form-invalid" | undefined;

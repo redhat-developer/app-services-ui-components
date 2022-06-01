@@ -1,10 +1,8 @@
 import { FormGroup } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  CloudProvidersTiles,
-  CloudProvidersTilesProps,
-} from "./CloudProviderTiles";
+import type { CloudProvidersTilesProps } from "./CloudProviderTiles";
+import { CloudProvidersTiles } from "./CloudProviderTiles";
 
 export type FieldCloudProviderProps = {
   isValid: boolean;

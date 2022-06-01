@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { EmptyState, EmptyStateVariant } from "./EmptyState";
 
 export default {
@@ -7,7 +7,7 @@ export default {
 } as ComponentMeta<typeof EmptyState>;
 
 const Template: ComponentStory<typeof EmptyState> = (args, { parameters }) => (
-  <div style={{ height: parameters.previewHeight }}>
+  <div style={{ height: parameters.previewHeight as number }}>
     <EmptyState {...args} />
   </div>
 );

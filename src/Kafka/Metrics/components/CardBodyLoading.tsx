@@ -1,5 +1,5 @@
 import { CardBody, Bullseye, Spinner } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 
 export const CardBodyLoading: FunctionComponent = () => (
   <CardBody>

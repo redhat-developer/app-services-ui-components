@@ -1,5 +1,6 @@
-import { Button, ButtonProps, ButtonVariant } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { ButtonProps } from "@patternfly/react-core";
+import { Button, ButtonVariant } from "@patternfly/react-core";
+import type { FunctionComponent } from "react";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons";
 
 export type ExternaLinkProps = {

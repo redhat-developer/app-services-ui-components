@@ -2,7 +2,7 @@ import { Button, Form, FormGroup, Modal } from "@patternfly/react-core";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { SelectAccount } from "./components/SelectAccount";
-import { Account } from "./types";
+import type { Account } from "./types";
 
 type ManageKafkaPermissionsProps = {
   accounts: Account[];

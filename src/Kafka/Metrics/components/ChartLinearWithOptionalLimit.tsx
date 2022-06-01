@@ -1,3 +1,4 @@
+import type { ChartVoronoiContainerProps } from "@patternfly/react-charts";
 import {
   Chart,
   ChartArea,
@@ -12,10 +13,10 @@ import {
   chart_color_black_500,
   chart_color_blue_300,
 } from "@patternfly/react-tokens";
-import { ReactElement, VoidFunctionComponent } from "react";
+import type { ReactElement, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
-import { DurationOptions, TimeSeriesMetrics } from "../types";
+import type { DurationOptions, TimeSeriesMetrics } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import { dateToChartValue, shouldShowDate, timestampsToTicks } from "./utils";
@@ -87,16 +88,16 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
       return <ChartSkeletonLoader />;
     case !hasMetrics:
       return emptyState;
-    default:
+    default: {
+      const labels: ChartVoronoiContainerProps["labels"] = ({ datum }) =>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions,@typescript-eslint/no-unsafe-argument
+        `${datum.name}: ${formatValue(datum.y)}`;
       return (
         <div ref={containerRef}>
           <Chart
             ariaTitle={chartName}
             containerComponent={
-              <ChartVoronoiContainer
-                labels={({ datum }) => `${datum.name}: ${formatValue(datum.y)}`}
-                constrainToVisibleArea
-              />
+              <ChartVoronoiContainer labels={labels} constrainToVisibleArea />
             }
             legendPosition="bottom-left"
             legendComponent={
@@ -113,9 +114,9 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
             legendAllowWrap={true}
           >
             <ChartAxis
-              label={"\n" + (xLabel || t("metrics:axis-label-time"))}
+              label={"\n" + (xLabel || t("metrics:axis-label-time") || "")}
               tickValues={tickValues}
-              tickFormat={(d) =>
+              tickFormat={(d: number) =>
                 dateToChartValue(d, {
                   showDate,
                 })
@@ -152,6 +153,7 @@ export const ChartLinearWithOptionalLimit: VoidFunctionComponent<
           </Chart>
         </div>
       );
+    }
   }
 };
 

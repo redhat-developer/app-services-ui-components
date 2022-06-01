@@ -1,11 +1,12 @@
-import { useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
+import type { SelectProps } from "@patternfly/react-core";
 import {
   ToolbarItem,
   Select,
   SelectVariant,
   SelectGroup,
   SelectOption,
-  SelectProps,
 } from "@patternfly/react-core";
 import { DurationOptions } from "../types";
 

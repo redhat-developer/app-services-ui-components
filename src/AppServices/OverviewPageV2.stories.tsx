@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { OverviewPageV2 as OverviewPageV2Comp } from "./OverviewPageV2";
 
 export default {

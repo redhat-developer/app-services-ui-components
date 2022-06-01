@@ -9,14 +9,15 @@ import {
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
 import { FilterIcon, SearchIcon } from "@patternfly/react-icons";
+import type { BaseCellProps } from "@patternfly/react-table";
 import {
-  BaseCellProps,
   InnerScrollContainer,
   OuterScrollContainer,
 } from "@patternfly/react-table";
 import { useMachine } from "@xstate/react";
 import { parseISO } from "date-fns";
-import { useMemo, useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   FormatDate,
@@ -24,11 +25,11 @@ import {
   RefreshButton,
   ResponsiveTable,
 } from "../../shared";
+import type { MessageDetailsProps } from "./components";
 import {
   FilterGroup,
   LimitSelector,
   MessageDetails,
-  MessageDetailsProps,
   NoDataCell,
   NoDataEmptyState,
   NoResultsEmptyState,
@@ -37,11 +38,9 @@ import {
   UnknownValuePreview,
 } from "./components";
 import "./KafkaMessageBrowser.css";
-import {
-  MessageApiResponse,
-  MessageBrowserMachine,
-} from "./MessageBrowserMachine";
-import { DateIsoString, Message } from "./types";
+import type { MessageApiResponse } from "./MessageBrowserMachine";
+import { MessageBrowserMachine } from "./MessageBrowserMachine";
+import type { DateIsoString, Message } from "./types";
 import { beautifyUnknownValue, isSameMessage } from "./utils";
 
 const columns = [

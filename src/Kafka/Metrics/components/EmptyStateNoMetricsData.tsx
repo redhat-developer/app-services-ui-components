@@ -5,7 +5,7 @@ import {
   Title,
 } from "@patternfly/react-core";
 import { ExclamationTriangleIcon } from "@patternfly/react-icons";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const EmptyStateNoMetricsData: FunctionComponent = () => {

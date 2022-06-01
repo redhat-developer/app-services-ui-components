@@ -4,9 +4,9 @@ import {
   ToggleGroupItem,
   Tooltip,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { AZ } from "../types";
+import type { AZ } from "../types";
 
 export type FieldAZProps = {
   value: AZ | undefined;

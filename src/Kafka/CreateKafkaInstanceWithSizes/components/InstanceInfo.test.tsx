@@ -11,7 +11,7 @@ const testCases = Object.values(composedStories).map((Story) => [
 describe("InstanceInfo", function () {
   // Batch snapshot testing
   test.each(testCases)("Renders %s story", async (_storyName, Story) => {
-    const tree = await render(<Story />);
+    const tree = render(<Story />);
     await waitForI18n(tree);
     expect(tree.baseElement).toMatchSnapshot();
   });

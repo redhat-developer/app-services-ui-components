@@ -1,5 +1,5 @@
 import { assign, createMachine, send } from "xstate";
-import {
+import type {
   CreateKafkaInitializationData,
   CreateKafkaInstanceError,
   GetSizesData,

@@ -1,6 +1,7 @@
-import { Button, ButtonProps, Tooltip } from "@patternfly/react-core";
+import type { ButtonProps } from "@patternfly/react-core";
+import { Button, Tooltip } from "@patternfly/react-core";
 import { TrashIcon } from "@patternfly/react-icons";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 
 export type RemoveButtonProps = {
   onClick: () => void;

@@ -1,9 +1,9 @@
 import { Button } from "@patternfly/react-core";
 import { actions } from "@storybook/addon-actions";
-import { PlayFunction } from "@storybook/csf";
+import type { PlayFunction } from "@storybook/csf";
 import { expect } from "@storybook/jest";
-import { ComponentStory } from "@storybook/react";
-import { ReactFramework } from "@storybook/react/types-6-0";
+import type { Meta, Story } from "@storybook/react";
+import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
@@ -302,14 +302,32 @@ export const argTypes = {
   },
 };
 
+export type StoryProps = {
+  apiPlan: "trial" | "standard";
+  apiScenario: InstanceAvailability | "backend-error";
+  apiSizes: "normal" | "no-sizes" | "error";
+  apiProviders: string[];
+  apiDefaultProvider: string;
+  apiRegionsAvailability: keyof typeof regionsScenario;
+  apiMaxStreamingUnits: number;
+  apiRemainingQuota: number;
+  apiLatency: number;
+  onCreate: CreateKafkaInstancePropsWithSizes["onCreate"];
+  onClickQuickStart?: () => void;
+  onClickKafkaOverview?: () => void;
+  onClickContactUs?: () => void;
+  onClickLearnMoreAboutRegions?: () => void;
+  onLearnHowToAddStreamingUnits?: () => void;
+  onLearnMoreAboutSizes?: () => void;
+};
+
+export type StoryMeta = Meta<StoryProps>;
+
 export const parameters = {
   controls: { include: /^api/ },
 };
 
-export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
-  args,
-  { id }
-) => {
+export const Template: Story<StoryProps> = (args, { id }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const onCloseModal = () => {
     setIsModalOpen(false);
@@ -342,7 +360,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     apiRemainingQuota = 3,
     apiMaxStreamingUnits = 5,
     apiLatency = 500,
-  } = args as { [key: string]: any };
+  } = args;
 
   const providers =
     apiRegionsAvailability === "full"
@@ -406,7 +424,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
           },
           apiLatency
         )
-      : apiError<GetSizesData>(apiLatency);
+      : apiError<GetSizesData>(undefined, apiLatency);
   };
 
   const onClickHandlers = actions(
@@ -461,25 +479,25 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
   );
 };
 
-export const sampleSubmit: PlayFunction<
-  ReactFramework,
-  CreateKafkaInstancePropsWithSizes
-> = async ({ canvasElement }) => {
+export const sampleSubmit: PlayFunction<ReactFramework, StoryProps> = async ({
+  canvasElement,
+}) => {
   const canvas = within(canvasElement);
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore
-  await waitFor(() => expect(canvas.getByLabelText("Name *")).toBeEnabled());
+  await waitFor(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+    expect(canvas.getByLabelText("Name *")).toBeEnabled();
+  });
 
-  await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
+  userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
 
   const regionSelect = await canvas.findByText("Cloud region");
-  await userEvent.click(regionSelect);
-  await userEvent.click(await canvas.findByText("US East, N. Virginia"));
+  userEvent.click(regionSelect);
+  userEvent.click(await canvas.findByText("US East, N. Virginia"));
 
   expect(await canvas.findByTestId("size-slider")).not.toBeNull();
 
-  await userEvent.click(
-    await canvas.findByTestId("modalCreateKafka-buttonSubmit")
-  );
+  userEvent.click(await canvas.findByTestId("modalCreateKafka-buttonSubmit"));
 };

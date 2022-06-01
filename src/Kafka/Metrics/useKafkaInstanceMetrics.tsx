@@ -1,7 +1,7 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
 import { KafkaInstanceMetricsContext } from "./KafkaInstanceMetricsProvider";
-import { DurationOptions } from "./types";
+import type { DurationOptions } from "./types";
 
 export function useKafkaInstanceMetrics() {
   const { service } = useContext(KafkaInstanceMetricsContext);

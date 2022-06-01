@@ -1,4 +1,4 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { Banner, Bullseye, Button, Popover } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 import "./DevelopmentPreview.css";

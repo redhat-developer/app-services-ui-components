@@ -1,12 +1,9 @@
-import { FunctionComponent, MouseEvent, ChangeEvent, useState } from "react";
+import type { FunctionComponent, MouseEvent, ChangeEvent } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  Select,
-  SelectOption,
-  SelectOptionObject,
-  SelectVariant,
-} from "@patternfly/react-core";
-import { SearchCategory } from "../types";
+import type { SelectOptionObject } from "@patternfly/react-core";
+import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
+import type { SearchCategory } from "../types";
 
 export type FilterSelectProps = {
   value: SearchCategory;

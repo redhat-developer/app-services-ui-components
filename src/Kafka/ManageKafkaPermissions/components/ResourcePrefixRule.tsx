@@ -1,10 +1,10 @@
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import type { SelectProps } from "@patternfly/react-core";
 import {
   FormGroup,
   Select,
   SelectOption,
-  SelectProps,
   SelectVariant,
 } from "@patternfly/react-core";
 

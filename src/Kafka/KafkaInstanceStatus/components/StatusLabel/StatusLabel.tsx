@@ -15,7 +15,7 @@ import {
 } from "@patternfly/react-icons";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import { KafkaStatus } from "../../types";
+import type { KafkaStatus } from "../../types";
 import "./StatusLabel.css";
 
 type StatusLabelProps = {

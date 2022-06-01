@@ -1,5 +1,5 @@
-import { Modal, Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { Form, Modal } from "@patternfly/react-core";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { ResourceOperation } from "./ResourceOperation";
 
@@ -51,7 +51,7 @@ InvalidSelection.parameters = {
 };
 
 export const ValidSelection = Template.bind({});
-ValidSelection.args = { value: "All" };
+ValidSelection.args = { value: "all" };
 ValidSelection.parameters = {
   docs: {
     description: {

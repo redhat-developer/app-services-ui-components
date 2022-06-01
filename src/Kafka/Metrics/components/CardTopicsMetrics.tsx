@@ -1,7 +1,7 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import {
+import type {
   DurationOptions,
   PartitionBytesMetric,
   TimeSeriesMetrics,
@@ -15,7 +15,7 @@ import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import { EmptyStateNoMetricsDataForSelection } from "./EmptyStateNoMetricsDataForSelection";
 import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
 import { EmptyStateNoTopicSelected } from "./EmptyStateNoTopicSelected";
-import { ToolbarRefreshProps } from "./ToolbarRefresh";
+import type { ToolbarRefreshProps } from "./ToolbarRefresh";
 import { ToolbarTopicsMetrics } from "./ToolbarTopicsMetrics";
 
 type CardTopicsMetricsProps = {

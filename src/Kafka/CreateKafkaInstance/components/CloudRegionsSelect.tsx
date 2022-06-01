@@ -1,11 +1,8 @@
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  FormSelect,
-  FormSelectOption,
-  SelectProps,
-} from "@patternfly/react-core";
-import { Region, RegionInfo } from "../machines";
+import type { SelectProps } from "@patternfly/react-core";
+import { FormSelect, FormSelectOption } from "@patternfly/react-core";
+import type { Region, RegionInfo } from "../machines";
 
 export type CloudRegionProps = {
   value: Region | undefined;

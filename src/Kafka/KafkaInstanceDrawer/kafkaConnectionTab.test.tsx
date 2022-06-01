@@ -1,5 +1,5 @@
-import { render, waitForI18n } from "../../test-utils";
 import { composeStories } from "@storybook/testing-react";
+import { render, waitForI18n } from "../../test-utils";
 import * as stories from "./KafkaConnectionTab.stories";
 
 const { ConnectionTab, ConnectionTabWhenkafkaCreationPending } =
@@ -26,6 +26,6 @@ describe("ConnectionTab", () => {
   it("bootstrap server and Token endpoint URL should be disabled when the kafka creating is pending", async () => {
     const comp = render(<ConnectionTabWhenkafkaCreationPending />);
     await waitForI18n(comp);
-    expect(await comp.queryByLabelText("Token endpoint URL")).toBe(null);
+    expect(comp.queryByLabelText("Token endpoint URL")).toBe(null);
   });
 });

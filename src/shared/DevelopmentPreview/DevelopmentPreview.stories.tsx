@@ -1,5 +1,5 @@
 import { PageSection } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { DevelopmentPreview } from "./DevelopmentPreview";
 
 export default {

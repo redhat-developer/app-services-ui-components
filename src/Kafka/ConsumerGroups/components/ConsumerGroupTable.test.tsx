@@ -1,7 +1,7 @@
+import { fireEvent, userEvent, within } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n } from "../../../test-utils";
 import * as stories from "./ConsumerGroupTable.stories";
-import { fireEvent, userEvent, within } from "@storybook/testing-library";
 
 const { DefaultConsumerGroupTable } = composeStories(stories);
 
@@ -10,7 +10,7 @@ describe("Consumer group table", () => {
     const comp = render(<DefaultConsumerGroupTable />);
     await waitForI18n(comp);
 
-    const firstRow = await comp.getAllByRole("row")[1];
+    const firstRow = comp.getAllByRole("row")[1];
 
     const btnExpand = within(firstRow).getByRole("button");
     userEvent.click(btnExpand);
@@ -27,8 +27,8 @@ describe("Consumer group table", () => {
 
     userEvent.click(await comp.findByText("Consumer group ID"));
 
-    const firstRow = await comp.getAllByRole("row")[1];
-    const secondRow = await comp.getAllByRole("row")[2];
+    const firstRow = comp.getAllByRole("row")[1];
+    const secondRow = comp.getAllByRole("row")[2];
 
     expect(within(firstRow).getByText("consumer-123")).toBeInTheDocument();
     expect(within(firstRow).getByText(1)).toBeInTheDocument();
@@ -50,9 +50,9 @@ describe("Consumer group table", () => {
     userEvent.click(await comp.findByText("Consumer group ID"));
     userEvent.click(await comp.findByText("Consumer group ID"));
 
-    const firstRow = await comp.getAllByRole("row")[1];
+    const firstRow = comp.getAllByRole("row")[1];
 
-    const secondRow = await comp.getAllByRole("row")[2];
+    const secondRow = comp.getAllByRole("row")[2];
 
     expect(within(firstRow).getByText("consumer-233")).toBeInTheDocument();
     expect(within(firstRow).getByText(2)).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe("Consumer group table", () => {
     );
     await waitForI18n(comp);
 
-    const firstRow = await comp.getAllByRole("row")[1];
+    const firstRow = comp.getAllByRole("row")[1];
 
     const btnExpand = within(firstRow).getByRole("button");
     fireEvent.click(btnExpand);
@@ -113,7 +113,7 @@ describe("Consumer group table", () => {
       state: "CompletingRebalance",
     });
 
-    const secondRow = await comp.getAllByRole("row")[2];
+    const secondRow = comp.getAllByRole("row")[2];
     const btn2Expand = within(secondRow).getByRole("button");
     fireEvent.click(btn2Expand);
     userEvent.click(await comp.findByText("Delete"));

@@ -1,6 +1,7 @@
-import { VFC } from "react";
-import { Label, LabelProps } from "@patternfly/react-core";
-import { AclResourceType } from "../types";
+import type { VFC } from "react";
+import type { LabelProps } from "@patternfly/react-core";
+import { Label } from "@patternfly/react-core";
+import type { AclResourceType } from "../types";
 import "./ResourceTypeLabel.css";
 
 export type SolidLabelProps = {

@@ -1,5 +1,5 @@
 import { InputGroup } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { within, userEvent } from "@storybook/testing-library";
 
 import { SearchInput } from "./SearchInput";

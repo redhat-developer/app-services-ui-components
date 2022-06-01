@@ -1,3 +1,4 @@
+import type { ChartVoronoiContainerProps } from "@patternfly/react-charts";
 import {
   Chart,
   ChartArea,
@@ -11,10 +12,10 @@ import {
   chart_color_blue_300,
   chart_color_green_300,
 } from "@patternfly/react-tokens";
-import { FunctionComponent, ReactElement } from "react";
+import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
-import { PartitionBytesMetric } from "../types";
+import type { PartitionBytesMetric } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {
@@ -74,15 +75,17 @@ export const ChartLogSizePerPartition: FunctionComponent<
             return <ChartSkeletonLoader />;
           case !hasMetrics:
             return emptyState;
-          default:
+          default: {
+            const labels: ChartVoronoiContainerProps["labels"] = ({ datum }) =>
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions,@typescript-eslint/no-unsafe-argument
+              `${datum.name}: ${formatBytes(datum.y)}`;
+
             return (
               <Chart
                 ariaTitle={t("metrics:log_size_per_partition")}
                 containerComponent={
                   <ChartVoronoiContainer
-                    labels={({ datum }) =>
-                      `${datum.name}: ${formatBytes(datum.y)}`
-                    }
+                    labels={labels}
                     constrainToVisibleArea
                   />
                 }
@@ -99,7 +102,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
                 <ChartAxis
                   label={"\n" + t("metrics:axis-label-time")}
                   tickValues={tickValues}
-                  tickFormat={(d) =>
+                  tickFormat={(d: number) =>
                     dateToChartValue(d, {
                       showDate,
                     })
@@ -117,6 +120,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
                 </ChartGroup>
               </Chart>
             );
+          }
         }
       })()}
     </div>
@@ -135,7 +139,7 @@ export function getChartData(
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
   Object.entries(partitions).map(([partition, dataMap], index) => {
-    const name = `${topic}: ${partition}`;
+    const name = topic ? `${topic}: ${partition}` : partition;
     const color = colors[index];
     legendData.push({
       name,

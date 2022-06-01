@@ -37,7 +37,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
       ).not.toBeInTheDocument()
     );
 
-    expect(await comp.queryAllByRole("alert")).toHaveLength(0);
+    expect(comp.queryAllByRole("alert")).toHaveLength(0);
     expect(comp.getByLabelText("Name *")).toBeEnabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeEnabled();
     expect(comp.getByText("Cloud region")).not.toHaveAttribute("disabled");
@@ -64,7 +64,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "You can create a trial instance to evaluate this service."
       )
     ).toBeInTheDocument();
@@ -82,9 +82,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     await waitForI18n(comp);
 
     expect(
-      await comp.queryByText(
-        "Your organization has no streaming units remaining."
-      )
+      comp.queryByText("Your organization has no streaming units remaining.")
     );
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
@@ -107,7 +105,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "All available trial instances are currently in use. Try again later."
       )
     ).toBeInTheDocument();
@@ -132,7 +130,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "You can deploy 1 trial instance at a time. To deploy a new instance, delete your existing one first.",
         { exact: false }
       )
@@ -179,7 +177,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     ).toBeInTheDocument();
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "One or more regions in the selected cloud provider are temporarily unavailable. Select an available region or try again later."
       )
     ).toBeInTheDocument();
@@ -209,7 +207,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Cloud provider regions are temporarily unavailable. Try again later.",
         { exact: false }
       )
@@ -240,7 +238,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "All available trial instances are currently in use. Try again later.",
         { exact: false }
       )
@@ -297,7 +295,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "Cloud provider regions are temporarily unavailable. Try again later",
         { exact: false }
       )
@@ -329,7 +327,7 @@ describe("CreateKafkaInstanceWithSizes", () => {
     );
 
     expect(
-      await comp.queryByText(
+      comp.queryByText(
         "There was a problem processing the request. Please try again."
       )
     ).toBeInTheDocument();

@@ -4,7 +4,8 @@ import {
   Select,
   SelectOption,
 } from "@patternfly/react-core";
-import { useState, VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type LimitSelectorProps = {

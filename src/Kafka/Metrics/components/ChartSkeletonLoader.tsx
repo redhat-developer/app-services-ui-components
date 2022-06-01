@@ -1,5 +1,5 @@
 import { Flex, FlexItem, Skeleton } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { chartHeight, chartPadding } from "../consts";
 import { useTranslation } from "react-i18next";
 
