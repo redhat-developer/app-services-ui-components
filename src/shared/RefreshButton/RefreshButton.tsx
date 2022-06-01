@@ -1,6 +1,6 @@
-import { VoidFunctionComponent } from "react";
 import { Button, Spinner } from "@patternfly/react-core";
-import SyncAltIcon from "@patternfly/react-icons/dist/esm/icons/sync-alt-icon";
+import { SyncAltIcon } from "@patternfly/react-icons";
+import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export type RefreshButtonProps = {

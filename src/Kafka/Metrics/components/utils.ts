@@ -1,7 +1,6 @@
 import byteSize from "byte-size";
+import { fromUnixTime, sub } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
-import fromUnixTime from "date-fns/fromUnixTime";
-import sub from "date-fns/sub";
 import { timeIntervalsMapping } from "../consts";
 import { DurationOptions } from "../types";
 

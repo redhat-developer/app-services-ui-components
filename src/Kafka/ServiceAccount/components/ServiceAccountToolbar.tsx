@@ -6,7 +6,7 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
+import { FilterIcon } from "@patternfly/react-icons";
 import { useEffect, useReducer, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { SearchCategory } from "../types";

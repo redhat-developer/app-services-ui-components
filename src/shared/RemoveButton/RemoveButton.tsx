@@ -1,5 +1,5 @@
 import { Button, ButtonProps, Tooltip } from "@patternfly/react-core";
-import TrashIcon from "@patternfly/react-icons/dist/esm/icons/trash-icon";
+import { TrashIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
 
 export type RemoveButtonProps = {

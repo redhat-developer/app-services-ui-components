@@ -9,7 +9,7 @@ import {
   ToolbarGroup,
   ToolbarItem,
 } from "@patternfly/react-core";
-import InfoIcon from "@patternfly/react-icons/dist/esm/icons/info-icon";
+import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { useMemo, VoidFunctionComponent } from "react";

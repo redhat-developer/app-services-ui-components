@@ -11,8 +11,10 @@ import {
   TextContent,
   Title,
 } from "@patternfly/react-core";
-import ExclamationCircleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-circle-icon";
-import ExclamationTriangleIcon from "@patternfly/react-icons/dist/esm/icons/exclamation-triangle-icon";
+import {
+  ExclamationCircleIcon,
+  ExclamationTriangleIcon,
+} from "@patternfly/react-icons";
 import { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { ChartPopover } from "./ChartPopover";

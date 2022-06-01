@@ -9,8 +9,7 @@ import {
   ToolbarItem,
   ToolbarToggleGroup,
 } from "@patternfly/react-core";
-import FilterIcon from "@patternfly/react-icons/dist/esm/icons/filter-icon";
-import SearchIcon from "@patternfly/react-icons/dist/esm/icons/search-icon";
+import { FilterIcon, SearchIcon } from "@patternfly/react-icons";
 import { FunctionComponent, useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Pagination, PaginationProps } from "../../../shared";

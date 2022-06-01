@@ -9,7 +9,7 @@ import {
   TextContent,
   TextVariants,
 } from "@patternfly/react-core";
-import HelpIcon from "@patternfly/react-icons/dist/esm/icons/help-icon";
+import { HelpIcon } from "@patternfly/react-icons";
 import { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";

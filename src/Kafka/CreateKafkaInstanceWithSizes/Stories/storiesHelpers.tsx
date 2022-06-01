@@ -7,17 +7,16 @@ import { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
-import {
-  CreateKafkaInstancePropsWithSizes,
-  CreateKafkaInstanceWithSizes,
-} from "../CreateKafkaInstanceWithSizes";
-import {
+import type { CreateKafkaInstancePropsWithSizes } from "../CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import type {
   CreateKafkaInitializationData,
   GetSizesData,
   InstanceAvailability,
   Provider,
   ProviderInfo,
   Providers,
+  Size,
 } from "../types";
 
 export const AWS: ProviderInfo = {
@@ -338,7 +337,6 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
     apiPlan = "standard",
     apiScenario = "standard-available",
     apiDefaultProvider,
-    apiDefaultRegion,
     apiRegionsAvailability = "full",
     apiSizes = "normal",
     apiRemainingQuota = 3,
@@ -391,8 +389,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
         );
 
   const getSizes: CreateKafkaInstancePropsWithSizes["getSizes"] = (
-    provider,
-    region
+    provider
   ) => {
     return apiSizes === "normal"
       ? fakeApi<GetSizesData>(
@@ -405,7 +402,7 @@ export const Template: ComponentStory<typeof CreateKafkaInstanceWithSizes> = (
       ? fakeApi<GetSizesData>(
           {
             standard: [],
-            trial: {},
+            trial: {} as Size,
           },
           apiLatency
         )
@@ -470,6 +467,8 @@ export const sampleSubmit: PlayFunction<
 > = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
 
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   await waitFor(() => expect(canvas.getByLabelText("Name *")).toBeEnabled());
 
   await userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");

@@ -21,7 +21,7 @@ import {
   SIZE_VALID,
   SYSTEM_UNAVAILABLE,
 } from "./CreateKafkaInstanceMachine";
-import {
+import type {
   CreateKafkaInstanceError,
   MakeCreateKafkaInstanceMachine,
   Provider,

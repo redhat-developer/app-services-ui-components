@@ -1,6 +1,6 @@
 import { Button, ButtonProps, ButtonVariant } from "@patternfly/react-core";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons/dist/esm/icons/external-link-alt-icon";
 import { FunctionComponent } from "react";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
 
 export type ExternaLinkProps = {
   testId: string;
