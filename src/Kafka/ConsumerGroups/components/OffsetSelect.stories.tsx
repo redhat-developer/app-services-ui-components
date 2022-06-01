@@ -1,20 +1,18 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { OffsetDropdown } from "./OffsetDropdown";
+import { OffsetSelect } from "./OffsetSelect";
 
 export default {
-  component: OffsetDropdown,
-  args: {
-    value: "latest",
-  },
+  component: OffsetSelect,
+  args: {},
   parameters: {
     backgrounds: {
       default: "Background color 100",
     },
   },
-} as ComponentMeta<typeof OffsetDropdown>;
+} as ComponentMeta<typeof OffsetSelect>;
 
-const Template: ComponentStory<typeof OffsetDropdown> = (args) => (
-  <OffsetDropdown {...args} />
+const Template: ComponentStory<typeof OffsetSelect> = (args) => (
+  <OffsetSelect {...args} />
 );
 
 export const OffsetDropdownSelect = Template.bind({});

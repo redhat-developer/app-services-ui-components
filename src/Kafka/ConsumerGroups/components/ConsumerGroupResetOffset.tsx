@@ -23,8 +23,8 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
-import { TopicDropdown } from "./TopicsDropdown";
-import { OffsetDropdown } from "./OffsetDropdown";
+import { TopicSelect } from "./TopicSelect";
+import { OffsetSelect } from "./OffsetSelect";
 
 export type ConsumerRow = Consumer & {
   selected?: boolean;
@@ -101,7 +101,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
     <Modal
       variant={ModalVariant.large}
       isOpen={isModalOpen}
-      aria-label={"Modal for resetting offset of Kafka consumergroup"}
+      aria-label={t("consumerGroup.reset_offset_modal_label")}
       title={t("consumerGroup.reset_offset")}
       showClose={true}
       aria-describedby="modal-message"
@@ -128,8 +128,11 @@ export const ConsumerGroupResetOffset: FunctionComponent<
               </Title>
             </FormGroup>
             {isDisconnected && (
-              <FormGroup label="Topic" fieldId="horizontal-form-name">
-                <TopicDropdown
+              <FormGroup
+                label={t("consumerGroup.reset_offset_topic_label")}
+                fieldId="horizontal-form-name"
+              >
+                <TopicSelect
                   value={selectedTopic}
                   topics={topics}
                   onChange={onChangeTopic}
@@ -137,8 +140,11 @@ export const ConsumerGroupResetOffset: FunctionComponent<
               </FormGroup>
             )}
             {isDisconnected && selectedTopic && (
-              <FormGroup label="New offset" fieldId="offset-dropdown">
-                <OffsetDropdown
+              <FormGroup
+                label={t("consumerGroup.reset_offset_new_offset_label")}
+                fieldId="offset-dropdown"
+              >
+                <OffsetSelect
                   value={selectedOffset ? selectedOffset : t("common:select")}
                   onChange={onChangeOffsetValue}
                 />
