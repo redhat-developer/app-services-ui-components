@@ -10,7 +10,7 @@ import { ResourceName } from "./ResourceName";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
 import { RemoveButton } from "../../..";
 
 export type ConsumeTopicShortcutProps = {
