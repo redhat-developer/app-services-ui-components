@@ -123,7 +123,11 @@ export const ConsumerGroupResetOffset: FunctionComponent<
         <StackItem>
           <Form isHorizontal>
             <FormGroup label="Consumer group" fieldId="horizontal-form-name">
-              <Title className="form-title" headingLevel="h4" size="md">
+              <Title
+                className="mas--ConsumerGroupResetOffset__formTitle"
+                headingLevel="h4"
+                size="md"
+              >
                 {groupId}
               </Title>
             </FormGroup>
