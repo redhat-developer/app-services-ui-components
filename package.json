@@ -122,7 +122,7 @@
     "i18next": "21.8.5",
     "react-i18next": "11.16.9",
     "tslib": "2.4.0",
-    "use-resize-observer": "8.0.0",
+    "use-resize-observer": "9.0.0",
     "xstate": "4.32.1"
   },
   "peerDependencies": {
