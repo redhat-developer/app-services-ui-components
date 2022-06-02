@@ -2,16 +2,15 @@ import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
-import {
-  ResourcePrefixRule,
-  ResourcePrefixRuleValue,
-} from "./ResourcePrefixRule";
+import { ResourcePrefixRule } from "./ResourcePrefixRule";
+import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
+
 import { ResourceName } from "./ResourceName";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
-import { RemoveButton } from "../../..";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { RemoveButton } from "../../../shared/RemoveButton";
 
 export type ConsumeTopicShortcutProps = {
   onChangeConsumerResourcePrefixRule: (value: string) => void;

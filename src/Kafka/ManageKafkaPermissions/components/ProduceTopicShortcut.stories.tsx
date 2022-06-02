@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { ProduceTopicShortcut } from "./ProduceTopicShortcut";
 import { TableComposable } from "@patternfly/react-table";
@@ -6,7 +6,7 @@ import { TableComposable } from "@patternfly/react-table";
 export default {
   component: ProduceTopicShortcut,
   args: {
-    prefixRuleValue: "starts-with",
+    prefixRuleValue: "Starts with",
     submitted: false,
     onFetchResourceNameOptions: (filter) =>
       fakeApi<string[]>(
@@ -54,7 +54,7 @@ MultipleRowsExist.parameters = {
 
 export const PrefixRuleVariant = Template.bind({});
 PrefixRuleVariant.args = {
-  prefixRuleValue: "is",
+  prefixRuleValue: "Is",
   multipleShorctutPermissions: false,
 };
 

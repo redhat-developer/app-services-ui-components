@@ -10,15 +10,15 @@ import {
 } from "@patternfly/react-core";
 
 export type ResourceOperationValue =
-  | "all"
-  | "read"
-  | "write"
-  | "create"
-  | "delete"
-  | "alter"
-  | "describe"
-  | "describe-configs"
-  | "alter-configs";
+  | "All"
+  | "Read"
+  | "Write"
+  | "Create"
+  | "Delete"
+  | "Alter"
+  | "Describe"
+  | "Describe configs"
+  | "Alter configs";
 
 type ResourceOperationProps = {
   value: ResourceOperationValue | undefined;

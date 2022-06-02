@@ -16,7 +16,7 @@ export default {
         100
       ),
     submitted: false,
-    resourcePrefixRule: "is",
+    resourcePrefixRule: "Is",
     resourceType: "topic",
   },
 } as ComponentMeta<typeof ResourceName>;
@@ -30,7 +30,7 @@ const Template: ComponentStory<typeof ResourceName> = (args) => (
 );
 
 export const InvalidTopicName = Template.bind({});
-InvalidTopicName.args = {};
+InvalidTopicName.args = { resourceType: "topic" };
 
 InvalidTopicName.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
@@ -107,7 +107,7 @@ InvalidTopicCharacters.parameters = {
 };
 
 export const PrefixRuleVariation = Template.bind({});
-PrefixRuleVariation.args = { resourcePrefixRule: "starts-with" };
+PrefixRuleVariation.args = { resourcePrefixRule: "Starts with" };
 PrefixRuleVariation.play = async ({ canvasElement }) => {
   const canvas = within(canvasElement);
   await canvas.findByPlaceholderText("Enter prefix");

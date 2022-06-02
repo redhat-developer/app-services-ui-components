@@ -1,6 +1,6 @@
 import { TableComposable } from "@patternfly/react-table";
 import { Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { ConsumeTopicShortcut } from "./ConsumeTopicShortcut";
 
@@ -21,8 +21,8 @@ export default {
         ),
         100
       ),
-    topicPrefixRuleValue: "starts-with",
-    consumerPrefixRuleValue: "starts-with",
+    topicPrefixRuleValue: "Starts with",
+    consumerPrefixRuleValue: "Starts with",
     submitted: false,
   },
 } as ComponentMeta<typeof ConsumeTopicShortcut>;
@@ -61,8 +61,8 @@ MultipleRowsExist.parameters = {
 
 export const PrefixRuleVariant = Template.bind({});
 PrefixRuleVariant.args = {
-  topicPrefixRuleValue: "is",
-  consumerPrefixRuleValue: "is",
+  topicPrefixRuleValue: "Is",
+  consumerPrefixRuleValue: "Is",
   multipleShorctutPermissions: false,
 };
 

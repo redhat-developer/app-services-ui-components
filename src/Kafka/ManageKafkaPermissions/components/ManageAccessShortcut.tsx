@@ -1,7 +1,7 @@
 import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { RemoveButton } from "../../../shared";

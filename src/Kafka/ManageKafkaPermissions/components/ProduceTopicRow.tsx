@@ -2,10 +2,8 @@ import { Tr, Td } from "@patternfly/react-table";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { ResourceName } from "./ResourceName";
-import {
-  ResourcePrefixRule,
-  ResourcePrefixRuleValue,
-} from "./ResourcePrefixRule";
+import { ResourcePrefixRule } from "./ResourcePrefixRule";
+import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 
 export type ProduceTopicRowProps = {
   onChange: (value: string) => void;

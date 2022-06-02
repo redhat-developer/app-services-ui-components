@@ -183,7 +183,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      is
+                      Is
                     </span>
                   </div>
                   <span
@@ -388,7 +388,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      is
+                      Is
                     </span>
                   </div>
                   <span
@@ -722,7 +722,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      starts-with
+                      Starts with
                     </span>
                   </div>
                   <span
@@ -927,7 +927,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      starts-with
+                      Starts with
                     </span>
                   </div>
                   <span
@@ -1232,7 +1232,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      starts-with
+                      Starts with
                     </span>
                   </div>
                   <span
@@ -1437,7 +1437,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     <span
                       class="pf-c-select__toggle-text"
                     >
-                      starts-with
+                      Starts with
                     </span>
                   </div>
                   <span

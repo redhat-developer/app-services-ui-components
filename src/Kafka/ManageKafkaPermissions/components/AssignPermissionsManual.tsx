@@ -1,15 +1,13 @@
 import { Tbody, Tr, Td } from "@patternfly/react-table";
 import { ResourceName } from "./ResourceName";
-import { ResourceOperation, ResourceOperationValue } from "./ResourceOperation";
-import {
-  ResourcePermission,
-  ResourcePermissionValue,
-} from "./ResourcePermission";
-import {
-  ResourcePrefixRule,
-  ResourcePrefixRuleValue,
-} from "./ResourcePrefixRule";
-import { ResourceType, ResourceTypeValue } from "./ResourceType";
+import { ResourceOperation } from "./ResourceOperation";
+import type { ResourceOperationValue } from "./ResourceOperation";
+import { ResourcePermission } from "./ResourcePermission";
+import type { ResourcePermissionValue } from "./ResourcePermission";
+import { ResourcePrefixRule } from "./ResourcePrefixRule";
+import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
+import { ResourceType } from "./ResourceType";
+import type { ResourceTypeValue } from "./ResourceType";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 import { useTranslation } from "react-i18next";
 import { KafkaInstanceManualPermissions } from "./KafkaInstanceManualPermissions";

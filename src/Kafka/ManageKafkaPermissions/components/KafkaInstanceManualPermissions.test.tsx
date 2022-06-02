@@ -9,13 +9,11 @@ describe("Kafka instance manual permissions", () => {
     const comp = render(<FormSubmitted />);
 
     await waitForI18n(comp);
-    expect(await comp.queryByText("Resource")).not.toBeInTheDocument();
-    expect(await comp.queryByText("Permission")).not.toBeInTheDocument();
+    expect(comp.queryByText("Resource")).not.toBeInTheDocument();
+    expect(comp.queryByText("Permission")).not.toBeInTheDocument();
     expect(await comp.findByText("Kafka instance")).toBeInTheDocument();
-    expect(await comp.queryByText("is")).not.toBeInTheDocument();
-    expect(
-      await comp.queryByPlaceholderText("Enter name")
-    ).not.toBeInTheDocument();
+    expect(comp.queryByText("is")).not.toBeInTheDocument();
+    expect(comp.queryByPlaceholderText("Enter name")).not.toBeInTheDocument();
     expect(await comp.findByText("Allow")).toBeInTheDocument();
     expect(await comp.findByText("Required")).toBeInTheDocument();
   });
@@ -25,6 +23,6 @@ describe("Kafka instance manual permissions", () => {
 
     await waitForI18n(comp);
     expect(await comp.findByText("Kafka instance")).toBeInTheDocument();
-    expect(await comp.queryByText("Required")).not.toBeInTheDocument();
+    expect(comp.queryByText("Required")).not.toBeInTheDocument();
   });
 });

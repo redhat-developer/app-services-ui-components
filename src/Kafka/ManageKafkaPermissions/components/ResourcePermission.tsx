@@ -1,11 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { SelectProps } from "@patternfly/react-core";
-import {
-  Select,
-  SelectOption,
-  SelectVariant,
-} from "@patternfly/react-core";
+import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
 
 export type ResourcePermissionValue = "allow" | "deny";
 

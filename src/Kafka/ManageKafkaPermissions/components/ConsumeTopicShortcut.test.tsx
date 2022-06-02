@@ -15,25 +15,25 @@ describe("Consume Topic shortcut permissions", () => {
 
     await waitForI18n(comp);
 
-    expect(await comp.getByText("Resource")).toBeInTheDocument();
-    expect(await comp.getByText("Permission")).toBeInTheDocument();
+    expect(await comp.findByText("Resource")).toBeInTheDocument();
+    expect(await comp.findByText("Permission")).toBeInTheDocument();
     expect(await comp.findByText("Consume from a topic")).toBeInTheDocument();
-    expect(await comp.getByText("Write")).toBeInTheDocument();
-    expect(await comp.getByText("Create")).toBeInTheDocument();
-    expect(await comp.getByText("Read")).toBeInTheDocument();
-    expect(await comp.getByText("Describe")).toBeInTheDocument();
-    expect(await comp.getByText("Topic")).toBeInTheDocument();
-    expect(await comp.getByText("Consumer group")).toBeInTheDocument();
-    const requiredValue = await comp.getAllByText("Required");
+    expect(await comp.findByText("Write")).toBeInTheDocument();
+    expect(await comp.findByText("Create")).toBeInTheDocument();
+    expect(await comp.findByText("Read")).toBeInTheDocument();
+    expect(await comp.findByText("Describe")).toBeInTheDocument();
+    expect(await comp.findByText("Topic")).toBeInTheDocument();
+    expect(await comp.findByText("Consumer group")).toBeInTheDocument();
+    const requiredValue = await comp.findAllByText("Required");
     expect(requiredValue[0]).toBeInTheDocument();
     expect(requiredValue[1]).toBeInTheDocument();
-    const allow = await comp.getAllByText("Allow");
+    const allow = await comp.findAllByText("Allow");
     expect(allow[0]).toBeInTheDocument();
     expect(allow[1]).toBeInTheDocument();
-    const startsWith = await comp.getAllByText("starts-with");
+    const startsWith = await comp.findAllByText("Starts with");
     expect(startsWith[0]).toBeInTheDocument();
     expect(startsWith[1]).toBeInTheDocument();
-    const prefix = await comp.getAllByPlaceholderText("Enter prefix");
+    const prefix = await comp.findAllByPlaceholderText("Enter prefix");
     expect(prefix[0]).toBeInTheDocument();
     expect(prefix[1]).toBeInTheDocument();
   });

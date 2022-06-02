@@ -62,7 +62,7 @@ InvalidSelection.parameters = {
 };
 
 export const ValidSelection = Template.bind({});
-ValidSelection.args = { value: "all" };
+ValidSelection.args = { value: "All" };
 ValidSelection.parameters = {
   docs: {
     description: {

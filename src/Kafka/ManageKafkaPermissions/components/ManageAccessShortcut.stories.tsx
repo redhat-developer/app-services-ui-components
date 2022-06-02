@@ -1,4 +1,4 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ManageAccessShortcut } from "./ManageAccessShortcut";
 import { Form } from "@patternfly/react-core";
 import { TableComposable } from "@patternfly/react-table";

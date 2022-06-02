@@ -179,7 +179,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                   <span
                     class="pf-c-select__toggle-text"
                   >
-                    is
+                    Is
                   </span>
                 </div>
                 <span
@@ -521,7 +521,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                   <span
                     class="pf-c-select__toggle-text"
                   >
-                    starts-with
+                    Starts with
                   </span>
                 </div>
                 <span
@@ -834,7 +834,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                   <span
                     class="pf-c-select__toggle-text"
                   >
-                    starts-with
+                    Starts with
                   </span>
                 </div>
                 <span

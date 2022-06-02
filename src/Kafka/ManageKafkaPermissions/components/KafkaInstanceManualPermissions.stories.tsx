@@ -1,6 +1,6 @@
 import { TableComposable } from "@patternfly/react-table";
 import { Form } from "@patternfly/react-core";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { KafkaInstanceManualPermissions } from "./KafkaInstanceManualPermissions";
 
 export default {

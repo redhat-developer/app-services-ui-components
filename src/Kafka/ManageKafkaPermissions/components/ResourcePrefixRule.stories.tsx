@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof ResourcePrefixRule> = (args, { id }) => {
 };
 
 export const WorksWithModal = Template.bind({});
-WorksWithModal.args = { initialOpen: true, value: "starts-with" };
+WorksWithModal.args = { initialOpen: true, value: "Starts with" };
 WorksWithModal.parameters = {
   docs: {
     description: {
@@ -36,7 +36,7 @@ WorksWithModal.parameters = {
 };
 
 export const InitialState = Template.bind({});
-InitialState.args = { value: "starts-with" };
+InitialState.args = { value: "Starts with" };
 InitialState.parameters = {
   docs: {
     description: {

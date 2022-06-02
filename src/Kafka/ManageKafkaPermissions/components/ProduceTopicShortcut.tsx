@@ -1,8 +1,8 @@
 import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
-import { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 

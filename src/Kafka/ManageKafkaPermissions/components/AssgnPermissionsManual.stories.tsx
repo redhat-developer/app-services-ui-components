@@ -16,7 +16,7 @@ export default {
       ),
     resourceType: undefined,
     submitted: false,
-    resourcePrefix: "is",
+    resourcePrefix: "Is",
     resourceName: undefined,
     resourcePermission: "allow",
     resourceOperation: undefined,
@@ -60,7 +60,7 @@ MultiplePermissionsExist.parameters = {
 
 export const PrefixRuleVariant = Template.bind({});
 PrefixRuleVariant.args = {
-  resourcePrefix: "starts-with",
+  resourcePrefix: "Starts with",
 };
 
 PrefixRuleVariant.parameters = {

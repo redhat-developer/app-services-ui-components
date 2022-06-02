@@ -1,12 +1,11 @@
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { ResourceType, ResourceTypeValue } from "./ResourceType";
-import {
-  ResourcePermission,
-  ResourcePermissionValue,
-} from "./ResourcePermission";
-import { ResourceOperation, ResourceOperationValue } from "./ResourceOperation";
-
+import { ResourceType } from "./ResourceType";
+import type { ResourceTypeValue } from "./ResourceType";
+import { ResourcePermission } from "./ResourcePermission";
+import type { ResourcePermissionValue } from "./ResourcePermission";
+import { ResourceOperation } from "./ResourceOperation";
+import type { ResourceOperationValue } from "./ResourceOperation";
 export type KafkaInstanceManualPermissions = {
   resourceType: ResourceTypeValue | undefined;
   onChangeResourceType: (value: ResourceTypeValue | undefined) => void;
