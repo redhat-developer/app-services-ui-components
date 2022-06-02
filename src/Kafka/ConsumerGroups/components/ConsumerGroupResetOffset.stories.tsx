@@ -1,8 +1,6 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import {
-  ConsumerGroupResetOffset,
-  ConsumerRow,
-} from "./ConsumerGroupResetOffset";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ConsumerGroupResetOffset } from "./ConsumerGroupResetOffset";
+import type { ConsumerRow } from "./ConsumerGroupResetOffset";
 
 const consumer: ConsumerRow[] = [
   {

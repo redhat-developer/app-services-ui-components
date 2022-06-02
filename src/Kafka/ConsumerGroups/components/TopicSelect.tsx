@@ -1,10 +1,7 @@
-import {
-  Select,
-  SelectOption,
-  SelectProps,
-  SelectVariant,
-} from "@patternfly/react-core";
-import { FunctionComponent, useState } from "react";
+import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
+import type { SelectProps } from "@patternfly/react-core";
+import { useState } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export type TopicSelectProps = {

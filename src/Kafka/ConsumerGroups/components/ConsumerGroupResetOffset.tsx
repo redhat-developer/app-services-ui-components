@@ -11,10 +11,10 @@ import {
   TextInput,
   Title,
 } from "@patternfly/react-core";
-import { FunctionComponent } from "react";
+import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import "../ConsumerGroup.css";
-import { Consumer, OffsetValue } from "../types";
+import type { Consumer, OffsetValue } from "../types";
 import {
   TableComposable,
   Tbody,
@@ -215,7 +215,8 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                             {consumer.partition}
                           </Td>
                           <Td dataLabel={tableColumns.clientId}>
-                            {consumer.groupId + consumer.memberId}
+                            {String(consumer.groupId)}
+                            {String(consumer.memberId)}
                           </Td>
                           <Td dataLabel={tableColumns.current_offset}>
                             {consumer.offset}
