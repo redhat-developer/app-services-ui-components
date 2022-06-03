@@ -75,6 +75,8 @@ export type DeleteModalProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
+
+  variant?: "destructive" | "non-destructive";
 };
 
 /**
@@ -136,6 +138,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   onDelete,
   onCancel,
   children,
+  variant,
 }) => {
   const { t } = useTranslation();
 
@@ -146,7 +149,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
       variant={ModalVariant.small}
       isOpen={isModalOpen}
       title={title}
-      titleIconVariant={"warning"}
+      titleIconVariant={variant === "non-destructive" ? undefined : "warning"}
       showClose={!isDeleting}
       onClose={onCancel}
       appendTo={appendTo}
