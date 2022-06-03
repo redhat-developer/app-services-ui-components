@@ -75,8 +75,14 @@ export type DeleteModalProps = {
    * A callback for when the cancel or close button are clicked.
    */
   onCancel: () => void;
-
+  /**
+   * To select destructive or non-destructive delete action
+   */
   variant?: "destructive" | "non-destructive";
+  /**
+   * Flag to disable delete button in non-destructive delete action
+   */
+  isDeleteDisable?: boolean;
 };
 
 /**
@@ -139,6 +145,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   onCancel,
   children,
   variant,
+  isDeleteDisable,
 }) => {
   const { t } = useTranslation();
 
@@ -164,7 +171,11 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
               : ButtonVariant.danger
           }
           onClick={onDelete}
-          isDisabled={isDeleting || !isDeleteEnabled}
+          isDisabled={
+            variant === "non-destructive"
+              ? isDeleteDisable
+              : isDeleting || !isDeleteEnabled
+          }
           isLoading={isDeleting}
           ouiaId={"delete"}
         >

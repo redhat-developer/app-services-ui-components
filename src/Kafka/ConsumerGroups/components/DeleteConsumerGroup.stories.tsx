@@ -5,18 +5,28 @@ export default {
   component: DeleteConsumerGroup,
   args: {
     isModalOpen: true,
-    state: "Stable",
     consumerName: "console-745",
   },
 } as ComponentMeta<typeof DeleteConsumerGroup>;
 
-const Template: ComponentStory<typeof DeleteConsumerGroup> = (args) => (
-  <DeleteConsumerGroup {...args} />
+const Template: ComponentStory<typeof DeleteConsumerGroup> = (args, { id }) => (
+  <DeleteConsumerGroup
+    {...args}
+    appendTo={() =>
+      document.getElementById(`story--${id}`) ||
+      document.getElementById("root") ||
+      document.body
+    }
+    disableFocusTrap={true}
+  />
 );
 
-export const DeleteModalWhenConsumerStateIsStable = Template.bind({});
-
-export const DeleteModalWhenConsumerStateIsNotStable = Template.bind({});
-DeleteModalWhenConsumerStateIsNotStable.args = {
+export const AllowConsumerGroupDeletion = Template.bind({});
+AllowConsumerGroupDeletion.args = {
   state: "Empty",
+};
+
+export const DenyConsumerGroupDeletion = Template.bind({});
+DenyConsumerGroupDeletion.args = {
+  state: "Stable",
 };
