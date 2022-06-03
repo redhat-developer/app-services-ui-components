@@ -40,7 +40,6 @@ export const TopicSelect: FunctionComponent<TopicSelectProps> = ({
       selections={value}
       placeholderText={t("common:select")}
       menuAppendTo={"parent"}
-      width={"200px"}
     >
       {topics.map((topic) => (
         <SelectOption key={topic}>{topic}</SelectOption>

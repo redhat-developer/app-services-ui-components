@@ -51,7 +51,6 @@ export const OffsetSelect: FunctionComponent<OffsetSelectProps> = ({
       variant={SelectVariant.single}
       isOpen={isOpen}
       placeholderText={t("common:select")}
-      width={200}
       selections={value}
       menuAppendTo={"parent"}
     >

@@ -9,7 +9,6 @@ import {
   Stack,
   StackItem,
   TextInput,
-  Title,
 } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
@@ -122,14 +121,20 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       <Stack hasGutter>
         <StackItem>
           <Form isHorizontal>
-            <FormGroup label="Consumer group" fieldId="horizontal-form-name">
-              <Title
-                className="mas--ConsumerGroupResetOffset__formTitle"
-                headingLevel="h4"
-                size="md"
-              >
-                {groupId}
-              </Title>
+            <FormGroup
+              className="mas--ConsumerGroupResetOffset-form-group--readonly"
+              label={t("consumerGroup.reset_offset_consumer_group_label")}
+              fieldId="horizontal-form-name"
+            >
+              <TextInput
+                isReadOnly
+                type="text"
+                aria-label={t(
+                  "consumerGroup.reset_offset_consumer_group_label"
+                )}
+                name={"Consumer group"}
+                value={groupId}
+              />
             </FormGroup>
             {isDisconnected && (
               <FormGroup
@@ -155,9 +160,16 @@ export const ConsumerGroupResetOffset: FunctionComponent<
               </FormGroup>
             )}
             {isDisconnected && selectedTopic && selectedOffset === "absolute" && (
-              <FormGroup label="Custom offset" fieldId="custom-offset-input">
+              <FormGroup
+                label={t("consumerGroup.reset_offset_custom_offset_label")}
+                fieldId="custom-offset-input"
+              >
                 <TextInput
                   id="custom-offset-input"
+                  name={t("consumerGroup.reset_offset_custom_offset_label")}
+                  aria-label={t(
+                    "consumerGroup.reset_offset_custom_offset_label"
+                  )}
                   value={customOffsetValue}
                   onChange={setcustomOffsetValue}
                   type="number"

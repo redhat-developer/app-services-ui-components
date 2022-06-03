@@ -26,9 +26,8 @@ const consumer: ConsumerRow[] = [
 
 const getTopics = () => {
   const topics = consumer.map((consumer) => consumer.topic);
-  const distinctTopics = topics.filter(
-    (topic: string, i: number) => topics.indexOf(topic) === i
-  );
+
+  const distinctTopics = [...new Set(topics)];
   return distinctTopics;
 };
 
