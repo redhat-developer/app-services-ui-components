@@ -69,7 +69,7 @@ export const ResourceCell: VFC<ResourceCellProps> = ({
 
 export type PermissionOperationCellProps = {
   permission: AclPermissionType;
-  operation: AclOperation;
+  operation: AclOperation | AclOperation[];
 };
 
 export const PermissionOperationCell: VFC<PermissionOperationCellProps> = ({
@@ -102,7 +102,15 @@ export const PermissionOperationCell: VFC<PermissionOperationCellProps> = ({
           {permissions[permission]}
         </Label>
       )}
-      {operation && <Label variant="outline">{operations[operation]}</Label>}
+      {Array.isArray(operation) ? (
+        operation.map((value, key) => (
+          <Label key={key} variant="outline">
+            {operations[value]}
+          </Label>
+        ))
+      ) : (
+        <Label variant="outline">{operations[operation]}</Label>
+      )}
     </LabelGroup>
   );
 };

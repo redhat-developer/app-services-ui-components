@@ -23,7 +23,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const validationCheck = (
     resourceType: ResourceTypeValue | undefined,
-    resourcePreixCondition: "starts-with" | "is",
+    resourcePreixCondition: "Starts with" | "Is",
     filter: string | undefined,
     isCreated?: boolean
   ) => {
@@ -32,7 +32,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
     if (filter === undefined || filter === "")
       return { isValid: true, message: undefined };
     if (
-      resourcePreixCondition == "is" &&
+      resourcePreixCondition == "Is" &&
       resourceType == "topic" &&
       isCreated
     ) {
@@ -74,13 +74,13 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
     <AsyncTypeaheadSelect
       id="resource-name"
       ariaLabel={
-        resourcePrefixRule === "is"
+        resourcePrefixRule === "Is"
           ? t("resourcePrefix.aria_label_name_is", { resourceType })
           : t("resourcePrefix.aria_label_name_starts_with", { resourceType })
       }
       value={value}
       placeholderText={
-        resourcePrefixRule === "is"
+        resourcePrefixRule === "Is"
           ? t("resourcePrefix.placeholder_name_is")
           : t("resourcePrefix.placeholder_name_starts_with")
       }

@@ -8,6 +8,17 @@ export default {
   args: {
     value: undefined,
     invalid: false,
+    resourceTypeOptions: [
+      "All",
+      "Read",
+      "Write",
+      "Create",
+      "Delete",
+      "Alter",
+      "Describe",
+      "Describe configs",
+      "Alter configs",
+    ],
   },
 } as ComponentMeta<typeof ResourceOperation>;
 
@@ -51,7 +62,7 @@ InvalidSelection.parameters = {
 };
 
 export const ValidSelection = Template.bind({});
-ValidSelection.args = { value: "all" };
+ValidSelection.args = { value: "All" };
 ValidSelection.parameters = {
   docs: {
     description: {

@@ -1,14 +1,9 @@
 import type { SelectProps } from "@patternfly/react-core";
-import {
-  FormGroup,
-  Select,
-  SelectOption,
-  SelectVariant,
-} from "@patternfly/react-core";
+import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export type ResourcePrefixRuleValue = "is" | "starts-with";
+export type ResourcePrefixRuleValue = "Is" | "Starts with";
 
 type ResourcePrefixRuleProps = {
   value: ResourcePrefixRuleValue;
@@ -29,11 +24,11 @@ export const ResourcePrefixRule: React.VFC<ResourcePrefixRuleProps> = ({
   const resourcePrefixRuleOptions: {
     [key in ResourcePrefixRuleValue]: { label: string; description: string };
   } = {
-    "starts-with": {
+    "Starts with": {
       label: t("resource_prefix_rule.starts_with"),
       description: t("resource_prefix_rule.starts_with_description"),
     },
-    is: {
+    Is: {
       label: t("resource_prefix_rule.is"),
       description: t("resource_prefix_rule.is_description"),
     },
@@ -57,21 +52,19 @@ export const ResourcePrefixRule: React.VFC<ResourcePrefixRuleProps> = ({
   };
 
   return (
-    <FormGroup fieldId={"resource-prefix-rule-select"}>
-      <Select
-        id={"resource-prefix-rule-select"}
-        aria-label={t("resource_prefix_rule.aria_label", { value })}
-        data-testid="acls-resource-prefix-rule-select"
-        variant={SelectVariant.single}
-        onToggle={onToggle}
-        onSelect={onSelect}
-        isOpen={isOpen}
-        width={200}
-        selections={value}
-        menuAppendTo={"parent"}
-      >
-        {makeOptions()}
-      </Select>
-    </FormGroup>
+    <Select
+      id={"resource-prefix-rule-select"}
+      aria-label={t("resource_prefix_rule.aria_label", { value })}
+      data-testid="acls-resource-prefix-rule-select"
+      variant={SelectVariant.single}
+      onToggle={onToggle}
+      onSelect={onSelect}
+      isOpen={isOpen}
+      width={200}
+      selections={value}
+      menuAppendTo={"parent"}
+    >
+      {makeOptions()}
+    </Select>
   );
 };

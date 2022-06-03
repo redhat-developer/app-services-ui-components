@@ -1,14 +1,9 @@
 import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { SelectProps } from "@patternfly/react-core";
-import {
-  FormGroup,
-  Select,
-  SelectOption,
-  SelectVariant,
-} from "@patternfly/react-core";
+import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
 
-type ResourcePermissionValue = "allow" | "deny";
+export type ResourcePermissionValue = "allow" | "deny";
 
 type ResourcePermissionProps = {
   value: ResourcePermissionValue;
@@ -48,21 +43,19 @@ export const ResourcePermission: React.VFC<ResourcePermissionProps> = ({
   };
 
   return (
-    <FormGroup fieldId={"resource-permission-select"}>
-      <Select
-        id={"resource-permission-select"}
-        aria-label={t("permissions.aria_label", { value })}
-        data-testid="acls-resource-permission-select"
-        variant={SelectVariant.single}
-        onToggle={onToggle}
-        onSelect={onSelect}
-        isOpen={isOpen}
-        width={200}
-        selections={value}
-        menuAppendTo={"parent"}
-      >
-        {makeOptions()}
-      </Select>
-    </FormGroup>
+    <Select
+      id={"resource-permission-select"}
+      aria-label={t("permissions.aria_label", { value })}
+      data-testid="acls-resource-permission-select"
+      variant={SelectVariant.single}
+      onToggle={onToggle}
+      onSelect={onSelect}
+      isOpen={isOpen}
+      width={200}
+      selections={value}
+      menuAppendTo={"parent"}
+    >
+      {makeOptions()}
+    </Select>
   );
 };
