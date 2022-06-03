@@ -9,13 +9,13 @@ import {
   TextVariants,
   Title,
 } from "@patternfly/react-core";
+import classNames from "classnames";
 import type {
   CSSProperties,
   FunctionComponent,
   ReactNode,
   VoidFunctionComponent,
 } from "react";
-import { css } from "@patternfly/react-styles";
 import "./MarketingPage.css";
 
 export type MarketingPageHeroProps = {
@@ -55,7 +55,7 @@ export const MarketingPageHero: VoidFunctionComponent<
   } as CSSProperties;
   return (
     <PageSection
-      className={css("appsrv-marketing--banner", {
+      className={classNames("appsrv-marketing--banner", {
         "pf-u-background-color-dark-100": variant === "dark",
         "pf-u-background-color-100": variant === "light",
       })}
@@ -122,7 +122,7 @@ export const MarketingPageSection: FunctionComponent<
 }) => (
   <PageSection
     isWidthLimited
-    className={css(className, {
+    className={classNames(className, {
       "pf-u-background-color-dark-100": variant === "dark",
       "pf-u-background-color-100": variant === "light",
     })}

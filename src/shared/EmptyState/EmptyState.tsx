@@ -22,7 +22,7 @@ import {
   SearchIcon,
   SpaceShuttleIcon,
 } from "@patternfly/react-icons";
-import { css } from "@patternfly/react-styles";
+import classNames from "classnames";
 import type {
   ComponentType,
   MouseEvent as ReactMouseEvent,
@@ -165,7 +165,7 @@ export const EmptyState: VoidFunctionComponent<EmptyStateProps> = ({
   return (
     <PFEmptyState
       variant={variant}
-      className={css("pf-u-pt-2xl pf-u-pt-3xl-on-md", className)}
+      className={classNames("pf-u-pt-2xl pf-u-pt-3xl-on-md", className)}
       {...restEmptyStateProps}
     >
       <EmptyStateIcon icon={icon} {...emptyStateIconProps} />
