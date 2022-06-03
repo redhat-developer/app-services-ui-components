@@ -31,41 +31,37 @@ export const KafkaInstanceManualPermissions: React.FC<
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   return (
-    <>
-      <Tbody>
-        <Tr>
-          <Td width={70}>
-            <ResourceType
-              value={resourceType}
-              onChangeValue={onChangeResourceType}
-              invalid={submitted && resourceType === undefined ? true : false}
-            />
-          </Td>
+    <Tbody>
+      <Tr>
+        <Td width={70}>
+          <ResourceType
+            value={resourceType}
+            onChangeValue={onChangeResourceType}
+            invalid={submitted && resourceType === undefined}
+          />
+        </Td>
 
-          <Td />
-          <Td />
+        <Td />
+        <Td />
 
-          <Td>
-            <ResourcePermission
-              value={resourcePermission}
-              onChangeValue={onChangeResourcePermission}
-            />
-          </Td>
-          <Td>
-            <ResourceOperation
-              value={resourceOperation}
-              onChangeValue={onChangeResourceOperation}
-              resourceTypeOptions={[
-                t("operations.alter"),
-                t("operations.describe"),
-              ]}
-              invalid={
-                submitted && resourceOperation === undefined ? true : false
-              }
-            />
-          </Td>
-        </Tr>
-      </Tbody>
-    </>
+        <Td>
+          <ResourcePermission
+            value={resourcePermission}
+            onChangeValue={onChangeResourcePermission}
+          />
+        </Td>
+        <Td>
+          <ResourceOperation
+            value={resourceOperation}
+            onChangeValue={onChangeResourceOperation}
+            resourceTypeOptions={[
+              t("operations.alter"),
+              t("operations.describe"),
+            ]}
+            invalid={submitted && resourceOperation === undefined}
+          />
+        </Td>
+      </Tr>
+    </Tbody>
   );
 };

@@ -66,7 +66,7 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
                 <RemoveButton
                   variant="link"
                   onClick={onDelete}
-                  tooltip={"Delete"}
+                  tooltip={t("operations.delete")}
                 />
               </FlexItem>
             </Flex>

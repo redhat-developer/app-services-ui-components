@@ -80,7 +80,7 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
                 <RemoveButton
                   variant="link"
                   onClick={onDelete}
-                  tooltip={"Delete"}
+                  tooltip={t("operations.delete")}
                 />
               </FlexItem>
             </Flex>
@@ -102,12 +102,10 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
             <DisplayResourceName resourceType={"GROUP"} />{" "}
           </Td>
           <Td>
-            {
-              <ResourcePrefixRule
-                value={consumerPrefixRuleValue}
-                onChangeValue={onChangeConsumerResourcePrefixRule}
-              />
-            }
+            <ResourcePrefixRule
+              value={consumerPrefixRuleValue}
+              onChangeValue={onChangeConsumerResourcePrefixRule}
+            />
           </Td>
           <Td>
             {

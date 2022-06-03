@@ -49,18 +49,6 @@ export const AssignPermissionsManual: React.FC<
 }) => {
   const { t } = useTranslation("manage-kafka-permissions");
   const resourceTypeOptions = () => {
-    if (resourceType === undefined)
-      return [
-        t("operations.all"),
-        t("operations.read"),
-        t("operations.write"),
-        t("operations.create"),
-        t("operations.delete"),
-        t("operations.alter"),
-        t("operations.describe"),
-        t("operations.describe_configs"),
-        t("operations.alter_configs"),
-      ];
     switch (resourceType) {
       case "consumer-group":
         return [
@@ -111,7 +99,7 @@ export const AssignPermissionsManual: React.FC<
               <ResourceType
                 value={resourceType}
                 onChangeValue={onChangeResourceType}
-                invalid={submitted && resourceType === undefined ? true : false}
+                invalid={submitted && resourceType === undefined}
               />
             </Td>
             <Td>
