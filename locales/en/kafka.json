@@ -75,6 +75,7 @@
     "reset_offset_accept": "I understand that by resetting the offset position, I risk clients skipping or duplicating messages.",
     "reset_offset_connected_alert_body": "One or more members of the consumer group are currently connected to a topic. All members of a consumer group must be disconnected before resetting the offset.",
     "reset_offset_connected_alert_title": "The offset for this consumer group cannot be reset at this time",
+    "reset_offset_consumer_group_label": "Consumer group",
     "reset_offset_custom_offset_label": "Custom offset",
     "reset_offset_modal_label": "Consumer group reset offset modal",
     "reset_offset_new_offset_label": "New offset",

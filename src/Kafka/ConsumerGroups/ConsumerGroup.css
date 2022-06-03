@@ -5,3 +5,15 @@
 .mas--ConsumerGroupResetOffset__formTitle {
   padding-top: var(--pf-c-form--m-horizontal__group-label--md--PaddingTop);
 }
+
+.mas--ConsumerGroupResetOffset-form-group--readonly
+  .pf-c-form-control[readonly] {
+  --pf-c-form-control--readonly--BackgroundColor: transparent;
+  --pf-c-form-control--readonly--focus--PaddingBottom: 0;
+  border: none;
+  padding: 0;
+}
+
+.mas--ConsumerGroupResetOffset-form-group--readonly .pf-c-form__group-label {
+  --pf-c-form__group-label--PaddingBottom: 0;
+}
