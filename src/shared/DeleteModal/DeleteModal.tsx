@@ -158,7 +158,11 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
       actions={[
         <Button
           key={"confirm__button"}
-          variant={ButtonVariant.danger}
+          variant={
+            variant === "non-destructive"
+              ? ButtonVariant.primary
+              : ButtonVariant.danger
+          }
           onClick={onDelete}
           isDisabled={isDeleting || !isDeleteEnabled}
           isLoading={isDeleting}

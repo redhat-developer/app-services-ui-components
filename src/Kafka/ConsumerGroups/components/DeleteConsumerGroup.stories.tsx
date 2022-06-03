@@ -1,5 +1,4 @@
-import { Modal } from "@patternfly/react-core";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { DeleteConsumerGroup } from "./DeleteConsumerGroup";
 
 export default {
