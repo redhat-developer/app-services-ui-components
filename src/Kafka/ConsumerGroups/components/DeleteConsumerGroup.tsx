@@ -51,18 +51,16 @@ export const DeleteConsumerGroup: FunctionComponent<
               name: consumerName,
             })}
           >
-            <p>{t("consumerGroup.delete_consumer_connected_alert_body")}</p>
+            {t("consumerGroup.delete_consumer_connected_alert_body")}
           </Alert>
         ) : (
           <Text id="modal-message">
-            <div>
-              <Trans
-                i18nKey={"common:confirm_delete_modal_text"}
-                values={{
-                  name: consumerName,
-                }}
-              />
-            </div>
+            <Trans
+              i18nKey={"common:confirm_delete_modal_text"}
+              values={{
+                name: consumerName,
+              }}
+            />
           </Text>
         )}
       </DeleteModal>

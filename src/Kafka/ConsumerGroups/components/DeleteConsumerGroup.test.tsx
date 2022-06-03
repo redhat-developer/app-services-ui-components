@@ -12,7 +12,7 @@ describe("Consumer group delete modal", () => {
     const onDeleteConsumer = jest.fn();
 
     const comp = render(
-      <AllowConsumerGroupDeletion
+      <DenyConsumerGroupDeletion
         onClose={onClose}
         onDeleteConsumer={onDeleteConsumer}
       />
@@ -20,7 +20,7 @@ describe("Consumer group delete modal", () => {
     await waitForI18n(comp);
 
     expect(
-      comp.findByText(
+      await comp.findByText(
         "The console-745 consumer group cannot be deleted at this time"
       )
     ).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe("Consumer group delete modal", () => {
     const onDeleteConsumer = jest.fn();
 
     const comp = render(
-      <DenyConsumerGroupDeletion
+      <AllowConsumerGroupDeletion
         onClose={onClose}
         onDeleteConsumer={onDeleteConsumer}
       />
