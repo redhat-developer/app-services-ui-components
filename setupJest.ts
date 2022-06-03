@@ -1,5 +1,4 @@
 import "@testing-library/jest-dom";
-import "core-js/stable";
 import failOnConsole from "jest-fail-on-console";
 import "regenerator-runtime/runtime";
 
