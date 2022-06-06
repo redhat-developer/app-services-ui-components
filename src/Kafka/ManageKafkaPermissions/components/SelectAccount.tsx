@@ -164,11 +164,17 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onFilter={(_, value) => makeOptions(value)}
         isOpen={isOpen}
         placeholderText={t("account_id_typeahead_placeholder")}
-        isCreatable={false}
+        isCreatable={true}
         menuAppendTo="parent"
         validated={validated}
+        createText={t("resourcePrefix.create_text")}
         isGrouped={true}
         maxHeight={400}
+        onCreateOption={(value: string) => {
+          onChangeAccount(value);
+          setIsOpen(false);
+          setIsDirty(true);
+        }}
       >
         {makeOptions()}
       </Select>
