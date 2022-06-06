@@ -5,6 +5,7 @@
   "cloudProviders": {
     "aws": "Amazon Web Services"
   },
+  "confirm_delete_modal_text": "<strong>{{name}}</strong> will be deleted.",
   "created": "Created",
   "delete": "Delete",
   "form_invalid_alert": "Address form errors to proceed.",
