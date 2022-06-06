@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render, waitForI18n } from "../../../test-utils"
+import { render, waitForI18n } from "../../../test-utils";
 import * as stories from "./EmptyStateNoTopics.stories";
 
 const { WithCTA } = composeStories(stories);
