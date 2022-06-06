@@ -82,7 +82,7 @@ export type DeleteModalProps = {
   /**
    * Flag to disable delete button in non-destructive delete action
    */
-  isDeleteDisable?: boolean;
+  isDisabled?: boolean;
 };
 
 /**
@@ -145,7 +145,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   onCancel,
   children,
   variant,
-  isDeleteDisable,
+  isDisabled,
 }) => {
   const { t } = useTranslation();
 
@@ -173,7 +173,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
           onClick={onDelete}
           isDisabled={
             variant === "non-destructive"
-              ? isDeleteDisable
+              ? isDisabled
               : isDeleting || !isDeleteEnabled
           }
           isLoading={isDeleting}

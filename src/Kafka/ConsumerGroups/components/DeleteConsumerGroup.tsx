@@ -40,7 +40,7 @@ export const DeleteConsumerGroup: FunctionComponent<
         variant={"non-destructive"}
         appendTo={appendTo}
         disableFocusTrap={disableFocusTrap}
-        isDeleteDisable={isConsumerConnected}
+        isDisabled={isConsumerConnected}
       >
         {isConsumerConnected ? (
           <Alert
