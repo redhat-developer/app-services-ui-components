@@ -31,5 +31,17 @@ describe("ManagePermissionsModal", () => {
 
     expect(button).toBeDisabled();
     expect(await comp.findByText("Required")).toBeInTheDocument();
+    userEvent.type(await comp.findByLabelText("Account"), "manual-select");
+    const option = await comp.findByText('Use "manual-select"');
+    expect(option).toBeInTheDocument();
+    userEvent.click(option);
+    expect(comp.queryByText("Required")).not.toBeInTheDocument();
+    userEvent.click(await comp.findByLabelText("Close"));
+    expect(hideModal).toBeCalledTimes(1);
+    userEvent.click(await comp.findByText("Cancel"));
+    expect(hideModal).toBeCalledTimes(2);
+    expect(button).toBeEnabled();
+    userEvent.type(comp.getByRole("dialog"), "{esc}");
+    expect(hideModal).toBeCalledTimes(3);
   });
 });

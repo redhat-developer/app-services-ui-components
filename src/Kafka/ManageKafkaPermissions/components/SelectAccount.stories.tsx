@@ -157,3 +157,14 @@ CanExpandOverDialog.parameters = {
     },
   },
 };
+
+export const ValidSelection = Template.bind({});
+ValidSelection.args = { value: "id2" };
+
+ValidSelection.parameters = {
+  docs: {
+    description: {
+      story: `Valid value is selected`,
+    },
+  },
+};

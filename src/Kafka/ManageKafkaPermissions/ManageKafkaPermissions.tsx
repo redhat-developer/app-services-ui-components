@@ -29,10 +29,6 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
     }
   };
 
-  const setEscapeClosesModal = (closes: boolean) => {
-    escapeClosesModal.current = closes;
-  };
-
   return (
     <Modal
       id="manage-permissions-modal"
@@ -71,7 +67,6 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
           value={selectedAccount}
           onChangeAccount={setSelectedAccount}
           accounts={accounts}
-          onEscapeModal={setEscapeClosesModal}
         />
       </Form>
     </Modal>

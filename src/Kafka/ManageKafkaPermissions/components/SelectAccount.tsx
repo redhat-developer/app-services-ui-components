@@ -18,7 +18,6 @@ export type SelectAccountProps = {
   accounts: Account[];
   initialOpen?: boolean;
   onChangeAccount: (value: string | undefined) => void;
-  onEscapeModal: (closes: boolean) => void;
 };
 
 export const SelectAccount: React.VFC<SelectAccountProps> = ({
@@ -26,7 +25,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   accounts,
   initialOpen = false,
   onChangeAccount,
-  onEscapeModal,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -36,15 +34,12 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   useLayoutEffect(() => setIsOpen(initialOpen), [initialOpen]);
 
   const onToggle = (newState: boolean) => {
-    if (newState) {
-      onEscapeModal(false);
-    } else onEscapeModal(true);
-
     setIsOpen(newState);
   };
 
   const clearSelection = () => {
     onChangeAccount(undefined);
+    setIsDirty(true);
     setIsOpen(false);
   };
 
@@ -133,14 +128,13 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     onChangeAccount(value as string);
-    setIsDirty(true);
+    setIsDirty(false);
     setIsOpen(false);
   };
 
-  const validated: ValidatedOptions =
-    isDirty && value === undefined
-      ? ValidatedOptions.error
-      : ValidatedOptions.default;
+  const validated: ValidatedOptions = isDirty
+    ? ValidatedOptions.error
+    : ValidatedOptions.default;
 
   return (
     <FormGroupWithPopover
@@ -164,11 +158,16 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onFilter={(_, value) => makeOptions(value)}
         isOpen={isOpen}
         placeholderText={t("account_id_typeahead_placeholder")}
-        isCreatable={false}
+        isCreatable={true}
         menuAppendTo="parent"
         validated={validated}
+        createText={t("resourcePrefix.create_text")}
         isGrouped={true}
         maxHeight={400}
+        onCreateOption={() => {
+          setIsOpen(false);
+          setIsDirty(false);
+        }}
       >
         {makeOptions()}
       </Select>
