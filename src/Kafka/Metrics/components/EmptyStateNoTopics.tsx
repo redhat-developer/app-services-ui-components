@@ -25,7 +25,11 @@ export const EmptyStateNoTopics: FunctionComponent<EmptyStateNoTopicsProps> = ({
       </Title>
       <EmptyStateBody>{t("metrics:empty_state_no_topics_body")}</EmptyStateBody>
       {onCreateTopic && (
-        <Button variant="primary" onClick={onCreateTopic}>
+        <Button
+          ouiaId="button-create"
+          variant="primary"
+          onClick={onCreateTopic}
+        >
           {t("metrics:empty_state_no_topics_create_topic")}
         </Button>
       )}
