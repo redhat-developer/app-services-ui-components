@@ -1,8 +1,8 @@
 import { assign, createMachine } from "xstate";
 import type {
-  TimeSeriesMetrics,
-  PartitionBytesMetric,
   GetTopicsMetricsResponse,
+  PartitionBytesMetric,
+  TimeSeriesMetrics,
 } from "../types";
 import { DurationOptions } from "../types";
 
@@ -33,28 +33,30 @@ const apiState = {
   },
 };
 
+export type TopicsMetricsMachineContext = {
+  lastUpdated: Date | undefined;
+
+  // from the UI elements
+  selectedTopic: string | undefined;
+  duration: DurationOptions;
+
+  // from the api
+  kafkaTopics: string[];
+  metricsTopics: string[];
+  bytesOutgoing: TimeSeriesMetrics;
+  bytesIncoming: TimeSeriesMetrics;
+  bytesPerPartition: PartitionBytesMetric;
+  incomingMessageRate: TimeSeriesMetrics;
+
+  // how many time did we try a fetch (that combines more api)
+  fetchFailures: number;
+};
+
 export const TopicsMetricsMachine = createMachine(
   {
     tsTypes: {} as import("./TopicsMetricsMachine.typegen").Typegen0,
     schema: {
-      context: {} as {
-        lastUpdated: Date | undefined;
-
-        // from the UI elements
-        selectedTopic: string | undefined;
-        duration: DurationOptions;
-
-        // from the api
-        kafkaTopics: string[];
-        metricsTopics: string[];
-        bytesOutgoing: TimeSeriesMetrics;
-        bytesIncoming: TimeSeriesMetrics;
-        bytesPerPartition: PartitionBytesMetric;
-        incomingMessageRate: TimeSeriesMetrics;
-
-        // how many time did we try a fetch (that combines more api)
-        fetchFailures: number;
-      },
+      context: {} as TopicsMetricsMachineContext,
       events: {} as  // called when a new kafka id has been specified
         | ({ type: "fetchSuccess" } & GetTopicsMetricsResponse)
         | { type: "fetchFail" }

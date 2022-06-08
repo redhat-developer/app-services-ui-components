@@ -32,26 +32,28 @@ const apiState = {
   },
 };
 
+export type KafkaInstanceMetricsMachineContext = {
+  lastUpdated: Date | undefined;
+
+  // from the UI elements
+  duration: DurationOptions;
+
+  // from the api
+  usedDiskSpaceMetrics: TimeSeriesMetrics;
+  clientConnectionsMetrics: TimeSeriesMetrics;
+  connectionAttemptRateMetrics: TimeSeriesMetrics;
+  diskSpaceLimit: number | undefined;
+  connectionsLimit: number | undefined;
+  connectionRateLimit: number | undefined;
+  // how many time did we try a fetch (that combines more api)
+  fetchFailures: number;
+};
+
 export const KafkaInstanceMetricsMachine = createMachine(
   {
     tsTypes: {} as import("./KafkaInstanceMetricsMachine.typegen").Typegen0,
     schema: {
-      context: {} as {
-        lastUpdated: Date | undefined;
-
-        // from the UI elements
-        duration: DurationOptions;
-
-        // from the api
-        usedDiskSpaceMetrics: TimeSeriesMetrics;
-        clientConnectionsMetrics: TimeSeriesMetrics;
-        connectionAttemptRateMetrics: TimeSeriesMetrics;
-        diskSpaceLimit: number | undefined;
-        connectionsLimit: number | undefined;
-        connectionRateLimit: number | undefined;
-        // how many time did we try a fetch (that combines more api)
-        fetchFailures: number;
-      },
+      context: {} as KafkaInstanceMetricsMachineContext,
       events: {} as
         | ({ type: "fetchSuccess" } & GetKafkaInstanceMetricsResponse)
         | { type: "fetchFail" }

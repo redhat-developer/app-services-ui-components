@@ -133,7 +133,7 @@ export const ResponsiveTable = <TRow, TCol>({
 
   const getTd = useCallback(
     (index: number) => {
-      const Td = forwardRef<HTMLTableDataCellElement, TdProps>(
+      const Td = forwardRef<HTMLTableCellElement, TdProps>(
         ({ children, ...props }, ref) => {
           return (
             <ResponsiveTd

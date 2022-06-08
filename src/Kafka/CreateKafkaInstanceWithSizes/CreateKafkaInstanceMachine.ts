@@ -219,37 +219,39 @@ const sizeStates = {
   },
 };
 
+export type CreateKafkaInstanceMachineContext = {
+  // initial data coming from the APIs
+  capabilities:
+    | (CreateKafkaInitializationData & { plan: "standard" | "trial" })
+    | undefined;
+
+  // what the user is selecting
+  form: {
+    name?: string;
+    provider?: Provider;
+    region?: Region;
+    size?: Size;
+  };
+
+  // based on the form.provider selection
+  selectedProvider: ProviderInfo | undefined;
+
+  // based on the form.provider and form.region selection
+  sizes:
+    | {
+        standard: Size[];
+        trial: Size;
+      }
+    | undefined;
+
+  creationError: CreateKafkaInstanceError | undefined;
+};
+
 const CreateKafkaInstanceMachine = createMachine(
   {
     tsTypes: {} as import("./CreateKafkaInstanceMachine.typegen").Typegen0,
     schema: {
-      context: {} as {
-        // initial data coming from the APIs
-        capabilities:
-          | (CreateKafkaInitializationData & { plan: "standard" | "trial" })
-          | undefined;
-
-        // what the user is selecting
-        form: {
-          name?: string;
-          provider?: Provider;
-          region?: Region;
-          size?: Size;
-        };
-
-        // based on the form.provider selection
-        selectedProvider: ProviderInfo | undefined;
-
-        // based on the form.provider and form.region selection
-        sizes:
-          | {
-              standard: Size[];
-              trial: Size;
-            }
-          | undefined;
-
-        creationError: CreateKafkaInstanceError | undefined;
-      },
+      context: {} as CreateKafkaInstanceMachineContext,
       events: {} as
         | { type: "initDone" }
         | { type: "formChange" }
