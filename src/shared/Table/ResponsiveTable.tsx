@@ -103,7 +103,7 @@ export const ResponsiveTable = <TRow, TCol>({
 
   const header = useMemo(() => {
     return columns.map((column, index) => {
-      const Th = forwardRef<HTMLTableHeaderCellElement, ThProps>(
+      const Th = forwardRef<HTMLTableCellElement, ThProps>(
         ({ children, ...props }, ref) => {
           return (
             <ResponsiveTh
@@ -133,7 +133,7 @@ export const ResponsiveTable = <TRow, TCol>({
 
   const getTd = useCallback(
     (index: number) => {
-      const Td = forwardRef<HTMLTableDataCellElement, TdProps>(
+      const Td = forwardRef<HTMLTableCellElement, TdProps>(
         ({ children, ...props }, ref) => {
           return (
             <ResponsiveTd
@@ -237,7 +237,7 @@ export type ResponsiveThProps = {
   canHide: boolean;
 } & Omit<ThProps, "ref">;
 export const ResponsiveTh = memo(
-  forwardRef<HTMLTableHeaderCellElement, ResponsiveThProps>((props, ref) => {
+  forwardRef<HTMLTableCellElement, ResponsiveThProps>((props, ref) => {
     const {
       tableWidth,
       columnWidth,
@@ -272,7 +272,7 @@ export type ResponsiveTdProps = {
   canHide: boolean;
 } & Omit<TdProps, "ref">;
 export const ResponsiveTd = memo(
-  forwardRef<HTMLTableDataCellElement, ResponsiveTdProps>((props, ref) => {
+  forwardRef<HTMLTableCellElement, ResponsiveTdProps>((props, ref) => {
     const {
       tableWidth,
       columnWidth,

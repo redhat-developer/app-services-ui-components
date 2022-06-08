@@ -1,22 +1,20 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext, useMemo } from "react";
-import type { DurationOptions } from "./types";
+import type { TopicsMetricsMachineContext } from "./machines";
 import { TopicsMetricsContext } from "./TopicsMetricsProvider";
+import type { DurationOptions } from "./types";
+
+type SelectorReturn = TopicsMetricsMachineContext & {
+  isInitialLoading: boolean;
+  isRefreshing: boolean;
+  isLoading: boolean;
+  isFailed: boolean;
+  isJustCreated: boolean;
+};
 
 export function useTopicsMetrics() {
   const { service } = useContext(TopicsMetricsContext);
 
-  const selector = useCallback(
-    (state: typeof service.state) => ({
-      ...state.context,
-      isInitialLoading: state.hasTag("initialLoading"),
-      isRefreshing: state.hasTag("refreshing"),
-      isLoading: state.hasTag("loading"),
-      isFailed: state.hasTag("failed"),
-      isJustCreated: state.hasTag("justCreated"),
-    }),
-    [service]
-  );
   const {
     selectedTopic,
     duration,
@@ -32,7 +30,20 @@ export function useTopicsMetrics() {
     isFailed,
     isJustCreated,
     lastUpdated,
-  } = useSelector(service, selector);
+  } = useSelector<typeof service, SelectorReturn>(
+    service,
+    useCallback(
+      (state) => ({
+        ...state.context,
+        isInitialLoading: state.hasTag("initialLoading"),
+        isRefreshing: state.hasTag("refreshing"),
+        isLoading: state.hasTag("loading"),
+        isFailed: state.hasTag("failed"),
+        isJustCreated: state.hasTag("justCreated"),
+      }),
+      []
+    )
+  );
 
   const onTopicChange = useCallback(
     (topic: string | undefined) => service.send({ type: "selectTopic", topic }),

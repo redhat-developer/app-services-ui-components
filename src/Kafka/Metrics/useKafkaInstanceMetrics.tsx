@@ -1,22 +1,20 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
 import { KafkaInstanceMetricsContext } from "./KafkaInstanceMetricsProvider";
+import type { KafkaInstanceMetricsMachineContext } from "./machines";
 import type { DurationOptions } from "./types";
+
+type SeletorReturn = KafkaInstanceMetricsMachineContext & {
+  isInitialLoading: boolean;
+  isRefreshing: boolean;
+  isLoading: boolean;
+  isFailed: boolean;
+  isJustCreated: boolean;
+};
 
 export function useKafkaInstanceMetrics() {
   const { service } = useContext(KafkaInstanceMetricsContext);
 
-  const selector = useCallback(
-    (state: typeof service.state) => ({
-      ...state.context,
-      isInitialLoading: state.hasTag("initialLoading"),
-      isRefreshing: state.hasTag("refreshing"),
-      isLoading: state.hasTag("loading"),
-      isFailed: state.hasTag("failed"),
-      isJustCreated: state.hasTag("justCreated"),
-    }),
-    [service]
-  );
   const {
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
@@ -31,7 +29,20 @@ export function useKafkaInstanceMetrics() {
     isRefreshing,
     isFailed,
     isJustCreated,
-  } = useSelector(service, selector);
+  } = useSelector<typeof service, SeletorReturn>(
+    service,
+    useCallback(
+      (state) => ({
+        ...state.context,
+        isInitialLoading: state.hasTag("initialLoading"),
+        isRefreshing: state.hasTag("refreshing"),
+        isLoading: state.hasTag("loading"),
+        isFailed: state.hasTag("failed"),
+        isJustCreated: state.hasTag("justCreated"),
+      }),
+      []
+    )
+  );
 
   const onDurationChange = useCallback(
     (duration: DurationOptions) =>

@@ -28,20 +28,22 @@ const apiState = {
   },
 };
 
+export type MetricsKpiMachineContext = {
+  // from the api
+  topics: number | undefined;
+  topicPartitions: number | undefined;
+  consumerGroups: number | undefined;
+  topicPartitionsLimit: number | undefined;
+
+  // how many time did we try a fetch (that combines more api)
+  fetchFailures: number;
+};
+
 export const MetricsKpiMachine = createMachine(
   {
     tsTypes: {} as import("./MetricsKpiMachine.typegen").Typegen0,
     schema: {
-      context: {} as {
-        // from the api
-        topics: number | undefined;
-        topicPartitions: number | undefined;
-        consumerGroups: number | undefined;
-        topicPartitionsLimit: number | undefined;
-
-        // how many time did we try a fetch (that combines more api)
-        fetchFailures: number;
-      },
+      context: {} as MetricsKpiMachineContext,
       events: {} as
         | { type: "fetch" }
         | ({ type: "fetchSuccess" } & GetMetricsKpiResponse)
