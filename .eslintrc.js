@@ -2,10 +2,12 @@ module.exports = {
   root: true,
   parser: "@typescript-eslint/parser",
   parserOptions: {
+    "ecmaVersion": 2020,
+    "sourceType": "module",
     tsconfigRootDir: __dirname,
     project: ["./tsconfig.json"],
   },
-  plugins: ["@typescript-eslint", "react-hooks"],
+  plugins: ["@typescript-eslint", "react-hooks", "deprecation"],
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -15,6 +17,7 @@ module.exports = {
     "prettier",
   ],
   rules: {
+    "deprecation/deprecation": "error",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "error",
     "react/jsx-uses-react": "off",
