@@ -25,7 +25,6 @@ export const OffsetSelect: FunctionComponent<OffsetSelectProps> = ({
     absolute: t("consumerGroup.offset.absolute"),
     latest: t("consumerGroup.offset.latest"),
     earliest: t("consumerGroup.offset.earliest"),
-    timestamp: t("consumerGroup.offset.timestamp"),
   };
 
   const onSelect: SelectProps["onSelect"] = (_, selection) => {
@@ -45,7 +44,7 @@ export const OffsetSelect: FunctionComponent<OffsetSelectProps> = ({
     <Select
       aira-label={t("consumerGroup.reset_offset_new_offset_label")}
       toggleAriaLabel={t("consumerGroup.reset_offset_new_offset_label")}
-      id={"topic-select"}
+      id={"offset-select"}
       onToggle={onToggle}
       onSelect={onSelect}
       variant={SelectVariant.single}

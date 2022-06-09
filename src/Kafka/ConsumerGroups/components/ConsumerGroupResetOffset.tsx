@@ -124,22 +124,20 @@ export const ConsumerGroupResetOffset: FunctionComponent<
             <FormGroup
               className="mas--ConsumerGroupResetOffset-form-group--readonly"
               label={t("consumerGroup.reset_offset_consumer_group_label")}
-              fieldId="horizontal-form-name"
+              fieldId="consumer-group-input"
             >
               <TextInput
                 isReadOnly
                 type="text"
-                aria-label={t(
-                  "consumerGroup.reset_offset_consumer_group_label"
-                )}
-                name={"Consumer group"}
+                name={t("consumerGroup.reset_offset_consumer_group_label")}
+                id={"consumer-group-input"}
                 value={groupId}
               />
             </FormGroup>
             {isDisconnected && (
               <FormGroup
                 label={t("consumerGroup.reset_offset_topic_label")}
-                fieldId="horizontal-form-name"
+                fieldId="topic-select"
               >
                 <TopicSelect
                   value={selectedTopic}
@@ -151,7 +149,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
             {isDisconnected && selectedTopic && (
               <FormGroup
                 label={t("consumerGroup.reset_offset_new_offset_label")}
-                fieldId="offset-dropdown"
+                fieldId="offset-select"
               >
                 <OffsetSelect
                   value={selectedOffset ? selectedOffset : t("common:select")}
@@ -167,9 +165,6 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                 <TextInput
                   id="custom-offset-input"
                   name={t("consumerGroup.reset_offset_custom_offset_label")}
-                  aria-label={t(
-                    "consumerGroup.reset_offset_custom_offset_label"
-                  )}
                   value={customOffsetValue}
                   onChange={setcustomOffsetValue}
                   type="number"
@@ -195,7 +190,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
             <Stack hasGutter>
               <StackItem>
                 <TableComposable
-                  aria-label="Selectable Table"
+                  aria-label={t("consumerGroup.reset_offset_selectable table")}
                   className="consumer-table"
                 >
                   <Thead>
@@ -259,8 +254,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
               <StackItem>
                 <Checkbox
                   label={t("consumerGroup.reset_offset_accept")}
-                  aria-label="uncontrolled checkbox example"
-                  id="check-5"
+                  id="resetoffset-checkbox"
                   isChecked={confirmCheckboxChecked}
                   onChange={onConfirmationChange}
                 />

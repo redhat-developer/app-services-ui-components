@@ -59,10 +59,9 @@
     "new_offset": "New offset",
     "no_result": "No consumer groups found",
     "offset": {
-      "absolute": "absolute",
-      "earliest": "earliest",
-      "latest": "latest",
-      "timestamp": "timestamp"
+      "absolute": "Custom offset",
+      "earliest": "Earliest",
+      "latest": "Latest"
     },
     "offset_lag": "Offset lag",
     "offset_successfully_reset": "offsets for the consumer group have been successfully reset",
@@ -79,6 +78,7 @@
     "reset_offset_custom_offset_label": "Custom offset",
     "reset_offset_modal_label": "Consumer group reset offset modal",
     "reset_offset_new_offset_label": "New offset",
+    "reset_offset_selectable table": "Selectable Table",
     "reset_offset_topic_label": "Topic",
     "search": "Search consumer groups",
     "state": {

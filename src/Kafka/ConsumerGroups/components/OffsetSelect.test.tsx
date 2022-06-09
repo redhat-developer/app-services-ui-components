@@ -17,12 +17,11 @@ describe("Offset Dropdown", () => {
     userEvent.click(await comp.findByLabelText("New offset"));
     await waitForPopper();
 
-    expect(await comp.findByText("absolute")).toBeInTheDocument();
-    expect(await comp.findByText("latest")).toBeInTheDocument();
-    expect(await comp.findByText("earliest")).toBeInTheDocument();
-    expect(await comp.findByText("timestamp")).toBeInTheDocument();
+    expect(await comp.findByText("Custom offset")).toBeInTheDocument();
+    expect(await comp.findByText("Latest")).toBeInTheDocument();
+    expect(await comp.findByText("Earliest")).toBeInTheDocument();
 
-    userEvent.click(await comp.findByText("absolute"));
+    userEvent.click(await comp.findByText("Earliest"));
     expect(onChangeOffsetValue).toHaveBeenCalledTimes(1);
   });
 });

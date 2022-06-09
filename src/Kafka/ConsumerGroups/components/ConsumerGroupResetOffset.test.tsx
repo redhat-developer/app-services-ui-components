@@ -4,11 +4,11 @@ import * as stories from "./ConsumerGroupResetOffset.stories";
 import { userEvent } from "@storybook/testing-library";
 
 const {
-  ResetOffsetWhenTopicisNotSelected,
-  ResetOffsetErrorMessage,
-  ResetOffsetWhenTopicIsSelected,
-  ResetOffsetWhenOffsetIsAbsolute,
+  NoTopicSelected,
+  NoOffsetSelected,
+  CustomOffsetEnabled,
   ResetOffsetWhenAllFieldsSelected,
+  ResetOffsetErrorMessage,
 } = composeStories(stories);
 
 describe("Consumer group reset offset Modal", () => {
@@ -43,7 +43,7 @@ describe("Consumer group reset offset Modal", () => {
   });
 
   it("Reset offset when consumer group is disconnected", async () => {
-    const comp = render(<ResetOffsetWhenTopicisNotSelected />);
+    const comp = render(<NoTopicSelected />);
 
     await waitForI18n(comp);
 
@@ -53,17 +53,19 @@ describe("Consumer group reset offset Modal", () => {
   });
 
   it("Reset offset when topic is selected", async () => {
-    const comp = render(<ResetOffsetWhenTopicIsSelected />);
+    const comp = render(<NoOffsetSelected />);
     await waitForI18n(comp);
     expect(comp.queryByLabelText("Custom offset")).not.toBeInTheDocument();
     expect(comp.getByRole("button", { name: "Reset offset" })).toBeDisabled();
   });
 
   it("Reset offset when absolute is selected as new offset", async () => {
-    const comp = render(<ResetOffsetWhenOffsetIsAbsolute />);
+    const comp = render(<CustomOffsetEnabled />);
     await waitForI18n(comp);
 
-    expect(await comp.findByLabelText("Custom offset")).toHaveDisplayValue("2");
+    expect(
+      comp.getByRole("spinbutton", { name: "Custom offset" })
+    ).toHaveDisplayValue("2");
     expect(comp.getByRole("button", { name: "Reset offset" })).toBeDisabled();
   });
 
