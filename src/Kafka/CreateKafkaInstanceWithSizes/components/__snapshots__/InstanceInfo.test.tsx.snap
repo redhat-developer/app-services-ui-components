@@ -40,6 +40,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
                   >
                     <div
                       class="pf-l-grid__item"
+                      data-testid="instance-size"
                     >
                       <dt
                         class="pf-c-description-list__term"
