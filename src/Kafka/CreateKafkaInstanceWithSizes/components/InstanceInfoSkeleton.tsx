@@ -34,7 +34,7 @@ export const InstanceInfoSkeleton: VoidFunctionComponent<InstanceInfoProps> = ({
               <DescriptionListGroup>
                 <Grid sm={6} lg={12} hasGutter>
                   {!isTrial && (
-                    <GridItem>
+                    <GridItem data-testid={"instance-size"}>
                       <DescriptionListTerm>
                         {t("common:size")}
                       </DescriptionListTerm>
