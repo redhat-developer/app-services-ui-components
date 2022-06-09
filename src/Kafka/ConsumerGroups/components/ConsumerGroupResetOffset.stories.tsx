@@ -45,20 +45,27 @@ const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (args) => (
   <ConsumerGroupResetOffset {...args} />
 );
 
-export const ResetOffsetWhenTopicisNotSelected = Template.bind({});
-ResetOffsetWhenTopicisNotSelected.args = {
+export const NoTopicSelected = Template.bind({});
+NoTopicSelected.args = {
   isModalOpen: true,
 };
 
-export const ResetOffsetWhenTopicIsSelected = Template.bind({});
-ResetOffsetWhenTopicIsSelected.args = {
+export const NoOffsetSelected = Template.bind({});
+NoOffsetSelected.args = {
   isModalOpen: true,
   selectedTopic: "test-topic",
-  selectedOffset: "latest",
 };
 
-export const ResetOffsetWhenOffsetIsAbsolute = Template.bind({});
-ResetOffsetWhenOffsetIsAbsolute.args = {
+export const CustomOffsetDisabled = Template.bind({});
+CustomOffsetDisabled.args = {
+  isModalOpen: true,
+  selectedTopic: "test-topic",
+  selectedOffset: "earliest",
+  customOffsetValue: "2",
+};
+
+export const CustomOffsetEnabled = Template.bind({});
+CustomOffsetEnabled.args = {
   isModalOpen: true,
   selectedTopic: "test-topic",
   selectedOffset: "absolute",

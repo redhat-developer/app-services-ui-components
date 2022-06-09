@@ -23,4 +23,4 @@ export interface ConsumerGroup {
   state: ConsumerGroupState;
 }
 
-export type OffsetValue = "absolute" | "latest" | "earliest" | "timestamp";
+export type OffsetValue = "absolute" | "latest" | "earliest";
