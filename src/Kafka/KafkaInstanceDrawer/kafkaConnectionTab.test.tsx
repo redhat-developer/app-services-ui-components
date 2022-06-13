@@ -19,7 +19,7 @@ describe("ConnectionTab", () => {
       "hema-test-c-k-l-kafka-stage.rhcloud.com:443"
     );
     expect(await comp.findByLabelText("Token endpoint URL")).toHaveDisplayValue(
-      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token"
+      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-connect/token"
     );
   });
 

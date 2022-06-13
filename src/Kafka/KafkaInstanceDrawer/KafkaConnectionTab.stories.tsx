@@ -6,12 +6,11 @@ export default {
   args: {
     externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
     tokenEndPointUrl:
-      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-coonect/token",
+      "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-connect/token",
     linkToServiceAccount: "/to-service-account",
     linkToAccessTab: "/to-access-tab",
-    restAPIUrl: "https://console.redhat.com/docs/api",
-    linkToAPIDocumentation: "/to-api-documentation",
-    linkToLearnMore: "/to-portal-documentation",
+    kafkaFleetManagerUrl: "https://api.openshift.com/api/kafkas_mgmt/v1",
+    adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
   },
   parameters: {
     backgrounds: {
