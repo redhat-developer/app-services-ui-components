@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/redhat-developer/app-services-ui-components#readme",
   "devDependencies": {
-    "@babel/core": "7.18.2",
+    "@babel/core": "7.18.5",
     "@patternfly/patternfly": "4.185.1",
     "@patternfly/react-charts": "6.34.1",
     "@patternfly/react-core": "4.202.16",
