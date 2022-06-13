@@ -36,7 +36,6 @@ export class TopicActions extends React.Component {
       <DropdownGroup label="View instance information">
         <DropdownItem>Details</DropdownItem>
         <DropdownItem>Connection</DropdownItem>
-        <DropdownItem>Settings</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>

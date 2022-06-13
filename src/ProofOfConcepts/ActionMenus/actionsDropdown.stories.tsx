@@ -5,6 +5,7 @@ import { ActionsDropdown } from "./actionsDropdown";
 import { AllActionsDropdown } from "./allActions";
 import { TopicActions } from "./topicActions";
 import { TopicKebab } from "./topicKebab";
+import { TopicActions2 } from "./secondTopicActions";
 
 export default {
   component: ActionsDropdown,
@@ -40,8 +41,8 @@ const Template4: ComponentStory<typeof TopicActions> = (args) => (
     <TopicActions {...args} />
   </div>
 );
-export const KafkaTopicResourceLevelMenu = Template4.bind({});
-KafkaTopicResourceLevelMenu.args = {};
+export const KafkaTopicResourceLevelMenuA = Template4.bind({});
+KafkaTopicResourceLevelMenuA.args = {};
 
 const Template5: ComponentStory<typeof TopicKebab> = (args) => (
   <div style={{ paddingTop: 25, paddingLeft: 25, height: 600 }}>
@@ -50,3 +51,11 @@ const Template5: ComponentStory<typeof TopicKebab> = (args) => (
 );
 export const KafkaTopicListView = Template5.bind({});
 KafkaTopicListView.args = {};
+
+const Template6: ComponentStory<typeof TopicActions2> = (args) => (
+  <div style={{ paddingTop: 25, paddingLeft: 25, height: 600 }}>
+    <TopicActions2 {...args} />
+  </div>
+);
+export const KafkaTopicResourceLevelMenuB = Template6.bind({});
+KafkaTopicResourceLevelMenuB.args = {};

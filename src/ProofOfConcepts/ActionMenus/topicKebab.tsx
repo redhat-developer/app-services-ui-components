@@ -40,12 +40,6 @@ export class TopicKebab extends React.Component {
         <DropdownItem>Schemas</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
-      <DropdownGroup label="View instance information">
-        <DropdownItem>Details</DropdownItem>
-        <DropdownItem>Connection</DropdownItem>
-        <DropdownItem>Settings</DropdownItem>
-        <DropdownSeparator />
-      </DropdownGroup>,
       <DropdownGroup>
         <DropdownItem>Edit topic configuration</DropdownItem>
         <DropdownSeparator />

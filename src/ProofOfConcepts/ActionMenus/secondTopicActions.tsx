@@ -7,7 +7,7 @@ import {
   DropdownSeparator,
 } from "@patternfly/react-core";
 
-export class ActionsDropdown extends React.Component {
+export class TopicActions2 extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,17 +33,12 @@ export class ActionsDropdown extends React.Component {
   render() {
     const { isOpen } = this.state;
     const dropdownItems = [
-      <DropdownGroup label="View instance information">
-        <DropdownItem>Details</DropdownItem>
-        <DropdownItem>Connection</DropdownItem>
+      <DropdownGroup>
+        <DropdownItem>Edit topic configuration</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>
-        <DropdownItem>Change instance owner</DropdownItem>
-        <DropdownSeparator />
-      </DropdownGroup>,
-      <DropdownGroup>
-        <DropdownItem>Delete instance</DropdownItem>
+        <DropdownItem>Delete topic</DropdownItem>
       </DropdownGroup>,
     ];
     return (
