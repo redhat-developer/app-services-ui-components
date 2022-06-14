@@ -1,7 +1,18 @@
 import React, { VoidFunctionComponent } from "react";
 import { Modal, ModalVariant, Button } from "@patternfly/react-core";
-
+import { Flex, FlexItem } from "@patternfly/react-core";
 var linebreak = "\n";
+
+//import React from 'react';
+//import { Flex, FlexItem } from '@patternfly/react-core';
+
+//const ColumnLayout = () => (
+//<Flex direction={{ default: 'column' }}>
+//<FlexItem>Flex item</FlexItem>
+//<FlexItem>Flex item</FlexItem>
+//<FlexItem>Flex item</FlexItem>
+//</Flex>
+//)
 
 export class SmallModal extends React.Component {
   constructor(props) {
@@ -49,11 +60,19 @@ export class SmallModal extends React.Component {
             </Button>,
           ]}
         >
-          <div>Red Hat has Terms and Conditions for its managed services.</div>
-          <div class="pf-u-font-weight-bold">
-            If you do not accept the terms, you will not be able to create new
-            Kafka instances.
-          </div>
+          <Flex direction={{ default: "column" }}>
+            <FlexItem>
+              <div>
+                Red Hat has Terms and Conditions for its managed services.
+              </div>
+            </FlexItem>
+            <FlexItem>
+              <div class="pf-u-font-weight-bold">
+                If you do not accept the terms, you will not be able to create
+                new Kafka instances.
+              </div>
+            </FlexItem>
+          </Flex>
         </Modal>
       </React.Fragment>
     );
