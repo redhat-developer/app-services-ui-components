@@ -43,6 +43,8 @@ export const withMas = (
               "overview-v2": () => import("../locales/en/overview-v2.json"),
               "create-kafka-instance-with-sizes": () =>
                 import("../locales/en/create-kafka-instance-with-sizes.json"),
+              "connection-tab": () =>
+                import("../locales/en/connection-tab.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),
