@@ -1,18 +1,6 @@
 import React, { VoidFunctionComponent } from "react";
 import { Modal, ModalVariant, Button } from "@patternfly/react-core";
 import { Flex, FlexItem } from "@patternfly/react-core";
-var linebreak = "\n";
-
-//import React from 'react';
-//import { Flex, FlexItem } from '@patternfly/react-core';
-
-//const ColumnLayout = () => (
-//<Flex direction={{ default: 'column' }}>
-//<FlexItem>Flex item</FlexItem>
-//<FlexItem>Flex item</FlexItem>
-//<FlexItem>Flex item</FlexItem>
-//</Flex>
-//)
 
 export class SmallModal extends React.Component {
   constructor(props) {
