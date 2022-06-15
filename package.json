@@ -110,7 +110,7 @@
     "wait-on": "6.0.1"
   },
   "dependencies": {
-    "@swc/helpers": "0.4.0",
+    "@swc/helpers": "0.4.1",
     "@xstate/react": "3.0.0",
     "byte-size": "8.1.0",
     "classnames": "2.3.1",
