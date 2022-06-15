@@ -18,7 +18,7 @@ import { Link } from "react-router-dom";
 import { APIDocumentLink } from "./components/APIDocument";
 import "./KafkaInstanceDrawer.css";
 
-export type KafkaConnectionTabV1Props = {
+export type KafkaConnectionTabP2Props = {
   isKafkaPending?: boolean;
   externalServer?: string;
   tokenEndPointUrl: string;
@@ -30,8 +30,8 @@ export type KafkaConnectionTabV1Props = {
   linkToDocPortal: string;
 };
 
-export const KafkaConnectionTabV1: FunctionComponent<
-  KafkaConnectionTabV1Props
+export const KafkaConnectionTabP2: FunctionComponent<
+  KafkaConnectionTabP2Props
 > = ({
   isKafkaPending,
   externalServer,

@@ -1,8 +1,8 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { KafkaConnectionTabV1 } from "./KafkaConnectionTabV1";
+import { KafkaConnectionTabP2 } from "./KafkaConnectionTabP2";
 
 export default {
-  component: KafkaConnectionTabV1,
+  component: KafkaConnectionTabP2,
   args: {
     externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
     tokenEndPointUrl:
@@ -18,10 +18,10 @@ export default {
       default: "Background color 100",
     },
   },
-} as ComponentMeta<typeof KafkaConnectionTabV1>;
+} as ComponentMeta<typeof KafkaConnectionTabP2>;
 
-const Template: ComponentStory<typeof KafkaConnectionTabV1> = (args) => (
-  <KafkaConnectionTabV1 {...args} />
+const Template: ComponentStory<typeof KafkaConnectionTabP2> = (args) => (
+  <KafkaConnectionTabP2 {...args} />
 );
 
 export const ConnectionTab = Template.bind({});
