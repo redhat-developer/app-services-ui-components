@@ -155,7 +155,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
             >
               <Button
                 variant={ButtonVariant.plain}
-                aria-label={t("connection-tab:admin_utl_button_aria_label")}
+                aria-label={t("connection-tab:admin_url_button_aria_label")}
               >
                 <HelpIcon />
               </Button>
@@ -165,8 +165,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
             <Skeleton fontSize="2xl" />
           ) : (
             <ClipboardCopy
-              data-testid="drawerStreams-copyRestApiURL"
-              textAriaLabel={t("connection-tab:rest_api")}
+              textAriaLabel={t("connection-tab:admin_url_label")}
               isReadOnly
             >
               {adminAPIUrl}
@@ -228,8 +227,9 @@ export const KafkaConnectionTabP2: FunctionComponent<
             <Skeleton fontSize="2xl" />
           ) : (
             <ClipboardCopy
-              data-testid="drawerStreams-copyRestApiURL"
-              textAriaLabel={t("connection-tab:rest_api")}
+              textAriaLabel={t(
+                "connection-tab:kafka_service_fleet_manager_url"
+              )}
               isReadOnly
             >
               {kafkaFleetManagerUrl}
