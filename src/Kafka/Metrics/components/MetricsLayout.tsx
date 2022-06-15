@@ -2,6 +2,7 @@ import { Grid, GridItem, PageSection } from "@patternfly/react-core";
 import type { ReactElement, FunctionComponent } from "react";
 
 type MetricsLayoutProps = {
+  metricsLagAlert: ReactElement;
   topicsKpi: ReactElement;
   topicPartitionsKpi: ReactElement;
   consumerGroupKpi: ReactElement;
@@ -9,6 +10,7 @@ type MetricsLayoutProps = {
   topicMetrics: ReactElement;
 };
 export const MetricsLayout: FunctionComponent<MetricsLayoutProps> = ({
+  metricsLagAlert,
   topicsKpi,
   topicPartitionsKpi,
   consumerGroupKpi,
@@ -18,6 +20,7 @@ export const MetricsLayout: FunctionComponent<MetricsLayoutProps> = ({
   return (
     <PageSection>
       <Grid hasGutter>
+        <GridItem>{metricsLagAlert}</GridItem>
         <GridItem sm={4}>{topicsKpi}</GridItem>
         <GridItem sm={4}>{topicPartitionsKpi}</GridItem>
         <GridItem sm={4}>{consumerGroupKpi}</GridItem>
