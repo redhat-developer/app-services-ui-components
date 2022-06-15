@@ -50,15 +50,15 @@ export class SmallModal extends React.Component {
         >
           <Flex direction={{ default: "column" }}>
             <FlexItem>
-              <div>
-                Red Hat has Terms and Conditions for its managed services.
-              </div>
+              <p>Red Hat has Terms and Conditions for its managed services.</p>
             </FlexItem>
             <FlexItem>
-              <div class="pf-u-font-weight-bold">
-                If you do not accept the terms, you will not be able to create
-                new Kafka instances.
-              </div>
+              <p>
+                <strong>
+                  If you do not accept the terms, you will not be able to create
+                  new Kafka instances.
+                </strong>
+              </p>
             </FlexItem>
           </Flex>
         </Modal>
