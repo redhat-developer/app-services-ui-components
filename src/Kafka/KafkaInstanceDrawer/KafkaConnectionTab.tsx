@@ -105,20 +105,25 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           }
         </Text>
       </TextContent>
-      <TextContent className="pf-u-pb-sm">
-        <ExpandableSection
-          toggleContent={
-            <Text component={TextVariants.h3} className={"pf-c-content"}>
+      <ExpandableSection
+        toggleContent={
+          <div className="pf-c-content">
+            <Text component={TextVariants.h3}>
               {t("kafka:connection_tab.rest_api_header")}
             </Text>
-          }
-          isExpanded={isExpanded}
-          onToggle={onChangeExpandedSection}
-        >
-          <Text component={TextVariants.small}>
+          </div>
+        }
+        isExpanded={isExpanded}
+        onToggle={onChangeExpandedSection}
+        className="pf-u-mt-lg"
+      >
+        <TextContent className="pf-u-pb-sm">
+          <Text component={TextVariants.small} className={"pf-c-content"}>
             {t("kafka:connection_tab.rest_api_description")}
           </Text>
-          <Text component={TextVariants.h3} className="pf-u-mt-xl">
+        </TextContent>
+        <TextContent>
+          <strong>
             {t("kafka:connection_tab.admin_url_label")}
             <Popover
               headerContent={
@@ -137,7 +142,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
                 <HelpIcon />
               </Button>
             </Popover>
-          </Text>
+          </strong>
           {isKafkaPending ? (
             <Skeleton fontSize="2xl" />
           ) : (
@@ -153,7 +158,9 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
               {t("kafka:connection_tab.admin_url_description")}
             </Text>
           </TextContent>
-          <Text component={TextVariants.h3} className="pf-u-mt-xl">
+        </TextContent>
+        <TextContent className="pf-u-mt-md">
+          <strong>
             {t("kafka:connection_tab.kafka_service_fleet_manager_url")}
             <Popover
               headerContent={
@@ -180,7 +187,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
                 <HelpIcon />
               </Button>
             </Popover>
-          </Text>
+          </strong>
           {isKafkaPending ? (
             <Skeleton fontSize="2xl" />
           ) : (
@@ -200,8 +207,8 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
               )}
             </Text>
           </TextContent>
-        </ExpandableSection>
-      </TextContent>
+        </TextContent>
+      </ExpandableSection>
       <TextContent className="pf-u-pb-sm">
         <Text component={TextVariants.h3} className="pf-u-mt-xl">
           {t("kafka:connection_tab.authentication_method")}

@@ -114,131 +114,140 @@ export const KafkaConnectionTabP2: FunctionComponent<
       <TextContent className="pf-u-pb-sm">
         <ExpandableSection
           toggleContent={
-            <Text component={TextVariants.h3} className={"pf-c-content"}>
-              {t("connection-tab:rest_api_header")}
-            </Text>
+            <div className="pf-c-content">
+              <Text component={TextVariants.h3} className={"pf-c-content"}>
+                {t("connection-tab:rest_api_header")}
+              </Text>
+            </div>
           }
           isExpanded={isExpanded}
           onToggle={onChangeExpandedSection}
+          className="pf-u-mt-lg"
         >
-          <Text component={TextVariants.small}>
-            {t("connection-tab:rest_api_description")}
-          </Text>
-          <Text component={TextVariants.h3} className="pf-u-mt-xl">
-            {t("connection-tab:admin_url_label")}
-            <Popover
-              headerContent={
-                <div>{t("connection-tab:admin_url_popover_label")}</div>
-              }
-              bodyContent={
-                <TextContent>
-                  <p>{t("connection-tab:admin_url_popover_body")}</p>
-                  <p>
-                    <Trans
-                      ns={"connection-tab"}
-                      i18nKey={"popover_helper_text"}
-                      components={[
-                        <Button
-                          isInline
-                          variant={ButtonVariant.link}
-                          component="a"
-                          href="https://console.redhat.com/docs/api"
-                        />,
-                        <APIDocumentLink
-                          linktoDocumentProtal={linkToDocPortal}
-                        />,
-                      ]}
-                    />
-                  </p>
-                </TextContent>
-              }
-            >
-              <Button
-                variant={ButtonVariant.plain}
-                aria-label={t("connection-tab:admin_url_button_aria_label")}
-              >
-                <HelpIcon />
-              </Button>
-            </Popover>
-          </Text>
-          {isKafkaPending ? (
-            <Skeleton fontSize="2xl" />
-          ) : (
-            <ClipboardCopy
-              textAriaLabel={t("connection-tab:admin_url_label")}
-              isReadOnly
-            >
-              {adminAPIUrl}
-            </ClipboardCopy>
-          )}
-          <TextContent className="pf-u-pt-sm">
+          <TextContent className="pf-u-pb-sm">
             <Text component={TextVariants.small}>
-              {t("connection-tab:admin_url_description")}
+              {t("connection-tab:rest_api_description")}
             </Text>
           </TextContent>
-          <Text component={TextVariants.h3} className="pf-u-mt-xl">
-            {t("connection-tab:kafka_service_fleet_manager_url")}
-            <Popover
-              headerContent={
-                <div>
-                  {t(
-                    "connection-tab:kafka_service_fleet_manager_popover_header"
-                  )}
-                </div>
-              }
-              bodyContent={
-                <TextContent>
-                  <p>
-                    {t(
-                      "connection-tab:kafka_service_fleet_manager_popover_body"
-                    )}
-                  </p>
-                  <p>
-                    <Trans
-                      ns={"connection-tab"}
-                      i18nKey={"popover_helper_text"}
-                      components={[
-                        <Button
-                          isInline
-                          variant={ButtonVariant.link}
-                          component="a"
-                          href="https://console.redhat.com/docs/api"
-                        />,
-                        <APIDocumentLink
-                          linktoDocumentProtal={linkToDocPortal}
-                        />,
-                      ]}
-                    />
-                  </p>
-                </TextContent>
-              }
-            >
-              <Button
-                variant={ButtonVariant.plain}
-                aria-label={t(
-                  "connection-tab:kafka_service_fleet_manager_button_aria_label"
-                )}
+          <TextContent>
+            <strong>
+              {t("connection-tab:admin_url_label")}
+              <Popover
+                headerContent={
+                  <div>{t("connection-tab:admin_url_popover_label")}</div>
+                }
+                bodyContent={
+                  <TextContent>
+                    <p>{t("connection-tab:admin_url_popover_body")}</p>
+                    <p>
+                      <Trans
+                        ns={"connection-tab"}
+                        i18nKey={"popover_helper_text"}
+                        components={[
+                          <Button
+                            isInline
+                            variant={ButtonVariant.link}
+                            component="a"
+                            href="https://console.redhat.com/docs/api"
+                          />,
+                          <APIDocumentLink
+                            linktoDocumentProtal={linkToDocPortal}
+                          />,
+                        ]}
+                      />
+                    </p>
+                  </TextContent>
+                }
               >
-                <HelpIcon />
-              </Button>
-            </Popover>
-          </Text>
-          {isKafkaPending ? (
-            <Skeleton fontSize="2xl" />
-          ) : (
-            <ClipboardCopy
-              textAriaLabel={t(
-                "connection-tab:kafka_service_fleet_manager_url"
-              )}
-              isReadOnly
-            >
-              {kafkaFleetManagerUrl}
-            </ClipboardCopy>
-          )}
-          <TextContent className="pf-u-pt-sm">
-            <Text component={TextVariants.small}>
-              {t("connection-tab:kafka_service_fleet_manager_description")}
-            </Text>
+                <Button
+                  variant={ButtonVariant.plain}
+                  aria-label={t("connection-tab:admin_url_button_aria_label")}
+                >
+                  <HelpIcon />
+                </Button>
+              </Popover>
+            </strong>
+            {isKafkaPending ? (
+              <Skeleton fontSize="2xl" />
+            ) : (
+              <ClipboardCopy
+                textAriaLabel={t("connection-tab:admin_url_label")}
+                isReadOnly
+              >
+                {adminAPIUrl}
+              </ClipboardCopy>
+            )}
+            <TextContent className="pf-u-pt-sm">
+              <Text component={TextVariants.small}>
+                {t("connection-tab:admin_url_description")}
+              </Text>
+            </TextContent>
+          </TextContent>
+          <TextContent className="pf-u-mt-md">
+            <strong>
+              {t("connection-tab:kafka_service_fleet_manager_url")}
+              <Popover
+                headerContent={
+                  <div>
+                    {t(
+                      "connection-tab:kafka_service_fleet_manager_popover_header"
+                    )}
+                  </div>
+                }
+                bodyContent={
+                  <TextContent>
+                    <p>
+                      {t(
+                        "connection-tab:kafka_service_fleet_manager_popover_body"
+                      )}
+                    </p>
+                    <p>
+                      <Trans
+                        ns={"connection-tab"}
+                        i18nKey={"popover_helper_text"}
+                        components={[
+                          <Button
+                            isInline
+                            variant={ButtonVariant.link}
+                            component="a"
+                            href="https://console.redhat.com/docs/api"
+                          />,
+                          <APIDocumentLink
+                            linktoDocumentProtal={linkToDocPortal}
+                          />,
+                        ]}
+                      />
+                    </p>
+                  </TextContent>
+                }
+              >
+                <Button
+                  variant={ButtonVariant.plain}
+                  aria-label={t(
+                    "connection-tab:kafka_service_fleet_manager_button_aria_label"
+                  )}
+                >
+                  <HelpIcon />
+                </Button>
+              </Popover>
+            </strong>
+            {isKafkaPending ? (
+              <Skeleton fontSize="2xl" />
+            ) : (
+              <ClipboardCopy
+                textAriaLabel={t(
+                  "connection-tab:kafka_service_fleet_manager_url"
+                )}
+                isReadOnly
+              >
+                {kafkaFleetManagerUrl}
+              </ClipboardCopy>
+            )}
+            <TextContent className="pf-u-pt-sm">
+              <Text component={TextVariants.small}>
+                {t("connection-tab:kafka_service_fleet_manager_description")}
+              </Text>
+            </TextContent>
           </TextContent>
         </ExpandableSection>
       </TextContent>
