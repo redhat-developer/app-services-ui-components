@@ -237,9 +237,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         <Text component={TextVariants.small}>
           {t("kafka:connection_tab.sasl_oauthbearer_description")}
         </Text>
-        <Text component={TextVariants.h6} className="pf-u-mt-md">
-          {t("kafka:connection_tab.token_endpoint_url")}
-        </Text>
+        <strong>{t("kafka:connection_tab.token_endpoint_url")}</strong>
         {isKafkaPending ? (
           <Skeleton fontSize="2xl" />
         ) : (

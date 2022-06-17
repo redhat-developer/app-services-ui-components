@@ -446,15 +446,9 @@ exports[`ConnectionTab renders 1`] = `
         >
           Use your service account credentials and a token endpoint URL to authenticate your client with the Kafka instance.
         </small>
-        <h6
-          class="pf-u-mt-md"
-          data-ouia-component-id="OUIA-Generated-Text-14"
-          data-ouia-component-type="PF4/Text"
-          data-ouia-safe="true"
-          data-pf-content="true"
-        >
+        <strong>
           Token endpoint URL
-        </h6>
+        </strong>
         <div
           class="pf-c-clipboard-copy"
         >
@@ -506,7 +500,7 @@ exports[`ConnectionTab renders 1`] = `
       >
         <h4
           class="pf-u-mt-md"
-          data-ouia-component-id="OUIA-Generated-Text-15"
+          data-ouia-component-id="OUIA-Generated-Text-14"
           data-ouia-component-type="PF4/Text"
           data-ouia-safe="true"
           data-pf-content="true"
@@ -515,7 +509,7 @@ exports[`ConnectionTab renders 1`] = `
         </h4>
         <small
           class=""
-          data-ouia-component-id="OUIA-Generated-Text-16"
+          data-ouia-component-id="OUIA-Generated-Text-15"
           data-ouia-component-type="PF4/Text"
           data-ouia-safe="true"
           data-pf-content="true"
