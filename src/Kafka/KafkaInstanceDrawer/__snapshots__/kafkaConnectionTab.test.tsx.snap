@@ -198,7 +198,7 @@ exports[`ConnectionTab renders 1`] = `
               data-ouia-safe="true"
               data-pf-content="true"
             >
-              Streams for Apache Kafka provides two REST APIs, one for accessing the Kafka instance and one for accessing the control plane.
+              Streams for Apache Kafka provides two REST APIs, one for accessing the Kafka instance and one for managing resources such as Kafka instances and services accounts.
             </small>
           </div>
           <div
@@ -285,7 +285,7 @@ exports[`ConnectionTab renders 1`] = `
                 data-ouia-safe="true"
                 data-pf-content="true"
               >
-                Connect to this Kafka instance over HTTPS to manage topics, consumer groups, and access. 
+                Configure topics, consumer groups, and access for an individual Kafka instance.
               </small>
             </div>
           </div>
@@ -373,7 +373,7 @@ exports[`ConnectionTab renders 1`] = `
                 data-ouia-safe="true"
                 data-pf-content="true"
               >
-                Connect to the control plane to manage Kafka instances and service accounts, and to access metrics.
+                Manage Kafka instances and service accounts, and access metrics.
               </small>
             </div>
           </div>
