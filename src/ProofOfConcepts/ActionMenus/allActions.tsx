@@ -41,8 +41,6 @@ export class AllActionsDropdown extends React.Component {
       <DropdownGroup label="View instance information">
         <DropdownItem>Details</DropdownItem>
         <DropdownItem>Connection</DropdownItem>
-        <DropdownItem>Settings</DropdownItem>
-        <DropdownItem>[data plane tab]</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>

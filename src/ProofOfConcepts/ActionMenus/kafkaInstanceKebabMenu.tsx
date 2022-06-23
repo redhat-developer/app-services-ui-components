@@ -1,13 +1,13 @@
 import React from "react";
 import {
   Dropdown,
-  DropdownToggle,
-  DropdownGroup,
   DropdownItem,
   DropdownSeparator,
+  KebabToggle,
+  DropdownGroup,
 } from "@patternfly/react-core";
 
-export class ActionsDropdown extends React.Component {
+export class InstanceTable extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ export class ActionsDropdown extends React.Component {
       this.onFocus();
     };
     this.onFocus = () => {
-      const element = document.getElementById("toggle-id-3");
+      const element = document.getElementById("toggle-id-6");
       element.focus();
     };
   }
@@ -49,14 +49,10 @@ export class ActionsDropdown extends React.Component {
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={
-          <DropdownToggle onToggle={this.onToggle} id="toggle-id-3">
-            Actions
-          </DropdownToggle>
-        }
+        toggle={<KebabToggle onToggle={this.onToggle} id="toggle-id-6" />}
         isOpen={isOpen}
+        isPlain
         dropdownItems={dropdownItems}
-        isGrouped
       />
     );
   }

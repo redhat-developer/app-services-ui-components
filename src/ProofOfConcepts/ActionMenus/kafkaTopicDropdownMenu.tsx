@@ -50,7 +50,7 @@ export class TopicActions extends React.Component {
       <Dropdown
         onSelect={this.onSelect}
         toggle={
-          <DropdownToggle onToggle={this.onToggle} id="toggle-id-3">
+          <DropdownToggle onToggle={this.onToggle} isPrimary id="toggle-id-3">
             Actions
           </DropdownToggle>
         }

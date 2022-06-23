@@ -1,13 +1,13 @@
 import React from "react";
 import {
   Dropdown,
+  DropdownToggle,
+  DropdownGroup,
   DropdownItem,
   DropdownSeparator,
-  KebabToggle,
-  DropdownGroup,
 } from "@patternfly/react-core";
 
-export class TopicKebab extends React.Component {
+export class InstanceDropdown extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ export class TopicKebab extends React.Component {
       this.onFocus();
     };
     this.onFocus = () => {
-      const element = document.getElementById("toggle-id-6");
+      const element = document.getElementById("toggle-id-3");
       element.focus();
     };
   }
@@ -33,28 +33,30 @@ export class TopicKebab extends React.Component {
   render() {
     const { isOpen } = this.state;
     const dropdownItems = [
-      <DropdownGroup label="View topic information">
-        <DropdownItem>Consumer groups</DropdownItem>
-        <DropdownItem>Messages</DropdownItem>
-        <DropdownItem>Properties</DropdownItem>
-        <DropdownItem>Schemas</DropdownItem>
+      <DropdownGroup label="View instance information">
+        <DropdownItem>Details</DropdownItem>
+        <DropdownItem>Connection</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>
-        <DropdownItem>Edit topic configuration</DropdownItem>
+        <DropdownItem>Change instance owner</DropdownItem>
         <DropdownSeparator />
       </DropdownGroup>,
       <DropdownGroup>
-        <DropdownItem>Delete topic</DropdownItem>
+        <DropdownItem>Delete instance</DropdownItem>
       </DropdownGroup>,
     ];
     return (
       <Dropdown
         onSelect={this.onSelect}
-        toggle={<KebabToggle onToggle={this.onToggle} id="toggle-id-6" />}
+        toggle={
+          <DropdownToggle onToggle={this.onToggle} id="toggle-id-3" isPrimary>
+            Actions
+          </DropdownToggle>
+        }
         isOpen={isOpen}
-        isPlain
         dropdownItems={dropdownItems}
+        isGrouped
       />
     );
   }
