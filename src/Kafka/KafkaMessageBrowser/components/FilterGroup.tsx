@@ -9,7 +9,6 @@ import {
   ToolbarItem,
 } from "@patternfly/react-core";
 import { formatISO, parse, parseISO } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
 
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
