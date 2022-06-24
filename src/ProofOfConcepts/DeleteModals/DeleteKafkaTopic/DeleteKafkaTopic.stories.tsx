@@ -8,12 +8,19 @@ import { createMachine } from "xstate";
 import type { DeleteModalProps } from "./DeleteKafkaTopic";
 import { DeleteModal, DeleteModalConfirmation } from "./DeleteKafkaTopic";
 
+const ResourceName = <b>resource name</b>;
+
 export default {
   component: DeleteModal,
   subcomponents: { DeleteModalConfirmation },
   args: {
-    title: "Delete Topic?",
-    children: `The {resource name} topic will be deleted and removed from this instance. Applications will no longer have access to this topic.`,
+    title: "Delete topic?",
+    children: (
+      <p>
+        `The {ResourceName} topic will be deleted and removed from this
+        instance. Applications will no longer have access to this topic.`
+      </p>
+    ),
     disableFocusTrap: true,
   },
   argTypes: {
