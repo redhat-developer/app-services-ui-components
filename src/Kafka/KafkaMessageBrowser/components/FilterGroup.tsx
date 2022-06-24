@@ -147,7 +147,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
               }
             }}
             value={
-              timestamp ? formatInTimeZone(parseISO(timestamp), "UTC", "t") : ""
+              timestamp ? Math.floor(parseISO(timestamp).getTime() / 1000) : ""
             }
           />
         )}
