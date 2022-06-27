@@ -44,7 +44,7 @@ export class NavigationModal extends React.Component {
             </Button>,
           ]}
         >
-          Changes you made to the topic properties will be lost.
+          Changes you made to the topic configuration will be lost.
         </Modal>
       </React.Fragment>
     );
