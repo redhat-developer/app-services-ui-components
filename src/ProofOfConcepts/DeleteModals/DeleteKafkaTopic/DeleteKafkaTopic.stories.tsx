@@ -17,8 +17,8 @@ export default {
     title: "Delete topic?",
     children: (
       <p>
-        `The {ResourceName} topic will be deleted and removed from this
-        instance. Applications will no longer have access to this topic.`
+        The {ResourceName} topic will be deleted and removed from this instance.
+        Applications will no longer have access to this topic.
       </p>
     ),
     disableFocusTrap: true,
@@ -197,7 +197,7 @@ DeleteWithActiveUsers.args = {
   children: (
     <div>
       <p>
-        The resource name topic will be deleted and removed from this instance.
+        The {ResourceName} topic will be deleted and removed from this instance.
         Applications will no longer have access to this topic.
       </p>
       <br></br>
