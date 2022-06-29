@@ -334,7 +334,7 @@ exports[`ConnectionTab renders 1`] = `
                   id="text-input-2"
                   readonly=""
                   type="text"
-                  value="https://api.openshift.com/api/kafkas_mgmt/v1"
+                  value="https://api.openshift.com/api/kafkas_mgmt/v1/openapi"
                 />
                 <button
                   aria-disabled="false"

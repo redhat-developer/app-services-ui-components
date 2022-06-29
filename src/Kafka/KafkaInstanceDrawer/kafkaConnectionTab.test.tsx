@@ -28,7 +28,9 @@ describe("ConnectionTab", () => {
     );
     expect(
       await comp.findByLabelText("URL for Kafka Management API")
-    ).toHaveDisplayValue("https://api.openshift.com/api/kafkas_mgmt/v1");
+    ).toHaveDisplayValue(
+      "https://api.openshift.com/api/kafkas_mgmt/v1/openapi"
+    );
   });
 
   it("bootstrap server and Token endpoint URL should be disabled when the kafka creating is pending", async () => {

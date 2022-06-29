@@ -9,7 +9,8 @@ export default {
       "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-connect/token",
     linkToServiceAccount: "/to-service-account",
     linkToAccessTab: "/to-access-tab",
-    kafkaFleetManagerUrl: "https://api.openshift.com/api/kafkas_mgmt/v1",
+    kafkaFleetManagerUrl:
+      "https://api.openshift.com/api/kafkas_mgmt/v1/openapi",
     adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
     linkToDocPortal: "#",
   },

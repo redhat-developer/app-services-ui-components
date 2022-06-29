@@ -2,7 +2,7 @@
   "admin_url_button_aria_label": "More information about the URL for Kafka Admin REST API",
   "admin_url_description": "Configure topics, consumer groups, and access for this Kafka instance.",
   "admin_url_label": "URL for Kafka Admin REST API",
-  "admin_url_popover_body": "Use the REST API URL to connect to this Kafka instance over HTTPS to manage topics, consumer groups, and access.",
+  "admin_url_popover_body": "Use the REST API URL to connect to this Kafka instance to manage topics, consumer groups, and access.",
   "admin_url_popover_label": "URL for Kafka Admin REST API",
   "authentication_method": "Authentication method",
   "bootstrap_server": "Bootstrap server",
