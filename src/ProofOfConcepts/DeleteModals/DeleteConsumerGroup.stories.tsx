@@ -1,24 +1,17 @@
-import { Alert } from "@patternfly/react-core";
-import type { PlayFunction } from "@storybook/csf";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import type { ReactFramework } from "@storybook/react/types-6-0";
-import { userEvent, within } from "@storybook/testing-library";
 import { useMachine } from "@xstate/react";
 import { createMachine } from "xstate";
-import type { DeleteModalProps } from "./DeleteKafkaTopic";
-import { DeleteModal, DeleteModalConfirmation } from "./DeleteKafkaTopic";
-
-const ResourceName = <b>resource name</b>;
+import { DeleteModal, DeleteModalConfirmation } from "./DeleteConsumerGroup";
+import React from "react";
 
 export default {
   component: DeleteModal,
   subcomponents: { DeleteModalConfirmation },
   args: {
-    title: "Delete topic?",
+    title: "Delete consumer group?",
     children: (
       <p>
-        The {ResourceName} topic will be deleted and removed from this instance.
-        Applications will no longer have access to this topic.
+        The <strong>resource name</strong> consumer group will be deleted.
       </p>
     ),
     disableFocusTrap: true,
@@ -30,7 +23,6 @@ export default {
     onCancel: { table: { category: "Events" } },
     children: { table: { category: "Appearance" } },
     disableFocusTrap: { table: { category: "Development" } },
-    confirmationValue: { table: { category: "Appearance" } },
     isModalOpen: {
       control: {
         type: null,
@@ -151,11 +143,6 @@ const Template: ComponentStory<typeof DeleteModal> = (
         onCancel={onCancel}
         onDelete={onDelete}
       >
-        {state.value === "withError" && (
-          <Alert variant="danger" title="Danger alert title" isInline>
-            <p>This should tell the user more information about the alert.</p>
-          </Alert>
-        )}
         {children}
       </DeleteModal>
       <button onClick={() => send("OPEN")}>Open modal</button>
@@ -163,60 +150,13 @@ const Template: ComponentStory<typeof DeleteModal> = (
   );
 };
 
-const fillConfirmation: PlayFunction<
-  ReactFramework,
-  DeleteModalProps
-> = async ({ canvasElement, args }) => {
-  const story = within(canvasElement);
-  const confirmationValue = args.confirmationValue || "resource name";
-  await userEvent.type(
-    await story.findByLabelText(`Type ${confirmationValue} to confirm`),
-    confirmationValue
-  );
-  await userEvent.click(await story.findByText("Delete"));
-};
-
-export const DeleteWithoutActiveUsers = Template.bind({});
-DeleteWithoutActiveUsers.args = {
-  confirmationValue: "resource name",
-  ...Template.bind({}).args,
-};
-DeleteWithoutActiveUsers.parameters = {
+export const DeleteConsumerGroup = Template.bind({});
+DeleteConsumerGroup.args = {};
+DeleteConsumerGroup.parameters = {
   docs: {
     description: {
-      story: `It is possible to ask the user to type something to enable the
-disable button. In this demo you should be typing \`resource name\`.
+      story: `Shows consumer group to be deleted, action is easily recorable.
       `,
     },
   },
 };
-DeleteWithoutActiveUsers.play = fillConfirmation;
-
-export const DeleteWithActiveUsers = Template.bind({});
-DeleteWithActiveUsers.args = {
-  children: (
-    <div>
-      <p>
-        The {ResourceName} topic will be deleted and removed from this instance.
-        Applications will no longer have access to this topic.
-      </p>
-      <br></br>
-      <p>
-        One or more consumers are currently active in this topic, and will be
-        removed at the time of deletion.
-      </p>
-      <br></br>
-      <DeleteModalConfirmation requiredConfirmationValue="resource name" />
-    </div>
-  ),
-};
-DeleteWithActiveUsers.parameters = {
-  docs: {
-    description: {
-      story: `It is possible to ask the user to type something to enable the
-disable button. In this demo you should be typing \`resource name\`.
-      `,
-    },
-  },
-};
-DeleteWithActiveUsers.play = fillConfirmation;

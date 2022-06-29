@@ -5,8 +5,11 @@ import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, within } from "@storybook/testing-library";
 import { useMachine } from "@xstate/react";
 import { createMachine } from "xstate";
-import type { DeleteModalProps } from "./DeleteKafkaInstance";
-import { DeleteModal, DeleteModalConfirmation } from "./DeleteKafkaInstance";
+import {
+  DeleteModal,
+  DeleteModalConfirmation,
+} from "/home/kellieodonovan/app-services-ui-components/src/shared/index";
+import type { DeleteModalProps } from "/home/kellieodonovan/app-services-ui-components/src/shared/index";
 
 const ResourceName = <b>resource name</b>;
 
@@ -14,7 +17,7 @@ export default {
   component: DeleteModal,
   subcomponents: { DeleteModalConfirmation },
   args: {
-    title: "Delete instance?",
+    title: "Delete Instance?",
     children: (
       <p>
         The {ResourceName} Kafka instance and all topics will be deleted.

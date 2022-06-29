@@ -364,3 +364,5 @@ AsynchronousCustomConfirmationPlacementAndError.parameters = {
   willDeleteFail: true,
   initialState: "withError",
 };
+
+export const DeleteConsumerGroup = Template.bind({});
