@@ -185,22 +185,16 @@ export const KafkaConnectionTabP2: FunctionComponent<
           </TextContent>
           <TextContent className="pf-u-mt-md">
             <strong>
-              {t("connection-tab:kafka_service_fleet_manager_url")}
+              {t("connection-tab:kafka_management_url")}
               <Popover
                 headerContent={
                   <div>
-                    {t(
-                      "connection-tab:kafka_service_fleet_manager_popover_header"
-                    )}
+                    {t("connection-tab:kafka_management_popover_header")}
                   </div>
                 }
                 bodyContent={
                   <TextContent>
-                    <p>
-                      {t(
-                        "connection-tab:kafka_service_fleet_manager_popover_body"
-                      )}
-                    </p>
+                    <p>{t("connection-tab:kafka_management_popover_body")}</p>
                     <p>
                       <Trans
                         ns={"connection-tab"}
@@ -224,7 +218,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                 <Button
                   variant={ButtonVariant.plain}
                   aria-label={t(
-                    "connection-tab:kafka_service_fleet_manager_button_aria_label"
+                    "connection-tab:kafka_management_button_aria_label"
                   )}
                 >
                   <HelpIcon />
@@ -235,9 +229,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
               <Skeleton fontSize="2xl" />
             ) : (
               <ClipboardCopy
-                textAriaLabel={t(
-                  "connection-tab:kafka_service_fleet_manager_url"
-                )}
+                textAriaLabel={t("connection-tab:kafka_management_url")}
                 isReadOnly
               >
                 {kafkaFleetManagerUrl}
@@ -245,7 +237,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
             )}
             <TextContent className="pf-u-pt-sm">
               <Text component={TextVariants.small}>
-                {t("connection-tab:kafka_service_fleet_manager_description")}
+                {t("connection-tab:kafka_management_description")}
               </Text>
             </TextContent>
           </TextContent>

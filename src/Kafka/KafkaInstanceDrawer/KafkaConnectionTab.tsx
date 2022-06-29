@@ -161,27 +161,23 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         </TextContent>
         <TextContent className="pf-u-mt-md">
           <strong>
-            {t("kafka:connection_tab.kafka_service_fleet_manager_url")}
+            {t("kafka:connection_tab.kafka_management_url")}
             <Popover
               headerContent={
                 <div>
-                  {t(
-                    "kafka:connection_tab.kafka_service_fleet_manager_popover_header"
-                  )}
+                  {t("kafka:connection_tab.kafka_management_popover_header")}
                 </div>
               }
               bodyContent={
                 <div>
-                  {t(
-                    "kafka:connection_tab.kafka_service_fleet_manager_popover_body"
-                  )}
+                  {t("kafka:connection_tab.kafka_management_popover_body")}
                 </div>
               }
             >
               <Button
                 variant={ButtonVariant.plain}
                 aria-label={t(
-                  "kafka:connection_tab.kafka_service_fleet_manager_button_aria_label"
+                  "kafka:connection_tab.kafka_management_button_aria_label"
                 )}
               >
                 <HelpIcon />
@@ -192,9 +188,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
             <Skeleton fontSize="2xl" />
           ) : (
             <ClipboardCopy
-              textAriaLabel={t(
-                "kafka:connection_tab.kafka_service_fleet_manager_url"
-              )}
+              textAriaLabel={t("kafka:connection_tab.kafka_management_url")}
               isReadOnly
             >
               {kafkaFleetManagerUrl}
@@ -202,9 +196,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           )}
           <TextContent className="pf-u-pt-sm">
             <Text component={TextVariants.small}>
-              {t(
-                "kafka:connection_tab.kafka_service_fleet_manager_description"
-              )}
+              {t("kafka:connection_tab.kafka_management_description")}
             </Text>
           </TextContent>
         </TextContent>
