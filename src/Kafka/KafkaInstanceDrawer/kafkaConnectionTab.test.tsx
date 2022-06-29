@@ -27,7 +27,7 @@ describe("ConnectionTab", () => {
       "https://admin-server-[name of instance]-[domain]/openapi"
     );
     expect(
-      await comp.findByLabelText("URL for Kafka Service Fleet Manager")
+      await comp.findByLabelText("URL for Kafka Management API")
     ).toHaveDisplayValue("https://api.openshift.com/api/kafkas_mgmt/v1");
   });
 
@@ -37,8 +37,6 @@ describe("ConnectionTab", () => {
     expect(comp.queryByLabelText("Bootstrap server")).toBe(null);
     expect(comp.queryByLabelText("Token endpoint URL")).toBe(null);
     expect(comp.queryByLabelText("URL for Kafka Admin REST API")).toBe(null);
-    expect(comp.queryByLabelText("URL for Kafka Service Fleet Manager")).toBe(
-      null
-    );
+    expect(comp.queryByLabelText("URL for Kafka Management API")).toBe(null);
   });
 });

@@ -288,7 +288,7 @@ exports[`ConnectionTab renders 1`] = `
                   data-ouia-safe="true"
                   data-pf-content="true"
                 >
-                  Configure topics, consumer groups, and access for an individual Kafka instance.
+                  Configure topics, consumer groups, and access for this Kafka instance.
                 </small>
               </div>
             </div>
@@ -296,10 +296,10 @@ exports[`ConnectionTab renders 1`] = `
               class="pf-c-content pf-u-mt-md"
             >
               <strong>
-                URL for Kafka Service Fleet Manager
+                URL for Kafka Management API
                 <button
                   aria-disabled="false"
-                  aria-label="More information about the URL for Kafka Service Fleet Manager"
+                  aria-label="More information about the URL for Kafka Management API"
                   class="pf-c-button pf-m-plain"
                   data-ouia-component-id="OUIA-Generated-Button-plain-2"
                   data-ouia-component-type="PF4/Button"
@@ -329,7 +329,7 @@ exports[`ConnectionTab renders 1`] = `
                 >
                   <input
                     aria-invalid="false"
-                    aria-label="URL for Kafka Service Fleet Manager"
+                    aria-label="URL for Kafka Management API"
                     class="pf-c-form-control"
                     data-ouia-component-id="OUIA-Generated-TextInputBase-3"
                     data-ouia-component-type="PF4/TextInput"
