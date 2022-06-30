@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { Account } from "../types";
 import { PrincipalType } from "../types";
@@ -16,19 +16,32 @@ import { FormGroupWithPopover } from "../../../shared";
 export type SelectAccountProps = {
   value: string | undefined;
   accounts: Account[];
+  isLoading: boolean;
   initialOpen?: boolean;
-  onChangeAccount: (value: string | undefined) => void;
+  onSelectServiceAccount: (value: string) => void;
+  onSelectWildcard: () => void;
+  onSelectUser: (value: string) => void;
+  onTypeUsername: (value: string) => void;
+  onClearSelection: () => void;
 };
 
 export const SelectAccount: React.VFC<SelectAccountProps> = ({
   value,
   accounts,
   initialOpen = false,
-  onChangeAccount,
+  isLoading,
+  onSelectServiceAccount,
+  onSelectUser,
+  onSelectWildcard,
+  onTypeUsername,
+  onClearSelection
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [isDirty, setIsDirty] = useState<boolean>(false);
+
+  const [selectKey, setSelectKey] = useState(Math.random());
+  useEffect(() => setSelectKey(Math.random()), [accounts]);
 
   // for Storybook, allows opening the select programmatically respecting the initialization needed by the modal and Popper.js
   useLayoutEffect(() => setIsOpen(initialOpen), [initialOpen]);
@@ -38,7 +51,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   };
 
   const clearSelection = () => {
-    onChangeAccount(undefined);
+    onClearSelection();
     setIsDirty(true);
     setIsOpen(false);
   };
@@ -59,8 +72,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     const filteredAccounts =
       filter !== ""
         ? accounts.filter((principal) =>
-            filterRegExp.test(principal.displayName)
-          )
+          filterRegExp.test(principal.displayName)
+        )
         : accounts;
 
     const serviceAccountOptions = filteredAccounts
@@ -77,6 +90,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           key={index}
           value={principal.id}
           description={principal.displayName}
+          onClick={() => onSelectServiceAccount(principal.id)}
         >
           {principal.id}
         </SelectOption>
@@ -91,6 +105,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           key={index}
           value={principal.id}
           description={principal.displayName}
+          onClick={() => onSelectUser(principal.id)}
         >
           {principal.id}
         </SelectOption>
@@ -102,6 +117,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           key="*"
           value="*"
           description={t("all_accounts_description")}
+          onClick={() => onSelectWildcard()}
         >
           {t("all_accounts_title")}
         </SelectOption>
@@ -127,7 +143,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   }
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
-    onChangeAccount(value as string);
     setIsDirty(false);
     setIsOpen(false);
   };
@@ -148,6 +163,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     >
       <Select
         id={"account-id"}
+        key={selectKey}
         data-testid="acls-select-account"
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel={t("account_id_title")}
@@ -164,7 +180,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         createText={t("resourcePrefix.create_text")}
         isGrouped={true}
         maxHeight={400}
-        onCreateOption={() => {
+        onCreateOption={(value) => {
+          onTypeUsername(value);
           setIsOpen(false);
           setIsDirty(false);
         }}
