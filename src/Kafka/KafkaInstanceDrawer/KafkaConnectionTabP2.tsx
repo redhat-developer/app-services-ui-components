@@ -15,7 +15,7 @@ import { useState } from "react";
 import type { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { APIDocumentLink } from "./components/APIDocument";
+import { ExternalLink } from "../../shared";
 import "./KafkaInstanceDrawer.css";
 
 export type KafkaConnectionTabP2Props = {
@@ -150,8 +150,9 @@ export const KafkaConnectionTabP2: FunctionComponent<
                             component="a"
                             href="https://console.redhat.com/docs/api"
                           />,
-                          <APIDocumentLink
-                            linktoDocumentProtal={linkToDocPortal}
+                          <ExternalLink
+                            testId={"customerPortal-link"}
+                            href={linkToDocPortal}
                           />,
                         ]}
                       />
@@ -206,8 +207,9 @@ export const KafkaConnectionTabP2: FunctionComponent<
                             component="a"
                             href="https://console.redhat.com/docs/api"
                           />,
-                          <APIDocumentLink
-                            linktoDocumentProtal={linkToDocPortal}
+                          <ExternalLink
+                            testId={"customerPortal-link"}
+                            href={linkToDocPortal}
                           />,
                         ]}
                       />
