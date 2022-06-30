@@ -82,6 +82,8 @@
     "uncosumed_partitions_for_topic": "Unconsumed partitions for this topic",
     "view_partitions_offsets": "View partition offsets"
   },
+  "delete_instance_message": "The <0>{{instanceName}}</0> Kafka instance and all topics will be deleted. Applications will no longer have access to the topics in this instance.",
+  "delete_instance_title": "Delete instance?",
   "duration": "Duration",
   "duration_value": "48 hours",
   "egress": "Egress",
