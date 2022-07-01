@@ -1,6 +1,6 @@
 import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n } from "../../test-utils";
-import * as stories from "./KafkaConnectionTab.stories";
+import * as stories from "./KafkaConnectionTabP2.stories";
 
 const { ConnectionTab, ConnectionTabWhenkafkaCreationPending } =
   composeStories(stories);

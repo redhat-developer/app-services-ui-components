@@ -1,8 +1,8 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { KafkaConnectionTab } from "./KafkaConnectionTab";
+import { KafkaConnectionTabP2 } from "./KafkaConnectionTabP2";
 
 export default {
-  component: KafkaConnectionTab,
+  component: KafkaConnectionTabP2,
   args: {
     externalServer: "hema-test-c-k-l-kafka-stage.rhcloud.com:443",
     tokenEndPointUrl:
@@ -12,16 +12,17 @@ export default {
     kafkaFleetManagerUrl:
       "https://api.openshift.com/api/kafkas_mgmt/v1/openapi",
     adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
+    linkToDocPortal: "#",
   },
   parameters: {
     backgrounds: {
       default: "Background color 100",
     },
   },
-} as ComponentMeta<typeof KafkaConnectionTab>;
+} as ComponentMeta<typeof KafkaConnectionTabP2>;
 
-const Template: ComponentStory<typeof KafkaConnectionTab> = (args) => (
-  <KafkaConnectionTab {...args} />
+const Template: ComponentStory<typeof KafkaConnectionTabP2> = (args) => (
+  <KafkaConnectionTabP2 {...args} />
 );
 
 export const ConnectionTab = Template.bind({});
