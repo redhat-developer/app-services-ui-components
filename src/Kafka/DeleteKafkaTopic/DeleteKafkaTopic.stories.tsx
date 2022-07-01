@@ -1,18 +1,18 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { DeleteKafkaInstance } from "./DeleteKafkaInstance";
+import { DeleteKafkaTopic } from "./DeleteKafkaTopic";
 
 export default {
-  component: DeleteKafkaInstance,
+  component: DeleteKafkaTopic,
   args: {
     instanceName: "resource name",
     isModalOpen: true,
     disableFocusTrap: true,
   },
-} as ComponentMeta<typeof DeleteKafkaInstance>;
+} as ComponentMeta<typeof DeleteKafkaTopic>;
 
-const Template: ComponentStory<typeof DeleteKafkaInstance> = (args) => (
-  <DeleteKafkaInstance {...args} />
+const Template: ComponentStory<typeof DeleteKafkaTopic> = (args) => (
+  <DeleteKafkaTopic {...args} />
 );
 
 export const Story = Template.bind({});
