@@ -24,7 +24,7 @@ export const DeleteKafkaTopicActive: VoidFunctionComponent<
     >
       <Trans
         ns={"kafka"}
-        i18nKey={"delete_topicmessage"}
+        i18nKey={"delete_topic_message"}
         components={[<strong />]}
         values={{
           instanceName,

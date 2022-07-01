@@ -87,7 +87,7 @@
   "delete_instance_title": "Delete instance?",
   "delete_topic_active_message": "One or more consumers are currently active in this topic, and will be removed at the time of deletion. ",
   "delete_topic_title": "Delete topic",
-  "delete_topicmessage": "The <0>{{instanceName}}</0> topic will be deleted and removed from this instance. Applications will no longer have access to this topic.",
+  "delete_topic_message": "The <0>{{instanceName}}</0> topic will be deleted and removed from this instance. Applications will no longer have access to this topic.",
   "duration": "Duration",
   "duration_value": "48 hours",
   "egress": "Egress",
