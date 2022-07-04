@@ -34,12 +34,12 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   onSelectUser,
   onSelectWildcard,
   onTypeUsername,
-  onClearSelection
+  onClearSelection,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [validationMessage, setValidationMessage] = useState<string>();
   const [isDirty, setIsDirty] = useState<boolean>(false);
-
   const [selectKey, setSelectKey] = useState(Math.random());
   useEffect(() => setSelectKey(Math.random()), [accounts]);
 
@@ -54,6 +54,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     onClearSelection();
     setIsDirty(true);
     setIsOpen(false);
+    setValidationMessage(t("common:required"));
   };
 
   const noServiceAccounts = [
@@ -71,9 +72,11 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     const filterRegExp = new RegExp(filter, "i");
     const filteredAccounts =
       filter !== ""
-        ? accounts.filter((principal) =>
-          filterRegExp.test(principal.displayName)
-        )
+        ? accounts.filter(
+            (principal) =>
+              filterRegExp.test(principal.displayName) ||
+              filterRegExp.test(principal.id)
+          )
         : accounts;
 
     const serviceAccountOptions = filteredAccounts
@@ -139,12 +142,20 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       >
         {userAccountOperations.length ? userAccountOperations : noUserAccounts}
       </SelectGroup>,
+      <Divider key="user_accounts_divider" />,
     ];
   }
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
-    setIsDirty(false);
+    const regExp = new RegExp("^[0-9A-Za-z_.-]+$");
+    if (regExp.test(value as string)) setIsDirty(false);
+    else setIsDirty(true);
     setIsOpen(false);
+  };
+
+  const validationCheck = (value: string) => {
+    onTypeUsername(value);
+    setValidationMessage(t("invalid_user_account"));
   };
 
   const validated: ValidatedOptions = isDirty
@@ -160,6 +171,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       buttonAriaLabel={t("account_id_aria")}
       isRequired={true}
       validated={validated}
+      helperTextInvalid={validationMessage}
     >
       <Select
         id={"account-id"}
@@ -180,11 +192,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         createText={t("resourcePrefix.create_text")}
         isGrouped={true}
         maxHeight={400}
-        onCreateOption={(value) => {
-          onTypeUsername(value);
-          setIsOpen(false);
-          setIsDirty(false);
-        }}
+        loadingVariant={isLoading ? "spinner" : undefined}
+        onCreateOption={(value) => validationCheck(value)}
       >
         {makeOptions()}
       </Select>

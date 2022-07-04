@@ -1,6 +1,7 @@
 import { ManageKafkaPermissions } from "./ManageKafkaPermissions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Account, PrincipalType } from "./types";
+import type { Account } from "./types";
+import {PrincipalType} from './types'
 import { fakeApi } from '../../shared/storiesHelpers';
 
 export default {

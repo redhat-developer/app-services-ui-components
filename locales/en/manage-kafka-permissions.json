@@ -14,6 +14,7 @@
   "is_kafka_instane": "",
   "kafka_instance": "$t(common:kafka) instance",
   "no_results_found": "No results found",
+  "invalid_user_account":"Valid characters in a user name include letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), and hyphens ( - ).",
   "operations": {
     "all": "All",
     "alter": "Alter",
