@@ -1,4 +1,3 @@
-export * from "./CreateKafkaInstance";
 export * from "./CreateKafkaInstanceWithSizes";
 export * from "./KafkaInstanceDrawer";
 export * from "./KafkaInstanceStatus";
