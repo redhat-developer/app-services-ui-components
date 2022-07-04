@@ -1,2 +1,2 @@
 export * from "./CreateKafkaInstanceWithSizes";
-export * as CreateKafkaInstanceWithSizesTypes from "./types";
+export * from "./types";
