@@ -22,7 +22,7 @@ describe("ConnectionTab", () => {
       "https://identify.api.stage.openshift.com/auth/realms/rhoas/protocol/openid-connect/token"
     );
     expect(
-      await comp.findByLabelText("URL for Kafka Admin REST API")
+      await comp.findByLabelText("URL for Kafka Instance API")
     ).toHaveDisplayValue(
       "https://admin-server-[name of instance]-[domain]/openapi"
     );
@@ -38,7 +38,7 @@ describe("ConnectionTab", () => {
     await waitForI18n(comp);
     expect(comp.queryByLabelText("Bootstrap server")).toBe(null);
     expect(comp.queryByLabelText("Token endpoint URL")).toBe(null);
-    expect(comp.queryByLabelText("URL for Kafka Admin REST API")).toBe(null);
+    expect(comp.queryByLabelText("URL for Kafka Instance API")).toBe(null);
     expect(comp.queryByLabelText("URL for Kafka Management API")).toBe(null);
   });
 });
