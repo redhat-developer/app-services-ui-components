@@ -68,6 +68,8 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
       - run: npm run build
+      - name: Check for uncommited changes
+        run: git diff --quiet --exit-code
 
   chromatic:
     needs:
