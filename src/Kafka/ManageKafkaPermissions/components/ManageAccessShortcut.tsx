@@ -66,7 +66,7 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
           <Td>
             <ResourceTypeLabel variant={"CLUSTER"} />{" "}
             <DisplayResourceName resourceType={"CLUSTER"} />{" "}
-            {t("is_kafka_instane", instanceName)}
+            {t("is_kafka_instance", instanceName)}
           </Td>
 
           <Td />
