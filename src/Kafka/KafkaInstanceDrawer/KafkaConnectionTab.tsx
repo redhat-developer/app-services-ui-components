@@ -124,19 +124,23 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         </TextContent>
         <TextContent>
           <strong>
-            {t("kafka:connection_tab.admin_url_label")}
+            {t("kafka:connection_tab.kafka_instance_url_label")}
             <Popover
               headerContent={
-                <div>{t("kafka:connection_tab.admin_url_popover_label")}</div>
+                <div>
+                  {t("kafka:connection_tab.kafka_instance_url_popover_label")}
+                </div>
               }
               bodyContent={
-                <div>{t("kafka:connection_tab.admin_url_popover_body")}</div>
+                <div>
+                  {t("kafka:connection_tab.kafka_instance_url_popover_body")}
+                </div>
               }
             >
               <Button
                 variant={ButtonVariant.plain}
                 aria-label={t(
-                  "kafka:connection_tab.admin_url_button_aria_label"
+                  "kafka:connection_tab.kafka_instance_url_button_aria_label"
                 )}
               >
                 <HelpIcon />
@@ -147,7 +151,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
             <Skeleton fontSize="2xl" />
           ) : (
             <ClipboardCopy
-              textAriaLabel={t("kafka:connection_tab.admin_url_label")}
+              textAriaLabel={t("kafka:connection_tab.kafka_instance_url_label")}
               isReadOnly
             >
               {adminAPIUrl}
@@ -155,7 +159,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
           )}
           <TextContent className="pf-u-pt-sm">
             <Text component={TextVariants.small}>
-              {t("kafka:connection_tab.admin_url_description")}
+              {t("kafka:connection_tab.kafka_instance_url_description")}
             </Text>
           </TextContent>
         </TextContent>

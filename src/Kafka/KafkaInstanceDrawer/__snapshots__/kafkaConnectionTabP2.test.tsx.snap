@@ -208,10 +208,10 @@ exports[`ConnectionTab renders 1`] = `
               class="pf-c-content"
             >
               <strong>
-                URL for Kafka Admin REST API
+                URL for Kafka Instance API
                 <button
                   aria-disabled="false"
-                  aria-label="More information about the URL for Kafka Admin REST API"
+                  aria-label="More information about the URL for Kafka Instance API"
                   class="pf-c-button pf-m-plain"
                   data-ouia-component-id="OUIA-Generated-Button-plain-1"
                   data-ouia-component-type="PF4/Button"
@@ -241,7 +241,7 @@ exports[`ConnectionTab renders 1`] = `
                 >
                   <input
                     aria-invalid="false"
-                    aria-label="URL for Kafka Admin REST API"
+                    aria-label="URL for Kafka Instance API"
                     class="pf-c-form-control"
                     data-ouia-component-id="OUIA-Generated-TextInputBase-2"
                     data-ouia-component-type="PF4/TextInput"
