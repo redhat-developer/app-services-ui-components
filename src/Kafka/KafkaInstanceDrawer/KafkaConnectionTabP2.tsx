@@ -131,14 +131,16 @@ export const KafkaConnectionTabP2: FunctionComponent<
           </TextContent>
           <TextContent>
             <strong>
-              {t("connection-tab:admin_url_label")}
+              {t("connection-tab:kafka_instance_url_label")}
               <Popover
                 headerContent={
-                  <div>{t("connection-tab:admin_url_popover_label")}</div>
+                  <div>
+                    {t("connection-tab:kafka_instance_url_popover_label")}
+                  </div>
                 }
                 bodyContent={
                   <TextContent>
-                    <p>{t("connection-tab:admin_url_popover_body")}</p>
+                    <p>{t("connection-tab:kafka_instance_url_popover_body")}</p>
                     <p>
                       <Trans
                         ns={"connection-tab"}
@@ -162,7 +164,9 @@ export const KafkaConnectionTabP2: FunctionComponent<
               >
                 <Button
                   variant={ButtonVariant.plain}
-                  aria-label={t("connection-tab:admin_url_button_aria_label")}
+                  aria-label={t(
+                    "connection-tab:kafka_instance_url_button_aria_label"
+                  )}
                 >
                   <HelpIcon />
                 </Button>
@@ -172,7 +176,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
               <Skeleton fontSize="2xl" />
             ) : (
               <ClipboardCopy
-                textAriaLabel={t("connection-tab:admin_url_label")}
+                textAriaLabel={t("connection-tab:kafka_instance_url_label")}
                 isReadOnly
               >
                 {adminAPIUrl}
@@ -180,7 +184,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
             )}
             <TextContent className="pf-u-pt-sm">
               <Text component={TextVariants.small}>
-                {t("connection-tab:admin_url_description")}
+                {t("connection-tab:kafka_instance_url_description")}
               </Text>
             </TextContent>
           </TextContent>
