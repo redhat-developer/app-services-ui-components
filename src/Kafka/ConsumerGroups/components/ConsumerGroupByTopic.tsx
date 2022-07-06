@@ -1,6 +1,4 @@
 import {
-  Flex,
-  FlexItem,
   Stack,
   TextContent,
   TextVariants,
