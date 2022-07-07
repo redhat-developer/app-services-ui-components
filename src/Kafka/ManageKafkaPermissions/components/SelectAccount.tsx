@@ -148,7 +148,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
     const regExp = new RegExp("^[0-9A-Za-z_.-]+$");
-    if (regExp.test(value as string)) setIsDirty(false);
+    if (regExp.test(value as string)|| value==='*') setIsDirty(false);
     else setIsDirty(true);
     setIsOpen(false);
   };

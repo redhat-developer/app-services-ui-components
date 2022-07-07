@@ -1,9 +1,21 @@
-import { Button, Form, FormGroup, Modal } from "@patternfly/react-core";
+import {
+  Button,
+  Form,
+  FormGroup,
+  HelperText,
+  Modal,
+  Popover,
+  TextContent,
+  Text,
+  TextVariants,
+} from "@patternfly/react-core";
+import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
 import { useMachine } from "@xstate/react";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { assign } from "xstate";
 import { SelectAccount } from "./components/SelectAccount";
+import { ViewAccountDetails } from "./components/ViewAccountDetails";
 import { ManageKafkaPermissionsMachine } from "./ManageKafkaPermissionsMachine";
 import type { Account } from "./types";
 
@@ -20,15 +32,29 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
 }) => {
   const [state, send] = useMachine(ManageKafkaPermissionsMachine, {
     actions: {
-      addConsumeTopicTemplateAcl: () => false,
-      addManageAccessTemplateAcl: () => false,
-      addProduceTopicTemplateAcl: () => false,
-      addRawAcl: () => false,
+      addConsumeTopicTemplateAcl: () => {
+        send("Add a consume from a topic ACL");
+      },
+
+      addManageAccessTemplateAcl: () => {
+        send("Add manage access ACL");
+      },
+
+      addProduceTopicTemplateAcl: () => {
+        send("Add a produce to a topic ACL");
+      },
+
+      addRawAcl: () => {
+        send("Add ACL manually");
+      },
+
       clearSelectedAccount: assign((_context) => ({ account: undefined })),
       setSelectedAccount: assign((_, event) => ({ account: event.account })),
       setSelectedUsername: assign((_, event) => ({ account: event.username })),
-      setWildcardAccount: assign((_context) => ({ account: '*' })),
-      setAvailableUsersAndAccounts: assign((_, event) => ({ availableUsersAndAccounts: event.data }))
+      setWildcardAccount: assign((_context) => ({ account: "*" })),
+      setAvailableUsersAndAccounts: assign((_, event) => ({
+        availableUsersAndAccounts: event.data,
+      })),
     },
     guards: {
       'acl user matches the selected one in step 1 OR selected user is "all accounts"':
@@ -120,6 +146,16 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
           />
         )}
       </Form>
+      {!isStep1 && (
+        <Form>
+          <ViewAccountDetails
+            accountId={state.context.account}
+            onRemoveAcl={send({ type: "Delete existing ACL", aclIndex: 1 })}
+            ExistingAcl={state.context.existingAcls}
+          />
+          <AssignPermissions />
+        </Form>
+      )}
     </Modal>
   );
 };
