@@ -10,7 +10,7 @@ const {
   VariantNoDefaultsRequired,
 } = composeStories(stories);
 
-describe("CreateKafkaInstanceWithSizes", () => {
+describe("CreateKafkaInstance", () => {
   it("should show the right default cloud provider", async () => {
     const comp = renderDialog(<VariantCanCustomizeDefaultProvider />);
     await waitForI18n(comp);

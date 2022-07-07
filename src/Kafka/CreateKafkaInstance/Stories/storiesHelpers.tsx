@@ -7,8 +7,8 @@ import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
-import type { CreateKafkaInstancePropsWithSizes } from "../CreateKafkaInstanceWithSizes";
-import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import type { CreateKafkaInstancePropsWithSizes } from "../CreateKafkaInstance";
+import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import type {
   CreateKafkaInitializationData,
   GetSizesData,
@@ -438,7 +438,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
 
   return (
     <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
-      <CreateKafkaInstanceWithSizes
+      <CreateKafkaInstance
         key={JSON.stringify(args)}
         getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
         getSizes={getSizes}

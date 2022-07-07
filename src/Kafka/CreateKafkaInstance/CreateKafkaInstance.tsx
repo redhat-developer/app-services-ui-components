@@ -33,12 +33,12 @@ import {
   useCreateKafkaInstanceMachine,
 } from "./CreateKafkaInstanceProvider";
 
-import "./CreateKafkaInstanceWithSizes.css";
+import "./CreateKafkaInstance.css";
 import type { MakeCreateKafkaInstanceMachine } from "./types";
 
 export type CreateKafkaInstancePropsWithSizes =
-  ConnectedCreateKafkaInstanceWithSizesProps & MakeCreateKafkaInstanceMachine;
-export const CreateKafkaInstanceWithSizes: FunctionComponent<
+  ConnectedCreateKafkaInstanceProps & MakeCreateKafkaInstanceMachine;
+export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstancePropsWithSizes
 > = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) =>
   props.isModalOpen ? (
@@ -47,11 +47,11 @@ export const CreateKafkaInstanceWithSizes: FunctionComponent<
       getSizes={getSizes}
       onCreate={onCreate}
     >
-      <ConnectedCreateKafkaInstanceWithSizes {...props} />
+      <ConnectedCreateKafkaInstance {...props} />
     </CreateKafkaInstanceProvider>
   ) : null;
 
-export type ConnectedCreateKafkaInstanceWithSizesProps = {
+export type ConnectedCreateKafkaInstanceProps = {
   /**
    *
    * Flag to show the modal
@@ -78,8 +78,8 @@ export type ConnectedCreateKafkaInstanceWithSizesProps = {
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
 };
-export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
-  ConnectedCreateKafkaInstanceWithSizesProps
+export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
+  ConnectedCreateKafkaInstanceProps
 > = ({
   isModalOpen,
   appendTo,
@@ -187,7 +187,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
         </FlexItem>
         <FlexItem
           flex={{ default: "flex_1" }}
-          className="mas--CreateKafkaInstanceWithSizes__sidebar"
+          className="mas--CreateKafkaInstance__sidebar"
         >
           {isLoadingSizes || selectedSize === undefined ? (
             <InstanceInfoSkeleton
@@ -212,7 +212,7 @@ export const ConnectedCreateKafkaInstanceWithSizes: VoidFunctionComponent<
         </FlexItem>
       </Flex>
       <Alert
-        className="mas--CreateKafkaInstanceWithSizes__creationTimeAlert"
+        className="mas--CreateKafkaInstance__creationTimeAlert"
         customIcon={<OutlinedClockIcon />}
         variant="info"
         isInline

@@ -1,9 +1,9 @@
 import type { ComponentMeta } from "@storybook/react";
-import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import { argTypes, parameters, PROVIDERS, Template } from "./storiesHelpers";
 
 export default {
-  component: CreateKafkaInstanceWithSizes,
+  component: CreateKafkaInstance,
   args: {
     apiPlan: "standard",
     apiScenario: "standard-available",
@@ -17,7 +17,7 @@ export default {
   },
   argTypes,
   parameters,
-} as ComponentMeta<typeof CreateKafkaInstanceWithSizes>;
+} as ComponentMeta<typeof CreateKafkaInstance>;
 
 export const VariantCanCustomizeDefaultProvider = Template.bind({});
 VariantCanCustomizeDefaultProvider.storyName = "Custom Default Provider";

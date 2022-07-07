@@ -4,7 +4,7 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mas--CreateKafkaInstanceWithSizes__sidebar"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
@@ -262,7 +262,7 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
 <body>
   <div>
     <div
-      class="pf-m-flex-1 mas--CreateKafkaInstanceWithSizes__sidebar"
+      class="pf-m-flex-1 mas--CreateKafkaInstance__sidebar"
       style=""
     >
       <div
