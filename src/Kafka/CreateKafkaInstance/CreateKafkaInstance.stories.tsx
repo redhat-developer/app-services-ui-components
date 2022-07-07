@@ -1,5 +1,5 @@
 import type { ComponentMeta } from "@storybook/react";
-import { CreateKafkaInstanceWithSizes as CreateKafkaInstanceComponent } from "./CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstance as CreateKafkaInstanceComponent } from "./CreateKafkaInstance";
 import {
   argTypes,
   parameters,
@@ -24,4 +24,4 @@ export default {
   parameters,
 } as ComponentMeta<typeof CreateKafkaInstanceComponent>;
 
-export const CreateKafkaInstanceWithSizes = Template.bind({});
+export const CreateKafkaInstance = Template.bind({});

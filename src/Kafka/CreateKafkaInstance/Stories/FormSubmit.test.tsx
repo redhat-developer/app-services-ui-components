@@ -10,7 +10,7 @@ const {
   FormErrorsCantSubmit,
 } = composeStories(stories);
 
-describe("CreateKafkaInstanceWithSizes", () => {
+describe("CreateKafkaInstance", () => {
   it("should show an alert when over quota after submitting the form", async () => {
     const comp = renderDialog(<OverQuotaOnFormSubmit />);
     await waitForI18n(comp);

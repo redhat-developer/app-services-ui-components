@@ -1,7 +1,7 @@
 import { expect } from "@storybook/jest";
 import type { ComponentMeta } from "@storybook/react";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
-import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import {
   argTypes,
   parameters,
@@ -11,7 +11,7 @@ import {
 } from "./storiesHelpers";
 
 export default {
-  component: CreateKafkaInstanceWithSizes,
+  component: CreateKafkaInstance,
   args: {
     apiPlan: "standard",
     apiScenario: "standard-available",
@@ -25,7 +25,7 @@ export default {
   },
   argTypes,
   parameters,
-} as ComponentMeta<typeof CreateKafkaInstanceWithSizes>;
+} as ComponentMeta<typeof CreateKafkaInstance>;
 
 export const OverQuotaOnFormSubmit = Template.bind({});
 OverQuotaOnFormSubmit.storyName = "Over Quota - Standard";

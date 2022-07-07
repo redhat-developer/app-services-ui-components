@@ -22,7 +22,7 @@ export default {
 const Template: ComponentStory<typeof InstanceInfoSkeletonComp> = (args) => (
   <FlexItem
     flex={{ default: "flex_1" }}
-    className="mas--CreateKafkaInstanceWithSizes__sidebar"
+    className="mas--CreateKafkaInstance__sidebar"
   >
     <InstanceInfoSkeletonComp {...args} />
   </FlexItem>

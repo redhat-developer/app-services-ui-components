@@ -1,9 +1,9 @@
-import { CreateKafkaInstanceWithSizes } from "../CreateKafkaInstanceWithSizes";
+import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import type { StoryMeta } from "./storiesHelpers";
 import { argTypes, parameters, PROVIDERS, Template } from "./storiesHelpers";
 
 export default {
-  component: CreateKafkaInstanceWithSizes,
+  component: CreateKafkaInstance,
   args: {
     apiPlan: "standard",
     apiScenario: "standard-available",

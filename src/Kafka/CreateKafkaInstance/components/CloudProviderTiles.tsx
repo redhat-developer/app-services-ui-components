@@ -56,9 +56,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
         </Flex>
       </div>
       <FormSelect
-        className={
-          "mas--CreateKafkaInstanceWithSizes__CloudProviderTile--select"
-        }
+        className={"mas--CreateKafkaInstance__CloudProviderTile--select"}
         value={value}
         id="form-cloud-provider-option"
         name="cloud-provider"
@@ -87,14 +85,14 @@ const tiles: { [id: Provider]: JSX.Element } = {
     <AwsIcon
       size="lg"
       color="black"
-      className="mas--CreateKafkaInstanceWithSizes__CloudProviderTile--Icon"
+      className="mas--CreateKafkaInstance__CloudProviderTile--Icon"
     />
   ),
   azure: (
     <AzureIcon
       size="lg"
       color="black"
-      className="mas--CreateKafkaInstanceWithSizes__CloudProviderTile--Icon"
+      className="mas--CreateKafkaInstance__CloudProviderTile--Icon"
     />
   ),
 };

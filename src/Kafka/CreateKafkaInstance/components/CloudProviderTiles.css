@@ -1,0 +1,7 @@
+.mas--CreateKafkaInstance__CloudProviderTile--Icon {
+  margin-right: var(--pf-global--spacer--md);
+}
+
+.mas--CreateKafkaInstance__CloudProviderTile--select {
+  display: none;
+}

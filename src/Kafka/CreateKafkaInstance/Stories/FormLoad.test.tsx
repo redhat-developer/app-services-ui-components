@@ -26,7 +26,7 @@ const {
   GotEmptySizes,
 } = composeStories(stories);
 
-describe("CreateKafkaInstanceWithSizes", () => {
+describe("CreateKafkaInstance", () => {
   it("should show a form for standard instances with no alerts", async () => {
     const comp = renderDialog(<QuotaAvailableOnFormLoad />);
     await waitForI18n(comp);

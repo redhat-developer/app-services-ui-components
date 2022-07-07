@@ -5,7 +5,7 @@ import * as stories from "./FormProcessing.stories";
 
 const { LoadingData, CreationInProgress } = composeStories(stories);
 
-describe("CreateKafkaInstanceWithSizes", () => {
+describe("CreateKafkaInstance", () => {
   it("should show a skeleton loader while waiting for the data", async () => {
     const spy = jest.fn();
 

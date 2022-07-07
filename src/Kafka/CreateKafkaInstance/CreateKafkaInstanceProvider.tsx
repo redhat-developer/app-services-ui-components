@@ -5,19 +5,8 @@ import type { ActorRefFrom } from "xstate";
 import {
   type CreateKafkaInstanceMachineContext,
   makeCreateKafkaInstanceMachine,
-  NAME_EMPTY,
-  NAME_INVALID,
-  NAME_VALID,
-  PROVIDER_VALID,
-  REGION_VALID,
-  SIZE_DISABLED,
-  SIZE_ERROR,
-  SIZE_IDLE,
-  SIZE_LOADING,
-  SIZE_OVER_QUOTA,
-  SIZE_VALID,
   SYSTEM_UNAVAILABLE,
-} from "./CreateKafkaInstanceMachine";
+} from "./machines/CreateKafkaInstanceMachine";
 import type {
   CreateKafkaInstanceError,
   MakeCreateKafkaInstanceMachine,
@@ -33,12 +22,19 @@ const CreateKafkaInstanceContext = createContext<{
 
 export const CreateKafkaInstanceProvider: FunctionComponent<
   MakeCreateKafkaInstanceMachine
-> = ({ onCreate, getAvailableProvidersAndDefaults, getSizes, children }) => {
+> = ({
+  onCreate,
+  getAvailableProvidersAndDefaults,
+  getStandardSizes,
+  getTrialSizes,
+  children,
+}) => {
   const service = useInterpret(
     () =>
       makeCreateKafkaInstanceMachine({
         getAvailableProvidersAndDefaults,
-        getSizes,
+        getStandardSizes,
+        getTrialSizes,
         onCreate,
       }),
     { devTools: true }

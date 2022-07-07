@@ -1,14 +1,15 @@
-export type InstanceAvailability =
-  | "standard-available"
-  | "trial-available"
+export type StandardPlanAvailability =
+  | "available"
   | "over-quota"
-  | "trial-used"
   | "instance-unavailable"
-  | "regions-unavailable"
+  | "regions-unavailable";
+
+export type TrialPlanAvailability =
+  | "available"
+  | "trial-used"
   | "trial-unavailable";
 
-export type Plan = "trial" | "standard";
-export type Provider = string;
+export type Provider = "aws";
 export type Region = string;
 export type RegionInfo = {
   id: Region;
@@ -47,16 +48,29 @@ export type CreateKafkaInstanceError =
   | "region-unavailable"
   | "unknown";
 
-export type CreateKafkaInitializationData = {
+export type StandardPlanInitializationData = {
   defaultProvider: Provider | undefined;
   availableProviders: Providers;
-  instanceAvailability: InstanceAvailability;
-  maxStreamingUnits: number;
-  remainingQuota: number;
-  plan: Plan;
+  instanceAvailability: StandardPlanAvailability;
+  remainingPrepaidQuota: number;
+  marketplacesQuota: { provider: Provider; quota: number };
+  plan: "standard";
 };
 
-export type GetSizesData = {
+export type TrialPlanInitializationData = {
+  defaultProvider: Provider | undefined;
+  availableProviders: Providers;
+  instanceAvailability: TrialPlanAvailability;
+  plan: "trial";
+};
+
+export type CreateKafkaInitializationData =
+  | StandardPlanInitializationData
+  | TrialPlanInitializationData;
+
+export type StandardSizes = Size[];
+
+export type TrialSizes = {
   standard: Size[];
   trial: Size;
 };
@@ -76,6 +90,10 @@ export type OnCreateKafka = (
 
 export type MakeCreateKafkaInstanceMachine = {
   getAvailableProvidersAndDefaults: () => Promise<CreateKafkaInitializationData>;
-  getSizes: (provider: Provider, region: Region) => Promise<GetSizesData>;
+  getStandardSizes: (
+    provider: Provider,
+    region: Region
+  ) => Promise<StandardSizes>;
+  getTrialSizes: (provider: Provider, region: Region) => Promise<TrialSizes>;
   onCreate: OnCreateKafka;
 };
