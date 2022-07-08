@@ -3,24 +3,11 @@ import { sendParent } from "xstate/lib/actions";
 import {
   CreateKafkaInstanceError,
   TrialSizes,
-  Provider,
-  ProviderInfo,
+  CloudProvider,
+  CloudProviderInfo,
   Region,
-  Size,
   TrialPlanInitializationData,
 } from "../types";
-
-export const NAME_EMPTY = "nameEmpty";
-export const NAME_INVALID = "nameInvalid";
-export const NAME_UNTOUCHED = "nameUntouched";
-export const NAME_VALID = "nameValid";
-export const PROVIDER_UNTOUCHED = "providerUntouched";
-export const PROVIDER_VALID = "providerValid";
-export const PROVIDER_INVALID = "providerInvalid";
-export const REGION_UNTOUCHED = "regionUntouched";
-export const REGION_VALID = "regionValid";
-export const REGION_INVALID = "regionInvalid";
-export const SYSTEM_UNAVAILABLE = "systemUnavailable";
 
 export type TrialPlanMachineContext = {
   // initial data coming from the APIs
@@ -29,13 +16,12 @@ export type TrialPlanMachineContext = {
   // what the user is selecting
   form: {
     name?: string;
-    provider?: Provider;
+    provider?: CloudProvider;
     region?: Region;
-    size?: Size;
   };
 
   // based on the form.provider selection
-  selectedProvider: ProviderInfo | undefined;
+  selectedProvider: CloudProviderInfo | undefined;
 
   // based on the form.provider and form.region selection
   sizes: TrialSizes | undefined;
@@ -44,7 +30,7 @@ export type TrialPlanMachineContext = {
 };
 
 export const TrialPlanMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QBUBOBLAhgGwArcwDsBZTAYwAt1CwA6ANzAwDMBPAQXs3QICMf0AF1YBiRKAAOAe1hD0UwuJAAPRAEYATAGYAHLQDsGtQE4ArDoAMO0wDYLGgCwAaEK0TGLtY8a03dxtX1TNTVTYwBfcJc0LDwCEnIqGloyBWZ0KABXDEIoWkJMAFs6Lmx0CExBMDEkEGlZQXlFWtUEB1DaNR1NLWNrfV6tQJc3BGN9PX0HAK0LOxDx00jojBx8IlJKajpUwnSsnLyC4pFmKVRCgGVM3kKhJXq5BSVWtXsR9Qsp2hsAgN+tFpHDYdMsQDE1vFNkkdmkMtlqEcitVjmAAMIUIgwB4yJ7NUCvd6udzmAzBIzTbpfAJgiFxDaJbYpOEHRG0CSoKT0cpMBg4cqVao4hpNF6IUwWNS0DTdDRBHSWN6zfQfNo6BxeSX6Hx9ByWcy01b0hJbZK7fYI3LsznciBMU7nK43O6CYV4sUIN4aVU2UxaAx9UJdSU2NQOLSG2LrE0w5l7eGHa1cnmoEQc5N21AYrFgN2NZ4tT7e4ltGz6TWaEFBQES4w2SOQhmm2Hx1lW1BgKBNPllCpVGqSXH5-EqRDTf0WIYy4HaDSmIKq0IDWjzhz6CYWCzBHQ+BvG6FM80JtkdrsKB0Xa63e61R7Dj1excgjQrr7mWbzwJ9PfRg9mlmWnkp5NGmNoptmuS5reQ6ioWnpEqMah+BqfrzvoVg6FoUwTD+UKMv+raAbQwHniRhAQdi0EigWBJFouDh6j8ujdLMWGUvouFNrGR5tnksgAF4lPyfZClR7pwRumrGOGfjSV0Ng2KqGi+lKDhbtYyo6HOficTGh4AYmAl0NgUiYBAiIiBACh0NQ9BSAA1nQdK-vhLYWoZ6CCbQJlmYiCC2VIZCVE0ADaFgALp5rBtGlqYXh1h43QSg4ZZaEpAxSlo4a6PoNgMXKphLFE4JGi5zZxu5bJGd5pnmbkIhMJyqDsgQghnBctDOXh5U8UR1U+XVUD+YQdlBcOYWRWJ95wSlcXeL8VihBYKUDEpIL+lhQabhoylzBGxVdVx+mER5gmgRmTAUVBg7USOhLFqMGg+OWEyOPKkrWClul-m5x5WkZIhkVdUU0aO8EPYgMo7rQVJhN0irWEVKxRt13EGWy7WFLQsCYNy9VkB2grXGQZBwPAU3RWDPSTEYZiWNYdiOEpvieDYcqWEM0lBPWB2lajx2VVamPY7jFkE2AgoAKKoE1IN3Ygfh6GY0llpoCzGBDCA7fYnR2GEynmOqhjfa5FV-XkmMiOLgpyw+cpKWGGpYZuXxzKGvocbzKNHQRgsW46F6FMDFOg60oZ6Kla7obOhWKSWJhWLQKW-BoViAnWGiRMVhBSHa5MoHzPslEw6BsJw3B8AIwi2zNmuBFKGt5cnoR6hYu5e42enJIIRoAKqwJANcxUGejKXOQJqY4OirfH+gN8pDEKS3ljt8jnc-bQPexL3BRcDwmC8Ng111DBodjprjieBrWrhrHm4OCbPXo1aqK0JkhCCFImSUIPIfy+Di41BAh+H4dC84gSzGsI-NGJ02SvzAIUCQ1c-4egUp4EI08gRljLDoX0i4tzGB+N0OsSEBh+imNAgW5t8jIloLZYSQ8qaBE1ClBUvhcq2DwfHOUrNyR5QIeuHCHd9ym16omV+pRyiMNeNoLwWEJTmDnnlLoKpuGSh+KuSwO0Qi-Eob7ahEjhI2xQXBOUL4tBhF0KYN6E9lr4LCEQkw7syFsT0b9XiNDijSMQBMVUmCyRTGnpfZWns14iKfrAq06ZbS8nfp-b+FBf43XEsPBwcVlreBVr4XUaTVRzylLlbw1hJQmG1KCYRZUYF+yTDE5qkiRLeIQBYvQaTnppKME9J6zgSx+kIdYYMSovi5UzhU-m+iPHRJTHQkaDCTHDzsF4Uwa49rahKYVPJlgDCgM0EEVO3g1BuLNhMsCmYexSLmWDQwcU7BDEMLMHaKU1Cql6TDbckpJxDLZocsRbJJmZkab4ksugXweCCO0SUEDQjfOfkBTs3Y4lfx-hARpYYr6OD6P0TCa446IRXknAYMoTBITSXMaFkTYVnkIGchpFzWgWM8Hs3QIRJzBFsE+GUK43o7kMDcixZLqlkWmfUlFtgYZPV+LYNJEo5jdMQlMTwa4zBfAcAVCIoyi5HKIoK4VtKfHLWlG3bKuVNCLHZXoaxa5uW7RrPy6hZEAU6EXL4f0eUJRWL1IrEZYTKlUI8dVepxjknTRiorWgVggjkKykE4w6VSRAlCNYw2ylxi2r9Z5GyEAj4oq3ChLKDEsKOH8GlEsBU9DxsKnOBUybQklW9l3dxfV020EaucRpobw2FSwlGwwMaS1lnLCzccHNAQ6XVfWzVp1jK1URNmi+eVCGp2wlYHwuDJypsbV5AaSST63Q9EYOKVizBDArV0cMSlzAMqAZhUpyE1XerGQ2ydDqlLTDitrN4KrfA7WkuuxMwt36wGdEIKoyLdWemAXqcM2pxhqTQTiyGk9pTKRMO0XKkof1jo3j8oWjohWzKDZTVo9Mw0eAUtJBidZi2PX3T8Setg55ZS6F62t69REwtoMLHGeMoCNM5knZ6WltRhmyfBrWKGYahFmG+BihgH6YbY+Sjjjps1UchgQ2gWE-AgjDLgpZcn70auwzxsDSzVSzEITMDwezPzeGhYgo+VQUWDDkUAt4SydPjGZksn4SENZzlYVGtxKLHXx3KZEIAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QBUBOBLAhgGwArcwDsBZTAYwAt1CwA6ANzAwDMBPAQXs3QICMf0AF1YBiRKAAOAe1hD0UwuJAAPRACYAbAA4AnLQ0AGNQBYArBo0BmHQHYNNywBoQrRDoO1bARjWmv54y8DY18AX1DnNCw8AhJyKhpaMgVmdCgAVwxCKFpYQUxBdNgRMlQwArAlaVlBeUUkFUQgtWdXBFNLY1o7LRDTG1NTLVNjG3DIjBx8IlJKajpkwlSMrJzmKVQAWwYcdAgRVLBsCABJQi5sPaqZOQUlVQQvLRs9NR1TI1Mdey0tNS1Wk1nqZaJodIEbEYTAZ7OMQFEprFZgkFik0plqGsNtsLnsSmUKtcanV7kCXqD3p9vjZfv9AQg1AYhrQDF4fH9jJ0aVo4QiYjN4vMkmiVpjaOstrlMPRMfjyoIwABldJkMhweANaq3eqgB5qSxqGwsgwmgzPHRBGxeemMrQeCwfAY6NT6s2mXmTflxOaJRbLDHZcXYqUy7JyioAUVQqA2RO1pIZBqNppN5st1pcTR04O6gX+9hMefdEXhnum3pRwqW6NWQa2B3QR1O512EDjtTuDQe-i+tD+Jpdxm0NhdpnpXlGXTNnIt-RCnOLE2i5eRQr9NbFh2OsFohEwmzouIgFTEmpuHZ1jQQxmG3VHfjUE7Zb3HGlGoK8Vo0-ksli0Vh0D1lyRQVfRFAM1kbbdd33MADmxZVeE2IR2xJLsmgNccbECWgvAsGwBkhBwb0sIDEQFH1UWrUVAy3CAdz3A8REYsAAGEKCIGBUM7XUMJaTNHg0QZQU5Axf0MYxRmwsivVXMDqIg8UoPo2gJBjGUICYHZLmPBVT0kc80N49o3lBQxgnBLkmQBATH20Wghy8WxnS0IJLA0GSV1Aqj-VrOidzUqQNKYeCtkQ5DBG4y9u0w2zLCePs33cxkmW0IdPJAyiq18zdlIC9S9hCwLgtQdjOMqM9iR4q8vFito7JBd4XhpGF-FGDKKMrdcaMgpsdzKKA6m0vYTyihNTEfY0TH-aFzGCccni6G8DGzf9WSE9KSz5Lysu6xT-NoAa6lCzZwpQyr43Qx46qaN4vFoawR1HT8Jv6DqKzXcC-Lyw6wEGhQRGKwrSo47IKoMqror48cTEsByOhItlLD8P93rknyN1on6joBnHCDKsGxqu2r+LaIJ3FoEYRytYYkZCNHvOyzHeug2QAC9D1bUaLovBNnjh2xnn-A1hgmmz6rtLRugMZrhhvJzF1LYDOs+hTvr63J0A52hsCkTAIFlCAFDoah6CkABrOhtsyrqvtyjX2boXX9cxBBTakMgCjqABtAwAF0ieM4x3k8O0jCc2qNDum0Bg0bpKXihxvmsYwGd2u2sYdrWnb1g2wyYGNUFUghBAlbZrZV+Scsz1ns513PXfdz2L19gOeaMq9g8asPHwtZKLRjs0+xRv5DHJzQ09ttX7drjmTrOyL2+qmLSfUC0uhMDRsysbRNH8SfVerlmVMdwGCs0kHysDmqboQSxgnuvD9THq1szCLayxtw-maUrO57xgmXEl5Q2uqvO+Zo9BBCsJCSwI5rA8g-srD6Vcf7+REEbRIeQKi0ArsgjGPVf7bmvt2QI90-BCx0PFWBXcbQPweoMLeidHyfAPignq6Dja5HyAqHBn9K74IgsQ9Q2g9CGBMOYACdgHBYU5KHay2FkbOhdOEEshApCaQ1CgPheCGBMHQGwTg3A+ACGEEI68YC8J6AtBHew35-wWDUKwugghPQAFVYCQDMW8ewuE+hsjZIMXwr4rFsgtLYp4Fgo5ONoC46Iri9xcB4JgXg2BwYgC1LzK6IQbR-j7FoJMYkhIRxpNEvGsB4nSiMck1JZjskCSCB4cEMtOQiNGDLLw0S9q1iwYUHc6RCCwHSEhIQCo2zAITM0ekQ4QTNSfhCbM9NEHkR0V0sUPSii5CGRFUZXj8mUwaayP4eFkb9HpNoOGkIVodBePYMSitcHoyZgQ9Zmj0mGWXogGk9I-weD+EMbMZpWTiVTks2SjNVm0WDKbVsXjg5xxlv+Zyj4CIWMRaCBhgwmQjD+KRUFO0p5HzrDiGF4ziaDD0P2KEQ5nijloStRKMIvjDmGMjTpGcsSSlgNKTEXiTRGleiaCaFprF0qlhNBWLomTHI8nir+bD9rBi5YwMZENLrGRMN8FkNIt4vGRSOWh2F9Ao1qu8Do+SZVLmWY8iFHLNhmJ-CCSlg5hy0vqX+SBtV2TPz-G8Nl08a4qRYrQfpggpAqgoJ40lxl-BqFBLoWBFhYEwn1E4epLwPVYr+K5dN9ztHWvZYQwNsFaBgE2BIUxUarwjilkJAYmh7DIxTVhTQuF+gcjsJQ38YxZX8KeftH6QboU6XtbfJysCWQdGnE1CaMs-WEoOkGo89rDUumZdmfof48Ljn-FLM0Tw7JOQsHO1BA7i1HkJJWh4nRY0WgGHhXQxhpzGGbXHfwNITAdt-LA49BCF2wXtWacc5hY3iPBEK5ovQf39o1kDC+wbCChvDZG1VmTo2Gusj4OcDghh2ByXYPse6wl3u-N2y1YL07+uPvlIKwNhq6TSRkjuV7-zww+P4NkQ4CKpvqi6e6IRmm6EZOu0jSsrXgoLQdWDWkh1XEvU0Do3RhzBzZEYb4ZgbSSRmS8MwbH77KJ7SsiTP0pNFyXXJhAd7KYOA5OSnQdowEukmvx7CgmVpNSg+raCJmAPi3UIC0O2gLK6HYx5meKk8bwcQ5QZDbzIYTK3p4N4nRAgfHzDCccQ5XjYW0AreKPxQsBv6n9Ia56FRmNgVLJy2E-DOiZPFHQMNx0zhHBxoSD6CtUd+v9QgtAZMqti2qmqwd9DWGpCjF0sCxxuuG50Fa35nQ-mkgZ-NlHC1Fe63RsxDgPB4Q+H+ecjIXz1P1EaGctigXDBEw88Tq2Dp4x8+OQVVnzK0yTO5Dra3Nba1Kwx95ID7CiPyXYL4wdDTfBtH3EbFlvxfsZLisj+Lv6-p+o7XrEAanmY4yCMehoTCHqEjaX4lXQeb38NvD7B1UdmZQ0x9QCnfCuXih8QYQQOgQ5HLhC0JohLaHwrmpBK350o7rgXWM5mLC7u-GCTkkltBTfqvYI0yMALzmnVdvNN2hd-xzi7bII6HP2C6GlTk+S-k+Ap8LjmD3bL-O6J6gYwRpn72W5rk9fUzG9HpJQ2NElqsvUCPD0T5GCXMzMSMb5Mth5Dn1N8Wm2holKpi4xj5DJ7OeEKbobT2ExJYXHd8XeIwRG2HVwL7y9rfOPAQeEIAA */
   createMachine(
     {
       context: {
@@ -58,10 +44,9 @@ export const TrialPlanMachine =
       schema: {
         context: {} as TrialPlanMachineContext,
         events: {} as
-          | { type: "formChange" }
-          | { type: "formSubmit" }
+          | { type: "fieldInvalid" }
           | { type: "nameChange"; name: string }
-          | { type: "providerChange"; provider: Provider }
+          | { type: "providerChange"; provider: CloudProvider }
           | { type: "regionChange"; region: Region }
           | { type: "nameIsValid" }
           | { type: "nameIsInvalid" }
@@ -75,8 +60,8 @@ export const TrialPlanMachine =
           };
         },
       },
-      id: "TrialPlanMachine",
       initial: "verifyAvailability",
+      id: "TrialPlanMachine",
       states: {
         verifyAvailability: {
           always: [
@@ -99,197 +84,54 @@ export const TrialPlanMachine =
         trialUnavailable: {
           type: "final",
         },
+        regionsUnavailable: {
+          type: "final",
+        },
         configuring: {
-          tags: "configurable",
           type: "parallel",
           states: {
-            name: {
-              initial: "untouched",
+            status: {
+              initial: "unsubmitted",
               states: {
-                untouched: {
-                  tags: "nameUntouched",
+                unsubmitted: {
+                  tags: "unsubmitted",
                 },
-                empty: {
-                  tags: "nameEmpty",
-                },
-                invalid: {
-                  tags: "nameInvalid",
-                },
-                valid: {
-                  tags: "nameValid",
-                },
-                validate: {
-                  always: [
-                    {
-                      cond: "nameIsEmpty",
-                      target: "empty",
-                    },
-                    {
-                      cond: "nameIsValid",
-                      target: "valid",
-                    },
-                    {
-                      target: "invalid",
-                    },
-                  ],
+                submitted: {
+                  tags: "submitted",
                 },
               },
               on: {
-                formSubmit: {
-                  target: ".validate",
-                },
-                nameChange: {
-                  actions: ["setName", "formChange"],
-                  target: ".validate",
-                },
-              },
-            },
-            provider: {
-              initial: "untouched",
-              states: {
-                untouched: {
-                  tags: "providerUntouched",
-                },
-                validate: {
-                  always: [
-                    {
-                      cond: "providerIsValid",
-                      target: "valid",
-                    },
-                    {
-                      target: "invalid",
-                    },
-                  ],
-                },
-                invalid: {
-                  tags: "providerInvalid",
-                },
-                valid: {
-                  tags: "providerValid",
-                },
-              },
-              on: {
-                formSubmit: {
-                  target: ".validate",
-                },
-                providerChange: {
-                  actions: ["setProvider", "formChange"],
-                  cond: "didProviderChange",
-                  target: ".validate",
-                },
-              },
-            },
-            region: {
-              initial: "untouched",
-              states: {
-                untouched: {
-                  tags: "regionUntouched",
-                },
-                validate: {
-                  always: [
-                    {
-                      cond: "regionIsValid",
-                      target: "valid",
-                    },
-                    {
-                      target: "invalid",
-                    },
-                  ],
-                },
-                invalid: {
-                  tags: "regionInvalid",
-                },
-                valid: {
-                  tags: "regionValid",
-                },
-              },
-              on: {
-                formSubmit: {
-                  target: ".validate",
-                },
-                providerChange: {
-                  target: ".validate",
-                },
-                regionChange: {
-                  actions: ["setRegion", "formChange"],
-                  cond: "didRegionChange",
-                  target: ".validate",
-                },
-              },
-            },
-            size: {
-              initial: "validate",
-              states: {
-                validate: {
-                  always: [
-                    {
-                      cond: "noProviderAndRegion",
-                      target: "idle",
-                    },
-                    {
-                      cond: "noSizes",
-                      target: "loading",
-                    },
-                    {
-                      cond: "emptySizes",
-                      target: "error",
-                    },
-                    {
-                      target: "loaded",
-                    },
-                  ],
-                },
-                idle: {
-                  tags: "sizeIdle",
-                },
-                error: {
-                  tags: "sizeError",
-                },
-                loading: {
+                create: {
                   description:
-                    "Fetch the data required to show the available sizes and limits",
-                  invoke: {
-                    src: "getSizes",
-                    onDone: [
-                      {
-                        actions: "setSizes",
-                        target: "validate",
-                      },
-                    ],
-                    onError: [
-                      {
-                        target: "error",
-                      },
-                    ],
-                  },
-                  tags: "sizeLoading",
-                },
-                loaded: {},
-              },
-              on: {
-                providerChange: {
-                  target: ".validate",
-                },
-                regionChange: {
-                  target: ".validate",
+                    "Save is enabled all the time, if it's clicked before the form is completely filled out we should show the validation for all errored fields",
+                  target: ".submitted",
                 },
               },
             },
             form: {
-              initial: "unsubmitted",
+              initial: "invalid",
               states: {
-                unsubmitted: {
-                  tags: "formUnsubmitted",
-                },
                 invalid: {
                   tags: "formInvalid",
+                },
+                valid: {
+                  entry: "resetCreationErrorMessage",
+                  tags: "creatable",
+                  on: {
+                    fieldInvalid: {
+                      target: "invalid",
+                    },
+                    create: {
+                      target: "saving",
+                    },
+                  },
                 },
                 saving: {
                   entry: ["resetCreationErrorMessage", "triggerSave"],
                   tags: "formSaving",
                   on: {
                     createSuccess: {
-                      target: "#TrialPlanMachine.complete",
+                      target: "saved",
                     },
                     createError: {
                       actions: "setCreationError",
@@ -297,36 +139,226 @@ export const TrialPlanMachine =
                     },
                   },
                 },
+                saved: {
+                  type: "final",
+                },
               },
               on: {
-                create: [
-                  {
-                    actions: "formSubmit",
-                    cond: "canSave",
-                    target: ".saving",
-                  },
-                  {
-                    actions: "formSubmit",
-                    target: ".invalid",
-                  },
-                ],
-                formChange: {
-                  actions: "resetCreationErrorMessage",
-                  cond: "canSave",
+                fieldInvalid: {
+                  description:
+                    "sent by the fields when their value change to an invalid value. This will transition the form to the invalid state, to then eventually transition to the valid state if the field state is marked as done (which means that all fields have a valid value selected)",
+                  target: ".invalid",
                 },
               },
             },
+            fields: {
+              tags: "configurable",
+              type: "parallel",
+              states: {
+                name: {
+                  initial: "untouched",
+                  states: {
+                    untouched: {
+                      tags: "nameUntouched",
+                    },
+                    empty: {
+                      tags: "nameEmpty",
+                    },
+                    invalid: {
+                      entry: "fieldInvalid",
+                      tags: "nameInvalid",
+                    },
+                    valid: {
+                      tags: "nameValid",
+                      type: "final",
+                    },
+                    validate: {
+                      always: [
+                        {
+                          cond: "nameIsEmpty",
+                          target: "empty",
+                        },
+                        {
+                          cond: "nameIsValid",
+                          target: "valid",
+                        },
+                        {
+                          target: "invalid",
+                        },
+                      ],
+                    },
+                  },
+                  on: {
+                    create: {
+                      target: ".validate",
+                    },
+                    nameChange: {
+                      actions: "setName",
+                      target: ".validate",
+                    },
+                  },
+                },
+                provider: {
+                  initial: "untouched",
+                  states: {
+                    untouched: {
+                      tags: "providerUntouched",
+                    },
+                    validate: {
+                      always: [
+                        {
+                          cond: "providerIsValid",
+                          target: "valid",
+                        },
+                        {
+                          target: "invalid",
+                        },
+                      ],
+                    },
+                    invalid: {
+                      entry: "fieldInvalid",
+                      tags: "providerInvalid",
+                    },
+                    valid: {
+                      tags: "providerValid",
+                      type: "final",
+                    },
+                  },
+                  on: {
+                    create: {
+                      target: ".validate",
+                    },
+                    providerChange: {
+                      actions: "setProvider",
+                      cond: "didProviderChange",
+                      target: ".validate",
+                    },
+                  },
+                },
+                region: {
+                  initial: "untouched",
+                  states: {
+                    untouched: {
+                      tags: "regionUntouched",
+                    },
+                    validate: {
+                      always: [
+                        {
+                          cond: "regionIsValid",
+                          target: "valid",
+                        },
+                        {
+                          target: "invalid",
+                        },
+                      ],
+                    },
+                    invalid: {
+                      entry: "fieldInvalid",
+                      tags: "regionInvalid",
+                    },
+                    valid: {
+                      tags: "regionValid",
+                      type: "final",
+                    },
+                  },
+                  on: {
+                    create: {
+                      target: ".validate",
+                    },
+                    providerChange: {
+                      target: ".validate",
+                    },
+                    regionChange: {
+                      actions: "setRegion",
+                      cond: "didRegionChange",
+                      target: ".validate",
+                    },
+                  },
+                },
+                size: {
+                  initial: "validate",
+                  states: {
+                    validate: {
+                      always: [
+                        {
+                          cond: "noProviderAndRegion",
+                          target: "idle",
+                        },
+                        {
+                          cond: "noSizes",
+                          target: "loading",
+                        },
+                        {
+                          cond: "emptySizes",
+                          target: "error",
+                        },
+                        {
+                          target: "valid",
+                        },
+                      ],
+                    },
+                    idle: {
+                      entry: "fieldInvalid",
+                      tags: "sizeIdle",
+                    },
+                    valid: {
+                      tags: "sizeValid",
+                      type: "final",
+                    },
+                    error: {
+                      entry: "fieldInvalid",
+                      tags: "sizeError",
+                    },
+                    loading: {
+                      description:
+                        "Fetch the data required to show the available sizes and limits",
+                      invoke: {
+                        src: "getSizes",
+                        onDone: [
+                          {
+                            actions: "setSizes",
+                            target: "validate",
+                          },
+                        ],
+                        onError: [
+                          {
+                            target: "error",
+                          },
+                        ],
+                      },
+                      tags: "sizeLoading",
+                    },
+                  },
+                  on: {
+                    create: {
+                      target: ".validate",
+                    },
+                    providerChange: {
+                      target: ".validate",
+                    },
+                    regionChange: {
+                      target: ".validate",
+                    },
+                  },
+                },
+              },
+              onDone: {
+                target: "#TrialPlanMachine.configuring.form.valid",
+              },
+            },
+          },
+          onDone: {
+            target: "saved",
           },
         },
-        complete: {
+        saved: {
           type: "final",
         },
       },
     },
     {
       actions: {
-        formChange: send("formChange"),
-        formSubmit: send("formSubmit"),
+        fieldInvalid: send("fieldInvalid"),
         setName: assign((context, { name }) => {
           if (context.creationError === "name-taken") {
             return {
@@ -352,6 +384,7 @@ export const TrialPlanMachine =
                 )[0]?.id,
             },
             selectedProvider,
+            sizes: undefined,
           };
         }),
         setRegion: assign((context, { region }) => {
@@ -370,7 +403,7 @@ export const TrialPlanMachine =
             sizes: undefined,
           };
         }),
-        setSizes: assign((_context, event) => {
+        setSizes: assign((context, event) => {
           const sizes = event.data;
           return {
             sizes,
@@ -383,17 +416,18 @@ export const TrialPlanMachine =
         setCreationError: assign((_context, { error }) => ({
           creationError: error,
         })),
-        triggerSave: (context) => {
-          sendParent({ type: "save", data: context.form });
-        },
+        triggerSave: sendParent((context) => ({
+          type: "save",
+          data: context.form,
+        })),
       },
       guards: {
         isTrialUsed: ({ capabilities }) =>
           capabilities === undefined ||
-          capabilities.instanceAvailability === "trial-used",
+          capabilities.instanceAvailability === "used",
         isTrialUnavailable: ({ capabilities }) =>
           capabilities === undefined ||
-          capabilities.instanceAvailability === "trial-unavailable",
+          capabilities.instanceAvailability === "unavailable",
         nameIsEmpty: ({ form }) =>
           form.name === undefined || form.name.length === 0,
         nameIsValid: ({ form }) =>
@@ -424,15 +458,7 @@ export const TrialPlanMachine =
         noProviderAndRegion: ({ form }) =>
           form.provider === undefined || form.region === undefined,
         noSizes: ({ sizes }) => sizes === undefined,
-        emptySizes: ({ sizes }) =>
-          sizes !== undefined && sizes.standard.length === 0,
-        canSave: (_context, _event, meta) => {
-          return (
-            meta.state.hasTag(NAME_VALID) &&
-            meta.state.hasTag(PROVIDER_VALID) &&
-            meta.state.hasTag(REGION_VALID)
-          );
-        },
+        emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
         didProviderChange: (context, event) =>
           context.form.provider !== event.provider,
         didRegionChange: (context, event) =>
