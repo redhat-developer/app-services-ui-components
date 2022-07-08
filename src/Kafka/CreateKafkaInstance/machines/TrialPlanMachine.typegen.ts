@@ -3,27 +3,34 @@
 export interface Typegen0 {
   "@@xstate/typegen": true;
   eventsCausingActions: {
+    setCreationError: "createError";
     setName: "nameChange";
-    formChange: "nameChange" | "providerChange" | "regionChange";
     setProvider: "providerChange";
     setRegion: "regionChange";
-    setSizes: "done.invoke.TrialPlanMachine.configuring.size.loading:invocation[0]";
-    formSubmit: "create";
-    resetCreationErrorMessage: "formChange" | "create";
-    setCreationError: "createError";
+    setSizes: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
+    resetCreationErrorMessage:
+      | "done.state.TrialPlanMachine.configuring.fields"
+      | "create";
     triggerSave: "create";
+    fieldInvalid:
+      | ""
+      | "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
   };
   internalEvents: {
-    "done.invoke.TrialPlanMachine.configuring.size.loading:invocation[0]": {
-      type: "done.invoke.TrialPlanMachine.configuring.size.loading:invocation[0]";
+    "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]": {
+      type: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
     "": { type: "" };
+    "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]": {
+      type: "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
+      data: unknown;
+    };
     "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {
-    getSizes: "done.invoke.TrialPlanMachine.configuring.size.loading:invocation[0]";
+    getSizes: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
   };
   missingImplementations: {
     actions: never;
@@ -46,57 +53,78 @@ export interface Typegen0 {
     noProviderAndRegion: "";
     noSizes: "";
     emptySizes: "";
-    canSave: "create" | "formChange";
   };
   eventsCausingDelays: {};
   matchesStates:
     | "verifyAvailability"
     | "trialUsed"
     | "trialUnavailable"
+    | "regionsUnavailable"
     | "configuring"
-    | "configuring.name"
-    | "configuring.name.untouched"
-    | "configuring.name.empty"
-    | "configuring.name.invalid"
-    | "configuring.name.valid"
-    | "configuring.name.validate"
-    | "configuring.provider"
-    | "configuring.provider.untouched"
-    | "configuring.provider.validate"
-    | "configuring.provider.invalid"
-    | "configuring.provider.valid"
-    | "configuring.region"
-    | "configuring.region.untouched"
-    | "configuring.region.validate"
-    | "configuring.region.invalid"
-    | "configuring.region.valid"
-    | "configuring.size"
-    | "configuring.size.validate"
-    | "configuring.size.idle"
-    | "configuring.size.error"
-    | "configuring.size.loading"
-    | "configuring.size.loaded"
+    | "configuring.status"
+    | "configuring.status.unsubmitted"
+    | "configuring.status.submitted"
     | "configuring.form"
-    | "configuring.form.unsubmitted"
     | "configuring.form.invalid"
+    | "configuring.form.valid"
     | "configuring.form.saving"
-    | "complete"
+    | "configuring.form.saved"
+    | "configuring.fields"
+    | "configuring.fields.name"
+    | "configuring.fields.name.untouched"
+    | "configuring.fields.name.empty"
+    | "configuring.fields.name.invalid"
+    | "configuring.fields.name.valid"
+    | "configuring.fields.name.validate"
+    | "configuring.fields.provider"
+    | "configuring.fields.provider.untouched"
+    | "configuring.fields.provider.validate"
+    | "configuring.fields.provider.invalid"
+    | "configuring.fields.provider.valid"
+    | "configuring.fields.region"
+    | "configuring.fields.region.untouched"
+    | "configuring.fields.region.validate"
+    | "configuring.fields.region.invalid"
+    | "configuring.fields.region.valid"
+    | "configuring.fields.size"
+    | "configuring.fields.size.validate"
+    | "configuring.fields.size.idle"
+    | "configuring.fields.size.valid"
+    | "configuring.fields.size.error"
+    | "configuring.fields.size.loading"
+    | "saved"
     | {
         configuring?:
-          | "name"
-          | "provider"
-          | "region"
-          | "size"
+          | "status"
           | "form"
+          | "fields"
           | {
-              name?: "untouched" | "empty" | "invalid" | "valid" | "validate";
-              provider?: "untouched" | "validate" | "invalid" | "valid";
-              region?: "untouched" | "validate" | "invalid" | "valid";
-              size?: "validate" | "idle" | "error" | "loading" | "loaded";
-              form?: "unsubmitted" | "invalid" | "saving";
+              status?: "unsubmitted" | "submitted";
+              form?: "invalid" | "valid" | "saving" | "saved";
+              fields?:
+                | "name"
+                | "provider"
+                | "region"
+                | "size"
+                | {
+                    name?:
+                      | "untouched"
+                      | "empty"
+                      | "invalid"
+                      | "valid"
+                      | "validate";
+                    provider?: "untouched" | "validate" | "invalid" | "valid";
+                    region?: "untouched" | "validate" | "invalid" | "valid";
+                    size?: "validate" | "idle" | "valid" | "error" | "loading";
+                  };
             };
       };
   tags:
+    | "unsubmitted"
+    | "submitted"
+    | "formInvalid"
+    | "creatable"
+    | "formSaving"
     | "configurable"
     | "nameUntouched"
     | "nameEmpty"
@@ -109,9 +137,7 @@ export interface Typegen0 {
     | "regionInvalid"
     | "regionValid"
     | "sizeIdle"
+    | "sizeValid"
     | "sizeError"
-    | "sizeLoading"
-    | "formUnsubmitted"
-    | "formInvalid"
-    | "formSaving";
+    | "sizeLoading";
 }

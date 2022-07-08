@@ -6,7 +6,6 @@ export interface Typegen0 {
     setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
     notifyCreateErrorToStandardPlan: "createError";
     notifyCreateErrorToTrialPlan: "createError";
-    initStandarPlan: "done.invoke.createKafkaInstance.loading:invocation[0]";
   };
   internalEvents: {
     "done.invoke.createKafkaInstance.loading:invocation[0]": {
@@ -15,32 +14,32 @@ export interface Typegen0 {
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
     "xstate.init": { type: "xstate.init" };
-    "done.invoke.standardPlan": {
-      type: "done.invoke.standardPlan";
+    "done.invoke.standardPlanService": {
+      type: "done.invoke.standardPlanService";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
-    "error.platform.standardPlan": {
-      type: "error.platform.standardPlan";
+    "error.platform.standardPlanService": {
+      type: "error.platform.standardPlanService";
       data: unknown;
     };
-    "done.invoke.trialPlan": {
-      type: "done.invoke.trialPlan";
+    "done.invoke.trialPlanService": {
+      type: "done.invoke.trialPlanService";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
-    "error.platform.trialPlan": {
-      type: "error.platform.trialPlan";
+    "error.platform.trialPlanService": {
+      type: "error.platform.trialPlanService";
       data: unknown;
     };
   };
   invokeSrcNameMap: {
     getAvailableProvidersAndDefaults: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    standardPlan: "done.invoke.standardPlan";
+    standardPlan: "done.invoke.standardPlanService";
     createInstance:
       | "done.invoke.createKafkaInstance.standardPlan.saving:invocation[0]"
       | "done.invoke.createKafkaInstance.trialPlan.saving:invocation[0]";
-    trialPlan: "done.invoke.trialPlan";
+    trialPlan: "done.invoke.trialPlanService";
   };
   missingImplementations: {
     actions: never;
@@ -67,16 +66,18 @@ export interface Typegen0 {
     | "loading"
     | "systemUnavailable"
     | "standardPlan"
-    | "standardPlan.init"
     | "standardPlan.idle"
     | "standardPlan.saving"
     | "trialPlan"
     | "trialPlan.idle"
     | "trialPlan.saving"
     | "complete"
-    | {
-        standardPlan?: "init" | "idle" | "saving";
-        trialPlan?: "idle" | "saving";
-      };
-  tags: "systemUnavailable" | "saving";
+    | { standardPlan?: "idle" | "saving"; trialPlan?: "idle" | "saving" };
+  tags:
+    | "loading"
+    | "systemUnavailable"
+    | "standardPlan"
+    | "saving"
+    | "trialPlan"
+    | "SAVING";
 }

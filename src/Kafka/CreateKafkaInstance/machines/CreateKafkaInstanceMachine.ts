@@ -4,14 +4,20 @@ import type {
   CreateKafkaFormData,
   CreateKafkaInitializationData,
   CreateKafkaInstanceError,
-  MakeCreateKafkaInstanceMachine,
+  CreateKafkaInstanceServices,
   StandardPlanInitializationData,
   TrialPlanInitializationData,
 } from "../types";
 import { StandardPlanMachine } from "./StandardPlanMachine";
 import { TrialPlanMachine } from "./TrialPlanMachine";
 
+export const LOADING = "loading";
 export const SYSTEM_UNAVAILABLE = "systemUnavailable";
+export const STANDARD_PLAN = "standardPlan";
+export const TRIAL_PLAN = "trialPlan";
+export const STANDARD_PLAN_MACHINE_ID = "standardPlanService";
+export const TRIAL_PLAN_MACHINE_ID = "trialPlanService";
+export const SAVING = "SAVING";
 
 export type CreateKafkaInstanceMachineContext = {
   // initial data coming from the APIs
@@ -19,7 +25,7 @@ export type CreateKafkaInstanceMachineContext = {
 };
 
 const CreateKafkaInstanceMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QGMBOYCGAXMBpDAZgNYYCSAdrFhucmAHQA2A9hhAJblQDEEz5DTgDdmRBmkw58xMpWq0GLNpygJhzZNnb8A2gAYAuolAAHZrHZZt5YyAAeiAKwBmABz0AbABYAjM496AEwA7ME+XgA0IACeiD4egfQ+wR5+Cc6+qf4AvtlREth4hCQUVDR0TKwcXNxgqKjMqPQmjNgEjQC29AVSxbJlCpXKXGrkIppWuoa2ZhaTNkj2cXpe9EGOPpsezkGhrq5RsQg7PvRersGBAJw+etvbgR65+eiF0iVy5QwDEBioEAAFVrkejsCCMMDcWAYIRgGbmSzWWwOBC3VL0NyuLxeK6uQLhDxXRyHRBXYL0LHBLzpPTBRxBPQ+Z4gHpFGSleQVH5-QHA+jQoQqbisgDKAFdkHRYPBFrNEfxkXFHF5nJ49K5nJdwqFqZEYohAs5VR4Uj5DRdDc5DcFmaz3v1Od95L9-kCaPyYULWQBReqNeFzJGLFGbMlrRz7W7q3HBMkkhCOM7rW43Xx6RkhW2vXrsz6DLCodgYRhukFgiFQmFw2UI+aK1F6RxXNZeYKuRzeZL7K3xxzBPRJC6tvGBR7XJ55FnZtkfAYVAtFkt8gVe6fiyVwGWmWtB0AhxyG8PJPzJI1G+Mm8lGwI4umXbyuLOSGcOr70BfF0sewU1H1+1ABvKCx7nEPhXIk-YdoyrZeIEBz6gg5yquBVIah4LjJBsE6TuQzAQHAth2n0HJvko1RQIBdbBogGpJMEzjKq4VxGpcrh3PGAC0PguPQRK0l2lxwZqT5vMReZctEVBgB0ACq5Awhg7CtAARhClG7ksqJNp49GOBGGTOCeCTxs4uL0FB5opAkgQrCJOazo6-LOjyX7ltW26Bgq1ENrBGK3Ds-bcYE9LwUcPjuF46x3G2bZYo8zh2S+JGDNyrrLp6XDqV5IE+Ykhl6AxwU4m4wTxuFxoJI22x+Fc6p0ol9rJVyzlpTQWXAZptzhX5BW0oyB4hZxmzuH2N61eqtIpLGDViXODAfku7pue19a3Cq9D9pFlxUlaEaBPGOIeLxIStkSjxEuBjgzbmc3voWn7pT+FE1p5HUhgVzZXISdKphGjIXl4ibXhseKav41LXQ5b4LaWK3eV1iZfWSTbhH9ehXCZ2lnTijKXEaoOQ6+gzIMwHQtGAOBwzlySjrxDFMQVbjUh4JndckqQHjccX+Dak5ETdjpU5p2mnoxzGanB7EIRxo5HVc2K6gVoTo1cuS5EAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QGMBOYCGAXMBpDAZgNYYCSAdrFhucmAHQA2A9hhAJblQDEEz5DTgDdmRBmkw58xMpWq0GLNpygJhzZNnb8A2gAYAuolAAHZrHZZt5YyAAeiACwA2AOz1negKyOAHF4BGPV89AE4AJkdXABoQAE9EAFpw13cw10jPN38fAF9c2IlsPEISCioaOiZWDi5uMFRUZlR6E0ZsAmaAW3oiqVLZCoVq5S41chFNK11DWzMLaZskeydXZ3oA8IDXMN9U0K8AZgCvWISERMPAj19Q1z97lP3XfML0YukyuUqGIYgMVAQAAK7XI9HYEEYYG4sAwQjAc3MlmstgcCDujnoXm8kQiO2czl8ATOiHCh18WNcB3JkV8zhSbleID6JRk5XkVT+AOBoPosKEKm4LIAygBXZB0WDwZbzZH8VGIIJ6PT0RzK7xeXxavQBQ6hEkIRx3LEBNWHDLOGn3Jksz6DDm-eT-QEgmh8uGClkAUUazURCxRyzRASC4Q2O184WcpscAVCekcBtN62cmsOx1ChwJBNCjht736bO+wywqHYGEYrrBEKhMLhCJlSMWCsNBPoCZSJ01yoOBrJKeC4XCXlSW1NoXzklZXyGVVL5crvP5noLYDFErg0tMTcDoDRRsO9CpdMJ4VuXiO+viTmNgTVzlCAUtEUtLwKzNXdvZP3o84rVfdAU6m9X1UH9OUlj3RBPACehwkfTVwl2XxHEOJNsXoPY4x2Vws2HXx03yd9yGYCA4FsW0Bm-YYlFqKBwObIMkkOMMngIlINSpRxE2vC4s1g6McjVMkfCjQ5Jw+Kji05OIqDALoAFVyDhDB2HaAAjKEGN3FYED2FUR2HUJQmce89EtA1Lk1OC9CuIJYyHIcvGcCTCxnB0+SdbkAJrBttwDeUmPRC9VU7cyXG4o0ePOE5Qg2Q5HEQjJ4zCXNXOne0fy5F0lw9LhtMCqDgq8ULXBOONQn8fxosQFjMT1WMWOHbEErzd9KKLWdHRoZ0eRoArIN0zNYMcMLTNM7jcz7MMMkS1wfATEz4z2dKv2khg-0XN1fIGltEpVB9bgzbwoiTS16ASyMOLWSKR1WqSut-Mt-1yoD6MbALBv3PxMOHB9XEjTwTpiXiWJVAIQkCHtbgyAj7s6jzNqrXagtGzFI2cu5AeVHwQfOKN6EzSNTSQxLPD8eH3J-ZBmC6NowBwFGivmkqAa8KM7lTTVMwNTwSt1JD4wS+MogndrPweh0md0xJnLg1J2J2C8uJqi5UMxbnIbJMSTKI3IgA */
   createMachine(
     {
       context: { capabilities: undefined },
@@ -46,6 +52,7 @@ const CreateKafkaInstanceMachine =
       initial: "loading",
       states: {
         loading: {
+          tags: LOADING,
           description: "Fetch the data required to drive the creation flow",
           invoke: {
             src: "getAvailableProvidersAndDefaults",
@@ -69,20 +76,17 @@ const CreateKafkaInstanceMachine =
           },
         },
         systemUnavailable: {
-          tags: "systemUnavailable",
+          tags: SYSTEM_UNAVAILABLE,
           type: "final",
         },
         standardPlan: {
+          tags: STANDARD_PLAN,
           invoke: {
             src: "standardPlan",
-            id: "standardPlan",
+            id: STANDARD_PLAN_MACHINE_ID,
           },
-          initial: "init",
+          initial: "idle",
           states: {
-            init: {
-              entry: "initStandarPlan",
-              always: "idle",
-            },
             idle: {
               on: {
                 save: {
@@ -108,9 +112,10 @@ const CreateKafkaInstanceMachine =
           },
         },
         trialPlan: {
+          tags: TRIAL_PLAN,
           invoke: {
             src: "trialPlan",
-            id: "trialPlan",
+            id: TRIAL_PLAN_MACHINE_ID,
           },
           initial: "idle",
           states: {
@@ -122,10 +127,10 @@ const CreateKafkaInstanceMachine =
               },
             },
             saving: {
+              tags: SAVING,
               invoke: {
                 src: "createInstance",
               },
-              tags: "saving",
               on: {
                 createSuccess: {
                   target: "#createKafkaInstance.complete",
@@ -152,26 +157,21 @@ const CreateKafkaInstanceMachine =
             capabilities,
           };
         }),
-        initStandarPlan: (context) =>
-          send(
-            { type: "init", capabilities: context.capabilities },
-            { to: "standarPlan" }
-          ),
         notifyCreateErrorToStandardPlan: (_, event) =>
           send(
             { type: "createError", error: event.error },
-            { to: "standardPlan" }
+            { to: STANDARD_PLAN_MACHINE_ID }
           ),
         notifyCreateErrorToTrialPlan: (_, event) =>
           send(
             { type: "createError", error: event.error },
-            { to: "trialPlan" }
+            { to: TRIAL_PLAN_MACHINE_ID }
           ),
       },
       guards: {
-        canCreateStandardInstances: ({ capabilities }) =>
+        canCreateStandardInstances: (_, { data: capabilities }) =>
           capabilities !== undefined && capabilities.plan === "standard",
-        canCreateTrialInstances: ({ capabilities }) =>
+        canCreateTrialInstances: (_, { data: capabilities }) =>
           capabilities !== undefined && capabilities.plan === "trial",
       },
     }
@@ -182,7 +182,7 @@ export function makeCreateKafkaInstanceMachine({
   getStandardSizes: getStandardSizesCb,
   getTrialSizes: getTrialSizesCb,
   onCreate,
-}: MakeCreateKafkaInstanceMachine) {
+}: CreateKafkaInstanceServices) {
   return CreateKafkaInstanceMachine.withConfig({
     services: {
       getAvailableProvidersAndDefaults,
