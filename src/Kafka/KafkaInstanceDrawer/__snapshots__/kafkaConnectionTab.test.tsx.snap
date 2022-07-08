@@ -205,10 +205,10 @@ exports[`ConnectionTab renders 1`] = `
             class="pf-c-content"
           >
             <strong>
-              connection_tab.kafka_instance_url_label
+              
               <button
                 aria-disabled="false"
-                aria-label="connection_tab.kafka_instance_url_button_aria_label"
+                aria-label=""
                 class="pf-c-button pf-m-plain"
                 data-ouia-component-id="OUIA-Generated-Button-plain-1"
                 data-ouia-component-type="PF4/Button"
@@ -238,7 +238,7 @@ exports[`ConnectionTab renders 1`] = `
               >
                 <input
                   aria-invalid="false"
-                  aria-label="connection_tab.kafka_instance_url_label"
+                  aria-label=""
                   class="pf-c-form-control"
                   data-ouia-component-id="OUIA-Generated-TextInputBase-2"
                   data-ouia-component-type="PF4/TextInput"
@@ -284,9 +284,7 @@ exports[`ConnectionTab renders 1`] = `
                 data-ouia-component-type="PF4/Text"
                 data-ouia-safe="true"
                 data-pf-content="true"
-              >
-                connection_tab.kafka_instance_url_description
-              </small>
+              />
             </div>
           </div>
           <div
