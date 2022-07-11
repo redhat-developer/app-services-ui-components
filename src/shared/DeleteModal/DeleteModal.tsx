@@ -161,7 +161,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
       onClose={onCancel}
       appendTo={appendTo}
       disableFocusTrap={disableFocusTrap}
-      hasNoBodyWrapper={false}
+      hasNoBodyWrapper={true}
       actions={[
         <Button
           key={"confirm__button"}
