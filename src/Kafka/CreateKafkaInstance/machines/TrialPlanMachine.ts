@@ -1,13 +1,12 @@
-import { assign, createMachine, send } from "xstate";
-import { sendParent } from "xstate/lib/actions";
+import { assign, createMachine, send, sendParent } from "xstate";
 import {
-  CreateKafkaInstanceError,
-  TrialSizes,
   CloudProvider,
-  CloudProviderInfo,
+  CreateKafkaInstanceError,
   Region,
   TrialPlanInitializationData,
+  TrialSizes,
 } from "../types";
+import { onProviderChange } from "./shared";
 
 export type TrialPlanMachineContext = {
   // initial data coming from the APIs
@@ -19,9 +18,6 @@ export type TrialPlanMachineContext = {
     provider?: CloudProvider;
     region?: Region;
   };
-
-  // based on the form.provider selection
-  selectedProvider: CloudProviderInfo | undefined;
 
   // based on the form.provider and form.region selection
   sizes: TrialSizes | undefined;
@@ -35,7 +31,6 @@ export const TrialPlanMachine =
     {
       context: {
         capabilities: {} as TrialPlanInitializationData,
-        selectedProvider: undefined,
         sizes: undefined,
         form: {},
         creationError: undefined,
@@ -51,6 +46,7 @@ export const TrialPlanMachine =
           | { type: "nameIsValid" }
           | { type: "nameIsInvalid" }
           | { type: "nameIsTaken" }
+          | { type: "submit" }
           | { type: "create" }
           | { type: "createSuccess" }
           | { type: "createError"; error: CreateKafkaInstanceError },
@@ -64,6 +60,7 @@ export const TrialPlanMachine =
       id: "TrialPlanMachine",
       states: {
         verifyAvailability: {
+          entry: "setInitialContext",
           always: [
             {
               cond: "isTrialUsed",
@@ -79,13 +76,13 @@ export const TrialPlanMachine =
           ],
         },
         trialUsed: {
-          type: "final",
+          tags: "blocked",
         },
         trialUnavailable: {
-          type: "final",
+          tags: "blocked",
         },
         regionsUnavailable: {
-          type: "final",
+          tags: "blocked",
         },
         configuring: {
           type: "parallel",
@@ -97,6 +94,7 @@ export const TrialPlanMachine =
                   tags: "unsubmitted",
                 },
                 submitted: {
+                  entry: "triggerSubmit",
                   tags: "submitted",
                 },
               },
@@ -116,12 +114,11 @@ export const TrialPlanMachine =
                 },
                 valid: {
                   entry: "resetCreationErrorMessage",
-                  tags: "creatable",
                   on: {
                     fieldInvalid: {
                       target: "invalid",
                     },
-                    create: {
+                    submit: {
                       target: "saving",
                     },
                   },
@@ -156,11 +153,8 @@ export const TrialPlanMachine =
               type: "parallel",
               states: {
                 name: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "nameUntouched",
-                    },
                     empty: {
                       tags: "nameEmpty",
                     },
@@ -199,11 +193,8 @@ export const TrialPlanMachine =
                   },
                 },
                 provider: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "providerUntouched",
-                    },
                     validate: {
                       always: [
                         {
@@ -236,11 +227,8 @@ export const TrialPlanMachine =
                   },
                 },
                 region: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "regionUntouched",
-                    },
                     validate: {
                       always: [
                         {
@@ -358,6 +346,18 @@ export const TrialPlanMachine =
     },
     {
       actions: {
+        setInitialContext: assign((context) => {
+          return {
+            form: {
+              ...(context.capabilities.defaultProvider
+                ? onProviderChange(
+                    context.capabilities.availableProviders,
+                    context.capabilities.defaultProvider
+                  )
+                : {}),
+            },
+          };
+        }),
         fieldInvalid: send("fieldInvalid"),
         setName: assign((context, { name }) => {
           if (context.creationError === "name-taken") {
@@ -369,21 +369,14 @@ export const TrialPlanMachine =
           return { form: { ...context.form, name } };
         }),
         setProvider: assign((context, { provider }) => {
-          const selectedProvider =
-            context.capabilities?.availableProviders.find(
-              (p) => p.id === provider
-            );
           return {
             form: {
               ...context.form,
-              provider,
-              region:
-                selectedProvider?.defaultRegion ||
-                selectedProvider?.regions.filter(
-                  (r) => !!r.isDisabled === false
-                )[0]?.id,
+              ...onProviderChange(
+                context.capabilities.availableProviders,
+                provider
+              ),
             },
-            selectedProvider,
             sizes: undefined,
           };
         }),
@@ -403,7 +396,7 @@ export const TrialPlanMachine =
             sizes: undefined,
           };
         }),
-        setSizes: assign((context, event) => {
+        setSizes: assign((_context, event) => {
           const sizes = event.data;
           return {
             sizes,
@@ -420,6 +413,7 @@ export const TrialPlanMachine =
           type: "save",
           data: context.form,
         })),
+        triggerSubmit: send("submit"),
       },
       guards: {
         isTrialUsed: ({ capabilities }) =>
@@ -458,7 +452,8 @@ export const TrialPlanMachine =
         noProviderAndRegion: ({ form }) =>
           form.provider === undefined || form.region === undefined,
         noSizes: ({ sizes }) => sizes === undefined,
-        emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
+        emptySizes: ({ sizes }) =>
+          sizes !== undefined && sizes.standard.length === 0,
         didProviderChange: (context, event) =>
           context.form.provider !== event.provider,
         didRegionChange: (context, event) =>

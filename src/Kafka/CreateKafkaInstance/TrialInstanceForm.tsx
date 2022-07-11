@@ -3,7 +3,7 @@ import type { FormEvent, VoidFunctionComponent } from "react";
 import { useCallback } from "react";
 import type { FieldSizeProps } from "./components";
 import {
-  ModalAlertsStandardPlan,
+  ModalAlertsTrialPlan,
   FormAlerts,
   InstanceInfoSkeleton,
   InstanceInfo,
@@ -13,27 +13,29 @@ import {
   FieldAZ,
   FieldSize,
 } from "./components";
-import { useStandardPlanMachine } from "./machines";
+import { useTrialPlanMachine } from "./machines";
 
-export type StandardInstanceFormProps = {
+export type TrialInstanceFormProps = {
   formId: string;
   onClickContactUs: () => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
   onClickQuickStart: () => void;
+  onClickKafkaOverview: () => void;
 };
 
-export const StandardInstanceForm: VoidFunctionComponent<
-  StandardInstanceFormProps
+export const TrialInstanceForm: VoidFunctionComponent<
+  TrialInstanceFormProps
 > = ({
   formId,
   onClickContactUs,
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
   onClickQuickStart,
+  onClickKafkaOverview,
 }) => {
-  const { capabilities, selectedSize, error, onCreate } =
-    useStandardPlanMachine();
+  const { capabilities, error, isLoadingSizes, sizes, onCreate } =
+    useTrialPlanMachine();
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -45,9 +47,10 @@ export const StandardInstanceForm: VoidFunctionComponent<
 
   return (
     <>
-      <ModalAlertsStandardPlan
+      <ModalAlertsTrialPlan
         instanceAvailability={capabilities.instanceAvailability}
-        onClickContactUs={onClickContactUs}
+        trialDurationInHours={sizes?.trial.trialDurationHours}
+        onClickKafkaOverview={onClickKafkaOverview}
       />
 
       <Flex
@@ -71,7 +74,7 @@ export const StandardInstanceForm: VoidFunctionComponent<
           flex={{ default: "flex_1" }}
           className="mas--CreateKafkaInstance__sidebar"
         >
-          {selectedSize === undefined ? (
+          {isLoadingSizes || !sizes ? (
             <InstanceInfoSkeleton
               isTrial={false}
               onClickQuickStart={onClickQuickStart}
@@ -80,15 +83,15 @@ export const StandardInstanceForm: VoidFunctionComponent<
             <InstanceInfo
               isTrial={false}
               trialDurationInHours={undefined}
-              ingress={selectedSize.ingress}
-              egress={selectedSize.egress}
-              storage={selectedSize.storage}
-              maxPartitions={selectedSize.maxPartitions}
-              connections={selectedSize.connections}
-              connectionRate={selectedSize.connectionRate}
-              messageSize={selectedSize.messageSize}
+              ingress={sizes.trial.ingress}
+              egress={sizes.trial.egress}
+              storage={sizes.trial.storage}
+              maxPartitions={sizes.trial.maxPartitions}
+              connections={sizes.trial.connections}
+              connectionRate={sizes.trial.connectionRate}
+              messageSize={sizes.trial.messageSize}
               onClickQuickStart={onClickQuickStart}
-              streamingUnits={selectedSize.displayName}
+              streamingUnits={sizes.trial.displayName}
             />
           )}
         </FlexItem>
@@ -106,7 +109,7 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
     isNameError,
     isFormEnabled,
     setName,
-  } = useStandardPlanMachine();
+  } = useTrialPlanMachine();
 
   return (
     <FieldInstanceName
@@ -128,7 +131,7 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
 
 export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
   const { form, capabilities, isProviderError, isFormEnabled, setProvider } =
-    useStandardPlanMachine();
+    useTrialPlanMachine();
 
   return (
     <FieldCloudProvider
@@ -145,41 +148,38 @@ export const ConnectedFieldCloudRegion: VoidFunctionComponent = () => {
   const {
     form,
     selectedProvider,
-    selectedSize,
     isRegionError,
     isFormEnabled,
-    capabilities,
     error,
     setRegion,
-  } = useStandardPlanMachine();
+  } = useTrialPlanMachine();
 
   return (
     <FieldCloudRegion
       validity={
         isRegionError
           ? "required"
-          : error === "region-unavailable" ||
-            capabilities.instanceAvailability === "regions-unavailable"
+          : error === "region-unavailable"
           ? "region-unavailable"
           : "valid"
       }
       regions={selectedProvider?.regions}
       value={form.region}
       isDisabled={!isFormEnabled}
-      isSizeUnavailable={selectedSize?.isDisabled || false}
+      isSizeUnavailable={false}
       onChange={setRegion}
     />
   );
 };
 
 export const ConnectedFieldAZ: VoidFunctionComponent = () => {
-  const { isFormEnabled } = useStandardPlanMachine();
+  const { isFormEnabled } = useTrialPlanMachine();
 
   return (
     <FieldAZ
       validity={"valid"}
-      options={"multi"}
-      value={"multi"}
+      options={"single"}
+      value={"single"}
       isDisabled={!isFormEnabled}
       onChange={() => false} // AZ is defined by the backend, we just visualize the value here
     />
@@ -192,33 +192,21 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     "onLearnHowToAddStreamingUnits" | "onLearnMoreAboutSizes"
   >
 > = ({ onLearnHowToAddStreamingUnits, onLearnMoreAboutSizes }) => {
-  const {
-    form,
-    sizes,
-    isSizeOverQuota,
-    isSizeDisabled,
-    isSizeError,
-    isSizeLoadingError,
-    isFormEnabled,
-    isLoadingSizes,
-    isLoading,
-    setSize,
-  } = useStandardPlanMachine();
+  const { sizes, isSizeError, isSizeLoadingError, isLoadingSizes, isLoading } =
+    useTrialPlanMachine();
 
   return (
     <FieldSize
-      value={form.size?.quota || 1}
-      sizes={sizes}
+      value={1}
+      sizes={sizes?.standard}
       //TODO remainingQuota={capabilities.remainingQuota || 0}
       remainingQuota={0}
-      isDisabled={!isFormEnabled || sizes === undefined}
+      isDisabled={true}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
       isLoadingError={isSizeLoadingError}
-      validity={
-        isSizeOverQuota ? "over-quota" : isSizeDisabled ? "required" : "valid"
-      }
-      onChange={setSize}
+      validity={"trial"}
+      onChange={() => false}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}
     />

@@ -14,11 +14,11 @@ export default {
   component: CreateKafkaInstance,
   args: {
     apiPlan: "standard",
-    apiScenario: "standard-available",
+    apiStandardScenario: "available",
+    apiTrialScenario: "available",
     apiProviders: PROVIDERS.map((p) => p.id),
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",
-    apiMaxStreamingUnits: 5,
     apiRemainingQuota: 3,
     apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
@@ -38,7 +38,7 @@ export const TrialUnavailableOnFormSubmit = Template.bind({});
 TrialUnavailableOnFormSubmit.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormSubmit.args = {
   apiPlan: "trial",
-  apiScenario: "trial-available",
+  apiTrialScenario: "available",
   onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
 };
 TrialUnavailableOnFormSubmit.play = sampleSubmit;
@@ -56,7 +56,7 @@ TrialSelectedRegionUnavailableOnFormSubmit.storyName =
   "Selected region unavailable - Trial";
 TrialSelectedRegionUnavailableOnFormSubmit.args = {
   apiPlan: "trial",
-  apiScenario: "trial-available",
+  apiTrialScenario: "available",
   onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
 };
 TrialSelectedRegionUnavailableOnFormSubmit.play = sampleSubmit;

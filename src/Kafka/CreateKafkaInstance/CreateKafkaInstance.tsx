@@ -1,50 +1,41 @@
 import {
   Alert,
   Button,
-  Flex,
-  FlexItem,
-  Form,
   Modal,
   ModalVariant,
+  Stack,
+  StackItem,
 } from "@patternfly/react-core";
 import { OutlinedClockIcon } from "@patternfly/react-icons";
-import type {
-  FormEvent,
-  FunctionComponent,
-  VoidFunctionComponent,
-} from "react";
-import { useCallback } from "react";
+import type { FunctionComponent, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { FieldSizeProps } from "./components";
-import {
-  FieldAZ,
-  FieldCloudProvider,
-  FieldCloudRegion,
-  FieldInstanceName,
-  FieldSize,
-  FormAlerts,
-  InstanceInfo,
-  InstanceInfoSkeleton,
-  ModalAlerts,
-} from "./components";
 
-import {
-  CreateKafkaInstanceProvider,
-  useCreateKafkaInstanceMachine,
-} from "./CreateKafkaInstanceProvider";
+import { CreateKafkaInstanceProvider } from "./machines/CreateKafkaInstanceProvider";
 
 import "./CreateKafkaInstance.css";
-import type { MakeCreateKafkaInstanceMachine } from "./types";
+import { LoadingForm } from "./LoadingForm";
+import { useCreateKafkaInstance } from "./machines";
+import { StandardInstanceForm } from "./StandardInstanceForm";
+import { TrialInstanceForm } from "./TrialInstanceForm";
+import type { CreateKafkaInstanceServices } from "./types";
+import { ModalAlertsLoading, ModalAlertsSystemUnavailable } from "./components";
 
 export type CreateKafkaInstancePropsWithSizes =
-  ConnectedCreateKafkaInstanceProps & MakeCreateKafkaInstanceMachine;
+  ConnectedCreateKafkaInstanceProps & CreateKafkaInstanceServices;
 export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstancePropsWithSizes
-> = ({ getAvailableProvidersAndDefaults, getSizes, onCreate, ...props }) =>
+> = ({
+  getAvailableProvidersAndDefaults,
+  getStandardSizes,
+  getTrialSizes,
+  onCreate,
+  ...props
+}) =>
   props.isModalOpen ? (
     <CreateKafkaInstanceProvider
       getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
-      getSizes={getSizes}
+      getStandardSizes={getStandardSizes}
+      getTrialSizes={getTrialSizes}
       onCreate={onCreate}
     >
       <ConnectedCreateKafkaInstance {...props} />
@@ -72,11 +63,11 @@ export type ConnectedCreateKafkaInstanceProps = {
    */
   onCancel: () => void;
   onClickQuickStart: () => void;
-  onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
   onClickLearnMoreAboutRegions: () => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
+  onClickKafkaOverview: () => void;
 };
 export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   ConnectedCreateKafkaInstanceProps
@@ -86,36 +77,18 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   onClickQuickStart,
   onCancel,
   disableFocusTrap,
-  onClickKafkaOverview,
   onClickContactUs,
   //onClickLearnMoreAboutRegions,
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
+  onClickKafkaOverview,
 }) => {
-  const FORM_ID = "create_instan ce_-form";
   const { t } = useTranslation("create-kafka-instance-with-sizes");
 
-  const {
-    isTrial,
-    isLoading,
-    isLoadingSizes,
-    isSaving,
-    canSave,
-    isSystemUnavailable,
-    error,
-    create,
+  const { isLoading, isStandardPlan, isTrialPlan, isSaving } =
+    useCreateKafkaInstance();
 
-    capabilities,
-    selectedSize,
-  } = useCreateKafkaInstanceMachine();
-
-  const onSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      create();
-    },
-    [create]
-  );
+  const FORM_ID = "create_kafka_instance_form";
 
   return (
     <Modal
@@ -128,38 +101,91 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
       onClose={onCancel}
       appendTo={appendTo}
       position="top"
-      actions={[
-        <Button
-          key="submit"
-          variant="primary"
-          type="submit"
-          form={FORM_ID}
-          isDisabled={!canSave}
-          spinnerAriaValueText={t("common:submitting_request")}
-          isLoading={isSaving}
-          data-testid="modalCreateKafka-buttonSubmit"
-          ouiaId="button-create"
-        >
-          {t("create_instance")}
-        </Button>,
-        <Button
-          key="cancel"
-          variant="link"
-          onClick={onCancel}
-          data-testid="modalCreateKafka-buttonCancel"
-        >
-          {t("common:cancel")}
-        </Button>,
-      ]}
+      footer={
+        <Stack hasGutter={true}>
+          <StackItem>
+            <Alert
+              className="mas--CreateKafkaInstance__creationTimeAlert"
+              customIcon={<OutlinedClockIcon />}
+              variant="info"
+              isInline
+              isPlain
+              title={t("instance_creation_time_alert")}
+            />
+          </StackItem>
+          <StackItem>
+            <Button
+              key="submit"
+              variant="primary"
+              type="submit"
+              form={FORM_ID}
+              spinnerAriaValueText={t("common:submitting_request")}
+              isDisabled={isLoading || isSaving}
+              isLoading={isSaving}
+              data-testid="modalCreateKafka-buttonSubmit"
+              ouiaId="button-create"
+            >
+              {t("create_instance")}
+            </Button>
+            <Button
+              key="cancel"
+              variant="link"
+              onClick={onCancel}
+              data-testid="modalCreateKafka-buttonCancel"
+            >
+              {t("common:cancel")}
+            </Button>
+          </StackItem>
+        </Stack>
+      }
     >
-      <Alert
-        className="mas--CreateKafkaInstance__creationTimeAlert"
-        customIcon={<OutlinedClockIcon />}
-        variant="info"
-        isInline
-        isPlain
-        title={t("instance_creation_time_alert")}
-      />
+      {(() => {
+        switch (true) {
+          case isLoading:
+            return (
+              <>
+                <ModalAlertsLoading />
+                <LoadingForm
+                  onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+                  onLearnMoreAboutSizes={onLearnMoreAboutSizes}
+                  onClickQuickStart={onClickQuickStart}
+                />
+              </>
+            );
+          case isStandardPlan:
+            return (
+              <StandardInstanceForm
+                formId={FORM_ID}
+                onClickContactUs={onClickContactUs}
+                onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+                onLearnMoreAboutSizes={onLearnMoreAboutSizes}
+                onClickQuickStart={onClickQuickStart}
+              />
+            );
+          case isTrialPlan:
+            return (
+              <TrialInstanceForm
+                formId={FORM_ID}
+                onClickContactUs={onClickContactUs}
+                onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+                onLearnMoreAboutSizes={onLearnMoreAboutSizes}
+                onClickQuickStart={onClickQuickStart}
+                onClickKafkaOverview={onClickKafkaOverview}
+              />
+            );
+          default:
+            return (
+              <>
+                <ModalAlertsSystemUnavailable />
+                <LoadingForm
+                  onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
+                  onLearnMoreAboutSizes={onLearnMoreAboutSizes}
+                  onClickQuickStart={onClickQuickStart}
+                />
+              </>
+            );
+        }
+      })()}
     </Modal>
   );
 };

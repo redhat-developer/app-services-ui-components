@@ -1,14 +1,13 @@
-import { assign, createMachine, send } from "xstate";
-import { sendParent } from "xstate/lib/actions";
+import { assign, createMachine, send, sendParent } from "xstate";
 import {
-  CreateKafkaInstanceError,
-  StandardSizes,
   CloudProvider,
-  CloudProviderInfo,
+  CreateKafkaInstanceError,
   Region,
   Size,
   StandardPlanInitializationData,
+  StandardSizes,
 } from "../types";
+import { onProviderChange } from "./shared";
 
 export type StandardPlanMachineContext = {
   // initial data coming from the APIs
@@ -23,7 +22,6 @@ export type StandardPlanMachineContext = {
   };
 
   // based on the form.provider selection
-  selectedProvider: CloudProviderInfo | undefined;
 
   // based on the form.provider and form.region selection
   sizes: StandardSizes | undefined;
@@ -32,12 +30,11 @@ export type StandardPlanMachineContext = {
 };
 
 export const StandardPlanMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAJgBsATgAM9bVoAsADj0B2HcYCMNgKz2ANCA6J99HRZsaAzF-1fMz0NAF9Ql1RMbDwiUgoaOnpyJTZqKABXVgwoeiiUDNgxchwwNBQwFVl5FEVlJDVEGxCXNwR7LQMLez1LYz0TCwstcMj0LFwCYgwyKloGFIw0zOzcthkcAFsmNEJqCDE0sEIIAEkMXj2IKrkFJRV1BBtTK097fWeLDUdjb1bNPQ6LT0Xx6GwWYxGUw2HQ6eyjEBRCaxaazRILVLpLK0NYbbaXfbFUrlSoNap3eqgR6fHRvD4vb72X42f4IDQaV56Yy+fwvXS+d4jCKI8YxKbxOZJRbLbE5ejrLZ5NCMHFEsoVADKGXI5Dg8DJt1q9wajz8HPoWhMel8GmsTJhrL8YItXnB7y5xmMCKRYriMwS82SmJWOPleKVKpyapJAFEcDgNjcanUHpobRYLVabXbbDpHRoHPQhgKtF9fBCLL5vaLJn60YHpVjVmGtodqMczhddvskxTU08OgYzLzfKZbRZrcZWTZdPZ6HYtDbOrpdNXorXUQGpcHZWt2ydYPQMGhNgwCdgKhIDcnjVTEGY519vnYgWP7C9p6XfPOdKZrOnTC0P94WFH0NwldEgyWJtQyOA8jxPMBDjxLUBE2EReyNSlGieG1p2GDMbAfIEuX8UEvVAmsUQghsd2bOCIEPY9TzEZiwAAYUoTAYEwlMTSaPDXCaICbEMDRjF-SthiBCixnXaj-UlDFoJDOUGMPKQExVCAWB2K4SSvaRDT4u92ltQxOjBMFTBs+xnkdGFjHoT1+neW1uXsHk12RcVFMgxtVL3DsNK0-YWGQrZUPQlBeNvHCbEEto-E9ehTGMRc-C0DkgjCSj5N8+ttxU3d5X3Rj6E0mRtPCyrqpwTjuNJIyb2w6lEs0GFROsMEfF8EwgT8bzfU3JSoJleiysPUooDqPT9gM2LWsQewC3oXpvlsZ5fg6KchKeAshyyuymT6mTcrkny6y3ZTxtgyb6GmuoIs2KKMOvPt+NwjRp18cEQQsF5zEHX92SG8C-No4qJuCh6wBmpQxFqsL6q4nImpAcksP7BLvr2nxdGcgUEqI9kPLBhTCpumC1Pux6EbpjAGrRxbsfap4F3oFa-w0MFLMcKs8sukb-Lou6YfkAAvM9uwvJCWc+l5vy8QGMtMRxbUdD5Oe8Cd0r0GyjHJgrrrG6mgvgyWGEIGQ0AgVUICUBhaEYGQAGsGDAimTYCkr1Lyagpfoa3bZxBBnZkchyjqABtPQAF15dMiS51-dbOr620WT2jlzHnLl-3Irajau0afehi2A6tm27ajFgExwCriBQBVtk943S9FmnxcroPq9D8PI6w2OE-erHPuTzxzBCdOsp0LOksrDR5y0HxrBnDo+osYvhch26u4rqXntemLR5M+K2dtctOY6L4IWsgjt5ooq9-N8rLcR0KdJRxrE-P3G2lBCYZyOtQREXLMnR+ENn5m1Kt3Q+DMmY8VPnFNq-9EC-R8M5Bw5YdAaDHLaRckDKam0CrAg+SFLaIPRpjM+qDWS-U6CCd0eDIT609EQ72ndX5FAdkkfIHsqLtxFlDMWB5f7UlsEvZ4HJrT2CsBORw+YsogkBmlW+f5ZIinyiXYRL8xC8IESSPIgidG7zNuIzQugDBGGCFYTaii8ZAjnGCPBoIeo2j6uEYUGAZA6X1MgExO8kjMFYJwHgfBBDCFEBYhAkJpxwlSjocscjkm-B5FvQWw0n4MCqiwAAihkGQ6AYm2l-C6QIElb7WniXOP8ySpJMkrOWDho1aBIl1AAVWPLwfgaABCEGocZFB940FsiAYBHoPNvA8h5EklpkEGawC6cqCJfSBkxLiXjbQnhSbdXLCvFh8yzGkPyIUegGQMCwAyGhEQFRrjIKWk8Foe0JKiSGDZZoXxdAOBAhdLJUCqYnPQAUQ8VybkoDuSU0w347K9GsgWRcjgLCsgnLSIC2hp56A6OJUwRzoFAvKIUGJANWT9GBOYboaS-xYogZk8GxCy6wXDM7GWJSJLAghBydklgV4wmRdnQE1jAb6A8tCLkeLAW+3DOeGJDhGHDl-KOcck58ygkSdoRkVhFWaLbqY-FUrFSwGVDiEpvRTDzhsrCcwydui+HzOZH4lhxImF+l4CVJCDWt2VJANlQIiyQifDyl8-Kkq2jnEBAUXIea2lxXSr2HcRFqTxLKzywIFXQrHF4FVeMV4GCIj0LKlZpFwndYy-e5U2LnIwCgGQ2pKA+oedjFahgNG9C2nIsw043xrVwZCORCUyWxr+fSzhibuEIVPPQMAmwpDRMbZ9L45qtByM8sYFa2hrD4WbQlEiaiTArVLVwshFbEL0BZVcWVbMYSLjWkEOEfg-w+CHVooW2SPXlxPZOmV87TLgicuyICANYQpOhHavGGi1qIskmrcwHJD1juPUxU954SQxJyp4N0M5W1pTA20N0Uj-CdD3Wu86L7-kMqPX7Nisr9bTnfOa9kQwJw81np4uNQjjm+3ukjL+Vaa11obc1D6v6IRrXfD4DtlZ6OjPEiEIsHxPIEOhDoeDL9EMVU-rpFDFQ0OAWco4MEdkiKlkrLtUNvxnIhDHLoL4IRVMwL9jx3S56ew-vip5IsgHGSFrSo6ZknmHADH0GCdh7G9WSo-SFKqyM5r3KE2PUy3RRIgZtP0Oedl8wWf6HgjdtnSO6qCRF0R5UnM4Bo6YByAxPCAffMMGczSwuFffcVqacNZoXP41QQTGMhmPJnLSXBSS57iU8nYIi04J7fGXa6Hkf4hj2dIX7BmsXUNuceOWc1fKmS8qxWOLk05tDfkhAlXQa7HDNCFMO+NuiHO0za0oM9XYL1raaBJC0-QQtEZxYBH63QQQAeaE6NdNkFtcZhst798XaGIErHm5dXJC3pNHAdm9x3TpndhZdsjI6E1qaW-d7CNDhlPIq3ja0yW5HLvRQWawz6CtvrLeOy2K2dMvYQCZ-1lo5vlgBkBehu39MAyGHPE74rGsM8o-dZn+x1ls7sOlCysLlP+ASvzm0nhhjLocNoYYaVQeRf9oHO2Rr+ndaJ48gsolyffG+ICIY4l6EeMV5IvqEkxz65a4bnJISClFLQCUuwt6fDDCxYuswWh6Gem-DCXBnxwFzw9+W0FPdIc9Zav2b435vigcC+drFuHNDAc5r0fZTIo2hauxx-VBvmd10TGzrnkH8b-k9EBZw2cJwGEtIuXbREfDWkT0znuwca5QEvTJ7wS88Gx96CvOEbrxcAua0nr35XHQr3DXCHGEJwTOsH4hmJvm9pwnNe+RcSSzDciCALSv4Xl9j7Z0yR335oVZTSlil8FfsfXcDEa5gcW09hMcI8FrROZSwp5p8gRhgalzVYR9AgIPR-A5lF9KZZVSc8NY1wggA */
+  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAJgBsATgAM9AMwAWLQA4ArDsPmA7DoCMAGhAdE++juu2zhh9uMLDUsAXxCXVExsPCJSCho6enIlNmooAFdWDCh6SJR02DFyHDA0FDAVWXkURWUkNUQHPQ0XNwQLMy0jLVt-Bwse4y9bMIj0LFwCYgwyKloGZIxUjKycthkcAFsmNEJqCDFUsEIIAEkMXj2ISrkFJRV1BAcze08zB0Mgq11A21bNPTPehaHoWDo9PQWQy2QyjECRCYxaazBILFJpTK0NYbbaXfZiWDpASbEQ3aq1B6NF46N4fL46H4WP6uTQaQH0YwOYzcrkOPnvOEI6JTOJzRKLZaY7L0dZbXJoRhYoolMpgADK6XI5Dg8HqVTudVAjw0hg0tmBZmMJjBJl6hn+CA0TuM9D0tihWmMGh0ZosDi0gvGwtiM3i8yS6JWWJlOPliuyytK5QAojgcBsyQbKY7TebzFbAlDjHaHRoPmZ6FzOQ4vBorc0RuF4UHJiGUeGJRjVjGtodqMczhddvtMzV7vVHv0tAY-WCOrY9ENOQ7-Q5zRY9IvIX7HDXYU2ha3kWHxZGpWt+ydYPQMGhNgw8dhyhI9bcx4aGghjJZ6LZTJ0TTMXxbG9FctG9TxZzLJp3lsRsxiiI9RVRCMli7aMjivG87zARNVVHCkJ0aU0VxAwxPEBH0dA3TpOgDA8WyRZCOzPbtMIga9b3vMQuLAABhShMBgAjxyNYiWhZJ4tGhTwF3MP1jGaaF4ObRCmNDMU0TQqNpXY68pHTRUIBYHYrlVF9pDfQixPaCCzSGCxv0MPwawkto2TMDQjBNHRLGLTk2QsQM1JFDSUM7HSLwHfTDP2Fg8PKESP0nEjJKdU1fxNJk4LZJ0nWCxFQvbU9tPPGVLw4+gDJkIz4uq2qcAEoSKlfclRM-D43IBV5YJc78uS0NcCuDY9NNQyU2Iq68SigWpTP2cykuzIIHFdOszEcTcYW0LqnhNLomjgv9qMG3NhqQsKWNKybovoGbagSlrLLa5LxJXExyOaBk62-PQTG5c71OKrSJowqa7rAWalDEeq4sawTsiekB9XfbNOpXb0LFdWwtA3GsQPeAGGJCtsTxB9DdPB+7oepjAmsRpaiKeVK2j5L1KwXLKYUUqEVMPIGyfGimoqw+QAC8H2HJ9cMZmyXnIrxoR3RTp3dUsQIMQauU890mj8QGisFiKyr03JqAl+hCBkNAICVCAlAYWhGBkABrBh+cNsbjZu0XzYYK2baxBAnZkcgylqABtPQAF1Zc-BzPAZDbnkO5znDSqwaSaXzc2LRy-wN0mvdYsHbvF-3rdthMWHTHAquIFBZW2D2i-CkvKbLv3LcroOQ7D98o9j1qsyZhOvHMRx3jdNPSzBVap16ZpFMBPnGM9tvrtL32JceuOUt230ugGQJ+gAk0HEL0aN9Bjvt9w2HjPh5q97etKgPIv0uR0IY-xx0JicKq3K6N8RaVXLmIWm9NhLD1RkzdGaVrCrVMKYNc34nQ50vsxEqIDyqdx3uXKBSMUbWQ6izTQOhXicjgoYLwG1PJmEwZdbBwtcFXjEPbRIeR3ZryAcwyKrCOIvyeAFegbJDBfXdFafQxhSzPBdLrLwzwKH6B0Iw4GQtIrsIdrkdA5QdEkyvsA4WQjtAeBMPJawdhHAriAuaT4nxwLzk6AXOEGAZDGV1MgHhhjEjMFYJwHgfBBDCFEEIr0pEDBUI0EyNcnptDPDUYLGqLAACK6QZDoBMbQ384FnLvH9BPFc1EKI+AoZab+gIgKJLGrQBE2oACqt5eD8DQAIQgRCrLtUeOEhBBgaHOlgg2Jk9EEKAJ8QwWmsBGkKiCa09pYTdpNCQVlPOwQggMIASNLB5N+F5AKPQdIGBCTEhEOUa4MCSGTmaA6P0djuZ8kcAyQEQVNkXXUd7aMezrzHJJCgM5JjfD0C+H9ewnorRggdAuGkPhf6fEhNRaE1Tr4sK+UInwDorReWhBQ5oZo1x-X3KMrZTCdkm1jE7KWJihhdFBe8GwFDBoWFLICLynpeiOHAmuXyGyiVvKNu3bEcpHxCKnDOfoYIXiLm-undy-RyJ1n8IuLWlhVGvIFsXTeulYywAVFiExm4KxlnfgauCTIZFpX6KtfQnkTDNCUkTXl6rkX8KbnGSAVKGS-iTh8XQON+iliNa6RywwfospGapMZ2yNFkq2CKj0QLxXzilcuSScqvIblxt+Rw1YNBIqMS68GvF6BgE2FIUJFyumIAJsCHwehfAPMQREisQFomdE+LuT4ea+Em0LThegFKrgirIU8Hwq1LAbiCICTlugu2kp9pVItwqK2vRHS6J0X1KJrlQWYIp7JfCbnrE0PQIJV4GKjR82+C6+2Pnwsu7MJgvI+mpT4X4lomWpoXM2zy4J218k7Wq9e+ae23V4iKutK5HIumotQ+wsE6y5oA7wudW9KoPxMjexKd6maGE6ByKEx6N34Z3Raz4oiQJDB8o4ECp7I0kujfOmKNU4b9qHIOrDNk5U5OXpI7+z6A0eB6BCXFpqEOOsA92hjVVYqP3muc56I8bK6yBfoaSBqNq6B0LI0jZo6w+hoVRs0s76MocYw1MDxHWZeBdDa6czxnIDH-WJpDxnL3TUhnNDDHSXr3p8KIv608p4dG-Oa1mwQaSQnAnWxS2hxGEojcS95AqBFuahhgFjS75OwI40MYENDAT1m-jjECK5l5vHsroF4LxTBGYvaAlLHnKXsc-DCAwNZBMtuQZ0DGG0g2RctM0VTcWW7jJc3ViGqXzMrkhOaWJQRpydETTVpLpty6ydvZly5iAejmndNE2thNhmlheOaIYfIzQ+mnEN7x57lvg1W-seZTXJwDTI2YY9NY63TisEdoIrpNwDGnv6PQqqnMjdq8ls2FtbY6rae6p7mg+SunbYNXydY-zBAdH4dmppl7gTWUBcNw2buarG6t5JOA0kZLQCYxHf1vg1k8v5DHklTTgVEbWblvQFVXbPXR8HK2u4ZeRp0ld0T5UDGiWWP8NZnhHa5AmnGOH6V+tE-FvlGqcEC4tjXDM8OEAggrMeyVgwNo41njWYEvx3Tj0sO6JbJOIerYDlXKAQ6D5QlWr6MsgImgbl8vbzXd2-aTbSgWYEO4fSSsUsWAPLC9JCMtA6XyLpnjBH9Fab9MJY+RSEY5THVgjAqqZO8Xq1EjM6uYHJ4X3mmbBD+uHvTNgzRsq0DY94Rg07UShI4YIPK1dOvmCKizVIwhhCAA */
   createMachine(
     {
       context: {
         capabilities: {} as StandardPlanInitializationData,
-        selectedProvider: undefined,
         sizes: undefined,
         form: {},
         creationError: undefined,
@@ -54,6 +51,7 @@ export const StandardPlanMachine =
           | { type: "nameIsValid" }
           | { type: "nameIsInvalid" }
           | { type: "nameIsTaken" }
+          | { type: "submit" }
           | { type: "create" }
           | { type: "createSuccess" }
           | { type: "createError"; error: CreateKafkaInstanceError },
@@ -67,6 +65,7 @@ export const StandardPlanMachine =
       id: "standardPlanMachine",
       states: {
         verifyAvailability: {
+          entry: "setInitialContext",
           always: [
             {
               cond: "isOverQuota",
@@ -86,13 +85,13 @@ export const StandardPlanMachine =
           ],
         },
         overQuota: {
-          type: "final",
+          tags: "blocked",
         },
         instanceUnavailable: {
-          type: "final",
+          tags: "blocked",
         },
         regionsUnavailable: {
-          type: "final",
+          tags: "blocked",
         },
         configuring: {
           type: "parallel",
@@ -104,6 +103,7 @@ export const StandardPlanMachine =
                   tags: "unsubmitted",
                 },
                 submitted: {
+                  entry: "triggerSubmit",
                   tags: "submitted",
                 },
               },
@@ -128,7 +128,7 @@ export const StandardPlanMachine =
                     fieldInvalid: {
                       target: "invalid",
                     },
-                    create: {
+                    submit: {
                       target: "saving",
                     },
                   },
@@ -163,11 +163,8 @@ export const StandardPlanMachine =
               type: "parallel",
               states: {
                 name: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "nameUntouched",
-                    },
                     empty: {
                       tags: "nameEmpty",
                     },
@@ -206,11 +203,8 @@ export const StandardPlanMachine =
                   },
                 },
                 provider: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "providerUntouched",
-                    },
                     validate: {
                       always: [
                         {
@@ -243,11 +237,8 @@ export const StandardPlanMachine =
                   },
                 },
                 region: {
-                  initial: "untouched",
+                  initial: "validate",
                   states: {
-                    untouched: {
-                      tags: "regionUntouched",
-                    },
                     validate: {
                       always: [
                         {
@@ -386,6 +377,18 @@ export const StandardPlanMachine =
     },
     {
       actions: {
+        setInitialContext: assign((context) => {
+          return {
+            form: {
+              ...(context.capabilities.defaultProvider
+                ? onProviderChange(
+                    context.capabilities.availableProviders,
+                    context.capabilities.defaultProvider
+                  )
+                : {}),
+            },
+          };
+        }),
         fieldInvalid: send("fieldInvalid"),
         setName: assign((context, { name }) => {
           if (context.creationError === "name-taken") {
@@ -397,21 +400,14 @@ export const StandardPlanMachine =
           return { form: { ...context.form, name } };
         }),
         setProvider: assign((context, { provider }) => {
-          const selectedProvider =
-            context.capabilities?.availableProviders.find(
-              (p) => p.id === provider
-            );
           return {
             form: {
               ...context.form,
-              provider,
-              region:
-                selectedProvider?.defaultRegion ||
-                selectedProvider?.regions.filter(
-                  (r) => !!r.isDisabled === false
-                )[0]?.id,
+              ...onProviderChange(
+                context.capabilities.availableProviders,
+                provider
+              ),
             },
-            selectedProvider,
             sizes: undefined,
           };
         }),
@@ -452,13 +448,17 @@ export const StandardPlanMachine =
         resetCreationErrorMessage: assign((_context) => ({
           creationError: undefined,
         })),
-        setCreationError: assign((_context, { error }) => ({
-          creationError: error,
-        })),
+        setCreationError: assign((_context, { error }) => {
+          console.log("wtf", error);
+          return {
+            creationError: error,
+          };
+        }),
         triggerSave: sendParent((context) => ({
           type: "save",
           data: context.form,
         })),
+        triggerSubmit: send("submit"),
       },
       guards: {
         isOverQuota: ({ capabilities }) =>
@@ -507,7 +507,7 @@ export const StandardPlanMachine =
         },
         sizeIsOverQuota: ({ form, capabilities }) => {
           if (capabilities === undefined || !form.size) return true;
-          return form.size.quota > capabilities.remainingQuota;
+          return form.size.quota > capabilities.remainingPrepaidQuota; // TODO: marketplaces
         },
         didProviderChange: (context, event) =>
           context.form.provider !== event.provider,

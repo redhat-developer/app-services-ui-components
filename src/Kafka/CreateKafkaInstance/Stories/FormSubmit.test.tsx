@@ -21,7 +21,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       await comp.findByText(
-        "The selected size requires more streaming units. Your organization has 3 of 5 streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first",
+        "The selected size requires more quota. To deploy a new instance, reduce its size, delete an existing one first",
         { exact: false }
       )
     ).toBeInTheDocument();

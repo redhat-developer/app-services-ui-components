@@ -1,5 +1,4 @@
-import { assign, createMachine } from "xstate";
-import { send } from "xstate/lib/actions";
+import { assign, createMachine, forwardTo, send } from "xstate";
 import type {
   CreateKafkaFormData,
   CreateKafkaInitializationData,
@@ -11,21 +10,13 @@ import type {
 import { StandardPlanMachine } from "./StandardPlanMachine";
 import { TrialPlanMachine } from "./TrialPlanMachine";
 
-export const LOADING = "loading";
-export const SYSTEM_UNAVAILABLE = "systemUnavailable";
-export const STANDARD_PLAN = "standardPlan";
-export const TRIAL_PLAN = "trialPlan";
-export const STANDARD_PLAN_MACHINE_ID = "standardPlanService";
-export const TRIAL_PLAN_MACHINE_ID = "trialPlanService";
-export const SAVING = "SAVING";
-
 export type CreateKafkaInstanceMachineContext = {
   // initial data coming from the APIs
   capabilities: CreateKafkaInitializationData | undefined;
 };
 
 const CreateKafkaInstanceMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5QGMBOYCGAXMBpDAZgNYYCSAdrFhucmAHQA2A9hhAJblQDEEz5DTgDdmRBmkw58xMpWq0GLNpygJhzZNnb8A2gAYAuolAAHZrHZZt5YyAAeiACwA2AOz1negKyOAHF4BGPV89AE4AJkdXABoQAE9EAFpw13cw10jPN38fAF9c2IlsPEISCioaOiZWDi5uMFRUZlR6E0ZsAmaAW3oiqVLZCoVq5S41chFNK11DWzMLaZskeydXZ3oA8IDXMN9U0K8AZgCvWISERMPAj19Q1z97lP3XfML0YukyuUqGIYgMVAQAAK7XI9HYEEYYG4sAwQjAc3MlmstgcCDujnoXm8kQiO2czl8ATOiHCh18WNcB3JkV8zhSbleID6JRk5XkVT+AOBoPosKEKm4LIAygBXZB0WDwZbzZH8VGIIJ6PT0RzK7xeXxavQBQ6hEkIRx3LEBNWHDLOGn3Jksz6DDm-eT-QEgmh8uGClkAUUazURCxRyzRASC4Q2O184WcpscAVCekcBtN62cmsOx1ChwJBNCjht736bO+wywqHYGEYrrBEKhMLhCJlSMWCsNBPoCZSJ01yoOBrJKeC4XCXlSW1NoXzklZXyGVVL5crvP5noLYDFErg0tMTcDoDRRsO9CpdMJ4VuXiO+viTmNgTVzlCAUtEUtLwKzNXdvZP3o84rVfdAU6m9X1UH9OUlj3RBPACehwkfTVwl2XxHEOJNsXoPY4x2Vws2HXx03yd9yGYCA4FsW0Bm-YYlFqKBwObIMkkOMMngIlINSpRxE2vC4s1g6McjVMkfCjQ5Jw+Kji05OIqDALoAFVyDhDB2HaAAjKEGN3FYED2FUR2HUJQmce89EtA1Lk1OC9CuIJYyHIcvGcCTCxnB0+SdbkAJrBttwDeUmPRC9VU7cyXG4o0ePOE5Qg2Q5HEQjJ4zCXNXOne0fy5F0lw9LhtMCqDgq8ULXBOONQn8fxosQFjMT1WMWOHbEErzd9KKLWdHRoZ0eRoArIN0zNYMcMLTNM7jcz7MMMkS1wfATEz4z2dKv2khg-0XN1fIGltEpVB9bgzbwoiTS16ASyMOLWSKR1WqSut-Mt-1yoD6MbALBv3PxMOHB9XEjTwTpiXiWJVAIQkCHtbgyAj7s6jzNqrXagtGzFI2cu5AeVHwQfOKN6EzSNTSQxLPD8eH3J-ZBmC6NowBwFGivmkqAa8KM7lTTVMwNTwSt1JD4wS+MogndrPweh0md0xJnLg1J2J2C8uJqi5UMxbnIbJMSTKI3IgA */
+  /** @xstate-layout N4IgpgJg5mDOIC5QGMBOYCGAXMBpDAZgNYYCSAdrFhucmAHQA2A9hhAJblQDEEz5DTgDdmRBmkw58xMpWq0GLNpygJhzZNnb8A2gAYAuolAAHZrHZZt5YyAAeiACwA2AOz1negKyOAHF4BGPV89AE4AJkdXABoQAE9EAFpw13cw10jPN38fAF9c2IlsPEISCioaOiZWDi5uMFRUZlR6E0ZsAmaAW3oiqVLZCoVq5S41chFNK11DWzMLaZskeydXZ3oA8IDXMN9U0K8AZgCvWISERMPAj19Q1z97lP3XfML0YukyuUqGIYgMVAQAAK7XI9HYEEYYG4sAwQjAc3MlmstgcCDujnoXm8kQiO2czl8ATOiHCh18WNcB3JkV8zhSbleID6JRk5XkVT+AOBoPosKEKm4LIAygBXZB0WDwZbzZH8VGIIJ6PT0RzK7xeXxavQBQ6hEkIRx3LEBNWHDLOGn3Jksz6DDm-eT-QEgmh8uGClkAUUazURCxRyzRASC4Q2O184WcpscAVCekcBtN62cmsOx1ChwJBNCjht736bO+wywqHYGEYrrBEKhMLhCJlSMWCsNBPoCZSJ01yoOBrJKeC4XCXlSW1NoXzklZXyGVVL5crvP5noLYDFErg0tMTcDoDRRsO9CpdMJ4VuXiO+viTmNgTVzlCAUtEUtLwKzNXdvZP3o84rVfdAU6m9X1UH9OUlj3RBPACehwkfTVwl2XxHEOJNsXoPY4x2Vws2HXx03yd9yGYCA4FsW0Bm-YYlFqKBwObIMknWE49FTY5WKJNZUwNS54PbeNQlzLZ-CfSJJw+Kji05OIqDALoAFVyDhDB2HaAAjKEGN3FYED2FUR2HITnHvNi0OvC4rgpJCriCWMhyHLxnAkwsZwdPknW5ACawbbcA3lJj0QvVVOzYlxHAi3N0NCDZDkcRCMnjMJcxc6d7R-LkXSXD0uG0gKoKCrwQtcE441Cfx-ETCzDkieg9VjGrh2xOK83fSii1nR0aGdHkaDyyDdMzWDHFCkyTMiqrziHG4astLxQgfHZ71Sr9pIYP9FzdHz+pbeKVQfW4M28KIk0tOq-CHHDxvit83inVbOt-Mt-2yoD6MbfyBv3PxMOHRbI08Y6YmqpCNhCQIe1uDICJWqTHo2qsdsCkbMUjJy7gB5UfGBqb1luRaMUiYJ7mctrPzh9zkGYLo2jAHAkYK1xgtcfwozuVNNUzA1PCK3UkPjOL4yiCcyfuimfgZ3TLhVVj2JDbEuIJXjUNg7Ch2VGCkOtIigA */
   createMachine(
     {
       context: { capabilities: undefined },
@@ -52,7 +43,6 @@ const CreateKafkaInstanceMachine =
       initial: "loading",
       states: {
         loading: {
-          tags: LOADING,
           description: "Fetch the data required to drive the creation flow",
           invoke: {
             src: "getAvailableProvidersAndDefaults",
@@ -74,17 +64,18 @@ const CreateKafkaInstanceMachine =
               },
             ],
           },
+          tags: "loading",
         },
         systemUnavailable: {
-          tags: SYSTEM_UNAVAILABLE,
+          tags: "systemUnavailable",
           type: "final",
         },
         standardPlan: {
-          tags: STANDARD_PLAN,
           invoke: {
             src: "standardPlan",
-            id: STANDARD_PLAN_MACHINE_ID,
+            id: "standardPlanService",
           },
+          tags: "standardPlan",
           initial: "idle",
           states: {
             idle: {
@@ -112,11 +103,11 @@ const CreateKafkaInstanceMachine =
           },
         },
         trialPlan: {
-          tags: TRIAL_PLAN,
           invoke: {
             src: "trialPlan",
-            id: TRIAL_PLAN_MACHINE_ID,
+            id: "trialPlanService",
           },
+          tags: "trialPlan",
           initial: "idle",
           states: {
             idle: {
@@ -127,10 +118,10 @@ const CreateKafkaInstanceMachine =
               },
             },
             saving: {
-              tags: SAVING,
               invoke: {
                 src: "createInstance",
               },
+              tags: "saving",
               on: {
                 createSuccess: {
                   target: "#createKafkaInstance.complete",
@@ -157,16 +148,14 @@ const CreateKafkaInstanceMachine =
             capabilities,
           };
         }),
-        notifyCreateErrorToStandardPlan: (_, event) =>
-          send(
-            { type: "createError", error: event.error },
-            { to: STANDARD_PLAN_MACHINE_ID }
-          ),
-        notifyCreateErrorToTrialPlan: (_, event) =>
-          send(
-            { type: "createError", error: event.error },
-            { to: TRIAL_PLAN_MACHINE_ID }
-          ),
+        notifyCreateErrorToStandardPlan: forwardTo("standardPlanService"),
+        notifyCreateErrorToTrialPlan: send(
+          (_, event) => {
+            console.log("wtf????", event);
+            return { type: "createError", error: event.error };
+          },
+          { to: "trialPlanService" }
+        ),
       },
       guards: {
         canCreateStandardInstances: (_, { data: capabilities }) =>
@@ -185,7 +174,25 @@ export function makeCreateKafkaInstanceMachine({
 }: CreateKafkaInstanceServices) {
   return CreateKafkaInstanceMachine.withConfig({
     services: {
-      getAvailableProvidersAndDefaults,
+      getAvailableProvidersAndDefaults:
+        async (): Promise<CreateKafkaInitializationData> => {
+          const capabilities = await getAvailableProvidersAndDefaults();
+          // For extra safety, let's check we actually got regions and that some of them are available.
+          // Ideally this check should be done by the backend, who should be then passing the "regions-unavailable" availability.
+          const allRegions = capabilities.availableProviders.flatMap(
+            (p) => p.regions
+          );
+          const noRegions =
+            allRegions.length === 0 ||
+            allRegions.every((r) => r.isDisabled === true);
+          if (noRegions) {
+            capabilities.instanceAvailability =
+              capabilities.plan === "standard"
+                ? "regions-unavailable"
+                : "unavailable";
+          }
+          return capabilities;
+        },
       createInstance: (_context, event) => {
         const form = event.data;
 
@@ -211,7 +218,6 @@ export function makeCreateKafkaInstanceMachine({
       standardPlan: (context) => {
         return StandardPlanMachine.withContext({
           capabilities: context.capabilities as StandardPlanInitializationData,
-          selectedProvider: undefined,
           sizes: undefined,
           form: {},
           creationError: undefined,
@@ -227,7 +233,6 @@ export function makeCreateKafkaInstanceMachine({
       trialPlan: (context) => {
         return TrialPlanMachine.withContext({
           capabilities: context.capabilities as TrialPlanInitializationData,
-          selectedProvider: undefined,
           sizes: undefined,
           form: {},
           creationError: undefined,
