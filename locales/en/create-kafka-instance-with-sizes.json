@@ -22,7 +22,7 @@
   "egress_value": "up to {{value}} MiB/second",
   "form_errors": {
     "form_invalid": "Address form errors to proceed.",
-    "over_quota_message": "The selected size requires more streaming units. Your organization has {{streamingUnits}} of {{maxStreamingUnits}} streaming units remaining. To deploy a new instance, reduce its size, delete an existing one first, or <0>contact us</0> to add more streaming units to your account.",
+    "over_quota_message": "The selected size requires more quota. To deploy a new instance, reduce its size, delete an existing one first, or <0>contact us</0> to add more quota to your account.",
     "over_quota_title": "$t(common:kafka) instance can't be created",
     "region_unavailable_message": "Select another region or try again later.",
     "region_unavailable_title": "The selected cloud provider region is temporarily unavailable.",
@@ -63,7 +63,7 @@
     "instance_unavailable_message": "$t(common:kafka) instances are temporarily available. Try again in a few hours.",
     "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
     "over_quota_message": "Your organization is out of quota.",
-    "over_quota_title": "Your organization has no streaming units remaining.",
+    "over_quota_title": "Your organization is out of quota.",
     "regions_unavailable_message": "Cloud provider regions are temporarily unavailable. Try again later.",
     "system_unavailable_message": "$t(common:unexpected_error)",
     "system_unavailable_title": "$t(common:something_went_wrong)",

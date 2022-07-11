@@ -27,12 +27,11 @@ Selected.args = {
 
 export const Invalid = Template.bind({});
 Invalid.args = {
-  value: "(╯°□°)╯︵ ┻━┻ ",
   isValid: false,
 };
 
 export const Disabled = Template.bind({});
 Disabled.args = {
-  value: "Pizza",
+  value: PROVIDERS[1].id,
   isDisabled: true,
 };

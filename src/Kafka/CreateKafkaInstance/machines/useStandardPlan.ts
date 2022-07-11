@@ -1,18 +1,19 @@
 import { useSelector } from "@xstate/react";
 import { useCallback } from "react";
-import {
+import type {
   CloudProvider,
+  CloudProviderInfo,
   CreateKafkaInstanceError,
   Region,
   Size,
 } from "../types";
-import { StandardPlanMachineContext } from "./StandardPlanMachine";
+import type { StandardPlanMachineContext } from "./StandardPlanMachine";
 import { useCreateKafkaInstance } from "./useCreateKafkaInstance";
 
 type SelectorReturn = {
   form: StandardPlanMachineContext["form"];
   capabilities: StandardPlanMachineContext["capabilities"];
-  selectedProvider: StandardPlanMachineContext["selectedProvider"];
+  selectedProvider: CloudProviderInfo | undefined;
   selectedSize: Size | undefined;
   sizes: StandardPlanMachineContext["sizes"];
 
@@ -34,7 +35,6 @@ type SelectorReturn = {
   isLoading: boolean;
   isLoadingSizes: boolean;
   isSaving: boolean;
-  isCreatable: boolean;
 
   error: CreateKafkaInstanceError | "form-invalid" | undefined;
 
@@ -54,7 +54,7 @@ export function useStandardPlanMachine(): SelectorReturn {
 
   if (!service) {
     throw new Error(
-      `useStandardPlanMachine should be called only when the parent CreateKafkaInstanceMachine is in the right state, got service ${service}`
+      "useStandardPlanMachine should be called only when the parent CreateKafkaInstanceMachine is in the right state"
     );
   }
 
@@ -81,16 +81,24 @@ export function useStandardPlanMachine(): SelectorReturn {
     service,
     useCallback(
       (state) => {
+        const isBlocked = state.hasTag("blocked");
         const isFormInvalid =
           state.hasTag("formInvalid") && state.hasTag("submitted");
         const isNameTaken = state.context.creationError === "name-taken";
         const isConfigurable = state.hasTag("configurable");
-        const isCreatable = state.hasTag("creatable");
         const isLoadingSizes = state.hasTag("sizeLoading");
 
-        const selectedSize = state.context.sizes?.find(
-          (s) => state.context.form.size?.id === s.id
-        );
+        const selectedProvider = isBlocked
+          ? undefined
+          : state.context.capabilities.availableProviders.find(
+              (p) => p.id === state.context.form.provider
+            );
+
+        const selectedSize = isBlocked
+          ? undefined
+          : state.context.sizes?.find(
+              (s) => state.context.form.size?.id === s.id
+            );
 
         const error: SelectorReturn["error"] = state.context.creationError
           ? state.context.creationError
@@ -101,11 +109,11 @@ export function useStandardPlanMachine(): SelectorReturn {
         return {
           form: state.context.form,
           capabilities: state.context.capabilities,
-          selectedProvider: state.context.selectedProvider,
+          selectedProvider,
           selectedSize,
           sizes: state.context.sizes,
 
-          isFormEnabled: !isLoading && !isSaving,
+          isFormEnabled: !isLoading && !isSaving && !isBlocked,
 
           isNameInvalid: state.hasTag("nameInvalid"),
           isNameEmpty: state.hasTag("nameEmpty"),
@@ -126,7 +134,6 @@ export function useStandardPlanMachine(): SelectorReturn {
           isLoading,
           isLoadingSizes,
           isConfigurable,
-          isCreatable,
           isSaving,
 
           error,
@@ -138,7 +145,7 @@ export function useStandardPlanMachine(): SelectorReturn {
           setSize,
         };
       },
-      [onCreate, setName, setProvider, setRegion, setSize]
+      [isLoading, isSaving, onCreate, setName, setProvider, setRegion, setSize]
     )
   );
 }

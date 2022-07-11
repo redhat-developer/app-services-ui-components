@@ -9,10 +9,12 @@ export interface Typegen0 {
     setRegion: "regionChange";
     setSize: "sizeChange";
     setSizes: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+    setInitialContext: "xstate.init";
+    triggerSubmit: "create";
     resetCreationErrorMessage:
       | "done.state.standardPlanMachine.configuring.fields"
-      | "create";
-    triggerSave: "create";
+      | "submit";
+    triggerSave: "submit";
     fieldInvalid:
       | ""
       | "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
@@ -76,18 +78,15 @@ export interface Typegen0 {
     | "configuring.form.saved"
     | "configuring.fields"
     | "configuring.fields.name"
-    | "configuring.fields.name.untouched"
     | "configuring.fields.name.empty"
     | "configuring.fields.name.invalid"
     | "configuring.fields.name.valid"
     | "configuring.fields.name.validate"
     | "configuring.fields.provider"
-    | "configuring.fields.provider.untouched"
     | "configuring.fields.provider.validate"
     | "configuring.fields.provider.invalid"
     | "configuring.fields.provider.valid"
     | "configuring.fields.region"
-    | "configuring.fields.region.untouched"
     | "configuring.fields.region.validate"
     | "configuring.fields.region.invalid"
     | "configuring.fields.region.valid"
@@ -114,14 +113,9 @@ export interface Typegen0 {
                 | "region"
                 | "size"
                 | {
-                    name?:
-                      | "untouched"
-                      | "empty"
-                      | "invalid"
-                      | "valid"
-                      | "validate";
-                    provider?: "untouched" | "validate" | "invalid" | "valid";
-                    region?: "untouched" | "validate" | "invalid" | "valid";
+                    name?: "empty" | "invalid" | "valid" | "validate";
+                    provider?: "validate" | "invalid" | "valid";
+                    region?: "validate" | "invalid" | "valid";
                     size?:
                       | "validate"
                       | "idle"
@@ -134,20 +128,18 @@ export interface Typegen0 {
             };
       };
   tags:
+    | "blocked"
     | "unsubmitted"
     | "submitted"
     | "formInvalid"
     | "creatable"
     | "formSaving"
     | "configurable"
-    | "nameUntouched"
     | "nameEmpty"
     | "nameInvalid"
     | "nameValid"
-    | "providerUntouched"
     | "providerInvalid"
     | "providerValid"
-    | "regionUntouched"
     | "regionInvalid"
     | "regionValid"
     | "sizeIdle"

@@ -11,11 +11,11 @@ export default {
   component: CreateKafkaInstanceComponent,
   args: {
     apiPlan: "standard",
-    apiScenario: "standard-available",
+    apiStandardScenario: "available",
+    apiTrialScenario: "available",
     apiProviders: PROVIDERS.map((p) => p.id),
     apiDefaultProvider: "aws",
     apiRegionsAvailability: "full",
-    apiMaxStreamingUnits: 5,
     apiRemainingQuota: 3,
     apiLatency: 500,
     onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),

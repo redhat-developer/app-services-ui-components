@@ -12,15 +12,11 @@ import type { CreateKafkaInstanceError } from "../types";
 export type FormAlertsProps = {
   error: CreateKafkaInstanceError | "form-invalid" | undefined;
   onClickContactUS: () => void;
-  streamingUnits?: number;
-  maxStreamingUnits?: number;
 };
 
 export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
   onClickContactUS,
-  streamingUnits,
-  maxStreamingUnits,
 }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
 
@@ -52,7 +48,6 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 <Trans
                   ns={["create-kafka-instance-with-sizes"]}
                   i18nKey={t("form_errors.over_quota_message")}
-                  values={{ streamingUnits, maxStreamingUnits }}
                   components={[
                     <Button
                       key="btn-contact-us"

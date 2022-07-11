@@ -4,64 +4,26 @@ import {
   AlertVariant,
   Button,
   ButtonVariant,
-  Spinner,
 } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { StandardPlanAvailability } from "../types";
+import type { StandardPlanAvailability } from "../types";
 
 export type ModalAlertsStandardPlanProps = {
   instanceAvailability: StandardPlanAvailability;
-  isSystemUnavailable: boolean;
-  isLoading: boolean;
-  onClickKafkaOverview: () => void;
   onClickContactUs: () => void;
 };
 
 export const ModalAlertsStandardPlan: VoidFunctionComponent<
   ModalAlertsStandardPlanProps
-> = ({
-  instanceAvailability,
-  isSystemUnavailable,
-  isLoading,
-  onClickKafkaOverview,
-  onClickContactUs,
-}) => {
+> = ({ instanceAvailability, onClickContactUs }) => {
   const { t } = useTranslation("create-kafka-instance-with-sizes");
 
   return (
     <AlertGroup>
       {(() => {
-        switch (true) {
-          case isLoading:
-            return (
-              <Alert
-                role={"alert"}
-                className="pf-u-mb-md"
-                variant={AlertVariant.info}
-                title={t("checking_instance_title")}
-                isInline
-                customIcon={
-                  <Spinner
-                    size="md"
-                    aria-valuetext={t("checking_instance_message")}
-                  />
-                }
-              />
-            );
-          case isSystemUnavailable:
-            return (
-              <Alert
-                role={"alert"}
-                className="pf-u-mb-md"
-                variant={AlertVariant.warning}
-                title={t("modal_alerts.system_unavailable_title")}
-                isInline
-              >
-                {t("modal_alerts.system_unavailable_message")}
-              </Alert>
-            );
-          case instanceAvailability === "over-quota":
+        switch (instanceAvailability) {
+          case "over-quota":
             return (
               <Alert
                 role={"alert"}
@@ -84,7 +46,7 @@ export const ModalAlertsStandardPlan: VoidFunctionComponent<
                 />
               </Alert>
             );
-          case instanceAvailability === "regions-unavailable":
+          case "regions-unavailable":
             return (
               <Alert
                 role={"alert"}
@@ -96,7 +58,7 @@ export const ModalAlertsStandardPlan: VoidFunctionComponent<
                 {t("modal_alerts.regions_unavailable_message")}
               </Alert>
             );
-          case instanceAvailability === "instance-unavailable":
+          case "instance-unavailable":
             return (
               <Alert
                 role={"alert"}
@@ -108,8 +70,9 @@ export const ModalAlertsStandardPlan: VoidFunctionComponent<
                 {t("modal_alerts.instance_unavailable_message")}
               </Alert>
             );
+          case "available":
+            return null;
         }
-        return null;
       })()}
     </AlertGroup>
   );

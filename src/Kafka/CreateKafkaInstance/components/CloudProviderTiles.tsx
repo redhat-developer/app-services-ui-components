@@ -10,13 +10,13 @@ import {
 import { AwsIcon, AzureIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { Provider, ProviderInfo } from "../types";
+import type { CloudProvider, CloudProviderInfo } from "../types";
 import "./CloudProviderTiles.css";
 
 export type CloudProvidersTilesProps = {
-  providers: ProviderInfo[];
-  value: Provider | undefined;
-  onChange: (provider: Provider) => void;
+  providers: CloudProviderInfo[];
+  value: CloudProvider | undefined;
+  onChange: (provider: CloudProvider) => void;
   isDisabled: boolean;
   validated?: SelectProps["validated"];
 };
@@ -80,7 +80,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
   );
 };
 
-const tiles: { [id: Provider]: JSX.Element } = {
+const tiles: { [id in CloudProvider]: JSX.Element } = {
   aws: (
     <AwsIcon
       size="lg"

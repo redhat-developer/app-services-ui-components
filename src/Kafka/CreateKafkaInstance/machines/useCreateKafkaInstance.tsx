@@ -1,18 +1,9 @@
 import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
-import { ActorRefFrom } from "xstate";
-import {
-  LOADING,
-  SAVING,
-  STANDARD_PLAN,
-  STANDARD_PLAN_MACHINE_ID,
-  SYSTEM_UNAVAILABLE,
-  TRIAL_PLAN,
-  TRIAL_PLAN_MACHINE_ID,
-} from "./CreateKafkaInstanceMachine";
+import type { ActorRefFrom } from "xstate";
 import { CreateKafkaInstanceContext } from "./CreateKafkaInstanceProvider";
-import { StandardPlanMachine } from "./StandardPlanMachine";
-import { TrialPlanMachine } from "./TrialPlanMachine";
+import type { StandardPlanMachine } from "./StandardPlanMachine";
+import type { TrialPlanMachine } from "./TrialPlanMachine";
 
 export type SelectorReturn = {
   standardPlanMachine: ActorRefFrom<typeof StandardPlanMachine> | undefined;
@@ -30,18 +21,18 @@ export function useCreateKafkaInstance() {
   return useSelector<typeof service, SelectorReturn>(
     service,
     useCallback((state) => {
-      const standardPlanMachine = state.children[STANDARD_PLAN_MACHINE_ID] as
+      const standardPlanMachine = state.children["standardPlanService"] as
         | ActorRefFrom<typeof StandardPlanMachine>
         | undefined;
-      const trialPlanMachine = state.children[TRIAL_PLAN_MACHINE_ID] as
+      const trialPlanMachine = state.children["trialPlanService"] as
         | ActorRefFrom<typeof TrialPlanMachine>
         | undefined;
 
-      const isLoading = state.hasTag(LOADING);
-      const isSystemUnavailable = state.hasTag(SYSTEM_UNAVAILABLE);
-      const isStandardPlan = state.hasTag(STANDARD_PLAN);
-      const isTrialPlan = state.hasTag(TRIAL_PLAN);
-      const isSaving = state.hasTag(SAVING);
+      const isLoading = state.hasTag("loading");
+      const isSystemUnavailable = state.hasTag("systemUnavailable");
+      const isStandardPlan = state.hasTag("standardPlan");
+      const isTrialPlan = state.hasTag("trialPlan");
+      const isSaving = state.hasTag("saving");
       const isSaved = state.done === true;
 
       return {

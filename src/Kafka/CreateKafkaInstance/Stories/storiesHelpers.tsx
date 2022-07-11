@@ -10,16 +10,17 @@ import { apiError, fakeApi } from "../../../shared/storiesHelpers";
 import type { CreateKafkaInstancePropsWithSizes } from "../CreateKafkaInstance";
 import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import type {
+  CloudProvider,
+  CloudProviderInfo,
+  CloudProviders,
   CreateKafkaInitializationData,
-  GetSizesData,
-  InstanceAvailability,
-  Provider,
-  ProviderInfo,
-  Providers,
-  Size,
+  StandardPlanAvailability,
+  StandardSizes,
+  TrialPlanAvailability,
+  TrialSizes,
 } from "../types";
 
-export const AWS: ProviderInfo = {
+export const AWS: CloudProviderInfo = {
   id: "aws",
   displayName: "Amazon Web Services",
   regions: [
@@ -32,7 +33,7 @@ export const AWS: ProviderInfo = {
   ],
 };
 
-export const AZURE: ProviderInfo = {
+export const AZURE: CloudProviderInfo = {
   id: "azure",
   displayName: "Microsoft Azure",
   regions: [
@@ -49,72 +50,108 @@ export const AZURE: ProviderInfo = {
   ],
 };
 
-export const PROVIDERS: Providers = [AWS, AZURE];
+export const PROVIDERS: CloudProviders = [AWS, AZURE];
 
-const SIZES: { [key: string]: GetSizesData } = {
+const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
+  aws: [
+    {
+      id: "x1",
+      displayName: "1",
+      quota: 1,
+      status: "stable",
+      ingress: 3,
+      egress: 31,
+      storage: 5,
+      connections: 6,
+      connectionRate: 7,
+      maxPartitions: 8,
+      messageSize: 9,
+      trialDurationHours: undefined,
+      isDisabled: false,
+    },
+    {
+      id: "x2",
+      displayName: "2",
+      quota: 2,
+      status: "preview",
+      ingress: 30,
+      egress: 301,
+      storage: 50,
+      connections: 60,
+      connectionRate: 70,
+      maxPartitions: 80,
+      messageSize: 90,
+      trialDurationHours: undefined,
+      isDisabled: false,
+    },
+    {
+      id: "x3",
+      displayName: "3",
+      quota: 3,
+      status: "preview",
+      ingress: 300,
+      egress: 3001,
+      storage: 500,
+      connections: 600,
+      connectionRate: 700,
+      maxPartitions: 800,
+      messageSize: 900,
+      trialDurationHours: undefined,
+      isDisabled: true,
+    },
+    {
+      id: "x5",
+      displayName: "5",
+      quota: 5,
+      status: "preview",
+      ingress: 300,
+      egress: 3001,
+      storage: 500,
+      connections: 600,
+      connectionRate: 700,
+      maxPartitions: 800,
+      messageSize: 900,
+      trialDurationHours: undefined,
+      isDisabled: false,
+    },
+  ],
+  azure: [
+    {
+      id: "x1",
+      displayName: "1",
+      quota: 3,
+      status: "preview",
+      ingress: 3,
+      egress: 31,
+      storage: 5,
+      connections: 6,
+      connectionRate: 7,
+      maxPartitions: 8,
+      messageSize: 9,
+      trialDurationHours: undefined,
+      isDisabled: false,
+    },
+    {
+      id: "x2",
+      displayName: "2",
+      quota: 9,
+      status: "preview",
+      ingress: 30,
+      egress: 301,
+      storage: 50,
+      connections: 60,
+      connectionRate: 70,
+      maxPartitions: 80,
+      messageSize: 90,
+      trialDurationHours: undefined,
+      isDisabled: false,
+    },
+  ],
+};
+
+const TRIAL_SIZES: { [key in CloudProvider]: TrialSizes } = {
   aws: {
-    standard: [
-      {
-        id: "x1",
-        displayName: "1",
-        quota: 1,
-        status: "stable",
-        ingress: 3,
-        egress: 31,
-        storage: 5,
-        connections: 6,
-        connectionRate: 7,
-        maxPartitions: 8,
-        messageSize: 9,
-        trialDurationHours: undefined,
-        isDisabled: false,
-      },
-      {
-        id: "x2",
-        displayName: "2",
-        quota: 2,
-        status: "preview",
-        ingress: 30,
-        egress: 301,
-        storage: 50,
-        connections: 60,
-        connectionRate: 70,
-        maxPartitions: 80,
-        messageSize: 90,
-        trialDurationHours: undefined,
-        isDisabled: false,
-      },
-      {
-        id: "x3",
-        displayName: "3",
-        quota: 3,
-        status: "preview",
-        ingress: 300,
-        egress: 3001,
-        storage: 500,
-        connections: 600,
-        connectionRate: 700,
-        maxPartitions: 800,
-        messageSize: 900,
-        trialDurationHours: undefined,
-        isDisabled: true,
-      },
-      {
-        id: "x5",
-        displayName: "5",
-        quota: 5,
-        status: "preview",
-        ingress: 300,
-        egress: 3001,
-        storage: 500,
-        connections: 600,
-        connectionRate: 700,
-        maxPartitions: 800,
-        messageSize: 900,
-        trialDurationHours: undefined,
-        isDisabled: false,
-      },
-    ],
+    standard: STANDARD_SIZES.aws,
     trial: {
       id: "trialx1",
       displayName: "1",
@@ -132,38 +169,7 @@ const SIZES: { [key: string]: GetSizesData } = {
     },
   },
   azure: {
-    standard: [
-      {
-        id: "x1",
-        displayName: "1",
-        quota: 3,
-        status: "preview",
-        ingress: 3,
-        egress: 31,
-        storage: 5,
-        connections: 6,
-        connectionRate: 7,
-        maxPartitions: 8,
-        messageSize: 9,
-        trialDurationHours: undefined,
-        isDisabled: false,
-      },
-      {
-        id: "x2",
-        displayName: "2",
-        quota: 9,
-        status: "preview",
-        ingress: 30,
-        egress: 301,
-        storage: 50,
-        connections: 60,
-        connectionRate: 70,
-        maxPartitions: 80,
-        messageSize: 90,
-        trialDurationHours: undefined,
-        isDisabled: false,
-      },
-    ],
+    standard: STANDARD_SIZES.azure,
     trial: {
       id: "trialx1",
       displayName: "1",
@@ -182,14 +188,12 @@ const SIZES: { [key: string]: GetSizesData } = {
   },
 };
 
-export function makeAvailableProvidersAndDefaults(
+export function makeAvailableProvidersAndDefaultsForStandardPlan(
   options: {
-    plan: "trial" | "standard";
-    instanceAvailability: InstanceAvailability;
-    defaultProvider: Provider | undefined;
+    instanceAvailability: StandardPlanAvailability;
+    defaultProvider: CloudProvider | undefined;
     providers: string[];
-    maxStreamingUnits: number;
-    remainingQuota: number;
+    remainingPrepaidQuota: number;
   },
   allProviders = PROVIDERS,
   latency = 500
@@ -198,9 +202,7 @@ export function makeAvailableProvidersAndDefaults(
     instanceAvailability,
     defaultProvider,
     providers,
-    maxStreamingUnits,
-    remainingQuota,
-    plan,
+    remainingPrepaidQuota,
   } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
@@ -209,12 +211,38 @@ export function makeAvailableProvidersAndDefaults(
   return () =>
     fakeApi<CreateKafkaInitializationData>(
       {
-        plan,
+        plan: "standard",
         defaultProvider,
         availableProviders,
         instanceAvailability,
-        maxStreamingUnits,
-        remainingQuota,
+        remainingPrepaidQuota,
+        marketplacesQuota: [],
+      },
+      latency
+    );
+}
+
+export function makeAvailableProvidersAndDefaultsForTrialPlan(
+  options: {
+    instanceAvailability: TrialPlanAvailability;
+    defaultProvider: CloudProvider | undefined;
+    providers: string[];
+  },
+  allProviders = PROVIDERS,
+  latency = 500
+): () => Promise<CreateKafkaInitializationData> {
+  const { instanceAvailability, defaultProvider, providers } = options;
+  const availableProviders = allProviders.filter((p) =>
+    providers.includes(p.id)
+  );
+
+  return () =>
+    fakeApi<CreateKafkaInitializationData>(
+      {
+        plan: "trial",
+        defaultProvider,
+        availableProviders,
+        instanceAvailability,
       },
       latency
     );
@@ -235,17 +263,19 @@ export const argTypes = {
     control: "radio",
     options: ["standard", "trial"],
   },
-  apiScenario: {
+  apiStandardScenario: {
     control: "radio",
     options: [
-      "standard-available",
-      "trial-available",
+      "available",
       "over-quota",
-      "trial-used",
       "instance-unavailable",
       "regions-unavailable",
       "backend-error",
     ],
+  },
+  apiTrialScenario: {
+    control: "radio",
+    options: ["available", "used", "unavailable", "backend-error"],
   },
   apiProviders: {
     options: PROVIDERS.map((p) => p.id),
@@ -253,6 +283,9 @@ export const argTypes = {
       type: "check",
       labels: Object.fromEntries(PROVIDERS.map((p) => [p.id, p.displayName])),
     },
+  },
+  apiSimulateBackendError: {
+    control: "toggle",
   },
   apiRegionsAvailability: {
     options: Object.keys(regionsScenario),
@@ -283,13 +316,6 @@ export const argTypes = {
       ),
     },
   },
-  apiMaxStreamingUnits: {
-    control: {
-      type: "range",
-      min: 0,
-      max: 9,
-    },
-  },
   apiRemainingQuota: {
     control: {
       type: "range",
@@ -304,21 +330,22 @@ export const argTypes = {
 
 export type StoryProps = {
   apiPlan: "trial" | "standard";
-  apiScenario: InstanceAvailability | "backend-error";
+  apiStandardScenario: StandardPlanAvailability;
+  apiTrialScenario: TrialPlanAvailability;
+  apiSimulateBackendError: boolean;
   apiSizes: "normal" | "no-sizes" | "error";
-  apiProviders: string[];
-  apiDefaultProvider: string;
+  apiProviders: CloudProvider[];
+  apiDefaultProvider: CloudProvider;
   apiRegionsAvailability: keyof typeof regionsScenario;
-  apiMaxStreamingUnits: number;
   apiRemainingQuota: number;
   apiLatency: number;
   onCreate: CreateKafkaInstancePropsWithSizes["onCreate"];
   onClickQuickStart?: () => void;
-  onClickKafkaOverview?: () => void;
   onClickContactUs?: () => void;
   onClickLearnMoreAboutRegions?: () => void;
   onLearnHowToAddStreamingUnits?: () => void;
   onLearnMoreAboutSizes?: () => void;
+  onClickKafkaOverview?: () => void;
 };
 
 export type StoryMeta = Meta<StoryProps>;
@@ -353,12 +380,13 @@ export const Template: Story<StoryProps> = (args, { id }) => {
   const {
     apiProviders = PROVIDERS.map((p) => p.id),
     apiPlan = "standard",
-    apiScenario = "standard-available",
+    apiTrialScenario = "available",
+    apiStandardScenario = "available",
+    apiSimulateBackendError = false,
     apiDefaultProvider,
     apiRegionsAvailability = "full",
     apiSizes = "normal",
     apiRemainingQuota = 3,
-    apiMaxStreamingUnits = 5,
     apiLatency = 500,
   } = args;
 
@@ -390,41 +418,46 @@ export const Template: Story<StoryProps> = (args, { id }) => {
           regions: [],
         }));
 
-  const getAvailableProvidersAndDefaults =
-    apiScenario === "backend-error"
-      ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
-      : makeAvailableProvidersAndDefaults(
-          {
-            plan: apiPlan,
-            instanceAvailability: apiScenario,
-            defaultProvider: apiDefaultProvider,
-            providers: apiProviders,
-            remainingQuota: apiPlan === "trial" ? 0 : apiRemainingQuota,
-            maxStreamingUnits: apiMaxStreamingUnits,
-          },
-          providers,
-          apiLatency
-        );
+  const getAvailableProvidersAndDefaults = apiSimulateBackendError
+    ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
+    : apiPlan === "standard"
+    ? makeAvailableProvidersAndDefaultsForStandardPlan(
+        {
+          instanceAvailability: apiStandardScenario,
+          defaultProvider: apiDefaultProvider,
+          providers: apiProviders,
+          remainingPrepaidQuota: apiRemainingQuota,
+        },
+        providers,
+        apiLatency
+      )
+    : makeAvailableProvidersAndDefaultsForTrialPlan(
+        {
+          instanceAvailability: apiTrialScenario,
+          defaultProvider: apiDefaultProvider,
+          providers: apiProviders,
+        },
+        providers,
+        apiLatency
+      );
 
-  const getSizes: CreateKafkaInstancePropsWithSizes["getSizes"] = (
+  const getStandardSizes: CreateKafkaInstancePropsWithSizes["getStandardSizes"] =
+    (provider) => {
+      return apiSizes === "normal"
+        ? fakeApi<StandardSizes>(STANDARD_SIZES[provider], apiLatency)
+        : apiSizes === "no-sizes"
+        ? fakeApi<StandardSizes>([], apiLatency)
+        : apiError<StandardSizes>(undefined, apiLatency);
+    };
+
+  const getTrialSizes: CreateKafkaInstancePropsWithSizes["getTrialSizes"] = (
     provider
   ) => {
     return apiSizes === "normal"
-      ? fakeApi<GetSizesData>(
-          {
-            ...SIZES[provider],
-          },
-          apiLatency
-        )
+      ? fakeApi<TrialSizes>(TRIAL_SIZES[provider], apiLatency)
       : apiSizes === "no-sizes"
-      ? fakeApi<GetSizesData>(
-          {
-            standard: [],
-            trial: {} as Size,
-          },
-          apiLatency
-        )
-      : apiError<GetSizesData>(undefined, apiLatency);
+      ? fakeApi<TrialSizes>({} as TrialSizes, apiLatency)
+      : apiError<TrialSizes>(undefined, apiLatency);
   };
 
   const onClickHandlers = actions(
@@ -433,7 +466,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     "onClickContactUs",
     "onClickLearnMoreAboutRegions",
     "onLearnHowToAddStreamingUnits",
-    "onLearnMoreAboutSizes"
+    "onLearnMoreAboutSizes",
+    "onClickKafkaOverview"
   );
 
   return (
@@ -441,7 +475,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
       <CreateKafkaInstance
         key={JSON.stringify(args)}
         getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
-        getSizes={getSizes}
+        getStandardSizes={getStandardSizes}
+        getTrialSizes={getTrialSizes}
         appendTo={() =>
           document.getElementById(`story--${id}`) ||
           document.getElementById("root") ||
@@ -453,9 +488,6 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         disableFocusTrap={true}
         onClickQuickStart={
           args.onClickQuickStart || onClickHandlers.onClickQuickStart
-        }
-        onClickKafkaOverview={
-          args.onClickKafkaOverview || onClickHandlers.onClickKafkaOverview
         }
         onClickContactUs={
           args.onClickContactUs || onClickHandlers.onClickContactUs
@@ -470,6 +502,9 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         }
         onLearnMoreAboutSizes={
           args.onLearnMoreAboutSizes || onClickHandlers.onLearnMoreAboutSizes
+        }
+        onClickKafkaOverview={
+          args.onClickKafkaOverview || onClickHandlers.onClickKafkaOverview
         }
       />
       <div>

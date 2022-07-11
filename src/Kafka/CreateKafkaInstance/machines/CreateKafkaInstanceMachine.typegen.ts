@@ -78,6 +78,5 @@ export interface Typegen0 {
     | "systemUnavailable"
     | "standardPlan"
     | "saving"
-    | "trialPlan"
-    | "SAVING";
+    | "trialPlan";
 }
