@@ -77,7 +77,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
       </TextContent>
       <TextContent className="pf-u-pb-sm">
         <Text component={TextVariants.h3} className="pf-u-mt-xl">
-          {t("service-account:service_accounts_small")}
+          {t("connection-tab:service_accounts_small")}
         </Text>
         <Text component={TextVariants.small}>
           {
@@ -97,7 +97,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
         isInline
         onClick={showCreateServiceAccountModal}
       >
-        {t("service-account:create_service_account")}
+        {t("connection-tab:create_service_account")}
       </Button>
       <TextContent className="pf-u-pt-sm">
         <Text component={TextVariants.small}>

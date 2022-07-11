@@ -87,7 +87,7 @@ export const ServiceAccountToolbar: VoidFunctionComponent<
         <ToolbarGroup>
           <ToolbarItem>
             <Button variant={"primary"} onClick={onCreateServiceAccountClick}>
-              {t("service-account:create_service_account")}
+              {t("connection-tab:create_service_account")}
             </Button>
           </ToolbarItem>
         </ToolbarGroup>
