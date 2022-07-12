@@ -152,6 +152,8 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   const { isDeleteEnabled } = useContext(ModalContext);
   return (
     <Modal
+      role="navigation"
+      aria-label="related navigation"
       ouiaId={ouiaId}
       variant={ModalVariant.small}
       isOpen={isModalOpen}
