@@ -55,39 +55,54 @@ export const KafkaPageV3: FunctionComponent = () => {
             <CardHeader>
               <CardHeaderMain>
                 <CardTitle>
-                  <Title headingLevel="h3">{t("purchaseCardTitle")}</Title>
+                  <Title headingLevel="h3">
+                    <Trans
+                      ns={"kafkaoverview-v3"}
+                      i18nKey={"purchaseCardTitle"}
+                      component={{ italic: <i />, bold: <strong /> }}
+                      values={{
+                        titleValue: "(US and Canada only)",
+                      }}
+                    />
+                  </Title>
                 </CardTitle>
               </CardHeaderMain>
             </CardHeader>
             <CardBody>{t("purchaseCardMainText")}</CardBody>
             <CardFooter>
-              <Button
-                data-testid="cardPurchase-buttonRH"
-                variant={ButtonVariant.link}
-                isLarge
-                isInline
-                component="a"
-                href="https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
-                target="_blank"
-                ouiaId="link-purchase-now"
-              >
-                {t("purchaseCardCallToActionButton")}
-                <ExternalLinkAltIcon className="pf-u-ml-md" />
-              </Button>
+              <Flex>
+                <FlexItem>
+                  <Button
+                    data-testid="cardPurchase-buttonRH"
+                    variant={ButtonVariant.link}
+                    isLarge
+                    isInline
+                    component="a"
+                    href="https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
+                    target="_blank"
+                    ouiaId="link-purchase-now"
+                  >
+                    {t("purchaseCardCallToActionButtonRedHat")}
+                    <ExternalLinkAltIcon className="pf-u-ml-md" />
+                  </Button>
+                </FlexItem>
 
-              <Button
-                data-testid="cardPurchase-buttonAWS"
-                variant={ButtonVariant.link}
-                isLarge
-                isInline
-                component="a"
-                href="https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
-                target="_blank"
-                ouiaId="link-purchase-now"
-              >
-                {t("purchaseCardCallToActionButton")}
-                <ExternalLinkAltIcon className="pf-u-ml-md" />
-              </Button>
+                <FlexItem>
+                  <Button
+                    data-testid="cardPurchase-buttonAWS"
+                    variant={ButtonVariant.link}
+                    isLarge
+                    isInline
+                    component="a"
+                    href="https://aws.amazon.com/marketplace/pp/prodview-3xohcoyuwkumc"
+                    target="_blank"
+                    ouiaId="link-purchase-now"
+                  >
+                    {t("purchaseCardCallToActionButtonAWS")}
+                    <ExternalLinkAltIcon className="pf-u-ml-md" />
+                  </Button>
+                </FlexItem>
+              </Flex>
             </CardFooter>
           </Card>
           <Card
