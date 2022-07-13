@@ -12,3 +12,4 @@ export * from "./RefreshButton";
 export * from "./RemoveButton";
 export * from "./Table";
 export * from "./AsyncTypeaheadSelect";
+export * from "./TermsAndConditionModal";
