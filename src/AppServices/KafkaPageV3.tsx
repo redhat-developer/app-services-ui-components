@@ -60,10 +60,7 @@ export const KafkaPageV3: FunctionComponent = () => {
                     <Trans
                       ns={"kafkaoverview-v3"}
                       i18nKey={"purchaseCardTitle"}
-                      component={[TextVariants.p, "pf-u-color-200"]}
-                      values={{
-                        titleValue: "(US and Canada only)",
-                      }}
+                      component={[<span className="pf-u-color-200" />]}
                     />
                   </Title>
                 </CardTitle>
