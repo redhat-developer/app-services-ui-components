@@ -16,43 +16,47 @@ export const withMas = (
 
   return (
     <InsightsChromeLayout withLayout={globals.withInsightsChrome === "true"}>
-      <I18nProvider
-        lng={globals.locale}
-        resources={{
-          en: {
-            common: () => import("../locales/en/common.json"),
-            "create-kafka-instance": () =>
-              import("../locales/en/create-kafka-instance.json"),
-            kafka: () => import("../locales/en/kafka.json"),
-            metrics: () => import("../locales/en/metrics.json"),
-            overview: () => import("../locales/en/overview.json"),
-            datascienceoverview: () =>
-              import("../locales/en/datascienceoverview.json"),
-            kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
-            apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
-            "kafkaoverview-v2": () =>
-              import("../locales/en/kafkaoverview-v2.json"),
-            "kafkaoverview-v3": () =>
-              import("../locales/en/kafkaoverview-v3.json"),
-            "manage-kafka-permissions": () =>
-              import("../locales/en/manage-kafka-permissions.json"),
-            "message-browser": () =>
-              import("../locales/en/message-browser.json"),
-            "overview-v2": () => import("../locales/en/overview-v2.json"),
-            "create-kafka-instance-with-sizes": () =>
-              import("../locales/en/create-kafka-instance-with-sizes.json"),
-            "connection-tab": () => import("../locales/en/connection-tab.json"),
-          },
-          it: {
-            common: () => Promise.resolve({ delete: "Elimina" }),
-          },
-        }}
-        debug={true}
-      >
-        <React.Suspense fallback={<AppServicesLoading />}>
-          <Story />
-        </React.Suspense>
-      </I18nProvider>
+      <Router>
+        <I18nProvider
+          lng={globals.locale}
+          resources={{
+            en: {
+              common: () => import("../locales/en/common.json"),
+              "create-kafka-instance": () =>
+                import("../locales/en/create-kafka-instance.json"),
+              kafka: () => import("../locales/en/kafka.json"),
+              metrics: () => import("../locales/en/metrics.json"),
+              overview: () => import("../locales/en/overview.json"),
+              datascienceoverview: () =>
+                import("../locales/en/datascienceoverview.json"),
+              kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
+              apimgmtoverview: () =>
+                import("../locales/en/apimgmtoverview.json"),
+              "kafkaoverview-v2": () =>
+                import("../locales/en/kafkaoverview-v2.json"),
+              "kafkaoverview-v3": () =>
+                import("../locales/en/kafkaoverview-v3.json"),
+              "manage-kafka-permissions": () =>
+                import("../locales/en/manage-kafka-permissions.json"),
+              "message-browser": () =>
+                import("../locales/en/message-browser.json"),
+              "overview-v2": () => import("../locales/en/overview-v2.json"),
+              "create-kafka-instance-with-sizes": () =>
+                import("../locales/en/create-kafka-instance-with-sizes.json"),
+              "connection-tab": () =>
+                import("../locales/en/connection-tab.json"),
+            },
+            it: {
+              common: () => Promise.resolve({ delete: "Elimina" }),
+            },
+          }}
+          debug={true}
+        >
+          <React.Suspense fallback={<AppServicesLoading />}>
+            <Story />
+          </React.Suspense>
+        </I18nProvider>
+      </Router>
     </InsightsChromeLayout>
   );
 };
