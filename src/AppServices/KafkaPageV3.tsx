@@ -25,13 +25,14 @@ import {
 } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { AppSpeedKeyArt, LogoAWS, LogoAzure } from "../images";
+import { AppSpeedKeyArt, LogoAWS, LogoAzure, LogoGCP } from "../images";
 import {
   KafkaInstanceCapacityTable,
   MarketingPageHero,
   MarketingPageSection,
 } from "./components";
 import { ExternalLinkAltIcon } from "@patternfly/react-icons";
+import { ExternalLink } from "../shared";
 
 export const KafkaPageV3: FunctionComponent = () => {
   const { t } = useTranslation(["kafkaoverview-v3"]);
@@ -55,11 +56,11 @@ export const KafkaPageV3: FunctionComponent = () => {
             <CardHeader>
               <CardHeaderMain>
                 <CardTitle>
-                  <Title headingLevel="h3">
+                  <Title headingLevel="h2">
                     <Trans
                       ns={"kafkaoverview-v3"}
                       i18nKey={"purchaseCardTitle"}
-                      component={{ italic: <i />, bold: <strong /> }}
+                      component={[TextVariants.p, "pf-u-color-200"]}
                       values={{
                         titleValue: "(US and Canada only)",
                       }}
@@ -210,7 +211,18 @@ export const KafkaPageV3: FunctionComponent = () => {
               <Trans
                 ns={"kafkaoverview-v3"}
                 i18nKey={"kafkaInstanceCapacityfooter"}
-                components={[<SupportLink />, <MonitoringDiskSpaceLink />]}
+                components={[
+                  <ExternalLink
+                    href={"https://access.redhat.com/support"}
+                    testId={"SupportLink"}
+                  />,
+                  <ExternalLink
+                    href={
+                      "https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
+                    }
+                    testId={"MonitoringDiskSpaceLink"}
+                  />,
+                ]}
               />
             </TextContent>
           </CardFooter>
@@ -224,7 +236,10 @@ export const KafkaPageV3: FunctionComponent = () => {
             <Title headingLevel="h2">{t("cloudProvidersTitle")}</Title>
           </CardTitle>
           <CardBody>
-            <Flex spaceItems={{ default: "spaceItemsXl" }}>
+            <Flex
+              spaceItems={{ default: "spaceItemsXl" }}
+              direction={{ default: "column", xl: "row" }}
+            >
               <Flex
                 justifyContent={{ default: "justifyContentCenter" }}
                 flex={{ default: "flex_1" }}
@@ -242,7 +257,35 @@ export const KafkaPageV3: FunctionComponent = () => {
                   </Split>
                 </FlexItem>
               </Flex>
+
               <Divider isVertical />
+
+              <Flex
+                justifyContent={{ default: "justifyContentCenter" }}
+                flex={{ default: "flex_1" }}
+              >
+                <FlexItem>
+                  <Split hasGutter>
+                    <SplitItem>
+                      <img src={LogoGCP} alt={""} style={{ height: "60px" }} />
+                    </SplitItem>
+                    <SplitItem>
+                      <Title headingLevel="h2" className={"pf-u-pt-sm"}>
+                        {t("googleCloudTitle")}
+                      </Title>
+                      <Text
+                        component={TextVariants.p}
+                        className={"pf-u-color-200"}
+                      >
+                        {t("googleCloudDescription")}
+                      </Text>
+                    </SplitItem>
+                  </Split>
+                </FlexItem>
+              </Flex>
+
+              <Divider isVertical />
+
               <Flex
                 justifyContent={{ default: "justifyContentCenter" }}
                 flex={{ default: "flex_1" }}
@@ -277,31 +320,3 @@ export const KafkaPageV3: FunctionComponent = () => {
     </>
   );
 };
-
-const SupportLink: FunctionComponent = ({ children }) => (
-  <Button
-    data-testid="redhatSupport-buttonCTA"
-    isInline
-    variant={ButtonVariant.link}
-    component="a"
-    target="_blank"
-    href="https://access.redhat.com/support"
-  >
-    {children}
-    <ExternalLinkAltIcon className="pf-u-ml-xs" />
-  </Button>
-);
-
-const MonitoringDiskSpaceLink: FunctionComponent = ({ children }) => (
-  <Button
-    data-testid="diskSpaceMetrics-buttonCTA"
-    isInline
-    variant={ButtonVariant.link}
-    component="a"
-    target="_blank"
-    href="https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
-  >
-    {children}
-    <ExternalLinkAltIcon className="pf-u-ml-xs" />
-  </Button>
-);
