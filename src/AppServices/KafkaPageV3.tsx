@@ -60,8 +60,9 @@ export const KafkaPageV3: FunctionComponent = () => {
                     <Trans
                       ns={"kafkaoverview-v3"}
                       i18nKey={"purchaseCardTitle"}
-                      component={[<span className="pf-u-color-200" />]}
-                    />
+                    >
+                      <span className="pf-u-color-200 pf-u-font-size-sm"></span>
+                    </Trans>
                   </Title>
                 </CardTitle>
               </CardHeaderMain>
@@ -109,7 +110,14 @@ export const KafkaPageV3: FunctionComponent = () => {
           >
             <CardHeader>
               <CardTitle>
-                <Title headingLevel="h2">{t("contactSalesCardTitle")}</Title>
+                <Title headingLevel="h2">
+                  <Trans
+                    ns={"kafkaoverview-v3"}
+                    i18nKey={"contactSalesCardTitle"}
+                  >
+                    <span className="pf-u-color-200 pf-u-font-size-sm"></span>
+                  </Trans>
+                </Title>
               </CardTitle>
             </CardHeader>
             <CardBody>{t("contactSalesCardMainText")}</CardBody>
