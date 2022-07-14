@@ -10,7 +10,8 @@ describe("TermsAndConditionModal", () => {
     const comp = render(
       <TermsAndConditionModal
         isModalOpen={true}
-        onClick={onClick}
+        serviceName="Kafka"
+        onClickViewTermsConditions={onClick}
         onCancel={onCancel}
       />
     );
@@ -22,13 +23,14 @@ describe("TermsAndConditionModal", () => {
   });
 
   it("should open terms and conditions modal and click on 'View Terms and Conditions' button", async () => {
-    const onClick = jest.fn();
+    const onClickViewTermsConditions = jest.fn();
     const onCancel = jest.fn();
 
     const comp = render(
       <TermsAndConditionModal
         isModalOpen={true}
-        onClick={onClick}
+        serviceName="Kafka"
+        onClickViewTermsConditions={onClickViewTermsConditions}
         onCancel={onCancel}
       />
     );
@@ -36,6 +38,6 @@ describe("TermsAndConditionModal", () => {
     await waitForI18n(comp);
 
     userEvent.click(comp.getByText("View Terms and Conditions"));
-    expect(onClick).toHaveBeenCalledTimes(1);
+    expect(onClickViewTermsConditions).toHaveBeenCalledTimes(1);
   });
 });
