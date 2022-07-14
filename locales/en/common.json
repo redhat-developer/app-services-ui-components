@@ -26,6 +26,13 @@
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
   "table_cell_no_data": "No {{column, lowercase}}",
+  "Terms and Conditions": "",
+  "terms_conditions_modal": {
+    "content1": "Red Hat has Terms and Conditions for its managed services.",
+    "content2": "If you do not accept the terms, you will not be able to create new {{serviceName}} instances.",
+    "terms_and_conditions": "Terms and Conditions",
+    "view_terms_and_conditions": "View Terms and Conditions"
+  },
   "time_created": "Time created",
   "time_updated": "Time updated",
   "type_value_to_confirm_html": "Type <i>{{value}}</i> to confirm",

@@ -8,7 +8,7 @@ export default {
   agrs: {},
 } as ComponentMeta<typeof TermsAndConditionModal>;
 
-const Template: ComponentStory<typeof TermsAndConditionModal> = () => {
+const Template: ComponentStory<typeof TermsAndConditionModal> = (args) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const onCancel = () => {
@@ -25,10 +25,9 @@ const Template: ComponentStory<typeof TermsAndConditionModal> = () => {
         Show TermsAndConditions Modal
       </Button>
       <TermsAndConditionModal
+        {...args}
+        serviceName="Kafka"
         onCancel={onCancel}
-        onClick={() => {
-          /* do nothing */
-        }}
         isModalOpen={isOpen}
       />
     </>

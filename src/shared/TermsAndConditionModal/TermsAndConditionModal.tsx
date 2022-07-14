@@ -9,21 +9,22 @@ import {
 import { useTranslation } from "react-i18next";
 
 export type TermsAndConditionModalProps = {
-  onClick: () => void;
+  onClickViewTermsConditions: () => void;
   onCancel: () => void;
   isModalOpen: boolean;
+  serviceName: string;
 };
 
 export const TermsAndConditionModal: VoidFunctionComponent<
   TermsAndConditionModalProps
-> = ({ onClick, onCancel, isModalOpen }) => {
-  const { t } = useTranslation("kafka");
+> = ({ onClickViewTermsConditions, onCancel, isModalOpen, serviceName }) => {
+  const { t } = useTranslation("common");
 
   return (
     <Modal
       id="modalTerms"
       variant={ModalVariant.small}
-      title="Terms and Conditions"
+      title={t("Terms and Conditions")}
       isOpen={isModalOpen}
       onClose={onCancel}
       actions={[
@@ -31,7 +32,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="confirm"
           variant="primary"
           data-testid="actionViewTerms"
-          onClick={onClick}
+          onClick={onClickViewTermsConditions}
         >
           {t("terms_conditions_modal.view_terms_and_conditions")}
         </Button>,
@@ -41,7 +42,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           data-testid="actionCancelViewTerms"
           onClick={onCancel}
         >
-          {t("common:cancel")}
+          {t("cancel")}
         </Button>,
       ]}
     >
@@ -51,7 +52,9 @@ export const TermsAndConditionModal: VoidFunctionComponent<
         </FlexItem>
         <FlexItem>
           <p>
-            <strong>{t("terms_conditions_modal.content2")}</strong>
+            <strong>
+              {t("terms_conditions_modal.content2", { serviceName })}
+            </strong>
           </p>
         </FlexItem>
       </Flex>
