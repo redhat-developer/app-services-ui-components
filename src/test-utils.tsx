@@ -32,6 +32,8 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             "overview-v3": () => import("../locales/en/overview-v3.json"),
             "kafkaoverview-v2": () =>
               import("../locales/en/kafkaoverview-v2.json"),
+            "kafkaoverview-v3": () =>
+              import("../locales/en/kafkaoverview-v3.json"),
             "create-kafka-instance-with-sizes": () =>
               import("../locales/en/create-kafka-instance-with-sizes.json"),
             "connection-tab": () => import("../locales/en/connection-tab.json"),
