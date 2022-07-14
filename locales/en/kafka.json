@@ -106,13 +106,13 @@
   "short_description": "Short Description",
   "storage": "Storage",
   "storage_value": "up to 1000 GiB",
+  "terms_conditions_modal": {
+    "content1": "Red Hat has Terms and Conditions for its managed services.",
+    "content2": "If you do not accept the terms, you will not be able to create new Kafka instances.",
+    "view_terms_and_conditions": "View Terms and Conditions"
+  },
   "topic": {
     "topic": "Topic"
   },
-  "will_expire": "This trial instance will expire in <time>{{time}}</time>",
-  "terms_conditions_modal":{
-    "view_terms_and_conditions":"View Terms and Conditions",
-    "content1":"Red Hat has Terms and Conditions for its managed services.",
-    "content2":"If you do not accept the terms, you will not be able to create new Kafka instances."
-  }
+  "will_expire": "This trial instance will expire in <time>{{time}}</time>"
 }
