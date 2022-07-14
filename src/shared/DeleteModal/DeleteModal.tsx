@@ -83,6 +83,7 @@ export type DeleteModalProps = {
    * Flag to disable delete button in non-destructive delete action
    */
   isDisabled?: boolean;
+  ariaLabel?: string;
 };
 
 /**
@@ -146,12 +147,14 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
   children,
   variant,
   isDisabled,
+  ariaLabel,
 }) => {
   const { t } = useTranslation();
 
   const { isDeleteEnabled } = useContext(ModalContext);
   return (
     <Modal
+      aria-label={ariaLabel || title}
       ouiaId={ouiaId}
       variant={ModalVariant.small}
       isOpen={isModalOpen}
@@ -161,7 +164,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
       onClose={onCancel}
       appendTo={appendTo}
       disableFocusTrap={disableFocusTrap}
-      hasNoBodyWrapper={false}
+      hasNoBodyWrapper={true}
       actions={[
         <Button
           key={"confirm__button"}

@@ -56,7 +56,8 @@ export const DeleteConsumerGroup: FunctionComponent<
         ) : (
           <Text id="modal-message">
             <Trans
-              i18nKey={"common:confirm_delete_modal_text"}
+              ns={"kafka"}
+              i18nKey={"consumerGroup.consumer_group_delete_message"}
               values={{
                 name: consumerName,
               }}
