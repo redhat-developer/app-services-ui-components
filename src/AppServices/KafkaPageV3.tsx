@@ -1,6 +1,4 @@
 import {
-  Button,
-  ButtonVariant,
   Card,
   CardBody,
   CardFooter,
@@ -31,7 +29,6 @@ import {
   MarketingPageHero,
   MarketingPageSection,
 } from "./components";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons";
 import { ExternalLink } from "../shared";
 
 export const KafkaPageV3: FunctionComponent = () => {
@@ -71,35 +68,41 @@ export const KafkaPageV3: FunctionComponent = () => {
             <CardFooter>
               <Flex>
                 <FlexItem>
-                  <Button
-                    data-testid="cardPurchase-buttonRH"
-                    variant={ButtonVariant.link}
-                    isLarge
-                    isInline
-                    component="a"
-                    href="https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
-                    target="_blank"
-                    ouiaId="link-purchase-now"
+                  <ExternalLink
+                    href={
+                      "https://marketplace.redhat.com/en-us/products/red-hat-openshift-streams-for-apache-kafka"
+                    }
+                    testId={"cardPurchase-buttonRH"}
+                    className={"pf-u-ml-md "}
                   >
-                    {t("purchaseCardCallToActionButtonRedHat")}
-                    <ExternalLinkAltIcon className="pf-u-ml-md" />
-                  </Button>
+                    <Trans
+                      ns={"kafkaoverview-v3"}
+                      i18nKey={"purchaseCardCallToActionButtonRedHat"}
+                      components={{
+                        bold: <strong />,
+                        size: <span className="pf-u-font-size-lg" />,
+                      }}
+                    />
+                  </ExternalLink>
                 </FlexItem>
 
                 <FlexItem>
-                  <Button
-                    data-testid="cardPurchase-buttonAWS"
-                    variant={ButtonVariant.link}
-                    isLarge
-                    isInline
-                    component="a"
-                    href="https://aws.amazon.com/marketplace/pp/prodview-3xohcoyuwkumc"
-                    target="_blank"
-                    ouiaId="link-purchase-now"
+                  <ExternalLink
+                    href={
+                      "https://aws.amazon.com/marketplace/pp/prodview-3xohcoyuwkumc"
+                    }
+                    testId={"cardPurchase-buttonAWS"}
+                    className={"pf-u-ml-md"}
                   >
-                    {t("purchaseCardCallToActionButtonAWS")}
-                    <ExternalLinkAltIcon className="pf-u-ml-md" />
-                  </Button>
+                    <Trans
+                      ns={"kafkaoverview-v3"}
+                      i18nKey={"purchaseCardCallToActionButtonAWS"}
+                      components={{
+                        bold: <strong />,
+                        size: <span className="pf-u-font-size-lg" />,
+                      }}
+                    />
+                  </ExternalLink>
                 </FlexItem>
               </Flex>
             </CardFooter>
@@ -122,19 +125,22 @@ export const KafkaPageV3: FunctionComponent = () => {
             </CardHeader>
             <CardBody>{t("contactSalesCardMainText")}</CardBody>
             <CardFooter>
-              <Button
-                data-testid="cardContactSales-buttonCTA"
-                variant={ButtonVariant.link}
-                isLarge
-                isInline
-                component="a"
-                href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka#contact-us"
-                target="_blank"
-                ouiaId="link-contact-sales"
+              <ExternalLink
+                href={
+                  "https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-streams-for-apache-kafka#contact-us"
+                }
+                testId={"cardContactSales-buttonCTA"}
+                className={"pf-u-ml-md"}
               >
-                {t("contactSalesCardCallToActionButton")}
-                <ExternalLinkAltIcon className="pf-u-ml-md" />
-              </Button>
+                <Trans
+                  ns={"kafkaoverview-v3"}
+                  i18nKey={"contactSalesCardCallToActionButton"}
+                  components={{
+                    bold: <strong />,
+                    size: <span className="pf-u-font-size-lg" />,
+                  }}
+                />
+              </ExternalLink>
             </CardFooter>
           </Card>
         </Grid>
@@ -220,12 +226,14 @@ export const KafkaPageV3: FunctionComponent = () => {
                   <ExternalLink
                     href={"https://access.redhat.com/support"}
                     testId={"SupportLink"}
+                    className={"pf-u-ml-xs"}
                   />,
                   <ExternalLink
                     href={
                       "https://access.redhat.com/documentation/en-us/red_hat_openshift_streams_for_apache_kafka/1/guide/aced8e5e-8229-4cb2-82f9-87a8caa24bb3"
                     }
                     testId={"MonitoringDiskSpaceLink"}
+                    className={"pf-u-ml-xs"}
                   />,
                 ]}
               />
