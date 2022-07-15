@@ -24,7 +24,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
     <Modal
       id="modalTerms"
       variant={ModalVariant.small}
-      title={t("Terms and Conditions")}
+      title={t("terms_conditions_modal.terms_and_conditions")}
       isOpen={isModalOpen}
       onClose={onCancel}
       actions={[
