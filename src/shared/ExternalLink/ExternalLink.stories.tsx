@@ -15,4 +15,5 @@ ExternalLink.args = {
   href: "https://www.redhat.com",
   testId: "test-id",
   children: "Sample text",
+  className: "pf-u-ml-xs",
 };
