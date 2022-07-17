@@ -3,15 +3,16 @@ import type { FormEvent, VoidFunctionComponent } from "react";
 import { useCallback } from "react";
 import type { FieldSizeProps } from "./components";
 import {
-  ModalAlertsStandardPlan,
-  FormAlerts,
-  InstanceInfoSkeleton,
-  InstanceInfo,
-  FieldInstanceName,
+  FieldAZ,
+  FieldBillingTiles,
   FieldCloudProvider,
   FieldCloudRegion,
-  FieldAZ,
+  FieldInstanceName,
   FieldSize,
+  FormAlerts,
+  InstanceInfo,
+  InstanceInfoSkeleton,
+  ModalAlertsStandardPlan,
 } from "./components";
 import { useStandardPlanMachine } from "./machines";
 
@@ -32,8 +33,13 @@ export const StandardInstanceForm: VoidFunctionComponent<
   onLearnMoreAboutSizes,
   onClickQuickStart,
 }) => {
-  const { capabilities, selectedSize, error, onCreate } =
-    useStandardPlanMachine();
+  const {
+    isBillingSelectionRequired,
+    capabilities,
+    selectedSize,
+    error,
+    onCreate,
+  } = useStandardPlanMachine();
 
   const onSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -65,6 +71,7 @@ export const StandardInstanceForm: VoidFunctionComponent<
               onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
               onLearnMoreAboutSizes={onLearnMoreAboutSizes}
             />
+            {isBillingSelectionRequired && <ConnectedBillingTiles />}
           </Form>
         </FlexItem>
         <FlexItem
@@ -199,18 +206,19 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     isSizeDisabled,
     isSizeError,
     isSizeLoadingError,
+    isBillingSelectionRequired,
     isFormEnabled,
     isLoadingSizes,
     isLoading,
     setSize,
+    remainingQuota,
   } = useStandardPlanMachine();
 
   return (
     <FieldSize
       value={form.size?.quota || 1}
       sizes={sizes}
-      //TODO remainingQuota={capabilities.remainingQuota || 0}
-      remainingQuota={0}
+      remainingQuota={isBillingSelectionRequired ? undefined : remainingQuota}
       isDisabled={!isFormEnabled || sizes === undefined}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
@@ -221,6 +229,45 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       onChange={setSize}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}
+    />
+  );
+};
+
+export const ConnectedBillingTiles: VoidFunctionComponent = () => {
+  const {
+    form,
+    capabilities,
+    selectedBilling,
+    isBillingPrepaidAvailable,
+    isSizeOverQuota,
+    isBillingError,
+    isBillingPrepaidOverQuota,
+    isBillingMarketplaceOverQuota,
+    setBillingPrepaid,
+    setBillingSubscription,
+  } = useStandardPlanMachine();
+
+  return (
+    <FieldBillingTiles
+      value={selectedBilling}
+      hasPrepaid={isBillingPrepaidAvailable}
+      subscriptions={capabilities.marketplacesQuota.flatMap((mq) =>
+        mq.subscriptions.map((subscription) => ({
+          marketplace: mq.marketplace,
+          subscription,
+          isDisabled:
+            mq.marketplace === "rh"
+              ? false
+              : form.provider
+              ? mq.marketplace !== form.provider
+              : false,
+        }))
+      )}
+      isPrepaidOverQuota={isBillingPrepaidOverQuota}
+      isMarketplaceOverQuota={isBillingMarketplaceOverQuota}
+      onPrepaid={setBillingPrepaid}
+      onSubscription={setBillingSubscription}
+      isValid={!isSizeOverQuota && !isBillingError}
     />
   );
 };

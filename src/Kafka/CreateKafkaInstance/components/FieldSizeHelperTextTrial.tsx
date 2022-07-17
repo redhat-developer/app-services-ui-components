@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 export const FieldSizeHelperTextTrial: VoidFunctionComponent<{
   onClick: () => void;
 }> = ({ onClick }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   return (
     <>
       <HelperText className={"pf-c-form__helper-text"}>

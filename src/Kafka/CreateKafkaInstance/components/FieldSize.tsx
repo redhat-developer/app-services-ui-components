@@ -11,7 +11,7 @@ import { FieldSizeHelperTextTrial } from "./FieldSizeHelperTextTrial";
 export type FieldSizeProps = {
   value: number;
   sizes: Size[] | undefined;
-  remainingQuota: number;
+  remainingQuota: number | undefined;
   isDisabled: boolean;
   isLoading: boolean;
   isError: boolean;
@@ -34,7 +34,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   const isRequired = validity !== "trial";
 
@@ -101,7 +101,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       isError={isError}
     />
   );
-  const helperTextOverQuota = (
+  const helperTextOverQuota = remainingQuota && (
     <FieldSizeHelperTextOverQuota
       remainingQuota={remainingQuota}
       onClick={onLearnHowToAddStreamingUnits}
@@ -113,6 +113,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   };
 
   const validation =
+    remainingQuota &&
     (validity !== "valid" || remainingQuota < value) &&
     validity !== "trial" &&
     isError

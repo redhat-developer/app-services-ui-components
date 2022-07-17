@@ -22,7 +22,7 @@ export const FieldAZ: VoidFunctionComponent<FieldAZProps> = ({
   isDisabled,
   onChange,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   const validated = validity !== "valid" ? "error" : "default";
   const disableAZTooltip = options === "all" || isDisabled;
   const enabledZone = options === "multi" ? "multi" : "single";

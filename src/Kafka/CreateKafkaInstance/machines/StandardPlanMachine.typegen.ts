@@ -9,6 +9,9 @@ export interface Typegen0 {
     setRegion: "regionChange";
     setSize: "sizeChange";
     setSizes: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+    unsetSubscription: "providerChange";
+    setBillingToPrepaid: "" | "selectPrepaid";
+    setBillingToSubscription: "selectSubscription";
     setInitialContext: "xstate.init";
     triggerSubmit: "create";
     resetCreationErrorMessage:
@@ -18,6 +21,7 @@ export interface Typegen0 {
     fieldInvalid:
       | ""
       | "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+    triggerBillingChange: "selectSubscription" | "selectPrepaid";
   };
   internalEvents: {
     "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]": {
@@ -55,11 +59,17 @@ export interface Typegen0 {
     didRegionChange: "regionChange";
     regionIsValid: "";
     didSizeChange: "sizeChange";
-    noProviderAndRegion: "";
+    noProviderOrRegion: "";
     noSizes: "";
     emptySizes: "";
     sizeIsDisabled: "";
+    billingRequiredButNotSelected: "";
     sizeIsOverQuota: "";
+    onlyPrepaid: "";
+    singleSubscription: "";
+    onlySubscriptions: "";
+    matchesSelectedProviderOrRHMarketplace: "selectSubscription";
+    noSelectedProvider: "selectSubscription";
   };
   eventsCausingDelays: {};
   matchesStates:
@@ -94,10 +104,21 @@ export interface Typegen0 {
     | "configuring.fields.size.validate"
     | "configuring.fields.size.idle"
     | "configuring.fields.size.disabled"
+    | "configuring.fields.size.waitingForQuota"
     | "configuring.fields.size.overQuota"
     | "configuring.fields.size.valid"
     | "configuring.fields.size.error"
     | "configuring.fields.size.loading"
+    | "configuring.fields.billing"
+    | "configuring.fields.billing.validate"
+    | "configuring.fields.billing.noSelectionRequired"
+    | "configuring.fields.billing.onlySubscriptions"
+    | "configuring.fields.billing.onlySubscriptions.invalid"
+    | "configuring.fields.billing.onlySubscriptions.valid"
+    | "configuring.fields.billing.prepaidAndSubscriptions"
+    | "configuring.fields.billing.prepaidAndSubscriptions.empty"
+    | "configuring.fields.billing.prepaidAndSubscriptions.subscription"
+    | "configuring.fields.billing.prepaidAndSubscriptions.prepaid"
     | "saved"
     | {
         configuring?:
@@ -112,6 +133,7 @@ export interface Typegen0 {
                 | "provider"
                 | "region"
                 | "size"
+                | "billing"
                 | {
                     name?: "empty" | "invalid" | "valid" | "validate";
                     provider?: "validate" | "invalid" | "valid";
@@ -120,10 +142,23 @@ export interface Typegen0 {
                       | "validate"
                       | "idle"
                       | "disabled"
+                      | "waitingForQuota"
                       | "overQuota"
                       | "valid"
                       | "error"
                       | "loading";
+                    billing?:
+                      | "validate"
+                      | "noSelectionRequired"
+                      | "onlySubscriptions"
+                      | "prepaidAndSubscriptions"
+                      | {
+                          onlySubscriptions?: "invalid" | "valid";
+                          prepaidAndSubscriptions?:
+                            | "empty"
+                            | "subscription"
+                            | "prepaid";
+                        };
                   };
             };
       };
@@ -144,8 +179,11 @@ export interface Typegen0 {
     | "regionValid"
     | "sizeIdle"
     | "sizeDisabled"
+    | "sizeWaitingForQuota"
     | "sizeOverQuota"
     | "sizeValid"
     | "sizeError"
-    | "sizeLoading";
+    | "sizeLoading"
+    | "noBilling"
+    | "billingValid";
 }

@@ -15,7 +15,7 @@ export const FieldCloudRegion: VoidFunctionComponent<FieldCloudRegionProps> = ({
   isSizeUnavailable,
   validity,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   const allRegionsUnavailable = regions
     ? regions.every(({ isDisabled }) => isDisabled === true) ||

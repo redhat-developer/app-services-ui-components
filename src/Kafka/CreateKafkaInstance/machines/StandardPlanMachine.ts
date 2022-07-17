@@ -2,12 +2,18 @@ import { assign, createMachine, send, sendParent } from "xstate";
 import {
   CloudProvider,
   CreateKafkaInstanceError,
+  MarketPlace,
   Region,
   Size,
   StandardPlanInitializationData,
   StandardSizes,
 } from "../types";
 import { onProviderChange } from "./shared";
+
+export type SelectedSubscription = {
+  marketplace: MarketPlace;
+  subscription: string;
+};
 
 export type StandardPlanMachineContext = {
   // initial data coming from the APIs
@@ -19,6 +25,7 @@ export type StandardPlanMachineContext = {
     provider?: CloudProvider;
     region?: Region;
     size?: Size;
+    billing?: SelectedSubscription | "prepaid";
   };
 
   // based on the form.provider selection
@@ -30,7 +37,7 @@ export type StandardPlanMachineContext = {
 };
 
 export const StandardPlanMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAJgBsATgAM9AMwAWLQA4ArDsPmA7DoCMAGhAdE++juu2zhh9uMLDUsAXxCXVExsPCJSCho6enIlNmooAFdWDCh6SJR02DFyHDA0FDAVWXkURWUkNUQHPQ0XNwQLMy0jLVt-Bwse4y9bMIj0LFwCYgwyKloGZIxUjKycthkcAFsmNEJqCDFUsEIIAEkMXj2ISrkFJRV1BAcze08zB0Mgq11A21bNPTPehaHoWDo9PQWQy2QyjECRCYxaazBILFJpTK0NYbbaXfZiWDpASbEQ3aq1B6NF46N4fL46H4WP6uTQaQH0YwOYzcrkOPnvOEI6JTOJzRKLZaY7L0dZbXJoRhYoolMpgADK6XI5Dg8HqVTudVAjw0hg0tmBZmMJjBJl6hn+CA0TuM9D0tihWmMGh0ZosDi0gvGwtiM3i8yS6JWWJlOPliuyytK5QAojgcBsyQbKY7TebzFbAlDjHaHRoPmZ6FzOQ4vBorc0RuF4UHJiGUeGJRjVjGtodqMczhddvtMzV7vVHv0tAY-WCOrY9ENOQ7-Q5zRY9IvIX7HDXYU2ha3kWHxZGpWt+ydYPQMGhNgw8dhyhI9bcx4aGghjJZ6LZTJ0TTMXxbG9FctG9TxZzLJp3lsRsxiiI9RVRCMli7aMjivG87zARNVVHCkJ0aU0VxAwxPEBH0dA3TpOgDA8WyRZCOzPbtMIga9b3vMQuLAABhShMBgAjxyNYiWhZJ4tGhTwF3MP1jGaaF4ObRCmNDMU0TQqNpXY68pHTRUIBYHYrlVF9pDfQixPaCCzSGCxv0MPwawkto2TMDQjBNHRLGLTk2QsQM1JFDSUM7HSLwHfTDP2Fg8PKESP0nEjJKdU1fxNJk4LZJ0nWCxFQvbU9tPPGVLw4+gDJkIz4uq2qcAEoSKlfclRM-D43IBV5YJc78uS0NcCuDY9NNQyU2Iq68SigWpTP2cykuzIIHFdOszEcTcYW0LqnhNLomjgv9qMG3NhqQsKWNKybovoGbagSlrLLa5LxJXExyOaBk62-PQTG5c71OKrSJowqa7rAWalDEeq4sawTsiekB9XfbNOpXb0LFdWwtA3GsQPeAGGJCtsTxB9DdPB+7oepjAmsRpaiKeVK2j5L1KwXLKYUUqEVMPIGyfGimoqw+QAC8H2HJ9cMZmyXnIrxoR3RTp3dUsQIMQauU890mj8QGisFiKyr03JqAl+hCBkNAICVCAlAYWhGBkABrBh+cNsbjZu0XzYYK2baxBAnZkcgylqABtPQAF1Zc-BzPAZDbnkO5znDSqwaSaXzc2LRy-wN0mvdYsHbvF-3rdthMWHTHAquIFBZW2D2i-CkvKbLv3LcroOQ7D98o9j1qsyZhOvHMRx3jdNPSzBVap16ZpFMBPnGM9tvrtL32JceuOUt230ugGQJ+gAk0HEL0aN9Bjvt9w2HjPh5q97etKgPIv0uR0IY-xx0JicKq3K6N8RaVXLmIWm9NhLD1RkzdGaVrCrVMKYNc34nQ50vsxEqIDyqdx3uXKBSMUbWQ6izTQOhXicjgoYLwG1PJmEwZdbBwtcFXjEPbRIeR3ZryAcwyKrCOIvyeAFegbJDBfXdFafQxhSzPBdLrLwzwKH6B0Iw4GQtIrsIdrkdA5QdEkyvsA4WQjtAeBMPJawdhHAriAuaT4nxwLzk6AXOEGAZDGV1MgHhhjEjMFYJwHgfBBDCFEEIr0pEDBUI0EyNcnptDPDUYLGqLAACK6QZDoBMbQ384FnLvH9BPFc1EKI+AoZab+gIgKJLGrQBE2oACqt5eD8DQAIQgRCrLtUeOEhBBgaHOlgg2Jk9EEKAJ8QwWmsBGkKiCa09pYTdpNCQVlPOwQggMIASNLB5N+F5AKPQdIGBCTEhEOUa4MCSGTmaA6P0djuZ8kcAyQEQVNkXXUd7aMezrzHJJCgM5JjfD0C+H9ewnorRggdAuGkPhf6fEhNRaE1Tr4sK+UInwDorReWhBQ5oZo1x-X3KMrZTCdkm1jE7KWJihhdFBe8GwFDBoWFLICLynpeiOHAmuXyGyiVvKNu3bEcpHxCKnDOfoYIXiLm-undy-RyJ1n8IuLWlhVGvIFsXTeulYywAVFiExm4KxlnfgauCTIZFpX6KtfQnkTDNCUkTXl6rkX8KbnGSAVKGS-iTh8XQON+iliNa6RywwfospGapMZ2yNFkq2CKj0QLxXzilcuSScqvIblxt+Rw1YNBIqMS68GvF6BgE2FIUJFyumIAJsCHwehfAPMQREisQFomdE+LuT4ea+Em0LThegFKrgirIU8Hwq1LAbiCICTlugu2kp9pVItwqK2vRHS6J0X1KJrlQWYIp7JfCbnrE0PQIJV4GKjR82+C6+2Pnwsu7MJgvI+mpT4X4lomWpoXM2zy4J218k7Wq9e+ae23V4iKutK5HIumotQ+wsE6y5oA7wudW9KoPxMjexKd6maGE6ByKEx6N34Z3Raz4oiQJDB8o4ECp7I0kujfOmKNU4b9qHIOrDNk5U5OXpI7+z6A0eB6BCXFpqEOOsA92hjVVYqP3muc56I8bK6yBfoaSBqNq6B0LI0jZo6w+hoVRs0s76MocYw1MDxHWZeBdDa6czxnIDH-WJpDxnL3TUhnNDDHSXr3p8KIv608p4dG-Oa1mwQaSQnAnWxS2hxGEojcS95AqBFuahhgFjS75OwI40MYENDAT1m-jjECK5l5vHsroF4LxTBGYvaAlLHnKXsc-DCAwNZBMtuQZ0DGG0g2RctM0VTcWW7jJc3ViGqXzMrkhOaWJQRpydETTVpLpty6ydvZly5iAejmndNE2thNhmlheOaIYfIzQ+mnEN7x57lvg1W-seZTXJwDTI2YY9NY63TisEdoIrpNwDGnv6PQqqnMjdq8ls2FtbY6rae6p7mg+SunbYNXydY-zBAdH4dmppl7gTWUBcNw2buarG6t5JOA0kZLQCYxHf1vg1k8v5DHklTTgVEbWblvQFVXbPXR8HK2u4ZeRp0ld0T5UDGiWWP8NZnhHa5AmnGOH6V+tE-FvlGqcEC4tjXDM8OEAggrMeyVgwNo41njWYEvx3Tj0sO6JbJOIerYDlXKAQ6D5QlWr6MsgImgbl8vbzXd2-aTbSgWYEO4fSSsUsWAPLC9JCMtA6XyLpnjBH9Fab9MJY+RSEY5THVgjAqqZO8Xq1EjM6uYHJ4X3mmbBD+uHvTNgzRsq0DY94Rg07UShI4YIPK1dOvmCKizVIwhhCAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAZgAcARnoBOfQAYdOrQHYArABYNAJnMAaEB0Q6j++reuXL5k3bWWpY65gC+Yc6omNh4RKQUNHT05Eps1FAArqwYUPTRKJmwYuQ4YGgoYCqy8iiKykhqmjp29OYW5hpGQYG+zq4Ilvoa9KZGlh4a5joAbPqBEVHoWLgExBhkVLQMqRjpWTl5bDI4ALZMaITUEGLpYIQQAJIYvFcQ1XIKSirqCKGG9Ds+ksU1m5n0M2s1n0-UQdgmllGdjsOj8QJm7ihixA0RWcXWmySOzSGWytCOJ3Or2uYlgmQEpxEH1q9R+bmMnnMnRR9n8di0RjssIQ-MFo2sgQ81lCGjm2NxsTWCS2yV2+zJuXoxzO+TQjHJJTKFTAAGVMuRyHB4I0al8GqBfoEZlp6FpISYdBp7PprFZhaK9JDAuDproQfLlor4htEtsUiSDuStZTdfrcobypUAKI4HAnZl2tkinn0WVTFFQrS+mb+jEzehzMz84btazjCMxVbRwlxtWkw7Js63aj3J4vS7XAt1b6NR0+etaWXzPmQmsuOGmRGWfmWRchbctGYdvFKmMq4l7ftJu4PWD0DBoU4ManYSoSG2faf2poIIL15GmDo+iLkBdhGOYa4DLMUKjKCljOkYbrDFox5RgSsaqgmGpHCOt73o+YAZsaU6srObj2F45gSn4UIaDY7QaMKMouohVgzNuHhgRoOioV26HnvGl6JpqN4QHeD5PmIElgAAwpQmAwCRM4OuRrS+tRVG2PRi5MexrSojM9iIW2VgSrx+LKkSgnqgOol3lIeb6hALAXG8xrvtIn6kSpgxAm00IosiEEzDMTjriKHj1hMEIoqE1iGeYdjmaePaYUJ2FarhYn0A5MhOSwRGVEp36-J6alUfCml0b6Onhci8UGJxnoSuBGj6Ml3YYReNnXll9mOdcBW5flOByQpVQfiyyk-mVlEabR2mMXVUr0EYgo+qGQHtJYHX8VZfbCTho53mUUD1K51zucVRYHl4hg6EEPisdYTHwkYgLDNKRjsSF0I7ZEOKRnxlm9lhtl9fQp31IVE2eVNJWqXNlULTVS1QXR5iAqidgzCYApui0u0g2lPUiRDUNKGIw2DaN8m5LDIC2l+RazepyNaajTFdJ4OM8hBnRejxAMKsDZ77WDvXHZDYBnZTFMYGN9PXWRfwUWzNEcwxTEGaWvgWA9Gg+P41hE2LoPpeDUvyAAXs+E6voRys+b6gbcW7czQu4tUDA44KrZCsogfyXqm6l3VXmTVvULb9CEDIaAQAaEBKAwtCMDIADWDAixZZskxHR14TbDBxwn5IIGnMjkBU9QANpGAAuk7P6gvQNi6HY2gPVCwr2HRbS6PoVG7lYQyh111kF5lUcx6XifpiweY4DlxAoNq5w5ylE8HRldn5NHJfx-PUAVy8Vc10o9dN5NhYq9uLqBMiwEWBKneWL3vKrSEiHDOBILDOPASO9LZFwPjDZujpQq6wAuxYwoEpj+n-qMT0254KG3ig9QB4sLaS1AbbKmA1nK03GhAtwi4sYeisPMQw9hay4wML6RKhhvrgiFksTsucw6T0OtPPBhF5aK0UjfZmKtcYuh9GBQwGIUS1kNgYT6Ewfqd26Fg82pNC7ZWLrSA+giGZM28j+KiLopjbkhPrcCuhaweGgT4Ux-hZj-XYSeTqQCJaRz4WIIQhAri5F0aQ388E26NnYuCZcEEXp1VxpjAmVYqKsOBEeYWQNOHbzcRou8XifF5BfFdYRBjfi7kDD6WU7FFwCm6L3LQAJpgtFRGCMySSOFb1cTg9x2VMlJiUIQDgZoBCwFKNQKQX5iiwHuGAcgKBen9NYEMgx+jpqlQempNqMwcaCiohjXuxh6yIUNkPZqpjElOLQsTcOPC94dM1A5MAUg+AQC4FgKZAzZlKBGWMiZTyZkiLhrfHyD1xhtwguMbQHtDLv3CrYQyDY1pgXGPoVEFhVH53ORDS5eRrm3OuA8iAnzBnDNpO8lA+AyiYveHkhZbhQiY18P83cbpvqhGFN4EYLRuhem+qCJFZzd6ov4FkgheUaZ+PJQjVW9ZuKojifYZEQJe67kRO0RciEcbxUQo4wGTSXHYPUbwsSYhk7JAKNnZJzTtVTzsv42YALphrRBIlVZhtwU+zBf5II246K7hVVy7h2F9Up3yOgSoAbNV7TUQXfx-IcaumlMbX0JgpH+hKUiMClUQiYgiADDAMhnLWmQCarVcZmCsE4DwPgghhCiH8SEaNoU2qyglD6cYworAGG9CER1PpqLeryiwAAipkGQ6B-EChGJxaEPgtC+y0K9VohsqxrTMI26YRyNXONDckWguJLQAFUHy8H4GgAQhA9FeQpQgLk71OiduCFyaRTq4RGBGG6RKoEWi6DWiuzeBbkjy1gLuvUZbD3Hv8Vyawd0tC6AlBB50sq6pVlLAHcYyJFzDFmN64BSYChFHoJkDAdIGQiEqGSn53yZqIVLG1KsIQUTFJsMKIYPM4pUQNpO306G0nBsKHefDjIUBEf8fOAwZhpT4y5KPCJAxl2rS6IueEnd4TwXY60vIWHc2M1PaK+DXpgI+FqbRiTiAJgulMKFeYht-C+AAY0tdpyfW2RTGne2lrwRgc9PCkwoVQiTsTSiVazDuhckDhCJTOr14XWI+p+GLNwTGfAhiH+7gHr3pFLjEYoU1rBCCMMOYGgQvmpTLAPU5II0oIbBYDw4x5wojCj7Kw+lZScV8PCT0eXzkFb1JACNCUDDhJc8CYI-pwSIlWbFHGHtMHWZOXnbl9mzjOf8LBdzYIvNCmWl0Nu5n5juBqfYVrPKpbSXoGAU4QyBgkfyYgJhox3VtjQTVad4VQid39pO5EcLDJ7ZAdlQ7jm3iWrVhVDW1UtaPfBDstszouRgi9CbSbosuEYbaeJAi4XnNgY9vRMFOMQRMXhTsgy7QbW7kNp93B32Uc5KKiKoshsRhtXmHJqpXpO5MUSqOmDb2hgfbhyklpoWIbSUteR9WVVFpMUs+KOiD0wQcVh8c+HqTlO6v6oKoh4XiLU5ViCgwDhuKBZMm6SCG5oReEKaKKRVT1VfvXTNsnKuRr0F+5OTXfybCAm0CqwwQIh7JeUWBt0nc6LzEnZD0nSOcqEJci+ED25-ZBAsCCZrXJ-QPU8BOt9HgISW7D+kiPquWBC5dCLlGIOfZrU8OXo2MrISGBz8r6WssMDq6p+ds9UwXShQFi0GwZUavkUfYCETUJ3DcXiihHnpqw0oqlvLR344-su5mhMZBvJQggkFLYpi0pESzDKTjCDbUJvy952a6feFZ-R8X78To71POClWc6ICkIuYD8CMJr6o-nR173vLQvSMgdi6PbgR6CyhgTlIqrTBJQT7fq27h7FzN4npRZa7tANidAmbDyhTIi1jTANiBCvYhTNi5bQE252Z277wxzXDAZX6IwgiGzAFuztDwiDYQjSZQiijp6fr5okGI657wGJyFZHqdbUEIAdBeC6DcRVhejiGrY+zAh6DAgmCKJWDaA+Df4QzwEADufAdQuQAAYicP2oOmgP9q0LQVMLyJAQlB-NWuMF7L-MoVZsfpPsivtnwvQD2jgIYUOsIbNLQSZJ6J6Iwcll0APgzsqkEBYuPk4TAaQXAQfKjsIfCpyB5shuxN6DIZoIhCAZIdtJ5tCOEMQbZjwfXvAYvPmD4RRGYdyFDjjAguFG2qtG2GVMCgzmoTPIfGXLkCBlCoZMEPyAKFCEMAZggNxMMG0IlNuCGIuF-oUdNrEbwQfH-lURYYeHUT7D4K5ltIbMiIZBiAUdEdwRxhcnykmJTogb8jNNoI1J0IZI+n4HAsEeIa6mBO4EMJ3GwqulNgjkcbyt4kmFmiaISvUAAEpgAACOmQ1AZQEW8yoqOsHqfcLmoU0IWy1aFgnajaAowmbReEaK7hGA3SuKLyeGc+l+recJHobQdqVK9OVYD2Aw2gAIaCsKIKaIOJ7SJxmoXSPS9I0yeK9Qd4ZJkWFxpUbqDYbB8KLQb2GIWyIUyCT23EFY2g7JGSnJeQ3JRJwy-iwEmMyh0wgWhgdJvcbEbcnazWNg8KboKp9AeJGKdy2KmpApR2J2laPhAQBgB4qI0o0o7Ewxtgso0Ka0fIhgEIqhsx3xSuxxfxVyJK9pjyvJzywy+QCZXycyGm0Wz2bU4E8IIUZUvoTK-ppYk6VYOmPgIc4Ziu-OUstpsZWK8ZfSiZTpdpzu5JLMno70EwQIiEzouMf0BZQwq0JgbOVYvZ7YFZfO5qvxWSEeNycZOKKZ-Jry2pEGHpsUPePpdGEKT24pDKfRkItg1paKlqLQpYm4UqMqQIOgcqa0bQPoIQzo8E0URBBxRRPxx0w6YGxems3siAhpCG0xyhl5wW45p+2E-i9C2mVGemHMTK-cLQ9gEO0iGWcunxCuAkhWzAMJ6ZKsQIboppkqnQ-haMcIQe0KT2xgj6D0VpIF2wEa0S8UV69aQIt2GRIoraxg7Q3Q8UoZUwGaYQQAA */
   createMachine(
     {
       context: {
@@ -48,6 +55,9 @@ export const StandardPlanMachine =
           | { type: "providerChange"; provider: CloudProvider }
           | { type: "regionChange"; region: Region }
           | { type: "sizeChange"; size: Size }
+          | { type: "selectSubscription"; subscription: SelectedSubscription }
+          | { type: "selectPrepaid" }
+          | { type: "billingChange" }
           | { type: "nameIsValid" }
           | { type: "nameIsInvalid" }
           | { type: "nameIsTaken" }
@@ -279,7 +289,7 @@ export const StandardPlanMachine =
                     validate: {
                       always: [
                         {
-                          cond: "noProviderAndRegion",
+                          cond: "noProviderOrRegion",
                           target: "idle",
                         },
                         {
@@ -293,6 +303,10 @@ export const StandardPlanMachine =
                         {
                           cond: "sizeIsDisabled",
                           target: "disabled",
+                        },
+                        {
+                          cond: "billingRequiredButNotSelected",
+                          target: "waitingForQuota",
                         },
                         {
                           cond: "sizeIsOverQuota",
@@ -310,6 +324,10 @@ export const StandardPlanMachine =
                     disabled: {
                       entry: "fieldInvalid",
                       tags: "sizeDisabled",
+                    },
+                    waitingForQuota: {
+                      entry: "fieldInvalid",
+                      tags: "sizeWaitingForQuota",
                     },
                     overQuota: {
                       entry: "fieldInvalid",
@@ -356,6 +374,113 @@ export const StandardPlanMachine =
                     sizeChange: {
                       actions: "setSize",
                       cond: "didSizeChange",
+                      target: ".validate",
+                    },
+                    billingChange: {
+                      target: ".validate",
+                    },
+                  },
+                },
+                billing: {
+                  initial: "validate",
+                  states: {
+                    validate: {
+                      always: [
+                        {
+                          actions: "setBillingToPrepaid",
+                          cond: "onlyPrepaid",
+                          target: "noSelectionRequired",
+                        },
+                        {
+                          cond: "singleSubscription",
+                          target: "noSelectionRequired",
+                        },
+                        {
+                          cond: "onlySubscriptions",
+                          target: "onlySubscriptions",
+                        },
+                        {
+                          description:
+                            "user has both prepaid and marketplace subscriptions",
+                          target: "prepaidAndSubscriptions",
+                        },
+                      ],
+                    },
+                    noSelectionRequired: {
+                      description:
+                        "The user doesn't need to specify any option about the billing. The API will automatically figure out the right thing to do without giving it any information.",
+                      tags: ["noBilling", "billingValid"],
+                      type: "final",
+                    },
+                    onlySubscriptions: {
+                      description:
+                        "More than one subscription exist. The user needs to select one to procede.",
+                      initial: "invalid",
+                      type: "final",
+                      states: {
+                        invalid: {},
+                        valid: {
+                          entry: "triggerBillingChange",
+                          tags: "billingValid",
+                          type: "final",
+                        },
+                      },
+                      on: {
+                        selectSubscription: [
+                          {
+                            actions: "setBillingToSubscription",
+                            cond: "matchesSelectedProviderOrRHMarketplace",
+                            target: ".valid",
+                          },
+                          {
+                            cond: "noSelectedProvider",
+                            target: ".valid",
+                          },
+                        ],
+                      },
+                    },
+                    prepaidAndSubscriptions: {
+                      description:
+                        "The user has both prepaid quota and one or more subscription to a marketplace. The user needs to select one to procede.",
+                      initial: "empty",
+                      type: "final",
+                      states: {
+                        empty: {},
+                        subscription: {
+                          entry: "triggerBillingChange",
+                          tags: "billingValid",
+                          type: "final",
+                        },
+                        prepaid: {
+                          entry: "triggerBillingChange",
+                          tags: "billingValid",
+                          type: "final",
+                        },
+                      },
+                      on: {
+                        selectSubscription: [
+                          {
+                            actions: "setBillingToSubscription",
+                            cond: "matchesSelectedProviderOrRHMarketplace",
+                            target: ".subscription",
+                          },
+                          {
+                            cond: "noSelectedProvider",
+                            target: ".subscription",
+                          },
+                        ],
+                        selectPrepaid: {
+                          actions: "setBillingToPrepaid",
+                          target: ".prepaid",
+                        },
+                      },
+                    },
+                  },
+                  on: {
+                    providerChange: {
+                      actions: "unsetSubscription",
+                      description:
+                        "If a new provider is selected, deselect any previously selected billing option.",
                       target: ".validate",
                     },
                   },
@@ -459,6 +584,22 @@ export const StandardPlanMachine =
           data: context.form,
         })),
         triggerSubmit: send("submit"),
+        triggerBillingChange: send("billingChange"),
+        setBillingToPrepaid: assign((context) => {
+          const form = { ...context.form };
+          form.billing = "prepaid";
+          return { form };
+        }),
+        setBillingToSubscription: assign((context, event) => {
+          const form = { ...context.form };
+          form.billing = event.subscription;
+          return { form };
+        }),
+        unsetSubscription: assign((context) => {
+          const form = { ...context.form };
+          form.billing = undefined;
+          return { form };
+        }),
       },
       guards: {
         isOverQuota: ({ capabilities }) =>
@@ -497,7 +638,7 @@ export const StandardPlanMachine =
               undefined
           );
         },
-        noProviderAndRegion: ({ form }) =>
+        noProviderOrRegion: ({ form }) =>
           form.provider === undefined || form.region === undefined,
         noSizes: ({ sizes }) => sizes === undefined,
         emptySizes: ({ sizes }) => sizes !== undefined && sizes.length === 0,
@@ -505,9 +646,20 @@ export const StandardPlanMachine =
           if (capabilities === undefined) return true;
           return form.size?.isDisabled === true;
         },
+        billingRequiredButNotSelected: ({ form }, _, meta) => {
+          if (meta.state.hasTag("noBilling")) {
+            return false;
+          }
+          return form.billing === undefined;
+        },
         sizeIsOverQuota: ({ form, capabilities }) => {
           if (capabilities === undefined || !form.size) return true;
-          return form.size.quota > capabilities.remainingPrepaidQuota; // TODO: marketplaces
+          const availableQuota =
+            form.billing === "prepaid"
+              ? capabilities.remainingPrepaidQuota
+              : capabilities.remainingMarketplaceQuota;
+          if (!availableQuota) return true;
+          return form.size.quota > availableQuota;
         },
         didProviderChange: (context, event) =>
           context.form.provider !== event.provider,
@@ -515,6 +667,19 @@ export const StandardPlanMachine =
           context.form.region !== event.region,
         didSizeChange: (context, event) =>
           context.form.size?.id !== event.size.id,
+        onlyPrepaid: (context) =>
+          context.capabilities.marketplacesQuota.length === 0,
+        singleSubscription: (context) =>
+          context.capabilities.remainingPrepaidQuota === undefined &&
+          context.capabilities.marketplacesQuota.flatMap((m) => m.subscriptions)
+            .length === 1,
+        onlySubscriptions: (context) =>
+          context.capabilities.remainingPrepaidQuota === undefined &&
+          context.capabilities.marketplacesQuota.length > 0,
+        matchesSelectedProviderOrRHMarketplace: ({ form }, { subscription }) =>
+          subscription.marketplace === "rh" ||
+          form.provider === subscription.marketplace,
+        noSelectedProvider: ({ form }) => form.provider === undefined,
       },
     }
   );

@@ -1,11 +1,3 @@
-export type StandardPlanAvailability =
-  | "available"
-  | "over-quota"
-  | "instance-unavailable"
-  | "regions-unavailable";
-
-export type TrialPlanAvailability = "available" | "used" | "unavailable";
-
 export type CloudProvider = "aws" | "azure";
 export type Region = string;
 export type RegionInfo = {
@@ -22,11 +14,18 @@ export type CloudProviderInfo = {
 };
 export type Regions = Array<RegionInfo>;
 export type CloudProviders = Array<CloudProviderInfo>;
+export type Quota = number;
+export type MarketPlace = CloudProvider | "rh";
+export type MarketPlaceSubscriptions = {
+  marketplace: MarketPlace;
+  subscriptions: string[];
+};
+
 export type Size = {
   id: string;
   displayName: string;
   status: "stable" | "preview";
-  quota: number;
+  quota: Quota;
   ingress: number;
   egress: number;
   storage: number;
@@ -34,7 +33,6 @@ export type Size = {
   connectionRate: number;
   maxPartitions: number;
   messageSize: number;
-  trialDurationHours: number | undefined;
   isDisabled: boolean;
 };
 
@@ -45,12 +43,21 @@ export type CreateKafkaInstanceError =
   | "region-unavailable"
   | "unknown";
 
+export type StandardPlanAvailability =
+  | "available"
+  | "over-quota"
+  | "instance-unavailable"
+  | "regions-unavailable";
+
+export type TrialPlanAvailability = "available" | "used" | "unavailable";
+
 export type StandardPlanInitializationData = {
   defaultProvider: CloudProvider | undefined;
   availableProviders: CloudProviders;
   instanceAvailability: StandardPlanAvailability;
-  remainingPrepaidQuota: number;
-  marketplacesQuota: { provider: CloudProvider; quota: number }[];
+  remainingPrepaidQuota: Quota | undefined;
+  remainingMarketplaceQuota: Quota | undefined;
+  marketplacesQuota: MarketPlaceSubscriptions[];
   plan: "standard";
 };
 
@@ -69,7 +76,9 @@ export type StandardSizes = Size[];
 
 export type TrialSizes = {
   standard: Size[];
-  trial: Size;
+  trial: Size & {
+    trialDurationHours: number;
+  };
 };
 
 export type CreateKafkaFormData = {

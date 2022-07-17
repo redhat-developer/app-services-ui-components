@@ -11,7 +11,7 @@ export const FieldSizeHelperTextOverQuota: VoidFunctionComponent<{
   remainingQuota: number;
   onClick: () => void;
 }> = ({ remainingQuota, onClick }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   return (
     <>
       <HelperText className={"pf-c-form__helper-text"}>

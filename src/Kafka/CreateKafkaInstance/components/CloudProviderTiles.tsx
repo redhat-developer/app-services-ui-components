@@ -11,7 +11,6 @@ import { AwsIcon, AzureIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type { CloudProvider, CloudProviderInfo } from "../types";
-import "./CloudProviderTiles.css";
 
 export type CloudProvidersTilesProps = {
   providers: CloudProviderInfo[];
@@ -47,6 +46,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
                 className={"pf-u-w-100"}
                 title={displayName}
                 icon={tiles[id]}
+                isStacked={true}
                 isSelected={value === id}
                 isDisabled={isDisabled}
                 onClick={() => onChange(id)}
@@ -56,7 +56,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
         </Flex>
       </div>
       <FormSelect
-        className={"mas--CreateKafkaInstance__CloudProviderTile--select"}
+        className={"pf-u-display-none"}
         value={value}
         id="form-cloud-provider-option"
         name="cloud-provider"
@@ -81,18 +81,6 @@ export const CloudProvidersTiles: VoidFunctionComponent<
 };
 
 const tiles: { [id in CloudProvider]: JSX.Element } = {
-  aws: (
-    <AwsIcon
-      size="lg"
-      color="black"
-      className="mas--CreateKafkaInstance__CloudProviderTile--Icon"
-    />
-  ),
-  azure: (
-    <AzureIcon
-      size="lg"
-      color="black"
-      className="mas--CreateKafkaInstance__CloudProviderTile--Icon"
-    />
-  ),
+  aws: <AwsIcon size="lg" color="black" />,
+  azure: <AzureIcon size="lg" color="black" />,
 };

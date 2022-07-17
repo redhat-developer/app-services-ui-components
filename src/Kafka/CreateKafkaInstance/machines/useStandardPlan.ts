@@ -4,6 +4,7 @@ import type {
   CloudProvider,
   CloudProviderInfo,
   CreateKafkaInstanceError,
+  MarketPlace,
   Region,
   Size,
 } from "../types";
@@ -16,6 +17,8 @@ type SelectorReturn = {
   selectedProvider: CloudProviderInfo | undefined;
   selectedSize: Size | undefined;
   sizes: StandardPlanMachineContext["sizes"];
+  selectedBilling: "prepaid" | string | undefined;
+  remainingQuota: number | undefined;
 
   isFormEnabled: boolean;
 
@@ -28,6 +31,11 @@ type SelectorReturn = {
   isSizeLoadingError: boolean;
   isSizeAvailable: boolean;
   isSizeError: boolean;
+  isBillingError: boolean;
+  isBillingSelectionRequired: boolean;
+  isBillingPrepaidAvailable: boolean;
+  isBillingPrepaidOverQuota: boolean;
+  isBillingMarketplaceOverQuota: boolean;
 
   isProviderError: boolean;
   isRegionError: boolean;
@@ -43,6 +51,11 @@ type SelectorReturn = {
   setRegion: (name: Region) => void;
   onCreate: () => void;
   setSize: (size: Size) => void;
+  setBillingSubscription: (
+    marketplace: MarketPlace,
+    subscription: string
+  ) => void;
+  setBillingPrepaid: () => void;
 };
 
 export function useStandardPlanMachine(): SelectorReturn {
@@ -77,6 +90,23 @@ export function useStandardPlanMachine(): SelectorReturn {
     [service]
   );
 
+  const setBillingSubscription = useCallback(
+    (marketplace: MarketPlace, subscription: string) =>
+      service.send({
+        type: "selectSubscription",
+        subscription: { marketplace, subscription },
+      }),
+    [service]
+  );
+
+  const setBillingPrepaid = useCallback(
+    () =>
+      service.send({
+        type: "selectPrepaid",
+      }),
+    [service]
+  );
+
   return useSelector<typeof service, SelectorReturn>(
     service,
     useCallback(
@@ -87,6 +117,10 @@ export function useStandardPlanMachine(): SelectorReturn {
         const isNameTaken = state.context.creationError === "name-taken";
         const isConfigurable = state.hasTag("configurable");
         const isLoadingSizes = state.hasTag("sizeLoading");
+        const isBillingSelectionRequired =
+          !state.hasTag("noBilling") && !isBlocked;
+        const isBillingPrepaidAvailable =
+          state.context.capabilities.remainingPrepaidQuota !== undefined;
 
         const selectedProvider = isBlocked
           ? undefined
@@ -100,11 +134,35 @@ export function useStandardPlanMachine(): SelectorReturn {
               (s) => state.context.form.size?.id === s.id
             );
 
+        const selectedBilling =
+          state.context.form.billing === "prepaid"
+            ? "prepaid"
+            : state.context.form.billing?.subscription;
+
         const error: SelectorReturn["error"] = state.context.creationError
           ? state.context.creationError
           : isFormInvalid
           ? "form-invalid"
           : undefined;
+
+        const remainingQuota =
+          state.context.form.billing === "prepaid"
+            ? state.context.capabilities.remainingPrepaidQuota
+            : state.context.capabilities.remainingMarketplaceQuota;
+
+        const isBillingPrepaidOverQuota =
+          selectedSize?.quota &&
+          state.context.capabilities.remainingPrepaidQuota
+            ? selectedSize.quota >
+              state.context.capabilities.remainingPrepaidQuota
+            : false;
+
+        const isBillingMarketplaceOverQuota =
+          selectedSize?.quota &&
+          state.context.capabilities.remainingMarketplaceQuota
+            ? selectedSize.quota >
+              state.context.capabilities.remainingMarketplaceQuota
+            : false;
 
         return {
           form: state.context.form,
@@ -112,9 +170,10 @@ export function useStandardPlanMachine(): SelectorReturn {
           selectedProvider,
           selectedSize,
           sizes: state.context.sizes,
+          selectedBilling,
+          remainingQuota,
 
           isFormEnabled: !isLoading && !isSaving && !isBlocked,
-
           isNameInvalid: state.hasTag("nameInvalid"),
           isNameEmpty: state.hasTag("nameEmpty"),
           isNameError:
@@ -127,10 +186,13 @@ export function useStandardPlanMachine(): SelectorReturn {
           isSizeLoadingError: state.hasTag("sizeError"),
           isSizeAvailable: !state.hasTag("sizeIdle"),
           isSizeError: !state.hasTag("sizeValid") && isFormInvalid,
-
           isProviderError: !state.hasTag("providerValid") && isFormInvalid,
           isRegionError: !state.hasTag("regionValid") && isFormInvalid,
-
+          isBillingError: !state.hasTag("billingValid") && isFormInvalid,
+          isBillingSelectionRequired,
+          isBillingPrepaidAvailable,
+          isBillingPrepaidOverQuota,
+          isBillingMarketplaceOverQuota,
           isLoading,
           isLoadingSizes,
           isConfigurable,
@@ -143,9 +205,21 @@ export function useStandardPlanMachine(): SelectorReturn {
           setRegion,
           onCreate,
           setSize,
+          setBillingSubscription,
+          setBillingPrepaid,
         };
       },
-      [isLoading, isSaving, onCreate, setName, setProvider, setRegion, setSize]
+      [
+        isLoading,
+        isSaving,
+        onCreate,
+        setBillingPrepaid,
+        setBillingSubscription,
+        setName,
+        setProvider,
+        setRegion,
+        setSize,
+      ]
     )
   );
 }

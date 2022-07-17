@@ -3,7 +3,9 @@
   "cancel": "Cancel",
   "cloud_provider": "Cloud provider",
   "cloudProviders": {
-    "aws": "Amazon Web Services"
+    "aws": "Amazon Web Services",
+    "azure": "Microsoft Azure",
+    "rh": "Red Hat"
   },
   "confirm_delete_modal_text": "<strong>{{name}}</strong> will be deleted.",
   "created": "Created",

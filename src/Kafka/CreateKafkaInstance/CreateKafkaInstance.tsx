@@ -83,7 +83,7 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   onLearnMoreAboutSizes,
   onClickKafkaOverview,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   const { isLoading, isStandardPlan, isTrialPlan, isSaving } =
     useCreateKafkaInstance();
@@ -93,7 +93,7 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   return (
     <Modal
       id="modalCreateKafka"
-      variant={ModalVariant.medium}
+      variant={ModalVariant.large}
       title={t("create_instance_title")}
       disableFocusTrap={disableFocusTrap}
       isOpen={isModalOpen}

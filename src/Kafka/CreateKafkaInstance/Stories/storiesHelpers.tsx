@@ -14,6 +14,8 @@ import type {
   CloudProviderInfo,
   CloudProviders,
   CreateKafkaInitializationData,
+  MarketPlace,
+  MarketPlaceSubscriptions,
   StandardPlanAvailability,
   StandardSizes,
   TrialPlanAvailability,
@@ -66,7 +68,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 7,
       maxPartitions: 8,
       messageSize: 9,
-      trialDurationHours: undefined,
       isDisabled: false,
     },
     {
@@ -81,7 +82,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 70,
       maxPartitions: 80,
       messageSize: 90,
-      trialDurationHours: undefined,
       isDisabled: false,
     },
     {
@@ -96,7 +96,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 700,
       maxPartitions: 800,
       messageSize: 900,
-      trialDurationHours: undefined,
       isDisabled: true,
     },
     {
@@ -111,7 +110,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 700,
       maxPartitions: 800,
       messageSize: 900,
-      trialDurationHours: undefined,
       isDisabled: false,
     },
   ],
@@ -128,7 +126,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 7,
       maxPartitions: 8,
       messageSize: 9,
-      trialDurationHours: undefined,
       isDisabled: false,
     },
     {
@@ -143,7 +140,6 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       connectionRate: 70,
       maxPartitions: 80,
       messageSize: 90,
-      trialDurationHours: undefined,
       isDisabled: false,
     },
   ],
@@ -193,7 +189,9 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
     instanceAvailability: StandardPlanAvailability;
     defaultProvider: CloudProvider | undefined;
     providers: string[];
-    remainingPrepaidQuota: number;
+    remainingPrepaidQuota: number | undefined;
+    remainingMarketplaceQuota: number | undefined;
+    marketplacesQuota: MarketPlaceSubscriptions[];
   },
   allProviders = PROVIDERS,
   latency = 500
@@ -203,6 +201,8 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
     defaultProvider,
     providers,
     remainingPrepaidQuota,
+    remainingMarketplaceQuota,
+    marketplacesQuota,
   } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
@@ -216,7 +216,8 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
         availableProviders,
         instanceAvailability,
         remainingPrepaidQuota,
-        marketplacesQuota: [],
+        remainingMarketplaceQuota,
+        marketplacesQuota,
       },
       latency
     );
@@ -259,11 +260,12 @@ const regionsScenario = {
 
 export const argTypes = {
   apiPlan: {
-    description: "Subscription type",
+    table: { category: "Plan" },
     control: "radio",
     options: ["standard", "trial"],
   },
   apiStandardScenario: {
+    table: { category: "Plan" },
     control: "radio",
     options: [
       "available",
@@ -272,23 +274,102 @@ export const argTypes = {
       "regions-unavailable",
       "backend-error",
     ],
+    if: { arg: "apiPlan", eq: "standard" },
   },
   apiTrialScenario: {
+    table: { category: "Plan" },
     control: "radio",
     options: ["available", "used", "unavailable", "backend-error"],
+    if: { arg: "apiPlan", eq: "trial" },
   },
-  apiProviders: {
-    options: PROVIDERS.map((p) => p.id),
+  apiRemainingPrepaid: {
+    table: { category: "Quota" },
     control: {
-      type: "check",
-      labels: Object.fromEntries(PROVIDERS.map((p) => [p.id, p.displayName])),
+      type: "boolean",
     },
+    if: { arg: "apiPlan", eq: "standard" },
   },
+  apiRemainingPrepaidQuota: {
+    table: { category: "Quota" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiRemainingPrepaid" },
+  },
+  apiHasMarketplaceSubscriptions: {
+    table: { category: "Quota" },
+    control: {
+      type: "boolean",
+    },
+    if: { arg: "apiPlan", eq: "standard" },
+  },
+  apiRemainingMarketplaceQuota: {
+    table: { category: "Quota" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiHasMarketplaceSubscriptions" },
+  },
+  apiMarketplacesAWS: {
+    table: { category: "Quota", subcategory: "Amazon Web Services" },
+    control: {
+      type: "boolean",
+    },
+    if: { arg: "apiHasMarketplaceSubscriptions" },
+  },
+  apiMarketplacesAWSSubscriptions: {
+    table: { category: "Quota", subcategory: "Amazon Web Services" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiMarketplacesAWS" },
+  },
+  apiMarketplacesAzure: {
+    table: { category: "Quota", subcategory: "Azure" },
+    control: {
+      type: "boolean",
+    },
+    if: { arg: "apiHasMarketplaceSubscriptions" },
+  },
+  apiMarketplacesAzureSubscriptions: {
+    table: { category: "Quota", subcategory: "Azure" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiMarketplacesAzure" },
+  },
+  apiMarketplacesRH: {
+    table: { category: "Quota", subcategory: "Red Hat Marketplace" },
+    control: {
+      type: "boolean",
+    },
+    if: { arg: "apiHasMarketplaceSubscriptions" },
+  },
+  apiMarketplacesRHSubscriptions: {
+    table: { category: "Quota", subcategory: "Red Hat Marketplace" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiMarketplacesRH" },
+  },
+
   apiSimulateBackendError: {
-    control: "toggle",
+    table: { category: "Backend scenario" },
+    control: "boolean",
   },
   apiRegionsAvailability: {
     options: Object.keys(regionsScenario),
+    table: { category: "Backend scenario" },
     control: {
       type: "radio",
       labels: regionsScenario,
@@ -296,10 +377,20 @@ export const argTypes = {
   },
   apiSizes: {
     options: ["normal", "no-sizes", "error"],
+    table: { category: "Backend scenario" },
     control: "radio",
+  },
+  apiProviders: {
+    options: PROVIDERS.map((p) => p.id),
+    table: { category: "Providers & regions" },
+    control: {
+      type: "check",
+      labels: Object.fromEntries(PROVIDERS.map((p) => [p.id, p.displayName])),
+    },
   },
   apiDefaultProvider: {
     options: PROVIDERS.map((p) => p.id),
+    table: { category: "Providers & regions" },
     control: {
       type: "radio",
       labels: Object.fromEntries(PROVIDERS.map((p) => [p.id, p.displayName])),
@@ -307,6 +398,7 @@ export const argTypes = {
   },
   apiDefaultRegion: {
     options: PROVIDERS.flatMap((p) => p.regions.map((r) => r.id)),
+    table: { category: "Providers & regions" },
     control: {
       type: "radio",
       labels: Object.fromEntries(
@@ -316,14 +408,8 @@ export const argTypes = {
       ),
     },
   },
-  apiRemainingQuota: {
-    control: {
-      type: "range",
-      min: 0,
-      max: 9,
-    },
-  },
   apiLatency: {
+    table: { category: "Backend scenario" },
     control: "number",
   },
 };
@@ -337,7 +423,16 @@ export type StoryProps = {
   apiProviders: CloudProvider[];
   apiDefaultProvider: CloudProvider;
   apiRegionsAvailability: keyof typeof regionsScenario;
-  apiRemainingQuota: number;
+  apiRemainingPrepaid: boolean;
+  apiRemainingPrepaidQuota: number;
+  apiHasMarketplaceSubscriptions: boolean;
+  apiRemainingMarketplaceQuota: number;
+  apiMarketplacesAWS: boolean;
+  apiMarketplacesAWSSubscriptions: number;
+  apiMarketplacesAzure: boolean;
+  apiMarketplacesAzureSubscriptions: number;
+  apiMarketplacesRH: boolean;
+  apiMarketplacesRHSubscriptions: number;
   apiLatency: number;
   onCreate: CreateKafkaInstancePropsWithSizes["onCreate"];
   onClickQuickStart?: () => void;
@@ -346,6 +441,29 @@ export type StoryProps = {
   onLearnHowToAddStreamingUnits?: () => void;
   onLearnMoreAboutSizes?: () => void;
   onClickKafkaOverview?: () => void;
+};
+
+export const defaultStoryArgs: StoryProps = {
+  apiPlan: "standard",
+  apiStandardScenario: "available",
+  apiTrialScenario: "available",
+  apiProviders: PROVIDERS.map((p) => p.id),
+  apiSizes: "normal",
+  apiDefaultProvider: "aws",
+  apiRegionsAvailability: "full",
+  apiRemainingPrepaid: true,
+  apiRemainingPrepaidQuota: 3,
+  apiHasMarketplaceSubscriptions: false,
+  apiRemainingMarketplaceQuota: 3,
+  apiMarketplacesAWS: true,
+  apiMarketplacesAWSSubscriptions: 2,
+  apiMarketplacesAzure: true,
+  apiMarketplacesAzureSubscriptions: 1,
+  apiMarketplacesRH: true,
+  apiMarketplacesRHSubscriptions: 1,
+  apiSimulateBackendError: false,
+  apiLatency: 500,
+  onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
 };
 
 export type StoryMeta = Meta<StoryProps>;
@@ -378,15 +496,25 @@ export const Template: Story<StoryProps> = (args, { id }) => {
   };
 
   const {
-    apiProviders = PROVIDERS.map((p) => p.id),
-    apiPlan = "standard",
-    apiTrialScenario = "available",
-    apiStandardScenario = "available",
-    apiSimulateBackendError = false,
+    apiProviders,
     apiDefaultProvider,
-    apiRegionsAvailability = "full",
-    apiSizes = "normal",
-    apiRemainingQuota = 3,
+    apiPlan,
+    apiTrialScenario,
+    apiStandardScenario,
+    apiSimulateBackendError,
+    apiRegionsAvailability,
+    apiSizes,
+    apiRemainingPrepaid,
+    apiRemainingPrepaidQuota,
+    apiHasMarketplaceSubscriptions,
+    apiRemainingMarketplaceQuota,
+    apiMarketplacesAWS,
+    apiMarketplacesAWSSubscriptions,
+    apiMarketplacesAzure,
+    apiMarketplacesAzureSubscriptions,
+    apiMarketplacesRH,
+    apiMarketplacesRHSubscriptions,
+
     apiLatency = 500,
   } = args;
 
@@ -418,6 +546,45 @@ export const Template: Story<StoryProps> = (args, { id }) => {
           regions: [],
         }));
 
+  function makeSubscriptions(provider: string, count: number) {
+    return Array(count)
+      .fill("")
+      .map(
+        (_, i) =>
+          `${provider}-${window.btoa(
+            encodeURIComponent(provider.padEnd(10, `${i}`))
+          )}`
+      );
+  }
+
+  function makeMarketplace(
+    marketplace: MarketPlace,
+    subscriptionCount: number
+  ): MarketPlaceSubscriptions {
+    return {
+      marketplace,
+      subscriptions: makeSubscriptions(marketplace, subscriptionCount),
+    };
+  }
+
+  const marketplacesQuota: MarketPlaceSubscriptions[] = [
+    makeMarketplace("aws", apiMarketplacesAWSSubscriptions),
+
+    makeMarketplace("azure", apiMarketplacesAzureSubscriptions),
+    makeMarketplace("rh", apiMarketplacesRHSubscriptions),
+  ].filter((q) => {
+    switch (q.marketplace) {
+      case "aws":
+        return apiMarketplacesAWS;
+      case "azure":
+        return apiMarketplacesAzure;
+      case "rh":
+        return apiMarketplacesRH;
+      default:
+        return false;
+    }
+  });
+
   const getAvailableProvidersAndDefaults = apiSimulateBackendError
     ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
     : apiPlan === "standard"
@@ -426,7 +593,15 @@ export const Template: Story<StoryProps> = (args, { id }) => {
           instanceAvailability: apiStandardScenario,
           defaultProvider: apiDefaultProvider,
           providers: apiProviders,
-          remainingPrepaidQuota: apiRemainingQuota,
+          remainingPrepaidQuota: apiRemainingPrepaid
+            ? apiRemainingPrepaidQuota
+            : undefined,
+          remainingMarketplaceQuota: apiHasMarketplaceSubscriptions
+            ? apiRemainingMarketplaceQuota
+            : undefined,
+          marketplacesQuota: apiHasMarketplaceSubscriptions
+            ? marketplacesQuota
+            : [],
         },
         providers,
         apiLatency

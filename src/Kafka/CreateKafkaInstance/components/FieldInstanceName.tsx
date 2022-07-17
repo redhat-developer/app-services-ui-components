@@ -11,7 +11,7 @@ export type FieldInstanceNameProps = {
 export const FieldInstanceName: VoidFunctionComponent<
   FieldInstanceNameProps
 > = ({ value, validity, isDisabled, onChange }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   const validation = validity !== "valid" ? "error" : "default";
 
   return (

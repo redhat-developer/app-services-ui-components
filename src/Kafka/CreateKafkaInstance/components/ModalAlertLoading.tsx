@@ -3,7 +3,7 @@ import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
 export const ModalAlertLoading: VoidFunctionComponent = () => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   return (
     <Alert

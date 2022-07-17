@@ -9,19 +9,21 @@ import { Trans, useTranslation } from "react-i18next";
 import { ExternalLink } from "../../../shared";
 
 export const FieldSizeHelperText: VoidFunctionComponent<{
-  remainingQuota: number;
+  remainingQuota: number | undefined;
   isPreview: boolean;
   isUnavailable: boolean;
   isError: boolean;
 }> = ({ remainingQuota, isPreview, isUnavailable, isError }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   return (
     <HelperText className={"pf-c-form__helper-text"}>
-      <HelperTextItem>
-        {t("standard_kafka_streaming_unit", {
-          count: remainingQuota,
-        })}
-      </HelperTextItem>
+      {remainingQuota && (
+        <HelperTextItem>
+          {t("standard_kafka_streaming_unit", {
+            count: remainingQuota,
+          })}
+        </HelperTextItem>
+      )}
 
       {isUnavailable && (
         <Alert
@@ -46,7 +48,7 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
           isInline
         >
           <Trans
-            ns={"create-kafka-instance-with-sizes"}
+            ns={"create-kafka-instance"}
             i18nKey={"size_preview_message"}
             components={[
               <ExternalLink

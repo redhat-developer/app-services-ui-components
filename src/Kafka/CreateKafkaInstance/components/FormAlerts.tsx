@@ -18,7 +18,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
   error,
   onClickContactUS,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   return (
     <AlertGroup aria-live="assertive">
@@ -46,7 +46,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 isInline
               >
                 <Trans
-                  ns={["create-kafka-instance-with-sizes"]}
+                  ns={["create-kafka-instance"]}
                   i18nKey={t("form_errors.over_quota_message")}
                   components={[
                     <Button
