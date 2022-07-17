@@ -7,8 +7,11 @@ import type {
   StandardPlanInitializationData,
   TrialPlanInitializationData,
 } from "../types";
-import { StandardPlanMachine } from "./StandardPlanMachine";
-import { TrialPlanMachine } from "./TrialPlanMachine";
+import {
+  StandardPlanMachine,
+  StandardPlanMachineContext,
+} from "./StandardPlanMachine";
+import { TrialPlanMachine, TrialPlanMachineContext } from "./TrialPlanMachine";
 
 export type CreateKafkaInstanceMachineContext = {
   // initial data coming from the APIs
@@ -32,10 +35,10 @@ const CreateKafkaInstanceMachine =
             data: CreateKafkaInitializationData;
           };
           standardPlan: {
-            data: any;
+            data: StandardPlanMachineContext;
           };
           trialPlan: {
-            data: any;
+            data: TrialPlanMachineContext;
           };
         },
       },

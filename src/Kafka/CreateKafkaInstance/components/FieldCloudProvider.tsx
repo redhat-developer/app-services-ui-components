@@ -10,7 +10,7 @@ export type FieldCloudProviderProps = {
 export const FieldCloudProvider: VoidFunctionComponent<
   FieldCloudProviderProps
 > = ({ value, providers, onChange, isDisabled, isValid }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   const validated = !isValid ? "error" : "default";
 

@@ -23,7 +23,7 @@ export const InstanceInfoSkeleton: VoidFunctionComponent<InstanceInfoProps> = ({
   isTrial,
   onClickQuickStart,
 }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
   return (
     <Stack hasGutter data-testid={"instance-info"}>
       <StackItem>

@@ -17,7 +17,7 @@ export type ModalAlertsStandardPlanProps = {
 export const ModalAlertsStandardPlan: VoidFunctionComponent<
   ModalAlertsStandardPlanProps
 > = ({ instanceAvailability, onClickContactUs }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   return (
     <AlertGroup>
@@ -33,7 +33,7 @@ export const ModalAlertsStandardPlan: VoidFunctionComponent<
                 isInline
               >
                 <Trans
-                  ns={["create-kafka-instance-with-sizes"]}
+                  ns={["create-kafka-instance"]}
                   i18nKey={t("modal_alerts.over_quota_message")}
                   components={[
                     <Button

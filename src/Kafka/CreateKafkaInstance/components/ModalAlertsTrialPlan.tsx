@@ -19,7 +19,7 @@ export type ModalAlertsTrialPlanProps = {
 export const ModalAlertsTrialPlan: VoidFunctionComponent<
   ModalAlertsTrialPlanProps
 > = ({ instanceAvailability, trialDurationInHours, onClickKafkaOverview }) => {
-  const { t } = useTranslation("create-kafka-instance-with-sizes");
+  const { t } = useTranslation("create-kafka-instance");
 
   return (
     <AlertGroup>
@@ -47,7 +47,7 @@ export const ModalAlertsTrialPlan: VoidFunctionComponent<
                 isInline
               >
                 <Trans
-                  ns={["create-kafka-instance-with-sizes"]}
+                  ns={["create-kafka-instance"]}
                   i18nKey={t("modal_alerts.trial_used_message")}
                   components={[
                     <Button
@@ -70,7 +70,7 @@ export const ModalAlertsTrialPlan: VoidFunctionComponent<
                 isInline
               >
                 <Trans
-                  ns={["create-kafka-instance-with-sizes"]}
+                  ns={["create-kafka-instance"]}
                   i18nKey="modal_alerts.trial_available_message"
                   components={[
                     <Button

@@ -45,7 +45,7 @@ export const CloudRegionSelect: FunctionComponent<CloudRegionProps> = ({
         value={id}
         description={
           isDisabled
-            ? t("create-kafka-instance-with-sizes:temporarily_unavailable")
+            ? t("create-kafka-instance:temporarily_unavailable")
             : undefined
         }
       >
