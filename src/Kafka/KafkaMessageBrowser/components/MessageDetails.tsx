@@ -21,10 +21,9 @@ import {
 import { parseISO } from "date-fns";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate } from "../../../shared";
+import { FormatDate, NoDataCell } from "../../../shared";
 import type { Message } from "../types";
 import { beautifyUnknownValue } from "../utils";
-import { NoDataCell } from "./NoDataCell";
 
 export type MessageDetailsProps = {
   onClose: () => void;
