@@ -1,10 +1,9 @@
 import {
-  Flex,
-  FlexItem,
   Stack,
-  TextContent,
-  TextVariants,
-  Text,
+  DescriptionList,
+  DescriptionListGroup,
+  DescriptionListTerm,
+  DescriptionListDescription,
 } from "@patternfly/react-core";
 import {
   TableComposable,
@@ -44,34 +43,39 @@ export const ConsumerGroupByKafka: FunctionComponent<
 
   return (
     <Stack hasGutter>
-      <TextContent>
-        <Flex>
-          <FlexItem>
-            <Text component={TextVariants.h4} size={50}>
-              {t("consumerGroup.active_members")}
-            </Text>
-            <Text component={TextVariants.h2}>{activeMembers}</Text>
-          </FlexItem>
-          <FlexItem>
-            <Text component={TextVariants.h4}>
-              {t("consumerGroup.partitions_with_lag")}{" "}
-              <ConsumerGroupPopover
-                title={t("consumerGroup.partitions_with_lag_name")}
-                description={t("consumerGroup.partitions_with_lag_description")}
-              />
-            </Text>
-            <Text component={TextVariants.h2}>{partitionsWithLag}</Text>
-          </FlexItem>
-          <FlexItem>
-            <Text component={TextVariants.h4}>
-              {t("consumerGroup.state_header")}
-            </Text>
-            <Text component={TextVariants.h2}>
-              {<ConsumerGroupStateLabel state={state} />}
-            </Text>
-          </FlexItem>
-        </Flex>
-      </TextContent>
+      <DescriptionList
+        columnModifier={{ lg: "3Col" }}
+        className={"pf-m-display-2xl"}
+      >
+        <DescriptionListGroup>
+          <DescriptionListTerm>
+            {t("consumerGroup.active_members")}
+          </DescriptionListTerm>
+          <DescriptionListDescription>
+            {activeMembers}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+        <DescriptionListGroup>
+          <DescriptionListTerm>
+            {t("consumerGroup.partitions_with_lag")}{" "}
+            <ConsumerGroupPopover
+              title={t("consumerGroup.partitions_with_lag_name")}
+              description={t("consumerGroup.partitions_with_lag_description")}
+            />
+          </DescriptionListTerm>
+          <DescriptionListDescription>
+            {partitionsWithLag}
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+        <DescriptionListGroup>
+          <DescriptionListTerm>
+            {t("consumerGroup.state_header")}
+          </DescriptionListTerm>
+          <DescriptionListDescription>
+            <ConsumerGroupStateLabel state={state} />
+          </DescriptionListDescription>
+        </DescriptionListGroup>
+      </DescriptionList>
       <TableComposable
         aria-label={t("consumerGroup.consumer_group_info_table_aria")}
         variant={TableVariant.compact}
