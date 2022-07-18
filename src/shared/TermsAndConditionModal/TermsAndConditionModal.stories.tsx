@@ -26,7 +26,6 @@ const Template: ComponentStory<typeof TermsAndConditionModal> = (args) => {
       </Button>
       <TermsAndConditionModal
         {...args}
-        serviceName="Kafka"
         onCancel={onCancel}
         isModalOpen={isOpen}
       />
@@ -35,3 +34,6 @@ const Template: ComponentStory<typeof TermsAndConditionModal> = (args) => {
 };
 
 export const TermsAndCondition_Modal = Template.bind({});
+TermsAndCondition_Modal.args = {
+  serviceName: "Kafka",
+};
