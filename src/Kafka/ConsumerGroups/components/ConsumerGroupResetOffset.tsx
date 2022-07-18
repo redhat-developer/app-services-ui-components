@@ -49,6 +49,8 @@ export type ConsumerGroupResetOffsetProps = {
   SelectAllConsumer: (consumer: ConsumerRow[]) => void;
   onSelectAll: (isSelected: boolean) => void;
   onSelectRow: (index: number, isSelected: boolean) => void;
+  disableFocusTrap?: boolean;
+  appendTo?: () => HTMLElement;
 };
 
 export const ConsumerGroupResetOffset: FunctionComponent<
@@ -72,6 +74,8 @@ export const ConsumerGroupResetOffset: FunctionComponent<
   isSelected,
   onSelectAll,
   onSelectRow,
+  disableFocusTrap,
+  appendTo,
 }) => {
   const { t } = useTranslation(["kafka"]);
 
@@ -104,6 +108,8 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       title={t("consumerGroup.reset_offset")}
       showClose={true}
       aria-describedby="modal-message"
+      disableFocusTrap={disableFocusTrap}
+      appendTo={appendTo}
       actions={[
         <Button
           variant="danger"
