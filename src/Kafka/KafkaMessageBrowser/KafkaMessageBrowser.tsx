@@ -22,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import {
   FormatDate,
   Loading,
+  NoDataCell,
   RefreshButton,
   ResponsiveTable,
 } from "../../shared";
@@ -30,7 +31,6 @@ import {
   FilterGroup,
   LimitSelector,
   MessageDetails,
-  NoDataCell,
   NoDataEmptyState,
   NoResultsEmptyState,
   OffsetRange,
