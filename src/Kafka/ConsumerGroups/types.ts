@@ -3,7 +3,7 @@ export interface Consumer {
   topic: string;
   partition: number;
   offset: number;
-  logEndOffset?: number;
+  logEndOffset: number;
   lag: number;
   memberId?: string;
 }

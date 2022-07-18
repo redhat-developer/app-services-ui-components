@@ -9,11 +9,10 @@ import { TableVariant } from "@patternfly/react-table";
 import { useMemo } from "react";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { ResponsiveTable } from "../../../shared";
+import { NoDataCell, ResponsiveTable } from "../../../shared";
 import type { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
-import { NoDataCell } from "../../KafkaMessageBrowser/components";
 
 const columns = [
   "topic",
@@ -94,6 +93,7 @@ export const ConsumerGroupByKafka: FunctionComponent<
         renderCell={({ column, row, Td, key }) => (
           <Td key={key} dataLabel={columnLabels[column]}>
             {(() => {
+              const empty = <NoDataCell columnLabel={columnLabels[column]} />;
               switch (column) {
                 case "topic":
                   return row.topic;
@@ -112,7 +112,7 @@ export const ConsumerGroupByKafka: FunctionComponent<
                 case "offset_lag":
                   return row.lag;
                 default:
-                  return null;
+                  return empty;
               }
             })()}
           </Td>
