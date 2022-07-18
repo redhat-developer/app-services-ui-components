@@ -1,6 +1,7 @@
 import { Skeleton } from "@patternfly/react-core";
 import type {
   ActionsColumnProps,
+  TableVariant,
   TdProps,
   ThProps,
 } from "@patternfly/react-table";
@@ -58,6 +59,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   isRowSelected?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
+  variant?: TableVariant;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -74,6 +76,7 @@ export const ResponsiveTable = <TRow, TCol>({
   isRowSelected,
   expectedLength = 3,
   onRowClick,
+  variant,
   children,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
@@ -165,6 +168,7 @@ export const ResponsiveTable = <TRow, TCol>({
       gridBreakPoint=""
       ref={ref}
       className={showColumns ? "" : "pf-m-grid"}
+      variant={variant}
     >
       <Thead>
         <Tr>{header}</Tr>
