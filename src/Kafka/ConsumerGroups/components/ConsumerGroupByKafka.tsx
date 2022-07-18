@@ -13,6 +13,7 @@ import { ResponsiveTable } from "../../../shared";
 import type { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
+import { NoDataCell } from "../../KafkaMessageBrowser/components";
 
 const columns = [
   "topic",
@@ -110,6 +111,8 @@ export const ConsumerGroupByKafka: FunctionComponent<
                   return row.logEndOffset;
                 case "offset_lag":
                   return row.lag;
+                default:
+                  return null;
               }
             })()}
           </Td>
