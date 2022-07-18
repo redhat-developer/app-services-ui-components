@@ -34,6 +34,7 @@ const getTopics = () => {
 export default {
   component: ConsumerGroupResetOffset,
   args: {
+    disableFocusTrap: true,
     isDisconnected: true,
     groupId: "console",
     topics: getTopics(),
@@ -41,8 +42,19 @@ export default {
   },
 } as ComponentMeta<typeof ConsumerGroupResetOffset>;
 
-const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (args) => (
-  <ConsumerGroupResetOffset {...args} />
+const Template: ComponentStory<typeof ConsumerGroupResetOffset> = (
+  args,
+  { id }
+) => (
+  <ConsumerGroupResetOffset
+    {...args}
+    appendTo={() =>
+      document.getElementById(`story--${id}`) ||
+      document.getElementById("root") ||
+      document.body
+    }
+    disableFocusTrap={true}
+  />
 );
 
 export const NoTopicSelected = Template.bind({});
