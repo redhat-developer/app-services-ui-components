@@ -103,6 +103,13 @@
   "partitions": "Partitions",
   "partitions_value": "up to 500",
   "select_filter_category": "Select filter category",
+  "settings": {
+    "connection_re_authentication_label": "Connection re-authentication:",
+    "disable": "Disable",
+    "kafka_instance_settings_label": "Configure global settings for the kafka instance",
+    "warning_description": "There are some potential risks",
+    "warning_title": "Disable re-authentication?"
+  },
   "short_description": "Short Description",
   "storage": "Storage",
   "storage_value": "up to 1000 GiB",
