@@ -270,9 +270,9 @@ export const KafkaPageV3: FunctionComponent = () => {
                   </Split>
                 </FlexItem>
               </Flex>
-
-              <Divider isVertical />
-
+              <Divider
+                orientation={{ default: "horizontal", xl: "vertical" }}
+              />
               <Flex
                 justifyContent={{ default: "justifyContentCenter" }}
                 flex={{ default: "flex_1" }}
@@ -296,9 +296,9 @@ export const KafkaPageV3: FunctionComponent = () => {
                   </Split>
                 </FlexItem>
               </Flex>
-
-              <Divider isVertical />
-
+              <Divider
+                orientation={{ default: "horizontal", xl: "vertical" }}
+              />
               <Flex
                 justifyContent={{ default: "justifyContentCenter" }}
                 flex={{ default: "flex_1" }}
