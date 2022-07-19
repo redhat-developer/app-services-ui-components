@@ -25,12 +25,12 @@ import {
   RefreshButton,
   ResponsiveTable,
 } from "../../shared";
-import type { MessageDetailsProps} from "./components";
-import { NoDataCell } from "./components";
+import type { MessageDetailsProps } from "./components";
 import {
   FilterGroup,
   LimitSelector,
   MessageDetails,
+  NoDataCell,
   NoDataEmptyState,
   NoResultsEmptyState,
   OffsetRange,

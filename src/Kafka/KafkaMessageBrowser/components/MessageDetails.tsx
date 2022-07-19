@@ -24,6 +24,7 @@ import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../../shared";
 import type { Message } from "../types";
 import { beautifyUnknownValue } from "../utils";
+import { NoDataCell } from "./NoDataCell";
 
 export type MessageDetailsProps = {
   onClose: () => void;
