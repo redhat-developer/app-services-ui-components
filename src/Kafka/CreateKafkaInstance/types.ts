@@ -21,6 +21,11 @@ export type MarketPlaceSubscriptions = {
   subscriptions: string[];
 };
 
+export type SelectedSubscription = {
+  marketplace: MarketPlace;
+  subscription: string;
+};
+
 export type Size = {
   id: string;
   displayName: string;
@@ -86,6 +91,7 @@ export type CreateKafkaFormData = {
   provider: CloudProvider;
   region: Region;
   sizeId: string;
+  billing: SelectedSubscription | "prepaid" | undefined;
 };
 
 export type CreateKafkaInstanceServices = {

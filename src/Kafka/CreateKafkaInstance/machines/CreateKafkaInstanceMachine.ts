@@ -212,6 +212,7 @@ export function makeCreateKafkaInstanceMachine({
               provider: form.provider,
               region: form.region,
               sizeId: form.sizeId,
+              billing: form.billing,
             },
             onSuccess,
             onError

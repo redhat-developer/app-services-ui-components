@@ -134,13 +134,27 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
 };
 
 export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
-  const { form, capabilities, isProviderError, isFormEnabled, setProvider } =
-    useStandardPlanMachine();
+  const {
+    form,
+    capabilities,
+    isProviderError,
+    isFormEnabled,
+    isBillingSingleMarketplace,
+    setProvider,
+  } = useStandardPlanMachine();
+
+  const providers =
+    isBillingSingleMarketplace && isBillingSingleMarketplace !== "rh"
+      ? capabilities.availableProviders.map((p) => ({
+          ...p,
+          isDisabled: p.id !== isBillingSingleMarketplace,
+        }))
+      : capabilities.availableProviders;
 
   return (
     <FieldCloudProvider
       isValid={!isProviderError}
-      providers={capabilities.availableProviders || []}
+      providers={providers}
       value={form.provider}
       isDisabled={!isFormEnabled}
       onChange={setProvider}

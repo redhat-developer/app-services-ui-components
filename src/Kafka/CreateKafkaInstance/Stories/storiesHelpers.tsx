@@ -1,5 +1,5 @@
 import { Button } from "@patternfly/react-core";
-import { actions } from "@storybook/addon-actions";
+import { actions, action } from "@storybook/addon-actions";
 import type { PlayFunction } from "@storybook/csf";
 import { expect } from "@storybook/jest";
 import type { Meta, Story } from "@storybook/react";
@@ -463,7 +463,10 @@ export const defaultStoryArgs: StoryProps = {
   apiMarketplacesRHSubscriptions: 1,
   apiSimulateBackendError: false,
   apiLatency: 500,
-  onCreate: (_data, onSuccess) => setTimeout(onSuccess, 500),
+  onCreate: (_data, onSuccess) => {
+    action("onCreate")(_data);
+    setTimeout(onSuccess, 500);
+  },
 };
 
 export type StoryMeta = Meta<StoryProps>;

@@ -111,7 +111,8 @@ export interface Typegen0 {
     | "configuring.fields.size.loading"
     | "configuring.fields.billing"
     | "configuring.fields.billing.validate"
-    | "configuring.fields.billing.noSelectionRequired"
+    | "configuring.fields.billing.prepaidOnly"
+    | "configuring.fields.billing.singleSubscription"
     | "configuring.fields.billing.onlySubscriptions"
     | "configuring.fields.billing.onlySubscriptions.invalid"
     | "configuring.fields.billing.onlySubscriptions.valid"
@@ -149,7 +150,8 @@ export interface Typegen0 {
                       | "loading";
                     billing?:
                       | "validate"
-                      | "noSelectionRequired"
+                      | "prepaidOnly"
+                      | "singleSubscription"
                       | "onlySubscriptions"
                       | "prepaidAndSubscriptions"
                       | {
@@ -185,5 +187,6 @@ export interface Typegen0 {
     | "sizeError"
     | "sizeLoading"
     | "noBilling"
-    | "billingValid";
+    | "billingValid"
+    | "singleSubscription";
 }

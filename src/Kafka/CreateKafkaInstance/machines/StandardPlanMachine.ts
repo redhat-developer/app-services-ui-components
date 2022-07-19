@@ -1,19 +1,15 @@
 import { assign, createMachine, send, sendParent } from "xstate";
 import {
   CloudProvider,
+  CreateKafkaFormData,
   CreateKafkaInstanceError,
-  MarketPlace,
   Region,
+  SelectedSubscription,
   Size,
   StandardPlanInitializationData,
   StandardSizes,
 } from "../types";
 import { onProviderChange } from "./shared";
-
-export type SelectedSubscription = {
-  marketplace: MarketPlace;
-  subscription: string;
-};
 
 export type StandardPlanMachineContext = {
   // initial data coming from the APIs
@@ -37,7 +33,7 @@ export type StandardPlanMachineContext = {
 };
 
 export const StandardPlanMachine =
-  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAZgAcARnoBOfQAYdOrQHYArABYNAJnMAaEB0Q6j++reuXL5k3bWWpY65gC+Yc6omNh4RKQUNHT05Eps1FAArqwYUPTRKJmwYuQ4YGgoYCqy8iiKykhqmjp29OYW5hpGQYG+zq4Ilvoa9KZGlh4a5joAbPqBEVHoWLgExBhkVLQMqRjpWTl5bDI4ALZMaITUEGLpYIQQAJIYvFcQ1XIKSirqCKGG9Ds+ksU1m5n0M2s1n0-UQdgmllGdjsOj8QJm7ihixA0RWcXWmySOzSGWytCOJ3Or2uYlgmQEpxEH1q9R+bmMnnMnRR9n8di0RjssIQ-MFo2sgQ81lCGjm2NxsTWCS2yV2+zJuXoxzO+TQjHJJTKFTAAGVMuRyHB4I0al8GqBfoEZlp6FpISYdBp7PprFZhaK9JDAuDproQfLlor4htEtsUiSDuStZTdfrcobypUAKI4HAnZl2tkinn0WVTFFQrS+mb+jEzehzMz84btazjCMxVbRwlxtWkw7Js63aj3J4vS7XAt1b6NR0+etaWXzPmQmsuOGmRGWfmWRchbctGYdvFKmMq4l7ftJu4PWD0DBoU4ManYSoSG2faf2poIIL15GmDo+iLkBdhGOYa4DLMUKjKCljOkYbrDFox5RgSsaqgmGpHCOt73o+YAZsaU6srObj2F45gSn4UIaDY7QaMKMouohVgzNuHhgRoOioV26HnvGl6JpqN4QHeD5PmIElgAAwpQmAwCRM4OuRrS+tRVG2PRi5MexrSojM9iIW2VgSrx+LKkSgnqgOol3lIeb6hALAXG8xrvtIn6kSpgxAm00IosiEEzDMTjriKHj1hMEIoqE1iGeYdjmaePaYUJ2FarhYn0A5MhOSwRGVEp36-J6alUfCml0b6Onhci8UGJxnoSuBGj6Ml3YYReNnXll9mOdcBW5flOByQpVQfiyyk-mVlEabR2mMXVUr0EYgo+qGQHtJYHX8VZfbCTho53mUUD1K51zucVRYHl4hg6EEPisdYTHwkYgLDNKRjsSF0I7ZEOKRnxlm9lhtl9fQp31IVE2eVNJWqXNlULTVS1QXR5iAqidgzCYApui0u0g2lPUiRDUNKGIw2DaN8m5LDIC2l+RazepyNaajTFdJ4OM8hBnRejxAMKsDZ77WDvXHZDYBnZTFMYGN9PXWRfwUWzNEcwxTEGaWvgWA9Gg+P41hE2LoPpeDUvyAAXs+E6voRys+b6gbcW7czQu4tUDA44KrZCsogfyXqm6l3VXmTVvULb9CEDIaAQAaEBKAwtCMDIADWDAixZZskxHR14TbDBxwn5IIGnMjkBU9QANpGAAuk7P6gvQNi6HY2gPVCwr2HRbS6PoVG7lYQyh111kF5lUcx6XifpiweY4DlxAoNq5w5ylE8HRldn5NHJfx-PUAVy8Vc10o9dN5NhYq9uLqBMiwEWBKneWL3vKrSEiHDOBILDOPASO9LZFwPjDZujpQq6wAuxYwoEpj+n-qMT0254KG3ig9QB4sLaS1AbbKmA1nK03GhAtwi4sYeisPMQw9hay4wML6RKhhvrgiFksTsucw6T0OtPPBhF5aK0UjfZmKtcYuh9GBQwGIUS1kNgYT6Ewfqd26Fg82pNC7ZWLrSA+giGZM28j+KiLopjbkhPrcCuhaweGgT4Ux-hZj-XYSeTqQCJaRz4WIIQhAri5F0aQ388E26NnYuCZcEEXp1VxpjAmVYqKsOBEeYWQNOHbzcRou8XifF5BfFdYRBjfi7kDD6WU7FFwCm6L3LQAJpgtFRGCMySSOFb1cTg9x2VMlJiUIQDgZoBCwFKNQKQX5iiwHuGAcgKBen9NYEMgx+jpqlQempNqMwcaCiohjXuxh6yIUNkPZqpjElOLQsTcOPC94dM1A5MAUg+AQC4FgKZAzZlKBGWMiZTyZkiLhrfHyD1xhtwguMbQHtDLv3CrYQyDY1pgXGPoVEFhVH53ORDS5eRrm3OuA8iAnzBnDNpO8lA+AyiYveHkhZbhQiY18P83cbpvqhGFN4EYLRuhem+qCJFZzd6ov4FkgheUaZ+PJQjVW9ZuKojifYZEQJe67kRO0RciEcbxUQo4wGTSXHYPUbwsSYhk7JAKNnZJzTtVTzsv42YALphrRBIlVZhtwU+zBf5II246K7hVVy7h2F9Up3yOgSoAbNV7TUQXfx-IcaumlMbX0JgpH+hKUiMClUQiYgiADDAMhnLWmQCarVcZmCsE4DwPgghhCiH8SEaNoU2qyglD6cYworAGG9CER1PpqLeryiwAAipkGQ6B-EChGJxaEPgtC+y0K9VohsqxrTMI26YRyNXONDckWguJLQAFUHy8H4GgAQhA9FeQpQgLk71OiduCFyaRTq4RGBGG6RKoEWi6DWiuzeBbkjy1gLuvUZbD3Hv8Vyawd0tC6AlBB50sq6pVlLAHcYyJFzDFmN64BSYChFHoJkDAdIGQiEqGSn53yZqIVLG1KsIQUTFJsMKIYPM4pUQNpO306G0nBsKHefDjIUBEf8fOAwZhpT4y5KPCJAxl2rS6IueEnd4TwXY60vIWHc2M1PaK+DXpgI+FqbRiTiAJgulMKFeYht-C+AAY0tdpyfW2RTGne2lrwRgc9PCkwoVQiTsTSiVazDuhckDhCJTOr14XWI+p+GLNwTGfAhiH+7gHr3pFLjEYoU1rBCCMMOYGgQvmpTLAPU5II0oIbBYDw4x5wojCj7Kw+lZScV8PCT0eXzkFb1JACNCUDDhJc8CYI-pwSIlWbFHGHtMHWZOXnbl9mzjOf8LBdzYIvNCmWl0Nu5n5juBqfYVrPKpbSXoGAU4QyBgkfyYgJhox3VtjQTVad4VQid39pO5EcLDJ7ZAdlQ7jm3iWrVhVDW1UtaPfBDstszouRgi9CbSbosuEYbaeJAi4XnNgY9vRMFOMQRMXhTsgy7QbW7kNp93B32Uc5KKiKoshsRhtXmHJqpXpO5MUSqOmDb2hgfbhyklpoWIbSUteR9WVVFpMUs+KOiD0wQcVh8c+HqTlO6v6oKoh4XiLU5ViCgwDhuKBZMm6SCG5oReEKaKKRVT1VfvXTNsnKuRr0F+5OTXfybCAm0CqwwQIh7JeUWBt0nc6LzEnZD0nSOcqEJci+ED25-ZBAsCCZrXJ-QPU8BOt9HgISW7D+kiPquWBC5dCLlGIOfZrU8OXo2MrISGBz8r6WssMDq6p+ds9UwXShQFi0GwZUavkUfYCETUJ3DcXiihHnpqw0oqlvLR344-su5mhMZBvJQggkFLYpi0pESzDKTjCDbUJvy952a6feFZ-R8X78To71POClWc6ICkIuYD8CMJr6o-nR173vLQvSMgdi6PbgR6CyhgTlIqrTBJQT7fq27h7FzN4npRZa7tANidAmbDyhTIi1jTANiBCvYhTNi5bQE252Z277wxzXDAZX6IwgiGzAFuztDwiDYQjSZQiijp6fr5okGI657wGJyFZHqdbUEIAdBeC6DcRVhejiGrY+zAh6DAgmCKJWDaA+Df4QzwEADufAdQuQAAYicP2oOmgP9q0LQVMLyJAQlB-NWuMF7L-MoVZsfpPsivtnwvQD2jgIYUOsIbNLQSZJ6J6Iwcll0APgzsqkEBYuPk4TAaQXAQfKjsIfCpyB5shuxN6DIZoIhCAZIdtJ5tCOEMQbZjwfXvAYvPmD4RRGYdyFDjjAguFG2qtG2GVMCgzmoTPIfGXLkCBlCoZMEPyAKFCEMAZggNxMMG0IlNuCGIuF-oUdNrEbwQfH-lURYYeHUT7D4K5ltIbMiIZBiAUdEdwRxhcnykmJTogb8jNNoI1J0IZI+n4HAsEeIa6mBO4EMJ3GwqulNgjkcbyt4kmFmiaISvUAAEpgAACOmQ1AZQEW8yoqOsHqfcLmoU0IWy1aFgnajaAowmbReEaK7hGA3SuKLyeGc+l+recJHobQdqVK9OVYD2Aw2gAIaCsKIKaIOJ7SJxmoXSPS9I0yeK9Qd4ZJkWFxpUbqDYbB8KLQb2GIWyIUyCT23EFY2g7JGSnJeQ3JRJwy-iwEmMyh0wgWhgdJvcbEbcnazWNg8KboKp9AeJGKdy2KmpApR2J2laPhAQBgB4qI0o0o7Ewxtgso0Ka0fIhgEIqhsx3xSuxxfxVyJK9pjyvJzywy+QCZXycyGm0Wz2bU4E8IIUZUvoTK-ppYk6VYOmPgIc4Ziu-OUstpsZWK8ZfSiZTpdpzu5JLMno70EwQIiEzouMf0BZQwq0JgbOVYvZ7YFZfO5qvxWSEeNycZOKKZ-Jry2pEGHpsUPePpdGEKT24pDKfRkItg1paKlqLQpYm4UqMqQIOgcqa0bQPoIQzo8E0URBBxRRPxx0w6YGxems3siAhpCG0xyhl5wW45p+2E-i9C2mVGemHMTK-cLQ9gEO0iGWcunxCuAkhWzAMJ6ZKsQIboppkqnQ-haMcIQe0KT2xgj6D0VpIF2wEa0S8UV69aQIt2GRIoraxg7Q3Q8UoZUwGaYQQAA */
+  /** @xstate-layout N4IgpgJg5mDOIC5SwC4EMB2E0CcIAUAbTAWTQGMALASwzADoA3MHagMwE8BBRta4gEb9qKDgGJEoAA4B7WCOoyMkkAA9EAZgAcARnoBOfQAYdOrQHYArABYNAJnMAaEB0Q6j++reuXL5k3bWWpY65gC+Yc6omNh4RKQUNHT05Eps1FAArqwYUPTRKJmwYuQ4YGgoYCqy8iiKykhqmjp29OYW5hpGQYG+zq4Ilvoa9KZGlh4a5joAbPqBEVHoWLgExBhkVLQMqRjpWTl5bDI4ALZMaITUEGLpYIQQAJIYvFcQ1XIKSirqCKGG9Ds+ksU1m5n0M2s1n0-UQdgmllGdjsOj8QJm7ihixA0RWcXWmySOzSGWytCOJ3Or2uYlgmQEpxEH1q9R+bmMnnMnRR9n8di0RjssIQ-MFo2sgQ81lCGjm2NxsTWCS2yV2+zJuXoxzO+TQjHJJTKFTAAGVMuRyHB4I0al8GqBfoEZlp6FpISYdBp7PprFZhaK9JDAuDproQfLlor4htEtsUiSDuStZTdfrcobypUAKI4HAnZl2tkinn0WVTFFQrS+mb+jEzehzMz84btazjCMxVbRwlxtWkw7Js63aj3J4vS7XAt1b6NR0+etaWXzPmQmsuOGmRGWfmWRchbctGYdvFKmMq4l7ftJu4PWD0DBoU4ManYSoSG2faf2poIIL15GmDo+iLkBdhGOYa4DLMUKjKCljOkYbrDFox5RgSsaqgmGpHCOt73o+YAZsaU6srObj2F45gSn4UIaDY7QaMKMouohVgzNuHhgRoOioV26HnvGl6JpqN4QHeD5PmIElgAAwpQmAwCRM4OuRrS+tRVG2PRi5MexrSojM9iIW2VgSrx+LKkSgnqgOol3lIeb6hALAXG8xrvtIn6kSpgxAm00IosiEEzDMTjriKHj1hMEIoqE1iGeYdjmaePaYUJ2FarhYn0A5MhOSwRGVEp36-J6alUfCml0b6Onhci8UGJxnoSuBGj6Ml3YYReNnXll9mOdcBW5flOByQpVQfiyyk-mVlEabR2mMXVUr0EYgo+qGQHtJYHX8VZfbCTho53mUUD1K51zucVRYHl4hg6EEPisdYTHwkYgLDNKRjsSF0I7ZEOKRnxlm9lhtl9fQp31IVE2eVNJWqXNlULTVS1QXR5iAqidgzCYApui0u0g2lPUiRDUNKGIw2DaN8m5LDIC2l+RazepyNaajTFdJ4OM8hBnRejxAMKsDZ77WDvXHZDYBnZTFMYGN9PXWRfwUWzNEcwxTEGaWvgWA9Gg+P41hE2LoPpeDUvyAAXs+E6voRys+b6gbcW7czQu4tUDA44KrZCsogfyXqm6l3VXmTVvULb9CEDIaAQAaEBKAwtCMDIADWDAixZZskxHR14TbDBxwn5IIGnMjkBU9QANpGAAuk7P6gvQNi6HY2gPVCwr2HRbS6PoVG7lYQyh111kF5lUcx6XifpiweY4DlxAoNq5w5ylE8HRldn5NHJfx-PUAVy8Vc10o9dN5NhYq9uLqBMiwEWBKneWL3vKrSEiHDOBILDOPASO9LZFwPjDZujpQq6wAuxYwoEpj+n-qMT0254KG3ig9QB4sLaS1AbbKmA1nK03GhAtwi4sYeisPMQw9hay4wML6RKhhvrgiFksTsucw6T0OtPPBhF5aK0UjfZmKtcYuh9GBQwGIUS1kNgYT6Ewfqd26Fg82pNC7ZWLrSA+giGZM28j+KiLopjbkhPrcCuhaweGgT4Ux-hZj-XYSeTqQCJaRz4WIIQhAri5F0aQ388E26NnYuCZcEEXp1VxpjAmVYqKsOBEeYWQNOHbzcRou8XifF5BfFdYRBjfjbhGFoAUZjZjLj8L3YpmM1pWHCZVGYONVH5x4XvTJSYlCEA4GaAQsBSjUCkF+YosB7hgHICgbpvTWADIMfo6apU1rWDaO6EKa0goNMqfoPQ-gbC4x9MBQUGgmnhxaRDNpmoHJgCkHwCAXAsATL6dMpQQyRljPuVMkRcNb4+UPIiYpQI9y7ngsBYU3hFlrU9GYjwIRwhJI4VvVxOD3HZTOXkC5Vzri3IgG8-pgzaQvJQPgMo6L3h5LmW4IwUxXS7i9L4KwswtAgr7m3FEQxEq6EhEc7hu9Tn8CyQQvKNM-GkoRqres3FURxPsMiIEvdAUD0XIhHG8VEKOMBnClx2D1G8LEmIZOyQCjZ2SfCzVU87L+NmOMNo7hxjlgaYbd+kT+6aWCG-XcSrOXAKTinfI6BKg+vVXtNRBd-H8hxq6aUxtfQmCkf6WU9YWhgUqiETEEQAYYBkM5a0yAjUarjMwVgnAeB8EEMIUQ-iQjhtCm1WUEofTjGFFYAw3oQj2p9NRTleUWAAEVMgyHQP4gUIxOLQh8FoX2DLwoJtLI9cFWg63TESU4tCxNU4YFxJaAAqg+Xg-A0ACEIHoryZKEBcnep0NtwQuTSIdT7ClrpQoonmC0XQa1F1qucYG5I8tYBbr1MWvdB7-FckWdCYpD1+RujHTCOqVZSwB3GMiRcwxZgerSf6wod5MhrvpIyFAlQSWfI+TNRCpY2pVhCI+jmwohg8zilRA2Y7fSocRXkAoRR8g4ZEPh-x84DBmGlPjLko8IkDAXatLoi54Sd3hPBZjWq2NZsZkekVsGvTAR8C0ICVHwoTBdKYUKLbkSsQhHJ01KY0723NeCRZnpNkmFCqEMdsaUSrWYd0LkgcTOwo-SurltkUwvis8BUY4EMQ-3cA9G9cJcYjFCmtYIQRhhzEOd55dedjm7xTLAPU5IQ0oIbBYDw4x5wojCj7Kw+lZScV8PCT0pmWlZb1JAENCUDDhOs8CYI-pwSIgabFHGHtMGpdFlwz1IlKRWf8LBOzYJHNCmWl0Nura51uu+vV7lUtpL0DAKcAZAxCP5MQEw0YhS2xoJqhOqCiUh3OmleMCEKWl0jdSSx7V4kCL0As28c1asKoa2qlrSd4J6zdG+h0MEXoTbDZSQirVe8tuBeFSzKiDYfT0UMqYkETFNkg4Mu0aY4xFxQ6ezDk1JzNsfZyUVJHKtDYjDavMKTc6vSdyYtd-2Y6jNDEMutkB2VpLmpI+rKqi0mK+E8AbX0QJWXGCStD41Qbyd4WpkQi6Dt-HaHrMubiHmTJukghuaEXhdzPo8BCFbvPcHZRVy5L7k4affJsICbQSrDBAiHlFkUXRFluk7nReYY7nQwpJwr5pG3leEJcojg7x6Kv+yCBYEEtWuT+gep4UdpupEW-l7msPfP+oCqIYLl0wuUaA9vdYta8xDJei6EYy3SKToy3OlTw98MixTBdKFAWLQbBlTK+RO9gR+NfW4vFFCOfP0Zfz9LWWGBPvjm+w7maExkG8lCCCQUtimLSkRPSl3zokNDZD7n6fVum9z7V0BxbDnBQNOdEBSEXMh8CahO4MfzoG-pNnzM5TLMhd-Yi6cyTrgR6CygoiJ7BAhQhRf5vb7wxyt4a7tANidD6bDwPrzY+wOYNiBCc4hTNiPbvppajZoZ7zFyfYQCAbL6lQUQgiGygFuztDwjdYQjiZQiigZ5vqbyn5+bn7wEMCJzZb7rNbUGIAdBeC6DcRVheiSGYFwjAh6DAgmCKJWDaA+CwFkEHz0AADufAdQuQAAYicD2n2mgD9q0HQVMLyNMDjAguFDSnoOMF7L-KoQApPr5mNt-uQZ2jgCYf2qIarBYZDgwZ6EwZ7l0HeozoqkEBYhPiflPrwY3vwVfgEZspyPZohuxN6HIQgBJmAdIdtA5tCMHkQc9rDqahDOQYvPmAEbNJYdyFyIeHYQMM2qtG2GVDaozhoZUVoXPLlgERBLFtoPfAKFCEMCJs0MMG0IlNuCGIuJ-u4elokV4QfMXktl6A0TYQlP6D4DZkBH3uBMPKqtwQkZ4XASimrsRLUdoI1J0IZBSn4HAuEZIf5C1O4EMJ3GwqUaToruHsirykmOmiaPivUAAEpgAACOmQ1AZQBGSm7eKs+WEw6+OuVe4RChro1mI6iE0a3RUsFxHSXS9IkyOK9Qd4ducJsyKmKOFiEq0wPQNglSwQowwQ0EYE-GcR3xoeZ+SRBJGAnS2Kjya6KRMeIqkWmMf4-IwOdqD0vcGJ0IkObq7Q4wXBOapxpBPK3i7S-JRJPSDygyA6q+tJfg9JY6jJ9hFUWMkIoQDEDSnJJxHhGp+JAJ5yRK1ymKgpgy22u2ZaARFgIw8IxgGmFKDgoQjKoQq0AQ9qjmwIeJeEFxaK7pdyxJ+pZJHGep7yv+CJ3yfIXgtmfeW0Y6l2iAb+Yq7QAo2y7g8IcZ-xWprplySZWKKZmZTyOUbp9uopRYzCroHgi4i4dKesIKtg6egoxSJSbU0wNZGSLpqK7ZNyyZGZpJTyA6RugZ3Q386+A+v4qIQ6r8hsVZvIU59AKK5qpgbcIZ0wqJUKsqa0bQPo7EFiEoKGixJBr2ZqfpIGgBZe3siAhgxizoY+-Ib+xSX+-i9Cam5GmmPo1UjKe+iGypYEVYJgnK2WzAlJf+Ks-yUUmyJp9Bl5saQwDYJgTCa0Y+boRyIa0S8U56NaQIZ2ORrQwwaR3oNewEz5EQQAA */
   createMachine(
     {
       context: {
@@ -389,11 +385,11 @@ export const StandardPlanMachine =
                         {
                           actions: "setBillingToPrepaid",
                           cond: "onlyPrepaid",
-                          target: "noSelectionRequired",
+                          target: "prepaidOnly",
                         },
                         {
                           cond: "singleSubscription",
-                          target: "noSelectionRequired",
+                          target: "singleSubscription",
                         },
                         {
                           cond: "onlySubscriptions",
@@ -406,10 +402,16 @@ export const StandardPlanMachine =
                         },
                       ],
                     },
-                    noSelectionRequired: {
+                    prepaidOnly: {
                       description:
                         "The user doesn't need to specify any option about the billing. The API will automatically figure out the right thing to do without giving it any information.",
                       tags: ["noBilling", "billingValid"],
+                      type: "final",
+                    },
+                    singleSubscription: {
+                      description:
+                        "The user doesn't need to specify any option about the billing. The API will automatically figure out the right thing to do without giving it any information.",
+                      tags: ["noBilling", "billingValid", "singleSubscription"],
                       type: "final",
                     },
                     onlySubscriptions: {
@@ -579,10 +581,21 @@ export const StandardPlanMachine =
             creationError: error,
           };
         }),
-        triggerSave: sendParent((context) => ({
-          type: "save",
-          data: context.form,
-        })),
+        triggerSave: sendParent((context) => {
+          const form = context.form as Required<typeof context.form> &
+            Pick<typeof context.form, "billing">;
+          const data: CreateKafkaFormData = {
+            name: form.name,
+            provider: form.provider,
+            region: form.region,
+            sizeId: form.size.id,
+            billing: form.billing,
+          };
+          return {
+            type: "save",
+            data,
+          };
+        }),
         triggerSubmit: send("submit"),
         triggerBillingChange: send("billingChange"),
         setBillingToPrepaid: assign((context) => {
