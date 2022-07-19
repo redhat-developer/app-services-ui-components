@@ -5,23 +5,20 @@ import {
   DescriptionListTerm,
   DescriptionListDescription,
 } from "@patternfly/react-core";
-import { TableVariant } from "@patternfly/react-table";
-import { useMemo } from "react";
+import {
+  TableComposable,
+  TableVariant,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+} from "@patternfly/react-table";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { NoDataCell, ResponsiveTable } from "../../../shared";
 import type { Consumer, ConsumerGroupState } from "../types";
 import { ConsumerGroupPopover } from "./ConsumerGroupPopover";
 import { ConsumerGroupStateLabel } from "./ConsumerGroupState";
-
-const columns = [
-  "topic",
-  "partition",
-  "consumer_id",
-  "current_offset",
-  "log_end_offset",
-  "offset_lag",
-];
 
 export type ConsumerGroupByKafkaProps = {
   state: ConsumerGroupState;
@@ -35,18 +32,15 @@ export const ConsumerGroupByKafka: FunctionComponent<
 > = ({ state, consumers, activeMembers, partitionsWithLag }) => {
   const { t } = useTranslation(["kafka"]);
 
-  const columnLabels: { [key in typeof columns[number]]: string } = useMemo(
-    () =>
-      ({
-        topic: t("topic.topic"),
-        partition: t("consumerGroup.partition"),
-        consumer_id: t("consumerGroup.consumer_id"),
-        current_offset: t("consumerGroup.current_offset"),
-        log_end_offset: t("consumerGroup.log_end_offset"),
-        offset_lag: t("consumerGroup.offset_lag"),
-      } as const),
-    [t]
-  );
+  const columnNames = {
+    topic: t("topic.topic"),
+    partition: t("consumerGroup.partition"),
+    consumer_id: t("consumerGroup.consumer_id"),
+    current_offset: t("consumerGroup.current_offset"),
+    log_end_offset: t("consumerGroup.log_end_offset"),
+    offset_lag: t("consumerGroup.offset_lag"),
+  };
+
   return (
     <Stack hasGutter>
       <DescriptionList
@@ -82,42 +76,50 @@ export const ConsumerGroupByKafka: FunctionComponent<
           </DescriptionListDescription>
         </DescriptionListGroup>
       </DescriptionList>
-      <ResponsiveTable
-        ariaLabel={t("consumerGroup.consumer_group_info_table_aria")}
-        columns={columns}
+      <TableComposable
+        aria-label={t("consumerGroup.consumer_group_info_table_aria")}
         variant={TableVariant.compact}
-        data={consumers}
-        renderHeader={({ column, Th, key }) => (
-          <Th key={key}>{columnLabels[column]}</Th>
-        )}
-        renderCell={({ column, row, Td, key }) => (
-          <Td key={key} dataLabel={columnLabels[column]}>
-            {(() => {
-              const empty = <NoDataCell columnLabel={columnLabels[column]} />;
-              switch (column) {
-                case "topic":
-                  return row.topic;
-                case "partition":
-                  return row.partition;
-                case "consumer_id":
-                  return row.memberId ? (
-                    row.groupId + "\n" + row.memberId
+      >
+        <Thead noWrap>
+          <Tr>
+            <Th width={20}>{columnNames.topic}</Th>
+            <Th width={20}>{columnNames.partition}</Th>
+            <Th width={20}>{columnNames.consumer_id}</Th>
+            <Th width={20}>{columnNames.current_offset}</Th>
+            <Th width={20}>{columnNames.log_end_offset}</Th>
+            <Th width={20}>{columnNames.offset_lag}</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {consumers.map((consumer) => {
+            const {
+              groupId,
+              partition,
+              topic,
+              memberId,
+              offset,
+              logEndOffset,
+              lag,
+            } = consumer;
+            return (
+              <Tr key={consumer.groupId}>
+                <Td dataLabel={columnNames.topic}>{topic}</Td>
+                <Td dataLabel={columnNames.partition}>{partition}</Td>
+                <Td dataLabel={columnNames.consumer_id}>
+                  {memberId ? (
+                    groupId + "\n" + memberId
                   ) : (
                     <i>{t("consumerGroup.unassigned")}</i>
-                  );
-                case "current_offset":
-                  return row.offset;
-                case "log_end_offset":
-                  return row.logEndOffset;
-                case "offset_lag":
-                  return row.lag;
-                default:
-                  return empty;
-              }
-            })()}
-          </Td>
-        )}
-      ></ResponsiveTable>
+                  )}
+                </Td>
+                <Td dataLabel={columnNames.current_offset}>{offset}</Td>
+                <Td dataLabel={columnNames.log_end_offset}>{logEndOffset}</Td>
+                <Td dataLabel={columnNames.offset_lag}>{lag}</Td>
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </TableComposable>
     </Stack>
   );
 };

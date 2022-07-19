@@ -7,3 +7,4 @@ export * from "./NoResultsEmptyState";
 export * from "./OffsetRange";
 export * from "./PartitionSelector";
 export * from "./UnknownValuePreview";
+export * from "./NoDataCell";

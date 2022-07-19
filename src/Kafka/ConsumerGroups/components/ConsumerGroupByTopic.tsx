@@ -104,17 +104,17 @@ export const ConsumerGroupByTopic: FunctionComponent<
               consumer;
             return (
               <Tr key={groupId}>
-                <Td key={columnNames.partition}>{partition}</Td>
-                <Td key={columnNames.consumer_id}>
+                <Td dataLabel={columnNames.partition}>{partition}</Td>
+                <Td dataLabel={columnNames.consumer_id}>
                   {memberId ? (
                     groupId + "\n" + memberId
                   ) : (
                     <i>{t("consumerGroup.unassigned")}</i>
                   )}{" "}
                 </Td>
-                <Td key={columnNames.current_offset}>{offset}</Td>
-                <Td key={columnNames.log_end_offset}>{logEndOffset}</Td>
-                <Td key={columnNames.offset_lag}>{lag}</Td>
+                <Td dataLabel={columnNames.current_offset}>{offset}</Td>
+                <Td dataLabel={columnNames.log_end_offset}>{logEndOffset}</Td>
+                <Td dataLabel={columnNames.offset_lag}>{lag}</Td>
               </Tr>
             );
           })}

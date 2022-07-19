@@ -22,11 +22,11 @@ import { useTranslation } from "react-i18next";
 import {
   FormatDate,
   Loading,
-  NoDataCell,
   RefreshButton,
   ResponsiveTable,
 } from "../../shared";
-import type { MessageDetailsProps } from "./components";
+import type { MessageDetailsProps} from "./components";
+import { NoDataCell } from "./components";
 import {
   FilterGroup,
   LimitSelector,
