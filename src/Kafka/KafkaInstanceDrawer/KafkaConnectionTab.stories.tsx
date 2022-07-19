@@ -27,11 +27,13 @@ const Template: ComponentStory<typeof KafkaConnectionTab> = (args) => (
 export const ConnectionTab = Template.bind({});
 ConnectionTab.args = {
   isKafkaPending: false,
+  isAdminUrlUndefined: false,
 };
 
 export const ConnectionTabWhenkafkaCreationPending = Template.bind({});
 ConnectionTabWhenkafkaCreationPending.args = {
   isKafkaPending: true,
+  isAdminUrlUndefined: true,
 };
 ConnectionTabWhenkafkaCreationPending.storyName =
   "Connection tab when Kafka Creation pending";

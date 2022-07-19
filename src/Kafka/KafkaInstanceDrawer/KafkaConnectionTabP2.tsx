@@ -28,6 +28,7 @@ export type KafkaConnectionTabP2Props = {
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
   linkToDocPortal: string;
+  isAdminUrlUndefined?: boolean;
 };
 
 export const KafkaConnectionTabP2: FunctionComponent<
@@ -42,6 +43,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
   linkToDocPortal,
+  isAdminUrlUndefined,
 }) => {
   const { t } = useTranslation();
 
@@ -172,7 +174,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                 </Button>
               </Popover>
             </strong>
-            {isKafkaPending ? (
+            {isAdminUrlUndefined ? (
               <Skeleton fontSize="2xl" />
             ) : (
               <ClipboardCopy
