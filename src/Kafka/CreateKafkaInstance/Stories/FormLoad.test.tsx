@@ -24,11 +24,18 @@ const {
   TrialAllRegionsDisabledOnFormLoad,
   UnableToRetrieveSizes,
   GotEmptySizes,
+  PrepaidAndSingleMarketplaceSubscription,
+  PrepaidAndMarketplaceSubscriptions,
+  OnlyMarketplaceSubscriptions,
+  SingleMarketplace,
+  SingleSubscription,
+  SingleSubscriptionToRH,
 } = composeStories(stories);
 
 describe("CreateKafkaInstance", () => {
   it("should show a form for standard instances with no alerts", async () => {
-    const comp = renderDialog(<QuotaAvailableOnFormLoad />);
+    const onCreate = jest.fn();
+    const comp = renderDialog(<QuotaAvailableOnFormLoad onCreate={onCreate} />);
     await waitForI18n(comp);
 
     await waitFor(() =>
@@ -50,6 +57,31 @@ describe("CreateKafkaInstance", () => {
     expect(comp.getByRole("button", { name: "Multi" })).toHaveAttribute(
       "aria-pressed",
       "true"
+    );
+
+    await waitFor(() =>
+      expect(comp.queryByTestId("size-loading")).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(comp.queryByTestId("size-loading")).not.toBeInTheDocument()
+    );
+
+    userEvent.type(comp.getByLabelText("Name *"), "test-name");
+    userEvent.click(comp.getByRole("button", { name: "Create instance" }));
+
+    await waitFor(() =>
+      expect(onCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          billing: undefined,
+          name: "test-name",
+          provider: "aws",
+          region: "eu-west-1",
+          sizeId: "x1",
+        }),
+        expect.anything(),
+        expect.anything()
+      )
     );
   });
 
@@ -377,5 +409,236 @@ describe("CreateKafkaInstance", () => {
         )
       ).toBeInTheDocument()
     );
+  });
+
+  it("should show the billing options, with prepaid and a single subscription", async () => {
+    const comp = renderDialog(<PrepaidAndSingleMarketplaceSubscription />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat pre-paid")).toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(
+        comp.getByText("Amazon Web Services Marketplace")
+      ).toBeInTheDocument()
+    );
+
+    userEvent.selectOptions(
+      comp.getByLabelText("Cloud provider *"),
+      "Microsoft Azure"
+    );
+    await waitFor(async () =>
+      expect(
+        (
+          await comp.findByText("Amazon Web Services Marketplace")
+        ).closest("[role=option]")
+      ).toHaveAttribute("aria-disabled", "true")
+    );
+  });
+
+  it("should show the billing options, with prepaid and a single subscription and save the right data", async () => {
+    const onCreate = jest.fn();
+    const comp = renderDialog(
+      <PrepaidAndSingleMarketplaceSubscription onCreate={onCreate} />
+    );
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(comp.queryByTestId("size-loading")).not.toBeInTheDocument()
+    );
+
+    userEvent.type(comp.getByLabelText("Name *"), "test-name");
+    userEvent.click(comp.getByText("Red Hat pre-paid"));
+    userEvent.click(comp.getByRole("button", { name: "Create instance" }));
+    await waitFor(() =>
+      expect(onCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          billing: "prepaid",
+          name: "test-name",
+          provider: "aws",
+          region: "eu-west-1",
+          sizeId: "x1",
+        }),
+        expect.anything(),
+        expect.anything()
+      )
+    );
+  });
+
+  it("should show the billing options, with prepaid and multiple subscriptions", async () => {
+    const comp = renderDialog(<PrepaidAndMarketplaceSubscriptions />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat pre-paid")).toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
+        2
+      )
+    );
+    await waitFor(() => {
+      const azure = comp.getByText("Microsoft Azure Marketplace");
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat Marketplace")).toBeInTheDocument()
+    );
+  });
+
+  it("should show the billing options, with prepaid and a multiple subscriptions and save the right data", async () => {
+    const onCreate = jest.fn();
+    const comp = renderDialog(
+      <PrepaidAndMarketplaceSubscriptions onCreate={onCreate} />
+    );
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(comp.queryByTestId("size-loading")).not.toBeInTheDocument()
+    );
+
+    userEvent.type(comp.getByLabelText("Name *"), "test-name");
+    userEvent.click(comp.getByText("rh-cmgwMDAwMDAwMA=="));
+    userEvent.click(comp.getByRole("button", { name: "Create instance" }));
+    await waitFor(() =>
+      expect(onCreate).toHaveBeenCalledWith(
+        expect.objectContaining({
+          billing: { marketplace: "rh", subscription: "rh-cmgwMDAwMDAwMA==" },
+          name: "test-name",
+          provider: "aws",
+          region: "eu-west-1",
+          sizeId: "x1",
+        }),
+        expect.anything(),
+        expect.anything()
+      )
+    );
+  });
+
+  it("should show the billing options, with only multiple subscriptions", async () => {
+    const comp = renderDialog(<OnlyMarketplaceSubscriptions />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(comp.queryByText("Red Hat pre-paid")).not.toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
+        2
+      )
+    );
+    await waitFor(() => {
+      const azure = comp.getByText("Microsoft Azure Marketplace");
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat Marketplace")).toBeInTheDocument()
+    );
+  });
+
+  it("should show the billing options, with a list of subscriptions from a single marketplace", async () => {
+    const comp = renderDialog(<SingleMarketplace />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
+    await waitFor(() =>
+      expect(comp.queryByText("Red Hat pre-paid")).not.toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
+        2
+      )
+    );
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Microsoft Azure Marketplace")
+      ).not.toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(comp.queryByText("Red Hat Marketplace")).not.toBeInTheDocument()
+    );
+  });
+
+  it("should show the billing options, with a list of subscriptions from a single marketplace", async () => {
+    const comp = renderDialog(<SingleSubscription />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(comp.queryByText("Billing")).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => {
+      const azure = comp.getAllByText("Microsoft Azure")[0];
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
+  });
+
+  it("should show the billing options, with a list of subscriptions from a single marketplace", async () => {
+    const comp = renderDialog(<SingleSubscriptionToRH />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(comp.queryByText("Billing")).not.toBeInTheDocument()
+    );
+
+    await waitFor(() => {
+      const azure = comp.getAllByText("Microsoft Azure")[0];
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).not.toHaveAttribute(
+        "aria-disabled"
+      );
+    });
   });
 });

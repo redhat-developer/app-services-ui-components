@@ -20,10 +20,10 @@ import { TrialInstanceForm } from "./TrialInstanceForm";
 import type { CreateKafkaInstanceServices } from "./types";
 import { ModalAlertsLoading, ModalAlertsSystemUnavailable } from "./components";
 
-export type CreateKafkaInstancePropsWithSizes =
-  ConnectedCreateKafkaInstanceProps & CreateKafkaInstanceServices;
+export type CreateKafkaInstanceProps = ConnectedCreateKafkaInstanceProps &
+  CreateKafkaInstanceServices;
 export const CreateKafkaInstance: FunctionComponent<
-  CreateKafkaInstancePropsWithSizes
+  CreateKafkaInstanceProps
 > = ({
   getAvailableProvidersAndDefaults,
   getStandardSizes,

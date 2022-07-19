@@ -7,7 +7,7 @@ import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
-import type { CreateKafkaInstancePropsWithSizes } from "../CreateKafkaInstance";
+import type { CreateKafkaInstanceProps } from "../CreateKafkaInstance";
 import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import type {
   CloudProvider,
@@ -434,7 +434,7 @@ export type StoryProps = {
   apiMarketplacesRH: boolean;
   apiMarketplacesRHSubscriptions: number;
   apiLatency: number;
-  onCreate: CreateKafkaInstancePropsWithSizes["onCreate"];
+  onCreate: CreateKafkaInstanceProps["onCreate"];
   onClickQuickStart?: () => void;
   onClickContactUs?: () => void;
   onClickLearnMoreAboutRegions?: () => void;
@@ -483,7 +483,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
   const onOpenModal = () => {
     setIsModalOpen(true);
   };
-  const onCreate: CreateKafkaInstancePropsWithSizes["onCreate"] = (
+  const onCreate: CreateKafkaInstanceProps["onCreate"] = (
     data,
     onSuccess,
     onFailure
@@ -619,16 +619,17 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         apiLatency
       );
 
-  const getStandardSizes: CreateKafkaInstancePropsWithSizes["getStandardSizes"] =
-    (provider) => {
-      return apiSizes === "normal"
-        ? fakeApi<StandardSizes>(STANDARD_SIZES[provider], apiLatency)
-        : apiSizes === "no-sizes"
-        ? fakeApi<StandardSizes>([], apiLatency)
-        : apiError<StandardSizes>(undefined, apiLatency);
-    };
+  const getStandardSizes: CreateKafkaInstanceProps["getStandardSizes"] = (
+    provider
+  ) => {
+    return apiSizes === "normal"
+      ? fakeApi<StandardSizes>(STANDARD_SIZES[provider], apiLatency)
+      : apiSizes === "no-sizes"
+      ? fakeApi<StandardSizes>([], apiLatency)
+      : apiError<StandardSizes>(undefined, apiLatency);
+  };
 
-  const getTrialSizes: CreateKafkaInstancePropsWithSizes["getTrialSizes"] = (
+  const getTrialSizes: CreateKafkaInstanceProps["getTrialSizes"] = (
     provider
   ) => {
     return apiSizes === "normal"

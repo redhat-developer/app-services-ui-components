@@ -68,7 +68,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
                 isDisabled={isPrepaidOverQuota}
                 isStacked={true}
                 isSelected={value === "prepaid"}
-                onClick={() => onPrepaid()}
+                onClick={onPrepaid}
               >
                 &nbsp;
               </Tile>
@@ -96,7 +96,10 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
               </span>
             )}
             {subscriptions.map(({ marketplace, subscription, isDisabled }) => (
-              <FlexItem key={subscription} flex={{ default: "flex_1" }}>
+              <FlexItem
+                key={`tile-${subscription}`}
+                flex={{ default: "flex_1" }}
+              >
                 <Tile
                   className={"pf-u-w-100"}
                   title={marketplaces[marketplace]}
@@ -123,9 +126,19 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
       <FormSelect
         className={"pf-u-display-none"}
         value={value}
-        id="form-cloud-provider-option"
-        name="cloud-provider"
+        id="form-billing-option"
+        name="billing"
         validated={validated}
+        onChange={(value) => {
+          if (value === "prepaid") {
+            onPrepaid();
+          } else {
+            const s = subscriptions.find((s) => s.marketplace === value);
+            if (s) {
+              onSubscription(s.marketplace, s.subscription);
+            }
+          }
+        }}
       >
         {[
           <FormSelectOption
@@ -134,20 +147,22 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
             label={t("select_billing")}
           />,
           hasPrepaid ? (
-            <FormSelectOption value={"prepaid"} label={`prepaid`} />
+            <FormSelectOption
+              key={"prepaid"}
+              value={"prepaid"}
+              label={`prepaid`}
+            />
           ) : null,
-          subscriptions.map(
-            ({ marketplace, subscription, isDisabled }, index) => {
-              return (
-                <FormSelectOption
-                  key={index}
-                  value={subscription}
-                  label={`${marketplace} - ${subscription}`}
-                  isDisabled={isDisabled}
-                />
-              );
-            }
-          ),
+          subscriptions.map(({ marketplace, subscription, isDisabled }) => {
+            return (
+              <FormSelectOption
+                key={`select-option-${subscription}`}
+                value={subscription}
+                label={`${marketplace} - ${subscription}`}
+                isDisabled={isDisabled}
+              />
+            );
+          }),
         ]}
       </FormSelect>
     </>

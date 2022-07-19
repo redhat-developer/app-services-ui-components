@@ -136,6 +136,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     >
       <div className="pf-c-input-group pf-u-w-50">
         <Slider
+          id="streaming-size"
           data-testid={"size-slider"}
           max={steps.length - 1}
           value={valueIndex}
@@ -148,10 +149,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
             isUnavailable ? "instance-size-unavailable" : "streaming-size"
           }
         />
-        <span
-          className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap"
-          id="streaming-size"
-        >
+        <span className="pf-c-input-group__text pf-m-plain pf-u-text-nowrap">
           {t("streaming_unit")}
         </span>
       </div>

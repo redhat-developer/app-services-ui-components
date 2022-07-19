@@ -10,8 +10,8 @@ export interface Typegen0 {
     setSize: "sizeChange";
     setSizes: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
     unsetSubscription: "providerChange";
-    setBillingToPrepaid: "" | "selectPrepaid";
     setBillingToSubscription: "selectSubscription";
+    setBillingToPrepaid: "selectPrepaid";
     setInitialContext: "xstate.init";
     triggerSubmit: "create";
     resetCreationErrorMessage:

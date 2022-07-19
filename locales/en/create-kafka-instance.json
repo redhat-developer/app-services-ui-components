@@ -15,7 +15,7 @@
     "marketplace_over_quota": "The selected size exceedes the quota available for the marketplace billing option.",
     "marketplace_rh": "$t(common:cloudProviders.rh) $t(create-kafka-instance:billing.marketplace)",
     "prepaid": "Pre-paid",
-    "prepaid_option": "$t(common:cloudProviders.rh) $t(create-kafka-instance:billing.prepaid)",
+    "prepaid_option": "$t(common:cloudProviders.rh) pre-paid",
     "prepaid_over_quota": "The selected size exceedes the quota available for the prepaid billing option."
   },
   "checking_instance_message": "Checking $t(common:kafka) availability",
