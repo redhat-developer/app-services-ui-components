@@ -149,3 +149,105 @@ GotEmptySizes.parameters = {
     },
   },
 };
+
+export const PrepaidAndSingleMarketplaceSubscription = Template.bind({});
+PrepaidAndSingleMarketplaceSubscription.storyName =
+  "User has a single active subscription in a marketplace and pre-paid quota - Standard";
+PrepaidAndSingleMarketplaceSubscription.args = {
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWSSubscriptions: 1,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: false,
+};
+PrepaidAndSingleMarketplaceSubscription.parameters = {
+  docs: {
+    description: {
+      story: ``,
+    },
+  },
+};
+
+export const PrepaidAndMarketplaceSubscriptions = Template.bind({});
+PrepaidAndMarketplaceSubscriptions.storyName =
+  "User has multiple active subscriptions in many marketplaces and pre-paid quota - Standard";
+PrepaidAndMarketplaceSubscriptions.args = {
+  apiHasMarketplaceSubscriptions: true,
+};
+PrepaidAndMarketplaceSubscriptions.parameters = {
+  docs: {
+    description: {
+      story: ``,
+    },
+  },
+};
+
+export const OnlyMarketplaceSubscriptions = Template.bind({});
+OnlyMarketplaceSubscriptions.storyName =
+  "User has multiple active subscriptions in many marketplaces and no pre-paid quota - Standard";
+OnlyMarketplaceSubscriptions.args = {
+  apiRemainingPrepaid: false,
+  apiHasMarketplaceSubscriptions: true,
+};
+OnlyMarketplaceSubscriptions.parameters = {
+  docs: {
+    description: {
+      story: ``,
+    },
+  },
+};
+
+export const SingleMarketplace = Template.bind({});
+SingleMarketplace.storyName =
+  "User has multiple active subscriptions in a single marketplaces and no pre-paid quota - Standard";
+SingleMarketplace.args = {
+  apiRemainingPrepaid: false,
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWS: true,
+  apiMarketplacesAWSSubscriptions: 2,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: false,
+};
+SingleMarketplace.parameters = {
+  docs: {
+    description: {
+      story: `Cloud Providers not matching the marketplace for which the user has a subscription are disabled`,
+    },
+  },
+};
+
+export const SingleSubscription = Template.bind({});
+SingleSubscription.storyName =
+  "User has a single active subscription in a marketplace and no pre-paid quota - Standard";
+SingleSubscription.args = {
+  apiRemainingPrepaid: false,
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWS: true,
+  apiMarketplacesAWSSubscriptions: 1,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: false,
+};
+SingleSubscription.parameters = {
+  docs: {
+    description: {
+      story: `Cloud Providers not matching the marketplace for which the user has a subscription are disabled`,
+    },
+  },
+};
+
+export const SingleSubscriptionToRH = Template.bind({});
+SingleSubscriptionToRH.storyName =
+  "User has a single active subscription in Red Hat Marketplace and no pre-paid quota - Standard";
+SingleSubscriptionToRH.args = {
+  apiRemainingPrepaid: false,
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWS: false,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: true,
+};
+SingleSubscriptionToRH.parameters = {
+  docs: {
+    description: {
+      story: `All Cloud Providers are available`,
+    },
+  },
+};
