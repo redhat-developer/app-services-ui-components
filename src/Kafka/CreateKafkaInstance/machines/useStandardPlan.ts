@@ -130,7 +130,8 @@ export function useStandardPlanMachine(): SelectorReturn {
         );
         const isBillingSingleMarketplace = state.hasTag("singleSubscription")
           ? state.context.capabilities.marketplacesQuota[0].marketplace
-          : marketplaces.length === 1
+          : marketplaces.length === 1 &&
+            state.context.capabilities.remainingPrepaidQuota === undefined
           ? marketplaces[0]
           : false;
 
