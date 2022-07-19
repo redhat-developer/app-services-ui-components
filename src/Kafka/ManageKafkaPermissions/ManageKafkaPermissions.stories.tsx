@@ -1,11 +1,14 @@
 import { ManageKafkaPermissions } from "./ManageKafkaPermissions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { PrincipalType } from "./types";
+import type { Account } from "./types";
+import {PrincipalType} from './types'
+import { fakeApi } from '../../shared/storiesHelpers';
 
 export default {
   component: ManageKafkaPermissions,
   args: {
-    accounts: [
+    kafkaName: "name-test",
+    getUsersAndServiceAccounts: () => fakeApi<Account[]>([
       {
         id: "id",
         displayName: "displayName",
@@ -41,8 +44,7 @@ export default {
         displayName: "displayName7",
         principalType: PrincipalType.ServiceAccount,
       },
-    ],
-    kafkaName: "name-test",
+    ])
   },
 } as ComponentMeta<typeof ManageKafkaPermissions>;
 

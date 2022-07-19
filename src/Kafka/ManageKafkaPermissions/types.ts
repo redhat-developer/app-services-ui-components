@@ -67,3 +67,5 @@ export type Account = {
   principalType: PrincipalType;
   displayName: string;
 };
+
+export type NewAcl = {}

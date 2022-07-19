@@ -64,7 +64,11 @@ export const InteractiveExample: ComponentStory<typeof SelectAccount> = (
       <SelectAccount
         {...args}
         value={selectedAccount}
-        onChangeAccount={setSelectedAccount}
+        onClearSelection={() => setSelectedAccount(undefined)}
+        onSelectServiceAccount={setSelectedAccount}
+        onSelectUser={setSelectedAccount}
+        onSelectWildcard={() => setSelectedAccount('*')}
+        onTypeUsername={setSelectedAccount}
         accounts={account}
       />
     </Form>
