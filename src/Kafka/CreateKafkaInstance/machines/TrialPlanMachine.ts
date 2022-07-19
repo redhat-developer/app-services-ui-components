@@ -1,6 +1,7 @@
 import { assign, createMachine, send, sendParent } from "xstate";
 import {
   CloudProvider,
+  CreateKafkaFormData,
   CreateKafkaInstanceError,
   Region,
   TrialPlanInitializationData,
@@ -409,10 +410,21 @@ export const TrialPlanMachine =
         setCreationError: assign((_context, { error }) => ({
           creationError: error,
         })),
-        triggerSave: sendParent((context) => ({
-          type: "save",
-          data: context.form,
-        })),
+        triggerSave: sendParent((context) => {
+          const form = context.form as Required<typeof context.form>;
+          const data: CreateKafkaFormData = {
+            name: form.name,
+            provider: form.provider,
+            region: form.region,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            sizeId: context.sizes!.trial.id,
+            billing: undefined,
+          };
+          return {
+            type: "save",
+            data,
+          };
+        }),
         triggerSubmit: send("submit"),
       },
       guards: {

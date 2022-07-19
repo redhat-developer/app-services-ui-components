@@ -36,6 +36,7 @@ type SelectorReturn = {
   isBillingPrepaidAvailable: boolean;
   isBillingPrepaidOverQuota: boolean;
   isBillingMarketplaceOverQuota: boolean;
+  isBillingSingleMarketplace: MarketPlace | false;
 
   isProviderError: boolean;
   isRegionError: boolean;
@@ -119,6 +120,20 @@ export function useStandardPlanMachine(): SelectorReturn {
         const isLoadingSizes = state.hasTag("sizeLoading");
         const isBillingSelectionRequired =
           !state.hasTag("noBilling") && !isBlocked;
+
+        const marketplaces = Array.from(
+          new Set(
+            state.context.capabilities.marketplacesQuota.map(
+              (m) => m.marketplace
+            )
+          )
+        );
+        const isBillingSingleMarketplace = state.hasTag("singleSubscription")
+          ? state.context.capabilities.marketplacesQuota[0].marketplace
+          : marketplaces.length === 1
+          ? marketplaces[0]
+          : false;
+
         const isBillingPrepaidAvailable =
           state.context.capabilities.remainingPrepaidQuota !== undefined;
 
@@ -193,6 +208,7 @@ export function useStandardPlanMachine(): SelectorReturn {
           isBillingPrepaidAvailable,
           isBillingPrepaidOverQuota,
           isBillingMarketplaceOverQuota,
+          isBillingSingleMarketplace,
           isLoading,
           isLoadingSizes,
           isConfigurable,

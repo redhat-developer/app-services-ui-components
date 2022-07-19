@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 import type { CloudProvider, CloudProviderInfo } from "../types";
 
 export type CloudProvidersTilesProps = {
-  providers: CloudProviderInfo[];
+  providers: (CloudProviderInfo & { isDisabled?: boolean })[];
   value: CloudProvider | undefined;
   onChange: (provider: CloudProvider) => void;
   isDisabled: boolean;
@@ -40,19 +40,21 @@ export const CloudProvidersTiles: VoidFunctionComponent<
           spacer={{ default: "spacerNone" }}
           spaceItems={{ default: "spaceItemsXs" }}
         >
-          {providers.map(({ id, displayName }) => (
-            <FlexItem grow={{ default: "grow" }} key={id}>
-              <Tile
-                className={"pf-u-w-100"}
-                title={displayName}
-                icon={tiles[id]}
-                isStacked={true}
-                isSelected={value === id}
-                isDisabled={isDisabled}
-                onClick={() => onChange(id)}
-              />
-            </FlexItem>
-          ))}
+          {providers.map(
+            ({ id, displayName, isDisabled: providerDisabled }) => (
+              <FlexItem grow={{ default: "grow" }} key={id}>
+                <Tile
+                  className={"pf-u-w-100"}
+                  title={displayName}
+                  icon={tiles[id]}
+                  isStacked={true}
+                  isSelected={value === id}
+                  isDisabled={providerDisabled || isDisabled}
+                  onClick={() => onChange(id)}
+                />
+              </FlexItem>
+            )
+          )}
         </Flex>
       </div>
       <FormSelect
