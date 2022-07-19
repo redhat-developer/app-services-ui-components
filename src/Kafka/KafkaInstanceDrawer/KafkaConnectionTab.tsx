@@ -25,6 +25,7 @@ export type KafkaConnectionTabProps = {
   adminAPIUrl: string;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
+  isAdminUrlUndefined?: boolean;
 };
 
 export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
@@ -36,6 +37,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
   adminAPIUrl,
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
+  isAdminUrlUndefined,
 }) => {
   const { t } = useTranslation();
 
@@ -147,7 +149,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
               </Button>
             </Popover>
           </strong>
-          {isKafkaPending ? (
+          {isAdminUrlUndefined ? (
             <Skeleton fontSize="2xl" />
           ) : (
             <ClipboardCopy
