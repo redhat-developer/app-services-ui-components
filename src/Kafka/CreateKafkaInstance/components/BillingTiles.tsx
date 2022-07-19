@@ -53,7 +53,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
           <Flex
             flex={{ default: "flex_1" }}
             direction={{ default: "column" }}
-            spaceItems={{ default: "spaceItemsXs" }}
+            spaceItems={{ default: "spaceItemsSm" }}
           >
             <span className="pf-c-form__label">
               <span className="pf-c-form__label-text">
@@ -69,7 +69,9 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
                 isStacked={true}
                 isSelected={value === "prepaid"}
                 onClick={() => onPrepaid()}
-              />
+              >
+                &nbsp;
+              </Tile>
             </FlexItem>
             {isPrepaidOverQuota && (
               <HelperText className={"pf-c-form__helper-text"}>
@@ -84,13 +86,15 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
           <Flex
             flex={{ default: "flex_1" }}
             direction={{ default: "column" }}
-            spaceItems={{ default: "spaceItemsXs" }}
+            spaceItems={{ default: "spaceItemsSm" }}
           >
-            <span className="pf-c-form__label">
-              <span className="pf-c-form__label-text">
-                {t("billing.marketplace")}
+            {hasPrepaid && (
+              <span className="pf-c-form__label">
+                <span className="pf-c-form__label-text">
+                  {t("billing.marketplace")}
+                </span>
               </span>
-            </span>
+            )}
             {subscriptions.map(({ marketplace, subscription, isDisabled }) => (
               <FlexItem key={subscription} flex={{ default: "flex_1" }}>
                 <Tile
