@@ -42,7 +42,6 @@ export const KafkaConnectionTabP2: FunctionComponent<
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
   linkToDocPortal,
-  isAdminUrlUndefined,
 }) => {
   const { t } = useTranslation();
 
