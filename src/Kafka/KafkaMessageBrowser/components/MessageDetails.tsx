@@ -21,7 +21,7 @@ import {
 import { parseISO } from "date-fns";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate, NoDataCell } from "../../../shared";
+import { FormatDate } from "../../../shared";
 import type { Message } from "../types";
 import { beautifyUnknownValue } from "../utils";
 
