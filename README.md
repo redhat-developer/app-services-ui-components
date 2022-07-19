@@ -111,6 +111,7 @@ const App: VoidFunctionComponent = () => (
         overview: () => import('@rhoas/app-services-ui-components/locales/en/overview.json'),
         datascienceoverview: () => import('@rhoas/app-services-ui-components/locales/en/datascienceoverview.json'),
         kafkaoverview: () => import('@rhoas/app-services-ui-components/locales/en/kafkaoverview.json'),
+        topic: () => import("../locales/en/topic.json"),
         apimgmtoverview: () => import('@rhoas/app-services-ui-components/locales/en/apimgmtoverview.json'),
         "manage-kafka-permissions": () => import("@rhoas/app-services-ui-components/locales/en/manage-kafka-permissions.json"),},
     }}

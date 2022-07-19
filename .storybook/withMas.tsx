@@ -30,6 +30,7 @@ export const withMas = (
               datascienceoverview: () =>
                 import("../locales/en/datascienceoverview.json"),
               kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
+              topic: () => import("../locales/en/topic.json"),
               apimgmtoverview: () =>
                 import("../locales/en/apimgmtoverview.json"),
               "kafkaoverview-v2": () =>
