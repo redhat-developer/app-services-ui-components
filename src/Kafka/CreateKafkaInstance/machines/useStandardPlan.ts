@@ -162,7 +162,8 @@ export function useStandardPlanMachine(): SelectorReturn {
           : undefined;
 
         const remainingQuota =
-          state.context.form.billing === "prepaid"
+          state.context.form.billing === "prepaid" ||
+          state.context.form.billing === undefined
             ? state.context.capabilities.remainingPrepaidQuota
             : state.context.capabilities.remainingMarketplaceQuota;
 

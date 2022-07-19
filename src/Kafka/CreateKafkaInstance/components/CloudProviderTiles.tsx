@@ -64,6 +64,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
         name="cloud-provider"
         isDisabled={isDisabled}
         validated={validated}
+        onChange={(value) => onChange(value as CloudProvider)}
       >
         {[
           <FormSelectOption

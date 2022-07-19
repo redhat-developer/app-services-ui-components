@@ -383,7 +383,6 @@ export const StandardPlanMachine =
                     validate: {
                       always: [
                         {
-                          actions: "setBillingToPrepaid",
                           cond: "onlyPrepaid",
                           target: "prepaidOnly",
                         },
@@ -668,7 +667,7 @@ export const StandardPlanMachine =
         sizeIsOverQuota: ({ form, capabilities }) => {
           if (capabilities === undefined || !form.size) return true;
           const availableQuota =
-            form.billing === "prepaid"
+            form.billing === "prepaid" || form.billing === undefined
               ? capabilities.remainingPrepaidQuota
               : capabilities.remainingMarketplaceQuota;
           if (!availableQuota) return true;
