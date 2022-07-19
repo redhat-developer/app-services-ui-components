@@ -22,10 +22,9 @@ export type KafkaConnectionTabProps = {
   tokenEndPointUrl: string;
   linkToServiceAccount: string;
   linkToAccessTab: string;
-  adminAPIUrl: string;
+  adminAPIUrl: string | undefined;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
-  isAdminUrlUndefined?: boolean;
 };
 
 export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
@@ -37,7 +36,6 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
   adminAPIUrl,
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
-  isAdminUrlUndefined,
 }) => {
   const { t } = useTranslation();
 
@@ -149,15 +147,15 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
               </Button>
             </Popover>
           </strong>
-          {isAdminUrlUndefined ? (
-            <Skeleton fontSize="2xl" />
-          ) : (
+          {adminAPIUrl ? (
             <ClipboardCopy
               textAriaLabel={t("kafka:connection_tab.kafka_instance_url_label")}
               isReadOnly
             >
               {adminAPIUrl}
             </ClipboardCopy>
+          ) : (
+            <Skeleton fontSize="2xl" />
           )}
           <TextContent className="pf-u-pt-sm">
             <Text component={TextVariants.small}>
