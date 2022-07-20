@@ -11,16 +11,16 @@ import {
 import { Link } from "react-router-dom";
 
 export type CreateTopicProps = {
-  isSwitchChecked: boolean;
+  isSwitchClicked: boolean;
   kafkaName?: string;
   kafkaPageLink?: string;
   kafkaInstanceLink?: string;
-  setIsSwitchChecked: (value: boolean) => void;
+  setIsSwitchClicked: (value: boolean) => void;
 };
 
 export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
-  isSwitchChecked,
-  setIsSwitchChecked,
+  isSwitchClicked,
+  setIsSwitchClicked,
   kafkaName,
   kafkaPageLink,
   kafkaInstanceLink,
@@ -61,8 +61,8 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
           id="simple-switch"
           label={t("topic:show_all_options")}
           labelOff={t("topic:show_all_options")}
-          isChecked={isSwitchChecked}
-          onChange={setIsSwitchChecked}
+          isChecked={isSwitchClicked}
+          onChange={setIsSwitchClicked}
           className="create-topic-wizard"
         />
       </PageSection>

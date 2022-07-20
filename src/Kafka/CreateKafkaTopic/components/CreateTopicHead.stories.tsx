@@ -12,20 +12,34 @@ export default {
   },
 } as ComponentMeta<typeof CreateTopicHead>;
 
-const Template: ComponentStory<typeof CreateTopicHead> = (args) => {
-  const [isSwitchChecked, setIsSwitchChecked] = useState<boolean>(false);
+const Template: ComponentStory<typeof CreateTopicHead> = (args) => (
+  <CreateTopicHead {...args} />
+);
+
+const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (args) => {
+  const [isSwitchClicked, setIsSwitchClicked] = useState<boolean>(false);
 
   const onClick = () => {
-    setIsSwitchChecked(!isSwitchChecked);
+    setIsSwitchClicked(!isSwitchClicked);
   };
+
   return (
     <CreateTopicHead
       {...args}
-      isSwitchChecked={isSwitchChecked}
-      setIsSwitchChecked={onClick}
+      isSwitchClicked={isSwitchClicked}
+      setIsSwitchClicked={onClick}
     />
   );
 };
 
-export const Story = Template.bind({});
-Story.args = {};
+InteractiveExample.parameters = {
+  docs: {
+    description: {
+      story: `A user can view the kafka instance for which the topic will be created, 
+      and use the switch to jump between the basic and advanced views for creating a topic `,
+    },
+  },
+};
+
+export const EmptyState = Template.bind({});
+EmptyState.args = {};
