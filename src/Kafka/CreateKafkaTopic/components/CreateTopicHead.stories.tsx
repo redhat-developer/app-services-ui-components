@@ -16,7 +16,9 @@ const Template: ComponentStory<typeof CreateTopicHead> = (args) => (
   <CreateTopicHead {...args} />
 );
 
-const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (args) => {
+export const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (
+  args
+) => {
   const [isSwitchClicked, setIsSwitchClicked] = useState<boolean>(false);
 
   const onClick = () => {
@@ -32,7 +34,9 @@ const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (args) => {
   );
 };
 
-InteractiveExample.parameters = {
+export const EmptyState = Template.bind({});
+EmptyState.args = {};
+EmptyState.parameters = {
   docs: {
     description: {
       story: `A user can view the kafka instance for which the topic will be created, 
@@ -40,6 +44,3 @@ InteractiveExample.parameters = {
     },
   },
 };
-
-export const EmptyState = Template.bind({});
-EmptyState.args = {};
