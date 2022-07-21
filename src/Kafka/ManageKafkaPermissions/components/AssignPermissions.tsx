@@ -1,127 +1,161 @@
 import { ActionList, ActionListItem } from "@patternfly/react-core";
 import { TableComposable } from "@patternfly/react-table";
 import { PermissionsDropdown } from ".";
+import { AddAclType} from "../types";
 import { AssignPermissionsManual } from "./AssignPermissionsManual";
 import { ConsumeTopicShortcut } from "./ConsumeTopicShortcut";
 import { ManageAccessShortcut } from "./ManageAccessShortcut";
 import { ProduceTopicShortcut } from "./ProduceTopicShortcut";
-import { ResourceOperationValue } from "./ResourceOperation";
-import { ResourcePermissionValue } from "./ResourcePermission";
-import { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
-import { ResourceTypeValue } from "./ResourceType";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 
-/*export type ViewAccountDetailsProps={
-    addConsumeTopicTemplateAcl,
-    addManageAccessTemplateAcl,
-    addProduceTopicTemplateAcl,
-    addRawAcl,
-    kafkaName,
-    acl
-}*/
+export type AssignPermissionsProps = {
+  submitted: boolean;
+  resourceNameOptions: (filter: string) => Promise<string[]>;
+  onDelete: (index: number) => void;
+  fetchConsumeTopicShortcutResourceName: (filter: string) => Promise<string[]>;
+  onFetchConsumeTopicShortcutTopicResourceNameOptions: (
+    filter: string
+  ) => Promise<string[]>;
+  onFetchProduceTopicShortcutResourceNameOptions: (
+    filter: string
+  ) => Promise<string[]>;
+  fetchConsumeTopicShortcutTopicResourceNameOptions: (
+    filter: string
+  ) => Promise<string[]>;
+  addedAcls: AddAclType[];
+  onAddManualPermissions: () => void;
+  onAddProduceTopicShortcut: () => void;
+  onConsumeTopicShortcut: () => void;
+  onManageAccessShortcut: () => void;
+  kafkaName:string
+};
 
+export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
+  resourceNameOptions,
+  submitted,
+  onDelete,
+  fetchConsumeTopicShortcutResourceName,
+  onFetchConsumeTopicShortcutTopicResourceNameOptions,
+  onFetchProduceTopicShortcutResourceNameOptions,
+  onAddManualPermissions,
+  onAddProduceTopicShortcut,
+  onConsumeTopicShortcut,
+  onManageAccessShortcut,
+  addedAcls,
+  kafkaName
 
-export const ViewAccountDetails: React.VFC=({
-    addConsumeTopicTemplateAcl,
-    addManageAccessTemplateAcl,
-    addProduceTopicTemplateAcl,
-    addRawAcl,
-    kafkaName,
-    acl
-    
+  //addedAcls
 }) => {
-    
-return(
-<>
-<TableComposable variant="compact">
-{acl.length > 0 && <ShortcutsTableHead />}
-{ acl.map((value: PermissionTypeValue, key: number) =>
-value === "manual-permission" ? (
-<AssignPermissionsManual
-key={key}
-row={key}
-resourceType={undefined}
-onChangeResourceType={function (
-  value: ResourceTypeValue | undefined
-): void {
-  throw new Error("Function not implemented.");
-}}
-submitted={false}
-resourcePrefix={"Is"}
-onChangeResourcePrefix={function (
-  value: ResourcePrefixRuleValue
-): void {
-  throw new Error("Function not implemented.");
-}}
-resourceName={undefined}
-onChangeResource={function (value: string | undefined): void {
-  throw new Error("Function not implemented.");
-}}
-onFetchResourceNameOptions={function (
-  filter: string
-): Promise<string[]> {
-  throw new Error("Function not implemented.");
-}}
-resourcePermission={"allow"}
-onChangeResourcePermission={function (
-  value: ResourcePermissionValue
-): void {
-  throw new Error("Function not implemented.");
-}}
-resourceOperation={undefined}
-onChangeResourceOperation={function (
-  value: ResourceOperationValue | undefined
-): void {
-  throw new Error("Function not implemented.");
-}}
-multipleShorctutPermissions={true}
-/>
-) : value === "produce-topic-shortcut" ? (
-<ProduceTopicShortcut onChange={function (value: string): void {
-    throw new Error("Function not implemented.");
-  } } prefixRuleValue={"Is"} resourceNameValue={undefined} onChangeResourceName={function (value: string | undefined): void {
-    throw new Error("Function not implemented.");
-  } } onFetchResourceNameOptions={function (filter: string): Promise<string[]> {
-    throw new Error("Function not implemented.");
-  } } submitted={false} onDelete={function (): void {
-    throw new Error("Function not implemented.");
-  } } 
-  multipleShorctutPermissions={true}/>
-) : value === "consume-topic-shortcut" ? (
-<ConsumeTopicShortcut onChangeConsumerResourcePrefixRule={function (value: string): void {
-      throw new Error("Function not implemented.");
-    } } onChangeTopicResourcePrefixRule={function (value: string): void {
-      throw new Error("Function not implemented.");
-    } } consumerPrefixRuleValue={"Starts with"} topicPrefixRuleValue={"Is"} consumerResourceNameValue={undefined} topicResourceNameValue={undefined} onChangeConsumerResourceName={function (value: string | undefined): void {
-      throw new Error("Function not implemented.");
-    } } onChangeTopicResourceName={function (value: string | undefined): void {
-      throw new Error("Function not implemented.");
-    } } onFetchConsumerResourceNameOptions={function (filter: string): Promise<string[]> {
-      throw new Error("Function not implemented.");
-    } } onFetchTopicResourceNameOptions={function (filter: string): Promise<string[]> {
-      throw new Error("Function not implemented.");
-    } } submitted={false} onDelete={function (): void {
-      throw new Error("Function not implemented.");
-    } } 
-    multipleShorctutPermissions={true}/>
-) : (
-<ManageAccessShortcut onDelete={function (): void {
-        throw new Error("Function not implemented.");
-      } } instanceName={kafkaName} 
-      multipleShorctutPermissions={true}/>
-)
-)}
-</TableComposable>
-<ActionList>
-                <ActionListItem>
-                  <PermissionsDropdown
-                    onAddPermission={addRawAcl}
-                    onShortcutConsumeTopic={addConsumeTopicTemplateAcl}
-                    onShortcutProduceTopic={addProduceTopicTemplateAcl}
-                    onShortcutManageAccess={addManageAccessTemplateAcl}
-                  />
-                </ActionListItem>
-              </ActionList>
-              </>
-)
-}
+  //const addedAcls: AddAclType[] = [];
+
+  const onAddPermission = () => {
+    addedAcls.map((aclTemplate, idx) => {
+      switch (aclTemplate.type) {
+        case "manual":
+          return (
+            <AssignPermissionsManual
+              resourceType={aclTemplate.resourceType}
+              onChangeResourceType={(value) =>
+                (aclTemplate.resourceType = value)
+              }
+              submitted={submitted}
+              resourcePrefix={aclTemplate.resourcePrefix}
+              onChangeResourcePrefix={(value) =>
+                (aclTemplate.resourcePrefix = value)
+              }
+              resourceName={aclTemplate.resourceName}
+              onChangeResource={(value) => (aclTemplate.resourceName = value)}
+              onFetchResourceNameOptions={resourceNameOptions}
+              resourcePermission={aclTemplate.resourcePermission}
+              onChangeResourcePermission={(value) =>
+                (aclTemplate.resourcePermission = value)
+              }
+              resourceOperation={aclTemplate.resourceOperation}
+              onChangeResourceOperation={(value) =>
+                (aclTemplate.resourceOperation = value)
+              }
+              row={idx}
+              onDelete={onDelete}
+            />
+          );
+
+        case "consume-topic":
+          return (
+            <ConsumeTopicShortcut
+              onChangeConsumerResourcePrefixRule={(value) =>
+                (aclTemplate.consumerResourcePrefixRule = value)
+              }
+              onChangeTopicResourcePrefixRule={(value) =>
+                (aclTemplate.topicResourcePrefixRule = value)
+              }
+              consumerPrefixRuleValue={aclTemplate.consumerResourcePrefixRule}
+              topicPrefixRuleValue={aclTemplate.topicResourcePrefixRule}
+              consumerResourceNameValue={aclTemplate.consumerResourceName}
+              topicResourceNameValue={aclTemplate.topicResourceName}
+              onChangeConsumerResourceName={(value) =>
+                (aclTemplate.consumerResourceName = value)
+              }
+              onChangeTopicResourceName={(value) =>
+                (aclTemplate.topicResourceName = value)
+              }
+              onFetchConsumerResourceNameOptions={
+                fetchConsumeTopicShortcutResourceName
+              }
+              onFetchTopicResourceNameOptions={
+                onFetchConsumeTopicShortcutTopicResourceNameOptions
+              }
+              submitted={submitted}
+              onDelete={onDelete}
+              row={idx}
+            />
+          );
+
+        case "produce-topic":
+          return (
+            <ProduceTopicShortcut
+              onChange={(value) => (aclTemplate.prefixRuleValue = value)}
+              prefixRuleValue={aclTemplate.prefixRuleValue}
+              resourceNameValue={aclTemplate.resourceNameValue}
+              onChangeResourceName={(value) =>
+                (aclTemplate.resourceNameValue = value)
+              }
+              onFetchResourceNameOptions={
+                onFetchProduceTopicShortcutResourceNameOptions
+              }
+              submitted={submitted}
+              onDelete={onDelete}
+              row={idx}
+            />
+          );
+
+        case "manage-access":
+          return (
+            <ManageAccessShortcut
+              rowIndex={idx}
+              instanceName={kafkaName}
+              onDelete={onDelete}
+            />
+          );
+      }
+    });
+  };
+
+  return (
+    <>
+      <TableComposable variant="compact">
+        <ShortcutsTableHead />
+        {onAddPermission}
+      </TableComposable>
+      <ActionList>
+        <ActionListItem>
+          <PermissionsDropdown
+            onAddPermission={onAddManualPermissions}
+            onShortcutConsumeTopic={onConsumeTopicShortcut}
+            onShortcutProduceTopic={onAddProduceTopicShortcut}
+            onShortcutManageAccess={onManageAccessShortcut}
+          />
+        </ActionListItem>
+      </ActionList>
+    </>
+  );
+};

@@ -1,3 +1,8 @@
+import { ResourceOperationValue } from "./components/ResourceOperation";
+import { ResourcePermissionValue } from "./components/ResourcePermission";
+import { ResourcePrefixRuleValue } from "./components/ResourcePrefixRule";
+import { ResourceTypeValue } from "./components/ResourceType";
+
 export type AclOperation =
   | "ALL"
   | "READ"
@@ -67,5 +72,37 @@ export type Account = {
   principalType: PrincipalType;
   displayName: string;
 };
+
+type ConsumeTopicTemplate={
+  consumerResourceName:string|undefined
+  consumerResourcePrefixRule:ResourcePrefixRuleValue
+  topicResourceName:string|undefined
+  topicResourcePrefixRule:ResourcePrefixRuleValue
+}
+
+type ManualAcl={
+  resourceType:ResourceTypeValue|undefined
+  resourcePrefix:ResourcePrefixRuleValue
+  resourceName:string|undefined
+  resourcePermission:ResourcePermissionValue
+  resourceOperation:ResourceOperationValue|undefined
+              
+}
+
+type ProduceTopicTemplate={
+  prefixRuleValue:ResourcePrefixRuleValue
+  resourceNameValue:string|undefined
+}
+
+type ManageAccessTemplate={
+  instanceName:string
+}
+export type AddAclType=
+  {type:'manual'}&ManualAcl
+   | {type:'consume-topic'}& ConsumeTopicTemplate
+   | {type:'produce-topic'}& ProduceTopicTemplate
+   | {type:'manage-access'}&ManageAccessTemplate
+
+
 
 export type NewAcl = {}

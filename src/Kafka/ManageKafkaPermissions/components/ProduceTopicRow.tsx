@@ -6,7 +6,7 @@ import { ResourcePrefixRule } from "./ResourcePrefixRule";
 import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 
 export type ProduceTopicRowProps = {
-  onChange: (value: string) => void;
+  onChange: (value: ResourcePrefixRuleValue) => void;
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;

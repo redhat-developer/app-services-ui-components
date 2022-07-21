@@ -4,14 +4,14 @@ export interface Typegen0 {
   "@@xstate/typegen": true;
   eventsCausingActions: {
     setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    resetCreationErrorMessage: "formChange" | "";
+    resetCreationErrorMessage: "formChange" | "create";
     setName: "nameChange";
     formChange: "nameChange" | "providerChange" | "regionChange" | "azChange";
     setProvider: "providerChange";
     setRegion: "regionChange";
     setAZ: "azChange";
     setCreationError: "createError";
-    markRequiredFields: "";
+    markRequiredFields: "create";
   };
   internalEvents: {
     "done.invoke.createKafkaInstance.loading:invocation[0]": {
@@ -34,11 +34,11 @@ export interface Typegen0 {
   };
   eventsCausingServices: {
     getAvailableProvidersAndDefaults: "xstate.init";
-    createInstance: "";
+    createInstance: "create";
   };
   eventsCausingGuards: {
     canCreateInstances: "";
-    canSave: "formChange" | "";
+    canSave: "create" | "formChange";
     nameIsUntouched: "";
     nameIsEmpty: "";
     nameIsValid: "";
@@ -77,7 +77,6 @@ export interface Typegen0 {
     | "configuring.az.validate"
     | "configuring.az.invalid"
     | "configuring.az.valid"
-    | "submit"
     | "formInvalid"
     | "saving"
     | "complete"

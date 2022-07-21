@@ -28,6 +28,8 @@ export type AssignPermissionsManualProps = {
     value: ResourceOperationValue | undefined
   ) => void;
   multipleShorctutPermissions?: boolean;
+  row:number
+  onDelete:(row:number)=>void
 };
 
 export const AssignPermissionsManual: React.FC<
@@ -45,6 +47,8 @@ export const AssignPermissionsManual: React.FC<
   resourceOperation,
   onChangeResourceOperation,
   onChangeResourcePermission,
+  onDelete,
+  row,
   multipleShorctutPermissions = false,
 }) => {
   const { t } = useTranslation("manage-kafka-permissions");

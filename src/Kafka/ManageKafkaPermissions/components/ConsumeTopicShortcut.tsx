@@ -13,8 +13,8 @@ import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
 import { RemoveButton } from "../../../shared/RemoveButton";
 
 export type ConsumeTopicShortcutProps = {
-  onChangeConsumerResourcePrefixRule: (value: string) => void;
-  onChangeTopicResourcePrefixRule: (value: string) => void;
+  onChangeConsumerResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
+  onChangeTopicResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
   consumerPrefixRuleValue: ResourcePrefixRuleValue;
   topicPrefixRuleValue: ResourcePrefixRuleValue;
   consumerResourceNameValue: string | undefined;
@@ -25,7 +25,8 @@ export type ConsumeTopicShortcutProps = {
   onFetchTopicResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
   multipleShorctutPermissions?: boolean;
-  onDelete: () => void;
+  onDelete: (row:number) => void;
+  row:number
 };
 export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onChangeConsumerResourceName,
@@ -40,6 +41,7 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onFetchConsumerResourceNameOptions,
   onFetchTopicResourceNameOptions,
   onDelete,
+  row,
   multipleShorctutPermissions = false,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
@@ -79,7 +81,7 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
               <FlexItem>
                 <RemoveButton
                   variant="link"
-                  onClick={onDelete}
+                  onClick={()=>onDelete(row)}
                   tooltip={t("operations.delete")}
                 />
               </FlexItem>
