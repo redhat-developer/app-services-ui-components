@@ -21,7 +21,7 @@ export const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (
 ) => {
   const [isSwitchClicked, setIsSwitchClicked] = useState<boolean>(false);
 
-  const onClick = () => {
+  const onSwitchClick = () => {
     setIsSwitchClicked(!isSwitchClicked);
   };
 
@@ -29,7 +29,7 @@ export const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (
     <CreateTopicHead
       {...args}
       isSwitchClicked={isSwitchClicked}
-      setIsSwitchClicked={onClick}
+      setIsSwitchClicked={onSwitchClick}
     />
   );
 };
