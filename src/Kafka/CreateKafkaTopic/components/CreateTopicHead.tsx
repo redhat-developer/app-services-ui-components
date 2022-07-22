@@ -11,16 +11,16 @@ import {
 import { Link } from "react-router-dom";
 
 export type CreateTopicProps = {
-  showAllOptionsClicked: boolean;
+  showAllOptions: boolean;
   kafkaName: string;
   kafkaPageLink: string;
   kafkaInstanceLink: string;
-  setshowAllOptionsClicked: (value: boolean) => void;
+  onShowAllOptions: (value: boolean) => void;
 };
 
 export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
-  showAllOptionsClicked,
-  setshowAllOptionsClicked,
+  showAllOptions,
+  onShowAllOptions,
   kafkaName,
   kafkaPageLink,
   kafkaInstanceLink,
@@ -59,8 +59,8 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
           id="simple-switch"
           label={t("topic:show_all_options")}
           labelOff={t("topic:show_all_options")}
-          isChecked={showAllOptionsClicked}
-          onChange={setshowAllOptionsClicked}
+          isChecked={showAllOptions}
+          onChange={onShowAllOptions}
           className="create-topic-wizard"
         />
       </PageSection>
