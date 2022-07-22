@@ -162,7 +162,25 @@ PrepaidAndSingleMarketplaceSubscription.args = {
 PrepaidAndSingleMarketplaceSubscription.parameters = {
   docs: {
     description: {
-      story: ``,
+      story: `The billing popover should show variant 1, mentioning external marketplaces`,
+    },
+  },
+};
+
+export const PrepaidAndSingleMarketplaceSubscriptionAllRH = Template.bind({});
+PrepaidAndSingleMarketplaceSubscriptionAllRH.storyName =
+  "User has a single active subscription in RH marketplace and pre-paid quota - Standard";
+PrepaidAndSingleMarketplaceSubscriptionAllRH.args = {
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWS: false,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: true,
+  apiMarketplacesRHSubscriptions: 1,
+};
+PrepaidAndSingleMarketplaceSubscriptionAllRH.parameters = {
+  docs: {
+    description: {
+      story: `The billing popover should show variant 2, with no mentions of external marketplaces`,
     },
   },
 };

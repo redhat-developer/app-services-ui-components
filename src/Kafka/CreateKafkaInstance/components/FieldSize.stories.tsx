@@ -112,3 +112,8 @@ Trial.args = {
   remainingQuota: 1,
   validity: "trial",
 };
+
+export const NoValue = Template.bind({});
+NoValue.args = {
+  value: undefined,
+};

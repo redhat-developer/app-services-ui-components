@@ -7,7 +7,7 @@ import {
   Skeleton,
   Tile,
 } from "@patternfly/react-core";
-import { AwsIcon, AzureIcon } from "@patternfly/react-icons";
+import { AwsIcon, MicrosoftIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type { CloudProvider, CloudProviderInfo } from "../types";
@@ -22,7 +22,7 @@ export type CloudProvidersTilesProps = {
 export const CloudProvidersTiles: VoidFunctionComponent<
   CloudProvidersTilesProps
 > = ({ providers, value, onChange, isDisabled, validated }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("create-kafka-instance");
   return (
     <>
       {providers.length === 0 && (
@@ -31,10 +31,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
           screenreaderText="Loading contents"
         />
       )}
-      <div
-        role="listbox"
-        aria-label={t("create-kafka-instance:select_cloud_provider")}
-      >
+      <div role="listbox" aria-label={t("select_cloud_provider")}>
         <Flex
           justifyContent={{ default: "justifyContentSpaceBetween" }}
           spacer={{ default: "spacerNone" }}
@@ -51,7 +48,11 @@ export const CloudProvidersTiles: VoidFunctionComponent<
                   isSelected={value === id}
                   isDisabled={providerDisabled || isDisabled}
                   onClick={() => onChange(id)}
-                />
+                >
+                  {(providerDisabled || isDisabled) &&
+                    t("billing.provider_incompatible_with_current_billing")}
+                  &nbsp;
+                </Tile>
               </FlexItem>
             )
           )}
@@ -70,7 +71,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
           <FormSelectOption
             value=""
             key="placeholder"
-            label={t("create-kafka-instance:select_cloud_provider")}
+            label={t("select_cloud_provider")}
           />,
           providers.map(({ id, displayName }, index) => {
             return (
@@ -85,5 +86,5 @@ export const CloudProvidersTiles: VoidFunctionComponent<
 
 const tiles: { [id in CloudProvider]: JSX.Element } = {
   aws: <AwsIcon size="lg" color="black" />,
-  azure: <AzureIcon size="lg" color="black" />,
+  azure: <MicrosoftIcon size="lg" color="black" />,
 };

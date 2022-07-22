@@ -92,6 +92,7 @@ export const TrialInstanceForm: VoidFunctionComponent<
               messageSize={sizes.trial.messageSize}
               onClickQuickStart={onClickQuickStart}
               streamingUnits={sizes.trial.displayName}
+              billing={undefined}
             />
           )}
         </FlexItem>
@@ -199,14 +200,13 @@ export const ConnectedFieldSize: VoidFunctionComponent<
     <FieldSize
       value={1}
       sizes={sizes?.standard}
-      //TODO remainingQuota={capabilities.remainingQuota || 0}
-      remainingQuota={0}
+      remainingQuota={undefined}
       isDisabled={true}
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
       isLoadingError={isSizeLoadingError}
       validity={"trial"}
-      onChange={() => false}
+      onChange={() => false} // for trial instances users can't change the size. This will never get fired
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}
     />

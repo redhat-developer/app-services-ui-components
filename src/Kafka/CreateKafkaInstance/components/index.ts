@@ -1,3 +1,4 @@
+export * from "./BillingHelp";
 export * from "./BillingTiles";
 export * from "./CloudProviderTiles";
 export * from "./CloudRegionsSelect";

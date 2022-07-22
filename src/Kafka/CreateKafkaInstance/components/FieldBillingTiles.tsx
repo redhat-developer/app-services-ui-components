@@ -1,11 +1,15 @@
 import { FormGroup } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import type { BillingHelpProps } from "./BillingHelp";
+import { BillingHelp } from "./BillingHelp";
 import type { BillingTilesProps } from "./BillingTiles";
 import { BillingTiles } from "./BillingTiles";
 
 export type FieldBillingTilesProps = {
   isValid: boolean;
+  billingType: BillingHelpProps["type"];
+  subscriptionOptionsHref: BillingHelpProps["subscriptionOptionsHref"];
 } & Omit<BillingTilesProps, "validated">;
 export const FieldBillingTiles: VoidFunctionComponent<
   FieldBillingTilesProps
@@ -18,6 +22,8 @@ export const FieldBillingTiles: VoidFunctionComponent<
   onPrepaid,
   onSubscription,
   isValid,
+  billingType,
+  subscriptionOptionsHref,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -25,7 +31,15 @@ export const FieldBillingTiles: VoidFunctionComponent<
 
   return (
     <FormGroup
-      label={t("billing.field_label")}
+      label={
+        <>
+          {t("billing.field_label")}{" "}
+          <BillingHelp
+            type={billingType}
+            subscriptionOptionsHref={subscriptionOptionsHref}
+          />
+        </>
+      }
       fieldId="form-billing-option"
       validated={validated}
       helperTextInvalid={
