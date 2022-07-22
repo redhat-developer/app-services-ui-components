@@ -85,3 +85,5 @@ export const LogoAzure = new URL(
   "../static/images/Logo-Azure.svg",
   import.meta.url
 ).href;
+export const LogoGCP = new URL("../static/images/Logo-GCP.svg", import.meta.url)
+  .href;

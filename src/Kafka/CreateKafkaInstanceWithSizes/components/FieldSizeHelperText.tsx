@@ -52,6 +52,7 @@ export const FieldSizeHelperText: VoidFunctionComponent<{
               <ExternalLink
                 href={"https://access.redhat.com/articles/6473891"}
                 testId={"size-preview-support-link"}
+                className={"pf-u-ml-xs"}
               />,
             ]}
           />
