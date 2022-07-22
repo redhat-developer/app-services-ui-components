@@ -66,7 +66,7 @@ export const KafkaPageV3: FunctionComponent = () => {
             </CardHeader>
             <CardBody>{t("purchaseCardMainText")}</CardBody>
             <CardFooter>
-              <Flex>
+              <Flex spaceItems={{ default: "spaceItemsXl" }}>
                 <FlexItem>
                   <ExternalLink
                     href={
