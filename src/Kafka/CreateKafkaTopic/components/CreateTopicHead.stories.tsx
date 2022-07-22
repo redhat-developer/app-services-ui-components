@@ -28,8 +28,8 @@ export const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (
   return (
     <CreateTopicHead
       {...args}
-      showAllOptionsClicked={showAllOptions}
-      setshowAllOptionsClicked={onShowAllOptionsClick}
+      showAllOptions={showAllOptions}
+      onShowAllOptions={onShowAllOptionsClick}
     />
   );
 };
