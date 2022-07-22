@@ -19,17 +19,17 @@ const Template: ComponentStory<typeof CreateTopicHead> = (args) => (
 export const InteractiveExample: ComponentStory<typeof CreateTopicHead> = (
   args
 ) => {
-  const [isSwitchClicked, setIsSwitchClicked] = useState<boolean>(false);
+  const [showAllOptions, setshowAllOptions] = useState<boolean>(false);
 
-  const onSwitchClick = () => {
-    setIsSwitchClicked(!isSwitchClicked);
+  const onShowAllOptionsClick = () => {
+    setshowAllOptions(!showAllOptions);
   };
 
   return (
     <CreateTopicHead
       {...args}
-      isSwitchClicked={isSwitchClicked}
-      setIsSwitchClicked={onSwitchClick}
+      showAllOptionsClicked={showAllOptions}
+      setshowAllOptionsClicked={onShowAllOptionsClick}
     />
   );
 };

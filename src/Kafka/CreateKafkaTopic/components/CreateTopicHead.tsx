@@ -11,16 +11,16 @@ import {
 import { Link } from "react-router-dom";
 
 export type CreateTopicProps = {
-  isSwitchClicked: boolean;
-  kafkaName?: string;
-  kafkaPageLink?: string;
-  kafkaInstanceLink?: string;
-  setIsSwitchClicked: (value: boolean) => void;
+  showAllOptionsClicked: boolean;
+  kafkaName: string;
+  kafkaPageLink: string;
+  kafkaInstanceLink: string;
+  setshowAllOptionsClicked: (value: boolean) => void;
 };
 
 export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
-  isSwitchClicked,
-  setIsSwitchClicked,
+  showAllOptionsClicked,
+  setshowAllOptionsClicked,
   kafkaName,
   kafkaPageLink,
   kafkaInstanceLink,
@@ -31,19 +31,17 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
     <Breadcrumb ouiaId={"breadcrumb"}>
       <BreadcrumbItem
         render={() => (
-          <Link to={kafkaPageLink || "#"}>{t("common:kafka_instance")}</Link>
+          <Link to={kafkaPageLink}>{t("common:kafka_instance")}</Link>
         )}
       />
       <BreadcrumbItem
         render={() => (
-          <Link to={kafkaInstanceLink || "#"}>
+          <Link to={kafkaInstanceLink}>
             {kafkaName || t("common:kafka_instance_name")}
           </Link>
         )}
       />
-      <BreadcrumbItem to="#" isActive>
-        {t("topic:create_topic")}
-      </BreadcrumbItem>
+      <BreadcrumbItem isActive>{t("topic:create_topic")}</BreadcrumbItem>
     </Breadcrumb>
   );
   return (
@@ -61,8 +59,8 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
           id="simple-switch"
           label={t("topic:show_all_options")}
           labelOff={t("topic:show_all_options")}
-          isChecked={isSwitchClicked}
-          onChange={setIsSwitchClicked}
+          isChecked={showAllOptionsClicked}
+          onChange={setshowAllOptionsClicked}
           className="create-topic-wizard"
         />
       </PageSection>
