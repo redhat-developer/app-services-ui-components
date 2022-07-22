@@ -284,13 +284,13 @@ export const KafkaPageV3: FunctionComponent = () => {
                     </SplitItem>
                     <SplitItem>
                       <Title headingLevel="h2" className={"pf-u-pt-sm"}>
-                        {t("googleCloudTitle")}
+                        {t("googleCloudProviderTitle")}
                       </Title>
                       <Text
                         component={TextVariants.p}
                         className={"pf-u-color-200"}
                       >
-                        {t("googleCloudDescription")}
+                        {t("googleCloudProviderDescription")}
                       </Text>
                     </SplitItem>
                   </Split>
