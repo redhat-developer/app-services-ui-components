@@ -34,8 +34,6 @@ export const withMas = (
                 import("../locales/en/apimgmtoverview.json"),
               "kafkaoverview-v2": () =>
                 import("../locales/en/kafkaoverview-v2.json"),
-              "kafkaoverview-v3": () =>
-                import("../locales/en/kafkaoverview-v3.json"),
               "manage-kafka-permissions": () =>
                 import("../locales/en/manage-kafka-permissions.json"),
               "message-browser": () =>
