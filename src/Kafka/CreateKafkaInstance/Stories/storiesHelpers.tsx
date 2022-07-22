@@ -437,10 +437,10 @@ export type StoryProps = {
   onCreate: CreateKafkaInstanceProps["onCreate"];
   onClickQuickStart?: () => void;
   onClickContactUs?: () => void;
-  onClickLearnMoreAboutRegions?: () => void;
   onLearnHowToAddStreamingUnits?: () => void;
   onLearnMoreAboutSizes?: () => void;
   onClickKafkaOverview?: () => void;
+  subscriptionOptionsHref: string;
 };
 
 export const defaultStoryArgs: StoryProps = {
@@ -467,6 +467,7 @@ export const defaultStoryArgs: StoryProps = {
     action("onCreate")(_data);
     setTimeout(onSuccess, 500);
   },
+  subscriptionOptionsHref: "https://www.redhat.com",
 };
 
 export type StoryMeta = Meta<StoryProps>;
@@ -643,7 +644,6 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     "onClickQuickStart",
     "onClickKafkaOverview",
     "onClickContactUs",
-    "onClickLearnMoreAboutRegions",
     "onLearnHowToAddStreamingUnits",
     "onLearnMoreAboutSizes",
     "onClickKafkaOverview"
@@ -671,10 +671,6 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         onClickContactUs={
           args.onClickContactUs || onClickHandlers.onClickContactUs
         }
-        onClickLearnMoreAboutRegions={
-          args.onClickLearnMoreAboutRegions ||
-          onClickHandlers.onClickLearnMoreAboutRegions
-        }
         onLearnHowToAddStreamingUnits={
           args.onLearnHowToAddStreamingUnits ||
           onClickHandlers.onLearnHowToAddStreamingUnits
@@ -685,6 +681,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         onClickKafkaOverview={
           args.onClickKafkaOverview || onClickHandlers.onClickKafkaOverview
         }
+        subscriptionOptionsHref={args.subscriptionOptionsHref}
       />
       <div>
         <Button onClick={() => onOpenModal()}>Open modal</Button>

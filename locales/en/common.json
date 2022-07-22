@@ -4,7 +4,8 @@
   "cloud_provider": "Cloud provider",
   "cloudProviders": {
     "aws": "Amazon Web Services",
-    "azure": "Microsoft Azure",
+    "aws_short": "AWS",
+    "azure": "Azure",
     "rh": "Red Hat"
   },
   "confirm_delete_modal_text": "<strong>{{name}}</strong> will be deleted.",

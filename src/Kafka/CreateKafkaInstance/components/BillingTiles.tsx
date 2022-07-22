@@ -7,7 +7,7 @@ import {
   FormSelectOption,
   Tile,
 } from "@patternfly/react-core";
-import { AwsIcon, AzureIcon, RedhatIcon } from "@patternfly/react-icons";
+import { AwsIcon, MicrosoftIcon, RedhatIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type { MarketPlace } from "../types";
@@ -171,6 +171,6 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
 
 const tiles: { [id in MarketPlace]: JSX.Element } = {
   aws: <AwsIcon size="md" color="black" />,
-  azure: <AzureIcon size="md" color="black" />,
+  azure: <MicrosoftIcon size="md" color="black" />,
   rh: <RedhatIcon size="md" color="black" />,
 };

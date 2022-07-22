@@ -64,10 +64,10 @@ export type ConnectedCreateKafkaInstanceProps = {
   onCancel: () => void;
   onClickQuickStart: () => void;
   onClickContactUs: () => void;
-  onClickLearnMoreAboutRegions: () => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
   onClickKafkaOverview: () => void;
+  subscriptionOptionsHref: string;
 };
 export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   ConnectedCreateKafkaInstanceProps
@@ -78,10 +78,10 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
   onCancel,
   disableFocusTrap,
   onClickContactUs,
-  //onClickLearnMoreAboutRegions,
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
   onClickKafkaOverview,
+  subscriptionOptionsHref,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -160,6 +160,7 @@ export const ConnectedCreateKafkaInstance: VoidFunctionComponent<
                 onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
                 onLearnMoreAboutSizes={onLearnMoreAboutSizes}
                 onClickQuickStart={onClickQuickStart}
+                subscriptionOptionsHref={subscriptionOptionsHref}
               />
             );
           case isTrialPlan:

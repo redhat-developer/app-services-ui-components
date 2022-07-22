@@ -17,13 +17,14 @@ import {
 import { ClockIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import type { SelectedSubscription } from "../types";
+import type { BillingHelpProps } from "./BillingHelp";
+import { BillingHelp } from "./BillingHelp";
 
 export type InstanceInfoProps = {
   isTrial: boolean;
   onClickQuickStart: () => void;
-};
 
-export type InstanceInfoLimitsProps = {
   trialDurationInHours: number | undefined;
   ingress: number;
   egress: number;
@@ -42,11 +43,15 @@ export type InstanceInfoLimitsProps = {
    */
   messageSize: number;
   streamingUnits: string | undefined;
+
+  billing:
+    | ({
+        value: "prepaid" | SelectedSubscription;
+      } & BillingHelpProps)
+    | undefined;
 };
 
-export const InstanceInfo: VoidFunctionComponent<
-  InstanceInfoProps & InstanceInfoLimitsProps
-> = ({
+export const InstanceInfo: VoidFunctionComponent<InstanceInfoProps> = ({
   isTrial,
   trialDurationInHours,
   ingress,
@@ -58,6 +63,7 @@ export const InstanceInfo: VoidFunctionComponent<
   messageSize,
   onClickQuickStart,
   streamingUnits,
+  billing,
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
@@ -163,6 +169,52 @@ export const InstanceInfo: VoidFunctionComponent<
                       })}
                     </DescriptionListDescription>
                   </GridItem>
+                  {billing && (
+                    <GridItem>
+                      <DescriptionListTerm>
+                        {t("billing.field_label")}&nbsp;
+                        <BillingHelp
+                          type={billing.type}
+                          subscriptionOptionsHref={
+                            billing.subscriptionOptionsHref
+                          }
+                        />
+                      </DescriptionListTerm>
+                      <DescriptionListDescription>
+                        {(() => {
+                          if (billing.value === "prepaid") {
+                            return t("billing.prepaid_option");
+                          }
+                          switch (billing.value.marketplace) {
+                            case "aws":
+                              return (
+                                <>
+                                  {t("billing.marketplace_aws")}
+                                  <br />
+                                  {billing.value.subscription}
+                                </>
+                              );
+                            case "azure":
+                              return (
+                                <>
+                                  {t("billing.marketplace_azure")}
+                                  <br />
+                                  {billing.value.subscription}
+                                </>
+                              );
+                            case "rh":
+                              return (
+                                <>
+                                  {t("billing.marketplace_rh")}
+                                  <br />
+                                  {billing.value.subscription}
+                                </>
+                              );
+                          }
+                        })()}
+                      </DescriptionListDescription>
+                    </GridItem>
+                  )}
                 </Grid>
               </DescriptionListGroup>
             </DescriptionList>

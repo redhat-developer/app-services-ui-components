@@ -1,7 +1,11 @@
 import { Flex, FlexItem, Form } from "@patternfly/react-core";
 import type { FormEvent, VoidFunctionComponent } from "react";
 import { useCallback } from "react";
-import type { FieldSizeProps } from "./components";
+import type {
+  FieldInstanceNameProps,
+  FieldSizeProps,
+  InstanceInfoProps,
+} from "./components";
 import {
   FieldAZ,
   FieldBillingTiles,
@@ -15,6 +19,7 @@ import {
   ModalAlertsStandardPlan,
 } from "./components";
 import { useStandardPlanMachine } from "./machines";
+import type { CloudProvider, MarketPlace } from "./types";
 
 export type StandardInstanceFormProps = {
   formId: string;
@@ -22,6 +27,7 @@ export type StandardInstanceFormProps = {
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
   onClickQuickStart: () => void;
+  subscriptionOptionsHref: string;
 };
 
 export const StandardInstanceForm: VoidFunctionComponent<
@@ -32,11 +38,16 @@ export const StandardInstanceForm: VoidFunctionComponent<
   onLearnHowToAddStreamingUnits,
   onLearnMoreAboutSizes,
   onClickQuickStart,
+  subscriptionOptionsHref,
 }) => {
   const {
+    isBillingSingleSubscription,
     isBillingSelectionRequired,
+    isBillingPrepaidAvailable,
+    isBillingSingleMarketplace,
     capabilities,
     selectedSize,
+    billingType,
     error,
     onCreate,
   } = useStandardPlanMachine();
@@ -48,6 +59,25 @@ export const StandardInstanceForm: VoidFunctionComponent<
     },
     [onCreate]
   );
+
+  const instanceInfoBilling: InstanceInfoProps["billing"] = (() => {
+    if (isBillingSingleSubscription) {
+      if (isBillingPrepaidAvailable) {
+        return {
+          value: "prepaid",
+          subscriptionOptionsHref,
+          type: billingType,
+        };
+      } else if (isBillingSingleMarketplace) {
+        return {
+          value: isBillingSingleMarketplace,
+          subscriptionOptionsHref,
+          type: billingType,
+        };
+      }
+    }
+    return undefined;
+  })();
 
   return (
     <>
@@ -71,7 +101,11 @@ export const StandardInstanceForm: VoidFunctionComponent<
               onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
               onLearnMoreAboutSizes={onLearnMoreAboutSizes}
             />
-            {isBillingSelectionRequired && <ConnectedBillingTiles />}
+            {isBillingSelectionRequired && (
+              <ConnectedBillingTiles
+                subscriptionOptionsHref={subscriptionOptionsHref}
+              />
+            )}
           </Form>
         </FlexItem>
         <FlexItem
@@ -96,6 +130,7 @@ export const StandardInstanceForm: VoidFunctionComponent<
               messageSize={selectedSize.messageSize}
               onClickQuickStart={onClickQuickStart}
               streamingUnits={selectedSize.displayName}
+              billing={instanceInfoBilling}
             />
           )}
         </FlexItem>
@@ -115,18 +150,21 @@ export const ConnectedFieldInstanceName: VoidFunctionComponent = () => {
     setName,
   } = useStandardPlanMachine();
 
+  const validity: FieldInstanceNameProps["validity"] = (() => {
+    if (isNameTaken) {
+      return "taken";
+    } else if (isNameInvalid) {
+      return "invalid";
+    } else if (isNameEmpty && isNameError) {
+      return "required";
+    }
+    return "valid";
+  })();
+
   return (
     <FieldInstanceName
       value={form.name || ""}
-      validity={
-        isNameTaken
-          ? "taken"
-          : isNameInvalid
-          ? "invalid"
-          : isNameEmpty && isNameError
-          ? "required"
-          : "valid"
-      }
+      validity={validity}
       isDisabled={!isFormEnabled}
       onChange={setName}
     />
@@ -144,10 +182,11 @@ export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
   } = useStandardPlanMachine();
 
   const providers =
-    isBillingSingleMarketplace && isBillingSingleMarketplace !== "rh"
+    isBillingSingleMarketplace &&
+    isBillingSingleMarketplace.marketplace !== "rh"
       ? capabilities.availableProviders.map((p) => ({
           ...p,
-          isDisabled: p.id !== isBillingSingleMarketplace,
+          isDisabled: p.id !== isBillingSingleMarketplace.marketplace,
         }))
       : capabilities.availableProviders;
 
@@ -230,7 +269,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
 
   return (
     <FieldSize
-      value={form.size?.quota || 1}
+      value={form.size?.quota}
       sizes={sizes}
       remainingQuota={isBillingSelectionRequired ? undefined : remainingQuota}
       isDisabled={!isFormEnabled || sizes === undefined}
@@ -247,11 +286,26 @@ export const ConnectedFieldSize: VoidFunctionComponent<
   );
 };
 
-export const ConnectedBillingTiles: VoidFunctionComponent = () => {
+function isMarketplaceDisabled(
+  marketplace: MarketPlace,
+  selectedProvider: CloudProvider | undefined
+) {
+  if (marketplace === "rh") {
+    return false;
+  } else if (selectedProvider) {
+    return marketplace !== selectedProvider;
+  }
+  return false;
+}
+
+export const ConnectedBillingTiles: VoidFunctionComponent<{
+  subscriptionOptionsHref: string;
+}> = ({ subscriptionOptionsHref }) => {
   const {
     form,
     capabilities,
     selectedBilling,
+    billingType,
     isBillingPrepaidAvailable,
     isSizeOverQuota,
     isBillingError,
@@ -269,12 +323,7 @@ export const ConnectedBillingTiles: VoidFunctionComponent = () => {
         mq.subscriptions.map((subscription) => ({
           marketplace: mq.marketplace,
           subscription,
-          isDisabled:
-            mq.marketplace === "rh"
-              ? false
-              : form.provider
-              ? mq.marketplace !== form.provider
-              : false,
+          isDisabled: isMarketplaceDisabled(mq.marketplace, form.provider),
         }))
       )}
       isPrepaidOverQuota={isBillingPrepaidOverQuota}
@@ -282,6 +331,8 @@ export const ConnectedBillingTiles: VoidFunctionComponent = () => {
       onPrepaid={setBillingPrepaid}
       onSubscription={setBillingSubscription}
       isValid={!isSizeOverQuota && !isBillingError}
+      billingType={billingType}
+      subscriptionOptionsHref={subscriptionOptionsHref}
     />
   );
 };

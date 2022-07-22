@@ -9,7 +9,7 @@ import { FieldSizeHelperTextOverQuota } from "./FieldSizeHelperTextOverQuota";
 import { FieldSizeHelperTextTrial } from "./FieldSizeHelperTextTrial";
 
 export type FieldSizeProps = {
-  value: number;
+  value: number | undefined;
   sizes: Size[] | undefined;
   remainingQuota: number | undefined;
   isDisabled: boolean;
@@ -114,6 +114,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
 
   const validation =
     remainingQuota &&
+    value &&
     (validity !== "valid" || remainingQuota < value) &&
     validity !== "trial" &&
     isError

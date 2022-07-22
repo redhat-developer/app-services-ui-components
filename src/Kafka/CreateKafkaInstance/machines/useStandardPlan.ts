@@ -6,6 +6,7 @@ import type {
   CreateKafkaInstanceError,
   MarketPlace,
   Region,
+  SelectedSubscription,
   Size,
 } from "../types";
 import type { StandardPlanMachineContext } from "./StandardPlanMachine";
@@ -18,6 +19,7 @@ type SelectorReturn = {
   selectedSize: Size | undefined;
   sizes: StandardPlanMachineContext["sizes"];
   selectedBilling: "prepaid" | string | undefined;
+  billingType: "rh-only" | "external-marketplaces";
   remainingQuota: number | undefined;
 
   isFormEnabled: boolean;
@@ -32,11 +34,12 @@ type SelectorReturn = {
   isSizeAvailable: boolean;
   isSizeError: boolean;
   isBillingError: boolean;
+  isBillingSingleSubscription: boolean;
   isBillingSelectionRequired: boolean;
   isBillingPrepaidAvailable: boolean;
   isBillingPrepaidOverQuota: boolean;
   isBillingMarketplaceOverQuota: boolean;
-  isBillingSingleMarketplace: MarketPlace | false;
+  isBillingSingleMarketplace: SelectedSubscription | false;
 
   isProviderError: boolean;
   isRegionError: boolean;
@@ -123,17 +126,22 @@ export function useStandardPlanMachine(): SelectorReturn {
 
         const marketplaces = Array.from(
           new Set(
-            state.context.capabilities.marketplacesQuota.map(
-              (m) => m.marketplace
+            state.context.capabilities.marketplacesQuota.flatMap<SelectedSubscription>(
+              (m) =>
+                m.subscriptions.map((s) => ({
+                  marketplace: m.marketplace,
+                  subscription: s,
+                }))
             )
           )
         );
-        const isBillingSingleMarketplace = state.hasTag("singleSubscription")
-          ? state.context.capabilities.marketplacesQuota[0].marketplace
-          : marketplaces.length === 1 &&
-            state.context.capabilities.remainingPrepaidQuota === undefined
-          ? marketplaces[0]
-          : false;
+        const isBillingSingleSubscription = state.hasTag("singleSubscription");
+        const isBillingSingleMarketplace =
+          isBillingSingleSubscription ||
+          (marketplaces.length === 1 &&
+            state.context.capabilities.remainingPrepaidQuota === undefined)
+            ? marketplaces[0]
+            : false;
 
         const isBillingPrepaidAvailable =
           state.context.capabilities.remainingPrepaidQuota !== undefined;
@@ -149,6 +157,12 @@ export function useStandardPlanMachine(): SelectorReturn {
           : state.context.sizes?.find(
               (s) => state.context.form.size?.id === s.id
             );
+
+        const billingType = state.context.capabilities.marketplacesQuota.some(
+          (m) => m.marketplace !== "rh"
+        )
+          ? "external-marketplaces"
+          : "rh-only";
 
         const selectedBilling =
           state.context.form.billing === "prepaid"
@@ -187,6 +201,7 @@ export function useStandardPlanMachine(): SelectorReturn {
           selectedProvider,
           selectedSize,
           sizes: state.context.sizes,
+          billingType,
           selectedBilling,
           remainingQuota,
 
@@ -206,6 +221,7 @@ export function useStandardPlanMachine(): SelectorReturn {
           isProviderError: !state.hasTag("providerValid") && isFormInvalid,
           isRegionError: !state.hasTag("regionValid") && isFormInvalid,
           isBillingError: !state.hasTag("billingValid") && isFormInvalid,
+          isBillingSingleSubscription,
           isBillingSelectionRequired,
           isBillingPrepaidAvailable,
           isBillingPrepaidOverQuota,

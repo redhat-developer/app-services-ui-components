@@ -17,12 +17,15 @@ import {
 import { ClockIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { InstanceInfoProps } from "./InstanceInfo";
 
-export const InstanceInfoSkeleton: VoidFunctionComponent<InstanceInfoProps> = ({
-  isTrial,
-  onClickQuickStart,
-}) => {
+export type InstanceInfoSkeletonProps = {
+  isTrial: boolean;
+  onClickQuickStart: () => void;
+};
+
+export const InstanceInfoSkeleton: VoidFunctionComponent<
+  InstanceInfoSkeletonProps
+> = ({ isTrial, onClickQuickStart }) => {
   const { t } = useTranslation("create-kafka-instance");
   return (
     <Stack hasGutter data-testid={"instance-info"}>

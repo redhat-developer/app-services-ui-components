@@ -423,12 +423,10 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
     await waitFor(() =>
-      expect(comp.getByText("Red Hat pre-paid")).toBeInTheDocument()
+      expect(comp.getByText("Red Hat prepaid")).toBeInTheDocument()
     );
     await waitFor(() =>
-      expect(
-        comp.getByText("Amazon Web Services Marketplace")
-      ).toBeInTheDocument()
+      expect(comp.getByText("AWS Marketplace")).toBeInTheDocument()
     );
 
     userEvent.selectOptions(
@@ -437,9 +435,7 @@ describe("CreateKafkaInstance", () => {
     );
     await waitFor(async () =>
       expect(
-        (
-          await comp.findByText("Amazon Web Services Marketplace")
-        ).closest("[role=option]")
+        (await comp.findByText("AWS Marketplace")).closest("[role=option]")
       ).toHaveAttribute("aria-disabled", "true")
     );
   });
@@ -456,7 +452,7 @@ describe("CreateKafkaInstance", () => {
     );
 
     userEvent.type(comp.getByLabelText("Name *"), "test-name");
-    userEvent.click(comp.getByText("Red Hat pre-paid"));
+    userEvent.click(comp.getByText("Red Hat prepaid"));
     userEvent.click(comp.getByRole("button", { name: "Create instance" }));
     await waitFor(() =>
       expect(onCreate).toHaveBeenCalledWith(
@@ -485,15 +481,13 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
     await waitFor(() =>
-      expect(comp.getByText("Red Hat pre-paid")).toBeInTheDocument()
+      expect(comp.getByText("Red Hat prepaid")).toBeInTheDocument()
     );
     await waitFor(() =>
-      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
-        2
-      )
+      expect(comp.getAllByText("AWS Marketplace")).toHaveLength(2)
     );
     await waitFor(() => {
-      const azure = comp.getByText("Microsoft Azure Marketplace");
+      const azure = comp.getByText("Azure Marketplace");
       expect(azure).toBeInTheDocument();
       expect(azure.closest("[role=option]")).toHaveAttribute(
         "aria-disabled",
@@ -546,15 +540,13 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
     await waitFor(() =>
-      expect(comp.queryByText("Red Hat pre-paid")).not.toBeInTheDocument()
+      expect(comp.queryByText("Red Hat prepaid")).not.toBeInTheDocument()
     );
     await waitFor(() =>
-      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
-        2
-      )
+      expect(comp.getAllByText("AWS Marketplace")).toHaveLength(2)
     );
     await waitFor(() => {
-      const azure = comp.getByText("Microsoft Azure Marketplace");
+      const azure = comp.getByText("Azure Marketplace");
       expect(azure).toBeInTheDocument();
       expect(azure.closest("[role=option]")).toHaveAttribute(
         "aria-disabled",
@@ -578,17 +570,13 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() => expect(comp.getByText("Billing")).toBeInTheDocument());
     await waitFor(() =>
-      expect(comp.queryByText("Red Hat pre-paid")).not.toBeInTheDocument()
+      expect(comp.queryByText("Red Hat prepaid")).not.toBeInTheDocument()
     );
     await waitFor(() =>
-      expect(comp.getAllByText("Amazon Web Services Marketplace")).toHaveLength(
-        2
-      )
+      expect(comp.getAllByText("AWS Marketplace")).toHaveLength(2)
     );
     await waitFor(() =>
-      expect(
-        comp.queryByText("Microsoft Azure Marketplace")
-      ).not.toBeInTheDocument()
+      expect(comp.queryByText("Azure Marketplace")).not.toBeInTheDocument()
     );
     await waitFor(() =>
       expect(comp.queryByText("Red Hat Marketplace")).not.toBeInTheDocument()
