@@ -143,18 +143,20 @@ class ToolbarWithFilterExample extends React.Component {
 
     const attributeFilterPlaceholder = [
       <p>
-        <FilterIcon /> Resource type permission
+        <FilterIcon /> Resource type operation
       </p>,
     ];
     const statusMenuItems = [
       <React.Fragment>
         <p>
           {" "}
-          &emsp; Resource type permission&emsp;
+          &emsp; Resource type operation&emsp;
           <CheckIcon color="blue" />{" "}
         </p>
         <br></br>
         <Text> &emsp; Resource name</Text>
+        <br></br>
+        <Text> &emsp; Permission access types</Text>
         <br></br>
         <Text> &emsp; Account type</Text>
         <br></br>
@@ -174,11 +176,11 @@ class ToolbarWithFilterExample extends React.Component {
             chips={filters.status}
             deleteChip={this.onDelete}
             deleteChipGroup={this.onDeleteGroup}
-            categoryName="Resource type permission"
+            categoryName="Resource type operation"
           >
             <Select
               variant={SelectVariant.checkbox}
-              aria-label="Resource type permission"
+              aria-label="Resource type operation"
               onToggle={this.onStatusToggle}
               onSelect={this.onStatusSelect}
               selections={filters.status}
@@ -195,12 +197,12 @@ class ToolbarWithFilterExample extends React.Component {
           >
             <Select
               variant={SelectVariant.checkbox}
-              aria-label="Filter by resource type permission"
+              aria-label="Filter by resource type operation"
               onToggle={this.onRiskToggle}
               onSelect={this.onRiskSelect}
               selections={filters.risk}
               isOpen={riskIsExpanded}
-              placeholderText="Filter by resource type permission"
+              placeholderText="Filter by resource type operation"
             >
               {riskMenuItems}
             </Select>

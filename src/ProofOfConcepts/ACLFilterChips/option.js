@@ -105,7 +105,7 @@ class Chips extends React.Component {
     return (
       <React.Fragment>
         <ChipGroup
-          categoryName="Resource type permission"
+          categoryName="Resource type operation"
           isClosable
           onClick={() => {
             this.deleteCategory2();

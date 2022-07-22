@@ -13,3 +13,7 @@ const Template: ComponentStory<typeof ACLFilterChips> = (
 ) => <ACLFilterChips {...args} />;
 
 export const ResourceTypePermissionChipsDemo = Template.bind({});
+
+ResourceTypePermissionChipsDemo.parameters = {
+  backgrounds: { default: "--pf-global--BackgroundColor--200" },
+};
