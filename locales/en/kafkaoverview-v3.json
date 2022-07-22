@@ -21,7 +21,7 @@
   "purchaseCardCallToActionButtonAWS": "<size><bold>AWS Marketplace</bold><size>",
   "purchaseCardCallToActionButtonRedHat": "<size><bold>Red Hat Marketplace</bold><size>",
   "purchaseCardMainText": "Purchase a pay-as-you-go subscription for up to 25 streaming units using one of our Marketplace options below.",
-  "purchaseCardTitle": "Purchase now <0>(US and Canda only)</0>",
+  "purchaseCardTitle": "Purchase now <0>(US and Canada only)</0>",
   "secondStreamingUnit": "2 streaming units",
   "steamingUnit": "Streaming unit",
   "storage": "Storage",
