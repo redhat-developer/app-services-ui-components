@@ -12,6 +12,7 @@ import {
   ModalVariant,
   Page,
   PageSection,
+  Spinner,
   Switch,
   Title,
 } from "@patternfly/react-core";
@@ -27,7 +28,7 @@ export type SettingsProps = {
   onDisable: () => void;
   onClose: () => void;
   closeAlertAction: (key: string | undefined) => void;
-  isSettingsChangeable: "success" | "fail";
+  isLoading: boolean;
 };
 
 export const Settings: FunctionComponent<SettingsProps> = ({
@@ -38,7 +39,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
   onDisable,
   onClose,
   closeAlertAction,
-  isSettingsChangeable,
+  isLoading,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -57,7 +58,20 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                 <LevelItem>
                   <Title headingLevel={"h3"}>
                     {t("settings.connection_re_authentication_label")}{" "}
-                    {isChecked ? "On" : "Off"}
+                    {isChecked ? (
+                      "On"
+                    ) : isLoading ? (
+                      <>
+                        <Spinner
+                          size="md"
+                          aria-valuetext={"Turning off..."}
+                          aria-label={"Turning off..."}
+                        />{" "}
+                        {"Turning off..."}
+                      </>
+                    ) : (
+                      "Off"
+                    )}
                   </Title>
                 </LevelItem>
                 <LevelItem>
@@ -93,37 +107,34 @@ export const Settings: FunctionComponent<SettingsProps> = ({
           </Card>
         </PageSection>
       </Page>
-      {isSettingsChangeable === "success" ? (
-        <AlertGroup isToast>
-          {showAlert.map(({ title, variant, description, id }) => (
-            <Alert
-              title={title}
-              variant={AlertVariant[variant]}
-              actionClose={
-                <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
-              }
-              timeout={8000}
-            >
-              {description}
-            </Alert>
-          ))}
-        </AlertGroup>
-      ) : (
-        <AlertGroup isToast>
-          {showAlert.map(({ title, variant, description, id }) => (
-            <Alert
-              title={title}
-              variant={AlertVariant[variant]}
-              actionClose={
-                <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
-              }
-              timeout={8000}
-            >
-              {description}
-            </Alert>
-          ))}
-        </AlertGroup>
-      )}
+      <AlertGroup isToast>
+        {showAlert.map(({ title, variant, description, id }) => (
+          <Alert
+            title={title}
+            variant={AlertVariant[variant]}
+            actionClose={
+              <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
+            }
+            timeout={8000}
+          >
+            {description}
+          </Alert>
+        ))}
+      </AlertGroup>
+      <AlertGroup isToast>
+        {showAlert.map(({ title, variant, description, id }) => (
+          <Alert
+            title={title}
+            variant={AlertVariant[variant]}
+            actionClose={
+              <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
+            }
+            timeout={8000}
+          >
+            {description}
+          </Alert>
+        ))}
+      </AlertGroup>
     </>
   );
 };

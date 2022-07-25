@@ -3,6 +3,7 @@ import { AlertVariant } from "@rhoas/app-services-ui-shared";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { Settings } from "./Settings";
+import { fakeApi } from "../../shared/storiesHelpers";
 
 export default {
   component: Settings,
@@ -10,12 +11,13 @@ export default {
 } as ComponentMeta<typeof Settings>;
 
 const Template: ComponentStory<typeof Settings> = () => {
-  const isSettingsChangeable = "success";
   const [isChecked, setIschecked] = useState<boolean>(true);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const [showAlert, setShowAlert] = useState<AlertProps[]>([]);
+
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const onChange = () => {
     setIsModalOpen(true);
@@ -31,21 +33,32 @@ const Template: ComponentStory<typeof Settings> = () => {
   };
 
   const onDisable = () => {
-    setIschecked(false);
     setIsModalOpen(false);
-    isSettingsChangeable === "success"
-      ? addAlert(
+    setIschecked(false);
+    setIsLoading(true);
+    fakeApi<{ ConfigurationOff: boolean }>(
+      {
+        ConfigurationOff: false,
+      },
+      2000
+    )
+      .then(() => {
+        addAlert(
           "Connection re-authentication is turrning off",
           AlertVariant.success,
           "Broker is restarting to apply the new configurations. This process might take several minutes",
           "success-alert"
-        )
-      : addAlert(
+        ),
+          setIsLoading(false);
+      })
+      .catch(() =>
+        addAlert(
           "Something went wrong",
           AlertVariant.danger,
           "We're unable to update connection re-authentication at this time, Try again later.",
           "danger-alert"
-        );
+        )
+      );
   };
 
   const onClose = () => {
@@ -65,7 +78,7 @@ const Template: ComponentStory<typeof Settings> = () => {
       onClose={onClose}
       showAlert={showAlert}
       closeAlertAction={closeAlertAction}
-      isSettingsChangeable={isSettingsChangeable}
+      isLoading={isLoading}
     />
   );
 };
