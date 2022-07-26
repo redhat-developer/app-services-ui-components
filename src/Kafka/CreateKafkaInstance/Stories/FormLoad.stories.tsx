@@ -20,7 +20,7 @@ QuotaAvailableOnFormLoad.storyName = "Quota Available - Standard";
 export const TrialAvailableOnFormLoad = Template.bind({});
 TrialAvailableOnFormLoad.storyName = "Quota Available - Trial";
 TrialAvailableOnFormLoad.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "available",
 };
 
@@ -33,14 +33,14 @@ OverQuotaOnFormLoad.args = {
 export const TrialUnavailableOnFormLoad = Template.bind({});
 TrialUnavailableOnFormLoad.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormLoad.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "unavailable",
 };
 
 export const TrialUsedOnFormLoad = Template.bind({});
 TrialUsedOnFormLoad.storyName = "Over Quota - Trial";
 TrialUsedOnFormLoad.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "used",
 };
 
@@ -61,7 +61,7 @@ SomeRegionsDisabledOnFormLoad.parameters = {
 export const TrialSomeRegionsDisabledOnFormLoad = Template.bind({});
 TrialSomeRegionsDisabledOnFormLoad.storyName = "Some regions disabled - Trial";
 TrialSomeRegionsDisabledOnFormLoad.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "available",
   apiRegionsAvailability: "someRegionsUnavailable",
 };
@@ -84,7 +84,7 @@ AllRegionsDisabledOnFormLoad.args = {
 export const TrialAllRegionsDisabledOnFormLoad = Template.bind({});
 TrialAllRegionsDisabledOnFormLoad.storyName = "All regions Unavailable - Trial";
 TrialAllRegionsDisabledOnFormLoad.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "unavailable",
   apiRegionsAvailability: "regionsDisabled",
 };

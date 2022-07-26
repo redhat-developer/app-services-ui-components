@@ -205,7 +205,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isLoading={isLoading || isLoadingSizes}
       isError={isSizeError}
       isLoadingError={isSizeLoadingError}
-      validity={"trial"}
+      validity={"developer"}
       onChange={() => false} // for trial instances users can't change the size. This will never get fired
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
       onLearnMoreAboutSizes={onLearnMoreAboutSizes}

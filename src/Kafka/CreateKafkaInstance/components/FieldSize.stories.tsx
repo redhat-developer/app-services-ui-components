@@ -110,7 +110,7 @@ Trial.args = {
   value: 1,
   sizes: summitSizes,
   remainingQuota: 1,
-  validity: "trial",
+  validity: "developer",
 };
 
 export const NoValue = Template.bind({});

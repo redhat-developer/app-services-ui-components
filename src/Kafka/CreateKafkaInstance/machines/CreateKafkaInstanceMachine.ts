@@ -164,7 +164,7 @@ const CreateKafkaInstanceMachine =
         canCreateStandardInstances: (_, { data: capabilities }) =>
           capabilities !== undefined && capabilities.plan === "standard",
         canCreateTrialInstances: (_, { data: capabilities }) =>
-          capabilities !== undefined && capabilities.plan === "trial",
+          capabilities !== undefined && capabilities.plan === "developer",
       },
     }
   );
@@ -208,6 +208,7 @@ export function makeCreateKafkaInstanceMachine({
           }
           onCreate(
             {
+              plan: form.plan,
               name: form.name,
               provider: form.provider,
               region: form.region,
