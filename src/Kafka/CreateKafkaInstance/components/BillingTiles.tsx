@@ -21,7 +21,9 @@ export type BillingTilesProps = {
     isDisabled: boolean;
   }[];
   isPrepaidOverQuota: boolean;
+  prepaidQuota: number;
   isMarketplaceOverQuota: boolean;
+  marketplaceQuota: number;
   onPrepaid: () => void;
   onSubscription: (marketplace: MarketPlace, subscription: string) => void;
   validated?: SelectProps["validated"];
@@ -31,7 +33,9 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
   hasPrepaid,
   subscriptions,
   isPrepaidOverQuota,
+  prepaidQuota,
   isMarketplaceOverQuota,
+  marketplaceQuota,
   onPrepaid,
   onSubscription,
   validated,
@@ -73,10 +77,17 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
                 &nbsp;
               </Tile>
             </FlexItem>
-            {isPrepaidOverQuota && (
+            {isPrepaidOverQuota && prepaidQuota > 0 && (
               <HelperText className={"pf-c-form__helper-text"}>
                 <HelperTextItem variant={"error"}>
                   {t("billing.prepaid_over_quota")}
+                </HelperTextItem>
+              </HelperText>
+            )}
+            {isPrepaidOverQuota && prepaidQuota === 0 && (
+              <HelperText className={"pf-c-form__helper-text"}>
+                <HelperTextItem variant={"error"}>
+                  {t("billing.prepaid_out_of_quota")}
                 </HelperTextItem>
               </HelperText>
             )}
@@ -113,10 +124,17 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
                 </Tile>
               </FlexItem>
             ))}
-            {isMarketplaceOverQuota && (
+            {isMarketplaceOverQuota && marketplaceQuota > 0 && (
               <HelperText className={"pf-c-form__helper-text"}>
                 <HelperTextItem variant={"error"}>
                   {t("billing.marketplace_over_quota")}
+                </HelperTextItem>
+              </HelperText>
+            )}
+            {isMarketplaceOverQuota && marketplaceQuota === 0 && (
+              <HelperText className={"pf-c-form__helper-text"}>
+                <HelperTextItem variant={"error"}>
+                  {t("billing.marketplace_out_of_quota")}
                 </HelperTextItem>
               </HelperText>
             )}

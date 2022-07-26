@@ -430,7 +430,7 @@ export const StandardPlanMachine =
                         selectSubscription: [
                           {
                             actions: "setBillingToSubscription",
-                            cond: "matchesSelectedProviderOrRHMarketplace",
+                            cond: "matchesSelectedProviderOrRHMarketplaceAndHasQuota",
                             target: ".valid",
                           },
                           {
@@ -462,7 +462,7 @@ export const StandardPlanMachine =
                         selectSubscription: [
                           {
                             actions: "setBillingToSubscription",
-                            cond: "matchesSelectedProviderOrRHMarketplace",
+                            cond: "matchesSelectedProviderOrRHMarketplaceAndHasQuota",
                             target: ".subscription",
                           },
                           {
@@ -472,6 +472,7 @@ export const StandardPlanMachine =
                         ],
                         selectPrepaid: {
                           actions: "setBillingToPrepaid",
+                          cond: "hasPrepaidQuota",
                           target: ".prepaid",
                         },
                       },
@@ -688,9 +689,17 @@ export const StandardPlanMachine =
         onlySubscriptions: (context) =>
           context.capabilities.remainingPrepaidQuota === undefined &&
           context.capabilities.marketplacesQuota.length > 0,
-        matchesSelectedProviderOrRHMarketplace: ({ form }, { subscription }) =>
-          subscription.marketplace === "rh" ||
-          form.provider === subscription.marketplace,
+        matchesSelectedProviderOrRHMarketplaceAndHasQuota: (
+          { form, capabilities },
+          { subscription }
+        ) =>
+          capabilities.remainingMarketplaceQuota !== undefined &&
+          capabilities.remainingMarketplaceQuota > 0 &&
+          (subscription.marketplace === "rh" ||
+            form.provider === subscription.marketplace),
+        hasPrepaidQuota: (context) =>
+          context.capabilities.remainingPrepaidQuota !== undefined &&
+          context.capabilities.remainingPrepaidQuota > 0,
         noSelectedProvider: ({ form }) => form.provider === undefined,
       },
     }

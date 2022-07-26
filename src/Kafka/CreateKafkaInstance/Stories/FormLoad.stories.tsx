@@ -152,7 +152,7 @@ GotEmptySizes.parameters = {
 
 export const PrepaidAndSingleMarketplaceSubscription = Template.bind({});
 PrepaidAndSingleMarketplaceSubscription.storyName =
-  "User has a single active subscription in a marketplace and pre-paid quota - Standard";
+  "User has prepaid quota, a single active subscription in a marketplace";
 PrepaidAndSingleMarketplaceSubscription.args = {
   apiHasMarketplaceSubscriptions: true,
   apiMarketplacesAWSSubscriptions: 1,
@@ -169,7 +169,7 @@ PrepaidAndSingleMarketplaceSubscription.parameters = {
 
 export const PrepaidAndSingleMarketplaceSubscriptionAllRH = Template.bind({});
 PrepaidAndSingleMarketplaceSubscriptionAllRH.storyName =
-  "User has a single active subscription in RH marketplace and pre-paid quota - Standard";
+  "User has prepaid quota, a single active subscription in RH marketplace";
 PrepaidAndSingleMarketplaceSubscriptionAllRH.args = {
   apiHasMarketplaceSubscriptions: true,
   apiMarketplacesAWS: false,
@@ -187,7 +187,7 @@ PrepaidAndSingleMarketplaceSubscriptionAllRH.parameters = {
 
 export const PrepaidAndMarketplaceSubscriptions = Template.bind({});
 PrepaidAndMarketplaceSubscriptions.storyName =
-  "User has multiple active subscriptions in many marketplaces and pre-paid quota - Standard";
+  "User has prepaid quota, multiple active subscriptions in many marketplaces";
 PrepaidAndMarketplaceSubscriptions.args = {
   apiHasMarketplaceSubscriptions: true,
 };
@@ -199,9 +199,39 @@ PrepaidAndMarketplaceSubscriptions.parameters = {
   },
 };
 
+export const MarketplaceSubscriptionsAndPrepaidOutOfQuota = Template.bind({});
+MarketplaceSubscriptionsAndPrepaidOutOfQuota.storyName =
+  "User has out of quota prepaid option, multiple active subscriptions in many marketplaces";
+MarketplaceSubscriptionsAndPrepaidOutOfQuota.args = {
+  apiHasMarketplaceSubscriptions: true,
+  apiRemainingPrepaidQuota: 0,
+};
+MarketplaceSubscriptionsAndPrepaidOutOfQuota.parameters = {
+  docs: {
+    description: {
+      story: ``,
+    },
+  },
+};
+
+export const PrepaidAndMarketplaceSubscriptionsOutOfQuota = Template.bind({});
+PrepaidAndMarketplaceSubscriptionsOutOfQuota.storyName =
+  "User has prepaid quota, out of quota multiple active subscriptions in many marketplaces";
+PrepaidAndMarketplaceSubscriptionsOutOfQuota.args = {
+  apiHasMarketplaceSubscriptions: true,
+  apiRemainingMarketplaceQuota: 0,
+};
+PrepaidAndMarketplaceSubscriptionsOutOfQuota.parameters = {
+  docs: {
+    description: {
+      story: ``,
+    },
+  },
+};
+
 export const OnlyMarketplaceSubscriptions = Template.bind({});
 OnlyMarketplaceSubscriptions.storyName =
-  "User has multiple active subscriptions in many marketplaces and no pre-paid quota - Standard";
+  "User has no prepaid quota, multiple active subscriptions in many marketplaces";
 OnlyMarketplaceSubscriptions.args = {
   apiRemainingPrepaid: false,
   apiHasMarketplaceSubscriptions: true,
@@ -216,7 +246,7 @@ OnlyMarketplaceSubscriptions.parameters = {
 
 export const SingleMarketplace = Template.bind({});
 SingleMarketplace.storyName =
-  "User has multiple active subscriptions in a single marketplaces and no pre-paid quota - Standard";
+  "User has no prepaid quota, multiple active subscriptions in a single marketplaces";
 SingleMarketplace.args = {
   apiRemainingPrepaid: false,
   apiHasMarketplaceSubscriptions: true,
@@ -235,7 +265,7 @@ SingleMarketplace.parameters = {
 
 export const SingleSubscription = Template.bind({});
 SingleSubscription.storyName =
-  "User has a single active subscription in a marketplace and no pre-paid quota - Standard";
+  "User has no prepaid quota, a single active subscription in a marketplace";
 SingleSubscription.args = {
   apiRemainingPrepaid: false,
   apiHasMarketplaceSubscriptions: true,
@@ -254,7 +284,7 @@ SingleSubscription.parameters = {
 
 export const SingleSubscriptionToRH = Template.bind({});
 SingleSubscriptionToRH.storyName =
-  "User has a single active subscription in Red Hat Marketplace and no pre-paid quota - Standard";
+  "User has no prepaid quota, a single active subscription in Red Hat Marketplace";
 SingleSubscriptionToRH.args = {
   apiRemainingPrepaid: false,
   apiHasMarketplaceSubscriptions: true,

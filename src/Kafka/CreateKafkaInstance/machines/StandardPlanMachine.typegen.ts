@@ -68,8 +68,9 @@ export interface Typegen0 {
     onlyPrepaid: "";
     singleSubscription: "";
     onlySubscriptions: "";
-    matchesSelectedProviderOrRHMarketplace: "selectSubscription";
+    matchesSelectedProviderOrRHMarketplaceAndHasQuota: "selectSubscription";
     noSelectedProvider: "selectSubscription";
+    hasPrepaidQuota: "selectPrepaid";
   };
   eventsCausingDelays: {};
   matchesStates:
