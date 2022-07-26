@@ -78,7 +78,7 @@
   "modal_alerts": {
     "instance_unavailable_message": "$t(common:kafka) instances are temporarily available. Try again in a few hours.",
     "instance_unavailable_title": "$t(common:kafka) instances are unavailable for creation",
-    "over_quota_message": "Your organization is out of quota.",
+    "over_quota_message": "To deploy a new instance, delete an existing one first or contact us to add more quota to your account.",
     "over_quota_title": "Your organization is out of quota.",
     "regions_unavailable_message": "Cloud provider regions are temporarily unavailable. Try again later.",
     "system_unavailable_message": "$t(common:unexpected_error)",
