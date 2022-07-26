@@ -6,6 +6,8 @@ import {
   Button,
   Card,
   CardBody,
+  Flex,
+  FlexItem,
   Level,
   LevelItem,
   Modal,
@@ -56,23 +58,29 @@ export const Settings: FunctionComponent<SettingsProps> = ({
             <CardBody>
               <Level>
                 <LevelItem>
-                  <Title headingLevel={"h3"}>
-                    {t("settings.connection_re_authentication_label")}{" "}
-                    {isChecked ? (
-                      "On"
-                    ) : isLoading ? (
-                      <>
-                        <Spinner
-                          size="md"
-                          aria-valuetext={"Turning off..."}
-                          aria-label={"Turning off..."}
-                        />{" "}
-                        {"Turning off..."}
-                      </>
-                    ) : (
-                      "Off"
-                    )}
-                  </Title>
+                  <Flex>
+                    <FlexItem spacer={{ default: "spacerNone" }}>
+                      <Title headingLevel={"h3"}>
+                        {t("settings.connection_re_authentication_label")}
+                      </Title>
+                    </FlexItem>
+                    <FlexItem>
+                      {isChecked ? (
+                        "On"
+                      ) : isLoading ? (
+                        <>
+                          <Spinner
+                            size="md"
+                            aria-valuetext={"Turning off..."}
+                            aria-label={"Turning off..."}
+                          />{" "}
+                          {"Turning off..."}
+                        </>
+                      ) : (
+                        "Off"
+                      )}
+                    </FlexItem>
+                  </Flex>
                 </LevelItem>
                 <LevelItem>
                   <Switch
