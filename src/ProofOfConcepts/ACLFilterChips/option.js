@@ -104,6 +104,7 @@ class Chips extends React.Component {
     const { chipsSet2, chipsSet3, chipsSet4 } = this.state;
     return (
       <React.Fragment>
+
         <ChipGroup
           categoryName="Resource type operation"
           isClosable
@@ -113,6 +114,7 @@ class Chips extends React.Component {
             this.deleteCategory4();
           }}
         >
+        <div class="row">
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup
               // className="lightblue"
@@ -154,6 +156,7 @@ class Chips extends React.Component {
               ))}
             </ChipGroup>
           </Chip>
+          </div>
         </ChipGroup>
       </React.Fragment>
     );
