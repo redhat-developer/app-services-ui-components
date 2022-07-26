@@ -585,6 +585,7 @@ export const StandardPlanMachine =
           const form = context.form as Required<typeof context.form> &
             Pick<typeof context.form, "billing">;
           const data: CreateKafkaFormData = {
+            plan: "standard",
             name: form.name,
             provider: form.provider,
             region: form.region,

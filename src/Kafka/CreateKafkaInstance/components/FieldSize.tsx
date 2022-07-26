@@ -16,7 +16,7 @@ export type FieldSizeProps = {
   isLoading: boolean;
   isError: boolean;
   isLoadingError: boolean;
-  validity: "valid" | "required" | "over-quota" | "trial" | "disabled";
+  validity: "valid" | "required" | "over-quota" | "developer" | "disabled";
   onChange: (size: Size) => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
@@ -36,7 +36,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
 }) => {
   const { t } = useTranslation("create-kafka-instance");
 
-  const isRequired = validity !== "trial";
+  const isRequired = validity !== "developer";
 
   const helperTextTrial = (
     <FieldSizeHelperTextTrial onClick={onLearnMoreAboutSizes} />
@@ -76,7 +76,9 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
         labelBody={t("size_help_content")}
         buttonAriaLabel={t("size_field_aria")}
         isRequired={isRequired}
-        helperText={validity === "trial" ? helperTextTrial : t("sizes_missing")}
+        helperText={
+          validity === "developer" ? helperTextTrial : t("sizes_missing")
+        }
       >
         <div data-testid={"size-slider"} />
       </FormGroupWithPopover>
@@ -84,7 +86,9 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
   }
 
   const valueIndex =
-    validity !== "trial" ? sizes.findIndex((size) => size.quota === value) : -1;
+    validity !== "developer"
+      ? sizes.findIndex((size) => size.quota === value)
+      : -1;
 
   const steps: SliderProps["customSteps"] = sizes.map((s, index) => ({
     value: index,
@@ -116,7 +120,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
     remainingQuota &&
     value &&
     (validity !== "valid" || remainingQuota < value) &&
-    validity !== "trial" &&
+    validity !== "developer" &&
     isError
       ? "error"
       : "default";
@@ -130,7 +134,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       buttonAriaLabel={t("size_field_aria")}
       isRequired={isRequired}
       validated={validation}
-      helperText={validity !== "trial" ? helperText : helperTextTrial}
+      helperText={validity !== "developer" ? helperText : helperTextTrial}
       helperTextInvalid={
         validity === "over-quota" ? helperTextOverQuota : helperText
       }
@@ -144,7 +148,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
           showTicks={true}
           customSteps={steps}
           className="pf-u-w-100"
-          isDisabled={isDisabled || validity === "trial"}
+          isDisabled={isDisabled || validity === "developer"}
           onChange={handleChange}
           aria-describedby={
             isUnavailable ? "instance-size-unavailable" : "streaming-size"

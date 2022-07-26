@@ -27,7 +27,7 @@ OverQuotaOnFormSubmit.play = sampleSubmit;
 export const TrialUnavailableOnFormSubmit = Template.bind({});
 TrialUnavailableOnFormSubmit.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormSubmit.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "available",
   onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
 };
@@ -45,7 +45,7 @@ export const TrialSelectedRegionUnavailableOnFormSubmit = Template.bind({});
 TrialSelectedRegionUnavailableOnFormSubmit.storyName =
   "Selected region unavailable - Trial";
 TrialSelectedRegionUnavailableOnFormSubmit.args = {
-  apiPlan: "trial",
+  apiPlan: "developer",
   apiTrialScenario: "available",
   onCreate: (_data, _onSuccess, onError) => onError("region-unavailable"),
 };

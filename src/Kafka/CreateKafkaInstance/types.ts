@@ -70,7 +70,7 @@ export type TrialPlanInitializationData = {
   defaultProvider: CloudProvider | undefined;
   availableProviders: CloudProviders;
   instanceAvailability: TrialPlanAvailability;
-  plan: "trial";
+  plan: "developer";
 };
 
 export type CreateKafkaInitializationData =
@@ -87,6 +87,7 @@ export type TrialSizes = {
 };
 
 export type CreateKafkaFormData = {
+  plan: "standard" | "developer";
   name: string;
   provider: CloudProvider;
   region: Region;

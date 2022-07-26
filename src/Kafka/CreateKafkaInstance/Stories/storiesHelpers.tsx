@@ -240,7 +240,7 @@ export function makeAvailableProvidersAndDefaultsForTrialPlan(
   return () =>
     fakeApi<CreateKafkaInitializationData>(
       {
-        plan: "trial",
+        plan: "developer",
         defaultProvider,
         availableProviders,
         instanceAvailability,
@@ -262,7 +262,7 @@ export const argTypes = {
   apiPlan: {
     table: { category: "Plan" },
     control: "radio",
-    options: ["standard", "trial"],
+    options: ["standard", "developer"],
   },
   apiStandardScenario: {
     table: { category: "Plan" },
@@ -280,7 +280,7 @@ export const argTypes = {
     table: { category: "Plan" },
     control: "radio",
     options: ["available", "used", "unavailable", "backend-error"],
-    if: { arg: "apiPlan", eq: "trial" },
+    if: { arg: "apiPlan", eq: "developer" },
   },
   apiRemainingPrepaid: {
     table: { category: "Quota" },
@@ -415,7 +415,7 @@ export const argTypes = {
 };
 
 export type StoryProps = {
-  apiPlan: "trial" | "standard";
+  apiPlan: "developer" | "standard";
   apiStandardScenario: StandardPlanAvailability;
   apiTrialScenario: TrialPlanAvailability;
   apiSimulateBackendError: boolean;

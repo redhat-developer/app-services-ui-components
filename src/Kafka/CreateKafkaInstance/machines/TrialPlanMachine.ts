@@ -413,6 +413,7 @@ export const TrialPlanMachine =
         triggerSave: sendParent((context) => {
           const form = context.form as Required<typeof context.form>;
           const data: CreateKafkaFormData = {
+            plan: "developer",
             name: form.name,
             provider: form.provider,
             region: form.region,
