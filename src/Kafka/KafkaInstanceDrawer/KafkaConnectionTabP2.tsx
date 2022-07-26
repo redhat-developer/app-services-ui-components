@@ -86,7 +86,12 @@ export const KafkaConnectionTabP2: FunctionComponent<
                 "connection-tab:create_service_account_to_generate_credentials"
               }
               components={{
-                value: <Link to={linkToServiceAccount}></Link>,
+                value: (
+                  <Link
+                    to={linkToServiceAccount}
+                    data-testid="tableStreams-linkKafka"
+                  ></Link>
+                ),
               }}
             />
           }
@@ -96,6 +101,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
         variant={ButtonVariant.secondary}
         isInline
         onClick={showCreateServiceAccountModal}
+        data-testid="drawerStreams-buttonCreateServiceAccount"
       >
         {t("connection-tab:create_service_account")}
       </Button>
