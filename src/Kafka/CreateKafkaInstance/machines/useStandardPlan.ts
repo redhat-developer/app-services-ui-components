@@ -115,10 +115,11 @@ export function useStandardPlanMachine(): SelectorReturn {
     service,
     useCallback(
       (state) => {
+        const { creationError, capabilities, form, sizes } = state.context;
         const isBlocked = state.hasTag("blocked");
         const isFormInvalid =
           state.hasTag("formInvalid") && state.hasTag("submitted");
-        const isNameTaken = state.context.creationError === "name-taken";
+        const isNameTaken = creationError === "name-taken";
         const isConfigurable = state.hasTag("configurable");
         const isLoadingSizes = state.hasTag("sizeLoading");
         const isBillingSelectionRequired =
@@ -126,12 +127,11 @@ export function useStandardPlanMachine(): SelectorReturn {
 
         const marketplaces = Array.from(
           new Set(
-            state.context.capabilities.marketplacesQuota.flatMap<SelectedSubscription>(
-              (m) =>
-                m.subscriptions.map((s) => ({
-                  marketplace: m.marketplace,
-                  subscription: s,
-                }))
+            capabilities.marketplacesQuota.flatMap<SelectedSubscription>((m) =>
+              m.subscriptions.map((s) => ({
+                marketplace: m.marketplace,
+                subscription: s,
+              }))
             )
           )
         );
@@ -139,68 +139,77 @@ export function useStandardPlanMachine(): SelectorReturn {
         const isBillingSingleMarketplace =
           isBillingSingleSubscription ||
           (marketplaces.length === 1 &&
-            state.context.capabilities.remainingPrepaidQuota === undefined)
+            capabilities.remainingPrepaidQuota === undefined)
             ? marketplaces[0]
             : false;
 
         const isBillingPrepaidAvailable =
-          state.context.capabilities.remainingPrepaidQuota !== undefined;
+          capabilities.remainingPrepaidQuota !== undefined;
 
         const selectedProvider = isBlocked
           ? undefined
-          : state.context.capabilities.availableProviders.find(
-              (p) => p.id === state.context.form.provider
-            );
+          : capabilities.availableProviders.find((p) => p.id === form.provider);
 
         const selectedSize = isBlocked
           ? undefined
-          : state.context.sizes?.find(
-              (s) => state.context.form.size?.id === s.id
-            );
+          : sizes?.find((s) => form.size?.id === s.id);
 
-        const billingType = state.context.capabilities.marketplacesQuota.some(
+        const billingType = capabilities.marketplacesQuota.some(
           (m) => m.marketplace !== "rh"
         )
           ? "external-marketplaces"
           : "rh-only";
 
         const selectedBilling =
-          state.context.form.billing === "prepaid"
-            ? "prepaid"
-            : state.context.form.billing?.subscription;
+          form.billing === "prepaid" ? "prepaid" : form.billing?.subscription;
 
-        const error: SelectorReturn["error"] = state.context.creationError
-          ? state.context.creationError
+        const error: SelectorReturn["error"] = creationError
+          ? creationError
           : isFormInvalid
           ? "form-invalid"
           : undefined;
 
         const remainingQuota =
-          state.context.form.billing === "prepaid" ||
-          state.context.form.billing === undefined
-            ? state.context.capabilities.remainingPrepaidQuota
-            : state.context.capabilities.remainingMarketplaceQuota;
+          form.billing === "prepaid" || form.billing === undefined
+            ? capabilities.remainingPrepaidQuota
+            : capabilities.remainingMarketplaceQuota;
 
-        const isBillingPrepaidOverQuota =
-          selectedSize?.quota &&
-          state.context.capabilities.remainingPrepaidQuota
-            ? selectedSize.quota >
-              state.context.capabilities.remainingPrepaidQuota
-            : false;
+        const isBillingPrepaidOverQuota: boolean = (() => {
+          if (
+            capabilities.remainingPrepaidQuota !== undefined &&
+            capabilities.remainingPrepaidQuota === 0
+          ) {
+            return true;
+          } else if (
+            selectedSize?.quota &&
+            capabilities.remainingPrepaidQuota
+          ) {
+            return selectedSize.quota > capabilities.remainingPrepaidQuota;
+          }
+          return false;
+        })();
 
-        const isBillingMarketplaceOverQuota =
-          selectedSize?.quota &&
-          state.context.capabilities.remainingMarketplaceQuota
-            ? selectedSize.quota >
-              state.context.capabilities.remainingMarketplaceQuota
-            : false;
+        const isBillingMarketplaceOverQuota: boolean = (() => {
+          if (
+            capabilities.remainingMarketplaceQuota !== undefined &&
+            capabilities.remainingMarketplaceQuota === 0
+          ) {
+            return true;
+          } else if (
+            selectedSize?.quota &&
+            capabilities.remainingMarketplaceQuota
+          ) {
+            return selectedSize.quota > capabilities.remainingMarketplaceQuota;
+          }
+          return false;
+        })();
 
         return {
-          form: state.context.form,
-          capabilities: state.context.capabilities,
+          form: form,
+          capabilities,
           selectedProvider,
           selectedSize,
-          sizes: state.context.sizes,
+          sizes: sizes,
           billingType,
           selectedBilling,
           remainingQuota,

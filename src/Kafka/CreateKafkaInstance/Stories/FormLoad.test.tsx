@@ -30,6 +30,8 @@ const {
   SingleMarketplace,
   SingleSubscription,
   SingleSubscriptionToRH,
+  MarketplaceSubscriptionsAndPrepaidOutOfQuota,
+  PrepaidAndMarketplaceSubscriptionsOutOfQuota,
 } = composeStories(stories);
 
 describe("CreateKafkaInstance", () => {
@@ -628,5 +630,58 @@ describe("CreateKafkaInstance", () => {
         "aria-disabled"
       );
     });
+  });
+
+  it("should show a disabled prepaid option in case of out of quota", async () => {
+    const comp = renderDialog(<MarketplaceSubscriptionsAndPrepaidOutOfQuota />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("The prepaid billing option is out of quota.")
+      ).toBeInTheDocument()
+    );
+
+    await waitFor(() => {
+      const azure = comp.getByText("Red Hat prepaid");
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).toHaveAttribute("aria-disabled");
+    });
+  });
+
+  it("should show disabled marketplace options in case of out of quota", async () => {
+    const comp = renderDialog(<PrepaidAndMarketplaceSubscriptionsOutOfQuota />);
+    await waitForI18n(comp);
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("Checking if new Kafka instances are available")
+      ).not.toBeInTheDocument()
+    );
+
+    await waitFor(() =>
+      expect(
+        comp.queryByText("The marketplace billing options are out of quota.")
+      ).toBeInTheDocument()
+    );
+
+    const checkDisabledTitle = async (s: string) => {
+      return await waitFor(() => {
+        const sub = comp.getByText(s);
+        expect(sub).toBeInTheDocument();
+        expect(sub.closest("[role=option]")).toHaveAttribute("aria-disabled");
+      });
+    };
+
+    await checkDisabledTitle("aws-YXdzMDAwMDAwMA==");
+    await checkDisabledTitle("aws-YXdzMTExMTExMQ==");
+    await checkDisabledTitle("azure-YXp1cmUwMDAwMA==");
+    await checkDisabledTitle("rh-cmgwMDAwMDAwMA==");
   });
 });

@@ -327,7 +327,9 @@ export const ConnectedBillingTiles: VoidFunctionComponent<{
         }))
       )}
       isPrepaidOverQuota={isBillingPrepaidOverQuota}
+      prepaidQuota={capabilities.remainingPrepaidQuota || 0} // we can default to 0 here just to make TS happy, we will have the info here
       isMarketplaceOverQuota={isBillingMarketplaceOverQuota}
+      marketplaceQuota={capabilities.remainingMarketplaceQuota || 0} // we can default to 0 here just to make TS happy, we will have the info here
       onPrepaid={setBillingPrepaid}
       onSubscription={setBillingSubscription}
       isValid={!isSizeOverQuota && !isBillingError}

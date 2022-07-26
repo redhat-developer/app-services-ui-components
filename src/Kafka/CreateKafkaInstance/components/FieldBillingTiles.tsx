@@ -18,7 +18,9 @@ export const FieldBillingTiles: VoidFunctionComponent<
   hasPrepaid,
   subscriptions,
   isPrepaidOverQuota,
+  prepaidQuota,
   isMarketplaceOverQuota,
+  marketplaceQuota,
   onPrepaid,
   onSubscription,
   isValid,
@@ -54,7 +56,9 @@ export const FieldBillingTiles: VoidFunctionComponent<
         hasPrepaid={hasPrepaid}
         subscriptions={subscriptions}
         isPrepaidOverQuota={isPrepaidOverQuota}
+        prepaidQuota={prepaidQuota}
         isMarketplaceOverQuota={isMarketplaceOverQuota}
+        marketplaceQuota={marketplaceQuota}
         onPrepaid={onPrepaid}
         onSubscription={onSubscription}
         validated={validated}
