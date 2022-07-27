@@ -56,7 +56,7 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
         <br />
         <Switch
           ouiaId={"toggle-switch-off"}
-          id="simple-switch"
+          id="id-show-all-options"
           label={t("topic:show_all_options")}
           labelOff={t("topic:show_all_options")}
           isChecked={showAllOptions}
