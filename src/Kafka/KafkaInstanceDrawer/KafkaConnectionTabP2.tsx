@@ -161,6 +161,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                           <ExternalLink
                             testId={"customerPortal-link"}
                             href={linkToDocPortal}
+                            className={"pf-u-ml-xs"}
                           />,
                         ]}
                       />
@@ -220,6 +221,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                           <ExternalLink
                             testId={"customerPortal-link"}
                             href={linkToDocPortal}
+                            className={"pf-u-ml-xs"}
                           />,
                         ]}
                       />

@@ -4,7 +4,12 @@ import { ExternalLink } from "./ExternalLink";
 describe("ExternalLink", () => {
   it("to render", () => {
     const comp = render(
-      <ExternalLink href={"test-href"} testId={"test-id"} target={"_self"} />
+      <ExternalLink
+        href={"test-href"}
+        testId={"test-id"}
+        target={"_self"}
+        className={"pf-u-ml-xs"}
+      />
     );
     const link = comp.getByTestId("test-id");
     expect(link).toBeInTheDocument();
