@@ -41,7 +41,6 @@ export const withMas = (
               "message-browser": () =>
                 import("../locales/en/message-browser.json"),
               "overview-v2": () => import("../locales/en/overview-v2.json"),
-              "overview-v3": () => import("../locales/en/overview-v3.json"),
               "create-kafka-instance-with-sizes": () =>
                 import("../locales/en/create-kafka-instance-with-sizes.json"),
               "connection-tab": () =>
