@@ -665,7 +665,7 @@ exports[`OverviewPage renders 1`] = `
                 <div
                   class="pf-l-stack__item"
                 >
-                  OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge and CockroachDB.
+                  OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge, CockroachDB Dedicated and Amazon RDS.
                 </div>
                 <div
                   class="pf-l-stack__item pf-u-color-200"
