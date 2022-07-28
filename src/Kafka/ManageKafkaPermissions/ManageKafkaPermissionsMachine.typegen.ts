@@ -27,16 +27,7 @@ export interface Typegen0 {
     saveAcls: "done.invoke.ACL Dialog.Step 2.Saving:invocation[0]";
   };
   missingImplementations: {
-    actions:
-      | "setAvailableUsersAndAccounts"
-      | "setWildcardAccount"
-      | "setSelectedUsername"
-      | "setSelectedAccount"
-      | "clearSelectedAccount"
-      | "addRawAcl"
-      | "addConsumeTopicTemplateAcl"
-      | "addProduceTopicTemplateAcl"
-      | "addManageAccessTemplateAcl";
+    actions: never;
     services: "loadUsersAndServiceAccounts" | "loadACLs" | "saveAcls";
     guards:
       | "pristine"

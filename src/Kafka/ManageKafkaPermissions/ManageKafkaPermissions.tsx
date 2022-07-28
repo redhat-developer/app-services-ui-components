@@ -1,21 +1,8 @@
-import {
-  Button,
-  Form,
-  FormGroup,
-  HelperText,
-  Modal,
-  Popover,
-  TextContent,
-  Text,
-  TextVariants,
-} from "@patternfly/react-core";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { Button, Form, FormGroup, Modal } from "@patternfly/react-core";
 import { useMachine } from "@xstate/react";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { assign } from "xstate";
 import { AssignPermissions } from "./components/AssignPermissions";
-import { ManageAccessShortcut } from "./components/ManageAccessShortcut";
 import { SelectAccount } from "./components/SelectAccount";
 import { ViewAccountDetails } from "./components/ViewAccountDetails";
 import { ManageKafkaPermissionsMachine } from "./ManageKafkaPermissionsMachine";
@@ -43,61 +30,6 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   fetchConsumeTopicShortcutTopicResourceNameOptions,
 }) => {
   const [state, send] = useMachine(ManageKafkaPermissionsMachine, {
-    actions: {
-      addConsumeTopicTemplateAcl: () => {
-        //send("Add a consume from a topic ACL");
-        addedAcls.push({
-          type: "consume-topic",
-          topicResourcePrefixRule: "Is",
-          topicResourceName: undefined,
-          consumerResourceName: undefined,
-          consumerResourcePrefixRule: "Is",
-        });
-      },
-
-      addManageAccessTemplateAcl: () => {
-        addedAcls.push({ type: "manage-access", instanceName: kafkaName });
-        //createRows('Manage Access')
-
-        //<ManageAccessShortcut onDelete={onDeleteNewAcl} instanceName={kafkaName} rowIndex={1}/>
-      },
-
-      addProduceTopicTemplateAcl: () => {
-        addedAcls.push({
-          type: "produce-topic",
-          prefixRuleValue: "Is",
-          resourceNameValue: undefined,
-        });
-      },
-
-      addRawAcl: () => {
-        addedAcls.push({
-          type: "manual",
-          resourceName: undefined,
-          resourceType: undefined,
-          resourceOperation: undefined,
-          resourcePrefix: "Is",
-          resourcePermission: "allow",
-        });
-      },
-
-      clearSelectedAccount: assign({
-        account: (context) => {
-          return (context.account = undefined);
-        },
-      }),
-      //setSelectedAccount: assign((context, event) => {}),
-      setSelectedAccount: assign({
-        account: (context, event) => {
-          return (context.account = event.account);
-        },
-      }),
-      setSelectedUsername: assign((_, event) => ({ account: event.username })),
-      setWildcardAccount: assign((_context) => ({ account: "*" })),
-      setAvailableUsersAndAccounts: assign((_, event) => ({
-        availableUsersAndAccounts: event.data,
-      })),
-    },
     guards: {
       'acl user matches the selected one in step 1 OR selected user is "all accounts"':
         (context, event) => {
@@ -129,10 +61,43 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const canNext = state.can("Next");
   const onNext = () => send("Next");
   const onSave = () => send("Save");
-  const onAddManualPermissions = () => send("Add ACL manually");
-  const onAddProduceTopicShortcut = () => send("Add a produce to a topic ACL");
-  const onConsumeTopicShortcut = () => send("Add a consume from a topic ACL");
-  const onManageAccessShortcut = () => send("Add manage access ACL");
+  const onAddManualPermissions = () =>
+    send({
+      type: "Add ACL manually",
+      value: {
+        type: "manual",
+        resourceName: undefined,
+        resourceType: undefined,
+        resourceOperation: undefined,
+        resourcePrefix: "Is",
+        resourcePermission: "allow",
+      },
+    });
+  const onAddProduceTopicShortcut = () =>
+    send({
+      type: "Add a produce to a topic ACL",
+      value: {
+        type: "produce-topic",
+        prefixRuleValue: "Is",
+        resourceNameValue: undefined,
+      },
+    });
+  const onConsumeTopicShortcut = () =>
+    send({
+      type: "Add a consume from a topic ACL",
+      value: {
+        type: "consume-topic",
+        consumerResourceName: undefined,
+        consumerResourcePrefixRule: "Is",
+        topicResourceName: undefined,
+        topicResourcePrefixRule: "Is",
+      },
+    });
+  const onManageAccessShortcut = () =>
+    send({
+      type: "Add manage access ACL",
+      value: { type: "manage-access", instanceName: kafkaName },
+    });
   const onRemoveAcl = (index: number) =>
     send({ type: "Delete existing ACL", aclIndex: index });
   const onDeleteNewAcl = (index: number) =>
