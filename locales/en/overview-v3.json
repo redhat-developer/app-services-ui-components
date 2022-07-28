@@ -3,7 +3,7 @@
   "applicationService": "Application service",
   "banner": "Reduce operational costs and complexity for application development teams with hosted and managed OpenShift Application and Data Services.",
   "dataService": "Data service",
-  "dbaasMainText": "OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge and CockroachDB.",
+  "dbaasMainText": "OpenShift Database Access helps developers find, connect, and provision cloud database services such as MongoDB Atlas, Crunchy Bridge, CockroachDB Dedicated and Amazon RDS.",
   "dbaasSecondaryText": "This service is hosted and managed by Red Hat as an add-on for managed",
   "dbaasTitle": "Red Hat OpenShift Database Access",
   "developmentPreview": "Development preview",
