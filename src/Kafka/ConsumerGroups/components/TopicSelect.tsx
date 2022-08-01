@@ -38,7 +38,7 @@ export const TopicSelect: FunctionComponent<TopicSelectProps> = ({
       onSelect={onSelect}
       isOpen={isOpen}
       selections={value}
-      placeholderText={t("common:select")}
+      placeholderText={t("consumerGroup.select_topic")}
       menuAppendTo={"parent"}
     >
       {topics.map((topic) => (

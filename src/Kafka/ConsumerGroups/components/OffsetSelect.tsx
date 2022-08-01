@@ -49,7 +49,7 @@ export const OffsetSelect: FunctionComponent<OffsetSelectProps> = ({
       onSelect={onSelect}
       variant={SelectVariant.single}
       isOpen={isOpen}
-      placeholderText={t("common:select")}
+      placeholderText={t("consumerGroup.select_offset")}
       selections={value}
       menuAppendTo={"parent"}
     >

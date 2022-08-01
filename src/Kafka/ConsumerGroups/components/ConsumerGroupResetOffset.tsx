@@ -159,7 +159,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
                 fieldId="offset-select"
               >
                 <OffsetSelect
-                  value={selectedOffset ? selectedOffset : t("common:select")}
+                  value={selectedOffset}
                   onChange={onChangeOffsetValue}
                 />
               </FormGroup>
