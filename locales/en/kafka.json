@@ -81,6 +81,8 @@
     "reset_offset_selectable table": "Selectable Table",
     "reset_offset_topic_label": "Topic",
     "search": "Search consumer groups",
+    "select_offset": "Select offset",
+    "select_topic": "Select topic",
     "state": {
       "completing_rebalance": "Completing rebalance",
       "dead": "Dead",
