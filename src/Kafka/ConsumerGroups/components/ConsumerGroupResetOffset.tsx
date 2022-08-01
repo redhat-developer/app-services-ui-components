@@ -79,15 +79,12 @@ export const ConsumerGroupResetOffset: FunctionComponent<
 }) => {
   const { t } = useTranslation(["kafka"]);
 
-  const isResetOffsetDisabled = (): boolean => {
-    return (
-      !selectedTopic ||
-      !selectedOffset ||
-      !confirmCheckboxChecked ||
-      !isDisconnected ||
-      consumers.filter(({ selected }) => selected === true).length === 0
-    );
-  };
+  const isResetOffsetDisabled =
+    !selectedTopic ||
+    !selectedOffset ||
+    !confirmCheckboxChecked ||
+    !isDisconnected ||
+    consumers.filter(({ selected }) => selected === true).length === 0;
 
   const tableColumns = {
     partition: t("consumerGroup.partition"),
@@ -115,7 +112,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
         <Button
           variant="danger"
           key={1}
-          isDisabled={isResetOffsetDisabled()}
+          isDisabled={isResetOffsetDisabled}
           onClick={onClickResetOffset}
         >
           {t("consumerGroup.reset_offset")}
