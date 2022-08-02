@@ -49,7 +49,7 @@
     "@patternfly/react-core": "4.224.1",
     "@patternfly/react-icons": "4.75.1",
     "@patternfly/react-table": "4.93.1",
-    "@rhoas/app-services-ui-shared": "0.16.1",
+    "@rhoas/app-services-ui-shared": "0.16.2",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-replace": "4.0.0",
     "@storybook/addon-a11y": "6.5.9",
