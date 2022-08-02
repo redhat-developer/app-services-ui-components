@@ -7,7 +7,7 @@ export type ExternaLinkProps = {
   testId: string;
   target?: ButtonProps["target"];
   href: NonNullable<ButtonProps["href"]>;
-  className: string;
+  className?: string;
 };
 
 export const ExternalLink: FunctionComponent<ExternaLinkProps> = ({
