@@ -24,8 +24,10 @@ import {
   MarketingPageSection,
   MarketingPageVideoCard,
 } from "./components";
-import { ExternalLinkAltIcon, ArrowRightIcon } from "@patternfly/react-icons";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
 import { useState, useCallback } from "react";
+import type { VoidFunctionComponent } from "react";
+import { ExternalLink } from "../shared";
 
 export type ClusterObject = {
   /**
@@ -72,12 +74,12 @@ const CREATE_CLUSTER_HREF = `${document.baseURI}openshift/create `;
 const UPGRADE_CLUSTER_HREF = `${document.baseURI}openshift/details/s/{subscriptionID}#machinePools`;
 const INSTALL_ADDON_HREF = `${document.baseURI}openshift/details/s/{subscriptionID}#addOns`;
 
-const ClusterSelect = ({
+const ClusterSelect: VoidFunctionComponent<ClusterSelectProps> = ({
   clusters,
   handleSelectCluster,
   selectedCluster,
   isDisabled,
-}: ClusterSelectProps) => {
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Select
@@ -114,7 +116,9 @@ const ClusterSelect = ({
   );
 };
 
-const InstallClusterModalContent = (props: ClusterSelectProps) => {
+const InstallClusterModalContent: VoidFunctionComponent<ClusterSelectProps> = (
+  props
+) => {
   const { t } = useTranslation("datascienceoverview");
   return (
     <Stack hasGutter>
@@ -133,14 +137,14 @@ const InstallClusterModalContent = (props: ClusterSelectProps) => {
   );
 };
 
-const UpgradeClusterModalContent = ({
-  handleStrategyChange,
-  upgradeStrategy,
-  ...props
-}: ClusterSelectProps & {
+type UpgradeClusterModalContentProps = ClusterSelectProps & {
   upgradeStrategy: UpgradeStrategy;
   handleStrategyChange: (strategy: UpgradeStrategy) => void;
-}) => {
+};
+
+const UpgradeClusterModalContent: VoidFunctionComponent<
+  UpgradeClusterModalContentProps
+> = ({ handleStrategyChange, upgradeStrategy, ...props }) => {
   const { t } = useTranslation("datascienceoverview");
   const upgradeBody = (
     <TextContent>
@@ -188,20 +192,22 @@ const CreateClusterContent = () => {
   );
 };
 
-const ClusterModalContent = ({
-  mode,
-  clusters,
-  handleSelectCluster,
-  selectedCluster,
-  upgradeStrategy,
-  handleStrategyChange,
-}: {
+type ClusterModalContentProps = {
   selectedCluster?: ClusterObject;
   handleSelectCluster: HandleSelectCluster;
   mode: RHodsClusterAddonMode;
   clusters: ClusterObject[];
   upgradeStrategy: UpgradeStrategy;
   handleStrategyChange: (strategy: UpgradeStrategy) => void;
+};
+
+const ClusterModalContent: VoidFunctionComponent<ClusterModalContentProps> = ({
+  mode,
+  clusters,
+  handleSelectCluster,
+  selectedCluster,
+  upgradeStrategy,
+  handleStrategyChange,
 }) => {
   if (mode === RHodsClusterAddonMode.Detecting) {
     return (
@@ -240,7 +246,9 @@ const ClusterModalContent = ({
   return null;
 };
 
-export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
+export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
+  loadClusters,
+}) => {
   const { t } = useTranslation("datascienceoverview");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedCluster, setSelectedCluster] = useState<
@@ -402,14 +410,12 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
             <Button onClick={handleInstallModalOpen}>
               {t("installButton")}
             </Button>
-            <a
-              data-testid="hero-buttonTryIt"
-              target="_blank"
+            <ExternalLink
+              testId="hero-buttonTryIt"
               href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started?extIdCarryOver=true&sc_cid=701f2000001Css5AAC"
             >
               {t("heroTryItButton")}
-              <ArrowRightIcon className="pf-u-ml-sm" />
-            </a>
+            </ExternalLink>
           </Flex>
         }
         heroImage={RhodsMlTechnology}
