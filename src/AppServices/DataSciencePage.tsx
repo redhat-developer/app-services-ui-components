@@ -68,22 +68,9 @@ enum UpgradeStrategy {
   Create,
 }
 
-const CREATE_CLUSTER_HREF = `${document.baseURI}/openshift/create `;
-const UPGRADE_CLUSTER_HREF = `${document.baseURI}/openshift/details/s/{subscriptionID}#machinePools`;
-const INSTALL_ADDON_HREF = `${document.baseURI}/openshift/details/s/{subscriptionID}#addOns`;
-
-const clusterModalTitles = {
-  [RHodsClusterAddonMode.Detecting]: "detectingClustersTitle",
-  [RHodsClusterAddonMode.Install]: "installClusterTitle",
-  [RHodsClusterAddonMode.Upgrade]: "installClusterTitle",
-  [RHodsClusterAddonMode.Create]: "installClusterTitle",
-};
-
-const clusterModalDescriptions = {
-  [RHodsClusterAddonMode.Install]: "installClusterDescription",
-  [RHodsClusterAddonMode.Upgrade]: "upgradeClusterDescription",
-  [RHodsClusterAddonMode.Create]: "createClusterDescription",
-};
+const CREATE_CLUSTER_HREF = `${document.baseURI}openshift/create `;
+const UPGRADE_CLUSTER_HREF = `${document.baseURI}openshift/details/s/{subscriptionID}#machinePools`;
+const INSTALL_ADDON_HREF = `${document.baseURI}openshift/details/s/{subscriptionID}#addOns`;
 
 const ClusterSelect = ({
   clusters,
@@ -309,11 +296,9 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
               )
         }
       >
-        {t(
-          upgradeStrategy === UpgradeStrategy.Create
-            ? "createClusterAction"
-            : "upgradeAction"
-        )}
+        {upgradeStrategy === UpgradeStrategy.Create
+          ? t("createClusterAction")
+          : t("upgradeAction")}
       </Button>,
       <Button
         onClick={() => setIsModalOpen(false)}
@@ -340,6 +325,19 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
         {t("cancelClusterAction")}
       </Button>,
     ],
+  };
+
+  const clusterModalDescriptions = {
+    [RHodsClusterAddonMode.Install]: t("installClusterDescription"),
+    [RHodsClusterAddonMode.Upgrade]: t("upgradeClusterDescription"),
+    [RHodsClusterAddonMode.Create]: t("createClusterDescription"),
+  };
+
+  const clusterModalTitles = {
+    [RHodsClusterAddonMode.Detecting]: t("detectingClustersTitle"),
+    [RHodsClusterAddonMode.Install]: t("installClusterTitle"),
+    [RHodsClusterAddonMode.Upgrade]: t("installClusterTitle"),
+    [RHodsClusterAddonMode.Create]: t("installClusterTitle"),
   };
 
   const getData = useCallback(async () => {
@@ -377,11 +375,11 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
         onClose={() => setIsModalOpen(false)}
         variant="medium"
         actions={modalActions[mode]}
-        title={t(clusterModalTitles[mode])}
+        title={clusterModalTitles[mode]}
         description={
           mode !== RHodsClusterAddonMode.Detecting ? (
             <Title headingLevel="h2" size="md">
-              {t(clusterModalDescriptions[mode])}
+              {clusterModalDescriptions[mode]}
             </Title>
           ) : undefined
         }
