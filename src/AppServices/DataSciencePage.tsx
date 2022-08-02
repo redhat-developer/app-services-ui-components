@@ -5,6 +5,8 @@ import {
   Flex,
   Grid,
   GridItem,
+  List,
+  ListItem,
   Modal,
   Radio,
   Select,
@@ -154,7 +156,12 @@ const UpgradeClusterModalContent: VoidFunctionComponent<
         isDisabled={upgradeStrategy !== UpgradeStrategy.Upgrade}
       />
       <TextContent>
-        <Text>TODO: Add requrements values</Text>
+        <Text>{t("upgradeClusterPrerequisites")}</Text>
+        <List>
+          <ListItem>{t("upgradeClusterNodes")}</ListItem>
+          <ListItem>{t("upgradeClusterCPUs")}</ListItem>
+          <ListItem>{t("upgradeClusterMemory")}</ListItem>
+        </List>
       </TextContent>
     </TextContent>
   );
