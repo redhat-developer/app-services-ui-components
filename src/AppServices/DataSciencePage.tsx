@@ -34,6 +34,7 @@ export type ClusterObject = {
    * THat will prevent TS from blocking the object and enforce the right properties
    */
   [key: string]: any;
+  id: string;
   cluster_id: string;
   display_name: string;
   metrics?: { nodes?: { compute: number } }[];
@@ -66,6 +67,10 @@ enum UpgradeStrategy {
   Upgrade,
   Create,
 }
+
+const CREATE_CLUSTER_HREF = `${document.baseURI}/openshift/create `;
+const UPGRADE_CLUSTER_HREF = `${document.baseURI}/openshift/details/s/{subscriptionID}#machinePools`;
+const INSTALL_ADDON_HREF = `${document.baseURI}/openshift/details/s/{subscriptionID}#addOns`;
 
 const clusterModalTitles = {
   [RHodsClusterAddonMode.Detecting]: "detectingClustersTitle",
@@ -264,9 +269,6 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
 
   const modalActions = {
     [RHodsClusterAddonMode.Detecting]: [],
-    /**
-     * How do I install RHODS on cluster?
-     */
     [RHodsClusterAddonMode.Install]: [
       <Button
         onClick={() =>
@@ -277,6 +279,11 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
         }
         variant="primary"
         key="install"
+        component="a"
+        href={INSTALL_ADDON_HREF.replace(
+          "{subscriptionID}",
+          selectedCluster?.id || ""
+        )}
       >
         {t("installClusterAction")}
       </Button>,
@@ -288,20 +295,19 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
         {t("cancelClusterAction")}
       </Button>,
     ],
-    /**
-     * How do I upgrade cluster for RHODS?
-     */
     [RHodsClusterAddonMode.Upgrade]: [
       <Button
-        onClick={() =>
-          console.log(
-            "Upgrade action for cluster",
-            upgradeStrategy,
-            selectedCluster || clusters[0]
-          )
-        }
         variant="primary"
         key="install"
+        component="a"
+        href={
+          upgradeStrategy === UpgradeStrategy.Create
+            ? CREATE_CLUSTER_HREF
+            : UPGRADE_CLUSTER_HREF.replace(
+                "{subscriptionID}",
+                selectedCluster?.id || ""
+              )
+        }
       >
         {t(
           upgradeStrategy === UpgradeStrategy.Create
@@ -317,11 +323,13 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
         {t("cancelClusterAction")}
       </Button>,
     ],
-    /**
-     * What is the link to Cluster manager create page?
-     */
     [RHodsClusterAddonMode.Create]: [
-      <Button component="a" href="#" variant="primary" key="install">
+      <Button
+        component="a"
+        href={CREATE_CLUSTER_HREF}
+        variant="primary"
+        key="install"
+      >
         {t("createClusterAction")}
       </Button>,
       <Button
@@ -359,7 +367,6 @@ export const DataSciencePage = ({ loadClusters }: DataSciencePageProps) => {
   };
 
   const handleSelectCluster = (cluster: ClusterObject) => {
-    console.log(cluster);
     setSelectedCluster(cluster);
   };
 
