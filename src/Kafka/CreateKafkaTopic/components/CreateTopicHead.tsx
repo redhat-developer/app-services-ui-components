@@ -25,7 +25,7 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
   kafkaPageLink,
   kafkaInstanceLink,
 }) => {
-  const { t } = useTranslation(["kafkaTemporaryFixMe"]);
+  const { t } = useTranslation(["common", "topic"]);
 
   const mainBreadcrumbs = (
     <Breadcrumb ouiaId={"breadcrumb"}>
