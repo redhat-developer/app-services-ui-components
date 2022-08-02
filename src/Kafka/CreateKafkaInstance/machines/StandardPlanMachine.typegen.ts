@@ -2,6 +2,28 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
+  internalEvents: {
+    "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]": {
+      type: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+      data: unknown;
+      __tip: "See the XState TS docs to learn how to strongly type this.";
+    };
+    "xstate.init": { type: "xstate.init" };
+    "": { type: "" };
+    "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]": {
+      type: "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+      data: unknown;
+    };
+  };
+  invokeSrcNameMap: {
+    getSizes: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
+  };
+  missingImplementations: {
+    actions: never;
+    services: "getSizes";
+    guards: never;
+    delays: never;
+  };
   eventsCausingActions: {
     setCreationError: "createError";
     setName: "nameChange";
@@ -22,28 +44,6 @@ export interface Typegen0 {
       | ""
       | "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
     triggerBillingChange: "selectSubscription" | "selectPrepaid";
-  };
-  internalEvents: {
-    "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]": {
-      type: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
-      data: unknown;
-      __tip: "See the XState TS docs to learn how to strongly type this.";
-    };
-    "": { type: "" };
-    "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]": {
-      type: "error.platform.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
-      data: unknown;
-    };
-    "xstate.init": { type: "xstate.init" };
-  };
-  invokeSrcNameMap: {
-    getSizes: "done.invoke.standardPlanMachine.configuring.fields.size.loading:invocation[0]";
-  };
-  missingImplementations: {
-    actions: never;
-    services: "getSizes";
-    guards: never;
-    delays: never;
   };
   eventsCausingServices: {
     getSizes: "";

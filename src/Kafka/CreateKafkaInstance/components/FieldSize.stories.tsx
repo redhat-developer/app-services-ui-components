@@ -89,7 +89,7 @@ export const OverQuota = Template.bind({});
 OverQuota.args = {
   value: 1,
   remainingQuota: 0,
-  validity: "over-quota",
+  validity: "out-of-quota",
 };
 
 export const Mvp = Template.bind({});
@@ -102,7 +102,7 @@ MvpOverQuota.args = {
   value: 2,
   sizes: summitSizes,
   remainingQuota: 1,
-  validity: "over-quota",
+  validity: "out-of-quota",
 };
 
 export const Trial = Template.bind({});

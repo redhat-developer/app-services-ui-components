@@ -12,7 +12,7 @@ import * as stories from "./FormLoad.stories";
 const {
   QuotaAvailableOnFormLoad,
   TrialAvailableOnFormLoad,
-  OverQuotaOnFormLoad,
+  OutOfQuotaOnFormLoad,
   TrialUnavailableOnFormLoad,
   TrialUsedOnFormLoad,
   SomeRegionsDisabledOnFormLoad,
@@ -111,13 +111,13 @@ describe("CreateKafkaInstance", () => {
     expect(comp.getByRole("button", { name: "Multi" })).toBeDisabled();
   });
 
-  it("should show an alert when over quota and a disabled form", async () => {
-    const comp = renderDialog(<OverQuotaOnFormLoad />);
+  it("should show an alert when out of quota and a disabled form", async () => {
+    const comp = renderDialog(<OutOfQuotaOnFormLoad />);
     await waitForI18n(comp);
 
     expect(
-      comp.queryByText("Your organization has no streaming units remaining.")
-    );
+      comp.queryByText("Your organization is out of quota.")
+    ).toBeInTheDocument();
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();

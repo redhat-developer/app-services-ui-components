@@ -23,18 +23,18 @@ export const ModalAlertsStandardPlan: VoidFunctionComponent<
     <AlertGroup>
       {(() => {
         switch (instanceAvailability) {
-          case "over-quota":
+          case "out-of-quota":
             return (
               <Alert
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.warning}
-                title={t("modal_alerts.over_quota_title")}
+                title={t("modal_alerts.out_of_quota_title")}
                 isInline
               >
                 <Trans
                   ns={["create-kafka-instance"]}
-                  i18nKey={t("modal_alerts.over_quota_message")}
+                  i18nKey={t("modal_alerts.out_of_quota_message")}
                   components={[
                     <Button
                       key="btn-contact-us"

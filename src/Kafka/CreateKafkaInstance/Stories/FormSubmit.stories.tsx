@@ -20,7 +20,7 @@ export default {
 export const OverQuotaOnFormSubmit = Template.bind({});
 OverQuotaOnFormSubmit.storyName = "Over Quota - Standard";
 OverQuotaOnFormSubmit.args = {
-  onCreate: (_data, _onSuccess, onError) => onError("over-quota"),
+  onCreate: (_data, _onSuccess, onError) => onError("out-of-quota"),
 };
 OverQuotaOnFormSubmit.play = sampleSubmit;
 
@@ -29,7 +29,7 @@ TrialUnavailableOnFormSubmit.storyName = "Trial Unavailable - Trial";
 TrialUnavailableOnFormSubmit.args = {
   apiPlan: "developer",
   apiTrialScenario: "available",
-  onCreate: (_data, _onSuccess, onError) => onError("trial-unavailable"),
+  onCreate: (_data, _onSuccess, onError) => onError("developer-unavailable"),
 };
 TrialUnavailableOnFormSubmit.play = sampleSubmit;
 

@@ -16,7 +16,7 @@ export type FieldSizeProps = {
   isLoading: boolean;
   isError: boolean;
   isLoadingError: boolean;
-  validity: "valid" | "required" | "over-quota" | "developer" | "disabled";
+  validity: "valid" | "required" | "out-of-quota" | "developer" | "disabled";
   onChange: (size: Size) => void;
   onLearnHowToAddStreamingUnits: () => void;
   onLearnMoreAboutSizes: () => void;
@@ -136,7 +136,7 @@ export const FieldSize: VoidFunctionComponent<FieldSizeProps> = ({
       validated={validation}
       helperText={validity !== "developer" ? helperText : helperTextTrial}
       helperTextInvalid={
-        validity === "over-quota" ? helperTextOverQuota : helperText
+        validity === "out-of-quota" ? helperTextOverQuota : helperText
       }
     >
       <div className="pf-c-input-group pf-u-w-50">

@@ -24,10 +24,10 @@ TrialAvailableOnFormLoad.args = {
   apiTrialScenario: "available",
 };
 
-export const OverQuotaOnFormLoad = Template.bind({});
-OverQuotaOnFormLoad.storyName = "Over Quota - Standard";
-OverQuotaOnFormLoad.args = {
-  apiStandardScenario: "over-quota",
+export const OutOfQuotaOnFormLoad = Template.bind({});
+OutOfQuotaOnFormLoad.storyName = "Out of Quota - Standard";
+OutOfQuotaOnFormLoad.args = {
+  apiStandardScenario: "out-of-quota",
 };
 
 export const TrialUnavailableOnFormLoad = Template.bind({});

@@ -36,18 +36,18 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
               />
             );
 
-          case "over-quota":
+          case "out-of-quota":
             return (
               <Alert
                 role={"alert"}
                 className="pf-u-mb-md"
                 variant={AlertVariant.danger}
-                title={t("form_errors.over_quota_title")}
+                title={t("form_errors.out_of_quota_title")}
                 isInline
               >
                 <Trans
                   ns={["create-kafka-instance"]}
-                  i18nKey={t("form_errors.over_quota_message")}
+                  i18nKey={t("form_errors.out_of_quota_message")}
                   components={[
                     <Button
                       key="btn-contact-us"
@@ -59,7 +59,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
                 />
               </Alert>
             );
-          case "trial-unavailable":
+          case "developer-unavailable":
             return (
               <Alert
                 role={"alert"}

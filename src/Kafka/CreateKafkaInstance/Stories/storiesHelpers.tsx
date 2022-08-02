@@ -191,7 +191,7 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
     providers: string[];
     remainingPrepaidQuota: number | undefined;
     remainingMarketplaceQuota: number | undefined;
-    marketplacesQuota: MarketPlaceSubscriptions[];
+    marketplaceSubscriptions: MarketPlaceSubscriptions[];
   },
   allProviders = PROVIDERS,
   latency = 500
@@ -202,7 +202,7 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
     providers,
     remainingPrepaidQuota,
     remainingMarketplaceQuota,
-    marketplacesQuota,
+    marketplaceSubscriptions,
   } = options;
   const availableProviders = allProviders.filter((p) =>
     providers.includes(p.id)
@@ -217,7 +217,7 @@ export function makeAvailableProvidersAndDefaultsForStandardPlan(
         instanceAvailability,
         remainingPrepaidQuota,
         remainingMarketplaceQuota,
-        marketplacesQuota,
+        marketplaceSubscriptions: marketplaceSubscriptions,
       },
       latency
     );
@@ -269,7 +269,7 @@ export const argTypes = {
     control: "radio",
     options: [
       "available",
-      "over-quota",
+      "out-of-quota",
       "instance-unavailable",
       "regions-unavailable",
       "backend-error",
@@ -571,7 +571,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     };
   }
 
-  const marketplacesQuota: MarketPlaceSubscriptions[] = [
+  const marketplaceSubscriptions: MarketPlaceSubscriptions[] = [
     makeMarketplace("aws", apiMarketplacesAWSSubscriptions),
 
     makeMarketplace("azure", apiMarketplacesAzureSubscriptions),
@@ -603,8 +603,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
           remainingMarketplaceQuota: apiHasMarketplaceSubscriptions
             ? apiRemainingMarketplaceQuota
             : undefined,
-          marketplacesQuota: apiHasMarketplaceSubscriptions
-            ? marketplacesQuota
+          marketplaceSubscriptions: apiHasMarketplaceSubscriptions
+            ? marketplaceSubscriptions
             : [],
         },
         providers,

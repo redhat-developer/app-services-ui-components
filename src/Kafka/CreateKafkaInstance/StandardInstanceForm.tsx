@@ -277,7 +277,7 @@ export const ConnectedFieldSize: VoidFunctionComponent<
       isError={isSizeError}
       isLoadingError={isSizeLoadingError}
       validity={
-        isSizeOverQuota ? "over-quota" : isSizeDisabled ? "required" : "valid"
+        isSizeOverQuota ? "out-of-quota" : isSizeDisabled ? "required" : "valid"
       }
       onChange={setSize}
       onLearnHowToAddStreamingUnits={onLearnHowToAddStreamingUnits}
@@ -319,7 +319,7 @@ export const ConnectedBillingTiles: VoidFunctionComponent<{
     <FieldBillingTiles
       value={selectedBilling}
       hasPrepaid={isBillingPrepaidAvailable}
-      subscriptions={capabilities.marketplacesQuota.flatMap((mq) =>
+      subscriptions={capabilities.marketplaceSubscriptions.flatMap((mq) =>
         mq.subscriptions.map((subscription) => ({
           marketplace: mq.marketplace,
           subscription,
