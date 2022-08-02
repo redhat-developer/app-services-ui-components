@@ -127,11 +127,12 @@ export function useStandardPlanMachine(): SelectorReturn {
 
         const marketplaces = Array.from(
           new Set(
-            capabilities.marketplacesQuota.flatMap<SelectedSubscription>((m) =>
-              m.subscriptions.map((s) => ({
-                marketplace: m.marketplace,
-                subscription: s,
-              }))
+            capabilities.marketplaceSubscriptions.flatMap<SelectedSubscription>(
+              (m) =>
+                m.subscriptions.map((s) => ({
+                  marketplace: m.marketplace,
+                  subscription: s,
+                }))
             )
           )
         );
@@ -154,7 +155,7 @@ export function useStandardPlanMachine(): SelectorReturn {
           ? undefined
           : sizes?.find((s) => form.size?.id === s.id);
 
-        const billingType = capabilities.marketplacesQuota.some(
+        const billingType = capabilities.marketplaceSubscriptions.some(
           (m) => m.marketplace !== "rh"
         )
           ? "external-marketplaces"

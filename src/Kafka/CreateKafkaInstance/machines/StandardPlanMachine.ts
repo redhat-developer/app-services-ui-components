@@ -576,7 +576,6 @@ export const StandardPlanMachine =
           creationError: undefined,
         })),
         setCreationError: assign((_context, { error }) => {
-          console.log("wtf", error);
           return {
             creationError: error,
           };
@@ -618,7 +617,7 @@ export const StandardPlanMachine =
       guards: {
         isOverQuota: ({ capabilities }) =>
           capabilities === undefined ||
-          capabilities.instanceAvailability === "over-quota",
+          capabilities.instanceAvailability === "out-of-quota",
         isInstanceUnavailable: ({ capabilities }) =>
           capabilities === undefined ||
           capabilities.instanceAvailability === "instance-unavailable",
@@ -682,14 +681,15 @@ export const StandardPlanMachine =
         didSizeChange: (context, event) =>
           context.form.size?.id !== event.size.id,
         onlyPrepaid: (context) =>
-          context.capabilities.marketplacesQuota.length === 0,
+          context.capabilities.marketplaceSubscriptions.length === 0,
         singleSubscription: (context) =>
           context.capabilities.remainingPrepaidQuota === undefined &&
-          context.capabilities.marketplacesQuota.flatMap((m) => m.subscriptions)
-            .length === 1,
+          context.capabilities.marketplaceSubscriptions.flatMap(
+            (m) => m.subscriptions
+          ).length === 1,
         onlySubscriptions: (context) =>
           context.capabilities.remainingPrepaidQuota === undefined &&
-          context.capabilities.marketplacesQuota.length > 0,
+          context.capabilities.marketplaceSubscriptions.length > 0,
         matchesSelectedProviderOrRHMarketplaceAndHasQuota: (
           { form, capabilities },
           { subscription }

@@ -80,7 +80,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
             {isPrepaidOverQuota && prepaidQuota > 0 && (
               <HelperText className={"pf-c-form__helper-text"}>
                 <HelperTextItem variant={"error"}>
-                  {t("billing.prepaid_over_quota")}
+                  {t("billing.prepaid_out_of_quota")}
                 </HelperTextItem>
               </HelperText>
             )}
@@ -127,7 +127,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
             {isMarketplaceOverQuota && marketplaceQuota > 0 && (
               <HelperText className={"pf-c-form__helper-text"}>
                 <HelperTextItem variant={"error"}>
-                  {t("billing.marketplace_over_quota")}
+                  {t("billing.marketplace_out_of_quota")}
                 </HelperTextItem>
               </HelperText>
             )}

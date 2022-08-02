@@ -42,15 +42,15 @@ export type Size = {
 };
 
 export type CreateKafkaInstanceError =
-  | "over-quota"
+  | "out-of-quota"
   | "name-taken"
-  | "trial-unavailable"
+  | "developer-unavailable"
   | "region-unavailable"
   | "unknown";
 
 export type StandardPlanAvailability =
   | "available"
-  | "over-quota"
+  | "out-of-quota"
   | "instance-unavailable"
   | "regions-unavailable";
 
@@ -62,7 +62,7 @@ export type StandardPlanInitializationData = {
   instanceAvailability: StandardPlanAvailability;
   remainingPrepaidQuota: Quota | undefined;
   remainingMarketplaceQuota: Quota | undefined;
-  marketplacesQuota: MarketPlaceSubscriptions[];
+  marketplaceSubscriptions: MarketPlaceSubscriptions[];
   plan: "standard";
 };
 
