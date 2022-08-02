@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_rhoas_app_services_ui_components=self.webpackChunk_rhoas_app_services_ui_components||[]).push([[6663],{"./locales/en/topic.json":module=>{module.exports=JSON.parse('{"create_topic":"Create topic","show_all_options":"Show all available options"}')}}]);
