@@ -1,47 +1,41 @@
 import {
-  Alert,
-  AlertActionCloseButton,
-  AlertGroup,
-  AlertVariant,
   Button,
   Card,
   CardBody,
   Flex,
   FlexItem,
-  Level,
-  LevelItem,
   Modal,
   ModalVariant,
   Page,
   PageSection,
   Spinner,
   Switch,
-  Title,
 } from "@patternfly/react-core";
-import type { AlertProps } from "@rhoas/app-services-ui-shared";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { SettingsAlert } from "./components/SettingsAlert";
+import { SettingsStatus } from "./types";
 
 export type SettingsProps = {
-  showAlert: AlertProps[];
-  isChecked: boolean;
+  connectionStatus: SettingsStatus;
+  onSwitchClick: () => void;
   isModalOpen: boolean;
-  onChange: () => void;
-  onDisable: () => void;
-  onClose: () => void;
-  closeAlertAction: (key: string | undefined) => void;
-  isLoading: boolean;
+  onClickTurnOff: () => void;
+  isLoading: "success" | "failure" | undefined;
+  AlertStatus: boolean;
+  onClickClose: () => void;
+  onClickCloseAction: () => void;
 };
 
 export const Settings: FunctionComponent<SettingsProps> = ({
-  showAlert,
-  isChecked,
-  onChange,
+  connectionStatus,
+  onSwitchClick,
   isModalOpen,
-  onDisable,
-  onClose,
-  closeAlertAction,
+  onClickTurnOff,
   isLoading,
+  AlertStatus,
+  onClickClose,
+  onClickCloseAction,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -53,96 +47,109 @@ export const Settings: FunctionComponent<SettingsProps> = ({
         </Card>
       </PageSection>
       <Page>
-        <PageSection isWidthLimited isCenterAligned>
+        <PageSection>
           <Card>
             <CardBody>
-              <Level>
-                <LevelItem>
-                  <Flex>
-                    <FlexItem spacer={{ default: "spacerNone" }}>
-                      <Title headingLevel={"h3"}>
-                        {t("settings.connection_re_authentication_label")}
-                      </Title>
-                    </FlexItem>
-                    <FlexItem>
-                      {isChecked ? (
-                        "On"
-                      ) : isLoading ? (
-                        <>
-                          <Spinner
-                            size="md"
-                            aria-valuetext={"Turning off..."}
-                            aria-label={"Turning off..."}
-                          />{" "}
-                          {"Turning off..."}
-                        </>
-                      ) : (
-                        "Off"
-                      )}
-                    </FlexItem>
-                  </Flex>
-                </LevelItem>
-                <LevelItem>
+              <Flex>
+                <FlexItem component={"span"} spacer={{ default: "spacerSm" }}>
+                  <strong>
+                    {t("settings.connection_re_authentication_title")}
+                  </strong>
+                </FlexItem>
+                <FlexItem>
+                  {(() => {
+                    switch (connectionStatus) {
+                      case "On":
+                        return t(
+                          "settings.Connection_re_authentication_states.turnon"
+                        );
+                      case "TurningOff":
+                        return (
+                          <>
+                            <Spinner
+                              size="md"
+                              aria-valuetext={t(
+                                "settings.Connection_re_authentication_states.turning_off"
+                              )}
+                              aria-label={t(
+                                "settings.connection_re_authentication_label"
+                              )}
+                            />{" "}
+                            {t(
+                              "settings.Connection_re_authentication_states.turning_off"
+                            )}
+                          </>
+                        );
+                      case "Off":
+                        return t(
+                          "settings.Connection_re_authentication_states.turnoff"
+                        );
+                      case "TurningOn":
+                        return (
+                          <>
+                            <Spinner
+                              size="md"
+                              aria-valuetext={
+                                "settings.Connection_re_authentication_states.turning_on"
+                              }
+                              aria-label={t(
+                                "settings.connection_re_authentication_label"
+                              )}
+                            />{" "}
+                            {t(
+                              "settings.Connection_re_authentication_states.turning_on"
+                            )}
+                          </>
+                        );
+                      default:
+                        return null;
+                    }
+                  })()}
+                </FlexItem>
+                <FlexItem component={"span"} align={{ default: "alignRight" }}>
                   <Switch
                     id="Connection-re-authentication-switch"
-                    isChecked={isChecked}
-                    onChange={onChange}
+                    aria-label={t(
+                      "settings.connection_re_authentication_switch"
+                    )}
+                    isChecked={connectionStatus === "On"}
+                    onChange={onSwitchClick}
                   />
-                  <Modal
-                    variant={ModalVariant.small}
-                    onClose={onClose}
-                    isOpen={isModalOpen}
-                    title={t("settings.warning_title")}
-                    titleIconVariant={"warning"}
-                    actions={[
-                      <Button
-                        key={"confirm"}
-                        variant="primary"
-                        onClick={onDisable}
-                      >
-                        {t("settings.disable")}
-                      </Button>,
-                      <Button key={"cancel"} variant="link" onClick={onClose}>
-                        {t("common:cancel")}
-                      </Button>,
-                    ]}
-                  >
-                    {t("settings.warning_description")}
-                  </Modal>
-                </LevelItem>
-              </Level>
+                </FlexItem>
+                <Modal
+                  variant={ModalVariant.small}
+                  isOpen={isModalOpen}
+                  title={t("settings.warning_title")}
+                  titleIconVariant={"warning"}
+                  actions={[
+                    <Button
+                      key={"confirm"}
+                      variant="primary"
+                      onClick={onClickTurnOff}
+                    >
+                      {t("settings.turn_off_button_label")}
+                    </Button>,
+                    <Button
+                      key={"cancel"}
+                      variant="link"
+                      onClick={onClickClose}
+                    >
+                      {t("common:cancel")}
+                    </Button>,
+                  ]}
+                >
+                  {t("settings.warning_description")}
+                </Modal>
+              </Flex>
             </CardBody>
           </Card>
         </PageSection>
       </Page>
-      <AlertGroup isToast>
-        {showAlert.map(({ title, variant, description, id }) => (
-          <Alert
-            title={title}
-            variant={AlertVariant[variant]}
-            actionClose={
-              <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
-            }
-            timeout={8000}
-          >
-            {description}
-          </Alert>
-        ))}
-      </AlertGroup>
-      <AlertGroup isToast>
-        {showAlert.map(({ title, variant, description, id }) => (
-          <Alert
-            title={title}
-            variant={AlertVariant[variant]}
-            actionClose={
-              <AlertActionCloseButton onClose={() => closeAlertAction(id)} />
-            }
-            timeout={8000}
-          >
-            {description}
-          </Alert>
-        ))}
-      </AlertGroup>
+      <SettingsAlert
+        isLoading={isLoading}
+        isClicked={AlertStatus}
+        closeAction={onClickCloseAction}
+      />
     </>
   );
 };
