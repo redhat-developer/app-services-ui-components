@@ -27,8 +27,11 @@ describe("ResponsiveTable", () => {
     expect(comp.queryAllByLabelText("Actions")).toHaveLength(
       sampleData.length - 1 /* deleted lines don't have actions */
     );
-
+    const actions = comp.queryAllByTestId("kebab-options");
+    userEvent.click(actions[0]);
+    expect(clickSpy).not.toHaveBeenCalled();
     userEvent.click(comp.getByText(sampleData[0][0]));
+
     expect(clickSpy).toHaveBeenNthCalledWith(1, {
       row: sampleData[0],
       rowIndex: 0,

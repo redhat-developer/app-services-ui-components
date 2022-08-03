@@ -205,6 +205,7 @@ export const ResponsiveTable = <TRow, TCol>({
               canHide={false}
               isActionCell={true}
               onClick={(event) => event.stopPropagation()}
+              data-testid={"kebab-options"}
             >
               {renderActions({ rowIndex, row, ActionsColumn })}
             </ResponsiveTd>
