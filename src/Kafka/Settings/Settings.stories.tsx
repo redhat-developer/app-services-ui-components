@@ -1,41 +1,56 @@
-import type { AlertProps } from "@rhoas/app-services-ui-shared";
-import { AlertVariant } from "@rhoas/app-services-ui-shared";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { Settings } from "./Settings";
 import { fakeApi } from "../../shared/storiesHelpers";
+import { SettingsStatus } from "./types";
 
 export default {
   component: Settings,
-  args: {},
+  args: {
+    ConnectionStatus: "On",
+  },
+  parameters: {
+    backgrounds: {
+      default: "Background color 100",
+    },
+  },
 } as ComponentMeta<typeof Settings>;
 
 const Template: ComponentStory<typeof Settings> = () => {
-  const [isChecked, setIschecked] = useState<boolean>(true);
+  const [connectionStatus, setConnectionStatus] =
+    useState<SettingsStatus>("On");
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [showAlert, setShowAlert] = useState<AlertProps[]>([]);
+  const [isLoading, setIsLoading] = useState<"success" | "failure" | undefined>(
+    undefined
+  );
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [AlertStatus, setAlertStatus] = useState<boolean>(false);
 
-  const onChange = () => {
-    setIsModalOpen(true);
+  const onSwitchClick = () => {
+    if (connectionStatus === "On") {
+      setIsModalOpen(true);
+    } else {
+      setConnectionStatus("TurningOn");
+      fakeApi<{ ConfigurationOff: boolean }>(
+        {
+          ConfigurationOff: false,
+        },
+        2000
+      )
+        .then(() => {
+          setConnectionStatus("On");
+          setAlertStatus(true);
+          setIsLoading("success");
+        })
+        .catch(() => {});
+    }
   };
 
-  const addAlert = (
-    title: string,
-    variant: AlertProps["variant"],
-    description: string,
-    id: string | undefined
-  ) => {
-    setShowAlert([...showAlert, { title, variant, description, id }]);
-  };
-
-  const onDisable = () => {
+  const onClickTurnOff = () => {
     setIsModalOpen(false);
-    setIschecked(false);
-    setIsLoading(true);
+    setConnectionStatus("TurningOff");
     fakeApi<{ ConfigurationOff: boolean }>(
       {
         ConfigurationOff: false,
@@ -43,42 +58,29 @@ const Template: ComponentStory<typeof Settings> = () => {
       2000
     )
       .then(() => {
-        addAlert(
-          "Connection re-authentication is turrning off",
-          AlertVariant.success,
-          "Broker is restarting to apply the new configurations. This process might take several minutes",
-          "success-alert"
-        ),
-          setIsLoading(false);
+        setConnectionStatus("Off");
+        setAlertStatus(false);
+        setIsLoading("success");
       })
-      .catch(() =>
-        addAlert(
-          "Something went wrong",
-          AlertVariant.danger,
-          "We're unable to update connection re-authentication at this time, Try again later.",
-          "danger-alert"
-        )
-      );
+      .catch(() => {});
   };
 
-  const onClose = () => {
+  const onClickClose = () => {
     setIsModalOpen(false);
   };
 
-  const closeAlertAction = (id: string | undefined) => {
-    setShowAlert([...showAlert.filter((alert) => alert.id !== id)]);
-  };
+  const onClickCloseAction = () => {};
 
   return (
     <Settings
-      isChecked={isChecked}
+      connectionStatus={connectionStatus}
+      onSwitchClick={onSwitchClick}
       isModalOpen={isModalOpen}
-      onChange={onChange}
-      onDisable={onDisable}
-      onClose={onClose}
-      showAlert={showAlert}
-      closeAlertAction={closeAlertAction}
+      onClickTurnOff={onClickTurnOff}
       isLoading={isLoading}
+      AlertStatus={AlertStatus}
+      onClickClose={onClickClose}
+      onClickCloseAction={onClickCloseAction}
     />
   );
 };
