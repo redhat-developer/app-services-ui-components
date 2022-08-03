@@ -204,6 +204,7 @@ export const ResponsiveTable = <TRow, TCol>({
               columnWidth={minimumColumnWidth}
               canHide={false}
               isActionCell={true}
+              onClick={(event) => event.stopPropagation()}
             >
               {renderActions({ rowIndex, row, ActionsColumn })}
             </ResponsiveTd>
