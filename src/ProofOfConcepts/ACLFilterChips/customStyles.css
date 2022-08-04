@@ -57,6 +57,7 @@
 .pf-c-chip-group__close {
   display: flex;
   align-self: center;
+  align-content: center;
 }
 
 .pf-c-chip.custom-c-chip {
@@ -72,10 +73,26 @@
 
 .pf-c-chip.custom-c-chip {
   --pf-c-chip__text--MaxWidth: auto;
+  display: table-row;
+}
+
+.pf-c-chip-group.pf-m-category {
+  padding-top: var(--pf-c-chip-group--m-category--PaddingTop);
+  padding-right: var(--pf-c-chip-group--m-category--PaddingRight);
+  padding-bottom: var(--pf-c-chip-group--m-category--PaddingBottom);
+  padding-left: var(--pf-c-chip-group--m-category--PaddingLeft);
+}
+.pf-c-chip-group.size {
+  --pf-c-chip-group--m-category--PaddingTop: 8px;
+  --pf-c-chip-group--m-category--PaddingBottom: 8px;
 }
 
 .pf-c-chip-group.bar {
   --pf-c-chip-group--m-category--BackgroundColor: darkgray;
+}
+
+.pf-c-chip.layout {
+  display: list-item;
 }
 
 .pf-m-overflow:not(.pf-c-chip__text *) {
