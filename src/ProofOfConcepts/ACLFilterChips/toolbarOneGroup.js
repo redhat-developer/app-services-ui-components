@@ -18,7 +18,7 @@ import {
 } from "@patternfly/react-core";
 
 import { CheckIcon, FilterIcon } from "@patternfly/react-icons";
-import CheckboxTreeView from "./treeviewDropdown";
+import CheckboxTreeView from "./treeviewDropdownOneGroup";
 import BulkSelector from "./bulkSelectButton";
 
 class ToolbarWithFilterExample extends React.Component {

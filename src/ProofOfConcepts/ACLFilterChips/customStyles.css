@@ -72,6 +72,12 @@
 
 .pf-c-chip.custom-c-chip {
   --pf-c-chip__text--MaxWidth: auto;
+  display: table-row;
+}
+
+.pf-c-chip-group.size {
+  --pf-c-chip-group--m-category--PaddingTop: 8px;
+  --pf-c-chip-group--m-category--PaddingBottom: 8px;
 }
 
 .pf-c-chip-group.bar {
