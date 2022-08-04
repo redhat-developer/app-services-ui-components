@@ -4,26 +4,26 @@ import {
   AlertGroup,
   AlertVariant,
 } from "@patternfly/react-core";
-import { VoidFunctionComponent } from "react";
+import type { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 
 export type SettingsAlertProps = {
-  isLoading: "success" | "failure" | undefined;
-  isClicked: boolean;
+  alertStatus: "success" | "failure" | undefined;
   closeAction: () => void;
+  connectionState: boolean;
 };
 
 export const SettingsAlert: VoidFunctionComponent<SettingsAlertProps> = ({
-  isLoading,
+  alertStatus,
   closeAction,
-  isClicked,
+  connectionState,
 }) => {
   const { t } = useTranslation("kafka");
 
   return (
     <AlertGroup isToast>
       {(() => {
-        switch (isLoading) {
+        switch (alertStatus) {
           case "success":
             return (
               <Alert
@@ -33,7 +33,7 @@ export const SettingsAlert: VoidFunctionComponent<SettingsAlertProps> = ({
                     ns={"kafka"}
                     i18nKey={"settings.success_alert"}
                     values={{
-                      status: isClicked ? "On" : "Off",
+                      status: connectionState ? "On" : "Off",
                     }}
                   />
                 }

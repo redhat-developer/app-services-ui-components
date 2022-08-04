@@ -1,14 +1,11 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { Settings } from "./Settings";
-import { fakeApi } from "../../shared/storiesHelpers";
-import { SettingsStatus } from "./types";
+import { apiError, fakeApi } from "../../shared/storiesHelpers";
+import type { SettingsStatus } from "./types";
 
 export default {
   component: Settings,
-  args: {
-    ConnectionStatus: "On",
-  },
   parameters: {
     backgrounds: {
       default: "Background color 100",
@@ -22,29 +19,32 @@ const Template: ComponentStory<typeof Settings> = () => {
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [isLoading, setIsLoading] = useState<"success" | "failure" | undefined>(
-    undefined
-  );
+  const [alertStatus, setAlertStatus] = useState<
+    "success" | "failure" | undefined
+  >(undefined);
 
-  const [AlertStatus, setAlertStatus] = useState<boolean>(false);
+  const [connectionState, setConnectionState] = useState<boolean>(false);
 
   const onSwitchClick = () => {
     if (connectionStatus === "On") {
       setIsModalOpen(true);
     } else {
       setConnectionStatus("TurningOn");
-      fakeApi<{ ConfigurationOff: boolean }>(
+      apiError<{ ConfigurationOff: boolean }>(
         {
-          ConfigurationOff: false,
+          ConfigurationOff: undefined,
         },
-        2000
+        4000
       )
         .then(() => {
           setConnectionStatus("On");
-          setAlertStatus(true);
-          setIsLoading("success");
+          setConnectionState(true);
+          setAlertStatus("success");
         })
-        .catch(() => {});
+        .catch(() => {
+          setConnectionStatus("Off");
+          setAlertStatus("failure");
+        });
     }
   };
 
@@ -55,21 +55,26 @@ const Template: ComponentStory<typeof Settings> = () => {
       {
         ConfigurationOff: false,
       },
-      2000
+      4000
     )
       .then(() => {
         setConnectionStatus("Off");
-        setAlertStatus(false);
-        setIsLoading("success");
+        setConnectionState(false);
+        setAlertStatus("success");
       })
-      .catch(() => {});
+      .catch(() => {
+        setConnectionStatus("On");
+        setAlertStatus("failure");
+      });
   };
 
   const onClickClose = () => {
     setIsModalOpen(false);
   };
 
-  const onClickCloseAction = () => {};
+  const onClickCloseAction = () => {
+    console.log("closeAlert");
+  };
 
   return (
     <Settings
@@ -77,10 +82,10 @@ const Template: ComponentStory<typeof Settings> = () => {
       onSwitchClick={onSwitchClick}
       isModalOpen={isModalOpen}
       onClickTurnOff={onClickTurnOff}
-      isLoading={isLoading}
-      AlertStatus={AlertStatus}
       onClickClose={onClickClose}
       onClickCloseAction={onClickCloseAction}
+      alertStatus={alertStatus}
+      connectionState={connectionState}
     />
   );
 };

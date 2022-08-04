@@ -3,7 +3,10 @@ import { SettingsAlert } from "./SettingsAlert";
 
 export default {
   component: SettingsAlert,
-  args: {},
+  args: {
+    alertStatus: "success",
+    connectionState: true,
+  },
   parameters: {
     backgrounds: {
       default: "Background color 100",
@@ -15,4 +18,9 @@ const Template: ComponentStory<typeof SettingsAlert> = (args) => (
   <SettingsAlert {...args} />
 );
 
-export const Alert = Template.bind({});
+export const SuccessAlert = Template.bind({});
+
+export const FailureAlert = Template.bind({});
+FailureAlert.args = {
+  alertStatus: "failure",
+};

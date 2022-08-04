@@ -14,15 +14,15 @@ import {
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { SettingsAlert } from "./components/SettingsAlert";
-import { SettingsStatus } from "./types";
+import type { SettingsStatus } from "./types";
 
 export type SettingsProps = {
   connectionStatus: SettingsStatus;
   onSwitchClick: () => void;
   isModalOpen: boolean;
   onClickTurnOff: () => void;
-  isLoading: "success" | "failure" | undefined;
-  AlertStatus: boolean;
+  alertStatus: "success" | "failure" | undefined;
+  connectionState: boolean;
   onClickClose: () => void;
   onClickCloseAction: () => void;
 };
@@ -32,10 +32,10 @@ export const Settings: FunctionComponent<SettingsProps> = ({
   onSwitchClick,
   isModalOpen,
   onClickTurnOff,
-  isLoading,
-  AlertStatus,
+  alertStatus,
   onClickClose,
   onClickCloseAction,
+  connectionState,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -146,9 +146,9 @@ export const Settings: FunctionComponent<SettingsProps> = ({
         </PageSection>
       </Page>
       <SettingsAlert
-        isLoading={isLoading}
-        isClicked={AlertStatus}
+        alertStatus={alertStatus}
         closeAction={onClickCloseAction}
+        connectionState={connectionState}
       />
     </>
   );
