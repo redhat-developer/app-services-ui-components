@@ -81,8 +81,8 @@ export const TrialInstanceForm: VoidFunctionComponent<
             />
           ) : (
             <InstanceInfo
-              isTrial={false}
-              trialDurationInHours={undefined}
+              isTrial={true}
+              trialDurationInHours={sizes.trial.trialDurationHours}
               ingress={sizes.trial.ingress}
               egress={sizes.trial.egress}
               storage={sizes.trial.storage}

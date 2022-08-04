@@ -17,7 +17,7 @@ import { LoadingForm } from "./LoadingForm";
 import { useCreateKafkaInstance } from "./machines";
 import { StandardInstanceForm } from "./StandardInstanceForm";
 import { TrialInstanceForm } from "./TrialInstanceForm";
-import type { CreateKafkaInstanceServices } from "./types";
+import type { CreateKafkaInstanceServices } from "./machines";
 import { ModalAlertsLoading, ModalAlertsSystemUnavailable } from "./components";
 
 export type CreateKafkaInstanceProps = ConnectedCreateKafkaInstanceProps &
@@ -25,7 +25,9 @@ export type CreateKafkaInstanceProps = ConnectedCreateKafkaInstanceProps &
 export const CreateKafkaInstance: FunctionComponent<
   CreateKafkaInstanceProps
 > = ({
-  getAvailableProvidersAndDefaults,
+  checkStandardQuota,
+  checkDeveloperAvailability,
+  fetchProvidersWithRegions,
   getStandardSizes,
   getTrialSizes,
   onCreate,
@@ -33,7 +35,9 @@ export const CreateKafkaInstance: FunctionComponent<
 }) =>
   props.isModalOpen ? (
     <CreateKafkaInstanceProvider
-      getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+      checkStandardQuota={checkStandardQuota}
+      checkDeveloperAvailability={checkDeveloperAvailability}
+      fetchProvidersWithRegions={fetchProvidersWithRegions}
       getStandardSizes={getStandardSizes}
       getTrialSizes={getTrialSizes}
       onCreate={onCreate}

@@ -1,4 +1,5 @@
 import type { SelectProps } from "@patternfly/react-core";
+import { Gallery, GalleryItem } from "@patternfly/react-core";
 import { HelperText, HelperTextItem } from "@patternfly/react-core";
 import {
   Flex,
@@ -106,24 +107,25 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
                 </span>
               </span>
             )}
-            {subscriptions.map(({ marketplace, subscription, isDisabled }) => (
-              <FlexItem
-                key={`tile-${subscription}`}
-                flex={{ default: "flex_1" }}
-              >
-                <Tile
-                  className={"pf-u-w-100"}
-                  title={marketplaces[marketplace]}
-                  icon={tiles[marketplace]}
-                  isStacked={true}
-                  isSelected={value === subscription}
-                  isDisabled={isDisabled || isMarketplaceOverQuota}
-                  onClick={() => onSubscription(marketplace, subscription)}
-                >
-                  {subscription}
-                </Tile>
-              </FlexItem>
-            ))}
+            <Gallery hasGutter={true}>
+              {subscriptions.map(
+                ({ marketplace, subscription, isDisabled }) => (
+                  <GalleryItem key={`tile-${subscription}`}>
+                    <Tile
+                      className={"pf-u-w-100"}
+                      title={marketplaces[marketplace]}
+                      icon={tiles[marketplace]}
+                      isStacked={true}
+                      isSelected={value === subscription}
+                      isDisabled={isDisabled || isMarketplaceOverQuota}
+                      onClick={() => onSubscription(marketplace, subscription)}
+                    >
+                      {subscription}
+                    </Tile>
+                  </GalleryItem>
+                )
+              )}
+            </Gallery>
             {isMarketplaceOverQuota && marketplaceQuota > 0 && (
               <HelperText className={"pf-c-form__helper-text"}>
                 <HelperTextItem variant={"error"}>

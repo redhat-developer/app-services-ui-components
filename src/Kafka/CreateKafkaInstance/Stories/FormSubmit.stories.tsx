@@ -20,7 +20,7 @@ export default {
 export const OverQuotaOnFormSubmit = Template.bind({});
 OverQuotaOnFormSubmit.storyName = "Over Quota - Standard";
 OverQuotaOnFormSubmit.args = {
-  onCreate: (_data, _onSuccess, onError) => onError("out-of-quota"),
+  onCreate: (_data, _onSuccess, onError) => onError("insufficient-quota"),
 };
 OverQuotaOnFormSubmit.play = sampleSubmit;
 

@@ -42,7 +42,7 @@ export type Size = {
 };
 
 export type CreateKafkaInstanceError =
-  | "out-of-quota"
+  | "insufficient-quota"
   | "name-taken"
   | "developer-unavailable"
   | "region-unavailable"
@@ -93,21 +93,4 @@ export type CreateKafkaFormData = {
   region: Region;
   sizeId: string;
   billing: SelectedSubscription | "prepaid" | undefined;
-};
-
-export type CreateKafkaInstanceServices = {
-  getAvailableProvidersAndDefaults: () => Promise<CreateKafkaInitializationData>;
-  getStandardSizes: (
-    provider: CloudProvider,
-    region: Region
-  ) => Promise<StandardSizes>;
-  getTrialSizes: (
-    provider: CloudProvider,
-    region: Region
-  ) => Promise<TrialSizes>;
-  onCreate: (
-    data: CreateKafkaFormData,
-    onSuccess: () => void,
-    onError: (error: CreateKafkaInstanceError) => void
-  ) => void;
 };

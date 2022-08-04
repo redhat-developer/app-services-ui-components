@@ -2,81 +2,131 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    setAvailableProvidersAndDefault: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    notifyCreateErrorToStandardPlan: "createError";
-    notifyCreateErrorToTrialPlan: "createError";
-  };
   internalEvents: {
-    "done.invoke.createKafkaInstance.loading:invocation[0]": {
-      type: "done.invoke.createKafkaInstance.loading:invocation[0]";
-      data: unknown;
-      __tip: "See the XState TS docs to learn how to strongly type this.";
-    };
-    "xstate.init": { type: "xstate.init" };
+    "": { type: "" };
     "done.invoke.standardPlanService": {
       type: "done.invoke.standardPlanService";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
-    };
-    "error.platform.standardPlanService": {
-      type: "error.platform.standardPlanService";
-      data: unknown;
     };
     "done.invoke.trialPlanService": {
       type: "done.invoke.trialPlanService";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
+    "error.platform.createKafkaInstance.loading.fetching providers:invocation[0]": {
+      type: "error.platform.createKafkaInstance.loading.fetching providers:invocation[0]";
+      data: unknown;
+    };
+    "error.platform.createKafkaInstance.loading.quota.checking developer availability:invocation[0]": {
+      type: "error.platform.createKafkaInstance.loading.quota.checking developer availability:invocation[0]";
+      data: unknown;
+    };
+    "error.platform.createKafkaInstance.loading.quota.checking standard quota:invocation[0]": {
+      type: "error.platform.createKafkaInstance.loading.quota.checking standard quota:invocation[0]";
+      data: unknown;
+    };
+    "error.platform.standardPlanService": {
+      type: "error.platform.standardPlanService";
+      data: unknown;
+    };
     "error.platform.trialPlanService": {
       type: "error.platform.trialPlanService";
       data: unknown;
     };
+    "xstate.init": { type: "xstate.init" };
   };
   invokeSrcNameMap: {
-    getAvailableProvidersAndDefaults: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    standardPlan: "done.invoke.standardPlanService";
+    checkDeveloperAvailability: "done.invoke.createKafkaInstance.loading.quota.checking developer availability:invocation[0]";
+    checkStandardQuota: "done.invoke.createKafkaInstance.loading.quota.checking standard quota:invocation[0]";
     createInstance:
-      | "done.invoke.createKafkaInstance.standardPlan.saving:invocation[0]"
-      | "done.invoke.createKafkaInstance.trialPlan.saving:invocation[0]";
+      | "done.invoke.createKafkaInstance.standard plan.saving:invocation[0]"
+      | "done.invoke.createKafkaInstance.developer plan.saving:invocation[0]";
+    fetchProvidersWithRegions: "done.invoke.createKafkaInstance.loading.fetching providers:invocation[0]";
+    standardPlan: "done.invoke.standardPlanService";
     trialPlan: "done.invoke.trialPlanService";
   };
   missingImplementations: {
     actions: never;
     services:
-      | "getAvailableProvidersAndDefaults"
+      | "checkStandardQuota"
+      | "checkDeveloperAvailability"
+      | "fetchProvidersWithRegions"
       | "standardPlan"
-      | "trialPlan"
-      | "createInstance";
+      | "createInstance"
+      | "trialPlan";
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    notifyCreateErrorToStandardPlan: "createError";
+    notifyCreateErrorToTrialPlan: "createError";
+    setCapabilities:
+      | "error.platform.createKafkaInstance.loading.fetching providers:invocation[0]"
+      | "providers and regions available"
+      | "providers or regions unavailable";
+    setDeveloperAvailable: "developer available";
+    setDeveloperUnavailable:
+      | "developer unavailable"
+      | "error.platform.createKafkaInstance.loading.quota.checking developer availability:invocation[0]";
+    setDeveloperUsed: "developer used";
+    setProviders: "providers and regions available";
+    setProvidersOrRegionsUnavailable:
+      | "error.platform.createKafkaInstance.loading.fetching providers:invocation[0]"
+      | "providers or regions unavailable";
+    setStandardAvailable: "standard quota available";
+    setStandardOutOfQuota: "out of standard quota";
+    setStandardUnavailable: "error.platform.createKafkaInstance.loading.quota.checking standard quota:invocation[0]";
+  };
   eventsCausingServices: {
-    getAvailableProvidersAndDefaults: "xstate.init";
-    standardPlan: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    trialPlan: "done.invoke.createKafkaInstance.loading:invocation[0]";
+    checkDeveloperAvailability: "no standard quota available";
+    checkStandardQuota: "xstate.init";
     createInstance: "save";
+    fetchProvidersWithRegions: "";
+    standardPlan: "done.state.createKafkaInstance.loading";
+    trialPlan: "done.state.createKafkaInstance.loading";
   };
   eventsCausingGuards: {
-    canCreateStandardInstances: "done.invoke.createKafkaInstance.loading:invocation[0]";
-    canCreateTrialInstances: "done.invoke.createKafkaInstance.loading:invocation[0]";
+    "developer plan": "done.state.createKafkaInstance.loading";
+    "standard plan": "done.state.createKafkaInstance.loading";
   };
   eventsCausingDelays: {};
   matchesStates:
-    | "loading"
-    | "systemUnavailable"
-    | "standardPlan"
-    | "standardPlan.idle"
-    | "standardPlan.saving"
-    | "trialPlan"
-    | "trialPlan.idle"
-    | "trialPlan.saving"
     | "complete"
-    | { standardPlan?: "idle" | "saving"; trialPlan?: "idle" | "saving" };
+    | "developer plan"
+    | "developer plan.idle"
+    | "developer plan.saving"
+    | "loading"
+    | "loading.fetching providers"
+    | "loading.quota"
+    | "loading.quota.checking developer availability"
+    | "loading.quota.checking standard quota"
+    | "loading.quota.developer"
+    | "loading.quota.standard"
+    | "loading.ready"
+    | "standard plan"
+    | "standard plan.idle"
+    | "standard plan.saving"
+    | "system unavailable"
+    | {
+        "developer plan"?: "idle" | "saving";
+        loading?:
+          | "fetching providers"
+          | "quota"
+          | "ready"
+          | {
+              quota?:
+                | "checking developer availability"
+                | "checking standard quota"
+                | "developer"
+                | "standard";
+            };
+        "standard plan"?: "idle" | "saving";
+      };
   tags:
     | "loading"
-    | "systemUnavailable"
-    | "standardPlan"
     | "saving"
+    | "standardPlan"
+    | "systemUnavailable"
     | "trialPlan";
 }

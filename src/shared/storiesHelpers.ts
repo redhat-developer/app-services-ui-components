@@ -1,11 +1,18 @@
+export const log: typeof console.log = (...args) => {
+  // don't log under Jest
+  if (process.env.JEST_WORKER_ID) return;
+  console.log(...args);
+};
+
 export function fakeApi<T>(response: T, waitLengthMs = 500): Promise<T> {
-  console.log("%cfakeApi", "color: green", { response, waitLengthMs });
+  log("%cfakeApi", "color: green", { response, waitLengthMs });
   return new Promise((resolve) => {
     const timeout = setTimeout(() => {
-      console.log("%cfakeApi: resolve", "color: green", {
-        response,
-        waitLengthMs,
-      });
+      process.env.JEST_WORKER_ID !== undefined &&
+        log("%cfakeApi: resolve", "color: green", {
+          response,
+          waitLengthMs,
+        });
       resolve(response);
     }, waitLengthMs);
     return () => clearTimeout(timeout);
@@ -13,10 +20,11 @@ export function fakeApi<T>(response: T, waitLengthMs = 500): Promise<T> {
 }
 
 export function apiError<T>(response?: T, waitLengthMs = 500): Promise<T> {
-  console.log("%capiError", "color: green", { response, waitLengthMs });
+  process.env.JEST_WORKER_ID !== undefined &&
+    log("%capiError", "color: green", { response, waitLengthMs });
   return new Promise((_, reject) => {
     const timeout = setTimeout(() => {
-      console.log("%capiError: reject", "color: green", {
+      log("%capiError: reject", "color: green", {
         response,
         waitLengthMs,
       });

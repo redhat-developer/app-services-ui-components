@@ -1,5 +1,5 @@
 import { Button } from "@patternfly/react-core";
-import { actions, action } from "@storybook/addon-actions";
+import { action, actions } from "@storybook/addon-actions";
 import type { PlayFunction } from "@storybook/csf";
 import { expect } from "@storybook/jest";
 import type { Meta, Story } from "@storybook/react";
@@ -9,11 +9,11 @@ import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
 import type { CreateKafkaInstanceProps } from "../CreateKafkaInstance";
 import { CreateKafkaInstance } from "../CreateKafkaInstance";
+import type { CreateKafkaInstanceServices } from "../machines";
 import type {
   CloudProvider,
   CloudProviderInfo,
   CloudProviders,
-  CreateKafkaInitializationData,
   MarketPlace,
   MarketPlaceSubscriptions,
   StandardPlanAvailability,
@@ -22,7 +22,7 @@ import type {
   TrialSizes,
 } from "../types";
 
-export const AWS: CloudProviderInfo = {
+const AWS: CloudProviderInfo = {
   id: "aws",
   displayName: "Amazon Web Services",
   regions: [
@@ -35,7 +35,7 @@ export const AWS: CloudProviderInfo = {
   ],
 };
 
-export const AZURE: CloudProviderInfo = {
+const AZURE: CloudProviderInfo = {
   id: "azure",
   displayName: "Microsoft Azure",
   regions: [
@@ -184,69 +184,81 @@ const TRIAL_SIZES: { [key in CloudProvider]: TrialSizes } = {
   },
 };
 
-export function makeAvailableProvidersAndDefaultsForStandardPlan(
+function makeCheckStandardQuota(
   options: {
-    instanceAvailability: StandardPlanAvailability;
-    defaultProvider: CloudProvider | undefined;
-    providers: string[];
+    standardScenario: StandardPlanAvailability;
+    developerScenario: TrialPlanAvailability;
     remainingPrepaidQuota: number | undefined;
     remainingMarketplaceQuota: number | undefined;
     marketplaceSubscriptions: MarketPlaceSubscriptions[];
   },
-  allProviders = PROVIDERS,
   latency = 500
-): () => Promise<CreateKafkaInitializationData> {
+): CreateKafkaInstanceServices["checkStandardQuota"] {
   const {
-    instanceAvailability,
-    defaultProvider,
-    providers,
+    standardScenario,
+    developerScenario,
     remainingPrepaidQuota,
     remainingMarketplaceQuota,
     marketplaceSubscriptions,
   } = options;
-  const availableProviders = allProviders.filter((p) =>
-    providers.includes(p.id)
-  );
-
-  return () =>
-    fakeApi<CreateKafkaInitializationData>(
-      {
-        plan: "standard",
-        defaultProvider,
-        availableProviders,
-        instanceAvailability,
-        remainingPrepaidQuota,
-        remainingMarketplaceQuota,
-        marketplaceSubscriptions: marketplaceSubscriptions,
-      },
-      latency
-    );
+  const cb: CreateKafkaInstanceServices["checkStandardQuota"] = ({
+    onQuotaAvailable,
+    onNoQuotaAvailable,
+    onOutOfQuota,
+  }) => {
+    setTimeout(() => {
+      switch (standardScenario) {
+        case "available":
+        case "regions-unavailable":
+          onQuotaAvailable({
+            quota: {
+              marketplaceSubscriptions,
+              remainingMarketplaceQuota,
+              remainingPrepaidQuota,
+            },
+          });
+          break;
+        case "instance-unavailable":
+          onNoQuotaAvailable({
+            hasTrialQuota: developerScenario === "available",
+          });
+          break;
+        case "out-of-quota":
+          onOutOfQuota({
+            quota: {
+              marketplaceSubscriptions,
+            },
+          });
+      }
+    }, latency);
+  };
+  return cb;
 }
 
-export function makeAvailableProvidersAndDefaultsForTrialPlan(
-  options: {
-    instanceAvailability: TrialPlanAvailability;
-    defaultProvider: CloudProvider | undefined;
-    providers: string[];
-  },
-  allProviders = PROVIDERS,
-  latency = 500
-): () => Promise<CreateKafkaInitializationData> {
-  const { instanceAvailability, defaultProvider, providers } = options;
-  const availableProviders = allProviders.filter((p) =>
-    providers.includes(p.id)
-  );
-
-  return () =>
-    fakeApi<CreateKafkaInitializationData>(
-      {
-        plan: "developer",
-        defaultProvider,
-        availableProviders,
-        instanceAvailability,
-      },
-      latency
-    );
+function makeCheckDeveloperAvailability(
+  availability: TrialPlanAvailability,
+  latency: number
+) {
+  const cb: CreateKafkaInstanceServices["checkDeveloperAvailability"] = ({
+    onAvailable,
+    onUsed,
+    onUnavailable,
+  }) => {
+    setTimeout(() => {
+      switch (availability) {
+        case "available":
+          onAvailable();
+          break;
+        case "used":
+          onUsed();
+          break;
+        case "unavailable":
+          onUnavailable();
+          break;
+      }
+    }, latency);
+  };
+  return cb;
 }
 
 const regionsScenario = {
@@ -462,7 +474,7 @@ export const defaultStoryArgs: StoryProps = {
   apiMarketplacesRH: true,
   apiMarketplacesRHSubscriptions: 1,
   apiSimulateBackendError: false,
-  apiLatency: 500,
+  apiLatency: process.env.JEST_WORKER_ID ? 10 : 500,
   onCreate: (_data, onSuccess) => {
     action("onCreate")(_data);
     setTimeout(onSuccess, 500);
@@ -522,7 +534,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     apiLatency = 500,
   } = args;
 
-  const providers =
+  const providers = (
     apiRegionsAvailability === "full"
       ? PROVIDERS
       : apiRegionsAvailability === "oneProviderUnavailable"
@@ -548,7 +560,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
       : PROVIDERS.map((p) => ({
           ...p,
           regions: [],
-        }));
+        }))
+  ).filter((p) => apiProviders.includes(p.id));
 
   function makeSubscriptions(provider: string, count: number) {
     return Array(count)
@@ -589,14 +602,15 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     }
   });
 
-  const getAvailableProvidersAndDefaults = apiSimulateBackendError
-    ? () => apiError<CreateKafkaInitializationData>(undefined, apiLatency)
-    : apiPlan === "standard"
-    ? makeAvailableProvidersAndDefaultsForStandardPlan(
+  const checkStandardQuota = apiSimulateBackendError
+    ? () => apiError<void>(undefined, apiLatency)
+    : makeCheckStandardQuota(
         {
-          instanceAvailability: apiStandardScenario,
-          defaultProvider: apiDefaultProvider,
-          providers: apiProviders,
+          standardScenario:
+            apiPlan === "standard"
+              ? apiStandardScenario
+              : "instance-unavailable",
+          developerScenario: apiTrialScenario,
           remainingPrepaidQuota: apiRemainingPrepaid
             ? apiRemainingPrepaidQuota
             : undefined,
@@ -607,18 +621,30 @@ export const Template: Story<StoryProps> = (args, { id }) => {
             ? marketplaceSubscriptions
             : [],
         },
-        providers,
-        apiLatency
-      )
-    : makeAvailableProvidersAndDefaultsForTrialPlan(
-        {
-          instanceAvailability: apiTrialScenario,
-          defaultProvider: apiDefaultProvider,
-          providers: apiProviders,
-        },
-        providers,
         apiLatency
       );
+
+  const checkDeveloperAvailability = apiSimulateBackendError
+    ? () => apiError<void>(undefined, apiLatency)
+    : makeCheckDeveloperAvailability(apiTrialScenario, apiLatency);
+
+  const fetchProvidersWithRegions: CreateKafkaInstanceServices["fetchProvidersWithRegions"] =
+    (_, { onAvailable, onUnavailable }) => {
+      const timeout = setTimeout(() => {
+        switch (apiRegionsAvailability) {
+          case "regionsMissing":
+          case "regionsDisabled":
+            onUnavailable();
+            break;
+          default:
+            onAvailable({
+              providers,
+              defaultProvider: apiDefaultProvider,
+            });
+        }
+        return () => clearTimeout(timeout);
+      }, apiLatency);
+    };
 
   const getStandardSizes: CreateKafkaInstanceProps["getStandardSizes"] = (
     provider
@@ -653,7 +679,9 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     <div style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}>
       <CreateKafkaInstance
         key={JSON.stringify(args)}
-        getAvailableProvidersAndDefaults={getAvailableProvidersAndDefaults}
+        checkDeveloperAvailability={checkDeveloperAvailability}
+        checkStandardQuota={checkStandardQuota}
+        fetchProvidersWithRegions={fetchProvidersWithRegions}
         getStandardSizes={getStandardSizes}
         getTrialSizes={getTrialSizes}
         appendTo={() =>

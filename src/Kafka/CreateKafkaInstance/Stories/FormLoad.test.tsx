@@ -115,9 +115,11 @@ describe("CreateKafkaInstance", () => {
     const comp = renderDialog(<OutOfQuotaOnFormLoad />);
     await waitForI18n(comp);
 
-    expect(
-      comp.queryByText("Your organization is out of quota.")
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        comp.getByText("Your organization is out of quota.")
+      ).toBeInTheDocument()
+    );
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
@@ -138,11 +140,13 @@ describe("CreateKafkaInstance", () => {
       ).not.toBeInTheDocument()
     );
 
-    expect(
-      comp.queryByText(
-        "All available trial instances are currently in use. Try again later."
-      )
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        comp.getByText(
+          "All available trial instances are currently in use. Please try again later."
+        )
+      ).toBeInTheDocument()
+    );
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
@@ -240,12 +244,13 @@ describe("CreateKafkaInstance", () => {
       ).not.toBeInTheDocument()
     );
 
-    expect(
-      comp.queryByText(
-        "Cloud provider regions are temporarily unavailable. Try again later.",
-        { exact: false }
-      )
-    ).toBeInTheDocument();
+    await waitFor(() =>
+      expect(
+        comp.getByText(
+          "Cloud provider regions are temporarily unavailable. Please try again later."
+        )
+      ).toBeInTheDocument()
+    );
 
     expect(comp.getByLabelText("Name *")).toBeDisabled();
     expect(comp.getByLabelText("Cloud provider *")).toBeDisabled();
@@ -273,7 +278,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       comp.queryByText(
-        "All available trial instances are currently in use. Try again later.",
+        "All available trial instances are currently in use. Please try again later.",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -330,7 +335,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       comp.queryByText(
-        "Cloud provider regions are temporarily unavailable. Try again later",
+        "Cloud provider regions are temporarily unavailable. Please try again later",
         { exact: false }
       )
     ).toBeInTheDocument();
@@ -362,7 +367,7 @@ describe("CreateKafkaInstance", () => {
 
     expect(
       comp.queryByText(
-        "There was a problem processing the request. Please try again."
+        "Kafka instances are temporarily available. Please try again in a few hours."
       )
     ).toBeInTheDocument();
 
@@ -644,7 +649,9 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() =>
       expect(
-        comp.queryByText("The prepaid billing option is out of quota.")
+        comp.queryByText(
+          "The selected size exceedes the quota available for the prepaid billing option."
+        )
       ).toBeInTheDocument()
     );
 
@@ -667,7 +674,9 @@ describe("CreateKafkaInstance", () => {
 
     await waitFor(() =>
       expect(
-        comp.queryByText("The marketplace billing options are out of quota.")
+        comp.queryByText(
+          "The selected size exceedes the quota available for the marketplace billing option."
+        )
       ).toBeInTheDocument()
     );
 

@@ -36,7 +36,7 @@ export const FormAlerts: VoidFunctionComponent<FormAlertsProps> = ({
               />
             );
 
-          case "out-of-quota":
+          case "insufficient-quota":
             return (
               <Alert
                 role={"alert"}
