@@ -1,10 +1,7 @@
 import { expect } from "@storybook/jest";
-import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n, fireEvent, waitFor, screen } from "../test-utils";
 import type { ClustersResponse } from "./DataSciencePage";
-import * as stories from "./DataSciencePage.stories";
-
-const { DataSciencePage } = composeStories(stories);
+import { DataSciencePage } from "./DataSciencePage";
 
 const installAddonResponse: ClustersResponse = {
   clusters: [],
@@ -57,7 +54,7 @@ function loadNoClusters() {
 
 describe("DataSciencePage", () => {
   it("renders", async () => {
-    const comp = render(<DataSciencePage />);
+    const comp = render(<DataSciencePage loadClusters={loadNoClusters} />);
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
 
