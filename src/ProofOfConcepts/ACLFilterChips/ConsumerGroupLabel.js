@@ -13,8 +13,9 @@ class ConsumerGroupLabel extends React.Component {
         <div class="child">
           <Label
             className="pf-c-label mas-m-solid smaller-label pf-m-green"
-            isCompact >
-              <span class="pf-c-label__content">G</span>
+            isCompact
+          >
+            <span class="pf-c-label__content">G</span>
           </Label>
         </div>
       </div>
