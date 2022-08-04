@@ -86,6 +86,7 @@ const ClusterSelect: VoidFunctionComponent<ClusterSelectProps> = ({
   return (
     <Select
       isDisabled={isDisabled}
+      data-testid="select-RHODS-cluster"
       onSelect={() => setIsOpen(false)}
       selections={
         selectedCluster
@@ -171,6 +172,7 @@ const UpgradeClusterModalContent: VoidFunctionComponent<
         <Radio
           id="upgrade-cluster"
           name="upgrade-cluster"
+          data-testid="radio-RHODS-action-upgrade"
           label={t("upgradeClusterSelectLabel")}
           onChange={() => handleStrategyChange(UpgradeStrategy.Upgrade)}
           isChecked={upgradeStrategy === UpgradeStrategy.Upgrade}
@@ -181,6 +183,7 @@ const UpgradeClusterModalContent: VoidFunctionComponent<
         <Radio
           id="create-cluster"
           name="create-cluster"
+          data-testid="radio-RHODS-action-create"
           label={t("createClusterLabel")}
           onChange={() => handleStrategyChange(UpgradeStrategy.Create)}
           isChecked={upgradeStrategy === UpgradeStrategy.Create}
@@ -273,15 +276,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     [RHodsClusterAddonMode.Detecting]: [],
     [RHodsClusterAddonMode.Install]: [
       <Button
-        onClick={() =>
-          console.log(
-            "Install action for cluster",
-            selectedCluster || clusters[0]
-          )
-        }
         variant="primary"
         key="install"
         component="a"
+        data-testid="install-RHODS-button"
         href={INSTALL_ADDON_HREF.replace(
           "{subscriptionID}",
           selectedCluster?.id || ""
@@ -293,6 +291,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         onClick={() => setIsModalOpen(false)}
         key="cancel"
         variant="secondary"
+        data-testid="install-RHODS-cancel"
       >
         {t("cancelClusterAction")}
       </Button>,
@@ -302,6 +301,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         variant="primary"
         key="install"
         component="a"
+        data-testid="upgrade-RHODS-button"
         href={
           upgradeStrategy === UpgradeStrategy.Create
             ? CREATE_CLUSTER_HREF
@@ -319,6 +319,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         onClick={() => setIsModalOpen(false)}
         key="cancel"
         variant="secondary"
+        data-testid="install-RHODS-cancel"
       >
         {t("cancelClusterAction")}
       </Button>,
@@ -336,6 +337,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         onClick={() => setIsModalOpen(false)}
         key="cancel"
         variant="secondary"
+        data-testid="install-RHODS-cancel"
       >
         {t("cancelClusterAction")}
       </Button>,
@@ -389,6 +391,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         variant="medium"
+        data-testid="data-science-modal"
         actions={modalActions[mode]}
         title={clusterModalTitles[mode]}
         description={
@@ -414,11 +417,16 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         description={t("heroDescription")}
         cta={
           <Flex>
-            <Button onClick={handleInstallModalOpen}>
+            <Button
+              data-testid="hero-buttonInstall"
+              ouiaId="button-rhods-install"
+              onClick={handleInstallModalOpen}
+            >
               {t("installButton")}
             </Button>
             <ExternalLink
-              testId="hero-buttonTryIt"
+              testId="hero-buttonTry"
+              ouiaId="button-rhods-try"
               href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started?extIdCarryOver=true&sc_cid=701f2000001Css5AAC"
             >
               {t("heroTryItButton")}
