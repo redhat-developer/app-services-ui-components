@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof PFChips> = (args, { parameters }) => (
   <PFChips {...args} />
 );
 
-export const StandardPFChipGroup = Template.bind({});
+export const SecondChipGroup = Template.bind({});
 
 StandardPFChipGroup.parameters = {
   backgrounds: { default: "--pf-global--BackgroundColor--200" },
