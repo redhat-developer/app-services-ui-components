@@ -11,7 +11,10 @@ class TopicLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <Label className ="pf-c-label mas-m-solid smaller-label pf-m-blue" isCompact>
+          <Label
+            className="pf-c-label mas-m-solid smaller-label pf-m-blue"
+            isCompact
+          >
             <span class="pf-c-label__content">T</span>
           </Label>
         </div>

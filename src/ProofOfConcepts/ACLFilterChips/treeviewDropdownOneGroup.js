@@ -73,7 +73,7 @@ class CheckboxTreeView extends React.Component {
           {
             name: "Describe",
             id: "ki-describe",
-            checkProps: { "aria-label": "ki-describe-check", checked: false},
+            checkProps: { "aria-label": "ki-describe-check", checked: false },
           },
         ],
         defaultExpanded: false,

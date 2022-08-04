@@ -54,12 +54,12 @@ class Chips extends React.Component {
       </div>,
     ];
     const AllText = [
-        <div class="row">
-          <div class="child">
-            <Text>&nbsp;All</Text>
-          </div>
-        </div>,
-      ];
+      <div class="row">
+        <div class="child">
+          <Text>&nbsp;All</Text>
+        </div>
+      </div>,
+    ];
 
     this.state = {
       chipsSet: [AllText, DescribeText, WriteText],
@@ -90,7 +90,6 @@ class Chips extends React.Component {
             this.deleteCategory();
           }}
         >
-          
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup categoryName={<TransactionalIdLabel />}>
               {chipsSet.map((currentChip) => (

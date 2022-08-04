@@ -264,4 +264,3 @@ class ToolbarWithFilterExample extends React.Component {
 }
 
 export default ToolbarWithFilterExample;
-

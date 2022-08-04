@@ -113,11 +113,8 @@ class Chips extends React.Component {
             this.deleteCategory4();
           }}
         >
-          <Chip className="custom-c-chip"  isReadOnly>
-            <ChipGroup
-              categoryName={<TopicLabel />}
-            >  
-            
+          <Chip className="custom-c-chip" isReadOnly>
+            <ChipGroup categoryName={<TopicLabel />}>
               {chipsSet2.map((currentChip) => (
                 <Chip
                   key={currentChip}
@@ -125,8 +122,7 @@ class Chips extends React.Component {
                 >
                   {currentChip}
                 </Chip>
-              ))} 
-             
+              ))}
             </ChipGroup>
           </Chip>
           <Chip className="custom-c-chip" isReadOnly>
@@ -141,7 +137,7 @@ class Chips extends React.Component {
               ))}
             </ChipGroup>
           </Chip>
-        
+
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup categoryName={<ConsumerGroupLabel />}>
               {chipsSet4.map((currentChip) => (
