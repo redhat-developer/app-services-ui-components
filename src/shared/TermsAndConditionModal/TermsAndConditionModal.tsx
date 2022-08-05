@@ -23,6 +23,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
   return (
     <Modal
       id="modalTerms"
+      ouiaId="modal-KafkaTerms"
       variant={ModalVariant.small}
       title={t("terms_conditions_modal.terms_and_conditions")}
       isOpen={isModalOpen}
@@ -32,6 +33,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="confirm"
           variant="primary"
           data-testid="actionViewTerms"
+          ouiaId="button-view-terms"
           onClick={onClickViewTermsConditions}
         >
           {t("terms_conditions_modal.view_terms_and_conditions")}
@@ -40,6 +42,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="cancel"
           variant="link"
           data-testid="actionCancelViewTerms"
+          ouiaId="button-cancel"
           onClick={onCancel}
         >
           {t("cancel")}
