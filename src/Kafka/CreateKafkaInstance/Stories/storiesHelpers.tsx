@@ -479,7 +479,7 @@ export const defaultStoryArgs: StoryProps = {
     action("onCreate")(_data);
     setTimeout(onSuccess, 500);
   },
-  subscriptionOptionsHref: "https://www.redhat.com",
+  subscriptionOptionsHref: "/../overview",
 };
 
 export type StoryMeta = Meta<StoryProps>;
