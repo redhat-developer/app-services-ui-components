@@ -42,7 +42,7 @@ export const StandardInstanceForm: VoidFunctionComponent<
 }) => {
   const {
     isBillingSelectionRequired,
-    selectedBilling,
+    isBillingSingleMarketplace,
     capabilities,
     selectedSize,
     billingType,
@@ -59,18 +59,20 @@ export const StandardInstanceForm: VoidFunctionComponent<
   );
 
   const instanceInfoBilling: InstanceInfoProps["billing"] = (() => {
-    if (selectedBilling === "prepaid") {
-      return {
-        value: "prepaid",
-        subscriptionOptionsHref,
-        type: billingType,
-      };
-    } else if (selectedBilling !== undefined) {
-      return {
-        value: selectedBilling,
-        subscriptionOptionsHref,
-        type: billingType,
-      };
+    if (!isBillingSelectionRequired) {
+      if (isBillingSingleMarketplace === false) {
+        return {
+          value: "prepaid",
+          subscriptionOptionsHref,
+          type: billingType,
+        };
+      } else {
+        return {
+          value: isBillingSingleMarketplace,
+          subscriptionOptionsHref,
+          type: billingType,
+        };
+      }
     }
     return undefined;
   })();
