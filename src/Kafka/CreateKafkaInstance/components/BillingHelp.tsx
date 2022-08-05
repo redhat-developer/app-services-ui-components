@@ -2,7 +2,7 @@ import { Popover } from "@patternfly/react-core";
 import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
-import { ExternalLink } from "../../../shared";
+import { Link } from "react-router-dom";
 
 export type BillingHelpProps = {
   type: "rh-only" | "external-marketplaces";
@@ -17,6 +17,7 @@ export const BillingHelp: VoidFunctionComponent<BillingHelpProps> = ({
   return (
     <Popover
       aria-label={t("billing.field_label")}
+      headerContent={t("billing.field_label")}
       bodyContent={
         <Trans
           i18nKey={
@@ -25,12 +26,7 @@ export const BillingHelp: VoidFunctionComponent<BillingHelpProps> = ({
               : "billing.field_popover_external_marketplace"
           }
           ns={"create-kafka-instance"}
-          components={[
-            <ExternalLink
-              testId={"subscription-options-ext-link"}
-              href={subscriptionOptionsHref}
-            />,
-          ]}
+          components={[<Link to={subscriptionOptionsHref} />]}
         />
       }
     >
