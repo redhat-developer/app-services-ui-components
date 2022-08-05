@@ -31,8 +31,8 @@ export interface Typegen0 {
     resetCreationErrorMessage:
       | "done.state.standardPlanMachine.configuring.fields"
       | "submit";
-    setBillingToPrepaid: "selectPrepaid";
-    setBillingToSubscription: "selectSubscription";
+    setBillingToPrepaid: "" | "selectPrepaid";
+    setBillingToSubscription: "" | "selectSubscription";
     setCreationError: "createError";
     setInitialContext: "xstate.init";
     setName: "nameChange";

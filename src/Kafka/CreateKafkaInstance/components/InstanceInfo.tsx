@@ -202,7 +202,7 @@ export const InstanceInfo: VoidFunctionComponent<InstanceInfoProps> = ({
                                   {billing.value.subscription}
                                 </>
                               );
-                            case "rh":
+                            case "rhm":
                               return (
                                 <>
                                   {t("billing.marketplace_rh")}

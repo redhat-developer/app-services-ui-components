@@ -474,7 +474,7 @@ export const defaultStoryArgs: StoryProps = {
   apiMarketplacesRH: true,
   apiMarketplacesRHSubscriptions: 1,
   apiSimulateBackendError: false,
-  apiLatency: process.env.JEST_WORKER_ID ? 10 : 500,
+  apiLatency: process.env.JEST_WORKER_ID ? 10 : 200,
   onCreate: (_data, onSuccess) => {
     action("onCreate")(_data);
     setTimeout(onSuccess, 500);
@@ -588,14 +588,14 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     makeMarketplace("aws", apiMarketplacesAWSSubscriptions),
 
     makeMarketplace("azure", apiMarketplacesAzureSubscriptions),
-    makeMarketplace("rh", apiMarketplacesRHSubscriptions),
+    makeMarketplace("rhm", apiMarketplacesRHSubscriptions),
   ].filter((q) => {
     switch (q.marketplace) {
       case "aws":
         return apiMarketplacesAWS;
       case "azure":
         return apiMarketplacesAzure;
-      case "rh":
+      case "rhm":
         return apiMarketplacesRH;
       default:
         return false;
@@ -723,12 +723,15 @@ export const sampleSubmit: PlayFunction<ReactFramework, StoryProps> = async ({
 }) => {
   const canvas = within(canvasElement);
 
-  await waitFor(() => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    expect(canvas.getByLabelText("Name *")).toBeEnabled();
-  });
+  await waitFor(
+    () => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      expect(canvas.getByLabelText("Name *")).toBeEnabled();
+    },
+    { timeout: 3000 }
+  );
 
   userEvent.type(await canvas.findByLabelText("Name *"), "instance-name");
 

@@ -75,7 +75,7 @@ describe("CreateKafkaInstance", () => {
     await waitFor(() =>
       expect(onCreate).toHaveBeenCalledWith(
         expect.objectContaining({
-          billing: undefined,
+          billing: "prepaid",
           name: "test-name",
           provider: "aws",
           region: "eu-west-1",
@@ -518,12 +518,12 @@ describe("CreateKafkaInstance", () => {
     );
 
     userEvent.type(comp.getByLabelText("Name *"), "test-name");
-    userEvent.click(comp.getByText("rh-cmgwMDAwMDAwMA=="));
+    userEvent.click(comp.getByText("rhm-cmhtMDAwMDAwMA=="));
     userEvent.click(comp.getByRole("button", { name: "Create instance" }));
     await waitFor(() =>
       expect(onCreate).toHaveBeenCalledWith(
         expect.objectContaining({
-          billing: { marketplace: "rh", subscription: "rh-cmgwMDAwMDAwMA==" },
+          billing: { marketplace: "rhm", subscription: "rhm-cmhtMDAwMDAwMA==" },
           name: "test-name",
           provider: "aws",
           region: "eu-west-1",
@@ -691,6 +691,6 @@ describe("CreateKafkaInstance", () => {
     await checkDisabledTitle("aws-YXdzMDAwMDAwMA==");
     await checkDisabledTitle("aws-YXdzMTExMTExMQ==");
     await checkDisabledTitle("azure-YXp1cmUwMDAwMA==");
-    await checkDisabledTitle("rh-cmgwMDAwMDAwMA==");
+    await checkDisabledTitle("rhm-cmhtMDAwMDAwMA==");
   });
 });

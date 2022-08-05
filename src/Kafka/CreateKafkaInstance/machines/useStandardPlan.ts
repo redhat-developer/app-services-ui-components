@@ -18,7 +18,7 @@ type SelectorReturn = {
   selectedProvider: CloudProviderInfo | undefined;
   selectedSize: Size | undefined;
   sizes: StandardPlanMachineContext["sizes"];
-  selectedBilling: "prepaid" | string | undefined;
+  selectedBilling: "prepaid" | SelectedSubscription | undefined;
   billingType: "rh-only" | "external-marketplaces";
   remainingQuota: number | undefined;
 
@@ -156,13 +156,13 @@ export function useStandardPlanMachine(): SelectorReturn {
           : sizes?.find((s) => form.size?.id === s.id);
 
         const billingType = capabilities.marketplaceSubscriptions.some(
-          (m) => m.marketplace !== "rh"
+          (m) => m.marketplace !== "rhm"
         )
           ? "external-marketplaces"
           : "rh-only";
 
         const selectedBilling =
-          form.billing === "prepaid" ? "prepaid" : form.billing?.subscription;
+          form.billing === "prepaid" ? "prepaid" : form.billing;
 
         const error: SelectorReturn["error"] = creationError
           ? creationError

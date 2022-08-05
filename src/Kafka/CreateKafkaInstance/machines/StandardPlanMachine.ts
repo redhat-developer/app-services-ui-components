@@ -405,12 +405,14 @@ export const StandardPlanMachine =
                       description:
                         "The user doesn't need to specify any option about the billing. The API will automatically figure out the right thing to do without giving it any information.",
                       tags: ["noBilling", "billingValid"],
+                      entry: "setBillingToPrepaid",
                       type: "final",
                     },
                     singleSubscription: {
                       description:
                         "The user doesn't need to specify any option about the billing. The API will automatically figure out the right thing to do without giving it any information.",
                       tags: ["noBilling", "billingValid", "singleSubscription"],
+                      entry: "setBillingToSubscription",
                       type: "final",
                     },
                     onlySubscriptions: {
@@ -605,7 +607,16 @@ export const StandardPlanMachine =
         }),
         setBillingToSubscription: assign((context, event) => {
           const form = { ...context.form };
-          form.billing = event.subscription;
+          if (event.type === "selectSubscription") {
+            form.billing = event.subscription;
+          } else {
+            // single subscription, take it from the context
+            const ms = context.capabilities.marketplaceSubscriptions[0];
+            form.billing = {
+              marketplace: ms.marketplace,
+              subscription: ms.subscriptions[0],
+            };
+          }
           return { form };
         }),
         unsetSubscription: assign((context) => {
@@ -696,7 +707,7 @@ export const StandardPlanMachine =
         ) =>
           capabilities.remainingMarketplaceQuota !== undefined &&
           capabilities.remainingMarketplaceQuota > 0 &&
-          (subscription.marketplace === "rh" ||
+          (subscription.marketplace === "rhm" ||
             form.provider === subscription.marketplace),
         hasPrepaidQuota: (context) =>
           context.capabilities.remainingPrepaidQuota !== undefined &&

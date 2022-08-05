@@ -2,29 +2,13 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    setCreationError: "createError";
-    setName: "nameChange";
-    setProvider: "providerChange";
-    setRegion: "regionChange";
-    setSizes: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
-    setInitialContext: "xstate.init";
-    triggerSubmit: "create";
-    resetCreationErrorMessage:
-      | "done.state.TrialPlanMachine.configuring.fields"
-      | "submit";
-    triggerSave: "submit";
-    fieldInvalid:
-      | ""
-      | "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
-  };
   internalEvents: {
+    "": { type: "" };
     "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]": {
       type: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
       data: unknown;
       __tip: "See the XState TS docs to learn how to strongly type this.";
     };
-    "": { type: "" };
     "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]": {
       type: "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
       data: unknown;
@@ -40,37 +24,41 @@ export interface Typegen0 {
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    fieldInvalid:
+      | ""
+      | "error.platform.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
+    resetCreationErrorMessage:
+      | "done.state.TrialPlanMachine.configuring.fields"
+      | "submit";
+    setCreationError: "createError";
+    setInitialContext: "xstate.init";
+    setName: "nameChange";
+    setProvider: "providerChange";
+    setRegion: "regionChange";
+    setSizes: "done.invoke.TrialPlanMachine.configuring.fields.size.loading:invocation[0]";
+    triggerSave: "submit";
+    triggerSubmit: "create";
+  };
   eventsCausingServices: {
     getSizes: "";
   };
   eventsCausingGuards: {
-    isTrialUsed: "";
+    didProviderChange: "providerChange";
+    didRegionChange: "regionChange";
+    emptySizes: "";
     isTrialUnavailable: "";
+    isTrialUsed: "";
     nameIsEmpty: "";
     nameIsValid: "";
-    didProviderChange: "providerChange";
-    providerIsValid: "";
-    didRegionChange: "regionChange";
-    regionIsValid: "";
     noProviderAndRegion: "";
     noSizes: "";
-    emptySizes: "";
+    providerIsValid: "";
+    regionIsValid: "";
   };
   eventsCausingDelays: {};
   matchesStates:
-    | "verifyAvailability"
-    | "trialUsed"
-    | "trialUnavailable"
-    | "regionsUnavailable"
     | "configuring"
-    | "configuring.status"
-    | "configuring.status.unsubmitted"
-    | "configuring.status.submitted"
-    | "configuring.form"
-    | "configuring.form.invalid"
-    | "configuring.form.valid"
-    | "configuring.form.saving"
-    | "configuring.form.saved"
     | "configuring.fields"
     | "configuring.fields.name"
     | "configuring.fields.name.empty"
@@ -78,28 +66,38 @@ export interface Typegen0 {
     | "configuring.fields.name.valid"
     | "configuring.fields.name.validate"
     | "configuring.fields.provider"
-    | "configuring.fields.provider.validate"
     | "configuring.fields.provider.invalid"
     | "configuring.fields.provider.valid"
+    | "configuring.fields.provider.validate"
     | "configuring.fields.region"
-    | "configuring.fields.region.validate"
     | "configuring.fields.region.invalid"
     | "configuring.fields.region.valid"
+    | "configuring.fields.region.validate"
     | "configuring.fields.size"
-    | "configuring.fields.size.validate"
-    | "configuring.fields.size.idle"
-    | "configuring.fields.size.valid"
     | "configuring.fields.size.error"
+    | "configuring.fields.size.idle"
     | "configuring.fields.size.loading"
+    | "configuring.fields.size.valid"
+    | "configuring.fields.size.validate"
+    | "configuring.form"
+    | "configuring.form.invalid"
+    | "configuring.form.saved"
+    | "configuring.form.saving"
+    | "configuring.form.valid"
+    | "configuring.status"
+    | "configuring.status.submitted"
+    | "configuring.status.unsubmitted"
+    | "regionsUnavailable"
     | "saved"
+    | "trialUnavailable"
+    | "trialUsed"
+    | "verifyAvailability"
     | {
         configuring?:
-          | "status"
-          | "form"
           | "fields"
+          | "form"
+          | "status"
           | {
-              status?: "unsubmitted" | "submitted";
-              form?: "invalid" | "valid" | "saving" | "saved";
               fields?:
                 | "name"
                 | "provider"
@@ -107,19 +105,19 @@ export interface Typegen0 {
                 | "size"
                 | {
                     name?: "empty" | "invalid" | "valid" | "validate";
-                    provider?: "validate" | "invalid" | "valid";
-                    region?: "validate" | "invalid" | "valid";
-                    size?: "validate" | "idle" | "valid" | "error" | "loading";
+                    provider?: "invalid" | "valid" | "validate";
+                    region?: "invalid" | "valid" | "validate";
+                    size?: "error" | "idle" | "loading" | "valid" | "validate";
                   };
+              form?: "invalid" | "saved" | "saving" | "valid";
+              status?: "submitted" | "unsubmitted";
             };
       };
   tags:
     | "blocked"
-    | "unsubmitted"
-    | "submitted"
+    | "configurable"
     | "formInvalid"
     | "formSaving"
-    | "configurable"
     | "nameEmpty"
     | "nameInvalid"
     | "nameValid"
@@ -127,8 +125,10 @@ export interface Typegen0 {
     | "providerValid"
     | "regionInvalid"
     | "regionValid"
-    | "sizeIdle"
-    | "sizeValid"
     | "sizeError"
-    | "sizeLoading";
+    | "sizeIdle"
+    | "sizeLoading"
+    | "sizeValid"
+    | "submitted"
+    | "unsubmitted";
 }

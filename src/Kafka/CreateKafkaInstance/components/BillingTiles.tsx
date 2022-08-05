@@ -45,7 +45,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
   const marketplaces: { [key in MarketPlace]: string } = {
     aws: t("billing.marketplace_aws"),
     azure: t("billing.marketplace_azure"),
-    rh: t("billing.marketplace_rh"),
+    rhm: t("billing.marketplace_rh"),
   };
   return (
     <>
@@ -69,7 +69,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
               <Tile
                 className={"pf-u-w-100"}
                 title={t("billing.prepaid_option")}
-                icon={tiles["rh"]}
+                icon={tiles["rhm"]}
                 isDisabled={isPrepaidOverQuota}
                 isStacked={true}
                 isSelected={value === "prepaid"}
@@ -192,5 +192,5 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
 const tiles: { [id in MarketPlace]: JSX.Element } = {
   aws: <AwsIcon size="md" color="black" />,
   azure: <MicrosoftIcon size="md" color="black" />,
-  rh: <RedhatIcon size="md" color="black" />,
+  rhm: <RedhatIcon size="md" color="black" />,
 };

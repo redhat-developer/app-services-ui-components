@@ -263,6 +263,25 @@ SingleMarketplace.parameters = {
   },
 };
 
+export const SingleMarketplaceRH = Template.bind({});
+SingleMarketplaceRH.storyName =
+  "User has no prepaid quota, multiple active subscriptions in RH marketplaces";
+SingleMarketplaceRH.args = {
+  apiRemainingPrepaid: false,
+  apiHasMarketplaceSubscriptions: true,
+  apiMarketplacesAWS: false,
+  apiMarketplacesAzure: false,
+  apiMarketplacesRH: true,
+  apiMarketplacesRHSubscriptions: 2,
+};
+SingleMarketplaceRH.parameters = {
+  docs: {
+    description: {
+      story: `All Cloud Providers should be enabled`,
+    },
+  },
+};
+
 export const SingleSubscription = Template.bind({});
 SingleSubscription.storyName =
   "User has no prepaid quota, a single active subscription in a marketplace";

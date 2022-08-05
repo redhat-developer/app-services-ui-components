@@ -41,10 +41,8 @@ export const StandardInstanceForm: VoidFunctionComponent<
   subscriptionOptionsHref,
 }) => {
   const {
-    isBillingSingleSubscription,
     isBillingSelectionRequired,
-    isBillingPrepaidAvailable,
-    isBillingSingleMarketplace,
+    selectedBilling,
     capabilities,
     selectedSize,
     billingType,
@@ -61,20 +59,18 @@ export const StandardInstanceForm: VoidFunctionComponent<
   );
 
   const instanceInfoBilling: InstanceInfoProps["billing"] = (() => {
-    if (isBillingSingleSubscription) {
-      if (isBillingPrepaidAvailable) {
-        return {
-          value: "prepaid",
-          subscriptionOptionsHref,
-          type: billingType,
-        };
-      } else if (isBillingSingleMarketplace) {
-        return {
-          value: isBillingSingleMarketplace,
-          subscriptionOptionsHref,
-          type: billingType,
-        };
-      }
+    if (selectedBilling === "prepaid") {
+      return {
+        value: "prepaid",
+        subscriptionOptionsHref,
+        type: billingType,
+      };
+    } else if (selectedBilling !== undefined) {
+      return {
+        value: selectedBilling,
+        subscriptionOptionsHref,
+        type: billingType,
+      };
     }
     return undefined;
   })();
@@ -183,7 +179,7 @@ export const ConnectedFieldCloudProvider: VoidFunctionComponent = () => {
 
   const providers =
     isBillingSingleMarketplace &&
-    isBillingSingleMarketplace.marketplace !== "rh"
+    isBillingSingleMarketplace.marketplace !== "rhm"
       ? capabilities.availableProviders.map((p) => ({
           ...p,
           isDisabled: p.id !== isBillingSingleMarketplace.marketplace,
@@ -290,7 +286,7 @@ function isMarketplaceDisabled(
   marketplace: MarketPlace,
   selectedProvider: CloudProvider | undefined
 ) {
-  if (marketplace === "rh") {
+  if (marketplace === "rhm") {
     return false;
   } else if (selectedProvider) {
     return marketplace !== selectedProvider;
@@ -317,7 +313,11 @@ export const ConnectedBillingTiles: VoidFunctionComponent<{
 
   return (
     <FieldBillingTiles
-      value={selectedBilling}
+      value={
+        selectedBilling === "prepaid"
+          ? "prepaid"
+          : selectedBilling?.subscription
+      }
       hasPrepaid={isBillingPrepaidAvailable}
       subscriptions={capabilities.marketplaceSubscriptions.flatMap((mq) =>
         mq.subscriptions.map((subscription) => ({

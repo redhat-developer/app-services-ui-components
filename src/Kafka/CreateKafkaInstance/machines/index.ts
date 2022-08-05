@@ -1,5 +1,4 @@
 export * from "./CreateKafkaInstanceMachine";
-export * from "./CreateKafkaInstanceMachine.typegen";
 export * from "./CreateKafkaInstanceProvider";
 export * from "./StandardPlanMachine";
 export * from "./TrialPlanMachine";

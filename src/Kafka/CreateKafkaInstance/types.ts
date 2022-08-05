@@ -15,7 +15,7 @@ export type CloudProviderInfo = {
 export type Regions = Array<RegionInfo>;
 export type CloudProviders = Array<CloudProviderInfo>;
 export type Quota = number;
-export type MarketPlace = CloudProvider | "rh";
+export type MarketPlace = CloudProvider | "rhm";
 export type MarketPlaceSubscriptions = {
   marketplace: MarketPlace;
   subscriptions: string[];
