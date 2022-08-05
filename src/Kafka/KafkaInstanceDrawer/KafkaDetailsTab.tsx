@@ -72,49 +72,49 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
               {instanceType === "standard" &&
                 renderTextListItem(
                   t("common:size"),
-                  t("create-kafka-instance-with-sizes:streaming_size_value", {
+                  t("create-kafka-instance:streaming_size_value", {
                     value: size,
                   })
                 )}
               {renderTextListItem(
                 t("ingress"),
-                t("create-kafka-instance-with-sizes:ingress_value", {
+                t("create-kafka-instance:ingress_value", {
                   value: ingress,
                 })
               )}
               {renderTextListItem(
                 t("egress"),
-                t("create-kafka-instance-with-sizes:egress_value", {
+                t("create-kafka-instance:egress_value", {
                   value: egress,
                 })
               )}
               {renderTextListItem(
                 t("storage"),
-                t("create-kafka-instance-with-sizes:storage_value", {
+                t("create-kafka-instance:storage_value", {
                   value: storage,
                 })
               )}
               {renderTextListItem(
                 t("partitions"),
-                t("create-kafka-instance-with-sizes:partitions_value", {
+                t("create-kafka-instance:partitions_value", {
                   value: maxPartitions,
                 })
               )}
               {renderTextListItem(
                 t("client_connections"),
-                t("create-kafka-instance-with-sizes:client_connections_value", {
+                t("create-kafka-instance:client_connections_value", {
                   value: connections,
                 })
               )}
               {renderTextListItem(
                 t("connection_rate"),
-                t("create-kafka-instance-with-sizes:connection_rate_value", {
+                t("create-kafka-instance:connection_rate_value", {
                   value: connectionRate,
                 })
               )}
               {renderTextListItem(
                 t("message_size"),
-                t("create-kafka-instance-with-sizes:message_size_value", {
+                t("create-kafka-instance:message_size_value", {
                   value: messageSize,
                 })
               )}
