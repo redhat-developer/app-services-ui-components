@@ -33,7 +33,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
 }) => {
   const { t } = useTranslation("common");
   const { ouiaIdModal, ouiaIdButtonViewTerms, ouiaIdButtonCancel } =
-  ouiaIds || {};
+    ouiaIds || {};
 
   return (
     <Modal
