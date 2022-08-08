@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof Settings> = () => {
       setConnectionStatus("TurningOn");
       apiError<{ ConfigurationOff: boolean }>(
         {
-          ConfigurationOff: undefined,
+          ConfigurationOff: true,
         },
         4000
       )
