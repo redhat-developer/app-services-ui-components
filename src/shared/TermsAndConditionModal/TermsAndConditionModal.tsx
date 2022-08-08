@@ -8,18 +8,14 @@ import {
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 
-type OuiaIdModal = {
-  ouiaIdModal?: string;
-  ouiaIdButtonViewTerms?: string;
-  ouiaIdButtonCancel?: string;
-};
-
 export type TermsAndConditionModalProps = {
   onClickViewTermsConditions: () => void;
   onCancel: () => void;
   isModalOpen: boolean;
   serviceName: string;
-  ouiaIds?: OuiaIdModal;
+  ouiaIdModal?: string;
+  ouiaIdButtonViewTerms?: string;
+  ouiaIdButtonCancel?: string;
 };
 
 export const TermsAndConditionModal: VoidFunctionComponent<
@@ -29,11 +25,11 @@ export const TermsAndConditionModal: VoidFunctionComponent<
   onCancel,
   isModalOpen,
   serviceName,
-  ouiaIds,
+  ouiaIdModal,
+  ouiaIdButtonViewTerms,
+  ouiaIdButtonCancel,
 }) => {
   const { t } = useTranslation("common");
-  const { ouiaIdModal, ouiaIdButtonViewTerms, ouiaIdButtonCancel } =
-    ouiaIds || {};
 
   return (
     <Modal
