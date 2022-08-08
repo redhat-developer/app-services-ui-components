@@ -14,17 +14,16 @@ import {
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { SettingsAlert } from "./components/SettingsAlert";
-import type { SettingsStatus } from "./types";
+import type { AlertStatus, SettingsStatus } from "./types";
 
 export type SettingsProps = {
   connectionStatus: SettingsStatus;
   onSwitchClick: () => void;
   isModalOpen: boolean;
   onClickTurnOff: () => void;
-  alertStatus: "success" | "failure" | undefined;
+  alertStatus: AlertStatus;
   connectionState: boolean;
   onClickClose: () => void;
-  onClickCloseAction: () => void;
 };
 
 export const Settings: FunctionComponent<SettingsProps> = ({
@@ -34,7 +33,6 @@ export const Settings: FunctionComponent<SettingsProps> = ({
   onClickTurnOff,
   alertStatus,
   onClickClose,
-  onClickCloseAction,
   connectionState,
 }) => {
   const { t } = useTranslation("kafka");
@@ -112,7 +110,10 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                     aria-label={t(
                       "settings.connection_re_authentication_switch"
                     )}
-                    isChecked={connectionStatus === "On"}
+                    isChecked={
+                      connectionStatus === "On" ||
+                      connectionStatus === "TurningOff"
+                    }
                     onChange={onSwitchClick}
                   />
                 </FlexItem>
@@ -137,6 +138,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                       {t("common:cancel")}
                     </Button>,
                   ]}
+                  onClose={onClickClose}
                 >
                   {t("settings.warning_description")}
                 </Modal>
@@ -147,7 +149,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
       </Page>
       <SettingsAlert
         alertStatus={alertStatus}
-        closeAction={onClickCloseAction}
+        // closeAction={onClickCloseAction}
         connectionState={connectionState}
       />
     </>

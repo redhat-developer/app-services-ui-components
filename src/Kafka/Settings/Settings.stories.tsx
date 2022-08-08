@@ -2,10 +2,13 @@ import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { Settings } from "./Settings";
 import { apiError, fakeApi } from "../../shared/storiesHelpers";
-import type { SettingsStatus } from "./types";
+import type { AlertStatus, SettingsStatus } from "./types";
 
 export default {
   component: Settings,
+  args: {
+    connectionStatus: "On",
+  },
   parameters: {
     backgrounds: {
       default: "Background color 100",
@@ -13,15 +16,17 @@ export default {
   },
 } as ComponentMeta<typeof Settings>;
 
-const Template: ComponentStory<typeof Settings> = () => {
+const Template: ComponentStory<typeof Settings> = (args) => (
+  <Settings {...args} />
+);
+
+export const InteractiveExample: ComponentStory<typeof Settings> = (args) => {
   const [connectionStatus, setConnectionStatus] =
     useState<SettingsStatus>("On");
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const [alertStatus, setAlertStatus] = useState<
-    "success" | "failure" | undefined
-  >(undefined);
+  const [alertStatus, setAlertStatus] = useState<AlertStatus>();
 
   const [connectionState, setConnectionState] = useState<boolean>(false);
 
@@ -43,7 +48,7 @@ const Template: ComponentStory<typeof Settings> = () => {
         })
         .catch(() => {
           setConnectionStatus("Off");
-          setAlertStatus("failure");
+          setAlertStatus("danger");
         });
     }
   };
@@ -64,7 +69,7 @@ const Template: ComponentStory<typeof Settings> = () => {
       })
       .catch(() => {
         setConnectionStatus("On");
-        setAlertStatus("failure");
+        setAlertStatus("danger");
       });
   };
 
@@ -72,18 +77,14 @@ const Template: ComponentStory<typeof Settings> = () => {
     setIsModalOpen(false);
   };
 
-  const onClickCloseAction = () => {
-    console.log("closeAlert");
-  };
-
   return (
     <Settings
+      {...args}
       connectionStatus={connectionStatus}
       onSwitchClick={onSwitchClick}
       isModalOpen={isModalOpen}
       onClickTurnOff={onClickTurnOff}
       onClickClose={onClickClose}
-      onClickCloseAction={onClickCloseAction}
       alertStatus={alertStatus}
       connectionState={connectionState}
     />
@@ -91,3 +92,38 @@ const Template: ComponentStory<typeof Settings> = () => {
 };
 
 export const DefaultSettings = Template.bind({});
+
+export const OnClickTurnOffSwitch = Template.bind({});
+OnClickTurnOffSwitch.args = {
+  isModalOpen: true,
+};
+
+export const TurningOffConnectionReauthentication = Template.bind({});
+TurningOffConnectionReauthentication.args = {
+  connectionStatus: "TurningOff",
+};
+
+export const TurningONConnectionReauthentication = Template.bind({});
+TurningONConnectionReauthentication.args = {
+  connectionStatus: "TurningOn",
+};
+
+export const TurnOffConnectionReauthentication = Template.bind({});
+TurnOffConnectionReauthentication.args = {
+  connectionStatus: "Off",
+  alertStatus: "success",
+  connectionState: false,
+};
+
+export const TurnONConnectionReauthentication = Template.bind({});
+TurnONConnectionReauthentication.args = {
+  connectionStatus: "On",
+  alertStatus: "success",
+  connectionState: true,
+};
+
+export const TurnONConnectionReauthenticationFail = Template.bind({});
+TurnONConnectionReauthenticationFail.args = {
+  connectionStatus: "Off",
+  alertStatus: "danger",
+};

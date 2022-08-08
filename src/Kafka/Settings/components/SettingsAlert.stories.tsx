@@ -22,5 +22,5 @@ export const SuccessAlert = Template.bind({});
 
 export const FailureAlert = Template.bind({});
 FailureAlert.args = {
-  alertStatus: "failure",
+  alertStatus: "danger",
 };
