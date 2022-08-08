@@ -136,7 +136,7 @@ class Chips extends React.Component {
       <React.Fragment>
         <ChipGroup>
           <ChipGroup
-            className="close"
+            //className="close"
             categoryName="Resource type operation"
             isClosable
             onClick={() => {
@@ -182,9 +182,8 @@ class Chips extends React.Component {
               </ChipGroup>
             </Chip>
           </ChipGroup>
-
           <ChipGroup
-            //className ="size"
+            className ="content"
             categoryName="Permission access types"
             isClosable
             onClick={() => {

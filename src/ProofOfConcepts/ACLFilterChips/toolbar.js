@@ -154,8 +154,6 @@ class ToolbarWithFilterExample extends React.Component {
           <CheckIcon color="blue" />{" "}
         </p>
         <br></br>
-        <Text> &emsp; Resource name</Text>
-        <br></br>
         <Text> &emsp; Permission access types</Text>
         <br></br>
         <Text> &emsp; Account type</Text>

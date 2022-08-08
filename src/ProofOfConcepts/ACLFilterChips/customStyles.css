@@ -1,3 +1,8 @@
+.pf-c-chip-group__close {
+  display: flex;
+  align-self: center;
+}
+
 .pf-c-label.mas-m-solid.smaller-label {
   --pf-c-label__content--before--BorderColor: transparent;
   --pf-c-label__content--Color: var(--pf-global--palette--white);
@@ -17,7 +22,6 @@
   );
   display: inline-flex;
   justify-content: center;
-  align-items: center;
 }
 
 .pf-c-label.mas-m-solid.pf-m-blue {
@@ -52,11 +56,6 @@
 .pf-c-chip-group.bkg-color {
   background-color: var(--pf-c-label--BackgroundColor);
   --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-100);
-}
-
-.pf-c-chip-group__close {
-  display: flex;
-  align-self: center;
 }
 
 .pf-c-chip.custom-c-chip {
