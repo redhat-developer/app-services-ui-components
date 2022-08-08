@@ -4,7 +4,7 @@ import ConsumerGroupLabel from "./ConsumerGroupLabel";
 import TopicLabel from "./TopicLabel";
 import TransactionalIdLabel from "./TrasactionalIdLabel";
 import KafkaInstanceLabel from "./KafkaInstanceLabel";
-import { Chip, ChipGroup, Flex, FlexItem, Text } from "@patternfly/react-core";
+import { Chip, ChipGroup, Text } from "@patternfly/react-core";
 
 // TODO
 // Clicking on exit 'x' button for entire chip group doesn't remove the chip group as expected.
@@ -136,7 +136,6 @@ class Chips extends React.Component {
       <React.Fragment>
         <ChipGroup>
           <ChipGroup
-            //className="close"
             categoryName="Resource type operation"
             isClosable
             onClick={() => {
@@ -183,7 +182,7 @@ class Chips extends React.Component {
             </Chip>
           </ChipGroup>
           <ChipGroup
-            className ="content"
+            className="content"
             categoryName="Permission access types"
             isClosable
             onClick={() => {
