@@ -25,6 +25,7 @@
   "return_to_home_page": "Return to home page",
   "search_button_label": "Search",
   "select": "Select",
+  "service_registry": "Service Registry",
   "servicePreview": "Service preview ",
   "servicePreviewTooltip": "Service preview releases provide early access to a limited set of features that might not be fully tested. Users should not use service preview software in production or for business-critical workloads.",
   "size": "Size",

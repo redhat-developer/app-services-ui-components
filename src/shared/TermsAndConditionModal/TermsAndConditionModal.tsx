@@ -8,22 +8,37 @@ import {
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
 
+type OuiaIdModal = {
+  ouiaIdModal?: string;
+  ouiaIdButtonViewTerms?: string;
+  ouiaIdButtonCancel?: string;
+};
+
 export type TermsAndConditionModalProps = {
   onClickViewTermsConditions: () => void;
   onCancel: () => void;
   isModalOpen: boolean;
   serviceName: string;
+  ouiaIds?: OuiaIdModal;
 };
 
 export const TermsAndConditionModal: VoidFunctionComponent<
   TermsAndConditionModalProps
-> = ({ onClickViewTermsConditions, onCancel, isModalOpen, serviceName }) => {
+> = ({
+  onClickViewTermsConditions,
+  onCancel,
+  isModalOpen,
+  serviceName,
+  ouiaIds,
+}) => {
   const { t } = useTranslation("common");
+  const { ouiaIdModal, ouiaIdButtonViewTerms, ouiaIdButtonCancel } =
+  ouiaIds || {};
 
   return (
     <Modal
       id="modalTerms"
-      ouiaId="modal-KafkaTerms"
+      ouiaId={ouiaIdModal}
       variant={ModalVariant.small}
       title={t("terms_conditions_modal.terms_and_conditions")}
       isOpen={isModalOpen}
@@ -33,7 +48,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="confirm"
           variant="primary"
           data-testid="actionViewTerms"
-          ouiaId="button-view-terms"
+          ouiaId={ouiaIdButtonViewTerms}
           onClick={onClickViewTermsConditions}
         >
           {t("terms_conditions_modal.view_terms_and_conditions")}
@@ -42,7 +57,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="cancel"
           variant="link"
           data-testid="actionCancelViewTerms"
-          ouiaId="button-cancel"
+          ouiaId={ouiaIdButtonCancel}
           onClick={onCancel}
         >
           {t("cancel")}
