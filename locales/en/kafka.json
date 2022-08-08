@@ -127,7 +127,7 @@
     "Connection_re_authentication_states": {
       "turning_off": "Turning off...",
       "turning_on": "Turning on...",
-      "turnoff": "off",
+      "turnoff": "Off",
       "turnon": "On"
     },
     "connection_re_authentication_switch": "Connection re-authentication.",
