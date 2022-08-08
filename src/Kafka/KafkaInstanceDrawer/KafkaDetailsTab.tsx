@@ -8,9 +8,10 @@ import {
 import type { FunctionComponent, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../shared";
+import type { MarketplaceSubscription } from "../CreateKafkaInstance";
 import type { InstanceType } from "../utils";
-import { KafkaSizeSkeleton } from "./KafkaSizeSkeleton";
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
+import { KafkaSizeSkeleton } from "./KafkaSizeSkeleton";
 
 export type KafkaDetailsTabProps = {
   id: string;
@@ -28,7 +29,8 @@ export type KafkaDetailsTabProps = {
   connections: number;
   connectionRate: number;
   messageSize: number;
-  isLoadingSize: boolean;
+  billing: "prepaid" | MarketplaceSubscription;
+  isLoading: boolean;
 };
 
 export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
@@ -47,7 +49,8 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
   connections,
   connectionRate,
   messageSize,
-  isLoadingSize,
+  billing,
+  isLoading,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -64,10 +67,10 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
       {instanceType !== "standard" && expiryDate && (
         <DetailsTabAlert expiryDate={expiryDate} />
       )}
-      {isLoadingSize && <KafkaSizeSkeleton />}
+      {isLoading && <KafkaSizeSkeleton />}
       <TextContent>
         <TextList component={TextListVariants.dl}>
-          {!isLoadingSize && (
+          {!isLoading && (
             <>
               {instanceType === "standard" &&
                 renderTextListItem(
@@ -136,6 +139,39 @@ export const KafkaDetailsTab: FunctionComponent<KafkaDetailsTabProps> = ({
             t("common:cloudProviders.aws")
           )}
           {renderTextListItem(t("common:region"), region)}
+          {renderTextListItem(
+            t("create-kafka-instance:billing.field_label"),
+            (() => {
+              if (billing === "prepaid")
+                return t("create-kafka-instance:billing.prepaid_option");
+              switch (billing.marketplace) {
+                case "aws":
+                  return (
+                    <>
+                      {t("create-kafka-instance:billing.marketplace_aws")}
+                      <br />
+                      {billing.subscription}
+                    </>
+                  );
+                case "azure":
+                  return (
+                    <>
+                      {t("create-kafka-instance:billing.marketplace_azure")}
+                      <br />
+                      {billing.subscription}
+                    </>
+                  );
+                case "rhm":
+                  return (
+                    <>
+                      {t("create-kafka-instance:billing.marketplace_rh")}
+                      <br />
+                      {billing.subscription}
+                    </>
+                  );
+              }
+            })()
+          )}
         </TextList>
       </TextContent>
     </div>

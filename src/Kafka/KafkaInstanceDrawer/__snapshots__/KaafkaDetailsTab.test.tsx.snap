@@ -189,6 +189,18 @@ exports[`Details Tab renders standard instance 1`] = `
           >
             US East, N. Virginia
           </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
+            Billing
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            Red Hat prepaid
+          </dd>
         </dl>
       </div>
     </div>
