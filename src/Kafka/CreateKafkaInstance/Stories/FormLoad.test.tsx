@@ -650,7 +650,7 @@ describe("CreateKafkaInstance", () => {
     await waitFor(() =>
       expect(
         comp.queryByText(
-          "The selected size exceedes the quota available for the prepaid billing option."
+          "The selected size exceeds the quota available for the prepaid billing option."
         )
       ).toBeInTheDocument()
     );
@@ -675,7 +675,7 @@ describe("CreateKafkaInstance", () => {
     await waitFor(() =>
       expect(
         comp.queryByText(
-          "The selected size exceedes the quota available for the marketplace billing option."
+          "The selected size exceeds the quota available for the marketplace billing option."
         )
       ).toBeInTheDocument()
     );

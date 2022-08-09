@@ -2,8 +2,8 @@ import { useInterpret } from "@xstate/react";
 import type { FunctionComponent } from "react";
 import { createContext } from "react";
 import type { ActorRefFrom } from "xstate";
-import { makeCreateKafkaInstanceMachine } from "./CreateKafkaInstanceMachine";
 import type { CreateKafkaInstanceServices } from "./CreateKafkaInstanceMachine";
+import { makeCreateKafkaInstanceMachine } from "./CreateKafkaInstanceMachine";
 
 export const CreateKafkaInstanceContext = createContext<{
   service: ActorRefFrom<ReturnType<typeof makeCreateKafkaInstanceMachine>>;
@@ -33,7 +33,6 @@ export const CreateKafkaInstanceProvider: FunctionComponent<
       }),
     { devTools: true }
   );
-  service.onTransition((state) => console.log(state.value));
   return (
     <CreateKafkaInstanceContext.Provider value={{ service }}>
       {children}

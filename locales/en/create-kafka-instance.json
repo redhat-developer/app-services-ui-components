@@ -14,11 +14,11 @@
     "marketplace": "Marketplace",
     "marketplace_aws": "$t(common:cloudProviders.aws_short) $t(create-kafka-instance:billing.marketplace)",
     "marketplace_azure": "$t(common:cloudProviders.azure) $t(create-kafka-instance:billing.marketplace)",
-    "marketplace_out_of_quota": "The selected size exceedes the quota available for the marketplace billing option.",
+    "marketplace_out_of_quota": "The selected size exceeds the quota available for the marketplace billing option.",
     "marketplace_rh": "$t(common:cloudProviders.rh) $t(create-kafka-instance:billing.marketplace)",
     "prepaid": "Prepaid",
     "prepaid_option": "$t(common:cloudProviders.rh) prepaid",
-    "prepaid_out_of_quota": "The selected size exceedes the quota available for the prepaid billing option.",
+    "prepaid_out_of_quota": "The selected size exceeds the quota available for the prepaid billing option.",
     "provider_incompatible_with_current_billing": "Incompatible with current billing option"
   },
   "checking_instance_message": "Checking $t(common:kafka) availability",
