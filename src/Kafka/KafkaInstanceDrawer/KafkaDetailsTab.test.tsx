@@ -7,6 +7,7 @@ const {
   TrialInstanceNearExpiration,
   TrialInstanceRecentlyCreated,
   StandardInstanceCreated,
+  MissingDataShownAsSkeletonLoaders,
 } = composeStories(stories);
 
 describe("Details Tab", () => {
@@ -72,5 +73,20 @@ describe("Details Tab", () => {
     await waitForI18n(comp);
     expect(comp.getByText("Red Hat Marketplace", { exact: false }));
     expect(comp.getByText("rhm-123", { exact: false }));
+  });
+
+  it("renders loaders for undefined data", async () => {
+    const comp = render(<MissingDataShownAsSkeletonLoaders />);
+    await waitForI18n(comp);
+
+    expect(comp.getByText("Loading Size"));
+    expect(comp.getByText("Loading Ingress"));
+    expect(comp.getByText("Loading Egress"));
+    expect(comp.getByText("Loading Storage"));
+    expect(comp.getByText("Loading Partitions"));
+    expect(comp.getByText("Loading Client connections"));
+    expect(comp.getByText("Loading Connection rate"));
+    expect(comp.getByText("Loading Message size"));
+    expect(comp.getByText("Loading Billing"));
   });
 });

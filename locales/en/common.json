@@ -28,7 +28,7 @@
   "servicePreview": "Service preview ",
   "servicePreviewTooltip": "Service preview releases provide early access to a limited set of features that might not be fully tested. Users should not use service preview software in production or for business-critical workloads.",
   "size": "Size",
-  "skeleton_loader_screenreader_text": "Loading content",
+  "skeleton_loader_screenreader_text": "Loading {{contentName, content}}",
   "something_went_wrong": "Something went wrong",
   "submitting_request": "Submitting request",
   "table_cell_no_data": "No {{column, lowercase}}",
