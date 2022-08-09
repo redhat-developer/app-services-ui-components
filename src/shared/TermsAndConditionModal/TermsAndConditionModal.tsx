@@ -13,16 +13,28 @@ export type TermsAndConditionModalProps = {
   onCancel: () => void;
   isModalOpen: boolean;
   serviceName: string;
+  ouiaIdModal?: string;
+  ouiaIdButtonViewTerms?: string;
+  ouiaIdButtonCancel?: string;
 };
 
 export const TermsAndConditionModal: VoidFunctionComponent<
   TermsAndConditionModalProps
-> = ({ onClickViewTermsConditions, onCancel, isModalOpen, serviceName }) => {
+> = ({
+  onClickViewTermsConditions,
+  onCancel,
+  isModalOpen,
+  serviceName,
+  ouiaIdModal,
+  ouiaIdButtonViewTerms,
+  ouiaIdButtonCancel,
+}) => {
   const { t } = useTranslation("common");
 
   return (
     <Modal
       id="modalTerms"
+      ouiaId={ouiaIdModal}
       variant={ModalVariant.small}
       title={t("terms_conditions_modal.terms_and_conditions")}
       isOpen={isModalOpen}
@@ -32,6 +44,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="confirm"
           variant="primary"
           data-testid="actionViewTerms"
+          ouiaId={ouiaIdButtonViewTerms}
           onClick={onClickViewTermsConditions}
         >
           {t("terms_conditions_modal.view_terms_and_conditions")}
@@ -40,6 +53,7 @@ export const TermsAndConditionModal: VoidFunctionComponent<
           key="cancel"
           variant="link"
           data-testid="actionCancelViewTerms"
+          ouiaId={ouiaIdButtonCancel}
           onClick={onCancel}
         >
           {t("cancel")}

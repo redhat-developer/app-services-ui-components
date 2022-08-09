@@ -33,7 +33,18 @@ const Template: ComponentStory<typeof TermsAndConditionModal> = (args) => {
   );
 };
 
-export const TermsAndCondition_Modal = Template.bind({});
-TermsAndCondition_Modal.args = {
+export const KafkaTermsAndCondition_Modal = Template.bind({});
+KafkaTermsAndCondition_Modal.args = {
   serviceName: "Kafka",
+  ouiaIdModal: "modal-KafkaTerms",
+  ouiaIdButtonViewTerms: "button-view-terms",
+  ouiaIdButtonCancel: "button-cancel",
+};
+
+export const ServiceRegistryTermsAndCondition_Modal = Template.bind({});
+ServiceRegistryTermsAndCondition_Modal.args = {
+  serviceName: "Service Registry",
+  ouiaIdModal: "modal-SrvRegTerms",
+  ouiaIdButtonViewTerms: "button-view-terms",
+  ouiaIdButtonCancel: "button-cancel",
 };
