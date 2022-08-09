@@ -44,7 +44,7 @@ KafkaTermsAndCondition_Modal.args = {
 export const ServiceRegistryTermsAndCondition_Modal = Template.bind({});
 ServiceRegistryTermsAndCondition_Modal.args = {
   serviceName: "Service Registry",
-  ouiaIdModal: "modal-ServiceRegistryTerms",
+  ouiaIdModal: "modal-SrvRegTerms",
   ouiaIdButtonViewTerms: "button-view-terms",
   ouiaIdButtonCancel: "button-cancel",
 };
