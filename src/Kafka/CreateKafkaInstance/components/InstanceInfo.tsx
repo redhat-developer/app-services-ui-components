@@ -17,7 +17,7 @@ import {
 import { ClockIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { SelectedSubscription } from "../types";
+import type { MarketplaceSubscription } from "../types";
 import type { BillingHelpProps } from "./BillingHelp";
 import { BillingHelp } from "./BillingHelp";
 
@@ -46,7 +46,7 @@ export type InstanceInfoProps = {
 
   billing:
     | ({
-        value: "prepaid" | SelectedSubscription;
+        value: "prepaid" | MarketplaceSubscription;
       } & BillingHelpProps)
     | undefined;
 };

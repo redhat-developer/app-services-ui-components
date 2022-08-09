@@ -5,8 +5,8 @@ import type {
   CloudProviderInfo,
   CreateKafkaInstanceError,
   MarketPlace,
+  MarketplaceSubscription,
   Region,
-  SelectedSubscription,
   Size,
 } from "../types";
 import type { StandardPlanMachineContext } from "./StandardPlanMachine";
@@ -18,7 +18,7 @@ type SelectorReturn = {
   selectedProvider: CloudProviderInfo | undefined;
   selectedSize: Size | undefined;
   sizes: StandardPlanMachineContext["sizes"];
-  selectedBilling: "prepaid" | SelectedSubscription | undefined;
+  selectedBilling: "prepaid" | MarketplaceSubscription | undefined;
   billingType: "rh-only" | "external-marketplaces";
   remainingQuota: number | undefined;
 
@@ -39,7 +39,7 @@ type SelectorReturn = {
   isBillingPrepaidAvailable: boolean;
   isBillingPrepaidOverQuota: boolean;
   isBillingMarketplaceOverQuota: boolean;
-  isBillingSingleMarketplace: SelectedSubscription | false;
+  isBillingSingleMarketplace: MarketplaceSubscription | false;
 
   isProviderError: boolean;
   isRegionError: boolean;
@@ -127,7 +127,7 @@ export function useStandardPlanMachine(): SelectorReturn {
 
         const marketplaces = Array.from(
           new Set(
-            capabilities.marketplaceSubscriptions.flatMap<SelectedSubscription>(
+            capabilities.marketplaceSubscriptions.flatMap<MarketplaceSubscription>(
               (m) =>
                 m.subscriptions.map((s) => ({
                   marketplace: m.marketplace,

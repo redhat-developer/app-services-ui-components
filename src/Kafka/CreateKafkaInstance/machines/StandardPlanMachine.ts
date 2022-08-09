@@ -3,8 +3,8 @@ import {
   CloudProvider,
   CreateKafkaFormData,
   CreateKafkaInstanceError,
+  MarketplaceSubscription,
   Region,
-  SelectedSubscription,
   Size,
   StandardPlanInitializationData,
   StandardSizes,
@@ -21,7 +21,7 @@ export type StandardPlanMachineContext = {
     provider?: CloudProvider;
     region?: Region;
     size?: Size;
-    billing?: SelectedSubscription | "prepaid";
+    billing?: MarketplaceSubscription | "prepaid";
   };
 
   // based on the form.provider selection
@@ -51,7 +51,10 @@ export const StandardPlanMachine =
           | { type: "providerChange"; provider: CloudProvider }
           | { type: "regionChange"; region: Region }
           | { type: "sizeChange"; size: Size }
-          | { type: "selectSubscription"; subscription: SelectedSubscription }
+          | {
+              type: "selectSubscription";
+              subscription: MarketplaceSubscription;
+            }
           | { type: "selectPrepaid" }
           | { type: "billingChange" }
           | { type: "nameIsValid" }
