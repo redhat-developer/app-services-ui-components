@@ -1,7 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { Settings } from "./Settings";
-import { apiError, fakeApi } from "../../shared/storiesHelpers";
+import { fakeApi } from "../../shared/storiesHelpers";
 import type { AlertStatus, SettingsStatus } from "./types";
 
 export default {
