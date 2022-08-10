@@ -21,7 +21,7 @@ type SupportedFormats =
 export const FormatMapping: {
   [name in SupportedFormats]: (date: Date) => string;
 } = {
-  distanceToNow: formatDistanceToNow,
+  distanceToNow: (date: Date) => formatDistanceToNow(date, { addSuffix: true }),
   expiration: (date: Date) => {
     const months = differenceInMonths(date, Date.now());
     const days = differenceInDays(date, Date.now());

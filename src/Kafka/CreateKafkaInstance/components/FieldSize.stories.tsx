@@ -1,6 +1,6 @@
 import { Form } from "@patternfly/react-core";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import type { Size } from "../types";
+import type { Size } from "../../types";
 
 import { FieldSize as FieldSizeComp } from "./FieldSize";
 

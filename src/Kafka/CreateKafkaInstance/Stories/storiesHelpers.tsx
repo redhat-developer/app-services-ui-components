@@ -7,15 +7,17 @@ import type { ReactFramework } from "@storybook/react/types-6-0";
 import { userEvent, waitFor, within } from "@storybook/testing-library";
 import { useState } from "react";
 import { apiError, fakeApi } from "../../../shared/storiesHelpers";
+import type {
+  CloudProvider,
+  MarketPlace,
+  MarketPlaceSubscriptions,
+} from "../../types";
 import type { CreateKafkaInstanceProps } from "../CreateKafkaInstance";
 import { CreateKafkaInstance } from "../CreateKafkaInstance";
 import type { CreateKafkaInstanceServices } from "../machines";
 import type {
-  CloudProvider,
   CloudProviderInfo,
   CloudProviders,
-  MarketPlace,
-  MarketPlaceSubscriptions,
   StandardPlanAvailability,
   StandardSizes,
   TrialPlanAvailability,

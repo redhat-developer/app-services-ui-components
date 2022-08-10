@@ -19,7 +19,6 @@ import {
   columnLabels,
   columns,
   defaultActions,
-  deletingSign,
   sampleData,
   sampleToolbarWithFilter,
 } from "./storybookHelpers";
@@ -96,7 +95,7 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
           ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
           : undefined
       }
-      isRowDeleted={({ row }) => row[5] === deletingSign}
+      isRowDeleted={({ row }) => row[5] === "deleting"}
       {...eventsFromNames}
     >
       <EmptyState variant={EmptyStateVariant.large}>

@@ -20,32 +20,32 @@ const {
 describe("FormatDate", () => {
   it("RightNow", () => {
     const comp = render(<RightNow />);
-    expect(comp.getByText("less than a minute")).toBeTruthy();
+    expect(comp.getByText("less than a minute ago")).toBeTruthy();
   });
 
   it("AFewMinutesNow", () => {
     const comp = render(<AFewMinutesNow />);
-    expect(comp.getByText("5 minutes")).toBeTruthy();
+    expect(comp.getByText("5 minutes ago")).toBeTruthy();
   });
 
   it("OneHourAgo", () => {
     const comp = render(<OneHourAgo />);
-    expect(comp.getByText("about 1 hour")).toBeTruthy();
+    expect(comp.getByText("about 1 hour ago")).toBeTruthy();
   });
 
   it("OneDayAgo", () => {
     const comp = render(<OneDayAgo />);
-    expect(comp.getByText("1 day")).toBeTruthy();
+    expect(comp.getByText("1 day ago")).toBeTruthy();
   });
 
   it("OneMonthAgo", () => {
     const comp = render(<OneMonthAgo />);
-    expect(comp.getByText("about 1 month")).toBeTruthy();
+    expect(comp.getByText("about 1 month ago")).toBeTruthy();
   });
 
   it("OneYearAgo", () => {
     const comp = render(<OneYearAgo />);
-    expect(comp.getByText("about 1 year")).toBeTruthy();
+    expect(comp.getByText("about 1 year ago")).toBeTruthy();
   });
 
   it("CustomFormat", () => {

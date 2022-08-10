@@ -16,7 +16,6 @@ import {
   columnLabels,
   columns,
   defaultActions,
-  deletingSign,
   sampleData,
 } from "./storybookHelpers";
 
@@ -76,7 +75,7 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
         ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
         : undefined
     }
-    isRowDeleted={({ row }) => row[5] === deletingSign}
+    isRowDeleted={({ row }) => row[5] === "deleting"}
     onRowClick={args.onRowClick || eventsFromNames["onRowClick"]}
     setActionCellOuiaId={
       args.hasCustomActionTestId

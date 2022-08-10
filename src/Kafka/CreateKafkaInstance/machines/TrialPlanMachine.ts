@@ -1,9 +1,8 @@
 import { assign, createMachine, send, sendParent } from "xstate";
+import { CloudProvider, CloudRegion } from "../../types";
 import {
-  CloudProvider,
   CreateKafkaFormData,
   CreateKafkaInstanceError,
-  Region,
   TrialPlanInitializationData,
   TrialSizes,
 } from "../types";
@@ -17,7 +16,7 @@ export type TrialPlanMachineContext = {
   form: {
     name?: string;
     provider?: CloudProvider;
-    region?: Region;
+    region?: CloudRegion;
   };
 
   // based on the form.provider and form.region selection
@@ -43,7 +42,7 @@ export const TrialPlanMachine =
           | { type: "fieldInvalid" }
           | { type: "nameChange"; name: string }
           | { type: "providerChange"; provider: CloudProvider }
-          | { type: "regionChange"; region: Region }
+          | { type: "regionChange"; region: CloudRegion }
           | { type: "nameIsValid" }
           | { type: "nameIsInvalid" }
           | { type: "nameIsTaken" }

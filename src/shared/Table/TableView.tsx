@@ -1,3 +1,4 @@
+import type { ToolbarProps } from "@patternfly/react-core";
 import { Toolbar, ToolbarContent, ToolbarGroup } from "@patternfly/react-core";
 import {
   InnerScrollContainer,
@@ -8,9 +9,10 @@ import { Pagination } from "../Pagination";
 import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 
-export const DEFAULT_PERPAGE = 10;
+export const DEFAULT_PERPAGE = 20;
 
 export type TableViewProps<TRow, TCol> = {
+  toolbarBreakpoint?: ToolbarProps["collapseListedFiltersBreakpoint"];
   toolbarContent: ReactNode;
   itemCount: number | undefined;
   page: number;
@@ -19,6 +21,7 @@ export type TableViewProps<TRow, TCol> = {
   onClearAllFilters?: () => void;
 } & ResponsiveTableProps<TRow, TCol>;
 export const TableView = <TRow, TCol>({
+  toolbarBreakpoint,
   toolbarContent,
   itemCount,
   page,
@@ -31,9 +34,12 @@ export const TableView = <TRow, TCol>({
   const showPagination =
     data?.length !== 0 && itemCount && itemCount > DEFAULT_PERPAGE;
   return (
-    <OuterScrollContainer>
+    <OuterScrollContainer className={"pf-u-h-100"}>
       {(toolbarContent || showPagination) && (
-        <Toolbar clearAllFilters={onClearAllFilters}>
+        <Toolbar
+          clearAllFilters={onClearAllFilters}
+          collapseListedFiltersBreakpoint={toolbarBreakpoint}
+        >
           <ToolbarContent>
             {toolbarContent}
             {showPagination && (
@@ -51,7 +57,7 @@ export const TableView = <TRow, TCol>({
           </ToolbarContent>
         </Toolbar>
       )}
-      <InnerScrollContainer>
+      <InnerScrollContainer className={"pf-u-h-100"}>
         <ResponsiveTable {...tableProps} />
       </InnerScrollContainer>
       {showPagination && (

@@ -1,11 +1,10 @@
 import { assign, createMachine, EventFrom, forwardTo, send } from "xstate";
-import type {
-  CloudProvider,
+import { CloudProvider, CloudRegion, Plan } from "../../types";
+import {
   CloudProviders,
   CreateKafkaFormData,
   CreateKafkaInitializationData,
   CreateKafkaInstanceError,
-  Region,
   StandardPlanInitializationData,
   StandardSizes,
   TrialPlanInitializationData,
@@ -423,7 +422,7 @@ export type CreateKafkaInstanceServices = {
     onUnavailable: () => void;
   }) => void;
   fetchProvidersWithRegions: (
-    plan: "standard" | "developer",
+    plan: Plan,
     events: {
       onAvailable: (p: EventOptions<"providers and regions available">) => void;
       onUnavailable: () => void;
@@ -431,11 +430,11 @@ export type CreateKafkaInstanceServices = {
   ) => void;
   getStandardSizes: (
     provider: CloudProvider,
-    region: Region
+    region: CloudRegion
   ) => Promise<StandardSizes>;
   getTrialSizes: (
     provider: CloudProvider,
-    region: Region
+    region: CloudRegion
   ) => Promise<TrialSizes>;
   onCreate: (
     data: CreateKafkaFormData,

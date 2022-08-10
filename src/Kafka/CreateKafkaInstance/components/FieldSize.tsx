@@ -3,7 +3,7 @@ import { Grid, GridItem, Skeleton, Slider } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormGroupWithPopover } from "../../../shared";
-import type { Size } from "../types";
+import type { Size } from "../../types";
 import { FieldSizeHelperText } from "./FieldSizeHelperText";
 import { FieldSizeHelperTextOverQuota } from "./FieldSizeHelperTextOverQuota";
 import { FieldSizeHelperTextTrial } from "./FieldSizeHelperTextTrial";

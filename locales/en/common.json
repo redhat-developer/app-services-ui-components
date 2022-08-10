@@ -17,6 +17,7 @@
   "kafka": "Kafka",
   "kafka_instance": "$t(common:kafka) Instances",
   "kafka_instance_name": "$t(common:kafka) instance name",
+  "name": "Name",
   "owner": "Owner",
   "progress_stepper_current_step": "{{currentStep}} of {{total}} steps completed",
   "refresh_button_label": "Refresh",

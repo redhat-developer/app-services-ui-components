@@ -40,7 +40,7 @@ export type RenderCellCb<TRow, TCol> = (props: {
   row: TRow;
 }) => ReactElement<ResponsiveTdProps>;
 
-export type RenderActionsCb = <TRow>(props: {
+export type RenderActionsCb<TRow> = (props: {
   ActionsColumn: typeof ActionsColumn;
   row: TRow;
   rowIndex: number;
@@ -53,7 +53,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   data: TRow[] | undefined;
   renderHeader: RenderHeaderCb<TCol>;
   renderCell: RenderCellCb<TRow, TCol>;
-  renderActions?: RenderActionsCb;
+  renderActions?: RenderActionsCb<TRow>;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
@@ -186,8 +186,10 @@ export const ResponsiveTable = <TRow, TCol>({
             isRowSelected !== undefined &&
             isRowSelected({ row: row, rowIndex });
 
-          const onClick = () =>
-            !deleted && onRowClick && onRowClick({ row, rowIndex });
+          const onClick =
+            !deleted && onRowClick
+              ? () => onRowClick({ row, rowIndex })
+              : undefined;
           const cells = columns.map((column, colIndex) => {
             return renderCell({
               Td: TdList[colIndex],

@@ -6,7 +6,6 @@ import {
   ToolbarItem,
 } from "@patternfly/react-core";
 import type { IAction } from "@patternfly/react-table";
-import { KafkaInstanceStatus } from "../../Kafka";
 
 export const columns = [
   "name",
@@ -25,38 +24,8 @@ export const columnLabels: { [key in typeof columns[number]]: string } = {
   region: "Region",
   status: "Status",
 };
-const readySign = (
-  <KafkaInstanceStatus
-    status={"ready"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-const creationPendingSign = (
-  <KafkaInstanceStatus
-    status={"preparing"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-export const deletingSign = (
-  <KafkaInstanceStatus
-    status={"deleting"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-export type SampleDataType = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  typeof readySign | typeof creationPendingSign | typeof deletingSign
-];
+
+export type SampleDataType = [string, string, string, string, string, string];
 export const sampleData: Array<SampleDataType> = [
   [
     "kafka-test-instance",
@@ -64,7 +33,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 1 hours ago",
     "Amazon Web Services",
     "US East, N. Virginia",
-    creationPendingSign,
+    "pending",
   ],
   [
     "kafka-test-instance-2",
@@ -72,7 +41,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 2 hours ago",
     "Amazon Web Services 2",
     "US East, N. Virginia 2",
-    creationPendingSign,
+    "pending",
   ],
   [
     "kafka-test-instance-3",
@@ -80,7 +49,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 3 hours ago",
     "Amazon Web Services 3",
     "US East, N. Virginia 3",
-    readySign,
+    "ready",
   ],
   [
     "kafka-test-instance-4",
@@ -88,7 +57,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 4 hours ago",
     "Amazon Web Services 4",
     "US East, N. Virginia 4",
-    deletingSign,
+    "deleting",
   ],
   [
     "kafka-test-instance-5",
@@ -96,7 +65,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 5 hours ago",
     "Amazon Web Services 5",
     "US East, N. Virginia 5",
-    readySign,
+    "ready",
   ],
 ];
 export const defaultActions = (data: any): IAction[] => [

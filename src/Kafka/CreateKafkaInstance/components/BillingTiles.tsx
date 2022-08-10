@@ -11,7 +11,7 @@ import {
 import { AwsIcon, MicrosoftIcon, RedhatIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { MarketPlace } from "../types";
+import type { MarketPlace } from "../../types";
 
 export type BillingTilesProps = {
   value: "prepaid" | string | undefined;

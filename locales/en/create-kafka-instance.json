@@ -49,7 +49,6 @@
   "instance_creation_time_alert": "Your $t(common:kafka) instance will be ready for use shortly after creation.",
   "instance_information": "Details",
   "instance_name": "Name",
-  "kafka_status_created_shortly_help": "This will be ready shortly.",
   "kafka_status_popover": {
     "header_content": "This will be ready shortly. In the meantime, you can create a service account under the <0>Connection tab.<0>",
     "header_content_with_error": "In the meantime, you can create a service account under the <0>Connections tab.</0> If your Kafka instance continues to take longer than expected, <1>open a support case.</1>",
@@ -69,7 +68,6 @@
     "title": "Creating instance",
     "warning_or_error_title": "$t(kafka_status_warning_or_error_title)"
   },
-  "kafka_status_warning_or_error_title": "This is taking longer than expected.",
   "learn_about_cloud_regions": "Learn more about cloud regions",
   "learn_about_sizes": "Learn more about sizes",
   "message_size_value": "up to {{value}} MiB",
@@ -112,12 +110,6 @@
   "standard_kafka_streaming_unit_zero": "Your organization has no streaming units remaining",
   "standard_kafka_streaming_unit_one": "Your organization has {{count}} streaming unit remaining",
   "standard_kafka_streaming_unit_other": "Your organization has {{count}} streaming units remaining",
-  "statuses": {
-    "creating": "Creating",
-    "degraded": "Degraded",
-    "deleting": "Deleting",
-    "ready": "Ready"
-  },
   "storage_value": "up to {{value}} GiB",
   "stream_unit_value": "{{size}} streaming units",
   "streaming_size_value": "{{value}} streaming unit",
