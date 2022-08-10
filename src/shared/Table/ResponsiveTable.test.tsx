@@ -10,6 +10,7 @@ const {
   UndefinedDataShowsSkeleton,
   WithoutActions,
   NoResults,
+  CustomActionTestId,
 } = composeStories(stories);
 
 describe("ResponsiveTable", () => {
@@ -27,7 +28,7 @@ describe("ResponsiveTable", () => {
     expect(comp.queryAllByLabelText("Actions")).toHaveLength(
       sampleData.length - 1 /* deleted lines don't have actions */
     );
-    const actions = comp.queryAllByTestId("kebab-options");
+    const actions = comp.queryAllByTestId("actions-for-row-0");
     userEvent.click(actions[0]);
     expect(clickSpy).not.toHaveBeenCalled();
     userEvent.click(comp.getByText(sampleData[0][0]));
@@ -64,5 +65,10 @@ describe("ResponsiveTable", () => {
   it("works without specifying renderActions", () => {
     const comp = render(<WithoutActions />);
     expect(comp.queryAllByLabelText("Actions")).toHaveLength(0);
+  });
+
+  it("can use a custom test id for actions", () => {
+    const comp = render(<CustomActionTestId />);
+    expect(comp.queryAllByTestId("my-action-row-0")).toHaveLength(1);
   });
 });
