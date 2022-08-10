@@ -35,7 +35,7 @@ export const InteractiveExample: ComponentStory<typeof Settings> = (args) => {
       setIsModalOpen(true);
     } else {
       setConnectionStatus("TurningOn");
-      apiError<{ ConfigurationOff: boolean }>(
+      fakeApi<{ ConfigurationOff: boolean }>(
         {
           ConfigurationOff: true,
         },

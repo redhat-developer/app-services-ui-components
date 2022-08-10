@@ -41,7 +41,7 @@ export const SettingsAlert: VoidFunctionComponent<SettingsAlertProps> = ({
                       ns={"kafka"}
                       i18nKey={"settings.success_alert"}
                       values={{
-                        status: connectionState ? "On" : "Off",
+                        status: connectionState ? "on" : "off",
                       }}
                     />
                   }

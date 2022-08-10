@@ -123,14 +123,13 @@
   "partitions_value": "up to 500",
   "select_filter_category": "Select filter category",
   "settings": {
-    "connection_re_authentication_label": "Connection re-authentication.",
+    "connection_re_authentication_label": "Connection re-authentication",
     "Connection_re_authentication_states": {
       "turning_off": "Turning off...",
       "turning_on": "Turning on...",
       "turnoff": "Off",
       "turnon": "On"
     },
-    "connection_re_authentication_switch": "Connection re-authentication.",
     "connection_re_authentication_title": "Connection re-authentication:",
     "error_alert_title": "Something went wrong",
     "error_alert_title_description": "We're unable to update connection re-authentication at this time, Try again later.",

@@ -13,7 +13,7 @@ import {
 } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { SettingsAlert } from "./components/SettingsAlert";
+import { SettingsAlert } from "./components";
 import type { AlertStatus, SettingsStatus } from "./types";
 
 export type SettingsProps = {
@@ -48,71 +48,79 @@ export const Settings: FunctionComponent<SettingsProps> = ({
         <PageSection>
           <Card>
             <CardBody>
-              <Flex>
-                <FlexItem component={"span"} spacer={{ default: "spacerSm" }}>
-                  <strong>
-                    {t("settings.connection_re_authentication_title")}
-                  </strong>
+              <Flex flexWrap={{ default: "nowrap" }}>
+                <FlexItem grow={{ default: "grow" }}>
+                  <Flex>
+                    <FlexItem
+                      component={"span"}
+                      spacer={{ default: "spacerSm" }}
+                    >
+                      <strong>
+                        {t("settings.connection_re_authentication_title")}
+                      </strong>
+                    </FlexItem>
+                    <FlexItem>
+                      {(() => {
+                        switch (connectionStatus) {
+                          case "On":
+                            return t(
+                              "settings.Connection_re_authentication_states.turnon"
+                            );
+                          case "TurningOff":
+                            return (
+                              <>
+                                <Spinner
+                                  size="md"
+                                  aria-valuetext={t(
+                                    "settings.Connection_re_authentication_states.turning_off"
+                                  )}
+                                  aria-label={t(
+                                    "settings.connection_re_authentication_label"
+                                  )}
+                                />{" "}
+                                {t(
+                                  "settings.Connection_re_authentication_states.turning_off"
+                                )}
+                              </>
+                            );
+                          case "Off":
+                            return t(
+                              "settings.Connection_re_authentication_states.turnoff"
+                            );
+                          case "TurningOn":
+                            return (
+                              <>
+                                <Spinner
+                                  size="md"
+                                  aria-valuetext={
+                                    "settings.Connection_re_authentication_states.turning_on"
+                                  }
+                                  aria-label={t(
+                                    "settings.connection_re_authentication_label"
+                                  )}
+                                />{" "}
+                                {t(
+                                  "settings.Connection_re_authentication_states.turning_on"
+                                )}
+                              </>
+                            );
+                          default:
+                            return null;
+                        }
+                      })()}
+                    </FlexItem>
+                  </Flex>
                 </FlexItem>
                 <FlexItem>
-                  {(() => {
-                    switch (connectionStatus) {
-                      case "On":
-                        return t(
-                          "settings.Connection_re_authentication_states.turnon"
-                        );
-                      case "TurningOff":
-                        return (
-                          <>
-                            <Spinner
-                              size="md"
-                              aria-valuetext={t(
-                                "settings.Connection_re_authentication_states.turning_off"
-                              )}
-                              aria-label={t(
-                                "settings.connection_re_authentication_label"
-                              )}
-                            />{" "}
-                            {t(
-                              "settings.Connection_re_authentication_states.turning_off"
-                            )}
-                          </>
-                        );
-                      case "Off":
-                        return t(
-                          "settings.Connection_re_authentication_states.turnoff"
-                        );
-                      case "TurningOn":
-                        return (
-                          <>
-                            <Spinner
-                              size="md"
-                              aria-valuetext={
-                                "settings.Connection_re_authentication_states.turning_on"
-                              }
-                              aria-label={t(
-                                "settings.connection_re_authentication_label"
-                              )}
-                            />{" "}
-                            {t(
-                              "settings.Connection_re_authentication_states.turning_on"
-                            )}
-                          </>
-                        );
-                      default:
-                        return null;
-                    }
-                  })()}
-                </FlexItem>
-                <FlexItem component={"span"} align={{ default: "alignRight" }}>
                   <Switch
                     id="Connection-re-authentication-switch"
                     aria-label={t(
-                      "settings.connection_re_authentication_switch"
+                      "settings.connection_re_authentication_label"
                     )}
-                    isChecked={
-                      connectionStatus === "On" ||
-                      connectionStatus === "TurningOff"
+                    isChecked={connectionStatus === "On"}
+                    isDisabled={
+                      connectionStatus === "TurningOff" ||
+                      connectionStatus === "TurningOn"
                     }
                     onChange={onSwitchClick}
                   />
