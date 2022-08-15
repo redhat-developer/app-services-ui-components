@@ -116,7 +116,7 @@ class Chips extends React.Component {
           <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup
               // className="lightblue"
-              categoryName={<TopicLabel />}
+              categoryName={<TopicLabel />} className = "bkg-color"
             >
               {chipsSet2.map((currentChip) => (
                 <Chip
@@ -130,7 +130,7 @@ class Chips extends React.Component {
           </Chip>
 
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup categoryName={<KafkaInstanceLabel />}>
+            <ChipGroup categoryName={<KafkaInstanceLabel />} className = "bkg-color">
               {chipsSet3.map((currentChip) => (
                 <Chip
                   key={currentChip}
@@ -143,7 +143,7 @@ class Chips extends React.Component {
           </Chip>
 
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup categoryName={<ConsumerGroupLabel />}>
+            <ChipGroup categoryName={<ConsumerGroupLabel />}className = "bkg-color">
               {chipsSet4.map((currentChip) => (
                 <Chip
                   key={currentChip}

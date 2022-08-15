@@ -91,7 +91,7 @@ class Chips extends React.Component {
           }}
         >
           <Chip className="custom-c-chip" isReadOnly>
-            <ChipGroup categoryName={<TransactionalIdLabel />}>
+            <ChipGroup categoryName={<TransactionalIdLabel />} className = "bkg-color">
               {chipsSet.map((currentChip) => (
                 <Chip
                   key={currentChip}

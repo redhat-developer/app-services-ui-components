@@ -136,6 +136,7 @@ class Chips extends React.Component {
       <React.Fragment>
         <ChipGroup>
           <ChipGroup
+          className="color"
             categoryName="Resource type operation"
             isClosable
             onClick={() => {
@@ -145,7 +146,7 @@ class Chips extends React.Component {
             }}
           >
             <Chip className="custom-c-chip" isReadOnly>
-              <ChipGroup categoryName={<TopicLabel />}>
+              <ChipGroup categoryName={<TopicLabel />} className = "bkg-color">
                 {chipsSet2.map((currentChip) => (
                   <Chip
                     key={currentChip}
@@ -157,7 +158,7 @@ class Chips extends React.Component {
               </ChipGroup>
             </Chip>
             <Chip className="custom-c-chip" isReadOnly>
-              <ChipGroup categoryName={<KafkaInstanceLabel />}>
+              <ChipGroup categoryName={<KafkaInstanceLabel />} className = "bkg-color">
                 {chipsSet3.map((currentChip) => (
                   <Chip
                     key={currentChip}
@@ -169,7 +170,7 @@ class Chips extends React.Component {
               </ChipGroup>
             </Chip>
             <Chip className="custom-c-chip" isReadOnly>
-              <ChipGroup categoryName={<ConsumerGroupLabel />}>
+              <ChipGroup categoryName={<ConsumerGroupLabel />} className = "bkg-color">
                 {chipsSet4.map((currentChip) => (
                   <Chip
                     key={currentChip}
@@ -182,14 +183,14 @@ class Chips extends React.Component {
             </Chip>
           </ChipGroup>
           <ChipGroup
-            className="content"
+            className="size"
             categoryName="Permission access types"
             isClosable
             onClick={() => {
               this.deleteCategory5();
             }}
           >
-            <ChipGroup className="custom-c-chip" isReadOnly>
+            <ChipGroup className="custom-c-chip" isReadOnly >
               {chipsSet5.map((currentChip) => (
                 <Chip
                   key={currentChip}
