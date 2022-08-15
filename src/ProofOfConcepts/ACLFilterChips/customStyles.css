@@ -17,7 +17,6 @@
   );
   display: inline-flex;
   justify-content: center;
-  align-items: center;
 }
 
 .pf-c-label.mas-m-solid.pf-m-blue {
@@ -49,14 +48,11 @@
   color: rgb(234, 0, 255);
 }
 
-.pf-c-chip-group.bkg-color {
+:root .pf-c-chip-group.bkg-color {
   background-color: var(--pf-c-label--BackgroundColor);
-  --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-100);
-}
-
-.pf-c-chip-group__close {
-  display: flex;
-  align-self: center;
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--black-200);
+  --pf-c-chip-group--m-category--PaddingTop: 0;
+  --pf-c-chip-group--m-category--PaddingBottom: 0;
 }
 
 .pf-c-chip.custom-c-chip {
@@ -72,6 +68,14 @@
 
 .pf-c-chip.custom-c-chip {
   --pf-c-chip__text--MaxWidth: auto;
+  display: table-row;
+  background-color: var(--pf-c-label--BackgroundColor);
+  --pf-c-label--BackgroundColor: var(--pf-global--palette--black-200);
+}
+
+:root .pf-c-chip-group__close {
+  display: flex;
+  align-self: center;
 }
 
 .pf-c-chip-group.bar {
