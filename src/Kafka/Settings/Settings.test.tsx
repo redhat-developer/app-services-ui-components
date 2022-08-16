@@ -102,6 +102,15 @@ describe("Consumer Group empty state", () => {
     expect(
       await comp.findByText("Connection re-authentication turned on")
     ).toBeInTheDocument();
+
+    userEvent.click(
+      comp.getByRole("button", {
+        name: "Close Success alert: alert: [object Object]",
+      })
+    );
+    expect(
+      comp.queryByText("Connection re-authentication turned on")
+    ).not.toBeInTheDocument();
   });
 
   it("Connection re-authentication updation failed", async () => {
@@ -113,5 +122,16 @@ describe("Consumer Group empty state", () => {
         "We're unable to update connection re-authentication at this time, Try again later."
       )
     ).toBeInTheDocument();
+
+    userEvent.click(
+      comp.getByRole("button", {
+        name: "Close Danger alert: alert: Something went wrong",
+      })
+    );
+    expect(
+      comp.queryByText(
+        "We're unable to update connection re-authentication at this time, Try again later."
+      )
+    ).not.toBeInTheDocument();
   });
 });
