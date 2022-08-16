@@ -216,6 +216,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-7"
                     data-ouia-component-type="PF4/Select"
@@ -421,6 +422,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-8"
                     data-ouia-component-type="PF4/Select"
@@ -762,6 +764,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-5"
                     data-ouia-component-type="PF4/Select"
@@ -967,6 +970,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-6"
                     data-ouia-component-type="PF4/Select"
@@ -1279,6 +1283,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                     data-ouia-component-type="PF4/Select"
@@ -1484,6 +1489,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                   class="pf-c-form__group-control"
                 >
                   <div
+                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-4"
                     data-ouia-component-type="PF4/Select"
