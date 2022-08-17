@@ -157,7 +157,6 @@ export const Settings: FunctionComponent<SettingsProps> = ({
       </Page>
       <SettingsAlert
         alertStatus={alertStatus}
-        // closeAction={onClickCloseAction}
         connectionState={connectionState}
       />
     </>

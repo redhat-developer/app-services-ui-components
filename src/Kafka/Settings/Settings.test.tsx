@@ -10,7 +10,7 @@ const {
   TurningOffConnectionReauthentication,
   TurningONConnectionReauthentication,
   TurnONConnectionReauthentication,
-  TurnONConnectionReauthenticationFail,
+  TurnOnConnectionFailure,
 } = composeStories(stories);
 
 describe("Consumer Group empty state", () => {
@@ -114,7 +114,7 @@ describe("Consumer Group empty state", () => {
   });
 
   it("Connection re-authentication updation failed", async () => {
-    const comp = render(<TurnONConnectionReauthenticationFail />);
+    const comp = render(<TurnOnConnectionFailure />);
     await waitForI18n(comp);
     expect(await comp.findByText("Something went wrong")).toBeInTheDocument();
     expect(

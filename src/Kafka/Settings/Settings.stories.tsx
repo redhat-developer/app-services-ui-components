@@ -35,9 +35,9 @@ export const InteractiveExample: ComponentStory<typeof Settings> = (args) => {
       setIsModalOpen(true);
     } else {
       setConnectionStatus("TurningOn");
-      fakeApi<{ ConfigurationOff: boolean }>(
+      fakeApi<{ isConnected: boolean }>(
         {
-          ConfigurationOff: true,
+          isConnected: true,
         },
         4000
       )
@@ -56,9 +56,9 @@ export const InteractiveExample: ComponentStory<typeof Settings> = (args) => {
   const onClickTurnOff = () => {
     setIsModalOpen(false);
     setConnectionStatus("TurningOff");
-    fakeApi<{ ConfigurationOff: boolean }>(
+    fakeApi<{ isConnected: boolean }>(
       {
-        ConfigurationOff: false,
+        isConnected: false,
       },
       4000
     )
@@ -122,8 +122,8 @@ TurnONConnectionReauthentication.args = {
   connectionState: true,
 };
 
-export const TurnONConnectionReauthenticationFail = Template.bind({});
-TurnONConnectionReauthenticationFail.args = {
+export const TurnOnConnectionFailure = Template.bind({});
+TurnOnConnectionFailure.args = {
   connectionStatus: "Off",
   alertStatus: "danger",
 };
