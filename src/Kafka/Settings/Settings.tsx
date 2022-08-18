@@ -53,6 +53,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                   <FlexItem component={"span"} spacer={{ default: "spacerSm" }}>
                     <strong>
                       {t("settings.connection_re_authentication_label")}
+                      {":"}
                     </strong>
                   </FlexItem>
                   <FlexItem>
