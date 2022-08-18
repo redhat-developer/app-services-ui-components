@@ -119,7 +119,7 @@ describe("Consumer Group empty state", () => {
     expect(await comp.findByText("Something went wrong")).toBeInTheDocument();
     expect(
       await comp.findByText(
-        "We're unable to update connection re-authentication at this time, Try again later."
+        "We're unable to update connection re-authentication at this time. Try again later."
       )
     ).toBeInTheDocument();
 
@@ -130,7 +130,7 @@ describe("Consumer Group empty state", () => {
     );
     expect(
       comp.queryByText(
-        "We're unable to update connection re-authentication at this time, Try again later."
+        "We're unable to update connection re-authentication at this time. Try again later."
       )
     ).not.toBeInTheDocument();
   });

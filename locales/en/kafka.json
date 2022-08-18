@@ -130,9 +130,8 @@
       "turnoff": "Off",
       "turnon": "On"
     },
-    "connection_re_authentication_title": "Connection re-authentication:",
     "error_alert_title": "Something went wrong",
-    "error_alert_title_description": "We're unable to update connection re-authentication at this time, Try again later.",
+    "error_alert_title_description": "We're unable to update connection re-authentication at this time. Try again later.",
     "kafka_instance_settings_label": "Configure global settings for this Kafka instance.",
     "success_alert": "Connection re-authentication turned {{status}}",
     "turn_off_button_label": "Turn off",
