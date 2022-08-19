@@ -45,7 +45,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
         </Card>
       </PageSection>
       <PageSection>
-        <Card className={"settings-card--max-width"}>
+        <Card className={"mas--settings__card"}>
           <CardBody>
             <Flex flexWrap={{ default: "nowrap" }}>
               <FlexItem grow={{ default: "grow" }}>
@@ -61,7 +61,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                       switch (connectionStatus) {
                         case "On":
                           return t(
-                            "settings.Connection_re_authentication_states.turnon"
+                            "settings.Connection_re_authentication_states.on"
                           );
                         case "TurningOff":
                           return (
@@ -82,7 +82,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                           );
                         case "Off":
                           return t(
-                            "settings.Connection_re_authentication_states.turnoff"
+                            "settings.Connection_re_authentication_states.off"
                           );
                         case "TurningOn":
                           return (

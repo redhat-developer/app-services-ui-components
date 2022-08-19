@@ -105,7 +105,7 @@ describe("Consumer Group empty state", () => {
 
     userEvent.click(
       comp.getByRole("button", {
-        name: "Close Success alert: alert: [object Object]",
+        name: "Success Alert close",
       })
     );
     expect(
