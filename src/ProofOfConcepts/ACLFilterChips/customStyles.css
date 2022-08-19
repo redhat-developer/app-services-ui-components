@@ -1,20 +1,6 @@
-.pf-c-label.mas-m-solid.smaller-label {
+.pf-c-label.mas-m-solid.mas-m-text {
   --pf-c-label__content--before--BorderColor: transparent;
   --pf-c-label__content--Color: var(--pf-global--palette--white);
-  font-weight: var(--pf-global--FontWeight--bold);
-  font-size: calc(var(--pf-global--FontSize--xs) * 0.9);
-  min-width: calc(
-    (
-        (var(--pf-c-label--FontSize) * var(--pf-global--LineHeight--md)) +
-          (var(--pf-c-label--PaddingTop) + var(--pf-c-label--PaddingBottom))
-      ) * 0.85
-  );
-  min-height: calc(
-    (
-        (var(--pf-c-label--FontSize) * var(--pf-global--LineHeight--md)) +
-          (var(--pf-c-label--PaddingTop) + var(--pf-c-label--PaddingBottom))
-      ) * 0.85
-  );
   display: inline-flex;
   justify-content: center;
 }
