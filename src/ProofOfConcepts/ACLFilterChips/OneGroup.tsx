@@ -8,7 +8,6 @@ export const OneGroupChips: VoidFunctionComponent = () => {
     <React.Fragment>
       {/* Mock toolbar with options pre-checked*/}
       <Toolbar />
-      <br></br>
       &emsp;
       <Chips />
     </React.Fragment>
