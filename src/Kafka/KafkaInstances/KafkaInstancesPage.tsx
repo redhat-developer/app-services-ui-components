@@ -1,7 +1,12 @@
-import { DropdownGroup, PageSection, Title } from "@patternfly/react-core";
+import {
+  Button,
+  DropdownGroup,
+  PageSection,
+  Title,
+} from "@patternfly/react-core";
 import { parseISO } from "date-fns";
-import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import type { TableViewProps } from "../../shared";
 import { FormatDate, TableView } from "../../shared";
 import type { KafkaInstance, KafkaInstanceField } from "../types";
@@ -10,10 +15,10 @@ import { useKafkaLabels } from "../useKafkaLabels";
 import type { EmptyStateNoInstancesProps } from "./components";
 import {
   EmptyStateNoInstances,
-  InstanceDrawer,
   InstanceStatus,
   InstancesToolbar,
 } from "./components";
+import { useKafkaInstanceDrawer } from "./KafkaInstanceDrawer";
 
 const KafkaInstancesColumns: KafkaInstanceField[] = [
   "name",
@@ -26,6 +31,7 @@ const KafkaInstancesColumns: KafkaInstanceField[] = [
 
 export type KafkaInstancesPageProps<T extends KafkaInstance> = {
   instances: T[] | undefined;
+  getUrlForInstance: (row: T) => string;
   onDetails: (row: T) => void;
   onConnection: (row: T) => void;
   onChangeOwner: (row: T) => void;
@@ -42,6 +48,7 @@ export const KafkaInstancesPage = <T extends KafkaInstance>({
   instances,
   itemCount,
   page,
+  getUrlForInstance,
   onPageChange,
   onDetails,
   onConnection,
@@ -53,15 +60,11 @@ export const KafkaInstancesPage = <T extends KafkaInstance>({
   onClickSupportLink,
 }: KafkaInstancesPageProps<T>) => {
   const { t } = useTranslation("kafka");
-  const [selectedRow, setSelectedRow] = useState<KafkaInstance>();
-
+  const { openDrawer, drawerInstance, closeDrawer } = useKafkaInstanceDrawer();
   const labels = useKafkaLabels();
 
   return (
-    <InstanceDrawer
-      instance={selectedRow}
-      onClose={() => setSelectedRow(undefined)}
-    >
+    <>
       <PageSection variant={"light"}>
         <Title headingLevel={"h1"}>{t("table.title")}</Title>
       </PageSection>
@@ -78,6 +81,23 @@ export const KafkaInstancesPage = <T extends KafkaInstance>({
               <Td key={key} dataLabel={labels.fields[column]}>
                 {(() => {
                   switch (column) {
+                    case "name":
+                      return (
+                        <Button
+                          variant="link"
+                          component={(props) => (
+                            <Link to={getUrlForInstance(row)} {...props}>
+                              {row.name}
+                            </Link>
+                          )}
+                          isDisabled={DeletingStatuses.includes(row["status"])}
+                          onClick={() => {
+                            if (drawerInstance?.id !== row.id) {
+                              closeDrawer();
+                            }
+                          }}
+                        />
+                      );
                     case "provider":
                       return labels.providers[row.provider];
                     case "createdAt":
@@ -136,8 +156,10 @@ export const KafkaInstancesPage = <T extends KafkaInstance>({
             />
           )}
           setActionCellOuiaId={() => "kebab-menu"}
-          onRowClick={({ row }) => setSelectedRow(row)}
-          isRowSelected={({ row }) => row === selectedRow}
+          onRowClick={({ row }) => openDrawer(row)}
+          isRowSelected={({ row }) =>
+            drawerInstance ? row.id === drawerInstance.id : false
+          }
           isRowDeleted={({ row }) => DeletingStatuses.includes(row["status"])}
           toolbarBreakpoint={"xl"}
           toolbarContent={
@@ -163,6 +185,6 @@ export const KafkaInstancesPage = <T extends KafkaInstance>({
           />
         </TableView>
       </PageSection>
-    </InstanceDrawer>
+    </>
   );
 };

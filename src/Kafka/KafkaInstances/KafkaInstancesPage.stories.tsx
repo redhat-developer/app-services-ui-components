@@ -1,6 +1,7 @@
 import { Page } from "@patternfly/react-core";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { addHours } from "date-fns";
+import { KafkaInstanceDrawer } from "./KafkaInstanceDrawer";
 import { KafkaInstancesPage as KafkaInstancesPageComp } from "./KafkaInstancesPage";
 
 const now = new Date().toISOString();
@@ -8,12 +9,16 @@ const future = addHours(new Date(), 19).toISOString();
 
 export default {
   component: KafkaInstancesPageComp,
-  args: {},
+  args: {
+    getUrlForInstance: (row) => `/${row.id}`,
+  },
 } as ComponentMeta<typeof KafkaInstancesPageComp>;
 
 const Template: ComponentStory<typeof KafkaInstancesPageComp> = (args) => (
   <Page>
-    <KafkaInstancesPageComp {...args} />
+    <KafkaInstanceDrawer>
+      <KafkaInstancesPageComp {...args} />
+    </KafkaInstanceDrawer>
   </Page>
 );
 

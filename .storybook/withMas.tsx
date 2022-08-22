@@ -1,7 +1,7 @@
 import { PartialStoryFn, StoryContext } from "@storybook/csf";
 import { Args, ReactFramework } from "@storybook/react/types-6-0";
 import React, { useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { MemoryRouter as Router } from "react-router-dom";
 
 import { AppServicesLoading, I18nProvider } from "../src";
 import { InsightsChromeLayout } from "./InsightsChromeLayout";

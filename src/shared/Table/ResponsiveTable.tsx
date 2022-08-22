@@ -208,7 +208,6 @@ export const ResponsiveTable = <TRow, TCol>({
               columnWidth={minimumColumnWidth}
               canHide={false}
               isActionCell={true}
-              onClick={(event) => event.stopPropagation()}
               data-testid={
                 setActionCellOuiaId
                   ? setActionCellOuiaId({ row, rowIndex })
@@ -320,7 +319,13 @@ export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
     return (
       <Tr
         isHoverable={!isDeleted && onClick !== undefined}
-        onRowClick={onClick}
+        onRowClick={(e) => {
+          if (e?.target instanceof HTMLElement) {
+            if (!["a", "button"].includes(e.target.tagName.toLowerCase())) {
+              onClick && onClick();
+            }
+          }
+        }}
         isRowSelected={isSelected}
         className={isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined}
         data-testid={[isSelected && "row-selected", isDeleted && "row-deleted"]
