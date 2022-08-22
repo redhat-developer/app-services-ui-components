@@ -49,6 +49,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
     <ToolbarItem>
       <InputGroup>
         <Dropdown
+          data-testid={"filter-group-dropdown"}
           toggle={
             <DropdownToggle
               onToggle={setIsOpen}
