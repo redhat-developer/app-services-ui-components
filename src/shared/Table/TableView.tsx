@@ -43,6 +43,7 @@ export const TableView = <TRow, TCol>({
                   page={page}
                   perPage={perPage}
                   onChange={onPageChange}
+                  variant={"top"}
                   isCompact
                 />
               </ToolbarGroup>
@@ -54,18 +55,13 @@ export const TableView = <TRow, TCol>({
         <ResponsiveTable {...tableProps} />
       </InnerScrollContainer>
       {showPagination && (
-        <Toolbar>
-          <ToolbarContent>
-            <ToolbarGroup alignment={{ default: "alignRight" }}>
-              <Pagination
-                itemCount={itemCount}
-                page={page}
-                perPage={perPage}
-                onChange={onPageChange}
-              />
-            </ToolbarGroup>
-          </ToolbarContent>
-        </Toolbar>
+        <Pagination
+          itemCount={itemCount}
+          page={page}
+          perPage={perPage}
+          variant={"bottom"}
+          onChange={onPageChange}
+        />
       )}
     </OuterScrollContainer>
   );
