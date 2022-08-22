@@ -106,6 +106,7 @@ export const PartitionSelector: VoidFunctionComponent<
           isDisabled={isDisabled}
           placeholderText={t("partition_placeholder")}
           onClear={() => onChange(undefined)}
+          data-testid={"partition-selector"}
         >
           {options}
         </Select>
