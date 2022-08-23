@@ -15,7 +15,6 @@ import { useState } from "react";
 import type { FunctionComponent } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "../../shared";
 import "./KafkaInstanceDrawer.css";
 
 export type KafkaConnectionTabP1Props = {
@@ -27,7 +26,6 @@ export type KafkaConnectionTabP1Props = {
   adminAPIUrl: string | undefined;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
-  linkToDocPortal: string;
 };
 
 export const KafkaConnectionTabP1: FunctionComponent<
@@ -41,7 +39,6 @@ export const KafkaConnectionTabP1: FunctionComponent<
   adminAPIUrl,
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
-  linkToDocPortal,
 }) => {
   const { t } = useTranslation("connection-tab-p1");
 
@@ -156,11 +153,6 @@ export const KafkaConnectionTabP1: FunctionComponent<
                             component="a"
                             href="https://console.redhat.com/docs/api/kafkainstance?github-owner=redhat-developer&github-repo=app-services-sdk-core&github-content=kafka-admin-rest.yaml%3Fref%3Ddoc-portal&readonly=true"
                           />,
-                          <ExternalLink
-                            testId={"customerPortal-link"}
-                            href={linkToDocPortal}
-                            className={"pf-u-ml-xs"}
-                          />,
                         ]}
                       />
                     </p>
@@ -211,11 +203,6 @@ export const KafkaConnectionTabP1: FunctionComponent<
                             variant={ButtonVariant.link}
                             component="a"
                             href="https://console.redhat.com/docs/api/kafkamgmt?github-owner=redhat-developer&github-repo=app-services-sdk-core&github-content=kas-fleet-manager.yaml%3Fref%3Ddoc-portal"
-                          />,
-                          <ExternalLink
-                            testId={"customerPortal-link"}
-                            href={linkToDocPortal}
-                            className={"pf-u-ml-xs"}
                           />,
                         ]}
                       />
