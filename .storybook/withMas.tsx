@@ -45,6 +45,8 @@ export const withMas = (
               "overview-v3": () => import("../locales/en/overview-v3.json"),
               "connection-tab": () =>
                 import("../locales/en/connection-tab.json"),
+              "connection-tab-p1": () =>
+                import("../locales/en/connection-tab-p1.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),
