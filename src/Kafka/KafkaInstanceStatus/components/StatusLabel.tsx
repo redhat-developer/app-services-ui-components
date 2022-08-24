@@ -15,11 +15,17 @@ import {
 } from "@patternfly/react-icons";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import type { KafkaStatus } from "../../types";
+import type { Status } from "../../types";
+import {
+  CreatingStatuses,
+  DegradedStatuses,
+  DeletingStatuses,
+  ReadyStatuses,
+} from "../../types";
 import "./StatusLabel.css";
 
 type StatusLabelProps = {
-  value: KafkaStatus;
+  value: Status;
   showWarning?: boolean;
   showError?: boolean;
   withPopover?: boolean;
@@ -34,12 +40,12 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
     { value, showWarning = false, showError = false, withPopover = false },
     ref
   ) => {
-    const { t } = useTranslation(["create-kafka-instance"]);
+    const { t } = useTranslation("kafka");
 
     const buttonVariant = withPopover ? "link" : "plain";
 
-    switch (value) {
-      case "ready":
+    switch (true) {
+      case ReadyStatuses.includes(value):
         return (
           <div>
             <Split hasGutter className="mas-c-status">
@@ -51,9 +57,7 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
           </div>
         );
 
-      case "accepted":
-      case "provisioning":
-      case "preparing":
+      case CreatingStatuses.includes(value):
         switch (true) {
           case showWarning:
             return (
@@ -93,7 +97,7 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
                   variant="danger"
                   isInline
                   isPlain
-                  title="This is taking longer than expected."
+                  title={t("status_warning_or_error_title")}
                 />
               </div>
             );
@@ -112,7 +116,7 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
                       <FlexItem>
                         <HelperText>
                           <HelperTextItem variant="indeterminate">
-                            {t("kafka_status_created_shortly_help")}
+                            {t("status_created_shortly_help")}
                           </HelperTextItem>
                         </HelperText>
                       </FlexItem>
@@ -123,7 +127,7 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
             );
         }
 
-      case "degraded":
+      case DegradedStatuses.includes(value):
         return (
           <div>
             <Split hasGutter className="mas-c-status">
@@ -135,8 +139,7 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
           </div>
         );
 
-      case "deleting":
-      case "deprovision":
+      case DeletingStatuses.includes(value):
         return (
           <div>
             <p className="mas-m-deleting"> {t("statuses.deleting")}</p>

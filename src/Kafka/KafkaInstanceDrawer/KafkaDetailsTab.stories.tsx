@@ -1,6 +1,6 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { addHours } from "date-fns";
-import type { MarketplaceSubscription } from "../CreateKafkaInstance";
+import type { MarketplaceSubscription } from "../types";
 import { KafkaDetailsTab } from "./KafkaDetailsTab";
 
 const billingValues: { [key: string]: MarketplaceSubscription | "prepaid" } = {

@@ -1,15 +1,14 @@
+import { differenceInMinutes } from "date-fns";
 import type { VoidFunctionComponent } from "react";
 import { useCallback, useRef, useState } from "react";
+import { useInterval } from "../../utils";
+import type { Status } from "../types";
 import type { StatusPopoverProps } from "./components";
 import { StatusLabel, StatusPopover } from "./components";
-
-import type { KafkaStatus } from "./types";
 import { KafkaToPopoverMapping } from "./types";
-import { differenceInMinutes } from "date-fns";
-import { useInterval } from "../../utils";
 
 export type KafkaInstanceStatusProps = {
-  status: KafkaStatus;
+  status: Status;
   createdAt: Date;
   warningAfterMinutes?: number;
   errorAfterMinutes?: number;

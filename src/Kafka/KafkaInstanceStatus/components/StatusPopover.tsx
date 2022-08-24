@@ -1,12 +1,11 @@
+import type { PopoverProps } from "@patternfly/react-core";
+import { Popover } from "@patternfly/react-core";
 import type { RefObject, VoidFunctionComponent } from "react";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-import type { PopoverProps } from "@patternfly/react-core";
-import { Popover } from "@patternfly/react-core";
-import type { PopoverContentProps } from "./PopoverContent";
-import { PopoverContent } from "./PopoverContent";
-import type { PopoverStatus } from "../../types";
+import type { PopoverStatus } from "../types";
+import type { StatusPopoverContentProps } from "./StatusPopoverContent";
+import { StatusPopoverContent } from "./StatusPopoverContent";
 
 export type StatusPopoverProps = {
   status: PopoverStatus;
@@ -14,8 +13,8 @@ export type StatusPopoverProps = {
   showWarning?: boolean;
   showError?: boolean;
   children?: PopoverProps["children"];
-  onClickConnectionTabLink: PopoverContentProps["onClickConnectionTabLink"];
-  onClickSupportLink: PopoverContentProps["onClickSupportLink"];
+  onClickConnectionTabLink: StatusPopoverContentProps["onClickConnectionTabLink"];
+  onClickSupportLink: StatusPopoverContentProps["onClickSupportLink"];
   reference?: RefObject<HTMLButtonElement>;
 };
 
@@ -65,7 +64,7 @@ export const StatusPopover: VoidFunctionComponent<StatusPopoverProps> = ({
     <Popover
       headerContent={t("kafka_status_popover.title")}
       bodyContent={
-        <PopoverContent
+        <StatusPopoverContent
           currentStatus={status}
           showWarning={showWarning}
           showError={showError}

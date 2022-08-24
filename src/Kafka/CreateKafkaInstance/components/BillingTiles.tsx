@@ -1,17 +1,19 @@
 import type { SelectProps } from "@patternfly/react-core";
-import { Gallery, GalleryItem } from "@patternfly/react-core";
-import { HelperText, HelperTextItem } from "@patternfly/react-core";
 import {
   Flex,
   FlexItem,
   FormSelect,
   FormSelectOption,
+  Gallery,
+  GalleryItem,
+  HelperText,
+  HelperTextItem,
   Tile,
 } from "@patternfly/react-core";
 import { AwsIcon, MicrosoftIcon, RedhatIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { MarketPlace } from "../types";
+import type { MarketPlace } from "../../types";
 
 export type BillingTilesProps = {
   value: "prepaid" | string | undefined;

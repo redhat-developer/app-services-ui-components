@@ -1,5 +1,5 @@
-import { render, waitForI18n } from "../../../../test-utils";
 import { userEvent } from "@storybook/testing-library";
+import { render, waitForI18n } from "../../../test-utils";
 import { StatusPopover } from "./StatusPopover";
 
 // Batch snapshot testing
