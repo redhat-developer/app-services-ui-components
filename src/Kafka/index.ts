@@ -2,6 +2,7 @@ export * from "./CreateKafkaInstance";
 export * from "./KafkaInstanceDrawer";
 export * from "./KafkaInstanceStatus";
 export * from "./KafkaMessageBrowser";
+export * from "./KafkaInstances";
 export * from "./ManageKafkaPermissions";
 export * from "./Metrics";
 export * from "./ServiceAccount";

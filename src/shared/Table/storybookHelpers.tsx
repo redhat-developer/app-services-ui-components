@@ -1,12 +1,13 @@
 import {
-  Button,
-  SearchInput,
-  ToolbarFilter,
-  ToolbarGroup,
-  ToolbarItem,
+  EmptyState,
+  EmptyStateIcon,
+  EmptyStateVariant,
+  Title,
 } from "@patternfly/react-core";
+import { InfoIcon } from "@patternfly/react-icons";
 import type { IAction } from "@patternfly/react-table";
-import { KafkaInstanceStatus } from "../../Kafka";
+import type { ChipFilterProps } from "../TableToolbar";
+import { sampleSearchFilter } from "../TableToolbar/ChipFilter/storybookHelpers";
 
 export const columns = [
   "name",
@@ -25,38 +26,8 @@ export const columnLabels: { [key in typeof columns[number]]: string } = {
   region: "Region",
   status: "Status",
 };
-const readySign = (
-  <KafkaInstanceStatus
-    status={"ready"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-const creationPendingSign = (
-  <KafkaInstanceStatus
-    status={"preparing"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-export const deletingSign = (
-  <KafkaInstanceStatus
-    status={"deleting"}
-    createdAt={new Date()}
-    onClickConnectionTabLink={() => false}
-    onClickSupportLink={() => false}
-  />
-);
-export type SampleDataType = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  typeof readySign | typeof creationPendingSign | typeof deletingSign
-];
+
+export type SampleDataType = [string, string, string, string, string, string];
 export const sampleData: Array<SampleDataType> = [
   [
     "kafka-test-instance",
@@ -64,7 +35,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 1 hours ago",
     "Amazon Web Services",
     "US East, N. Virginia",
-    creationPendingSign,
+    "pending",
   ],
   [
     "kafka-test-instance-2",
@@ -72,7 +43,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 2 hours ago",
     "Amazon Web Services 2",
     "US East, N. Virginia 2",
-    creationPendingSign,
+    "pending",
   ],
   [
     "kafka-test-instance-3",
@@ -80,7 +51,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 3 hours ago",
     "Amazon Web Services 3",
     "US East, N. Virginia 3",
-    readySign,
+    "ready",
   ],
   [
     "kafka-test-instance-4",
@@ -88,7 +59,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 4 hours ago",
     "Amazon Web Services 4",
     "US East, N. Virginia 4",
-    deletingSign,
+    "deleting",
   ],
   [
     "kafka-test-instance-5",
@@ -96,7 +67,7 @@ export const sampleData: Array<SampleDataType> = [
     "about 5 hours ago",
     "Amazon Web Services 5",
     "US East, N. Virginia 5",
-    readySign,
+    "ready",
   ],
 ];
 export const defaultActions = (data: any): IAction[] => [
@@ -118,15 +89,24 @@ export const defaultActions = (data: any): IAction[] => [
   },
 ];
 
-export const sampleToolbarWithFilter = (
-  <ToolbarGroup variant="filter-group">
-    <ToolbarFilter chips={["this doesn't exist"]} categoryName="Example">
-      <ToolbarItem>
-        <SearchInput value={"this doesn't exist"} />
-      </ToolbarItem>
-    </ToolbarFilter>
-    <ToolbarItem>
-      <Button>Sample</Button>
-    </ToolbarItem>
-  </ToolbarGroup>
+export const sampleToolbarFilters: ChipFilterProps["filters"] = {
+  "sample toolbar": sampleSearchFilter,
+};
+
+export const SampleEmptyStateNoData = (
+  <EmptyState variant={EmptyStateVariant.large}>
+    <EmptyStateIcon icon={InfoIcon} />
+    <Title headingLevel="h4" size="lg">
+      Empty state to show when the initial loading returns no data
+    </Title>
+  </EmptyState>
+);
+
+export const SampleEmptyStateNoResults = (
+  <EmptyState variant={EmptyStateVariant.large}>
+    <EmptyStateIcon icon={InfoIcon} />
+    <Title headingLevel="h4" size="lg">
+      Empty state to show when the data is filtered but has no results
+    </Title>
+  </EmptyState>
 );

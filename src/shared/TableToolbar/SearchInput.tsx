@@ -1,11 +1,12 @@
 import {
   Button,
   ButtonVariant,
+  InputGroup,
   TextInput,
   Tooltip,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { SearchIcon } from "@patternfly/react-icons";
+import { ArrowRightIcon } from "@patternfly/react-icons";
 import type { KeyboardEvent, VoidFunctionComponent } from "react";
 import { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,7 +50,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
   );
 
   return (
-    <>
+    <InputGroup>
       <TextInput
         name="search"
         id="search"
@@ -70,7 +71,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
         onClick={handleSearch}
         aria-label={t("common:search_button_label")}
       >
-        <SearchIcon />
+        <ArrowRightIcon />
       </Button>
       <Tooltip
         trigger="manual"
@@ -78,6 +79,6 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
         content={errorMessage}
         reference={inputRef}
       />
-    </>
+    </InputGroup>
   );
 };

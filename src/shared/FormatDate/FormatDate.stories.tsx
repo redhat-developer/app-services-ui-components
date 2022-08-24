@@ -25,21 +25,25 @@ AFewMinutesNow.args = {
 
 export const OneHourAgo = Template.bind({});
 OneHourAgo.args = {
+  format: "distanceToNowWithAgo",
   date: sub(new Date(), { hours: 1 }),
 };
 
 export const OneDayAgo = Template.bind({});
 OneDayAgo.args = {
+  format: "distanceToNowWithAgo",
   date: sub(new Date(), { days: 1 }),
 };
 
 export const OneMonthAgo = Template.bind({});
 OneMonthAgo.args = {
+  format: "distanceToNowWithAgo",
   date: sub(new Date(), { days: 31 }),
 };
 
 export const OneYearAgo = Template.bind({});
 OneYearAgo.args = {
+  format: "distanceToNowWithAgo",
   date: sub(new Date(), { years: 1 }),
 };
 

@@ -40,7 +40,7 @@ export type RenderCellCb<TRow, TCol> = (props: {
   row: TRow;
 }) => ReactElement<ResponsiveTdProps>;
 
-export type RenderActionsCb = <TRow>(props: {
+export type RenderActionsCb<TRow> = (props: {
   ActionsColumn: typeof ActionsColumn;
   row: TRow;
   rowIndex: number;
@@ -53,7 +53,10 @@ export type ResponsiveTableProps<TRow, TCol> = {
   data: TRow[] | undefined;
   renderHeader: RenderHeaderCb<TCol>;
   renderCell: RenderCellCb<TRow, TCol>;
-  renderActions?: RenderActionsCb;
+  renderActions?: RenderActionsCb<TRow>;
+  isColumnSortable?: (
+    column: TCol
+  ) => (ResponsiveThProps["sort"] & { label: string }) | undefined;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
@@ -71,6 +74,7 @@ export const ResponsiveTable = <TRow, TCol>({
   renderHeader,
   renderCell,
   renderActions,
+  isColumnSortable,
   isRowDeleted,
   isRowSelected,
   expectedLength = 3,
@@ -113,6 +117,7 @@ export const ResponsiveTable = <TRow, TCol>({
               tableWidth={width}
               columnWidth={minimumColumnWidth}
               canHide={canColumnBeHidden(index)}
+              sort={isColumnSortable ? isColumnSortable(column) : undefined}
               {...props}
               ref={ref}
             >
@@ -131,7 +136,14 @@ export const ResponsiveTable = <TRow, TCol>({
         colIndex: index,
       });
     });
-  }, [canColumnBeHidden, columns, minimumColumnWidth, renderHeader, width]);
+  }, [
+    canColumnBeHidden,
+    columns,
+    isColumnSortable,
+    minimumColumnWidth,
+    renderHeader,
+    width,
+  ]);
 
   const getTd = useCallback(
     (index: number) => {
@@ -186,8 +198,10 @@ export const ResponsiveTable = <TRow, TCol>({
             isRowSelected !== undefined &&
             isRowSelected({ row: row, rowIndex });
 
-          const onClick = () =>
-            !deleted && onRowClick && onRowClick({ row, rowIndex });
+          const onClick =
+            !deleted && onRowClick
+              ? () => onRowClick({ row, rowIndex })
+              : undefined;
           const cells = columns.map((column, colIndex) => {
             return renderCell({
               Td: TdList[colIndex],
@@ -206,7 +220,6 @@ export const ResponsiveTable = <TRow, TCol>({
               columnWidth={minimumColumnWidth}
               canHide={false}
               isActionCell={true}
-              onClick={(event) => event.stopPropagation()}
               data-testid={
                 setActionCellOuiaId
                   ? setActionCellOuiaId({ row, rowIndex })
@@ -318,7 +331,13 @@ export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
     return (
       <Tr
         isHoverable={!isDeleted && onClick !== undefined}
-        onRowClick={onClick}
+        onRowClick={(e) => {
+          if (e?.target instanceof HTMLElement) {
+            if (!["a", "button"].includes(e.target.tagName.toLowerCase())) {
+              onClick && onClick();
+            }
+          }
+        }}
         isRowSelected={isSelected}
         className={isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined}
         data-testid={[isSelected && "row-selected", isDeleted && "row-deleted"]

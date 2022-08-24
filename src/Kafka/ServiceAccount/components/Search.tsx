@@ -2,9 +2,9 @@ import { InputGroup, ToolbarItem } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { FilterSelect } from "./FilterSelect";
-import { SearchInput } from "./SearchInput";
+import { SearchInput } from "../../../shared";
 import type { SearchCategory } from "../types";
+import { FilterSelect } from "./FilterSelect";
 
 export type SearchProps = {
   onSearch: (category: SearchCategory, value: string) => void;
