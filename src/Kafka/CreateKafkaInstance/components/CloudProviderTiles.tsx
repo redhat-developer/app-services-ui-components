@@ -10,7 +10,8 @@ import {
 import { AwsIcon, MicrosoftIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { CloudProvider, CloudProviderInfo } from "../types";
+import type { CloudProvider } from "../../types";
+import type { CloudProviderInfo } from "../types";
 
 export type CloudProvidersTilesProps = {
   providers: (CloudProviderInfo & { isDisabled?: boolean })[];

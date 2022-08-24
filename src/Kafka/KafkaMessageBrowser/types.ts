@@ -1,4 +1,5 @@
-export type DateIsoString = string;
+import type { DateIsoString } from "../types";
+
 export type Message = {
   partition?: number;
   offset?: number;

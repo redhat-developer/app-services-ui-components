@@ -2,13 +2,12 @@ import { useSelector } from "@xstate/react";
 import { useCallback } from "react";
 import type {
   CloudProvider,
-  CloudProviderInfo,
-  CreateKafkaInstanceError,
+  CloudRegion,
   MarketPlace,
   MarketplaceSubscription,
-  Region,
   Size,
-} from "../types";
+} from "../../types";
+import type { CloudProviderInfo, CreateKafkaInstanceError } from "../types";
 import type { StandardPlanMachineContext } from "./StandardPlanMachine";
 import { useCreateKafkaInstance } from "./useCreateKafkaInstance";
 
@@ -52,7 +51,7 @@ type SelectorReturn = {
 
   setName: (name: string) => void;
   setProvider: (name: CloudProvider) => void;
-  setRegion: (name: Region) => void;
+  setRegion: (name: CloudRegion) => void;
   onCreate: () => void;
   setSize: (size: Size) => void;
   setBillingSubscription: (
@@ -85,7 +84,7 @@ export function useStandardPlanMachine(): SelectorReturn {
     [service]
   );
   const setRegion = useCallback(
-    (region: Region) => service.send({ type: "regionChange", region }),
+    (region: CloudRegion) => service.send({ type: "regionChange", region }),
     [service]
   );
   const onCreate = useCallback(() => service.send("create"), [service]);

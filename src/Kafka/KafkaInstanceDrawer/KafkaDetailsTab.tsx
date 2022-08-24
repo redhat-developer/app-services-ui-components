@@ -9,7 +9,7 @@ import {
 import type { ReactChild, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../shared";
-import type { MarketplaceSubscription } from "../CreateKafkaInstance";
+import type { MarketplaceSubscription } from "../types";
 import type { InstanceType } from "../utils";
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 
