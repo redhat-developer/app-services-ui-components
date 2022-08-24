@@ -1,11 +1,7 @@
 import { useSelector } from "@xstate/react";
 import { useCallback } from "react";
-import type {
-  CloudProvider,
-  CloudProviderInfo,
-  CreateKafkaInstanceError,
-  Region,
-} from "../types";
+import type { CloudProvider, CloudRegion } from "../../types";
+import type { CloudProviderInfo, CreateKafkaInstanceError } from "../types";
 import type { TrialPlanMachineContext } from "./TrialPlanMachine";
 import { useCreateKafkaInstance } from "./useCreateKafkaInstance";
 
@@ -36,7 +32,7 @@ type SelectorReturn = {
 
   setName: (name: string) => void;
   setProvider: (name: CloudProvider) => void;
-  setRegion: (name: Region) => void;
+  setRegion: (name: CloudRegion) => void;
   onCreate: () => void;
 };
 
@@ -63,7 +59,7 @@ export function useTrialPlanMachine(): SelectorReturn {
     [service]
   );
   const setRegion = useCallback(
-    (region: Region) => service.send({ type: "regionChange", region }),
+    (region: CloudRegion) => service.send({ type: "regionChange", region }),
     [service]
   );
   const onCreate = useCallback(() => service.send("create"), [service]);

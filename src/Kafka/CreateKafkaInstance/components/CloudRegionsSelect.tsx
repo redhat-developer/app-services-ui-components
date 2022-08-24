@@ -3,10 +3,11 @@ import { Select, SelectOption, SelectVariant } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { Region, RegionInfo } from "../types";
+import type { CloudRegion } from "../../types";
+import type { RegionInfo } from "../types";
 
 export type CloudRegionProps = {
-  value: Region | undefined;
+  value: CloudRegion | undefined;
   regions: RegionInfo[] | undefined;
   isDisabled: boolean;
   isSizeUnavailable: boolean;

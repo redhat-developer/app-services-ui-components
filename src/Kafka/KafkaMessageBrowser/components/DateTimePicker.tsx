@@ -3,7 +3,7 @@ import { DatePicker, InputGroup, TimePicker } from "@patternfly/react-core";
 import { formatISO, parseISO, setHours, setMinutes } from "date-fns";
 import { formatInTimeZone } from "date-fns-tz";
 import type { VoidFunctionComponent } from "react";
-import type { DateIsoString } from "../types";
+import type { DateIsoString } from "../../types";
 
 export type DateTimePickerProps = {
   isDisabled: boolean;

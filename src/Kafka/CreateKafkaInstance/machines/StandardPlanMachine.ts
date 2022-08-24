@@ -1,11 +1,13 @@
 import { assign, createMachine, send, sendParent } from "xstate";
 import {
   CloudProvider,
+  CloudRegion,
+  MarketplaceSubscription,
+  Size,
+} from "../../types";
+import {
   CreateKafkaFormData,
   CreateKafkaInstanceError,
-  MarketplaceSubscription,
-  Region,
-  Size,
   StandardPlanInitializationData,
   StandardSizes,
 } from "../types";
@@ -19,7 +21,7 @@ export type StandardPlanMachineContext = {
   form: {
     name?: string;
     provider?: CloudProvider;
-    region?: Region;
+    region?: CloudRegion;
     size?: Size;
     billing?: MarketplaceSubscription | "prepaid";
   };
@@ -49,7 +51,7 @@ export const StandardPlanMachine =
           | { type: "fieldInvalid" }
           | { type: "nameChange"; name: string }
           | { type: "providerChange"; provider: CloudProvider }
-          | { type: "regionChange"; region: Region }
+          | { type: "regionChange"; region: CloudRegion }
           | { type: "sizeChange"; size: Size }
           | {
               type: "selectSubscription";
