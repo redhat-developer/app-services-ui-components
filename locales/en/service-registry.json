@@ -70,5 +70,11 @@
   "no_permission_to_delete_service_registry": "Organization administrators and the Service Registry instance owner can delete this instance.",
   "registry_instance_list": "Service Registry instance list",
   "ams_service_down_message": "We are unable to create a new Service Registry instance at this time. Please try again later.",
-  "instance_checking_message": "Checking if new Service Registry instances are available"
+  "instance_checking_message": "Checking if new Service Registry instances are available",
+  "artifact_size": "Artifact size",
+  "artifact_size_value": "up to 64 KiB",
+  "artifact_versions": "Artifact versions",
+  "artifact_versions_value": "up to 10000",
+  "request_rate": "Request rate",
+  "request_rate_value": "up to 10 requests/second"
 }
