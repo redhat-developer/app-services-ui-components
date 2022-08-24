@@ -6,3 +6,4 @@ export * from "./ConsumerGroupTable";
 export * from "./ConsumerGroupState";
 export * from "./ConsumerGroupToolbar";
 export * from "./ConsumerGroupEmptyState";
+export * from "./ConsumerGroupResetOffset";

@@ -24,7 +24,7 @@ export type KafkaConnectionTabP2Props = {
   tokenEndPointUrl: string;
   linkToServiceAccount: string;
   linkToAccessTab: string;
-  adminAPIUrl: string;
+  adminAPIUrl: string | undefined;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
   linkToDocPortal: string;
@@ -86,7 +86,12 @@ export const KafkaConnectionTabP2: FunctionComponent<
                 "connection-tab:create_service_account_to_generate_credentials"
               }
               components={{
-                value: <Link to={linkToServiceAccount}></Link>,
+                value: (
+                  <Link
+                    to={linkToServiceAccount}
+                    data-testid="tableStreams-linkKafka"
+                  ></Link>
+                ),
               }}
             />
           }
@@ -96,6 +101,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
         variant={ButtonVariant.secondary}
         isInline
         onClick={showCreateServiceAccountModal}
+        data-testid="drawerStreams-buttonCreateServiceAccount"
       >
         {t("connection-tab:create_service_account")}
       </Button>
@@ -155,6 +161,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                           <ExternalLink
                             testId={"customerPortal-link"}
                             href={linkToDocPortal}
+                            className={"pf-u-ml-xs"}
                           />,
                         ]}
                       />
@@ -172,15 +179,15 @@ export const KafkaConnectionTabP2: FunctionComponent<
                 </Button>
               </Popover>
             </strong>
-            {isKafkaPending ? (
-              <Skeleton fontSize="2xl" />
-            ) : (
+            {adminAPIUrl ? (
               <ClipboardCopy
                 textAriaLabel={t("connection-tab:kafka_instance_url_label")}
                 isReadOnly
               >
                 {adminAPIUrl}
               </ClipboardCopy>
+            ) : (
+              <Skeleton fontSize="2xl" />
             )}
             <TextContent className="pf-u-pt-sm">
               <Text component={TextVariants.small}>
@@ -214,6 +221,7 @@ export const KafkaConnectionTabP2: FunctionComponent<
                           <ExternalLink
                             testId={"customerPortal-link"}
                             href={linkToDocPortal}
+                            className={"pf-u-ml-xs"}
                           />,
                         ]}
                       />

@@ -30,21 +30,25 @@ export const withMas = (
               datascienceoverview: () =>
                 import("../locales/en/datascienceoverview.json"),
               kafkaoverview: () => import("../locales/en/kafkaoverview.json"),
+              topic: () => import("../locales/en/topic.json"),
               apimgmtoverview: () =>
                 import("../locales/en/apimgmtoverview.json"),
               "kafkaoverview-v2": () =>
                 import("../locales/en/kafkaoverview-v2.json"),
+              "kafkaoverview-v3": () =>
+                import("../locales/en/kafkaoverview-v3.json"),
               "manage-kafka-permissions": () =>
                 import("../locales/en/manage-kafka-permissions.json"),
               "message-browser": () =>
                 import("../locales/en/message-browser.json"),
               "overview-v2": () => import("../locales/en/overview-v2.json"),
-              "create-kafka-instance-with-sizes": () =>
-                import("../locales/en/create-kafka-instance-with-sizes.json"),
+              "overview-v3": () => import("../locales/en/overview-v3.json"),
               "connection-tab": () =>
                 import("../locales/en/connection-tab.json"),
               "service-registry": () =>
                 import("../locales/en/service-registry.json"),
+              "connection-tab-p1": () =>
+                import("../locales/en/connection-tab-p1.json"),
             },
             it: {
               common: () => Promise.resolve({ delete: "Elimina" }),

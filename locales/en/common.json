@@ -16,7 +16,10 @@
   "clientID": "Client ID",
   "cloud_provider": "Cloud provider",
   "cloudProviders": {
-    "aws": "Amazon Web Services"
+    "aws": "Amazon Web Services",
+    "aws_short": "AWS",
+    "azure": "Azure",
+    "rh": "Red Hat"
   },
   "complete": "Ready",
   "confirm_delete_modal_text": "<strong>{{name}}</strong> will be deleted.",
@@ -58,6 +61,8 @@
   "no_permission_to_delete_service_registry": "Organization administrators and the Service Registry instance owner can delete this instance.",
   "no_results_found": "No results found",
   "options_toggle": "Items per page",
+  "kafka_instance": "$t(common:kafka) Instances",
+  "kafka_instance_name": "$t(common:kafka) instance name",
   "owner": "Owner",
   "page": "page",
   "per_page_suffix": "per page",
@@ -79,10 +84,12 @@
   "search_button_label": "Search",
   "service_registry_creation_failed_alert_title": "Service Registry instance can't be created",
   "service_registry_name_label": "Type <b>{{name}}</b> to confirm:",
+  "select": "Select",
+  "service_registry": "Service Registry",
   "servicePreview": "Service preview ",
   "servicePreviewTooltip": "Service preview releases provide early access to a limited set of features that might not be fully tested. Users should not use service preview software in production or for business-critical workloads.",
   "size": "Size",
-  "skeleton_loader_screenreader_text": "Loading content",
+  "skeleton_loader_screenreader_text": "Loading {{contentName, content}}",
   "something_went_wrong": "Something went wrong",
   "standard_service_registry_alert_message": "Your organization reached the limit of Service Registry instances available for creation.",
   "standard_service_registry_alert_title": "Service Registry instances are unavailable for creation",
@@ -91,6 +98,12 @@
   "submitting_request": "Submitting request",
   "table_cell_no_data": "No {{column, lowercase}}",
   "this_is_a_required_field": "Required",
+  "terms_conditions_modal": {
+    "content1": "Red Hat has Terms and Conditions for its managed services.",
+    "content2": "If you do not accept the terms, you will not be able to create new {{serviceName}} instances.",
+    "terms_and_conditions": "Terms and Conditions",
+    "view_terms_and_conditions": "View Terms and Conditions"
+  },
   "time_created": "Time created",
   "time_updated": "Time updated",
   "to_first_page": "Go to first page",

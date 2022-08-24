@@ -38,8 +38,12 @@ export function initI18next(
       interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
         format: function (value, format) {
-          if (format === "lowercase" && typeof value === "string")
+          if (!value && format) {
+            return format;
+          }
+          if (format === "lowercase" && typeof value === "string") {
             return value.toLocaleLowerCase();
+          }
           return value as string;
         },
       },
