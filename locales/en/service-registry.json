@@ -76,5 +76,9 @@
   "artifact_versions": "Artifact versions",
   "artifact_versions_value": "up to 10000",
   "request_rate": "Request rate",
-  "request_rate_value": "up to 10 requests/second"
+  "request_rate_value": "up to 10 requests/second",
+  "input_filed_invalid_helper_text": "Must start with a letter and end with a letter or number. Valid characters include lowercase letters from a to z, numbers from 0 to 9, and hyphens ( - ).",
+  "input_text_area_invalid_helper_text": "Valid characters include letters from Aa to Zz, numbers from 0 to 9, spaces, and line breaks.",
+  "checkbox_label_after_the_download_click": "I understand that the artifacts zip file might not download successfully if I permanently delete the instance before the download is complete.",
+  "checkbox_label_before_the_download_click": "I don't need to download artifacts from this instance, and I understand they will be permanently deleted."
 }
