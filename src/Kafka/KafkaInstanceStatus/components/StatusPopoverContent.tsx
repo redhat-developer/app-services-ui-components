@@ -1,20 +1,20 @@
-import type { VoidFunctionComponent } from "react";
-import { useTranslation, Trans } from "react-i18next";
 import {
-  Stack,
-  StackItem,
   Alert,
-  TextContent,
-  Text,
-  TextVariants,
   Button,
   ButtonVariant,
+  Stack,
+  StackItem,
+  Text,
+  TextContent,
+  TextVariants,
 } from "@patternfly/react-core";
+import type { VoidFunctionComponent } from "react";
+import { Trans, useTranslation } from "react-i18next";
+import type { PopoverStatus } from "../types";
+import { PopoverStatusOrder } from "../types";
 import { StatusProgressStepper } from "./StatusProgressStepper";
-import type { PopoverStatus } from "../../types";
-import { PopoverStatusOrder } from "../../types";
 
-export type PopoverContentProps = {
+export type StatusPopoverContentProps = {
   currentStatus: PopoverStatus;
   showWarning?: boolean;
   showError?: boolean;
@@ -22,7 +22,9 @@ export type PopoverContentProps = {
   onClickSupportLink: () => void;
 };
 
-export const PopoverContent: VoidFunctionComponent<PopoverContentProps> = ({
+export const StatusPopoverContent: VoidFunctionComponent<
+  StatusPopoverContentProps
+> = ({
   currentStatus,
   showWarning = false,
   showError = false,

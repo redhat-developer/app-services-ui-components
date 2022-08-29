@@ -37,6 +37,10 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             "kafkaoverview-v3": () =>
               import("../locales/en/kafkaoverview-v3.json"),
             "connection-tab": () => import("../locales/en/connection-tab.json"),
+            "service-registry": () =>
+              import("../locales/en/service-registry.json"),
+            "connection-tab-p1": () =>
+              import("../locales/en/connection-tab-p1.json"),
           },
           it: {
             common: () => Promise.resolve({ delete: "Elimina" }),

@@ -1,6 +1,7 @@
 import { Flex, FlexItem, Form } from "@patternfly/react-core";
 import type { FormEvent, VoidFunctionComponent } from "react";
 import { useCallback } from "react";
+import type { CloudProvider, MarketPlace } from "../types";
 import type {
   FieldInstanceNameProps,
   FieldSizeProps,
@@ -19,7 +20,6 @@ import {
   ModalAlertsStandardPlan,
 } from "./components";
 import { useStandardPlanMachine } from "./machines";
-import type { CloudProvider, MarketPlace } from "./types";
 
 export type StandardInstanceFormProps = {
   formId: string;
