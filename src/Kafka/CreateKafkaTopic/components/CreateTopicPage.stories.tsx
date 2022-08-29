@@ -41,7 +41,7 @@ BasicTopicCreation.args = {};
 BasicTopicCreation.parameters = {
   docs: {
     description: {
-      story: ` `,
+      story: ` A user can create a topic with the basic work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
     },
   },
 };
