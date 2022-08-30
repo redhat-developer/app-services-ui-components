@@ -53,13 +53,13 @@
   --pf-c-label--BackgroundColor: var(--pf-global--palette--black-200);
 }
 
-.pf-c-chip-group.mas-m-bar {
-  --pf-c-chip-group--m-category--BackgroundColor: darkgray;
-}
-
 :root .pf-c-chip-group__close {
   display: flex;
   align-self: center;
+}
+
+.pf-c-chip-group.mas-m-bar {
+  --pf-c-chip-group--m-category--BackgroundColor: darkgray;
 }
 
 .pf-m-overflow:not(.pf-c-chip__text *) {
