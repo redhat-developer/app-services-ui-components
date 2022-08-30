@@ -1,5 +1,5 @@
 import { Popover, FormGroup, TextInput } from "@patternfly/react-core";
-import React from "react";
+import type React from "react";
 import { HelpIcon } from "@patternfly/react-icons";
 import "./TextWithLabelPopover.css";
 
