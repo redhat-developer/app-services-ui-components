@@ -145,8 +145,8 @@ class Chips extends React.Component {
             }}
           >
             <Chip className="mas-m-custom-chip" isReadOnly>
-              <ChipGroup 
-                categoryName={<TopicLabel />} 
+              <ChipGroup
+                categoryName={<TopicLabel />}
                 className="mas-m-resource-group"
               >
                 {chipsSet2.map((currentChip) => (

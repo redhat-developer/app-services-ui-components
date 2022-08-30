@@ -162,7 +162,6 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
         </ChipGroup>
-        
       </React.Fragment>
     );
   }
