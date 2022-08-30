@@ -98,7 +98,7 @@ export const retentionSizeSelectOptions: SelectOptions[] = [
 ];
 
 export const useValidateTopic = (): {
-  validateName(name: string): string | undefined;
+  validateName: (name: string) => string | undefined;
 } => {
   const { t } = useTranslation(["create-topic"]);
 

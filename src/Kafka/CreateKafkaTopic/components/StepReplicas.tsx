@@ -39,7 +39,7 @@ export const StepReplicas: React.FC<StepReplicasProps> = ({
           isInline
           title={
             isMultiAZ
-              ? t("replicas_helper_text_multi_az")
+              ? t("replicas_helper_text_single_az")
               : t("replicas_helper_text_single_az")
           }
         />
@@ -49,7 +49,7 @@ export const StepReplicas: React.FC<StepReplicasProps> = ({
           btnAriaLabel={t("replicas")}
           fieldLabel={t("replicas")}
           fieldValue={replicationFactor.toString()}
-          popoverBody={t("topic.replicas_description")}
+          popoverBody={t("replicas_description")}
           popoverHeader={t("replicas")}
         />
 

@@ -23,9 +23,13 @@
   "replicas_helper_text_single_az": "This instance is a single broker instance. Streams for Apache Kafka only supports 1 replica and a minimum in-sync replica factor of 1 for single broker instances.",
   "replicas_info": "How many copies of a topic will be made for high availability.",
   "retention_time": "Retention time",
+  "topic": {
+    "replicas_description": ""
+  },
   "topic_name": "Topic name",
   "topic_name_helper_text": "Must be letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), or hyphens ( - )",
   "topic_name_info": "Unique name used to recognize your topic",
   "topic_name_info_note": "The topic name is also used by your producers and consumers as part of the connection information, so make it something easy to recognize.",
-  "wizard_title": "Create topics wizard"
+  "wizard_title": "Create topics wizard",
+  "no_return": "No,return to form"
 }

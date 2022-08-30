@@ -31,9 +31,7 @@ export const StepTopicName: React.FC<StepTopicNameProps> = ({
   setInvalidText,
 }) => {
   const { t } = useTranslation(["create-topic"]);
-  /*eslint-disable */
   const { validateName } = useValidateTopic();
-  /*eslint-enable */
 
   const validationCheck = useCallback(
     (inputValue: string) => {

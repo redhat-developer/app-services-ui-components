@@ -37,7 +37,7 @@ export const PartitionLimitWarning: React.FC<PartitionLimitWarningProps> = ({
           {t("common:yes")}
         </Button>,
         <Button key="cancel" variant="link" onClick={handleModalToggle}>
-          {t("common:no_return")}
+          {t("no_return")}
         </Button>,
       ]}
     >
