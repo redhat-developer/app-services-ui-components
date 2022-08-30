@@ -136,7 +136,6 @@ class Chips extends React.Component {
       <React.Fragment>
         <ChipGroup>
           <ChipGroup
-            className="color"
             categoryName="Resource type operation"
             isClosable
             onClick={() => {
@@ -145,8 +144,11 @@ class Chips extends React.Component {
               this.deleteCategory4();
             }}
           >
-            <Chip className="custom-c-chip" isReadOnly>
-              <ChipGroup categoryName={<TopicLabel />} className="bkg-color">
+            <Chip className="mas-m-custom-chip" isReadOnly>
+              <ChipGroup 
+                categoryName={<TopicLabel />} 
+                className="mas-m-resource-group"
+              >
                 {chipsSet2.map((currentChip) => (
                   <Chip
                     key={currentChip}
@@ -157,10 +159,10 @@ class Chips extends React.Component {
                 ))}
               </ChipGroup>
             </Chip>
-            <Chip className="custom-c-chip" isReadOnly>
+            <Chip className="mas-m-custom-chip" isReadOnly>
               <ChipGroup
                 categoryName={<KafkaInstanceLabel />}
-                className="bkg-color"
+                className="mas-m-resource-group"
               >
                 {chipsSet3.map((currentChip) => (
                   <Chip
@@ -172,10 +174,10 @@ class Chips extends React.Component {
                 ))}
               </ChipGroup>
             </Chip>
-            <Chip className="custom-c-chip" isReadOnly>
+            <Chip className="mas-m-custom-chip" isReadOnly>
               <ChipGroup
                 categoryName={<ConsumerGroupLabel />}
-                className="bkg-color"
+                className="mas-m-resource-group"
               >
                 {chipsSet4.map((currentChip) => (
                   <Chip
@@ -189,14 +191,13 @@ class Chips extends React.Component {
             </Chip>
           </ChipGroup>
           <ChipGroup
-            className="size"
             categoryName="Permission access types"
             isClosable
             onClick={() => {
               this.deleteCategory5();
             }}
           >
-            <ChipGroup className="custom-c-chip" isReadOnly>
+            <ChipGroup className="mas-m-custom-chip" isReadOnly>
               {chipsSet5.map((currentChip) => (
                 <Chip
                   key={currentChip}

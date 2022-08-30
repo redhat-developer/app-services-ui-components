@@ -90,10 +90,10 @@ class Chips extends React.Component {
             this.deleteCategory();
           }}
         >
-          <Chip className="custom-c-chip" isReadOnly>
+          <Chip className="mas-m-custom-chip" isReadOnly>
             <ChipGroup
               categoryName={<TransactionalIdLabel />}
-              className="bkg-color"
+              className="mas-m-resource-group"
             >
               {chipsSet.map((currentChip) => (
                 <Chip

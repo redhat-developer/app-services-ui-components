@@ -113,11 +113,11 @@ class Chips extends React.Component {
             this.deleteCategory4();
           }}
         >
-          <Chip className="custom-c-chip" isReadOnly>
+          <Chip className="mas-m-custom-chip" isReadOnly>
             <ChipGroup
               // className="lightblue"
               categoryName={<TopicLabel />}
-              className="bkg-color"
+              className="mas-m-resource-group"
             >
               {chipsSet2.map((currentChip) => (
                 <Chip
@@ -130,10 +130,10 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
 
-          <Chip className="custom-c-chip" isReadOnly>
+          <Chip className="mas-m-custom-chip" isReadOnly>
             <ChipGroup
               categoryName={<KafkaInstanceLabel />}
-              className="bkg-color"
+              className="mas-m-resource-group"
             >
               {chipsSet3.map((currentChip) => (
                 <Chip
@@ -146,10 +146,10 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
 
-          <Chip className="custom-c-chip" isReadOnly>
+          <Chip className="mas-m-custom-chip" isReadOnly>
             <ChipGroup
               categoryName={<ConsumerGroupLabel />}
-              className="bkg-color"
+              className="mas-m-resource-group"
             >
               {chipsSet4.map((currentChip) => (
                 <Chip
@@ -162,6 +162,7 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
         </ChipGroup>
+        
       </React.Fragment>
     );
   }
