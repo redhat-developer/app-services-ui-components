@@ -12,7 +12,7 @@ class TopicLabel extends React.Component {
       <div class="row">
         <div class="child">
           <Label
-            color = "blue"
+            color="blue"
             className="pf-c-label mas-m-solid mas-m-text"
             isCompact
           >
