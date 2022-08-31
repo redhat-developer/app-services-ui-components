@@ -10,6 +10,7 @@
   "message_retention_info_note": "Messages that aren't read by a consumer within this time will be missed. By default, a limit is only applied to retention time.",
   "min_insync_replicas": "Minimum in-sync replicas",
   "min_insync_replicas_description": "Minimum in-sync replicas is the minimum number of replicas that must acknowledge a write for the write to be considered successful. This property assumes that the producer requests acknowledgements from all replicas (`acks` set to `all`). If this minimum is not met, the producer raises an exception (`NotEnoughReplicas` or `NotEnoughReplicasAfterAppend`). Typically you create a topic with a replication factor of 3, set `min.insync.replicas` to 2, and set the producer `acks` to `all`.(min.insync.replicas)",
+  "no_return": "No,return to form",
   "partition_helper_text": "One partition is sufficient for getting started, but production systems often have more.",
   "partition_info": "An ordered list of messages",
   "partition_info_note": "One or more partitions make up a topic. Partitions are distributed across the brokers to increase the scalability of your topic. You can also use them to distribute messages across the members of the consumer group.",
@@ -30,6 +31,5 @@
   "topic_name_helper_text": "Must be letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), or hyphens ( - )",
   "topic_name_info": "Unique name used to recognize your topic",
   "topic_name_info_note": "The topic name is also used by your producers and consumers as part of the connection information, so make it something easy to recognize.",
-  "wizard_title": "Create topics wizard",
-  "no_return": "No,return to form"
+  "wizard_title": "Create topics wizard"
 }
