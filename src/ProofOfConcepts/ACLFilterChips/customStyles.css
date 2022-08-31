@@ -1,24 +1,6 @@
 .pf-c-label.mas-m-solid.mas-m-text {
   --pf-c-label__content--before--BorderColor: transparent;
   --pf-c-label__content--Color: var(--pf-global--palette--white);
-  display: inline-flex;
-  justify-content: center;
-}
-
-.pf-c-label.mas-m-solid.mas-m-blue {
-  --pf-c-label--BackgroundColor: var(--pf-global--palette--blue-400);
-}
-
-.pf-c-label.mas-m-solid.mas-m-grey {
-  --pf-c-label--BackgroundColor: var(--pf-global--palette--black-600);
-}
-
-.pf-c-label.mas-m-solid.mas-m-green {
-  --pf-c-label--BackgroundColor: var(--pf-global--palette--green-500);
-}
-
-.pf-c-label.mas-m-solid.mas-m-orange {
-  --pf-c-label--BackgroundColor: var(--pf-global--palette--orange-400);
 }
 
 .box {
@@ -56,10 +38,6 @@
 :root .pf-c-chip-group__close {
   display: flex;
   align-self: center;
-}
-
-.pf-c-chip-group.mas-m-bar {
-  --pf-c-chip-group--m-category--BackgroundColor: darkgray;
 }
 
 .pf-m-overflow:not(.pf-c-chip__text *) {
