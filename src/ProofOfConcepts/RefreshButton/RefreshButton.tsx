@@ -1,50 +1,39 @@
-import React from "react";
-import { ToolbarItem } from "@patternfly/react-core";
+import { Button, Spinner, Tooltip } from "@patternfly/react-core";
+import { SyncAltIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate, RefreshButton } from "../../shared";
 
 export type RefreshButtonProps = {
+  isDisabled?: boolean;
+  tooltip: string;
   isRefreshing: boolean;
-  lastUpdated: Date | undefined;
-  ariaLabel: string;
-  onRefresh: () => void;
+  ariaLabel?: string;
+  onClick: () => void;
 };
-
-export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
-  isRefreshing,
-  lastUpdated = new Date(),
+export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   ariaLabel,
-  onRefresh,
+  onClick,
+  isDisabled,
+  tooltip,
+  isRefreshing,
 }) => {
-  const { t } = useTranslation(["metrics"]);
-
+  const { t } = useTranslation("common");
   return (
-    <>
-      <ToolbarItem>
-        <RefreshButton
-          ariaLabel={ariaLabel}
-          onClick={onRefresh}
-          isRefreshing={isRefreshing}
-        />
-      </ToolbarItem>
-      <ToolbarItem
-        alignment={{ default: "alignRight" }}
-        style={{ color: "var(--pf-global--Color--200)" }}
+    <Tooltip content={tooltip}>
+      <Button
+        variant="plain"
+        aria-label={ariaLabel || t("refresh_button_label")}
+        isDisabled={isDisabled}
+        onClick={isDisabled === true ? undefined : onClick}
       >
-        <div className="pf-u-font-size-xs">
-          {isRefreshing ? (
-            t("metrics:refreshing")
-          ) : (
-            <>
-              {t("metrics:last-refresh")}
-              <br />
-              <FormatDate date={lastUpdated} format="distanceToNow" />
-              {t("metrics:last-refresh-distance")}
-            </>
-          )}
-        </div>
-      </ToolbarItem>
-    </>
+        {isRefreshing ? (
+          <span className="pf-c-button__progress">
+            <Spinner size="md" />
+          </span>
+        ) : (
+          <SyncAltIcon />
+        )}
+      </Button>
+    </Tooltip>
   );
 };
