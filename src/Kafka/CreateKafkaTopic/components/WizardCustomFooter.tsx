@@ -5,11 +5,12 @@ import {
   WizardFooter,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
+import type { ValidatedOptions } from "@patternfly/react-core/dist/js";
 
 export interface IWizardFooter {
   isLoading: boolean;
   onValidate: (value: () => void) => void;
-  topicNameValidated: "error" | "default";
+  topicNameValidated: ValidatedOptions;
   closeWizard: () => void;
   partitionValue: number;
 }

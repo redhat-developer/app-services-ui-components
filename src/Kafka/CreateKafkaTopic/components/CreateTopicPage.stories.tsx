@@ -1,6 +1,7 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { CreateTopicPage } from "./CreateTopicPage";
+import { constantValues } from "./storiesHelpers";
 
 export default {
   component: CreateTopicPage,
@@ -27,6 +28,7 @@ export default {
       minInSyncReplica: 1,
       isMultiAZ: false,
     },
+    constantValues: constantValues,
   },
 } as ComponentMeta<typeof CreateTopicPage>;
 
@@ -36,12 +38,12 @@ const Template: ComponentStory<typeof CreateTopicPage> = (args) => (
   </>
 );
 
-export const BasicTopicCreation = Template.bind({});
-BasicTopicCreation.args = {};
-BasicTopicCreation.parameters = {
+export const TopicCreation = Template.bind({});
+TopicCreation.args = {};
+TopicCreation.parameters = {
   docs: {
     description: {
-      story: ` A user can create a topic with the basic work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
+      story: ` A user can create a topic with the basic or advanced work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
     },
   },
 };

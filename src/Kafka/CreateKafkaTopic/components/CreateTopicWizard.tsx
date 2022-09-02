@@ -6,6 +6,7 @@ import {
   PageSection,
   PageSectionTypes,
   PageSectionVariants,
+  ValidatedOptions,
   Wizard,
 } from "@patternfly/react-core";
 import type { WizardStep } from "@patternfly/react-core";
@@ -17,8 +18,9 @@ import {
   WizardCustomFooter,
 } from "../components";
 import type { IWizardFooter } from "../components";
-import type { NewTopic } from "../types";
+import type { ConstantValues, NewTopic } from "../types";
 import { PartitionLimitWarning } from "./PartitionLimitWarning";
+import { TopicAdvancePage } from "./TopicAdvancePage";
 
 export type CreateTopicWizardProps = {
   isSwitchChecked: boolean;
@@ -28,6 +30,7 @@ export type CreateTopicWizardProps = {
   initialFieldsValue: NewTopic;
   checkTopicName: (value: string) => Promise<boolean>;
   availablePartitionLimit: number;
+  constantValues: ConstantValues;
 };
 
 export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
@@ -37,12 +40,12 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
   initialFieldsValue,
   checkTopicName,
   availablePartitionLimit,
+  constantValues,
 }) => {
   const { t } = useTranslation(["create-topic", "common"]);
 
-  const [topicNameValidated, setTopicNameValidated] = useState<
-    "error" | "default"
-  >("default");
+  const [topicNameValidated, setTopicNameValidated] =
+    useState<ValidatedOptions>(ValidatedOptions.default);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [invalidText, setInvalidText] = useState<string>("");
   const [topicData, setTopicData] = useState<NewTopic>(initialFieldsValue);
@@ -56,7 +59,8 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
     {
       name: t("topic_name"),
       enableNext:
-        topicData?.name.trim() !== "" && topicNameValidated === "default",
+        topicData?.name.trim() !== "" &&
+        topicNameValidated === ValidatedOptions.default,
       component: (
         <StepTopicName
           newTopicData={topicData}
@@ -108,7 +112,7 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
   const onValidate: IWizardFooter["onValidate"] = (onNext) => {
     if (topicData?.name.length < 1) {
       setInvalidText(t("common:required"));
-      setTopicNameValidated("error");
+      setTopicNameValidated(ValidatedOptions.error);
     } else {
       setIsLoading(true);
 
@@ -116,7 +120,7 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
         .then((value) =>
           value == false
             ? (setInvalidText(t("already_exists", { name: topicData?.name })),
-              setTopicNameValidated("error"))
+              setTopicNameValidated(ValidatedOptions.error))
             : onNext()
         )
         .finally(() => setIsLoading(false));
@@ -136,13 +140,26 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
             variant={PageSectionVariants.light}
             hasOverflowScroll={true}
           >
-            {/*  <TopicAdvanceConfig
-              isCreate={true}
-              saveTopic={onSave}
-              handleCancel={onCloseCreateTopic}
-              topicData={topicData}
-              setTopicData={setTopicData}
-          />*/}
+            {
+              <TopicAdvancePage
+                isCreate={true}
+                onConfirm={onSaveTopic}
+                handleCancel={onCloseCreateTopic}
+                topicData={topicData}
+                setTopicData={setTopicData}
+                checkTopicName={checkTopicName}
+                availablePartitionLimit={availablePartitionLimit}
+                constantValues={constantValues}
+              />
+            }
+            {warningModalOpen && (
+              <PartitionLimitWarning
+                topicData={topicData}
+                onSave={onSave}
+                isModalOpen={warningModalOpen}
+                setIsModalOpen={setWarningModalOpen}
+              />
+            )}
           </PageSection>
         </>
       ) : (

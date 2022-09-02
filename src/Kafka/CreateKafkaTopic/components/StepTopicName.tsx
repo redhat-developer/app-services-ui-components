@@ -9,6 +9,7 @@ import {
   TextContent,
   TextInput,
   TextVariants,
+  ValidatedOptions,
 } from "@patternfly/react-core";
 import { useValidateTopic } from "../types";
 import type { NewTopic } from "../types";
@@ -16,8 +17,8 @@ import type { NewTopic } from "../types";
 export type StepTopicNameProps = {
   newTopicData: NewTopic;
   onTopicNameChange: (value: NewTopic) => void;
-  topicNameValidated: "error" | "default";
-  onValidationCheck: (value: "error" | "default") => void;
+  topicNameValidated: ValidatedOptions;
+  onValidationCheck: (value: ValidatedOptions) => void;
   invalidText: string;
   setInvalidText: (value: string) => void;
 };
@@ -38,9 +39,9 @@ export const StepTopicName: React.FC<StepTopicNameProps> = ({
       const errorMessage = validateName(inputValue);
       if (errorMessage) {
         setInvalidText(errorMessage);
-        onValidationCheck("error");
+        onValidationCheck(ValidatedOptions.error);
       } else {
-        onValidationCheck("default");
+        onValidationCheck(ValidatedOptions.default);
       }
     },
     [setInvalidText, onValidationCheck, validateName]

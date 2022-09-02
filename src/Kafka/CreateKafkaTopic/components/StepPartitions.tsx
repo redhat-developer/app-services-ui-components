@@ -82,7 +82,6 @@ export const StepPartitions: React.FC<StepPartitionsProps> = ({
             inputName="input"
             onChange={handlePartitionTouchspinChange}
             widthChars={20}
-            min={1}
             onBlur={onBlur}
           />
         </FormGroup>

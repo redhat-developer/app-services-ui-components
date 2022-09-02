@@ -100,7 +100,6 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
   };
 
   const handleRetentionMessageSize = (value: RetentionSizeUnits) => {
-    console.log(value);
     if (value == RetentionSizeUnits.CUSTOM) {
       onChangeMessageRetention({
         ...newTopicData,
