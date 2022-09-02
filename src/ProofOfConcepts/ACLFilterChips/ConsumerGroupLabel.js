@@ -13,7 +13,7 @@ class ConsumerGroupLabel extends React.Component {
         <div class="child">
           <Label
             color="green"
-            className="pf-c-label mas-m-solid mas-m-text"
+            className="pf-c-label mas-m-solid"
             isCompact
           >
             G

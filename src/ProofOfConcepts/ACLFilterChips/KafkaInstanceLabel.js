@@ -12,8 +12,7 @@ class KafkaInstanceLabel extends React.Component {
       <div class="row">
         <div class="child">
           <Label
-            color="grey"
-            className="pf-c-label mas-m-solid mas-m-text"
+            className="pf-c-label mas-m-solid"
             isCompact
           >
             KI
