@@ -11,11 +11,7 @@ class ConsumerGroupLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <Label
-            color="green"
-            className="pf-c-label mas-m-solid"
-            isCompact
-          >
+          <Label color="green" className="pf-c-label mas-m-solid" isCompact>
             G
           </Label>
         </div>

@@ -11,11 +11,7 @@ class TransactionalIdLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <Label
-            color="orange"
-            className="pf-c-label mas-m-solid"
-            isCompact
-          >
+          <Label color="orange" className="pf-c-label mas-m-solid" isCompact>
             TI
           </Label>
         </div>
