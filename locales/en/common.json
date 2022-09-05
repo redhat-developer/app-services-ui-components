@@ -12,6 +12,8 @@
     "aws": "Amazon Web Services",
     "aws_short": "AWS",
     "azure": "Azure",
+    "gcp": "Google Cloud Platform",
+    "gcp_short": "GCP",
     "rh": "Red Hat"
   },
   "complete": "Ready",

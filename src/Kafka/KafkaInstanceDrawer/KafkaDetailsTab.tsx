@@ -184,6 +184,14 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
                         {billing.subscription}
                       </>
                     );
+                  case "gcp":
+                    return (
+                      <>
+                        {t("create-kafka-instance:billing.marketplace_gcp")}
+                        <br />
+                        {billing.subscription}
+                      </>
+                    );
                   case "rhm":
                     return (
                       <>
