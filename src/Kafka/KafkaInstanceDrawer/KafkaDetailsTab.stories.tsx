@@ -29,6 +29,7 @@ export default {
     connectionRate: 100,
     messageSize: 1,
     billing: "prepaid",
+    kafkaVersion: "3.0.1",
   },
   argTypes: {
     billing: {
