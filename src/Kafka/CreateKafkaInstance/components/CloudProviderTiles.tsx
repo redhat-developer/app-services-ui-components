@@ -7,9 +7,9 @@ import {
   Skeleton,
   Tile,
 } from "@patternfly/react-core";
-import { AwsIcon, MicrosoftIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { AWSLogo, AzureLogo, GCPLogo } from "../../../shared/Logo";
 import type { CloudProvider } from "../../types";
 import type { CloudProviderInfo } from "../types";
 
@@ -86,6 +86,7 @@ export const CloudProvidersTiles: VoidFunctionComponent<
 };
 
 const tiles: { [id in CloudProvider]: JSX.Element } = {
-  aws: <AwsIcon size="lg" color="black" />,
-  azure: <MicrosoftIcon size="lg" color="black" />,
+  aws: <AWSLogo />,
+  gcp: <GCPLogo />,
+  azure: <AzureLogo />,
 };

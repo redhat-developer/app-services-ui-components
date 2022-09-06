@@ -53,7 +53,20 @@ const AZURE: CloudProviderInfo = {
   ],
 };
 
-export const PROVIDERS: CloudProviderInfo[] = [AWS, AZURE];
+const GCP: CloudProviderInfo = {
+  id: "gcp",
+  displayName: "Google Cloud Platform",
+  regions: [
+    { id: "eu-west-1", displayName: "EU, Ireland", isDisabled: false },
+    {
+      id: "us-east-1",
+      displayName: "US East, N. Virginia",
+      isDisabled: false,
+    },
+  ],
+};
+
+export const PROVIDERS: CloudProviderInfo[] = [AWS, GCP, AZURE];
 
 const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
   aws: [
@@ -144,6 +157,36 @@ const STANDARD_SIZES: { [key in CloudProvider]: StandardSizes } = {
       isDisabled: false,
     },
   ],
+  gcp: [
+    {
+      id: "x1",
+      displayName: "1",
+      quota: 3,
+      status: "preview",
+      ingress: 3,
+      egress: 31,
+      storage: 5,
+      connections: 6,
+      connectionRate: 7,
+      maxPartitions: 8,
+      messageSize: 9,
+      isDisabled: false,
+    },
+    {
+      id: "x2",
+      displayName: "2",
+      quota: 9,
+      status: "preview",
+      ingress: 30,
+      egress: 301,
+      storage: 50,
+      connections: 60,
+      connectionRate: 70,
+      maxPartitions: 80,
+      messageSize: 90,
+      isDisabled: false,
+    },
+  ],
 };
 
 const TRIAL_SIZES: { [key in CloudProvider]: TrialSizes } = {
@@ -167,6 +210,24 @@ const TRIAL_SIZES: { [key in CloudProvider]: TrialSizes } = {
   },
   azure: {
     standard: STANDARD_SIZES.azure,
+    trial: {
+      id: "trialx1",
+      displayName: "1",
+      quota: 0,
+      status: "stable",
+      ingress: 1,
+      egress: 1,
+      storage: 1,
+      connections: 1,
+      connectionRate: 1,
+      maxPartitions: 1,
+      messageSize: 1,
+      trialDurationHours: 24,
+      isDisabled: false,
+    },
+  },
+  gcp: {
+    standard: STANDARD_SIZES.gcp,
     trial: {
       id: "trialx1",
       displayName: "1",
@@ -359,6 +420,22 @@ export const argTypes = {
     },
     if: { arg: "apiMarketplacesAzure" },
   },
+  apiMarketplacesGCP: {
+    table: { category: "Quota", subcategory: "Azure" },
+    control: {
+      type: "boolean",
+    },
+    if: { arg: "apiHasMarketplaceSubscriptions" },
+  },
+  apiMarketplacesGCPSubscriptions: {
+    table: { category: "Quota", subcategory: "gcp" },
+    control: {
+      type: "range",
+      min: 0,
+      max: 25,
+    },
+    if: { arg: "apiMarketplacesGCP" },
+  },
   apiMarketplacesRH: {
     table: { category: "Quota", subcategory: "Red Hat Marketplace" },
     control: {
@@ -443,6 +520,8 @@ export type StoryProps = {
   apiMarketplacesAWS: boolean;
   apiMarketplacesAWSSubscriptions: number;
   apiMarketplacesAzure: boolean;
+  apiMarketplacesGCP: boolean;
+  apiMarketplacesGCPSubscriptions: number;
   apiMarketplacesAzureSubscriptions: number;
   apiMarketplacesRH: boolean;
   apiMarketplacesRHSubscriptions: number;
@@ -475,6 +554,8 @@ export const defaultStoryArgs: StoryProps = {
   apiMarketplacesRH: true,
   apiMarketplacesRHSubscriptions: 1,
   apiSimulateBackendError: false,
+  apiMarketplacesGCP: true,
+  apiMarketplacesGCPSubscriptions: 1,
   apiLatency: process.env.JEST_WORKER_ID ? 10 : 200,
   onCreate: (_data, onSuccess) => {
     action("onCreate")(_data);
@@ -527,6 +608,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
     apiRemainingMarketplaceQuota,
     apiMarketplacesAWS,
     apiMarketplacesAWSSubscriptions,
+    apiMarketplacesGCP,
+    apiMarketplacesGCPSubscriptions,
     apiMarketplacesAzure,
     apiMarketplacesAzureSubscriptions,
     apiMarketplacesRH,
@@ -590,6 +673,7 @@ export const Template: Story<StoryProps> = (args, { id }) => {
 
     makeMarketplace("azure", apiMarketplacesAzureSubscriptions),
     makeMarketplace("rhm", apiMarketplacesRHSubscriptions),
+    makeMarketplace("gcp", apiMarketplacesGCPSubscriptions),
   ].filter((q) => {
     switch (q.marketplace) {
       case "aws":
@@ -598,6 +682,8 @@ export const Template: Story<StoryProps> = (args, { id }) => {
         return apiMarketplacesAzure;
       case "rhm":
         return apiMarketplacesRH;
+      case "gcp":
+        return apiMarketplacesGCP;
       default:
         return false;
     }

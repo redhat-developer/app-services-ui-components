@@ -8,6 +8,7 @@ const billingValues: { [key: string]: MarketplaceSubscription | "prepaid" } = {
   aws: { marketplace: "aws", subscription: "aws-123" },
   azure: { marketplace: "azure", subscription: "azure-123" },
   rhm: { marketplace: "rhm", subscription: "rhm-123" },
+  gcp: { marketplace: "gcp", subscription: "gcp-123" },
 };
 
 export default {

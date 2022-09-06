@@ -158,6 +158,7 @@ PrepaidAndSingleMarketplaceSubscription.args = {
   apiMarketplacesAWSSubscriptions: 1,
   apiMarketplacesAzure: false,
   apiMarketplacesRH: false,
+  apiMarketplacesGCP: false,
 };
 PrepaidAndSingleMarketplaceSubscription.parameters = {
   docs: {
@@ -174,6 +175,7 @@ PrepaidAndSingleMarketplaceSubscriptionAllRH.args = {
   apiHasMarketplaceSubscriptions: true,
   apiMarketplacesAWS: false,
   apiMarketplacesAzure: false,
+  apiMarketplacesGCP: false,
   apiMarketplacesRH: true,
   apiMarketplacesRHSubscriptions: 1,
 };
@@ -254,6 +256,7 @@ SingleMarketplace.args = {
   apiMarketplacesAWSSubscriptions: 2,
   apiMarketplacesAzure: false,
   apiMarketplacesRH: false,
+  apiMarketplacesGCP: false,
 };
 SingleMarketplace.parameters = {
   docs: {
@@ -272,6 +275,7 @@ SingleMarketplaceRH.args = {
   apiMarketplacesAWS: false,
   apiMarketplacesAzure: false,
   apiMarketplacesRH: true,
+  apiMarketplacesGCP: false,
   apiMarketplacesRHSubscriptions: 2,
 };
 SingleMarketplaceRH.parameters = {
@@ -292,6 +296,7 @@ SingleSubscription.args = {
   apiMarketplacesAWSSubscriptions: 1,
   apiMarketplacesAzure: false,
   apiMarketplacesRH: false,
+  apiMarketplacesGCP: false,
 };
 SingleSubscription.parameters = {
   docs: {
@@ -310,6 +315,7 @@ SingleSubscriptionToRH.args = {
   apiMarketplacesAWS: false,
   apiMarketplacesAzure: false,
   apiMarketplacesRH: true,
+  apiMarketplacesGCP: false,
 };
 SingleSubscriptionToRH.parameters = {
   docs: {

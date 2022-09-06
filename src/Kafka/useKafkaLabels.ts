@@ -13,6 +13,7 @@ export function useKafkaLabels() {
   };
   const providers: { [status in CloudProvider]: string } = {
     aws: t("common:cloudProviders.aws"),
+    gcp: t("common:cloudProviders.gcp"),
     azure: t("common:cloudProviders.azure"),
   };
   const fields: {
