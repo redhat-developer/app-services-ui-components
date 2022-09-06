@@ -194,6 +194,14 @@ export const InstanceInfo: VoidFunctionComponent<InstanceInfoProps> = ({
                                   {billing.value.subscription}
                                 </>
                               );
+                            case "gcp":
+                              return (
+                                <>
+                                  {t("billing.marketplace_gcp")}
+                                  <br />
+                                  {billing.value.subscription}
+                                </>
+                              );
                             case "azure":
                               return (
                                 <>

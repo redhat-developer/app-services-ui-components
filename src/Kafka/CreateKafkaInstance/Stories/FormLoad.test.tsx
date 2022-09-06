@@ -445,6 +445,15 @@ describe("CreateKafkaInstance", () => {
         (await comp.findByText("AWS Marketplace")).closest("[role=option]")
       ).toHaveAttribute("aria-disabled", "true")
     );
+    userEvent.selectOptions(
+      comp.getByLabelText("Cloud provider *"),
+      "Google Cloud Platform"
+    );
+    await waitFor(async () =>
+      expect(
+        (await comp.findByText("AWS Marketplace")).closest("[role=option]")
+      ).toHaveAttribute("aria-disabled", "true")
+    );
   });
 
   it("should show the billing options, with prepaid and a single subscription and save the right data", async () => {
@@ -501,9 +510,44 @@ describe("CreateKafkaInstance", () => {
         "true"
       );
     });
+    await waitFor(() => {
+      const gcp = comp.getByText("GCP Marketplace");
+      expect(gcp).toBeInTheDocument();
+      expect(gcp.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
     await waitFor(() =>
       expect(comp.getByText("Red Hat Marketplace")).toBeInTheDocument()
     );
+
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat Marketplace")).toBeInTheDocument()
+    );
+
+    userEvent.selectOptions(
+      comp.getByLabelText("Cloud provider *"),
+      "Google Cloud Platform"
+    );
+    await waitFor(() =>
+      expect(comp.getByText("Red Hat prepaid")).toBeInTheDocument()
+    );
+
+    await waitFor(() => {
+      const azure = comp.getByText("Azure Marketplace");
+      expect(azure).toBeInTheDocument();
+      expect(azure.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
+
+    await waitFor(() => {
+      const gcp = comp.getByText("GCP Marketplace");
+      expect(gcp).toBeInTheDocument();
+      expect(gcp.closest("[role=option]")).not.toHaveAttribute("aria-disabled");
+    });
   });
 
   it("should show the billing options, with prepaid and a multiple subscriptions and save the right data", async () => {
@@ -560,6 +604,14 @@ describe("CreateKafkaInstance", () => {
         "true"
       );
     });
+    await waitFor(() => {
+      const gcp = comp.getByText("GCP Marketplace");
+      expect(gcp).toBeInTheDocument();
+      expect(gcp.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
     await waitFor(() =>
       expect(comp.getByText("Red Hat Marketplace")).toBeInTheDocument()
     );
@@ -584,6 +636,9 @@ describe("CreateKafkaInstance", () => {
     );
     await waitFor(() =>
       expect(comp.queryByText("Azure Marketplace")).not.toBeInTheDocument()
+    );
+    await waitFor(() =>
+      expect(comp.queryByText("GCP Marketplace")).not.toBeInTheDocument()
     );
     await waitFor(() =>
       expect(comp.queryByText("Red Hat Marketplace")).not.toBeInTheDocument()
@@ -612,6 +667,15 @@ describe("CreateKafkaInstance", () => {
         "true"
       );
     });
+
+    await waitFor(() => {
+      const gcp = comp.getAllByText("Google Cloud Platform")[0];
+      expect(gcp).toBeInTheDocument();
+      expect(gcp.closest("[role=option]")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
+    });
   });
 
   it("should show the billing options, with a list of subscriptions from a single marketplace", async () => {
@@ -634,6 +698,12 @@ describe("CreateKafkaInstance", () => {
       expect(azure.closest("[role=option]")).not.toHaveAttribute(
         "aria-disabled"
       );
+    });
+
+    await waitFor(() => {
+      const gcp = comp.getAllByText("Google Cloud Platform")[0];
+      expect(gcp).toBeInTheDocument();
+      expect(gcp.closest("[role=option]")).not.toHaveAttribute("aria-disabled");
     });
   });
 
@@ -690,6 +760,7 @@ describe("CreateKafkaInstance", () => {
 
     await checkDisabledTitle("aws-YXdzMDAwMDAwMA==");
     await checkDisabledTitle("aws-YXdzMTExMTExMQ==");
+    await checkDisabledTitle("gcp-Z2NwMDAwMDAwMA==");
     await checkDisabledTitle("azure-YXp1cmUwMDAwMA==");
     await checkDisabledTitle("rhm-cmhtMDAwMDAwMA==");
   });

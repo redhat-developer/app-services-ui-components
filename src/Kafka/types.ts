@@ -8,7 +8,7 @@ export type DateIsoString = string;
  * Typescript errors to find where extra information need to be added (images,
  * translations).
  */
-export type CloudProvider = "aws" | "azure";
+export type CloudProvider = "aws" | "gcp" | "azure";
 
 /**
  * A Cloud Region. Since this varies between Cloud Providers and has no extra
