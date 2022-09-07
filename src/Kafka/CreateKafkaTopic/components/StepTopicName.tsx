@@ -83,7 +83,6 @@ export const StepTopicName: React.FC<StepTopicNameProps> = ({
             onChange={handleTopicNameChange}
             placeholder={t("enter_name")}
             validated={topicNameValidated}
-            aria-label={t("topic_nametopic_name")}
           />
         </FormGroup>
       </FormSection>
