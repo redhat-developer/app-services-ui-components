@@ -22,3 +22,5 @@ export const I18nProvider: FunctionComponent<I18nProviderProps> = ({
     {children}
   </I18nextProvider>
 );
+
+export * from "react-i18next";
