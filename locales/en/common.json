@@ -13,6 +13,8 @@
     "aws": "Amazon Web Services",
     "aws_short": "AWS",
     "azure": "Azure",
+    "gcp": "Google Cloud Platform",
+    "gcp_short": "GCP",
     "rh": "Red Hat"
   },
   "complete": "Ready",
@@ -42,6 +44,7 @@
   "kafka": "Kafka",
   "kafka_instance": "$t(common:kafka) Instances",
   "kafka_instance_name": "$t(common:kafka) instance name",
+  "kafka_version": "Kafka version",
   "loading": "Loading",
   "mvn": "mvn",
   "name": "Name",

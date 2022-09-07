@@ -125,6 +125,18 @@ exports[`Details Tab renders standard instance 1`] = `
             class=""
             data-pf-content="true"
           >
+            Kafka version
+          </dt>
+          <dd
+            class=""
+            data-pf-content="true"
+          >
+            3.0.1
+          </dd>
+          <dt
+            class=""
+            data-pf-content="true"
+          >
             Owner
           </dt>
           <dd

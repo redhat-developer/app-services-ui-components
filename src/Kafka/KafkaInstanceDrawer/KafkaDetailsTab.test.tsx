@@ -75,6 +75,17 @@ describe("Details Tab", () => {
     expect(comp.getByText("rhm-123", { exact: false }));
   });
 
+  it("renders gcp marketplace billing option", async () => {
+    const comp = render(
+      <StandardInstanceCreated
+        billing={{ marketplace: "gcp", subscription: "gcp-123" }}
+      />
+    );
+    await waitForI18n(comp);
+    expect(comp.getByText("GCP Marketplace", { exact: false }));
+    expect(comp.getByText("gcp-123", { exact: false }));
+  });
+
   it("renders loaders for undefined data", async () => {
     const comp = render(<MissingDataShownAsSkeletonLoaders />);
     await waitForI18n(comp);

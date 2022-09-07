@@ -34,6 +34,7 @@ export type KafkaDetailsTabProps = {
   connectionRate: number | undefined;
   messageSize: number | undefined;
   billing: "prepaid" | MarketplaceSubscription | undefined;
+  kafkaVersion: string;
 };
 
 export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
@@ -53,6 +54,7 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
   connectionRate,
   messageSize,
   billing,
+  kafkaVersion,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -145,6 +147,7 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
           )}
 
           {renderTextListItem(t("common:id"), id)}
+          {renderTextListItem(t("common:kafka_version"), kafkaVersion)}
           {renderTextListItem(t("common:owner"), owner)}
           {renderTextListItem(
             t("common:time_created"),
@@ -180,6 +183,14 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
                     return (
                       <>
                         {t("create-kafka-instance:billing.marketplace_azure")}
+                        <br />
+                        {billing.subscription}
+                      </>
+                    );
+                  case "gcp":
+                    return (
+                      <>
+                        {t("create-kafka-instance:billing.marketplace_gcp")}
                         <br />
                         {billing.subscription}
                       </>

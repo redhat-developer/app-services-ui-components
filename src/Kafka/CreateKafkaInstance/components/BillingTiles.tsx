@@ -10,9 +10,9 @@ import {
   HelperTextItem,
   Tile,
 } from "@patternfly/react-core";
-import { AwsIcon, MicrosoftIcon, RedhatIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import { AWSLogo, AzureLogo, GCPLogo, RedhatLogo } from "../../../shared/Logo";
 import type { MarketPlace } from "../../types";
 
 export type BillingTilesProps = {
@@ -47,6 +47,7 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
   const marketplaces: { [key in MarketPlace]: string } = {
     aws: t("billing.marketplace_aws"),
     azure: t("billing.marketplace_azure"),
+    gcp: t("billing.marketplace_gcp"),
     rhm: t("billing.marketplace_rh"),
   };
   return (
@@ -192,7 +193,8 @@ export const BillingTiles: VoidFunctionComponent<BillingTilesProps> = ({
 };
 
 const tiles: { [id in MarketPlace]: JSX.Element } = {
-  aws: <AwsIcon size="md" color="black" />,
-  azure: <MicrosoftIcon size="md" color="black" />,
-  rhm: <RedhatIcon size="md" color="black" />,
+  aws: <AWSLogo />,
+  gcp: <GCPLogo />,
+  azure: <AzureLogo />,
+  rhm: <RedhatLogo />,
 };
