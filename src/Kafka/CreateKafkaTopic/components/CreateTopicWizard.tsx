@@ -181,7 +181,6 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
                 onValidate={onValidate}
                 topicNameValidated={topicNameValidated}
                 closeWizard={closeWizard}
-                partitionValue={topicData.numPartitions}
               />
             }
           />

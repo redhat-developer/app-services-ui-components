@@ -3,22 +3,21 @@ import {
   WizardContextConsumer,
   Button,
   WizardFooter,
+  ValidatedOptions,
 } from "@patternfly/react-core";
 import { useTranslation } from "react-i18next";
-import type { ValidatedOptions } from "@patternfly/react-core/dist/js";
 
 export interface IWizardFooter {
   isLoading: boolean;
   onValidate: (value: () => void) => void;
   topicNameValidated: ValidatedOptions;
   closeWizard: () => void;
-  partitionValue: number;
 }
 export const WizardCustomFooter: React.FC<IWizardFooter> = ({
   isLoading,
   onValidate,
   closeWizard,
-  partitionValue,
+  topicNameValidated,
 }) => {
   const { t } = useTranslation(["create-topic", "common"]);
 
@@ -34,7 +33,11 @@ export const WizardCustomFooter: React.FC<IWizardFooter> = ({
                   type="submit"
                   isLoading={isLoading}
                   onClick={() => onValidate(onNext)}
-                  isDisabled={partitionValue == 0 ? true : false}
+                  isDisabled={
+                    topicNameValidated == ValidatedOptions.default
+                      ? false
+                      : true
+                  }
                   ouiaId={"button-next"}
                 >
                   {t("common:next")}
