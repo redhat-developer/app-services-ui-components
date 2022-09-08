@@ -99,9 +99,8 @@ describe("Create topic", () => {
     expect(await comp.findByText("A week")).toBeInTheDocument();
     expect(await comp.findByText("Custom duration")).toBeInTheDocument();
     expect(await comp.findByText("Custom size")).toBeInTheDocument();
-    const unlimited = await comp.findAllByText("Unlimited");
-    expect(unlimited[0]).toBeInTheDocument();
-    expect(unlimited[1]).toBeInTheDocument();
+    expect(await comp.findByLabelText("Unlimited size")).toBeInTheDocument();
+    expect(await comp.findByLabelText("Unlimited time")).toBeInTheDocument();
     userEvent.click(await comp.findByLabelText("Custom duration"));
     expect(await comp.findByDisplayValue("7")).toBeInTheDocument();
     expect(await comp.findByDisplayValue("days")).toBeInTheDocument();
@@ -111,9 +110,11 @@ describe("Create topic", () => {
     expect(await comp.findByDisplayValue("1")).toBeInTheDocument();
     userEvent.click(await comp.findByText("bytes"));
     userEvent.click(await comp.findByText("tebibytes"));
+    userEvent.click(await comp.findByLabelText("Unlimited time"));
     userEvent.click(await comp.findByText("A day"));
     userEvent.click(await comp.findByText("A week"));
     userEvent.click(await comp.findByText("A week"));
+    userEvent.click(await comp.findByLabelText("Unlimited size"));
     userEvent.click(button);
     const replicas = await comp.findAllByText("Replicas");
     expect(replicas[0]).toBeInTheDocument();

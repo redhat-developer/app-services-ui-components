@@ -203,7 +203,7 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
                 onChange={() =>
                   handleRetentionMessageTime(RetentionTimeUnits.UNLIMITED)
                 }
-                label="Unlimited"
+                label="Unlimited time"
                 aria-label="Unlimited"
                 id="radio-controlled-3"
                 value={RetentionTimeUnits.UNLIMITED}
@@ -224,7 +224,7 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
                 onChange={() =>
                   handleRetentionMessageSize(RetentionSizeUnits.UNLIMITED)
                 }
-                label="Unlimited"
+                label="Unlimited size"
                 aria-label="Unlimited"
                 id="radio-controlled-6"
                 value={RetentionSizeUnits.UNLIMITED}
