@@ -238,7 +238,7 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
                   handleRetentionMessageSize(RetentionSizeUnits.CUSTOM)
                 }
                 label="Custom size"
-                aria-label="custom input"
+                aria-label="custom size"
                 id="radio-controlled-5"
                 value={RetentionSizeUnits.CUSTOM}
               />

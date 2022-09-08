@@ -125,7 +125,7 @@ PartitionLimitReached.play = async ({ canvasElement }) => {
 PartitionLimitReached.parameters = {
   docs: {
     description: {
-      story: ` A user entered an invalid topic name `,
+      story: ` A user has reached the partitions limit `,
     },
   },
 };
