@@ -4,6 +4,7 @@
   "bytes_to_gibibyte": "{{bytes}} bytes ({{gibibyte}} gibibyte)",
   "bytes_to_kibibytes": "{{bytes}} bytes ({{kibibytes}} kibibytes)",
   "bytes_to_mebibytes": "{{bytes}} bytes ({{mebibytes}} mebibytes)",
+  "cannot_exceed_characters": "Cannot exceed 249 characters",
   "cleanup": "Cleanup",
   "cleanup_policy": "Cleanup policy",
   "cleanup_policy_description": "Cleanup policy determines whether log messages are deleted, compacted, or both. With the `compact, delete` option, log segments are first compacted and then deleted according to the retention time or size limit settings. (cleanup.policy)",
@@ -101,6 +102,5 @@
   "topic_name_info_note": "The topic name is also used by your producers and consumers as part of the connection information, so make it something easy to recognize.",
   "unclean_leader_election": "Unclean leader election",
   "unclean_leader_election_description": "Unclean leader election allows a follower replica that is not in sync with the partition leader to become the leader of the partition. This property provides a way to retain at least partial data if partition leaders are jeopardized. However, this property can lead to data loss, so it's disabled by default. (unclean.leader.election.enable)",
-  "wizard_title": "Create topics wizard",
-  "cannot_exceed_characters": "Cannot exceed 249 characters"
+  "wizard_title": "Create topics wizard"
 }
