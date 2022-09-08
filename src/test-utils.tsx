@@ -31,6 +31,7 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
               import("../locales/en/message-browser.json"),
             "overview-v2": () => import("../locales/en/overview-v2.json"),
             "overview-v3": () => import("../locales/en/overview-v3.json"),
+            "overview-v4": () => import("../locales/en/overview-v4.json"),
             "kafkaoverview-v2": () =>
               import("../locales/en/kafkaoverview-v2.json"),
             "kafkaoverview-v3": () =>
