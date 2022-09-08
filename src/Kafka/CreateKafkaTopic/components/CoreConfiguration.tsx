@@ -172,29 +172,40 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
           {t("core_config_info")}
         </Text>
       </TextContent>
-      <FormGroupWithPopover
-        labelHead={t("topic_name")}
-        fieldId="create-topic-name"
-        fieldLabel={t("topic_name")}
-        labelBody={t("topic_name_description")}
-        buttonAriaLabel="More info for topic name field"
-        helperTextInvalid={invalidText}
-        validated={topicValidated}
-        isRequired={true}
-        helperText={t("topic_name_helper_text")}
-      >
-        <TextInput
-          isRequired
-          type="text"
-          id="create-topic-name"
-          name="name"
-          value={topicData.name}
-          onChange={handleTextInputChange}
-          label={t("topic_name")}
-          placeholder={t("enter_name")}
+      {isCreate ? (
+        <FormGroupWithPopover
+          labelHead={t("topic_name")}
+          fieldId="create-topic-name"
+          fieldLabel={t("topic_name")}
+          labelBody={t("topic_name_description")}
+          buttonAriaLabel="More info for topic name field"
+          helperTextInvalid={invalidText}
           validated={topicValidated}
+          isRequired={true}
+          helperText={t("topic_name_helper_text")}
+        >
+          <TextInput
+            isRequired
+            type="text"
+            id="create-topic-name"
+            name="name"
+            value={topicData.name}
+            onChange={handleTextInputChange}
+            label={t("topic_name")}
+            placeholder={t("enter_name")}
+            validated={topicValidated}
+          />
+        </FormGroupWithPopover>
+      ) : (
+        <TextWithLabelPopover
+          fieldId="topic-name"
+          btnAriaLabel="topic detail name"
+          fieldLabel="Name"
+          fieldValue={topicData.name}
+          popoverBody={t("topic_name_description")}
+          popoverHeader={t("topic_name")}
         />
-      </FormGroupWithPopover>
+      )}
 
       <FormGroupWithPopover
         fieldId="create-topic-partitions"
