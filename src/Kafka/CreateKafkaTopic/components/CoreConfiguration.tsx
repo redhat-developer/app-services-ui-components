@@ -286,7 +286,7 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
             onChange={() =>
               handleRetentionMessageTime(RetentionTimeUnits.UNLIMITED)
             }
-            label="Unlimited"
+            label="Unlimited time"
             aria-label="Unlimited"
             id="unlimited-retention-time"
             value={RetentionTimeUnits.UNLIMITED}
@@ -323,7 +323,7 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
             onChange={() =>
               handleRetentionMessageSize(RetentionSizeUnits.UNLIMITED)
             }
-            label="Unlimited"
+            label="Unlimited size"
             aria-label="Unlimited"
             id="unlimited-retention-size"
             value={RetentionSizeUnits.UNLIMITED}

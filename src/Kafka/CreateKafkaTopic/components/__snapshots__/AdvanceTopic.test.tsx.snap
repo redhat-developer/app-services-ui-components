@@ -686,7 +686,7 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
                                 class="pf-c-radio__label"
                                 for="unlimited-retention-time"
                               >
-                                Unlimited
+                                Unlimited time
                               </label>
                             </div>
                           </div>
@@ -900,7 +900,7 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
                                 class="pf-c-radio__label"
                                 for="unlimited-retention-size"
                               >
-                                Unlimited
+                                Unlimited size
                               </label>
                             </div>
                           </div>
