@@ -45,27 +45,6 @@ export enum RetentionSizeUnits {
   CUSTOM = "custom",
   UNLIMITED = "unlimited",
 }
-export const unitsToBytes = {
-  [RetentionSizeUnits.BYTE]: 1,
-  [RetentionSizeUnits.KIBIBYTE]: 1024,
-  [RetentionSizeUnits.MEBIBYTE]: 1048576,
-  [RetentionSizeUnits.GIBIBYTE]: 1073741824,
-  [RetentionSizeUnits.TEBIBYTE]: 1.0995116e12,
-};
-
-export const unitsToMilliSecond = {
-  [RetentionTimeUnits.MILLISECOND]: 1,
-  [RetentionTimeUnits.SECOND]: 1000,
-  [RetentionTimeUnits.MINUTE]: 60000,
-  [RetentionTimeUnits.HOUR]: 3600000,
-  [RetentionTimeUnits.DAY]: 86400000,
-};
-
-export const RetentionTimeUnitToValue = {
-  ...unitsToMilliSecond,
-  [RetentionTimeUnits.DAY]: 1,
-  [RetentionTimeUnits.WEEK]: 7,
-};
 
 export type SelectOptions = {
   key: string;
@@ -90,13 +69,6 @@ export type ConstantValues = {
   DEFAULT_MINIMUM_COMPACTION_LAG_TIME_MILLISECONDS: number;
   DEFAULT_FLUSH_INTERVAL_MESSAGES: string;
   DEFAULT_FLUSH_INTERVAL_TIME_MILLISECONDS: string;
-};
-
-export const kebabToDotSeparated = (val: string): string => {
-  if (typeof val === "string") {
-    return val.replace(/-/g, ".");
-  }
-  return val;
 };
 
 export const retentionTimeSelectOptions: SelectOptions[] = [
