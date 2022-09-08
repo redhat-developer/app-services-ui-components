@@ -49,6 +49,13 @@ describe("Create topic", () => {
     await waitForPopper();
     const input = await comp.findByDisplayValue("my-test");
     userEvent.clear(input);
+    userEvent.type(await comp.findByPlaceholderText("Enter topic name"), "$");
+    expect(
+      comp.getByText(
+        "Must be letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), or hyphens ( - )"
+      )
+    ).toBeInTheDocument();
+    userEvent.clear(input);
     userEvent.type(
       await comp.findByPlaceholderText("Enter topic name"),
       "test-this-name"
