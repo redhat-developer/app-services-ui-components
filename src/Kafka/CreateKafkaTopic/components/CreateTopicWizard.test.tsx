@@ -46,12 +46,15 @@ describe("Create advance topic", () => {
 
     const unlimited = await comp.findAllByLabelText("Unlimited");
     userEvent.click(unlimited[0]);
+    userEvent.click(unlimited[1]);
     const custom = await comp.findAllByDisplayValue(RetentionSizeUnits.CUSTOM);
+    userEvent.click(custom[1]);
     userEvent.click(custom[0]);
     userEvent.click(await comp.findByText("bytes"));
     userEvent.click(await comp.findByText("tebibytes"));
     userEvent.click(await comp.findByTestId("Partitions"));
-    userEvent.type(await comp.findByTestId("Partitions"), "12");
+    const partitionsInput = await comp.findAllByDisplayValue(1);
+    userEvent.type(partitionsInput[0], "12");
     userEvent.click(await comp.findByText("Delete"));
     expect(comp.getByText("Compact")).toBeInTheDocument();
     expect(comp.getByText("Compact,Delete")).toBeInTheDocument();
