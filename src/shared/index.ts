@@ -13,3 +13,5 @@ export * from "./RemoveButton";
 export * from "./Table";
 export * from "./AsyncTypeaheadSelect";
 export * from "./TermsAndConditionModal";
+export * from "./TextWithLabelPopover";
+export * from "./DropdownWithToggle";

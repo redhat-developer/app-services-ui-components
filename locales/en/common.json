@@ -2,6 +2,7 @@
   "404_page_does_not_exist": "404: That page doesn’t exist",
   "accepted": "Creation pending",
   "adjust_your_filters_and_try_again": "Adjust your filters and try again.",
+  "back": "Back",
   "cancel": "Cancel",
   "cli": "cli",
   "client_key": "Client Key",
@@ -29,9 +30,11 @@
   "deleting": "Deleting",
   "deprovision": "Deleting",
   "description": "Description",
+  "disabled": "Disabled",
   "duration": "Duration",
   "duration_value": "2 months",
   "failed": "Failed",
+  "finish": "Finish",
   "form_invalid_alert": "Please address the errors in your form to proceed",
   "full_pagination": "Full pagination",
   "go_to_kafka_instances": "Go to $t(common:kafka) Instances",
@@ -45,6 +48,7 @@
   "loading": "Loading",
   "mvn": "mvn",
   "name": "Name",
+  "next": "Next",
   "no_results_found": "No results found",
   "options_toggle": "Items per page",
   "owner": "Owner",
@@ -62,6 +66,7 @@
   "resources": "Resources",
   "return_to_home_page": "Return to home page",
   "sample_code": "Sample code",
+  "save": "Save",
   "search_button_label": "Search",
   "select": "Select",
   "servicePreview": "Service preview ",
@@ -89,5 +94,6 @@
   "type_value_to_confirm_plain": "Type {{value}} to confirm",
   "unexpected_error": "There was a problem processing the request. Please try again.",
   "updated": "Updated",
-  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for."
+  "we_cannot_find_the_page_you_are_looking_for": "We can’t find the page you’re looking for.",
+  "yes": "Yes"
 }

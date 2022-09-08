@@ -1,0 +1,2170 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Create advance topic should render an advanced topic creation page 1`] = `
+<body>
+  <div>
+    <hr
+      class="pf-c-divider kafka-ui--divider--FlexShrink"
+    />
+    <section
+      class="pf-c-page__main-section pf-m-light pf-m-overflow-scroll"
+      tabindex="0"
+    >
+      <section
+        class="pf-c-page__main-section pf-m-no-padding"
+      >
+        <div
+          class="pf-c-sidebar pf-m-gutter"
+        >
+          <div
+            class="pf-c-sidebar__main"
+          >
+            <div
+              class="pf-c-sidebar__panel pf-m-sticky"
+            >
+              <nav
+                aria-label="JUMP TO SECTION"
+                class="pf-c-jump-links pf-m-vertical"
+                style="position: sticky;"
+              >
+                <div
+                  class="pf-c-jump-links__main"
+                >
+                  <div
+                    class="pf-c-jump-links__header"
+                  >
+                    <div
+                      class="pf-c-jump-links__label"
+                    >
+                      JUMP TO SECTION
+                    </div>
+                  </div>
+                  <ul
+                    class="pf-c-jump-links__list"
+                  >
+                    <li
+                      aria-current="location"
+                      class="pf-c-jump-links__item pf-m-current"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#core-configuration"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Core configuration
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#messages"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Messages
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#log"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Log
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#replication"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Replication
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#cleanup"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Cleanup
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#index"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Index
+                        </span>
+                      </a>
+                    </li>
+                    <li
+                      class="pf-c-jump-links__item"
+                    >
+                      <a
+                        class="pf-c-jump-links__link"
+                        href="#flush"
+                      >
+                        <span
+                          class="pf-c-jump-links__link-text"
+                        >
+                          Flush
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+            <div
+              class="pf-c-sidebar__content"
+            >
+              <div
+                class="pf-c-page__main-group pf-m-overflow-scroll"
+                id="topic-detail-view"
+                tabindex="0"
+              >
+                <section
+                  class="pf-c-page__main-section pf-m-no-padding"
+                >
+                  <form
+                    class="pf-c-form"
+                    novalidate=""
+                  >
+                    <section
+                      aria-labelledby="pf-form-section-title0"
+                      class="pf-c-form__section"
+                      id="core-configuration"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title0"
+                      >
+                        Core configuration
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class="section-info"
+                          data-ouia-component-id="OUIA-Generated-Text-1"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Before deploying your topic, we recommend entering all core configuration details.
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="create-topic-name"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Topic name
+                            </span>
+                            <span
+                              aria-hidden="true"
+                              class="pf-c-form__label-required"
+                            >
+                               
+                              *
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="More info for topic name field"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-1"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="create-topic-name"
+                            label="Topic name"
+                            name="name"
+                            placeholder="Enter topic name"
+                            required=""
+                            type="text"
+                            value=""
+                          />
+                          <div
+                            aria-live="polite"
+                            class="pf-c-form__helper-text"
+                            id="create-topic-name-helper"
+                          >
+                            Must be letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), or hyphens ( - )
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="create-topic-partitions"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Partitions
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="More info for partitions field"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <div
+                            class="pf-c-number-input"
+                            data-testid="Partitions"
+                            id="create-topic-partitions"
+                          >
+                            <div
+                              class="pf-c-input-group"
+                            >
+                              <button
+                                aria-disabled="false"
+                                aria-label="Minus"
+                                class="pf-c-button pf-m-control"
+                                data-ouia-component-id="OUIA-Generated-Button-control-1"
+                                data-ouia-component-type="PF4/Button"
+                                data-ouia-safe="true"
+                                name="num-partitions"
+                                type="button"
+                              >
+                                <span
+                                  class="pf-c-number-input__icon"
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    height="1em"
+                                    role="img"
+                                    style="vertical-align: -0.125em;"
+                                    viewBox="0 0 448 512"
+                                    width="1em"
+                                  >
+                                    <path
+                                      d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                    />
+                                  </svg>
+                                </span>
+                              </button>
+                              <input
+                                aria-label="Input"
+                                class="pf-c-form-control"
+                                name="num-partitions"
+                                type="number"
+                                value="1"
+                              />
+                              <button
+                                aria-disabled="false"
+                                aria-label="Plus"
+                                class="pf-c-button pf-m-control"
+                                data-ouia-component-id="OUIA-Generated-Button-control-2"
+                                data-ouia-component-type="PF4/Button"
+                                data-ouia-safe="true"
+                                name="num-partitions"
+                                type="button"
+                              >
+                                <span
+                                  class="pf-c-number-input__icon"
+                                >
+                                  <svg
+                                    aria-hidden="true"
+                                    fill="currentColor"
+                                    height="1em"
+                                    role="img"
+                                    style="vertical-align: -0.125em;"
+                                    viewBox="0 0 448 512"
+                                    width="1em"
+                                  >
+                                    <path
+                                      d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                    />
+                                  </svg>
+                                </span>
+                              </button>
+                            </div>
+                          </div>
+                          <div
+                            aria-live="polite"
+                            class="pf-c-form__helper-text"
+                            id="create-topic-partitions-helper"
+                          >
+                            One partition is sufficient for getting started, but production systems often have more.
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="replicas"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Replicas
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Replicas"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-2"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="replicas"
+                            name="replicas"
+                            readonly=""
+                            type="text"
+                            value="1"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="min-insync-replicas"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Minimum in-sync replicas
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="topic detail min-in-sync replica"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-3"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="min-insync-replicas"
+                            name="min-insync-replicas"
+                            readonly=""
+                            type="text"
+                            value="1"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="retention"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Retention time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="More info for retention time field"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <div
+                            class="pf-l-stack pf-m-gutter"
+                          >
+                            <div
+                              class="pf-c-radio kafka-ui--radio-label__number-input"
+                            >
+                              <input
+                                aria-invalid="false"
+                                checked=""
+                                class="pf-c-radio__input"
+                                data-ouia-component-id="OUIA-Generated-Radio-1"
+                                data-ouia-component-type="PF4/Radio"
+                                data-ouia-safe="true"
+                                id="custom-retention-time"
+                                name="custom-retention-time"
+                                type="radio"
+                                value="custom"
+                              />
+                              <label
+                                class="pf-c-radio__label"
+                                for="custom-retention-time"
+                              >
+                                <div
+                                  class="kafka-ui--radio__parameters"
+                                >
+                                  <div
+                                    class="pf-l-flex"
+                                  >
+                                    <div
+                                      class=""
+                                    >
+                                      <div
+                                        class="pf-c-number-input"
+                                      >
+                                        <div
+                                          class="pf-c-input-group"
+                                        >
+                                          <button
+                                            aria-disabled="false"
+                                            aria-label="Minus"
+                                            class="pf-c-button pf-m-control"
+                                            data-ouia-component-id="OUIA-Generated-Button-control-3"
+                                            data-ouia-component-type="PF4/Button"
+                                            data-ouia-safe="true"
+                                            type="button"
+                                          >
+                                            <span
+                                              class="pf-c-number-input__icon"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                height="1em"
+                                                role="img"
+                                                style="vertical-align: -0.125em;"
+                                                viewBox="0 0 448 512"
+                                                width="1em"
+                                              >
+                                                <path
+                                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                                />
+                                              </svg>
+                                            </span>
+                                          </button>
+                                          <input
+                                            aria-label="Input"
+                                            class="pf-c-form-control"
+                                            type="number"
+                                            value="1"
+                                          />
+                                          <button
+                                            aria-disabled="false"
+                                            aria-label="Plus"
+                                            class="pf-c-button pf-m-control"
+                                            data-ouia-component-id="OUIA-Generated-Button-control-4"
+                                            data-ouia-component-type="PF4/Button"
+                                            data-ouia-safe="true"
+                                            type="button"
+                                          >
+                                            <span
+                                              class="pf-c-number-input__icon"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                height="1em"
+                                                role="img"
+                                                style="vertical-align: -0.125em;"
+                                                viewBox="0 0 448 512"
+                                                width="1em"
+                                              >
+                                                <path
+                                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                                />
+                                              </svg>
+                                            </span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class=""
+                                    >
+                                      <div
+                                        class="pf-c-select"
+                                        data-ouia-component-id="OUIA-Generated-Select-single-1"
+                                        data-ouia-component-type="PF4/Select"
+                                        data-ouia-safe="true"
+                                      >
+                                        <button
+                                          aria-expanded="false"
+                                          aria-haspopup="listbox"
+                                          aria-label="Options menu"
+                                          aria-labelledby=" pf-select-toggle-id-0"
+                                          class="pf-c-select__toggle"
+                                          id="pf-select-toggle-id-0"
+                                          type="button"
+                                        >
+                                          <div
+                                            class="pf-c-select__toggle-wrapper"
+                                          >
+                                            <span
+                                              class="pf-c-select__toggle-text"
+                                            >
+                                              days
+                                            </span>
+                                          </div>
+                                          <span
+                                            class="pf-c-select__toggle-arrow"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              fill="currentColor"
+                                              height="1em"
+                                              role="img"
+                                              style="vertical-align: -0.125em;"
+                                              viewBox="0 0 320 512"
+                                              width="1em"
+                                            >
+                                              <path
+                                                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                              />
+                                            </svg>
+                                          </span>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </label>
+                            </div>
+                            <div
+                              class="pf-c-radio"
+                            >
+                              <input
+                                aria-invalid="false"
+                                class="pf-c-radio__input"
+                                data-ouia-component-id="OUIA-Generated-Radio-2"
+                                data-ouia-component-type="PF4/Radio"
+                                data-ouia-safe="true"
+                                id="unlimited-retention-time"
+                                name="unlimited-retention-time"
+                                type="radio"
+                                value="unlimited"
+                              />
+                              <label
+                                class="pf-c-radio__label"
+                                for="unlimited-retention-time"
+                              >
+                                Unlimited time
+                              </label>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="retention-size"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Retention size
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="More info for retention size field"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <div
+                            class="pf-l-stack pf-m-gutter"
+                          >
+                            <div
+                              class="pf-c-radio kafka-ui--radio-label__number-input"
+                            >
+                              <input
+                                aria-invalid="false"
+                                class="pf-c-radio__input"
+                                data-ouia-component-id="OUIA-Generated-Radio-3"
+                                data-ouia-component-type="PF4/Radio"
+                                data-ouia-safe="true"
+                                id="custom-retention-size"
+                                name="custom-retention-size"
+                                type="radio"
+                                value="custom"
+                              />
+                              <label
+                                class="pf-c-radio__label"
+                                for="custom-retention-size"
+                              >
+                                <div
+                                  class="kafka-ui--radio__parameters"
+                                >
+                                  <div
+                                    class="pf-l-flex"
+                                  >
+                                    <div
+                                      class=""
+                                    >
+                                      <div
+                                        class="pf-c-number-input"
+                                      >
+                                        <div
+                                          class="pf-c-input-group"
+                                        >
+                                          <button
+                                            aria-disabled="false"
+                                            aria-label="Minus"
+                                            class="pf-c-button pf-m-control"
+                                            data-ouia-component-id="OUIA-Generated-Button-control-5"
+                                            data-ouia-component-type="PF4/Button"
+                                            data-ouia-safe="true"
+                                            type="button"
+                                          >
+                                            <span
+                                              class="pf-c-number-input__icon"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                height="1em"
+                                                role="img"
+                                                style="vertical-align: -0.125em;"
+                                                viewBox="0 0 448 512"
+                                                width="1em"
+                                              >
+                                                <path
+                                                  d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                                />
+                                              </svg>
+                                            </span>
+                                          </button>
+                                          <input
+                                            aria-label="Input"
+                                            class="pf-c-form-control"
+                                            type="number"
+                                            value="1"
+                                          />
+                                          <button
+                                            aria-disabled="false"
+                                            aria-label="Plus"
+                                            class="pf-c-button pf-m-control"
+                                            data-ouia-component-id="OUIA-Generated-Button-control-6"
+                                            data-ouia-component-type="PF4/Button"
+                                            data-ouia-safe="true"
+                                            type="button"
+                                          >
+                                            <span
+                                              class="pf-c-number-input__icon"
+                                            >
+                                              <svg
+                                                aria-hidden="true"
+                                                fill="currentColor"
+                                                height="1em"
+                                                role="img"
+                                                style="vertical-align: -0.125em;"
+                                                viewBox="0 0 448 512"
+                                                width="1em"
+                                              >
+                                                <path
+                                                  d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"
+                                                />
+                                              </svg>
+                                            </span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div
+                                      class=""
+                                    >
+                                      <div
+                                        class="pf-c-select"
+                                        data-ouia-component-id="OUIA-Generated-Select-single-2"
+                                        data-ouia-component-type="PF4/Select"
+                                        data-ouia-safe="true"
+                                      >
+                                        <button
+                                          aria-expanded="false"
+                                          aria-haspopup="listbox"
+                                          aria-label="Options menu"
+                                          aria-labelledby=" pf-select-toggle-id-1"
+                                          class="pf-c-select__toggle"
+                                          id="pf-select-toggle-id-1"
+                                          type="button"
+                                        >
+                                          <div
+                                            class="pf-c-select__toggle-wrapper"
+                                          >
+                                            <span
+                                              class="pf-c-select__toggle-text"
+                                            >
+                                              bytes
+                                            </span>
+                                          </div>
+                                          <span
+                                            class="pf-c-select__toggle-arrow"
+                                          >
+                                            <svg
+                                              aria-hidden="true"
+                                              fill="currentColor"
+                                              height="1em"
+                                              role="img"
+                                              style="vertical-align: -0.125em;"
+                                              viewBox="0 0 320 512"
+                                              width="1em"
+                                            >
+                                              <path
+                                                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                              />
+                                            </svg>
+                                          </span>
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </label>
+                            </div>
+                            <div
+                              class="pf-c-radio"
+                            >
+                              <input
+                                aria-invalid="false"
+                                checked=""
+                                class="pf-c-radio__input"
+                                data-ouia-component-id="OUIA-Generated-Radio-4"
+                                data-ouia-component-type="PF4/Radio"
+                                data-ouia-safe="true"
+                                id="unlimited-retention-size"
+                                name="unlimited-retention-size"
+                                type="radio"
+                                value="unlimited"
+                              />
+                              <label
+                                class="pf-c-radio__label"
+                                for="unlimited-retention-size"
+                              >
+                                Unlimited size
+                              </label>
+                            </div>
+                          </div>
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title9"
+                      class="pf-c-form__section"
+                      id="messages"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title9"
+                      >
+                        Messages
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class="section-info"
+                          data-ouia-component-id="OUIA-Generated-Text-2"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Control how your messages will be handled in the Kafka instance.
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="max-message-size"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Maximum message size
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Maximum message size"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-4"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="max-message-size"
+                            name="max-message-size"
+                            readonly=""
+                            type="text"
+                            value=" 1048588 bytes "
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="message-timestamp-type"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Message timestamp type
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Message timestamp type"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-5"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="message-timestamp-type"
+                            name="message-timestamp-type"
+                            readonly=""
+                            type="text"
+                            value="CreateTime"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="max-message-timestamp-diff"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Maximum message timestamp difference
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Maximum message timestamp difference"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-6"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="max-message-timestamp-diff"
+                            name="max-message-timestamp-diff"
+                            readonly=""
+                            type="text"
+                            value="9223372036854775807 milliseconds "
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="compression-type"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Compression type
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Compression type"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-7"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="compression-type"
+                            name="compression-type"
+                            readonly=""
+                            type="text"
+                            value="Producer"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="message-format"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Message format version
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Message format version"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-8"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="message-format"
+                            name="message-format"
+                            readonly=""
+                            type="text"
+                            value="2.7-IV2"
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title15"
+                      class="pf-c-form__section"
+                      id="log"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title15"
+                      >
+                        Log
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class=""
+                          data-ouia-component-id="OUIA-Generated-Text-3"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Define how your log is handled.
+                        </p>
+                        <small
+                          class=""
+                          data-ouia-component-id="OUIA-Generated-Text-4"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Note: Messages are continually appended to the partition’s log and assigned their offset.
+                        </small>
+                      </div>
+                      <div
+                        class="pf-c-form__group"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="cleanup-policy"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Cleanup policy
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Cleanup policy"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <div
+                            aria-label="select policy type from dropdown"
+                            class="pf-c-dropdown"
+                            data-ouia-component-id="OUIA-Generated-Dropdown-1"
+                            data-ouia-component-type="PF4/Dropdown"
+                            data-ouia-safe="true"
+                            id="log-section-policy-type-dropdown"
+                            name="cleanup-policy"
+                          >
+                            <button
+                              aria-expanded="false"
+                              aria-haspopup="true"
+                              class="pf-c-dropdown__toggle"
+                              data-ouia-component-id="OUIA-Generated-DropdownToggle-1"
+                              data-ouia-component-type="PF4/DropdownToggle"
+                              data-ouia-safe="true"
+                              id="log-section-policy-type-dropdowntoggle"
+                              type="button"
+                            >
+                              <span
+                                class="pf-c-dropdown__toggle-text"
+                              >
+                                Delete
+                              </span>
+                              <span
+                                class="pf-c-dropdown__toggle-icon"
+                              >
+                                <svg
+                                  aria-hidden="true"
+                                  fill="currentColor"
+                                  height="1em"
+                                  role="img"
+                                  style="vertical-align: -0.125em;"
+                                  viewBox="0 0 320 512"
+                                  width="1em"
+                                >
+                                  <path
+                                    d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                                  />
+                                </svg>
+                              </span>
+                            </button>
+                          </div>
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="delete-retention-time"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Delete retention time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Delete retention time"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-9"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="delete-retention-time"
+                            name="delete-retention-time"
+                            readonly=""
+                            type="text"
+                            value="86400000 milliseconds (1 day)"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="min-cleanable-ratio"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Minimum cleanable dirty ratio
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Minimum cleanable dirty ratio"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-10"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="min-cleanable-ratio"
+                            name="min-cleanable-ratio"
+                            readonly=""
+                            type="text"
+                            value="0.5"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="min-compaction-lag-time-description"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Minimum compaction lag time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Minimum compaction lag time"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-11"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="min-compaction-lag-time-description"
+                            name="min-compaction-lag-time-description"
+                            readonly=""
+                            type="text"
+                            value="0 milliseconds "
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title20"
+                      class="pf-c-form__section"
+                      id="replication"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title20"
+                      >
+                        Replication
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class=""
+                          data-ouia-component-id="OUIA-Generated-Text-5"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Control the behavior of your replicas.
+                          <small
+                            class=""
+                            data-ouia-component-id="OUIA-Generated-Text-6"
+                            data-ouia-component-type="PF4/Text"
+                            data-ouia-safe="true"
+                            data-pf-content="true"
+                          >
+                            Note: Each parameter impacts every replica created in this topic.
+                          </small>
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="unclean-leader-election"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Unclean leader election
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Unclean leader election"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-12"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="unclean-leader-election"
+                            name="unclean-leader-election"
+                            readonly=""
+                            type="text"
+                            value="Disabled"
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title22"
+                      class="pf-c-form__section"
+                      id="cleanup"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title22"
+                      >
+                        Cleanup
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class="section-info"
+                          data-ouia-component-id="OUIA-Generated-Text-7"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Control the cleanup processing of the log.
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="log-segment-size"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Log segment size
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Log segment size"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-13"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="log-segment-size"
+                            name="log-segment-size"
+                            readonly=""
+                            type="text"
+                            value="1073741824 bytes (1 gibibyte)"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="segement-time"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Segment time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Segment time"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-14"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="segement-time"
+                            name="segement-time"
+                            readonly=""
+                            type="text"
+                            value="604800000 milliseconds (7 days)"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="segment-jitter-time"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Segment jitter time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Segment jitter time"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-15"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="segment-jitter-time"
+                            name="segment-jitter-time"
+                            readonly=""
+                            type="text"
+                            value="0 milliseconds "
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="file-delete-delay"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              File delete delay
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="File delete delay"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-16"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="file-delete-delay"
+                            name="file-delete-delay"
+                            readonly=""
+                            type="text"
+                            value="60000 milliseconds (1 minute)"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="preallocate-log-segment-files"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Preallocate log segment files
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Preallocate log segment files"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-17"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="preallocate-log-segment-files"
+                            name="preallocate-log-segment-files"
+                            readonly=""
+                            type="text"
+                            value="Disabled"
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title28"
+                      class="pf-c-form__section"
+                      id="index"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title28"
+                      >
+                        Index
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class="section-info"
+                          data-ouia-component-id="OUIA-Generated-Text-8"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Control the indexing of the log.
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="index-interval-size"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Index interval size
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Index interval size"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-18"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="index-interval-size"
+                            name="index-interval-size"
+                            readonly=""
+                            type="text"
+                            value="4096 bytes (4 kibibytes)"
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="segment-index-size"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Segment index size
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Segment index size"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-19"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="segment-index-size"
+                            name="segment-index-size"
+                            readonly=""
+                            type="text"
+                            value="10485760 bytes (10 mebibytes)"
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                    <section
+                      aria-labelledby="pf-form-section-title31"
+                      class="pf-c-form__section"
+                      id="flush"
+                      role="group"
+                    >
+                      <h2
+                        class="pf-c-form__section-title"
+                        id="pf-form-section-title31"
+                      >
+                        Flush
+                      </h2>
+                      <div
+                        class="pf-c-content"
+                      >
+                        <p
+                          class="section-info"
+                          data-ouia-component-id="OUIA-Generated-Text-9"
+                          data-ouia-component-type="PF4/Text"
+                          data-ouia-safe="true"
+                          data-pf-content="true"
+                        >
+                          Control the frequency of the flushing of the log.
+                        </p>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="flush-interval-messages"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Flush interval messages
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Flush interval messages"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-20"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="flush-interval-messages"
+                            name="flush-interval-messages"
+                            readonly=""
+                            type="text"
+                            value="9223372036854775807 messages "
+                          />
+                          
+                        </div>
+                      </div>
+                      <div
+                        class="pf-c-form__group kafka-ui-form-group--readonly"
+                      >
+                        <div
+                          class="pf-c-form__group-label"
+                        >
+                          <label
+                            class="pf-c-form__label"
+                            for="flush-interval-time"
+                          >
+                            <span
+                              class="pf-c-form__label-text"
+                            >
+                              Flush interval time
+                            </span>
+                          </label>
+                           
+                          <button
+                            aria-label="Flush interval time"
+                            class="pf-c-form__group-label-help"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              fill="currentColor"
+                              height="1em"
+                              role="img"
+                              viewBox="0 0 1024 1024"
+                              width="1em"
+                            >
+                              <path
+                                d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
+                              />
+                            </svg>
+                          </button>
+                        </div>
+                        <div
+                          class="pf-c-form__group-control"
+                        >
+                          <input
+                            aria-invalid="false"
+                            class="pf-c-form-control"
+                            data-ouia-component-id="OUIA-Generated-TextInputBase-21"
+                            data-ouia-component-type="PF4/TextInput"
+                            data-ouia-safe="true"
+                            id="flush-interval-time"
+                            name="flush-interval-time"
+                            readonly=""
+                            type="text"
+                            value="9223372036854775807 milliseconds "
+                          />
+                          
+                        </div>
+                      </div>
+                    </section>
+                  </form>
+                  <div
+                    class="pf-c-form__group pf-m-action kafka-ui--sticky-footer"
+                  >
+                    <div
+                      class="pf-c-form__group-control"
+                    >
+                      <div
+                        class="pf-c-form__actions"
+                      >
+                        <hr
+                          class="pf-c-divider kafka-ui--divider--FlexShrink"
+                        />
+                        <button
+                          aria-disabled="false"
+                          class="pf-c-button pf-m-primary pf-m-progress"
+                          data-ouia-component-id="OUIA-Generated-Button-primary-1"
+                          data-ouia-component-type="PF4/Button"
+                          data-ouia-safe="true"
+                          data-testid="topicAdvanceCreate-actionCreate"
+                          type="button"
+                        >
+                          Create topic
+                        </button>
+                        <button
+                          aria-disabled="false"
+                          class="pf-c-button pf-m-link"
+                          data-ouia-component-id="OUIA-Generated-Button-link-1"
+                          data-ouia-component-type="PF4/Button"
+                          data-ouia-safe="true"
+                          data-testid="topicAdvanceCreate-actionCancel"
+                          type="button"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </div>
+</body>
+`;

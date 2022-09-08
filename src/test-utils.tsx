@@ -27,6 +27,7 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
             apimgmtoverview: () => import("../locales/en/apimgmtoverview.json"),
             "manage-kafka-permissions": () =>
               import("../locales/en/manage-kafka-permissions.json"),
+            "create-topic": () => import("../locales/en/create-topic.json"),
             "message-browser": () =>
               import("../locales/en/message-browser.json"),
             "overview-v2": () => import("../locales/en/overview-v2.json"),
