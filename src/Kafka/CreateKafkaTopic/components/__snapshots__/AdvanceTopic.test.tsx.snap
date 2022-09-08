@@ -293,6 +293,7 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
                         >
                           <div
                             class="pf-c-number-input"
+                            data-testid="Partitions"
                             id="create-topic-partitions"
                           >
                             <div

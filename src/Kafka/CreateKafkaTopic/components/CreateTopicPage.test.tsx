@@ -1,4 +1,4 @@
-import { userEvent, waitFor } from "@storybook/testing-library";
+import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import { render, waitForI18n, waitForPopper } from "../../../test-utils";
 import * as stories from "./CreateTopicPage.stories";
@@ -105,8 +105,15 @@ describe("Create topic", () => {
     userEvent.click(await comp.findByLabelText("Custom duration"));
     expect(await comp.findByDisplayValue("7")).toBeInTheDocument();
     expect(await comp.findByDisplayValue("days")).toBeInTheDocument();
+    userEvent.click(await comp.findByText("days"));
+    userEvent.click(await comp.findByText("hours"));
     userEvent.click(await comp.findByLabelText("Custom size"));
     expect(await comp.findByDisplayValue("1")).toBeInTheDocument();
+    userEvent.click(await comp.findByText("bytes"));
+    userEvent.click(await comp.findByText("tebibytes"));
+    userEvent.click(await comp.findByText("A day"));
+    userEvent.click(await comp.findByText("A week"));
+    userEvent.click(await comp.findByText("A week"));
     userEvent.click(button);
     const replicas = await comp.findAllByText("Replicas");
     expect(replicas[0]).toBeInTheDocument();
@@ -165,32 +172,15 @@ describe("Create topic", () => {
     expect(backButton).toBeDisabled();
   });
   it("should render partitions warning", async () => {
-    const comp = render(<PartitionLimitReached />);
+    const onSave = jest.fn();
+    const comp = render(<PartitionLimitReached onSave={onSave} />);
     await waitForI18n(comp);
     const button = await comp.findByText("Next");
-    userEvent.type(
-      await comp.findByPlaceholderText("Enter topic name"),
-      "test-this-name"
-    );
     userEvent.click(button);
-    void waitFor(async () => {
-      expect(
-        comp.findByText(
-          "This Kafka instance has reached its maximum partition limit and might experience degraded performance. To create more partitions, migrate to a larger Kafka instance or split your workloads across multiple instances."
-        )
-      ).toBeInTheDocument();
-      userEvent.click(button);
-      userEvent.click(button);
-      const finish = await comp.findByText("Finish");
-      userEvent.click(finish);
-      expect(
-        comp.findByText("Increase the number of partitions?")
-      ).toBeInTheDocument();
-      expect(
-        comp.findByText(
-          "Since this Kafka Instance has already reached its maximum partition limit, increasing the number of partitions might result in degraded performance."
-        )
-      ).toBeInTheDocument();
-    });
+    userEvent.click(button);
+    userEvent.click(button);
+    const finish = await comp.findByText("Finish");
+    userEvent.click(finish);
+    expect(onSave).not.toHaveBeenCalled();
   });
 });

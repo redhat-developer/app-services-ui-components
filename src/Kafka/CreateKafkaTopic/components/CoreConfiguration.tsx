@@ -228,6 +228,7 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
           id="create-topic-partitions"
           inputName="num-partitions"
           onChange={onPartitionsChange}
+          data-testid={t("partitions")}
           onPlus={handleOnPlus}
           onMinus={handleOnMinus}
           value={topicData.numPartitions}
