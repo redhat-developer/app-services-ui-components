@@ -2,7 +2,6 @@ import { userEvent } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { render, waitForI18n } from "../../../test-utils";
-import { RetentionSizeUnits } from "../types";
 import * as stories from "./AdvanceTopic.stories";
 
 const { AdvanceTopic } = composeStories(stories);
