@@ -6,6 +6,7 @@ import * as stories from "./AdvanceTopic.stories";
 
 const { AdvanceTopic } = composeStories(stories);
 jest.setTimeout(10000);
+const onSave = jest.fn();
 describe("Create advance topic", () => {
   it("should render an advanced topic creation page", async () => {
     const comp = render(
@@ -15,6 +16,7 @@ describe("Create advance topic", () => {
             !["test", "my-test", "test-topic"].some((m) => m == topicName)
           )
         }
+        onSave={onSave}
       />
     );
     await waitForI18n(comp);
@@ -67,5 +69,6 @@ describe("Create advance topic", () => {
     userEvent.click(await comp.findByText("Compact"));
     expect(comp.getByText("Compact")).toBeInTheDocument();
     userEvent.click(await comp.findByText("Create topic"));
+    expect(onSave).not.toBeCalledTimes(1);
   });
 });
