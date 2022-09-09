@@ -91,3 +91,7 @@ export const LogoRedhat = new URL(
   "../static/images/Logo-Redhat.svg",
   import.meta.url
 ).href;
+export const LogoRedHatOpenShiftAPIDesignerSvg = new URL(
+  "../static/images/Logo-Red_Hat-OpenShift_API_Designer-A-Standard-RGB.png",
+  import.meta.url
+).href;
