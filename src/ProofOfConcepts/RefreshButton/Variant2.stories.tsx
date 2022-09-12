@@ -3,7 +3,7 @@ import { Toolbar, ToolbarContent } from "@patternfly/react-core";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { sub } from "date-fns";
 
-import { POCRefreshButton } from "./RefreshButtonExample";
+import { POCRefreshButton } from "./Variant2";
 
 export default {
   component: POCRefreshButton,

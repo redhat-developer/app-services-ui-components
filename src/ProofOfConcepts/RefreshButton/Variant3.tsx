@@ -9,7 +9,6 @@ export type RefreshButtonProps = {
   isRefreshing: boolean;
   lastUpdated: Date | undefined;
   ariaLabel: string;
-  hoover: string;
   onRefresh: () => void;
 };
 
@@ -17,30 +16,33 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   isRefreshing,
   lastUpdated = new Date(),
   ariaLabel,
-  hoover,
   onRefresh,
 }) => {
-  const { t } = useTranslation(["metrics"]);
+  const { t } = useTranslation(["kafka"]);
 
-  {
-    isRefreshing
-      ? (hoover = t("metrics:refreshing"))
-      : (hoover =
-          t("metrics:last-refresh") +
-          " " +
-          formatDistanceToNow(lastUpdated) +
-          " " +
-          t("metrics:last-refresh-distance"));
-  }
   return (
     <>
       <ToolbarItem>
         <RefreshButton
-          tooltip={hoover}
+          tooltip={t("kafka:refresh-description")}
           ariaLabel={ariaLabel}
           onClick={onRefresh}
           isRefreshing={isRefreshing}
         />
+      </ToolbarItem>
+      <ToolbarItem
+        alignment={{ default: "alignRight" }}
+        style={{ color: "var(--pf-global--Color--200)" }}
+      >
+        <div className="pf-u-font-size-xs">
+          {isRefreshing
+            ? t("kafka:refreshing")
+            : t("kafka:last-refresh") +
+              " " +
+              formatDistanceToNow(lastUpdated) +
+              " " +
+              t("kafka:last-refresh-distance")}
+        </div>
       </ToolbarItem>
     </>
   );
