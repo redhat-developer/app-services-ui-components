@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DataSciencePage open modal in create mode 1`] = `
+<div
+  class="pf-c-modal-box__body"
+  data-testid="data-science-modal"
+>
+  <div
+    class="pf-c-content"
+  >
+    <p
+      class=""
+      data-ouia-component-id="OUIA-Generated-Text-32"
+      data-ouia-component-type="PF4/Text"
+      data-ouia-safe="true"
+      data-pf-content="true"
+    >
+      To create a new cluster, you'll be redirected to Cluster Manager. Don't worry, you'll be redirected back here afterwards so you can install OpenShift Data Science.
+    </p>
+  </div>
+</div>
+`;
+
 exports[`DataSciencePage renders 1`] = `
 <body>
   <div>
@@ -42,43 +63,46 @@ exports[`DataSciencePage renders 1`] = `
           <div
             class="pf-l-flex"
           >
-            <a
+            <button
               aria-disabled="false"
-              class="pf-c-button pf-m-secondary"
-              data-ouia-component-id="button-rhods-tryit"
+              class="pf-c-button pf-m-primary"
+              data-ouia-component-id="button-rhods-install"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
-              data-testid="hero-buttonTryIt"
-              target="_blank"
+              data-testid="hero-buttonInstall"
+              type="button"
             >
-              Try it
-            </a>
+              Install it on a cluster
+            </button>
             <a
               aria-disabled="false"
-              class="pf-c-button pf-m-link"
-              data-ouia-component-id="OUIA-Generated-Button-link-1"
+              class="pf-c-button pf-m-link pf-m-inline"
+              data-ouia-component-id="button-rhods-try"
               data-ouia-component-type="PF4/Button"
               data-ouia-safe="true"
-              data-testid="hero-buttonLearnMore"
-              href="https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-data-science"
+              data-testid="hero-buttonTry"
+              href="https://developers.redhat.com/products/red-hat-openshift-data-science/getting-started?extIdCarryOver=true&sc_cid=701f2000001Css5AAC"
               target="_blank"
             >
-              Learn more about OpenShift Data Science
-               
-              <svg
-                aria-hidden="true"
-                class="pf-u-ml-sm"
-                fill="currentColor"
-                height="1em"
-                role="img"
-                style="vertical-align: -0.125em;"
-                viewBox="0 0 512 512"
-                width="1em"
+              Try it in the sandbox
+              <span
+                style="white-space: nowrap;"
               >
-                <path
-                  d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
-                />
-              </svg>
+                 
+                <svg
+                  aria-hidden="true"
+                  fill="currentColor"
+                  height="1em"
+                  role="img"
+                  style="vertical-align: -0.125em;"
+                  viewBox="0 0 512 512"
+                  width="1em"
+                >
+                  <path
+                    d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z"
+                  />
+                </svg>
+              </span>
             </a>
           </div>
         </div>
@@ -184,5 +208,6 @@ exports[`DataSciencePage renders 1`] = `
       </div>
     </section>
   </div>
+  <div />
 </body>
 `;
