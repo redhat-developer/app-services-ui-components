@@ -57,7 +57,7 @@ export default {
           <Button>Sample</Button>
         </ToolbarItem>
         <ToolbarItem>
-          <POCRefreshButton isRefreshing />
+          <POCRefreshButton />
         </ToolbarItem>
       </ToolbarGroup>
     ),
