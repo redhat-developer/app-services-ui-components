@@ -25,6 +25,7 @@ import {
   RefreshButton,
   ResponsiveTable,
 } from "../../shared";
+import type { DateIsoString } from "../types";
 import type { MessageDetailsProps } from "./components";
 import {
   FilterGroup,
@@ -40,7 +41,7 @@ import {
 import "./KafkaMessageBrowser.css";
 import type { MessageApiResponse } from "./MessageBrowserMachine";
 import { MessageBrowserMachine } from "./MessageBrowserMachine";
-import type { DateIsoString, Message } from "./types";
+import type { Message } from "./types";
 import { beautifyUnknownValue, isSameMessage } from "./utils";
 
 const columns = [

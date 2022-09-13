@@ -31,6 +31,17 @@ describe("ConnectionTab", () => {
     ).toHaveDisplayValue(
       "https://api.openshift.com/api/kafkas_mgmt/v1/openapi"
     );
+
+    expect(
+      comp.getByRole("button", { name: "Create service account" })
+    ).toHaveAttribute(
+      "data-testid",
+      "drawerStreams-buttonCreateServiceAccount"
+    );
+
+    expect(
+      comp.getByRole("link", { name: "Service Accounts" })
+    ).toHaveAttribute("data-testid", "tableStreams-linkKafka");
   });
 
   it("bootstrap server and Token endpoint URL should be disabled when the kafka creating is pending", async () => {

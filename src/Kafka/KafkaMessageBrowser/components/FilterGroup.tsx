@@ -14,7 +14,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import type { DateIsoString } from "../types";
+import type { DateIsoString } from "../../types";
 import { DateTimePicker } from "./DateTimePicker";
 
 type Category = "offset" | "timestamp" | "epoch" | "latest";
@@ -49,6 +49,7 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
     <ToolbarItem>
       <InputGroup>
         <Dropdown
+          data-testid={"filter-group-dropdown"}
           toggle={
             <DropdownToggle
               onToggle={setIsOpen}

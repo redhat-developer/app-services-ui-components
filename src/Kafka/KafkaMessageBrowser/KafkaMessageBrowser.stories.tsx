@@ -1,9 +1,9 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { apiError, fakeApi } from "../../shared/storiesHelpers";
+import type { DateIsoString } from "../types";
 import { KafkaMessageBrowser } from "./KafkaMessageBrowser";
 import type { Message } from "./types";
-import type { DateIsoString } from "./types";
 
 export default {
   component: KafkaMessageBrowser,

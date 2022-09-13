@@ -22,7 +22,7 @@ export type KafkaConnectionTabProps = {
   tokenEndPointUrl: string;
   linkToServiceAccount: string;
   linkToAccessTab: string;
-  adminAPIUrl: string;
+  adminAPIUrl: string | undefined;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
 };
@@ -80,7 +80,12 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
                 "kafka:connection_tab.create_service_account_to_generate_credentials"
               }
               components={{
-                value: <Link to={linkToServiceAccount}></Link>,
+                value: (
+                  <Link
+                    to={linkToServiceAccount}
+                    data-testid="tableStreams-linkKafka"
+                  ></Link>
+                ),
               }}
             />
           }
@@ -90,6 +95,7 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
         variant={ButtonVariant.secondary}
         isInline
         onClick={showCreateServiceAccountModal}
+        data-testid="drawerStreams-buttonCreateServiceAccount"
       >
         {t("kafka:connection_tab.create_service_account")}
       </Button>
@@ -147,15 +153,15 @@ export const KafkaConnectionTab: FunctionComponent<KafkaConnectionTabProps> = ({
               </Button>
             </Popover>
           </strong>
-          {isKafkaPending ? (
-            <Skeleton fontSize="2xl" />
-          ) : (
+          {adminAPIUrl ? (
             <ClipboardCopy
               textAriaLabel={t("kafka:connection_tab.kafka_instance_url_label")}
               isReadOnly
             >
               {adminAPIUrl}
             </ClipboardCopy>
+          ) : (
+            <Skeleton fontSize="2xl" />
           )}
           <TextContent className="pf-u-pt-sm">
             <Text component={TextVariants.small}>

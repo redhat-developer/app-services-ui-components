@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useState } from "react";
+import type React from "react";
+import { useLayoutEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { Account } from "../types";
 import { PrincipalType } from "../types";

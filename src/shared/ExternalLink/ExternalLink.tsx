@@ -7,17 +7,22 @@ export type ExternaLinkProps = {
   testId: string;
   target?: ButtonProps["target"];
   href: NonNullable<ButtonProps["href"]>;
+  className?: string;
+  ouiaId?: ButtonProps["ouiaId"];
 };
 
 export const ExternalLink: FunctionComponent<ExternaLinkProps> = ({
   testId,
   target = "_blank",
   href,
+  className,
+  ouiaId,
   children,
 }) => (
   <Button
     data-testid={testId}
     isInline
+    ouiaId={ouiaId}
     variant={ButtonVariant.link}
     component="a"
     target={target}
@@ -26,7 +31,7 @@ export const ExternalLink: FunctionComponent<ExternaLinkProps> = ({
     {children}
     <span style={{ whiteSpace: "nowrap" }}>
       &nbsp;
-      <ExternalLinkAltIcon className="pf-u-ml-xs" />
+      <ExternalLinkAltIcon className={className} />
     </span>
   </Button>
 );

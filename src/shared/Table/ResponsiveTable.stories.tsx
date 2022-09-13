@@ -25,6 +25,7 @@ const eventsFromNames = actions("onRowClick");
 const ResponsiveTableSampleType: VoidFunctionComponent<
   ResponsiveTableProps<SampleDataType, typeof columns[number]> & {
     hasActions?: boolean;
+    hasCustomActionTestId?: boolean;
     isRowClickable?: boolean;
     selectedRow?: number;
   }
@@ -38,6 +39,7 @@ export default {
     data: sampleData,
     columns,
     hasActions: true,
+    hasCustomActionTestId: false,
     isRowClickable: true,
     selectedRow: 3,
     expectedLength: 3,
@@ -76,6 +78,11 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => (
     }
     isRowDeleted={({ row }) => row[5] === deletingSign}
     onRowClick={args.onRowClick || eventsFromNames["onRowClick"]}
+    setActionCellOuiaId={
+      args.hasCustomActionTestId
+        ? ({ rowIndex }) => `my-action-row-${rowIndex}`
+        : undefined
+    }
   >
     <EmptyState variant={EmptyStateVariant.large}>
       <EmptyStateIcon icon={InfoIcon} />
@@ -116,4 +123,9 @@ UndefinedDataShowsSkeleton.args = {
 export const NoResults = Template.bind({});
 NoResults.args = {
   data: [],
+};
+
+export const CustomActionTestId = Template.bind({});
+CustomActionTestId.args = {
+  hasCustomActionTestId: true,
 };

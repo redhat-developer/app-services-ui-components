@@ -58,6 +58,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   isRowSelected?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
+  setActionCellOuiaId?: (props: RowProps<TRow>) => string;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -74,6 +75,7 @@ export const ResponsiveTable = <TRow, TCol>({
   isRowSelected,
   expectedLength = 3,
   onRowClick,
+  setActionCellOuiaId,
   children,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
@@ -204,6 +206,12 @@ export const ResponsiveTable = <TRow, TCol>({
               columnWidth={minimumColumnWidth}
               canHide={false}
               isActionCell={true}
+              onClick={(event) => event.stopPropagation()}
+              data-testid={
+                setActionCellOuiaId
+                  ? setActionCellOuiaId({ row, rowIndex })
+                  : `actions-for-row-${rowIndex}`
+              }
             >
               {renderActions({ rowIndex, row, ActionsColumn })}
             </ResponsiveTd>

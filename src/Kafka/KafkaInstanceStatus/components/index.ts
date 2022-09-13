@@ -1,2 +1,2 @@
-export * from "./StatusPopover";
 export * from "./StatusLabel";
+export * from "./StatusPopover";

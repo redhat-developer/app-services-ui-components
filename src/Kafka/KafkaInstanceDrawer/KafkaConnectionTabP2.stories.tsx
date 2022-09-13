@@ -11,7 +11,6 @@ export default {
     linkToAccessTab: "/to-access-tab",
     kafkaFleetManagerUrl:
       "https://api.openshift.com/api/kafkas_mgmt/v1/openapi",
-    adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
     linkToDocPortal: "#",
   },
   parameters: {
@@ -28,6 +27,7 @@ const Template: ComponentStory<typeof KafkaConnectionTabP2> = (args) => (
 export const ConnectionTab = Template.bind({});
 ConnectionTab.args = {
   isKafkaPending: false,
+  adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
 };
 
 export const ConnectionTabWhenkafkaCreationPending = Template.bind({});

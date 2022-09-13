@@ -1,9 +1,9 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import * as popoverStories from "./components/StatusPopover/StatusPopover.stories";
+import { sub } from "date-fns";
 import { StatusLabel, StatusPopover } from "./components";
+import * as popoverStories from "./components/StatusPopover.stories";
 
 import { KafkaInstanceStatus } from "./KafkaInstanceStatus";
-import { sub } from "date-fns";
 
 export default {
   component: KafkaInstanceStatus,
