@@ -57,7 +57,7 @@ export default {
           <Button>Sample</Button>
         </ToolbarItem>
         <ToolbarItem>
-          <POCRefreshButton lastUpdated={sub(new Date(), { minutes: 3 })} />
+          <POCRefreshButton />
         </ToolbarItem>
       </ToolbarGroup>
     ),
