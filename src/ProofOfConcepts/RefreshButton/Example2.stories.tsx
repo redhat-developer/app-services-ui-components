@@ -23,8 +23,8 @@ import {
   deletingSign,
   sampleData,
 } from "../../shared/Table/storybookHelpers";
-import type { TableViewProps } from "./Example2";
-import { DEFAULT_PERPAGE, TableView } from "./Example2";
+import type { TableViewProps } from "./Example";
+import { DEFAULT_PERPAGE, TableView } from "./Example";
 import { POCRefreshButton } from "./Variant2";
 import { sub } from "date-fns";
 
