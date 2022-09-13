@@ -21,7 +21,7 @@ jobs:
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
-          node-version: 14
+          node-version: 16.6.2
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
