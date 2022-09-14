@@ -1,3 +1,6 @@
+import type { FunctionComponent } from "react";
+import { useState, useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Button,
   Card,
@@ -10,32 +13,66 @@ import {
   Spinner,
   Switch,
 } from "@patternfly/react-core";
-import type { FunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
 import { SettingsAlert } from "./components";
 import type { AlertStatus, SettingsStatus } from "./types";
 import "./Settings.css";
 
 export type SettingsProps = {
-  connectionStatus: SettingsStatus;
-  onSwitchClick: () => void;
-  isModalOpen: boolean;
-  onClickTurnOff: () => void;
-  alertStatus: AlertStatus;
-  connectionState: boolean;
-  onClickClose: () => void;
+  onSubmitReAuthentication: (
+    reauthenticationEnabled: boolean
+  ) => Promise<boolean>;
+  reauthenticationEnabled: boolean;
 };
 
 export const Settings: FunctionComponent<SettingsProps> = ({
-  connectionStatus,
-  onSwitchClick,
-  isModalOpen,
-  onClickTurnOff,
-  alertStatus,
-  onClickClose,
-  connectionState,
+  onSubmitReAuthentication,
+  reauthenticationEnabled,
 }) => {
   const { t } = useTranslation("kafka");
+  const reauthenticationStatus = reauthenticationEnabled ? "On" : "Off";
+  //states
+  const [connectionStatus, setConnectionStatus] = useState<SettingsStatus>(
+    reauthenticationStatus
+  );
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [alertStatus, setAlertStatus] = useState<AlertStatus | undefined>();
+  const [connectionState, setConnectionState] = useState<boolean>(false);
+
+  const onClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const onChangeSwitch = (checked: boolean) => {
+    if (connectionStatus === "On") {
+      setIsModalOpen(true);
+    } else {
+      handleReAuthentication(checked);
+    }
+  };
+
+  const handleReAuthentication = (reAuthValue: boolean) => {
+    setConnectionStatus(reAuthValue ? "TurningOn" : "TurningOff");
+
+    onSubmitReAuthentication(reAuthValue)
+      .then((reauthentication) => {
+        setConnectionStatus(reauthentication ? "On" : "Off");
+        setConnectionState(reauthentication);
+        setAlertStatus("success");
+      })
+      .catch(() => {
+        setConnectionStatus(!reAuthValue ? "On" : "Off");
+        setAlertStatus("danger");
+      });
+  };
+
+  const onTurnOff = () => {
+    setIsModalOpen(false);
+    handleReAuthentication(false);
+  };
+
+  const clearAlert = useCallback(() => {
+    setAlertStatus(undefined);
+  }, []);
 
   return (
     <>
@@ -120,7 +157,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                     connectionStatus === "TurningOff" ||
                     connectionStatus === "TurningOn"
                   }
-                  onChange={onSwitchClick}
+                  onChange={onChangeSwitch}
                 />
               </FlexItem>
               <Modal
@@ -129,18 +166,14 @@ export const Settings: FunctionComponent<SettingsProps> = ({
                 title={t("settings.warning_title")}
                 titleIconVariant={"warning"}
                 actions={[
-                  <Button
-                    key={"confirm"}
-                    variant="primary"
-                    onClick={onClickTurnOff}
-                  >
+                  <Button key={"confirm"} variant="primary" onClick={onTurnOff}>
                     {t("settings.turn_off_button_label")}
                   </Button>,
-                  <Button key={"cancel"} variant="link" onClick={onClickClose}>
+                  <Button key={"cancel"} variant="link" onClick={onClose}>
                     {t("common:cancel")}
                   </Button>,
                 ]}
-                onClose={onClickClose}
+                onClose={onClose}
               >
                 {t("settings.warning_description")}
               </Modal>
@@ -151,6 +184,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
       <SettingsAlert
         alertStatus={alertStatus}
         connectionState={connectionState}
+        clearAlert={clearAlert}
       />
     </>
   );

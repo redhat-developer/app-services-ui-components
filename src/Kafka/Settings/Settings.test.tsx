@@ -3,99 +3,14 @@ import { composeStories } from "@storybook/testing-react";
 import * as stories from "./Settings.stories";
 import { userEvent } from "@storybook/testing-library";
 
-const {
-  DefaultSettings,
-  TurnOffConnectionReauthentication,
-  OnClickTurnOffSwitch,
-  TurningOffConnectionReauthentication,
-  TurningONConnectionReauthentication,
-  TurnONConnectionReauthentication,
-  TurnOnConnectionFailure,
-} = composeStories(stories);
+const { TurningOnConnectionReauthentication, TurnOnConnectionFailure } =
+  composeStories(stories);
 
-describe("Consumer Group empty state", () => {
+describe("Settings", () => {
   it("Connection re-authentication turned on", async () => {
-    const onClickSwitch = jest.fn();
-    const comp = render(<DefaultSettings onSwitchClick={onClickSwitch} />);
+    const comp = render(<TurningOnConnectionReauthentication />);
     await waitForI18n(comp);
-    expect(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    ).toBeChecked();
-    userEvent.click(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    );
-    expect(onClickSwitch).toHaveBeenCalledTimes(1);
-  });
 
-  it("Connection re-authentication turned off", async () => {
-    const onClickSwitch = jest.fn();
-    const comp = render(
-      <TurnOffConnectionReauthentication onSwitchClick={onClickSwitch} />
-    );
-    await waitForI18n(comp);
-    expect(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    ).not.toBeChecked();
-    userEvent.click(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    );
-    expect(onClickSwitch).toHaveBeenCalledTimes(1);
-    expect(
-      await comp.findByText("Connection re-authentication turned off")
-    ).toBeInTheDocument();
-  });
-
-  it("Open modal while turning off Connection re-authentication", async () => {
-    const onClickTurnOff = jest.fn();
-    const onClickClose = jest.fn();
-    const comp = render(
-      <OnClickTurnOffSwitch
-        onClickTurnOff={onClickTurnOff}
-        onClickClose={onClickClose}
-      />
-    );
-    await waitForI18n(comp);
-    expect(
-      await comp.findByText("Turn off re-authentication?")
-    ).toBeInTheDocument();
-    expect(
-      await comp.findByText(
-        "There are potential risks associated with turning off re-authentication, where attackers could stay connected indefinitely."
-      )
-    ).toBeInTheDocument();
-
-    userEvent.click(comp.getByRole("button", { name: "Cancel" }));
-    expect(onClickClose).toHaveBeenCalledTimes(1);
-
-    userEvent.click(comp.getByRole("button", { name: "Close" }));
-    expect(onClickClose).toHaveBeenCalledTimes(2);
-
-    userEvent.click(comp.getByRole("button", { name: "Turn off" }));
-    expect(onClickTurnOff).toHaveBeenCalledTimes(1);
-  });
-
-  it("Connection re-authentication turning off", async () => {
-    const comp = render(<TurningOffConnectionReauthentication />);
-    await waitForI18n(comp);
-    expect(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    ).toBeDisabled();
-  });
-
-  it("Connection re-authentication turning on", async () => {
-    const comp = render(<TurningONConnectionReauthentication />);
-    await waitForI18n(comp);
-    expect(
-      comp.getByRole("checkbox", { name: "Connection re-authentication" })
-    ).toBeDisabled();
-  });
-
-  it("Connection re-authentication turned on", async () => {
-    const onClickSwitch = jest.fn();
-    const comp = render(
-      <TurnONConnectionReauthentication onSwitchClick={onClickSwitch} />
-    );
-    await waitForI18n(comp);
     expect(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     ).toBeChecked();
