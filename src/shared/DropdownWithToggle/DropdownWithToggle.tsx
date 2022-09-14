@@ -15,7 +15,7 @@ export interface IDropdownWithToggleProps {
   isLabelAndValueNotSame?: boolean;
 }
 
-export interface IDropdownOption {
+interface IDropdownOption {
   value?: string;
   label?: string;
   key?: string;
