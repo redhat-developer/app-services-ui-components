@@ -1,6 +1,7 @@
 import type React from "react";
 import { useState } from "react";
-import { CreateTopicHead, CreateTopicWizard } from "../components";
+import { CreateTopicHead } from "../components";
+import { CreateTopicWizard } from "./CreateTopicWizard";
 import type { ConstantValues, NewTopic } from "../types";
 
 export type CreateTopicPageProps = {
