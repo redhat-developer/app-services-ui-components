@@ -5,32 +5,30 @@ import {
   AlertVariant,
 } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
-import { useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import type { AlertStatus } from "../types";
 
 export type SettingsAlertProps = {
   alertStatus: AlertStatus;
   connectionState: boolean;
+  clearAlert: () => void;
 };
 
 export const SettingsAlert: VoidFunctionComponent<SettingsAlertProps> = ({
   alertStatus,
   connectionState,
+  clearAlert,
 }) => {
   const { t } = useTranslation("kafka");
 
-  const [isCloseActionClicked, setIsCloseActionClicked] =
-    useState<boolean>(false);
-
   const closeAction = () => {
-    setIsCloseActionClicked(true);
+    clearAlert && clearAlert();
   };
 
   return (
     <AlertGroup isToast>
       {(() => {
-        if (alertStatus === "success" && !isCloseActionClicked) {
+        if (alertStatus === "success") {
           return (
             <Alert
               variant={AlertVariant.success}
@@ -52,7 +50,7 @@ export const SettingsAlert: VoidFunctionComponent<SettingsAlertProps> = ({
               timeout={8000}
             />
           );
-        } else if (alertStatus === "danger" && !isCloseActionClicked) {
+        } else if (alertStatus === "danger") {
           return (
             <Alert
               role={"alert"}
