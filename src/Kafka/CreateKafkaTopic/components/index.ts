@@ -7,4 +7,3 @@ export * from "./WizardCustomFooter";
 export * from "./TopicAdvancePage";
 export * from "./PartitionLimitWarning";
 export * from "./CreateTopicHead";
-export * from "./CreateTopicWizard";

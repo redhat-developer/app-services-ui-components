@@ -117,7 +117,7 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
       setIsLoading(true);
 
       checkTopicName(topicData?.name)
-        .then((value) =>
+        .then((value: boolean) =>
           value == false
             ? (setInvalidText(t("already_exists", { name: topicData?.name })),
               setTopicNameValidated(ValidatedOptions.error))
