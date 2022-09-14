@@ -19,7 +19,7 @@ describe("Settings", () => {
     ).not.toBeChecked();
 
     userEvent.click(
-      await comp.getByRole("checkbox", { name: "Connection re-authentication" })
+      comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
     setTimeout(() => {
       expect(
@@ -46,7 +46,7 @@ describe("Settings", () => {
     const comp = render(<TurnOnConnectionFailure />);
     await waitForI18n(comp);
     userEvent.click(
-      await comp.getByRole("checkbox", { name: "Connection re-authentication" })
+      comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
     setTimeout(() => {
       expect(
@@ -76,7 +76,7 @@ describe("Settings", () => {
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     ).toBeChecked();
     userEvent.click(
-      await comp.getByRole("checkbox", { name: "Connection re-authentication" })
+      comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
     expect(
       await comp.findByText("Turn off re-authentication?")
