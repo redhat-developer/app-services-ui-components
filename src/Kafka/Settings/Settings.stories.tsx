@@ -1,13 +1,12 @@
-import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
+import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { Settings } from "./Settings";
-import { fakeApi } from "../../shared/storiesHelpers";
-import type { AlertStatus, SettingsStatus } from "./types";
+import { fakeApi, apiError } from "../../shared/storiesHelpers";
 
 export default {
   component: Settings,
   args: {
-    connectionStatus: "On",
+    reauthenticationEnabled: true,
   },
   parameters: {
     backgrounds: {
@@ -16,114 +15,72 @@ export default {
   },
 } as ComponentMeta<typeof Settings>;
 
-const Template: ComponentStory<typeof Settings> = (args) => (
-  <Settings {...args} />
-);
-
 export const InteractiveExample: ComponentStory<typeof Settings> = (args) => {
-  const [connectionStatus, setConnectionStatus] =
-    useState<SettingsStatus>("On");
+  const [reauthenticationEnabled, setReauthenticationEnabled] =
+    useState<boolean>(true);
 
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
-  const [alertStatus, setAlertStatus] = useState<AlertStatus>();
-
-  const [connectionState, setConnectionState] = useState<boolean>(false);
-
-  const onSwitchClick = () => {
-    if (connectionStatus === "On") {
-      setIsModalOpen(true);
-    } else {
-      setConnectionStatus("TurningOn");
-      fakeApi<{ isConnected: boolean }>(
-        {
-          isConnected: true,
-        },
-        4000
-      )
-        .then(() => {
-          setConnectionStatus("On");
-          setConnectionState(true);
-          setAlertStatus("success");
-        })
-        .catch(() => {
-          setConnectionStatus("Off");
-          setAlertStatus("danger");
-        });
-    }
-  };
-
-  const onClickTurnOff = () => {
-    setIsModalOpen(false);
-    setConnectionStatus("TurningOff");
-    fakeApi<{ isConnected: boolean }>(
-      {
-        isConnected: false,
-      },
-      4000
-    )
-      .then(() => {
-        setConnectionStatus("Off");
-        setConnectionState(false);
-        setAlertStatus("success");
-      })
-      .catch(() => {
-        setConnectionStatus("On");
-        setAlertStatus("danger");
-      });
-  };
-
-  const onClickClose = () => {
-    setIsModalOpen(false);
+  const onSubmitReAuthentication = (connectionStatus: boolean) => {
+    setReauthenticationEnabled(connectionStatus);
+    return fakeApi(connectionStatus, 4000);
   };
 
   return (
     <Settings
       {...args}
-      connectionStatus={connectionStatus}
-      onSwitchClick={onSwitchClick}
-      isModalOpen={isModalOpen}
-      onClickTurnOff={onClickTurnOff}
-      onClickClose={onClickClose}
-      alertStatus={alertStatus}
-      connectionState={connectionState}
+      onSubmitReAuthentication={onSubmitReAuthentication}
+      reauthenticationEnabled={reauthenticationEnabled}
     />
   );
 };
 
-export const DefaultSettings = Template.bind({});
+export const TurningOnConnectionReauthentication: ComponentStory<
+  typeof Settings
+> = (args) => {
+  const [reauthenticationEnabled, setReauthenticationEnabled] =
+    useState<boolean>(false);
 
-export const OnClickTurnOffSwitch = Template.bind({});
-OnClickTurnOffSwitch.args = {
-  isModalOpen: true,
+  const onSubmitReAuthentication = (connectionStatus: boolean) => {
+    setReauthenticationEnabled(connectionStatus);
+    return fakeApi(connectionStatus, 4000);
+  };
+
+  return (
+    <Settings
+      {...args}
+      onSubmitReAuthentication={onSubmitReAuthentication}
+      reauthenticationEnabled={reauthenticationEnabled}
+    />
+  );
 };
 
-export const TurningOffConnectionReauthentication = Template.bind({});
-TurningOffConnectionReauthentication.args = {
-  connectionStatus: "TurningOff",
+export const TurnOnConnectionFailure: ComponentStory<typeof Settings> = (
+  args
+) => {
+  const onSubmitReAuthentication = (connectionStatus: boolean) => {
+    return apiError(connectionStatus, 4000);
+  };
+
+  return (
+    <Settings
+      {...args}
+      onSubmitReAuthentication={onSubmitReAuthentication}
+      reauthenticationEnabled={false}
+    />
+  );
 };
 
-export const TurningONConnectionReauthentication = Template.bind({});
-TurningONConnectionReauthentication.args = {
-  connectionStatus: "TurningOn",
-};
+export const TurnOffConnectionFailure: ComponentStory<typeof Settings> = (
+  args
+) => {
+  const onSubmitReAuthentication = (connectionStatus: boolean) => {
+    return apiError(connectionStatus, 4000);
+  };
 
-export const TurnOffConnectionReauthentication = Template.bind({});
-TurnOffConnectionReauthentication.args = {
-  connectionStatus: "Off",
-  alertStatus: "success",
-  connectionState: false,
-};
-
-export const TurnONConnectionReauthentication = Template.bind({});
-TurnONConnectionReauthentication.args = {
-  connectionStatus: "On",
-  alertStatus: "success",
-  connectionState: true,
-};
-
-export const TurnOnConnectionFailure = Template.bind({});
-TurnOnConnectionFailure.args = {
-  connectionStatus: "Off",
-  alertStatus: "danger",
+  return (
+    <Settings
+      {...args}
+      onSubmitReAuthentication={onSubmitReAuthentication}
+      reauthenticationEnabled={true}
+    />
+  );
 };
