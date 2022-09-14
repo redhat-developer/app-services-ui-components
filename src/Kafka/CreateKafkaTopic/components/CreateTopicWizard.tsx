@@ -16,11 +16,11 @@ import {
   StepReplicas,
   StepTopicName,
   WizardCustomFooter,
+  TopicAdvancePage,
+  PartitionLimitWarning,
 } from "../components";
 import type { IWizardFooter } from "../components";
 import type { ConstantValues, NewTopic } from "../types";
-import { PartitionLimitWarning } from "./PartitionLimitWarning";
-import { TopicAdvancePage } from "./TopicAdvancePage";
 
 export type CreateTopicWizardProps = {
   isSwitchChecked: boolean;
