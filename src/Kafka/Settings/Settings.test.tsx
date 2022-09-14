@@ -14,6 +14,8 @@ describe("Settings", () => {
     const comp = render(<TurningOnConnectionReauthentication />);
     await waitForI18n(comp);
 
+    expect(await comp.findByText("Off")).toBeInTheDocument();
+
     expect(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     ).not.toBeChecked();
@@ -21,6 +23,8 @@ describe("Settings", () => {
     userEvent.click(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
+
+    expect(await comp.findByText("Turning on...")).toBeInTheDocument();
     setTimeout(() => {
       expect(
         comp.findByText("Connection re-authentication turned on")
@@ -39,12 +43,15 @@ describe("Settings", () => {
       expect(
         comp.getByRole("checkbox", { name: "Connection re-authentication" })
       ).toBeChecked();
+
+      expect(comp.findByText("On")).toBeInTheDocument();
     }, 4000);
   });
 
   it("Connection re-authentication updation failed", async () => {
     const comp = render(<TurnOnConnectionFailure />);
     await waitForI18n(comp);
+
     userEvent.click(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
@@ -65,6 +72,7 @@ describe("Settings", () => {
           "We're unable to update connection re-authentication at this time. Try again later."
         )
       ).not.toBeInTheDocument();
+      expect(comp.findByText("On")).toBeInTheDocument();
     }, 4000);
   });
 
@@ -75,6 +83,9 @@ describe("Settings", () => {
     expect(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     ).toBeChecked();
+
+    expect(await comp.findByText("On")).toBeInTheDocument();
+
     userEvent.click(
       comp.getByRole("checkbox", { name: "Connection re-authentication" })
     );
@@ -87,6 +98,8 @@ describe("Settings", () => {
       )
     ).toBeInTheDocument();
     userEvent.click(comp.getByRole("button", { name: "Turn off" }));
+
+    expect(await comp.findByText("Turning off...")).toBeInTheDocument();
     setTimeout(() => {
       expect(
         comp.findByText("Connection re-authentication turned off")
@@ -95,6 +108,8 @@ describe("Settings", () => {
       expect(
         comp.getByRole("checkbox", { name: "Connection re-authentication" })
       ).not.toBeChecked();
+
+      expect(comp.findByText("Off")).toBeInTheDocument();
     }, 4000);
   });
 });
