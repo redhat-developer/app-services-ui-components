@@ -65,6 +65,13 @@ exports[`Renders Accepted story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -555,6 +562,13 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
       style=""
     />
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -637,6 +651,13 @@ exports[`Renders CreatingOver15Minutes story 1`] = `
         
       </div>
     </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;
@@ -721,6 +742,13 @@ exports[`Renders CreatingOver30Minutes story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -757,6 +785,13 @@ exports[`Renders Degraded story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -772,6 +807,13 @@ exports[`Renders Deleting story 1`] = `
       </p>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -786,6 +828,13 @@ exports[`Renders Deprovision story 1`] = `
         Deleting
       </p>
     </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;
@@ -855,6 +904,13 @@ exports[`Renders Preparing story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -923,6 +979,13 @@ exports[`Renders Provisioning story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -958,6 +1021,13 @@ exports[`Renders Ready story 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;

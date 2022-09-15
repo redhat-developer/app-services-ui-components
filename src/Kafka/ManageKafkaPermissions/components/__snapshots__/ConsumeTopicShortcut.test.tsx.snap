@@ -538,6 +538,13 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
       </table>
     </form>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -1079,6 +1086,13 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
       </table>
     </form>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -1590,6 +1604,13 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
         </tbody>
       </table>
     </form>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;

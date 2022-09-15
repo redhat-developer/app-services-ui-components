@@ -566,5 +566,12 @@ exports[`OverviewPage renders 1`] = `
       </div>
     </section>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;

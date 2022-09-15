@@ -255,6 +255,13 @@ exports[`InstanceInfo Renders QuotaInstance story 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -525,6 +532,13 @@ exports[`InstanceInfo Renders TrialInstance story 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;
