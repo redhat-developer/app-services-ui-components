@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -13,8 +13,8 @@ import {
   Spinner,
   Switch,
 } from "@patternfly/react-core";
-import { SettingsAlert } from "./components";
-import type { AlertStatus, SettingsStatus } from "./types";
+import { useAlert, AlertVariant } from "@rhoas/app-services-ui-shared";
+import type { SettingsStatus } from "./types";
 import "./Settings.css";
 
 export type SettingsProps = {
@@ -29,14 +29,12 @@ export const Settings: FunctionComponent<SettingsProps> = ({
   reauthenticationEnabled,
 }) => {
   const { t } = useTranslation("kafka");
-  const reauthenticationStatus = reauthenticationEnabled ? "On" : "Off";
+  const { addAlert } = useAlert();
   //states
   const [connectionStatus, setConnectionStatus] = useState<SettingsStatus>(
-    reauthenticationStatus
+    reauthenticationEnabled ? "On" : "Off"
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [alertStatus, setAlertStatus] = useState<AlertStatus | undefined>();
-  const [connectionState, setConnectionState] = useState<boolean>(false);
 
   const onClose = () => {
     setIsModalOpen(false);
@@ -56,12 +54,22 @@ export const Settings: FunctionComponent<SettingsProps> = ({
     onSubmitReAuthentication(reAuthValue)
       .then((reauthentication) => {
         setConnectionStatus(reauthentication ? "On" : "Off");
-        setConnectionState(reauthentication);
-        setAlertStatus("success");
+
+        addAlert({
+          variant: AlertVariant.success,
+          title: t("settings.success_alert", {
+            status: reauthentication ? "on" : "off",
+          }),
+        });
       })
       .catch(() => {
         setConnectionStatus(!reAuthValue ? "On" : "Off");
-        setAlertStatus("danger");
+
+        addAlert({
+          variant: AlertVariant.danger,
+          title: t("settings.error_alert_title"),
+          description: t("settings.error_alert_title_description"),
+        });
       });
   };
 
@@ -69,10 +77,6 @@ export const Settings: FunctionComponent<SettingsProps> = ({
     setIsModalOpen(false);
     handleReAuthentication(false);
   };
-
-  const clearAlert = useCallback(() => {
-    setAlertStatus(undefined);
-  }, []);
 
   return (
     <>
@@ -181,11 +185,6 @@ export const Settings: FunctionComponent<SettingsProps> = ({
           </CardBody>
         </Card>
       </PageSection>
-      <SettingsAlert
-        alertStatus={alertStatus}
-        connectionState={connectionState}
-        clearAlert={clearAlert}
-      />
     </>
   );
 };
