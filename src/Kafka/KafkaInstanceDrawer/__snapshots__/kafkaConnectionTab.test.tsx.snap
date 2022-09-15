@@ -517,5 +517,12 @@ exports[`ConnectionTab renders 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;

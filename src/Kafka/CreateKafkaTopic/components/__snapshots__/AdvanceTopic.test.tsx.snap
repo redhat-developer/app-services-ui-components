@@ -2166,5 +2166,12 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
       </section>
     </section>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
