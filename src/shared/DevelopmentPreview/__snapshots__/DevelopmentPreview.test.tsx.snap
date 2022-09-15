@@ -9,6 +9,13 @@ exports[`Renders HideDevPreview story 1`] = `
       loading
     </div>
   </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
 </body>
 `;
 
@@ -20,6 +27,13 @@ exports[`Renders ShowDevPreview story 1`] = `
     >
       loading
     </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
   </div>
 </body>
 `;
