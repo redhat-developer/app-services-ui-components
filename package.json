@@ -63,7 +63,7 @@
     "@storybook/jest": "0.0.10",
     "@storybook/manager-webpack5": "6.5.10",
     "@storybook/react": "6.5.10",
-    "@storybook/test-runner": "0.7.1",
+    "@storybook/test-runner": "^0.7.1",
     "@storybook/testing-library": "0.0.13",
     "@storybook/testing-react": "1.3.0",
     "@swc/core": "1.2.218",
@@ -133,12 +133,12 @@
     "@patternfly/react-table": "^4.71.16",
     "@patternfly/react-tokens": "^4.54.16",
     "@rhoas/app-services-ui-shared": "^0.16.0",
+    "jest": "^27.5.1",
+    "jest-environment-node": "27.5.1",
+    "jest-runner": "^27.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router-dom": "^5.2.1",
-    "jest": "^27.5.1",
-    "jest-runner": "^27.5.1",
-    "jest-environment-node": "27.5.1"
+    "react-router-dom": "^5.2.1"
   },
   "lint-staged": {
     "*.{ts,tsx}": "eslint --cache --fix",
