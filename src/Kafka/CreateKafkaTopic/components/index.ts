@@ -1,4 +1,3 @@
-export * from "./CreateTopicPage";
 export * from "./StepMessageRetention";
 export * from "./StepPartitions";
 export * from "./StepReplicas";
