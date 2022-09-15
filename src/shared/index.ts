@@ -15,3 +15,4 @@ export * from "./AsyncTypeaheadSelect";
 export * from "./TermsAndConditionModal";
 export * from "./TextWithLabelPopover";
 export * from "./DropdownWithToggle";
+export * from "./Alerts";
