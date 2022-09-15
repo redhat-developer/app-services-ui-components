@@ -1,8 +1,8 @@
 import type React from "react";
 import { useState } from "react";
-import { CreateTopicHead } from "../components";
-import { CreateTopicWizard } from "./CreateTopicWizard";
-import type { ConstantValues, NewTopic } from "../types";
+import { CreateTopicHead } from "./components";
+import { CreateTopicWizard } from "./components/CreateTopicWizard";
+import type { ConstantValues, NewTopic } from "./types";
 
 export type CreateTopicPageProps = {
   kafkaName: string;
