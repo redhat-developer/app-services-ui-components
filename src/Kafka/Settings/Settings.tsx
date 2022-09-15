@@ -1,5 +1,5 @@
 import type { FunctionComponent } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Button,
@@ -30,13 +30,11 @@ export const Settings: FunctionComponent<SettingsProps> = ({
 }) => {
   const { t } = useTranslation("kafka");
   const { addAlert } = useAlert();
-  const reauthenticationStatus = reauthenticationEnabled ? "On" : "Off";
   //states
   const [connectionStatus, setConnectionStatus] = useState<SettingsStatus>(
-    reauthenticationStatus
+    reauthenticationEnabled ? "On" : "Off"
   );
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  const [connectionState, setConnectionState] = useState<boolean>(false);
 
   const onClose = () => {
     setIsModalOpen(false);
@@ -56,7 +54,6 @@ export const Settings: FunctionComponent<SettingsProps> = ({
     onSubmitReAuthentication(reAuthValue)
       .then((reauthentication) => {
         setConnectionStatus(reauthentication ? "On" : "Off");
-        setConnectionState(reauthentication);
 
         addAlert({
           variant: AlertVariant.success,
