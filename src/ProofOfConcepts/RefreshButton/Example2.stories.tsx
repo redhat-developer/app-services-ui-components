@@ -23,10 +23,8 @@ import {
   deletingSign,
   sampleData,
 } from "../../shared/Table/storybookHelpers";
-import type { TableViewProps } from "./Example";
-import { DEFAULT_PERPAGE, TableView } from "./Example";
-import { POCRefreshButton } from "./Variant2";
-import { sub } from "date-fns";
+import type { TableViewProps } from "./Example2";
+import { DEFAULT_PERPAGE, TableView } from "./Example2";
 
 const eventsFromNames = actions("onRowClick");
 
@@ -54,9 +52,6 @@ export default {
         </ToolbarItem>
         <ToolbarItem>
           <Button>Sample</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <POCRefreshButton />
         </ToolbarItem>
       </ToolbarGroup>
     ),

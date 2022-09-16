@@ -34,15 +34,13 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         alignment={{ default: "alignRight" }}
         style={{ color: "var(--pf-global--Color--200)" }}
       >
-        <div className="pf-u-font-size-xs">
-          {isRefreshing
-            ? t("kafka:refreshing")
-            : t("kafka:last-refresh") +
-              " " +
-              formatDistanceToNow(lastUpdated) +
-              " " +
-              t("kafka:last-refresh-distance")}
-        </div>
+        {isRefreshing
+          ? t("kafka:refreshing")
+          : t("kafka:last-refresh") +
+            " " +
+            formatDistanceToNow(lastUpdated) +
+            " " +
+            t("kafka:last-refresh-distance")}
       </ToolbarItem>
     </>
   );

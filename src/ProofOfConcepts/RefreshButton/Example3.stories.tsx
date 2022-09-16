@@ -23,10 +23,8 @@ import {
   deletingSign,
   sampleData,
 } from "../../shared/Table/storybookHelpers";
-import type { TableViewProps } from "./Example";
-import { DEFAULT_PERPAGE, TableView } from "./Example";
-import { POCRefreshButton } from "./Variant3";
-import { sub } from "date-fns";
+import type { TableViewProps } from "./Example3";
+import { DEFAULT_PERPAGE, TableView } from "./Example3";
 
 const eventsFromNames = actions("onRowClick");
 
@@ -37,7 +35,7 @@ const TableViewSampleType: VoidFunctionComponent<
 > = (props) => <TableView {...props} />;
 
 export default {
-  component: POCRefreshButton,
+  component: TableView,
   TableView,
   args: {
     ariaLabel: "Table title",
@@ -55,9 +53,6 @@ export default {
         </ToolbarItem>
         <ToolbarItem>
           <Button>Sample</Button>
-        </ToolbarItem>
-        <ToolbarItem>
-          <POCRefreshButton isRefreshing />
         </ToolbarItem>
       </ToolbarGroup>
     ),

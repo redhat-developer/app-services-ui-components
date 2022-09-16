@@ -8,6 +8,7 @@ import type { PropsWithChildren, ReactNode } from "react";
 import { Pagination } from "../../shared/Pagination";
 import type { ResponsiveTableProps } from "../../shared/Table/ResponsiveTable";
 import { ResponsiveTable } from "../../shared/Table/ResponsiveTable";
+import { POCRefreshButton } from "./Variant3";
 
 export const DEFAULT_PERPAGE = 10;
 
@@ -37,6 +38,7 @@ export const TableView = <TRow, TCol>({
         <Toolbar clearAllFilters={onClearAllFilters}>
           <ToolbarContent>
             {toolbarContent}
+            <POCRefreshButton />
             {showPagination && (
               <ToolbarGroup alignment={{ default: "alignRight" }}>
                 <Pagination
