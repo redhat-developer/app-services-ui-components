@@ -40,7 +40,7 @@ export const TableView = <TRow, TCol>({
             {toolbarContent}
             <POCRefreshButton />
             {showPagination && (
-              <ToolbarGroup alignment={{ default: "alignRight" }}>
+              <ToolbarGroup>
                 <Pagination
                   itemCount={itemCount}
                   page={page}
