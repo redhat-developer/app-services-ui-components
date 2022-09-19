@@ -1,7 +1,7 @@
 .pf-c-label.mas-m-solid {
-  --pf-c-label__content--before--BorderColor: transparent !important;
+  --pf-c-label__content--before--BorderColor: transparent;
   --pf-c-label--BackgroundColor: var(--pf-global--palette--black-600);
-  --pf-c-label__content--Color: var(--pf-global--palette--white) !important;
+  --pf-c-label__content--Color: var(--pf-global--palette--white);
   font-weight: var(--pf-global--FontWeight--bold);
   min-width: calc(
     (var(--pf-c-label--FontSize) * var(--pf-global--LineHeight--md)) +

@@ -1,6 +1,6 @@
-import "./customStyles.css";
 import React from "react";
 import { Label } from "@patternfly/react-core";
+import "./customStyles.css";
 
 class KafkaInstanceLabel extends React.Component {
   constructor(props) {
