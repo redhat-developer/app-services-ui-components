@@ -31,6 +31,7 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         />
       </ToolbarItem>
       <ToolbarItem
+        className="pf-u-font-size-xs"
         alignment={{ default: "alignRight" }}
         style={{ color: "var(--pf-global--Color--200)" }}
       >
