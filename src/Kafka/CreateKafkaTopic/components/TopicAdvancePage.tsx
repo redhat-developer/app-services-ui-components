@@ -79,7 +79,11 @@ export const TopicAdvancePage: React.FunctionComponent<
       <Sidebar hasGutter>
         <TopicAdvanceJumpLinks />
         <SidebarContent>
-          <PageGroup hasOverflowScroll id="topic-detail-view">
+          <PageGroup
+            aria-label={"advance-topic-page"}
+            hasOverflowScroll
+            id="topic-detail-view"
+          >
             <PageSection padding={{ default: "noPadding" }}>
               <Form>
                 <CoreConfiguration
