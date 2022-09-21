@@ -93,7 +93,7 @@ export const PermissionsDropdown: VoidFunctionComponent<
   }, []);
 
   const handleSelect: MenuProps["onSelect"] = useCallback(
-    (_event, itemId) => {
+    (_event?: React.MouseEvent, itemId?: string | number) => {
       setIsOpen(false);
       switch (itemId) {
         case "add_permission":

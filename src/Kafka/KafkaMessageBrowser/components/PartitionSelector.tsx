@@ -71,7 +71,7 @@ export const PartitionSelector: VoidFunctionComponent<
   }, [allPartitions, makeOptions]);
 
   const handleFilter: SelectProps["onFilter"] = useCallback(
-    (_, filter: string) => {
+    (_: React.ChangeEvent<HTMLInputElement> | null, filter: string) => {
       if (filter !== "") {
         return makeOptions(
           allPartitions.filter((partition) => partition.includes(filter))
