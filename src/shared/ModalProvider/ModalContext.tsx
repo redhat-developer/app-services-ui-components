@@ -82,7 +82,9 @@ const ModalWrapper: FunctionComponent<ModalWrapperProps<ModalType>> = ({
   );
 };
 
-export const ModalProvider: FunctionComponent = ({ children }) => {
+export const ModalProvider: FunctionComponent<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [activeModal, setActiveModal] = useState<
     ActiveModalProps<ModalType> | undefined
   >();

@@ -249,7 +249,9 @@ export const KafkaPageV2: FunctionComponent = () => {
   );
 };
 
-const SupportLink: FunctionComponent = ({ children }) => (
+const SupportLink: FunctionComponent<{ children?: React.ReactNode }> = ({
+  children,
+}) => (
   <Button
     data-testid="redhatSupport-buttonCTA"
     isInline
@@ -263,7 +265,9 @@ const SupportLink: FunctionComponent = ({ children }) => (
   </Button>
 );
 
-const MonitoringDiskSpaceLink: FunctionComponent = ({ children }) => (
+const MonitoringDiskSpaceLink: FunctionComponent<{
+  children?: React.ReactNode;
+}> = ({ children }) => (
   <Button
     data-testid="diskSpaceMetrics-buttonCTA"
     isInline

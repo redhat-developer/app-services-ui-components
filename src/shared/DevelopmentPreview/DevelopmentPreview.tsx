@@ -5,6 +5,7 @@ import "./DevelopmentPreview.css";
 
 export type DevelopmentPreviewProps = {
   show?: boolean;
+  children: React.ReactNode;
 };
 
 export const DevelopmentPreview: FunctionComponent<DevelopmentPreviewProps> = ({

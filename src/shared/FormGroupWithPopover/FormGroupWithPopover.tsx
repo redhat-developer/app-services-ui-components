@@ -13,6 +13,7 @@ export type FormGroupWithPopoverProps = {
   helperText?: ReactNode;
   helperTextInvalid?: ReactNode;
   isRequired?: boolean;
+  children?: React.ReactNode;
 };
 
 export const FormGroupWithPopover: FC<FormGroupWithPopoverProps> = ({

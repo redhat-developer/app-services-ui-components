@@ -11,6 +11,7 @@ export type I18nProviderProps = {
     };
   };
   debug?: boolean;
+  children: React.ReactNode;
 };
 export const I18nProvider: FunctionComponent<I18nProviderProps> = ({
   lng,

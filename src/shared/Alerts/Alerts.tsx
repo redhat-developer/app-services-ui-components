@@ -4,7 +4,9 @@ import type { AlertProps } from "@rhoas/app-services-ui-shared";
 import { AlertContext } from "@rhoas/app-services-ui-shared";
 import { AlertToastGroup } from "./AlertToastGroup";
 
-export const AlertProvider: FunctionComponent = ({ children }) => {
+export const AlertProvider: FunctionComponent<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   const [alerts, setAlerts] = useState<AlertProps[]>([]);
 
   const createId = () => new Date().getTime();

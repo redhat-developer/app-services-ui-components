@@ -89,7 +89,9 @@ export const MarketingPageHero: VoidFunctionComponent<
   );
 };
 
-export const MarketingPageBanner: FunctionComponent = ({ children }) => {
+export const MarketingPageBanner: FunctionComponent<{
+  children: React.ReactNode;
+}> = ({ children }) => {
   return (
     <PageSection
       variant={PageSectionVariants.light}
@@ -109,6 +111,7 @@ export const MarketingPageBanner: FunctionComponent = ({ children }) => {
 
 export type MarketingPageSectionProps = {
   className?: string;
+  children: React.ReactNode;
 };
 
 export const MarketingPageSection: FunctionComponent<

@@ -84,6 +84,7 @@ export type DeleteModalProps = {
    */
   isDisabled?: boolean;
   ariaLabel?: string;
+  children?: React.ReactNode;
 };
 
 /**

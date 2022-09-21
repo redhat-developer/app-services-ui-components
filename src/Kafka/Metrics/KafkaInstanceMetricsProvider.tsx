@@ -17,6 +17,7 @@ export type KafkaInstanceMetricsProviderProps = {
     duration: DurationOptions;
     interval: number;
   }) => Promise<GetKafkaInstanceMetricsResponse>;
+  children: React.ReactNode;
 };
 export const KafkaInstanceMetricsProvider: FunctionComponent<
   KafkaInstanceMetricsProviderProps

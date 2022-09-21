@@ -441,6 +441,7 @@ export type CreateKafkaInstanceServices = {
     onSuccess: () => void,
     onError: (error: CreateKafkaInstanceError) => void
   ) => void;
+  children?: React.ReactNode;
 };
 
 export function makeCreateKafkaInstanceMachine({

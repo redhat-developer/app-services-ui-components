@@ -13,6 +13,7 @@ export const MetricsKpiContext = createContext<{
 
 export type MetricsKpiProviderProps = {
   getMetricsKpi: () => Promise<GetMetricsKpiResponse>;
+  children: React.ReactNode;
 };
 export const MetricsKpiProvider: FunctionComponent<MetricsKpiProviderProps> = ({
   children,

@@ -312,6 +312,7 @@ export type DeletableRowProps = {
   isSelected: boolean;
   isDeleted: boolean;
   onClick?: () => void;
+  children: React.ReactNode;
 };
 export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
   ({ isDeleted, isSelected, onClick, children }) => {

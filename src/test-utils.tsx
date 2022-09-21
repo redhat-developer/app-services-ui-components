@@ -8,7 +8,9 @@ import { AlertProvider } from "../src/shared/Alerts";
 
 const suspenseTestId = "i18n-suspense";
 
-const AllTheProviders: FunctionComponent = ({ children }) => {
+const AllTheProviders: FunctionComponent<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return (
     <Router>
       <AlertProvider>
@@ -62,7 +64,9 @@ const AllTheProviders: FunctionComponent = ({ children }) => {
   );
 };
 
-const AllTheProvidersWithRoot: FunctionComponent = ({ children }) => (
+const AllTheProvidersWithRoot: FunctionComponent<{
+  children: React.ReactNode;
+}> = ({ children }) => (
   <AllTheProviders>
     <div id={"root"}>{children}</div>
   </AllTheProviders>

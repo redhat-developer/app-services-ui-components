@@ -9,6 +9,7 @@ export type ExternaLinkProps = {
   href: NonNullable<ButtonProps["href"]>;
   className?: string;
   ouiaId?: ButtonProps["ouiaId"];
+  children?: React.ReactNode;
 };
 
 export const ExternalLink: FunctionComponent<ExternaLinkProps> = ({

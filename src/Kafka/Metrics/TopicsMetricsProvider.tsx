@@ -18,6 +18,7 @@ export type TopicsMetricsProviderProps = {
     interval: number;
     selectedTopic: string | undefined;
   }) => Promise<GetTopicsMetricsResponse>;
+  children: React.ReactNode;
 };
 export const TopicsMetricsProvider: FunctionComponent<
   TopicsMetricsProviderProps
