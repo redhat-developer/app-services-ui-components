@@ -60,10 +60,6 @@ module.exports = () => {
             singleton: true,
             requiredVersion: peerDependencies['react-dom'],
           },
-          'react-i18next': {
-            singleton: true,
-            requiredVersion: peerDependencies['react-i18next'],
-          },
           'react-router-dom': {
             singleton: true,
             requiredVersion: peerDependencies['react-router-dom'],
@@ -86,6 +82,26 @@ module.exports = () => {
   };
 }
 ```
+
+## i18n
+This project implements i18n using `react-i18next`. 
+
+You can translate strings by using one of the methods provided by `react-18next`, like the [`useTranslation`](https://react.i18next.com/latest/usetranslation-hook) hook.
+
+To make life easier when developing a new Managed Application Services UI or when writing unit tests that also cover translations, the whole `react-i18next` library is re-exported by `@rhoas/app-services-ui-components`.
+
+You can translate your content without directly including `react-i18next` as a direct dependency of your project by doing:
+
+```tsx
+import { useTranslation } from '@rhoas/app-services-ui-components';
+
+const MyComponent = () => {
+    const { t } = useTranslation();
+    return <span>{t('common:status')}</span>
+}
+```
+
+Refer to the `react-i18next` [documentation](https://react.i18next.com/) for more information.
 
 ## Optional: set up the shared context providers
 
