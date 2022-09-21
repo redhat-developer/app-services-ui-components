@@ -16,11 +16,11 @@ import {
   StepReplicas,
   StepTopicName,
   WizardCustomFooter,
-  TopicAdvancePage,
-  PartitionLimitWarning,
 } from "../components";
 import type { IWizardFooter } from "../components";
 import type { ConstantValues, NewTopic } from "../types";
+import { PartitionLimitWarning } from "./PartitionLimitWarning";
+import { TopicAdvancePage } from "./TopicAdvancePage";
 
 export type CreateTopicWizardProps = {
   isSwitchChecked: boolean;
@@ -117,7 +117,7 @@ export const CreateTopicWizard: React.FC<CreateTopicWizardProps> = ({
       setIsLoading(true);
 
       checkTopicName(topicData?.name)
-        .then((value: boolean) =>
+        .then((value) =>
           value == false
             ? (setInvalidText(t("already_exists", { name: topicData?.name })),
               setTopicNameValidated(ValidatedOptions.error))

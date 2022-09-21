@@ -1,5 +1,4 @@
 export * from "./CreateKafkaInstance";
-export * from "./CreateKafkaTopic";
 export * from "./KafkaInstanceDrawer";
 export * from "./KafkaInstanceStatus";
 export * from "./KafkaMessageBrowser";

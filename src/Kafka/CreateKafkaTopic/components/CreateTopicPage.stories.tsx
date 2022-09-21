@@ -2,7 +2,7 @@ import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { fakeApi } from "../../../shared/storiesHelpers";
 import { RetentionSizeUnits, RetentionTimeUnits } from "../types";
-import { CreateTopicPage } from "../CreateTopicPage";
+import { CreateTopicPage } from "./CreateTopicPage";
 import { constantValues } from "./storiesHelpers";
 
 export default {
