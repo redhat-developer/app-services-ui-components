@@ -44,7 +44,7 @@
   "homepage": "https://github.com/redhat-developer/app-services-ui-components#readme",
   "devDependencies": {
     "@babel/core": "7.18.13",
-    "@patternfly/patternfly": "4.202.1",
+    "@patternfly/patternfly": "4.210.2",
     "@patternfly/react-charts": "6.77.1",
     "@patternfly/react-core": "4.224.1",
     "@patternfly/react-icons": "4.75.1",
@@ -126,13 +126,13 @@
     "xstate": "4.32.1"
   },
   "peerDependencies": {
-    "@patternfly/patternfly": "^4.185.1",
-    "@patternfly/react-charts": "^6.34.1",
-    "@patternfly/react-core": "^4.202.16",
-    "@patternfly/react-icons": "^4.53.16",
-    "@patternfly/react-table": "^4.71.16",
+    "@patternfly/patternfly": "^4.210.2",
+    "@patternfly/react-charts": "^6.77.1",
+    "@patternfly/react-core": "^4.224.1",
+    "@patternfly/react-icons": "^4.75.1",
+    "@patternfly/react-table": "^4.93.1",
     "@patternfly/react-tokens": "^4.54.16",
-    "@rhoas/app-services-ui-shared": "^0.16.0",
+    "@rhoas/app-services-ui-shared": "^0.16.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.1"
