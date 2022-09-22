@@ -5,3 +5,4 @@ export * from "./KafkaPageV2";
 export * from "./OverviewPage";
 export * from "./OverviewPageV2";
 export * from "./KafkaPageV3";
+export * from "./OverviewPageV4";
