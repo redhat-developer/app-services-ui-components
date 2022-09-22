@@ -8,8 +8,8 @@
       (var(--pf-c-label--PaddingTop) + var(--pf-c-label--PaddingBottom))
   ); /* ensure it's at least as wide as it is tall */
   display: inline-flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .pf-c-label.mas-m-solid.pf-m-blue {
