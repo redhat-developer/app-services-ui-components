@@ -11,7 +11,6 @@ export default {
     linkToAccessTab: "/to-access-tab",
     kafkaFleetManagerUrl:
       "https://api.openshift.com/api/kafkas_mgmt/v1/openapi",
-    linkToDocPortal: "#",
   },
   parameters: {
     backgrounds: {
