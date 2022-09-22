@@ -10,7 +10,7 @@ import {
 } from "@patternfly/react-charts";
 import {
   chart_color_blue_300,
-  chart_color_green_300,
+  chart_color_cyan_300,
 } from "@patternfly/react-tokens";
 import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,7 @@ import {
   timestampsToTicks,
 } from "./utils";
 
-const colors = [chart_color_green_300.value, chart_color_blue_300.value];
+const colors = [chart_color_cyan_300.value, chart_color_blue_300.value];
 
 type ChartData = {
   color: string;
@@ -95,7 +95,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
                 }
                 height={chartHeight}
                 padding={chartPadding}
-                themeColor={ChartThemeColor.multiUnordered}
+                themeColor={ChartThemeColor.multiOrdered}
                 width={width}
                 legendAllowWrap={true}
               >

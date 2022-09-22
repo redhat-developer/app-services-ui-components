@@ -10,7 +10,7 @@ import {
 } from "@patternfly/react-charts";
 import {
   chart_color_blue_300,
-  chart_color_orange_300,
+  chart_color_green_300,
 } from "@patternfly/react-tokens";
 import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
@@ -176,7 +176,7 @@ export function getBytesChartData(
 
   const outgoingLine = metricsToLine(outgoingTopic, outgoingTopicName);
   if (outgoingLine.length > 0) {
-    const color = chart_color_orange_300.value;
+    const color = chart_color_green_300.value;
     chartData.push({ color, line: outgoingLine });
     legendData.push({
       name: outgoingTopicName,
