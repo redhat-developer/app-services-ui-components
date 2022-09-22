@@ -27,7 +27,6 @@ export type KafkaConnectionTabP2Props = {
   adminAPIUrl: string | undefined;
   showCreateServiceAccountModal: () => void;
   kafkaFleetManagerUrl: string;
-  linkToDocPortal: string;
 };
 
 export const KafkaConnectionTabP2: FunctionComponent<
@@ -41,7 +40,6 @@ export const KafkaConnectionTabP2: FunctionComponent<
   adminAPIUrl,
   kafkaFleetManagerUrl,
   showCreateServiceAccountModal,
-  linkToDocPortal,
 }) => {
   const { t } = useTranslation();
 
@@ -156,11 +154,11 @@ export const KafkaConnectionTabP2: FunctionComponent<
                             isInline
                             variant={ButtonVariant.link}
                             component="a"
-                            href="https://console.redhat.com/docs/api"
+                            href="https://console.redhat.com/docs/api/kafkainstance?github-owner=redhat-developer&github-repo=app-services-sdk-core&github-content=kafka-admin-rest.yaml%3Fref%3Ddoc-portal&readonly=true"
                           />,
                           <ExternalLink
                             testId={"customerPortal-link"}
-                            href={linkToDocPortal}
+                            href="https://access.redhat.com/documentation/en-us/red_hat_openshift_application_services/1/guide/2409253a-45ee-470e-bdc9-5db4bfcf9d0f"
                             className={"pf-u-ml-xs"}
                           />,
                         ]}
@@ -216,11 +214,11 @@ export const KafkaConnectionTabP2: FunctionComponent<
                             isInline
                             variant={ButtonVariant.link}
                             component="a"
-                            href="https://console.redhat.com/docs/api"
+                            href="https://console.redhat.com/docs/api/kafkamgmt?github-owner=redhat-developer&github-repo=app-services-sdk-core&github-content=kas-fleet-manager.yaml%3Fref%3Ddoc-portal"
                           />,
                           <ExternalLink
                             testId={"customerPortal-link"}
-                            href={linkToDocPortal}
+                            href="https://access.redhat.com/documentation/en-us/red_hat_openshift_application_services/1/guide/2409253a-45ee-470e-bdc9-5db4bfcf9d0f"
                             className={"pf-u-ml-xs"}
                           />,
                         ]}
