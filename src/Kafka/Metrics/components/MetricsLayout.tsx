@@ -1,4 +1,4 @@
-import { Grid, GridItem, PageSection } from "@patternfly/react-core";
+import { Grid, GridItem } from "@patternfly/react-core";
 import type { ReactElement, FunctionComponent } from "react";
 
 type MetricsLayoutProps = {
@@ -18,15 +18,13 @@ export const MetricsLayout: FunctionComponent<MetricsLayoutProps> = ({
   topicMetrics,
 }) => {
   return (
-    <PageSection>
-      <Grid hasGutter>
-        <GridItem>{metricsLagAlert}</GridItem>
-        <GridItem sm={4}>{topicsKpi}</GridItem>
-        <GridItem sm={4}>{topicPartitionsKpi}</GridItem>
-        <GridItem sm={4}>{consumerGroupKpi}</GridItem>
-        <GridItem lg={6}>{diskSpaceMetrics}</GridItem>
-        <GridItem lg={6}>{topicMetrics}</GridItem>
-      </Grid>
-    </PageSection>
+    <Grid hasGutter>
+      <GridItem>{metricsLagAlert}</GridItem>
+      <GridItem sm={4}>{topicsKpi}</GridItem>
+      <GridItem sm={4}>{topicPartitionsKpi}</GridItem>
+      <GridItem sm={4}>{consumerGroupKpi}</GridItem>
+      <GridItem lg={6}>{diskSpaceMetrics}</GridItem>
+      <GridItem lg={6}>{topicMetrics}</GridItem>
+    </Grid>
   );
 };
