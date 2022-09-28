@@ -80,9 +80,11 @@ export const Settings: FunctionComponent<SettingsProps> = ({
 
   return (
     <>
-      <Card>
-        <CardBody>{t("settings.kafka_instance_settings_label")}</CardBody>
-      </Card>
+      <PageSection padding={{ default: "noPadding" }}>
+        <Card>
+          <CardBody>{t("settings.kafka_instance_settings_label")}</CardBody>
+        </Card>
+      </PageSection>
       <PageSection>
         <Card className={"mas--settings__card"}>
           <CardBody>
