@@ -1,7 +1,6 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 import { fakeApi } from "../../shared/storiesHelpers";
-import { RetentionSizeUnits, RetentionTimeUnits } from "./types";
 import { CreateTopicPage } from "./CreateTopicPage";
 import { constantValues } from "./components/storiesHelpers";
 
@@ -31,6 +30,7 @@ export default {
       isMultiAZ: false,
     },
     constantValues: constantValues,
+    isSwitchChecked: false,
   },
 } as ComponentMeta<typeof CreateTopicPage>;
 
@@ -45,7 +45,16 @@ TopicCreation.args = {};
 TopicCreation.parameters = {
   docs: {
     description: {
-      story: ` A user can create a topic with the basic or advanced work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
+      story: ` A user can create a topic with the basic work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
+    },
+  },
+};
+export const AdvanceTopicCreation = Template.bind({});
+AdvanceTopicCreation.args = { isSwitchChecked: true };
+AdvanceTopicCreation.parameters = {
+  docs: {
+    description: {
+      story: ` A user can create a topic with the  advanced work flow. This story provides validation errors when topic name is invalid. We also get a warning modal in case the user exceeds the available partition limit `,
     },
   },
 };
@@ -57,12 +66,12 @@ InvalidTopicName.args = {
     numPartitions: 1,
     replicationFactor: 1,
     retentionTime: 1,
-    retentionTimeUnit: RetentionTimeUnits.WEEK,
+    retentionTimeUnit: "weeks",
     retentionBytes: 1,
-    retentionBytesUnit: RetentionSizeUnits.BYTE,
+    retentionBytesUnit: "bytes",
     cleanupPolicy: "delete",
-    customRetentionTimeUnit: RetentionTimeUnits.DAY,
-    customRetentionSizeUnit: RetentionSizeUnits.BYTE,
+    customRetentionTimeUnit: "days",
+    customRetentionSizeUnit: "bytes",
     minInSyncReplica: 1,
     isMultiAZ: false,
   },
@@ -82,12 +91,12 @@ InvalidLength.args = {
     numPartitions: 1,
     replicationFactor: 1,
     retentionTime: 1,
-    retentionTimeUnit: RetentionTimeUnits.WEEK,
+    retentionTimeUnit: "weeks",
     retentionBytes: 1,
-    retentionBytesUnit: RetentionSizeUnits.BYTE,
+    retentionBytesUnit: "bytes",
     cleanupPolicy: "delete",
-    customRetentionTimeUnit: RetentionTimeUnits.DAY,
-    customRetentionSizeUnit: RetentionSizeUnits.BYTE,
+    customRetentionTimeUnit: "days",
+    customRetentionSizeUnit: "bytes",
     minInSyncReplica: 1,
     isMultiAZ: false,
   },
@@ -107,12 +116,12 @@ PartitionLimitReached.args = {
     numPartitions: 12,
     replicationFactor: 1,
     retentionTime: 1,
-    retentionTimeUnit: RetentionTimeUnits.WEEK,
+    retentionTimeUnit: "weeks",
     retentionBytes: 1,
-    retentionBytesUnit: RetentionSizeUnits.BYTE,
+    retentionBytesUnit: "bytes",
     cleanupPolicy: "delete",
-    customRetentionTimeUnit: RetentionTimeUnits.DAY,
-    customRetentionSizeUnit: RetentionSizeUnits.BYTE,
+    customRetentionTimeUnit: "days",
+    customRetentionSizeUnit: "bytes",
     minInSyncReplica: 1,
     isMultiAZ: false,
   },

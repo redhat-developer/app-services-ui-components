@@ -2,6 +2,7 @@ import type React from "react";
 import { useState } from "react";
 import { Dropdown, DropdownItem, DropdownToggle } from "@patternfly/react-core";
 import type { DropdownProps } from "@patternfly/react-core/dist/js";
+import type { IDropdownOption } from "../../Kafka";
 
 export interface IDropdownWithToggleProps {
   id: string;
@@ -13,13 +14,6 @@ export interface IDropdownWithToggleProps {
   ariaLabel?: string;
   menuAppendTo?: HTMLElement | (() => HTMLElement) | "parent" | "inline";
   isLabelAndValueNotSame?: boolean;
-}
-
-export interface IDropdownOption {
-  value?: string;
-  label?: string;
-  key?: string;
-  isDisabled?: boolean;
 }
 
 export const DropdownWithToggle: React.FC<IDropdownWithToggleProps> = ({

@@ -10,17 +10,15 @@ import {
   Wizard,
 } from "@patternfly/react-core";
 import type { WizardStep } from "@patternfly/react-core";
-import {
-  StepMessageRetention,
-  StepPartitions,
-  StepReplicas,
-  StepTopicName,
-  WizardCustomFooter,
-} from "../components";
-import type { IWizardFooter } from "../components";
 import type { ConstantValues, NewTopic } from "../types";
 import { PartitionLimitWarning } from "./PartitionLimitWarning";
 import { TopicAdvancePage } from "./TopicAdvancePage";
+import { StepMessageRetention } from "./StepMessageRetention";
+import { StepPartitions } from "./StepPartitions";
+import { StepReplicas } from "./StepReplicas";
+import { StepTopicName } from "./StepTopicName";
+import type { IWizardFooter } from "./WizardCustomFooter";
+import { WizardCustomFooter } from "./WizardCustomFooter";
 
 export type CreateTopicWizardProps = {
   isSwitchChecked: boolean;

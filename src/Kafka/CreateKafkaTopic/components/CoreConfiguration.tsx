@@ -19,11 +19,13 @@ import { CustomRetentionSize } from "./CustomRetentionSize";
 import {
   retentionTimeSelectOptions,
   retentionSizeSelectOptions,
+} from "../types";
+import { useValidateTopic } from "../types";
+import type {
+  NewTopic,
   RetentionTimeUnits,
   RetentionSizeUnits,
 } from "../types";
-import { useValidateTopic } from "../types";
-import type { NewTopic } from "../types";
 
 export type CoreConfigurationProps = {
   isCreate?: boolean;
@@ -70,19 +72,19 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
     [setInvalidText, setTopicValidated, validateName]
   );
 
-  const handleRetentionMessageSize = (value: string) => {
+  const handleRetentionMessageSize = (value: RetentionSizeUnits) => {
     switch (value) {
-      case RetentionSizeUnits.CUSTOM:
+      case "custom":
         setTopicData({
           ...topicData,
           retentionBytes: 1,
-          retentionBytesUnit: RetentionSizeUnits.CUSTOM,
+          retentionBytesUnit: "custom",
         });
         break;
-      case RetentionTimeUnits.UNLIMITED:
+      case "unlimited":
         setTopicData({
           ...topicData,
-          retentionBytesUnit: RetentionSizeUnits.UNLIMITED,
+          retentionBytesUnit: "unlimited",
         });
     }
   };
@@ -95,19 +97,20 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
     setIsRetentionSizeSelectOpen(isOpen);
   };
 
-  const handleRetentionMessageTime = (value: string) => {
+  const handleRetentionMessageTime = (value: RetentionTimeUnits) => {
+    console.log("did it come", value);
     switch (value) {
-      case RetentionTimeUnits.CUSTOM:
+      case "custom":
         setTopicData({
           ...topicData,
           retentionTime: 7,
-          retentionTimeUnit: RetentionTimeUnits.CUSTOM,
+          retentionTimeUnit: "custom",
         });
         break;
-      case RetentionTimeUnits.UNLIMITED:
+      case "unlimited":
         setTopicData({
           ...topicData,
-          retentionTimeUnit: RetentionTimeUnits.UNLIMITED,
+          retentionTimeUnit: "unlimited",
         });
     }
   };
@@ -263,33 +266,23 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
       >
         <Stack hasGutter>
           <Radio
-            isChecked={
-              topicData.retentionTimeUnit === RetentionTimeUnits.DAY ||
-              topicData.retentionTimeUnit === RetentionTimeUnits.WEEK ||
-              topicData.retentionTimeUnit === RetentionTimeUnits.CUSTOM
-            }
+            isChecked={topicData.retentionTimeUnit !== "unlimited"}
             name="custom-retention-time"
-            onChange={() =>
-              handleRetentionMessageTime(RetentionTimeUnits.CUSTOM)
-            }
+            onChange={() => handleRetentionMessageTime("custom")}
             label={retentionTimeInput}
             className="kafka-ui--radio-label__number-input"
             aria-label="custom duration"
             id="custom-retention-time"
-            value={RetentionTimeUnits.CUSTOM}
+            value={"custom"}
           />
           <Radio
-            isChecked={
-              topicData.retentionTimeUnit === RetentionTimeUnits.UNLIMITED
-            }
+            isChecked={topicData.retentionTimeUnit === "unlimited"}
             name="unlimited-retention-time"
-            onChange={() =>
-              handleRetentionMessageTime(RetentionTimeUnits.UNLIMITED)
-            }
+            onChange={() => handleRetentionMessageTime("unlimited")}
             label="Unlimited time"
             aria-label="Unlimited"
             id="unlimited-retention-time"
-            value={RetentionTimeUnits.UNLIMITED}
+            value={"unlimited"}
           />
         </Stack>
       </FormGroupWithPopover>
@@ -302,31 +295,23 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
       >
         <Stack hasGutter>
           <Radio
-            isChecked={
-              topicData.retentionBytesUnit === RetentionSizeUnits.CUSTOM
-            }
+            isChecked={topicData.retentionBytesUnit !== "unlimited"}
             name="custom-retention-size"
-            onChange={() =>
-              handleRetentionMessageSize(RetentionSizeUnits.CUSTOM)
-            }
+            onChange={() => handleRetentionMessageSize("custom")}
             label={retentionSizeInput}
             className="kafka-ui--radio-label__number-input"
             aria-label="custom size"
             id="custom-retention-size"
-            value={RetentionSizeUnits.CUSTOM}
+            value={"custom"}
           />
           <Radio
-            isChecked={
-              topicData.retentionBytesUnit === RetentionSizeUnits.UNLIMITED
-            }
+            isChecked={topicData.retentionBytesUnit === "unlimited"}
             name="unlimited-retention-size"
-            onChange={() =>
-              handleRetentionMessageSize(RetentionSizeUnits.UNLIMITED)
-            }
+            onChange={() => handleRetentionMessageSize("unlimited")}
             label="Unlimited size"
             aria-label="Unlimited"
             id="unlimited-retention-size"
-            value={RetentionSizeUnits.UNLIMITED}
+            value={"unlimited"}
           />
         </Stack>
       </FormGroupWithPopover>

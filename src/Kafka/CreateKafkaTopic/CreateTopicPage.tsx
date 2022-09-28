@@ -1,5 +1,4 @@
 import type React from "react";
-import { useState } from "react";
 import { CreateTopicHead, CreateTopicWizard } from "./components";
 import type { ConstantValues, NewTopic } from "./types";
 
@@ -13,6 +12,8 @@ export type CreateTopicPageProps = {
   checkTopicName: (value: string) => Promise<boolean>;
   availablePartitionLimit: number;
   constantValues: ConstantValues;
+  isSwitchChecked: boolean;
+  setIsSwitchChecked: (value: boolean) => void;
 };
 
 export const CreateTopicPage: React.FC<CreateTopicPageProps> = ({
@@ -25,9 +26,9 @@ export const CreateTopicPage: React.FC<CreateTopicPageProps> = ({
   checkTopicName,
   availablePartitionLimit,
   constantValues,
+  isSwitchChecked,
+  setIsSwitchChecked,
 }) => {
-  const [isSwitchChecked, setIsSwitchChecked] = useState<boolean>(false);
-
   return (
     <>
       <CreateTopicHead

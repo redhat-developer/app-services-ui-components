@@ -16,35 +16,32 @@ export type NewTopic = {
   isMultiAZ: boolean;
 };
 
-export enum RetentionTimeUnits {
-  MILLISECOND = "milliseconds",
-  SECOND = "seconds",
-  MINUTE = "minutes",
-  HOUR = "hours",
-  DAY = "days",
-  WEEK = "weeks",
-  CUSTOM = "custom",
-  UNLIMITED = "unlimited",
-}
+export type RetentionTimeUnits =
+  | "milliseconds"
+  | "seconds"
+  | "minutes"
+  | "hours"
+  | "days"
+  | "weeks"
+  | "custom"
+  | "unlimited";
 
-export enum CustomRetentionTimeUnits {
-  MILLISECOND = "milliseconds",
-  SECOND = "seconds",
-  MINUTE = "minutes",
-  HOUR = "hours",
-  DAY = "days",
-  WEEK = "weeks",
-}
+export type CustomRetentionTimeUnits =
+  | "milliseconds"
+  | "seconds"
+  | "minutes"
+  | "hours"
+  | "days"
+  | "weeks";
 
-export enum RetentionSizeUnits {
-  BYTE = "bytes",
-  KIBIBYTE = "kibibytes",
-  MEBIBYTE = "mebibytes",
-  GIBIBYTE = "gibibytes",
-  TEBIBYTE = "tebibytes",
-  CUSTOM = "custom",
-  UNLIMITED = "unlimited",
-}
+export type RetentionSizeUnits =
+  | "bytes"
+  | "kibibytes"
+  | "mebibytes"
+  | "gibibytes"
+  | "tebibytes"
+  | "custom"
+  | "unlimited";
 
 export type SelectOptions = {
   key: string;

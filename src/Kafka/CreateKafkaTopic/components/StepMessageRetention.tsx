@@ -13,10 +13,9 @@ import {
 } from "@patternfly/react-core";
 import {
   retentionSizeSelectOptions,
-  RetentionSizeUnits,
   retentionTimeSelectOptions,
-  RetentionTimeUnits,
 } from "../types";
+import type { RetentionSizeUnits, RetentionTimeUnits } from "../types";
 import type { NewTopic } from "../types";
 import { CustomRetentionMessage } from "./CustomRetentionMessage";
 import { CustomRetentionSize } from "./CustomRetentionSize";
@@ -39,78 +38,78 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
 
   const handleRetentionMessageTime = (value: RetentionTimeUnits) => {
     switch (value) {
-      case RetentionTimeUnits.DAY:
+      case "days":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.DAY,
+          retentionTimeUnit: "days",
         });
         break;
 
-      case RetentionTimeUnits.HOUR:
+      case "hours":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.HOUR,
+          retentionTimeUnit: "hours",
         });
         break;
-      case RetentionTimeUnits.MILLISECOND:
+      case "milliseconds":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.MILLISECOND,
+          retentionTimeUnit: "milliseconds",
         });
         break;
-      case RetentionTimeUnits.MINUTE:
+      case "minutes":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.MINUTE,
+          retentionTimeUnit: "minutes",
         });
         break;
-      case RetentionTimeUnits.SECOND:
+      case "seconds":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.SECOND,
+          retentionTimeUnit: "seconds",
         });
         break;
-      case RetentionTimeUnits.WEEK:
+      case "weeks":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.WEEK,
+          retentionTimeUnit: "weeks",
         });
         break;
-      case RetentionTimeUnits.UNLIMITED:
+      case "unlimited":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 1,
-          retentionTimeUnit: RetentionTimeUnits.UNLIMITED,
+          retentionTimeUnit: "unlimited",
         });
         break;
-      case RetentionTimeUnits.CUSTOM:
+      case "custom":
         onChangeMessageRetention({
           ...newTopicData,
           retentionTime: 7,
-          retentionTimeUnit: RetentionTimeUnits.CUSTOM,
+          retentionTimeUnit: "custom",
         });
         break;
     }
   };
 
   const handleRetentionMessageSize = (value: RetentionSizeUnits) => {
-    if (value == RetentionSizeUnits.CUSTOM) {
+    if (value == "custom") {
       onChangeMessageRetention({
         ...newTopicData,
         retentionBytes: 1,
-        retentionBytesUnit: RetentionSizeUnits.CUSTOM,
+        retentionBytesUnit: "custom",
       });
     } else {
       onChangeMessageRetention({
         ...newTopicData,
         retentionBytes: 1,
-        retentionBytesUnit: RetentionSizeUnits.UNLIMITED,
+        retentionBytesUnit: "unlimited",
       });
     }
   };
@@ -146,45 +145,33 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
           >
             <Stack hasGutter>
               <Radio
-                isChecked={
-                  newTopicData.retentionTimeUnit === RetentionTimeUnits.DAY
-                }
+                isChecked={newTopicData.retentionTimeUnit === "days"}
                 name="radioDay"
-                onChange={() =>
-                  handleRetentionMessageTime(RetentionTimeUnits.DAY)
-                }
+                onChange={() => handleRetentionMessageTime("days")}
                 label="A day"
                 aria-label="A day"
                 id="radio-controlled-1"
-                value={RetentionTimeUnits.DAY}
+                value={"days"}
               />
               <Radio
-                isChecked={
-                  newTopicData.retentionTimeUnit === RetentionTimeUnits.WEEK
-                }
+                isChecked={newTopicData.retentionTimeUnit === "weeks"}
                 name="radioWeek"
-                onChange={() =>
-                  handleRetentionMessageTime(RetentionTimeUnits.WEEK)
-                }
+                onChange={() => handleRetentionMessageTime("weeks")}
                 label="A week"
                 aria-label="A week"
                 id="radio-controlled-2"
-                value={RetentionTimeUnits.WEEK}
+                value={"weeks"}
               />
               <Radio
-                isChecked={
-                  newTopicData.retentionTimeUnit === RetentionTimeUnits.CUSTOM
-                }
+                isChecked={newTopicData.retentionTimeUnit === "custom"}
                 name="radioCustomTime"
-                onChange={() =>
-                  handleRetentionMessageTime(RetentionTimeUnits.CUSTOM)
-                }
+                onChange={() => handleRetentionMessageTime("custom")}
                 label="Custom duration"
                 aria-label="custom input"
                 id="radio-controlled-4"
-                value={RetentionTimeUnits.CUSTOM}
+                value={"custom"}
               />
-              {newTopicData.retentionTimeUnit === RetentionTimeUnits.CUSTOM && (
+              {newTopicData.retentionTimeUnit === "custom" && (
                 <CustomRetentionMessage
                   name="retention-ms"
                   topicData={newTopicData}
@@ -195,18 +182,13 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
                 />
               )}
               <Radio
-                isChecked={
-                  newTopicData.retentionTimeUnit ===
-                  RetentionTimeUnits.UNLIMITED
-                }
+                isChecked={newTopicData.retentionTimeUnit === "unlimited"}
                 name="radioUnlimitedTime"
-                onChange={() =>
-                  handleRetentionMessageTime(RetentionTimeUnits.UNLIMITED)
-                }
+                onChange={() => handleRetentionMessageTime("unlimited")}
                 label="Unlimited time"
                 aria-label="Unlimited"
                 id="radio-controlled-3"
-                value={RetentionTimeUnits.UNLIMITED}
+                value={"unlimited"}
               />
             </Stack>
           </FormGroup>
@@ -216,34 +198,24 @@ export const StepMessageRetention: React.FC<StepMessageRetentionProps> = ({
           >
             <Stack hasGutter>
               <Radio
-                isChecked={
-                  newTopicData.retentionBytesUnit ===
-                  RetentionSizeUnits.UNLIMITED
-                }
+                isChecked={newTopicData.retentionBytesUnit === "unlimited"}
                 name="radioUnlimitedSize"
-                onChange={() =>
-                  handleRetentionMessageSize(RetentionSizeUnits.UNLIMITED)
-                }
+                onChange={() => handleRetentionMessageSize("unlimited")}
                 label="Unlimited size"
                 aria-label="Unlimited"
                 id="radio-controlled-6"
-                value={RetentionSizeUnits.UNLIMITED}
+                value={"unlimited"}
               />
               <Radio
-                isChecked={
-                  newTopicData.retentionBytesUnit === RetentionSizeUnits.CUSTOM
-                }
+                isChecked={newTopicData.retentionBytesUnit === "custom"}
                 name="radioCustomSize"
-                onChange={() =>
-                  handleRetentionMessageSize(RetentionSizeUnits.CUSTOM)
-                }
+                onChange={() => handleRetentionMessageSize("custom")}
                 label="Custom size"
                 aria-label="custom size"
                 id="radio-controlled-5"
-                value={RetentionSizeUnits.CUSTOM}
+                value={"custom"}
               />
-              {newTopicData.retentionBytesUnit ===
-                RetentionSizeUnits.CUSTOM && (
+              {newTopicData.retentionBytesUnit === "custom" && (
                 <CustomRetentionSize
                   name="retention-bytes"
                   topicData={newTopicData}

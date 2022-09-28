@@ -25,7 +25,7 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
   kafkaPageLink,
   kafkaInstanceLink,
 }) => {
-  const { t } = useTranslation(["common", "topic"]);
+  const { t } = useTranslation(["common", "create-topic"]);
 
   const mainBreadcrumbs = (
     <Breadcrumb ouiaId={"breadcrumb"}>
@@ -41,7 +41,7 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
           </Link>
         )}
       />
-      <BreadcrumbItem isActive>{t("topic:create_topic")}</BreadcrumbItem>
+      <BreadcrumbItem isActive>{t("create-topic:create_topic")}</BreadcrumbItem>
     </Breadcrumb>
   );
   return (
@@ -51,14 +51,14 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
       </section>
       <PageSection variant={PageSectionVariants.light}>
         <Title headingLevel="h1" size="2xl">
-          {t("topic:create_topic")}
+          {t("create-topic:create_topic")}
         </Title>
         <br />
         <Switch
           ouiaId={"toggle-switch-off"}
           id="id-show-all-options"
-          label={t("topic:show_all_options")}
-          labelOff={t("topic:show_all_options")}
+          label={t("create-topic:show_all_options")}
+          labelOff={t("create-topic:show_all_options")}
           isChecked={showAllOptions}
           onChange={onShowAllOptions}
           className="create-topic-wizard"
