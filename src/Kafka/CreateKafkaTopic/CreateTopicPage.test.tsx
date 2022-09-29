@@ -8,6 +8,7 @@ const {
   InvalidTopicName,
   InvalidLength,
   PartitionLimitReached,
+  AdvanceTopicCreation,
 } = composeStories(stories);
 
 describe("Create topic", () => {
@@ -194,6 +195,22 @@ describe("Create topic", () => {
     userEvent.click(button);
     const finish = await comp.findByText("Finish");
     userEvent.click(finish);
+    expect(onSave).not.toHaveBeenCalled();
+  });
+  it("should render partitions warning", async () => {
+    const onSave = jest.fn();
+    const comp = render(<AdvanceTopicCreation onSave={onSave} />);
+    await waitForI18n(comp);
+    const unlimited = await comp.findAllByDisplayValue("unlimited");
+    userEvent.click(unlimited[0]);
+    userEvent.click(unlimited[1]);
+    const custom = await comp.findAllByDisplayValue("custom");
+    userEvent.click(custom[0]);
+    userEvent.click(custom[1]);
+    userEvent.click(unlimited[0]);
+    userEvent.click(unlimited[1]);
+    const button = await comp.findByTestId("topicAdvanceCreate-actionCreate");
+    userEvent.click(button);
     expect(onSave).not.toHaveBeenCalled();
   });
 });
