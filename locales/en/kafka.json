@@ -177,6 +177,11 @@
   },
   "storage": "Storage",
   "storage_value": "up to 1000 GiB",
+  "suspend_empty_state_body": "Most actions are unavailable with a suspended instance.",
+  "suspend_empty_state_title": "This instance is suspended",
+  "suspend_popover_body_1": "The subscription associated with this instance is no longer active.",
+  "suspend_popover_body_2": "Learn more about suspended instances",
+  "suspend_popover_title": "Suspended instance",
   "table": {
     "actions": {
       "change-owner": "Change owner",
