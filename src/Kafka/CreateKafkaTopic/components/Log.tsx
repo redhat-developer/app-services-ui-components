@@ -77,7 +77,7 @@ const Log: React.FC<LogProps> = ({
           onSelectOption={onSelectOption}
           items={cleanupPolicyOptions}
           name="cleanup-policy"
-          value={topicData.cleanupPolicy || ""}
+          value={topicData.cleanupPolicy}
           isLabelAndValueNotSame={true}
         />
       </FormGroupWithPopover>

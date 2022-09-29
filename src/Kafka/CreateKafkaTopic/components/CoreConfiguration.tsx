@@ -98,7 +98,6 @@ const CoreConfiguration: React.FC<CoreConfigurationProps> = ({
   };
 
   const handleRetentionMessageTime = (value: RetentionTimeUnits) => {
-    console.log("did it come", value);
     switch (value) {
       case "custom":
         setTopicData({

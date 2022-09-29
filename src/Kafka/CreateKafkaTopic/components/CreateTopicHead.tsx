@@ -35,11 +35,7 @@ export const CreateTopicHead: VoidFunctionComponent<CreateTopicProps> = ({
         )}
       />
       <BreadcrumbItem
-        render={() => (
-          <Link to={kafkaInstanceLink}>
-            {kafkaName || t("common:kafka_instance_name")}
-          </Link>
-        )}
+        render={() => <Link to={kafkaInstanceLink}>{kafkaName}</Link>}
       />
       <BreadcrumbItem isActive>{t("create-topic:create_topic")}</BreadcrumbItem>
     </Breadcrumb>
