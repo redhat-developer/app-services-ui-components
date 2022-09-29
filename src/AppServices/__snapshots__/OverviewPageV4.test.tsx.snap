@@ -173,12 +173,12 @@ exports[`OverviewPage renders 1`] = `
                 <div
                   class="pf-l-stack__item"
                 >
-                  API Designer provides a click-driven, user-friendly interface to design, build and create APIs and schemas.
+                  API Designer provides application developers with a visual editor to create, import, edit, and manage API definitions and event schemas.
                 </div>
                 <div
                   class="pf-l-stack__item pf-u-color-200"
                 >
-                  This service is fully hosted and managed by Red Hat and offered at no cost to Streams for Apache Kafka and API Management users.
+                  This service is fully hosted and managed by Red Hat and offered at no cost to any user who can access the Red Hat Hybrid Cloud Console.
                 </div>
               </div>
             </div>
