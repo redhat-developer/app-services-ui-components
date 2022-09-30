@@ -95,7 +95,6 @@
   "segment_jitter_time": "Segment jitter time",
   "segment_jitter_time_description": "Segment jitter time is the maximum delay for log segment rolling. This delay prevents bursts of log segment rolling activity. (segment.jitter.ms)",
   "select_policy": "select policy type from dropdown",
-  "show_all_options": "Show all available options",
   "topic_name": "Topic name",
   "topic_name_description": "Topic name is the unique identifier for this topic within this cluster. You need this to set up your producers and consumers, so make it something memorable.",
   "topic_name_helper_text": "Must be letters (Aa-Zz), numbers, underscores ( _ ), periods ( . ), or hyphens ( - )",
