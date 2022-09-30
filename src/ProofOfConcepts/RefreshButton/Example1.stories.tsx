@@ -25,6 +25,7 @@ import {
 } from "../../shared/Table/storybookHelpers";
 import type { TableViewProps } from "./Example1";
 import { DEFAULT_PERPAGE, TableView } from "./Example1";
+import { sub } from "date-fns";
 
 const eventsFromNames = actions("onRowClick");
 
@@ -37,6 +38,8 @@ const TableViewSampleType: VoidFunctionComponent<
 export default {
   component: TableView,
   args: {
+    isRefreshing: false,
+    lastUpdated: sub(new Date(), { minutes: 3 }),
     ariaLabel: "Table title",
     minimumColumnWidth: 250,
     selectedRow: 3,

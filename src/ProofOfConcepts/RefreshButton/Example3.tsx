@@ -19,7 +19,8 @@ export type TableViewProps<TRow, TCol> = {
   perPage?: number;
   onPageChange: (page: number, perPage: number) => void;
   onClearAllFilters?: () => void;
-} & ResponsiveTableProps<TRow, TCol>;
+} & ResponsiveTableProps<TRow, TCol> &
+  POCRefreshButton;
 export const TableView = <TRow, TCol>({
   toolbarContent,
   itemCount,
@@ -27,6 +28,10 @@ export const TableView = <TRow, TCol>({
   perPage = DEFAULT_PERPAGE,
   onPageChange,
   onClearAllFilters,
+  isRefreshing,
+  lastUpdated = new Date(),
+  ariaLabel,
+  onRefresh,
   ...tableProps
 }: PropsWithChildren<TableViewProps<TRow, TCol>>) => {
   const { data } = tableProps;
@@ -38,7 +43,11 @@ export const TableView = <TRow, TCol>({
         <Toolbar clearAllFilters={onClearAllFilters}>
           <ToolbarContent>
             {toolbarContent}
-            <POCRefreshButton />
+            <POCRefreshButton
+              ariaLabel={ariaLabel}
+              onClick={onRefresh}
+              isRefreshing={isRefreshing}
+            />
             {showPagination && (
               <ToolbarGroup>
                 <Pagination
