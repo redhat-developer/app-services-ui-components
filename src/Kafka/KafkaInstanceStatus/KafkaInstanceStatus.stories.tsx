@@ -78,3 +78,8 @@ export const Degraded = Template.bind({});
 Degraded.args = {
   status: "degraded",
 };
+
+export const Suspended = Template.bind({});
+Suspended.args = {
+  status: "suspended",
+};

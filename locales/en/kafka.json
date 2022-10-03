@@ -166,7 +166,8 @@
     "deprovision": "Deprovisioning",
     "preparing": "Preparing",
     "provisioning": "Provisioning",
-    "ready": "Ready"
+    "ready": "Ready",
+    "suspended": "Suspended"
   },
   "statuses-filter": {
     "creating": "Creation pending",

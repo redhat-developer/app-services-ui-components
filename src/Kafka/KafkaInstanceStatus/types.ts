@@ -5,9 +5,15 @@ export type KafkaStatus =
   | "provisioning"
   | "preparing"
   | "deprovision"
-  | "deleting";
+  | "deleting"
+  | "suspended";
 
-export type PopoverStatus = "pending" | "provisioning" | "preparing" | "ready";
+export type PopoverStatus =
+  | "pending"
+  | "provisioning"
+  | "preparing"
+  | "ready"
+  | "suspended";
 
 export const PopoverStatusOrder: PopoverStatus[] = [
   "pending",
@@ -25,4 +31,5 @@ export const KafkaToPopoverMapping: {
   preparing: "preparing",
   deprovision: null,
   deleting: null,
+  suspended: "suspended",
 };

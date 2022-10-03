@@ -4,7 +4,7 @@ exports[`Connection empty state renders 1`] = `
 <body>
   <div>
     <div
-      class="pf-c-empty-state pf-m-lg"
+      class="pf-c-empty-state pf-m-sm"
     >
       <div
         class="pf-c-empty-state__content"

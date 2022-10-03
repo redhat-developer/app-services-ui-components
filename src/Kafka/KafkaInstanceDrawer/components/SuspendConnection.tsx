@@ -13,7 +13,7 @@ import { useTranslation } from "react-i18next";
 export const SuspendConnection: VoidFunctionComponent = () => {
   const { t } = useTranslation("kafka");
   return (
-    <EmptyState variant={EmptyStateVariant.large}>
+    <EmptyState variant={EmptyStateVariant.small}>
       <EmptyStateIcon icon={ExclamationTriangleIcon} color={"#f0ab00"} />
       <Title headingLevel={"h1"} size={TitleSizes.lg}>
         {t("suspend_empty_state_title")}

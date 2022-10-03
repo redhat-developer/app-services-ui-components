@@ -1,15 +1,19 @@
-import {
-  Button,
-  ButtonVariant,
-  Popover,
-  TextContent,
-} from "@patternfly/react-core";
-import type { VoidFunctionComponent } from "react";
+import { Popover, TextContent } from "@patternfly/react-core";
+import type { RefObject, VoidFunctionComponent } from "react";
 import { ExclamationTriangleIcon } from "@patternfly/react-icons";
 import { useTranslation } from "react-i18next";
 import { ExternalLink } from "../../../shared";
+import type { PopoverProps } from "@patternfly/react-core";
 
-export const SuspendPopover: VoidFunctionComponent = () => {
+export type SuspendPopoverProps = {
+  children?: PopoverProps["children"];
+  reference?: RefObject<HTMLButtonElement>;
+};
+
+export const SuspendPopover: VoidFunctionComponent<SuspendPopoverProps> = ({
+  children,
+  reference,
+}) => {
   const { t } = useTranslation("kafka");
   return (
     <Popover
@@ -26,8 +30,10 @@ export const SuspendPopover: VoidFunctionComponent = () => {
           </p>
         </TextContent>
       }
+      position={"right"}
+      reference={reference}
     >
-      <Button variant={ButtonVariant.link}>{"Suspended"}</Button>
+      {children}
     </Popover>
   );
 };
