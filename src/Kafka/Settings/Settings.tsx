@@ -80,7 +80,7 @@ export const Settings: FunctionComponent<SettingsProps> = ({
 
   return (
     <>
-      <PageSection>
+      <PageSection padding={{ default: "noPadding" }}>
         <Card>
           <CardBody>{t("settings.kafka_instance_settings_label")}</CardBody>
         </Card>
