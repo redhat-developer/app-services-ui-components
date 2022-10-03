@@ -185,4 +185,21 @@ describe("KafkaInstanceStatus", () => {
     await waitForI18n(tree);
     await tree.findByText("Degraded");
   });
+
+  it("Suspended", async () => {
+    const onClickConnectionTabLink = jest.fn();
+    const onClickSupportLink = jest.fn();
+    const createdAt = new Date();
+
+    const tree = render(
+      <KafkaInstanceStatus
+        onClickConnectionTabLink={onClickConnectionTabLink}
+        onClickSupportLink={onClickSupportLink}
+        status={"suspended"}
+        createdAt={createdAt}
+      />
+    );
+    await waitForI18n(tree);
+    await tree.findByText("Suspended");
+  });
 });
