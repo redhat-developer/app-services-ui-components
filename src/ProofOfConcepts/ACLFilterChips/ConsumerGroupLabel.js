@@ -1,5 +1,6 @@
-import "./customStyles.css";
 import React from "react";
+import { Label } from "@patternfly/react-core";
+import "./customStyles.css";
 
 class ConsumerGroupLabel extends React.Component {
   constructor(props) {
@@ -10,9 +11,9 @@ class ConsumerGroupLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <span class="pf-c-label mas-m-solid smaller-label pf-m-green ">
-            <span class="pf-c-label__content">G</span>
-          </span>
+          <Label color="green" className="pf-c-label mas-m-solid" isCompact>
+            G
+          </Label>
         </div>
       </div>
     );
