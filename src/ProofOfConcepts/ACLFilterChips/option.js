@@ -105,7 +105,7 @@ class Chips extends React.Component {
     return (
       <React.Fragment>
         <ChipGroup
-          categoryName="Resource type operation"
+          categoryName="Resource type permission"
           isClosable
           onClick={() => {
             this.deleteCategory2();
@@ -113,11 +113,10 @@ class Chips extends React.Component {
             this.deleteCategory4();
           }}
         >
-          <Chip className="mas-m-custom-chip" isReadOnly>
+          <Chip className="custom-c-chip" isReadOnly>
             <ChipGroup
               // className="lightblue"
               categoryName={<TopicLabel />}
-              className="mas-m-resource-group"
             >
               {chipsSet2.map((currentChip) => (
                 <Chip
@@ -130,11 +129,8 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
 
-          <Chip className="mas-m-custom-chip" isReadOnly>
-            <ChipGroup
-              categoryName={<KafkaInstanceLabel />}
-              className="mas-m-resource-group"
-            >
+          <Chip className="custom-c-chip" isReadOnly>
+            <ChipGroup categoryName={<KafkaInstanceLabel />}>
               {chipsSet3.map((currentChip) => (
                 <Chip
                   key={currentChip}
@@ -146,11 +142,8 @@ class Chips extends React.Component {
             </ChipGroup>
           </Chip>
 
-          <Chip className="mas-m-custom-chip" isReadOnly>
-            <ChipGroup
-              categoryName={<ConsumerGroupLabel />}
-              className="mas-m-resource-group"
-            >
+          <Chip className="custom-c-chip" isReadOnly>
+            <ChipGroup categoryName={<ConsumerGroupLabel />}>
               {chipsSet4.map((currentChip) => (
                 <Chip
                   key={currentChip}

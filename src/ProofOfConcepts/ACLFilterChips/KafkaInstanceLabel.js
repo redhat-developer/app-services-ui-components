@@ -1,6 +1,5 @@
-import React from "react";
-import { Label } from "@patternfly/react-core";
 import "./customStyles.css";
+import React from "react";
 
 class KafkaInstanceLabel extends React.Component {
   constructor(props) {
@@ -11,9 +10,9 @@ class KafkaInstanceLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <Label className="pf-c-label mas-m-solid" isCompact>
-            KI
-          </Label>
+          <span class="pf-c-label mas-m-solid smaller-label pf-m-grey ">
+            <span class="pf-c-label__content">KI</span>
+          </span>
         </div>
       </div>
     );
