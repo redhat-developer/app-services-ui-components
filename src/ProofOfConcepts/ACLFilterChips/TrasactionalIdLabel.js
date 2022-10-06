@@ -1,5 +1,6 @@
-import "./customStyles.css";
 import React from "react";
+import { Label } from "@patternfly/react-core";
+import "./customStyles.css";
 
 class TransactionalIdLabel extends React.Component {
   constructor(props) {
@@ -10,9 +11,9 @@ class TransactionalIdLabel extends React.Component {
     return (
       <div class="row">
         <div class="child">
-          <span class="pf-c-label mas-m-solid smaller-label pf-m-orange ">
-            <span class="pf-c-label__content">TI</span>
-          </span>
+          <Label color="orange" className="pf-c-label mas-m-solid" isCompact>
+            TI
+          </Label>
         </div>
       </div>
     );
