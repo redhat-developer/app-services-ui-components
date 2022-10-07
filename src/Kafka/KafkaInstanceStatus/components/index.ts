@@ -1,3 +1,3 @@
 export * from "./StatusLabel";
 export * from "./StatusPopover";
-export * from "./SuspendPopover";
+export * from "./SuspendedPopover";

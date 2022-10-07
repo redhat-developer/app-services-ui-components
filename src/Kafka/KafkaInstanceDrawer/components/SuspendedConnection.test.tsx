@@ -1,6 +1,6 @@
 import { render, waitForI18n } from "../../../test-utils";
 import { composeStories } from "@storybook/testing-react";
-import * as stories from "./SuspendConnection.stories";
+import * as stories from "./SuspendedConnection.stories";
 
 const { SuspendedConnectionEmptyState } = composeStories(stories);
 

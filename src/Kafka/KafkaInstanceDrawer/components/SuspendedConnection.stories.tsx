@@ -1,18 +1,18 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { SuspendConnection } from "./SuspendConnection";
+import { SuspendedConnection } from "./SuspendedConnection";
 
 export default {
-  component: SuspendConnection,
+  component: SuspendedConnection,
   args: {},
   parameters: {
     backgrounds: {
       default: "Background color 100",
     },
   },
-} as ComponentMeta<typeof SuspendConnection>;
+} as ComponentMeta<typeof SuspendedConnection>;
 
-const Template: ComponentStory<typeof SuspendConnection> = (args) => (
-  <SuspendConnection {...args} />
+const Template: ComponentStory<typeof SuspendedConnection> = (args) => (
+  <SuspendedConnection {...args} />
 );
 
 export const SuspendedConnectionEmptyState = Template.bind({});

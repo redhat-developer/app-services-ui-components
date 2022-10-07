@@ -1,14 +1,14 @@
 import { Button, ButtonVariant } from "@patternfly/react-core";
 import { userEvent } from "@storybook/testing-library";
 import { render, waitForI18n } from "../../../test-utils";
-import { SuspendPopover } from "./SuspendPopover";
+import { SuspendedPopover } from "./SuspendedPopover";
 
-describe("SuspendPopover", () => {
+describe("SuspendedPopover", () => {
   it("Popover", async () => {
     const tree = render(
-      <SuspendPopover>
+      <SuspendedPopover>
         <Button variant={ButtonVariant.link}>{"Suspended"}</Button>
-      </SuspendPopover>
+      </SuspendedPopover>
     );
     await waitForI18n(tree);
     userEvent.click(await tree.findByText("Suspended"));

@@ -5,12 +5,12 @@ import { useTranslation } from "react-i18next";
 import { ExternalLink } from "../../../shared";
 import type { PopoverProps } from "@patternfly/react-core";
 
-export type SuspendPopoverProps = {
+export type SuspendedPopoverProps = {
   children?: PopoverProps["children"];
   reference?: RefObject<HTMLButtonElement>;
 };
 
-export const SuspendPopover: VoidFunctionComponent<SuspendPopoverProps> = ({
+export const SuspendedPopover: VoidFunctionComponent<SuspendedPopoverProps> = ({
   children,
   reference,
 }) => {

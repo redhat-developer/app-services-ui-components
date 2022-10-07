@@ -10,7 +10,7 @@ import { ExclamationTriangleIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 
-export const SuspendConnection: VoidFunctionComponent = () => {
+export const SuspendedConnection: VoidFunctionComponent = () => {
   const { t } = useTranslation("kafka");
   return (
     <EmptyState variant={EmptyStateVariant.small}>
