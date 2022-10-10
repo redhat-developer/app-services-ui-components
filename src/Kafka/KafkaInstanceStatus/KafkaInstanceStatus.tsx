@@ -52,14 +52,16 @@ export const KafkaInstanceStatus: VoidFunctionComponent<
       {popoverStatus === "suspended" ? (
         <SuspendedPopover reference={labelRef} />
       ) : (
-        <StatusPopover
-          status={popoverStatus || "preparing"}
-          showWarning={showWarning}
-          showError={showError}
-          onClickConnectionTabLink={onClickConnectionTabLink}
-          onClickSupportLink={onClickSupportLink}
-          reference={labelRef}
-        />
+        popoverStatus && (
+          <StatusPopover
+            status={popoverStatus}
+            showWarning={showWarning}
+            showError={showError}
+            onClickConnectionTabLink={onClickConnectionTabLink}
+            onClickSupportLink={onClickSupportLink}
+            reference={labelRef}
+          />
+        )
       )}
       <StatusLabel
         value={status}
