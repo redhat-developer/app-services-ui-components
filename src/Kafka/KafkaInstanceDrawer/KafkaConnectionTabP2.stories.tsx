@@ -45,3 +45,10 @@ ConnectionTabWhenkafkaCreationPending.parameters = {
     },
   },
 };
+
+export const ConnectionTabWhenKafkaInstanceSuspended = Template.bind({});
+ConnectionTabWhenKafkaInstanceSuspended.args = {
+  isKafkaSuspended: true,
+  isKafkaPending: false,
+  adminAPIUrl: "https://admin-server-[name of instance]-[domain]/openapi",
+};

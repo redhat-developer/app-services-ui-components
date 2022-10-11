@@ -17,8 +17,10 @@ import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "../../shared";
 import "./KafkaInstanceDrawer.css";
+import { SuspendedConnection } from "./components/SuspendedConnection";
 
 export type KafkaConnectionTabP2Props = {
+  isKafkaSuspended?: boolean;
   isKafkaPending?: boolean;
   externalServer?: string;
   tokenEndPointUrl: string;
@@ -32,6 +34,7 @@ export type KafkaConnectionTabP2Props = {
 export const KafkaConnectionTabP2: FunctionComponent<
   KafkaConnectionTabP2Props
 > = ({
+  isKafkaSuspended,
   isKafkaPending,
   externalServer,
   tokenEndPointUrl,
@@ -49,7 +52,9 @@ export const KafkaConnectionTabP2: FunctionComponent<
     setIsExpanded(!isExpanded);
   };
 
-  return (
+  return isKafkaSuspended ? (
+    <SuspendedConnection />
+  ) : (
     <div className="mas--details__drawer--tab-content">
       <TextContent className="pf-u-pb-sm">
         <Text component={TextVariants.small}>

@@ -4,7 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { useInterval } from "../../utils";
 import type { Status } from "../types";
 import type { StatusPopoverProps } from "./components";
-import { StatusLabel, StatusPopover } from "./components";
+import { StatusLabel, StatusPopover, SuspendedPopover } from "./components";
 import { KafkaToPopoverMapping } from "./types";
 
 export type KafkaInstanceStatusProps = {
@@ -49,15 +49,19 @@ export const KafkaInstanceStatus: VoidFunctionComponent<
   const showError = alert === "error";
   return (
     <>
-      {popoverStatus && (
-        <StatusPopover
-          status={popoverStatus}
-          showWarning={showWarning}
-          showError={showError}
-          onClickConnectionTabLink={onClickConnectionTabLink}
-          onClickSupportLink={onClickSupportLink}
-          reference={labelRef}
-        />
+      {popoverStatus === "suspended" ? (
+        <SuspendedPopover reference={labelRef} />
+      ) : (
+        popoverStatus && (
+          <StatusPopover
+            status={popoverStatus}
+            showWarning={showWarning}
+            showError={showError}
+            onClickConnectionTabLink={onClickConnectionTabLink}
+            onClickSupportLink={onClickSupportLink}
+            reference={labelRef}
+          />
+        )
       )}
       <StatusLabel
         value={status}

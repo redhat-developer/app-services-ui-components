@@ -21,6 +21,7 @@ import {
   DegradedStatuses,
   DeletingStatuses,
   ReadyStatuses,
+  SuspendedStatuses,
 } from "../../types";
 import "./StatusLabel.css";
 
@@ -143,6 +144,21 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
         return (
           <div>
             <p className="mas-m-deleting"> {t("statuses.deleting")}</p>
+          </div>
+        );
+      case SuspendedStatuses.includes(value):
+        return (
+          <div>
+            <Split hasGutter className="mas-c-status">
+              <SplitItem>
+                <ExclamationTriangleIcon className="mas-m-degraded" />
+              </SplitItem>
+              <SplitItem>
+                <Button ref={ref} variant={buttonVariant} isInline>
+                  {t("statuses.suspended")}
+                </Button>
+              </SplitItem>
+            </Split>
           </div>
         );
       default:
