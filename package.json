@@ -43,21 +43,12 @@
   },
   "homepage": "https://github.com/redhat-developer/app-services-ui-components#readme",
   "devDependencies": {
-<<<<<<< HEAD
     "@babel/core": "7.18.9",
     "@patternfly/patternfly": "4.202.1",
     "@patternfly/react-charts": "6.77.1",
     "@patternfly/react-core": "4.224.1",
     "@patternfly/react-icons": "4.75.1",
     "@patternfly/react-table": "4.93.1",
-=======
-    "@babel/core": "7.18.6",
-    "@patternfly/patternfly": "4.185.1",
-    "@patternfly/react-charts": "6.34.1",
-    "@patternfly/react-core": "^4.214.1",
-    "@patternfly/react-icons": "4.53.16",
-    "@patternfly/react-table": "4.71.16",
->>>>>>> 739be8a (dividers reactive to layout size)
     "@rhoas/app-services-ui-shared": "0.16.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-replace": "4.0.0",
@@ -75,11 +66,7 @@
     "@storybook/test-runner": "0.5.0",
     "@storybook/testing-library": "0.0.13",
     "@storybook/testing-react": "1.3.0",
-<<<<<<< HEAD
     "@swc/core": "1.2.218",
-=======
-    "@swc/core": "1.2.213",
->>>>>>> a536fde (rebase with main)
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "@types/byte-size": "8.1.0",
