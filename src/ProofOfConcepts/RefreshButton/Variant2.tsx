@@ -22,11 +22,17 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
 }) => {
   const { t } = useTranslation(["kafka"]);
 
+  {
+    isRefreshing
+      ? (hoover = t("kafka:refreshing_tooltip"))
+      : (hoover = t("kafka:refresh_description"));
+  }
+
   return (
     <>
       <ToolbarItem>
         <RefreshButton
-          tooltip={t("kafka:refresh-description")}
+          tooltip={hoover}
           ariaLabel={ariaLabel}
           onClick={onRefresh}
           isRefreshing={isRefreshing}

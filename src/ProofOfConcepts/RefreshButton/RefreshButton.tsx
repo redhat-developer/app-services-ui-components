@@ -1,7 +1,9 @@
+import React from "react";
 import { Button, Spinner, Tooltip } from "@patternfly/react-core";
 import { SyncAltIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
+import "./RefreshButton.css";
 
 export type RefreshButtonProps = {
   isDisabled?: boolean;
@@ -27,11 +29,13 @@ export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         onClick={isDisabled === true ? undefined : onClick}
       >
         {isRefreshing ? (
-          <span className="pf-c-button__progress">
+          <span className="pf-c-button__progress position">
             <Spinner size="md" />
           </span>
         ) : (
-          <SyncAltIcon />
+          <span className="pf-c-button__progress position">
+            <SyncAltIcon />
+          </span>
         )}
       </Button>
     </Tooltip>
