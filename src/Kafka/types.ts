@@ -65,6 +65,7 @@ export const Statuses = [
   "preparing",
   "deprovision",
   "deleting",
+  "suspended",
 ] as const;
 export type Status = typeof Statuses[number];
 export const ReadyStatuses: Status[] = ["ready"];
@@ -75,6 +76,7 @@ export const CreatingStatuses: Status[] = [
 ];
 export const DegradedStatuses: Status[] = ["degraded"];
 export const DeletingStatuses: Status[] = ["deleting", "deprovision"];
+export const SuspendedStatuses: Status[] = ["suspended"];
 
 /**
  * A list of marketplaces where an instance can be billed to

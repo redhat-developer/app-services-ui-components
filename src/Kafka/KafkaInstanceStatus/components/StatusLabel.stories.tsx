@@ -42,6 +42,9 @@ export const AllStatutesAtOnce = () => (
     <pre>degraded</pre>
     <StatusLabel value={"degraded"} />
     <br />
+    <pre>Suspend</pre>
+    <StatusLabel value={"suspended"} />
+    <br />
   </>
 );
 
@@ -138,6 +141,18 @@ Degraded.parameters = {
   docs: {
     description: {
       story: "Something has gone wrong with the Kafka instance .",
+    },
+  },
+};
+
+export const suspended = Template.bind({});
+suspended.args = {
+  value: "suspended",
+};
+suspended.parameters = {
+  docs: {
+    description: {
+      story: "The Kafka instance is suspended",
     },
   },
 };
