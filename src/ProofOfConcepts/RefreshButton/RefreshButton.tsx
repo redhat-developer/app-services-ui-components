@@ -29,11 +29,11 @@ export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         onClick={isDisabled === true ? undefined : onClick}
       >
         {isRefreshing ? (
-          <span className="pf-c-button__progress spinner_position">
+          <span className="pf-c-button__progress position">
             <Spinner size="md" />
           </span>
         ) : (
-          <span className="pf-c-button__progress spinner_position">
+          <span className="pf-c-button__progress position">
             <SyncAltIcon />
           </span>
         )}
