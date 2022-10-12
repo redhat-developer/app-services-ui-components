@@ -146,6 +146,7 @@
   "partitions": "Partitions",
   "partitions_value": "up to 500",
   "refresh_description": "Reload contents",
+  "refresh-description": "",
   "refreshing": "Getting data",
   "refreshing_tooltip": "Data is currently refreshing",
   "select_filter_category": "Select filter category",
