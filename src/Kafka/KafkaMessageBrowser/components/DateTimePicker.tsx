@@ -23,7 +23,13 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
     }
   };
 
-  const onSelectTime: TimePickerProps["onChange"] = (_, hour, minute) => {
+  const onSelectTime: TimePickerProps["onChange"] = (
+    _,
+    hour,
+    minute,
+    __,
+    isValid
+  ) => {
     //onChange();
     if (date) {
       let newDate = date;
@@ -33,7 +39,7 @@ export const DateTimePicker: VoidFunctionComponent<DateTimePickerProps> = ({
       if (minute !== undefined) {
         newDate = setMinutes(newDate, minute);
       }
-      onChange(formatISO(newDate));
+      if (isValid) onChange(formatISO(newDate));
     }
   };
 
