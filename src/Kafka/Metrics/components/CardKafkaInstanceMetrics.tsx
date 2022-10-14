@@ -1,7 +1,11 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { DurationOptions, TimeSeriesMetrics } from "../types";
+import type {
+  BrokerFilter,
+  DurationOptions,
+  TimeSeriesMetrics,
+} from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
@@ -10,6 +14,7 @@ import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
 import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import type { ToolbarRefreshProps } from "./ToolbarRefresh";
+import { BrokerToggle } from "./BrokerToggle";
 
 export type CardKafkaInstanceMetricsLimits = {
   diskSpaceLimit: number;
@@ -18,6 +23,7 @@ export type CardKafkaInstanceMetricsLimits = {
 };
 
 export type CardKafkaInstanceMetricsProps = {
+  brokers: string[];
   usedDiskMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
@@ -27,6 +33,8 @@ export type CardKafkaInstanceMetricsProps = {
   isInitialLoading: boolean;
   isLoading: boolean;
   isJustCreated: boolean;
+  selectedBroker: string | undefined;
+  onSelectedBroker: (broker: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
 } & Omit<ToolbarRefreshProps, "ariaLabel"> &
   CardKafkaInstanceMetricsLimits;
@@ -39,6 +47,7 @@ type ChartTitleProps = {
 export const CardKafkaInstanceMetrics: FunctionComponent<
   CardKafkaInstanceMetricsProps
 > = ({
+  brokers,
   usedDiskMetrics,
   clientConnectionsMetrics,
   connectionAttemptRateMetrics,
@@ -54,6 +63,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
   connectionRateLimit,
   onRefresh,
   onDurationChange,
+  selectedBroker,
+  onSelectedBroker,
 }) => {
   const { t } = useTranslation("metrics");
 
@@ -67,6 +78,9 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
         isDisabled={backendUnavailable || isJustCreated || isLoading}
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
+        selectedBroker={undefined}
+        BrokerList={brokers}
+        onSetSelectedBroker={onSelectedBroker}
       />
       {(() => {
         switch (true) {
@@ -95,6 +109,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   helperText={t("used_disk_space_help_text")}
                 />
                 <CardBody>
+                  <BrokerToggle value={"total"} onChange={() => false} />
                   <ChartLinearWithOptionalLimit
                     chartName={t("used_disk_space")}
                     yLabel={t("axis-label-bytes")}

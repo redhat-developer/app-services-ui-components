@@ -18,6 +18,7 @@ export default {
     diskSpaceLimit: 1000 * 1024 ** 3,
     connectionsLimit: 100,
     connectionRateLimit: 100,
+    brokers: ["Broker1", "Broker2"],
   },
 } as ComponentMeta<typeof CardKafkaInstanceMetrics>;
 

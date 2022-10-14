@@ -7,6 +7,7 @@ import {
   ToolbarContent,
 } from "@patternfly/react-core";
 import { FilterByTime } from "./FilterByTime";
+import { FilterByBroker } from "./FilterByBroker";
 import type { DurationOptions } from "../types";
 import { useTranslation } from "react-i18next";
 import type { ToolbarRefreshProps } from "./ToolbarRefresh";
@@ -14,9 +15,12 @@ import { ToolbarRefresh } from "./ToolbarRefresh";
 
 type ToolbarKafkaInstanceMetricProps = {
   title: string;
+  selectedBroker: string | undefined;
+  BrokerList: string[];
   isDisabled: boolean;
   duration: DurationOptions;
   onSetTimeDuration: (value: DurationOptions) => void;
+  onSetSelectedBroker: (value: string | undefined) => void;
 } & Omit<ToolbarRefreshProps, "ariaLabel">;
 export const ToolbarKafkaInstanceMetric: FunctionComponent<
   ToolbarKafkaInstanceMetricProps
@@ -28,6 +32,9 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
   duration,
   onSetTimeDuration,
   onRefresh,
+  selectedBroker,
+  BrokerList,
+  onSetSelectedBroker,
 }) => {
   const { t } = useTranslation();
   return (
@@ -38,6 +45,11 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
       <Divider />
       <Toolbar>
         <ToolbarContent>
+          <FilterByBroker
+            selectedBroker={selectedBroker}
+            BrokerList={BrokerList}
+            onSetSelectedBroker={onSetSelectedBroker}
+          />
           <FilterByTime
             ariaLabel={t("metrics:kafka_instance_filter_by_time")}
             duration={duration}

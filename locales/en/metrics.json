@@ -1,7 +1,12 @@
 {
+  "all_brokers": "All Brokers",
   "all_topics": "All topics",
   "axis-label-bytes": "Bytes",
   "axis-label-time": "Time (UTC)",
+  "broker_filter": {
+    "per_broker": "Per broker",
+    "total": "Total"
+  },
   "chart-popover-icon-screenreader-text": "Information about {{title}}",
   "client_connections": "Client connections",
   "client_connections_helper_text": "Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",

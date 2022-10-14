@@ -37,3 +37,5 @@ export type GetMetricsKpiResponse = {
   consumerGroups: number;
   topicPartitionsLimit: number;
 };
+
+export type BrokerFilter = "total" | "perBroker";
