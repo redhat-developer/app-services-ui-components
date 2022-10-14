@@ -1,5 +1,5 @@
 import { composeStories } from "@storybook/testing-react";
-import { render } from "../../test-utils";
+import { render, waitForI18n } from "../../test-utils";
 import { FormatMapping } from "./FormatDate";
 import * as stories from "./FormatDate.stories";
 
@@ -18,70 +18,88 @@ const {
 } = composeStories(stories);
 
 describe("FormatDate", () => {
-  it("RightNow", () => {
+  it("RightNow", async () => {
     const comp = render(<RightNow />);
+    await waitForI18n(comp);
+
     expect(comp.getByText("less than a minute")).toBeTruthy();
   });
 
-  it("AFewMinutesNow", () => {
+  it("AFewMinutesNow", async () => {
     const comp = render(<AFewMinutesNow />);
+    await waitForI18n(comp);
+
     expect(comp.getByText("5 minutes")).toBeTruthy();
   });
 
-  it("OneHourAgo", () => {
+  it("OneHourAgo", async () => {
     const comp = render(<OneHourAgo />);
-    expect(comp.getByText("about 1 hour")).toBeTruthy();
+    await waitForI18n(comp);
+    expect(comp.getByText("about 1 hour ago")).toBeTruthy();
   });
 
-  it("OneDayAgo", () => {
+  it("OneDayAgo", async () => {
     const comp = render(<OneDayAgo />);
-    expect(comp.getByText("1 day")).toBeTruthy();
+    await waitForI18n(comp);
+    expect(comp.getByText("1 day ago")).toBeTruthy();
   });
 
-  it("OneMonthAgo", () => {
+  it("OneMonthAgo", async () => {
     const comp = render(<OneMonthAgo />);
-    expect(comp.getByText("about 1 month")).toBeTruthy();
+    await waitForI18n(comp);
+    expect(comp.getByText("about 1 month ago")).toBeTruthy();
   });
 
-  it("OneYearAgo", () => {
+  it("OneYearAgo", async () => {
     const comp = render(<OneYearAgo />);
-    expect(comp.getByText("about 1 year")).toBeTruthy();
+    await waitForI18n(comp);
+    expect(comp.getByText("about 1 year ago")).toBeTruthy();
   });
 
-  it("CustomFormat", () => {
+  it("CustomFormat", async () => {
     const comp = render(<CustomFormat />);
+    await waitForI18n(comp);
+
     expect(
       comp.getByText(`Hello custom ${CustomFormat.args!.date!.getTime()}`)
     ).toBeTruthy();
   });
 
-  it("TimeToExpiry", () => {
+  it("TimeToExpiry", async () => {
     const comp = render(<TimeToExpiry />);
+    await waitForI18n(comp);
+
     expect(comp.getByText("1 day 23 hours")).toBeTruthy();
   });
 
-  it("LongFormat", () => {
+  it("LongFormat", async () => {
     const comp = render(<LongFormat />);
+    await waitForI18n(comp);
+
     expect(
-      comp.getByText(FormatMapping["long"](LongFormat.args!.date!))
+      comp.getByText(FormatMapping["long"](LongFormat.args!.date!, () => ""))
     ).toBeTruthy();
   });
 
-  it("LongFormatWithMilliseconds", () => {
+  it("LongFormatWithMilliseconds", async () => {
     const comp = render(<LongFormatWithMilliseconds />);
+    await waitForI18n(comp);
+
     expect(
       comp.getByText(
         FormatMapping["longWithMilliseconds"](
-          LongFormatWithMilliseconds.args!.date!
+          LongFormatWithMilliseconds.args!.date!,
+          () => ""
         )
       )
     ).toBeTruthy();
   });
 
-  it("Epoch", () => {
+  it("Epoch", async () => {
     const comp = render(<Epoch />);
+    await waitForI18n(comp);
     expect(
-      comp.getByText(FormatMapping["epoch"](Epoch.args!.date!))
+      comp.getByText(FormatMapping["epoch"](Epoch.args!.date!, () => ""))
     ).toBeTruthy();
   });
 });

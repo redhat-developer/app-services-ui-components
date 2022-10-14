@@ -1,10 +1,9 @@
-import type { FunctionComponent } from "react";
-
 import type { PaginationProps as PFPaginationProps } from "@patternfly/react-core";
 import {
   Pagination as PFPagination,
   PaginationVariant,
 } from "@patternfly/react-core";
+import type { FunctionComponent } from "react";
 
 export type PaginationProps = {
   itemCount: number;
@@ -27,7 +26,7 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
       page={page}
       perPage={perPage}
       onSetPage={(_, page) => onChange(page, perPage)}
-      onPerPageSelect={(_, perPage) => onChange(page, perPage)}
+      onPerPageSelect={(_, perPage) => onChange(1, perPage)}
       variant={variant}
       isCompact={isCompact}
     />

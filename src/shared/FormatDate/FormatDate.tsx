@@ -9,19 +9,24 @@ import {
 import { formatInTimeZone } from "date-fns-tz";
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
+import type { TFunction } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { useInterval } from "../../utils";
 
 type SupportedFormats =
   | "distanceToNow"
+  | "distanceToNowWithAgo"
   | "expiration"
   | "long"
   | "longWithMilliseconds"
   | "epoch";
 
 export const FormatMapping: {
-  [name in SupportedFormats]: (date: Date) => string;
+  [name in SupportedFormats]: (date: Date, trans: TFunction) => string;
 } = {
-  distanceToNow: formatDistanceToNow,
+  distanceToNow: (date) => formatDistanceToNow(date),
+  distanceToNowWithAgo: (date, t) =>
+    t("common:distance-to-now-ago", { date: formatDistanceToNow(date) }),
   expiration: (date: Date) => {
     const months = differenceInMonths(date, Date.now());
     const days = differenceInDays(date, Date.now());
@@ -54,12 +59,13 @@ export const FormatDate: VoidFunctionComponent<FormatDateProps> = ({
   format,
   interval = 5000,
 }) => {
+  const { t } = useTranslation();
   const formatFn =
     typeof format === "function" ? format : FormatMapping[format];
   const [distance, setDistance] = useState<string>("");
   useInterval(() => {
     try {
-      setDistance(formatFn(date));
+      setDistance(formatFn(date, t));
     } catch (e) {
       console.warn(
         `FormatDate can't format date "${date.toISOString()}" with format "${format.toString()}"`

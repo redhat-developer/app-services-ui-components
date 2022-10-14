@@ -1,15 +1,3 @@
-import {
-  Button,
-  EmptyState,
-  EmptyStateBody,
-  EmptyStateIcon,
-  EmptyStateVariant,
-  SearchInput,
-  Title,
-  ToolbarGroup,
-  ToolbarItem,
-} from "@patternfly/react-core";
-import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import type { VoidFunctionComponent } from "react";
@@ -19,9 +7,10 @@ import {
   columnLabels,
   columns,
   defaultActions,
-  deletingSign,
   sampleData,
-  sampleToolbarWithFilter,
+  SampleEmptyStateNoData,
+  SampleEmptyStateNoResults,
+  sampleToolbarFilters,
 } from "./storybookHelpers";
 import type { TableViewProps } from "./TableView";
 import { DEFAULT_PERPAGE, TableView } from "./TableView";
@@ -44,17 +33,18 @@ export default {
     page: 1,
     perPage: 10,
     itemCount: 397,
-    data: sampleData,
-    toolbarContent: (
-      <ToolbarGroup>
-        <ToolbarItem>
-          <SearchInput />
-        </ToolbarItem>
-        <ToolbarItem>
-          <Button>Sample</Button>
-        </ToolbarItem>
-      </ToolbarGroup>
-    ),
+    filters: sampleToolbarFilters,
+    isFiltered: false,
+    emptyStateNoData: SampleEmptyStateNoData,
+    emptyStateNoResults: SampleEmptyStateNoResults,
+  },
+  argTypes: {
+    data: {
+      table: { disable: true },
+      control: {
+        type: null,
+      },
+    },
   },
 } as ComponentMeta<typeof TableViewSampleType>;
 
@@ -73,7 +63,7 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
       }
       return [];
     }
-    return undefined;
+    return data;
   }, [data, itemCount, page, perPage]);
   return (
     <TableView
@@ -96,53 +86,51 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
           ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
           : undefined
       }
-      isRowDeleted={({ row }) => row[5] === deletingSign}
+      isRowDeleted={({ row }) => row[5] === "deleting"}
       {...eventsFromNames}
-    >
-      <EmptyState variant={EmptyStateVariant.large}>
-        <EmptyStateIcon icon={InfoIcon} />
-        <Title headingLevel="h4" size="lg">
-          Empty state to show when the data is filtered but has no results
-        </Title>
-        <EmptyStateBody>
-          The <code>children</code> property will be used when no data is
-          available as the empty state.
-        </EmptyStateBody>
-      </EmptyState>
-    </TableView>
+    />
   );
 };
 
 export const Example = Template.bind({});
-Example.args = {};
+Example.args = {
+  data: sampleData,
+};
 
-export const UpdatingResults = Template.bind({});
-UpdatingResults.args = {
+export const FirstLoadShowsSpinner = Template.bind({});
+FirstLoadShowsSpinner.args = {
+  data: null,
+};
+
+export const NoInitialDataShowsRightEmptyState = Template.bind({});
+NoInitialDataShowsRightEmptyState.args = {
+  data: [],
+  isFiltered: false,
+};
+
+export const LoadingDataAfterFilteringShowsASkeletonAndNoPagination =
+  Template.bind({});
+LoadingDataAfterFilteringShowsASkeletonAndNoPagination.args = {
   data: undefined,
   itemCount: undefined,
-  toolbarContent: sampleToolbarWithFilter,
+  isFiltered: true,
 };
 
-export const NoResults = Template.bind({});
-NoResults.args = {
+export const NoResultsForFilterShowsRightEmptyState = Template.bind({});
+NoResultsForFilterShowsRightEmptyState.args = {
   data: [],
-  toolbarContent: sampleToolbarWithFilter,
+  isFiltered: true,
 };
 
-export const SinglePage = Template.bind({});
-SinglePage.args = {
+export const SinglePageShowsNoPaginationControl = Template.bind({});
+SinglePageShowsNoPaginationControl.args = {
+  data: sampleData,
   itemCount: sampleData.length,
 };
 
 export const LastPage = Template.bind({});
 LastPage.args = {
-  itemCount: 27,
-  page: 3,
-};
-
-export const LoadingNewPage = Template.bind({});
-LoadingNewPage.args = {
-  data: undefined,
+  data: sampleData,
   itemCount: 27,
   page: 3,
 };

@@ -40,7 +40,7 @@ describe("StatusPopover", () => {
       </StatusPopover>
     );
     await waitForI18n(tree);
-    await tree.findByText("1 of 3 steps completed");
+    await tree.findByText("2 of 3 steps completed");
     userEvent.click(await tree.findByText("Connection tab."));
     expect(onClickConnectionTabLink).toBeCalledTimes(1);
     expect(onClickSupportLink).toBeCalledTimes(0);
@@ -61,7 +61,7 @@ describe("StatusPopover", () => {
       </StatusPopover>
     );
     await waitForI18n(tree);
-    await tree.findByText("2 of 3 steps completed");
+    await tree.findByText("1 of 3 steps completed");
     userEvent.click(await tree.findByText("Connection tab."));
     expect(onClickConnectionTabLink).toBeCalledTimes(1);
     expect(onClickSupportLink).toBeCalledTimes(0);
