@@ -15,7 +15,7 @@ export type MessageApiResponse = {
     offset: number | undefined;
     timestamp: DateIsoString | undefined;
     limit: number | undefined;
-    epoch: string | undefined;
+    epoch: number | undefined;
   };
 };
 
@@ -32,7 +32,7 @@ export const MessageBrowserMachine = createMachine(
         // optional input
         partition: number | undefined;
         offset: number | undefined;
-        epoch: string | undefined;
+        epoch: number | undefined;
         timestamp: DateIsoString | undefined;
         selectedMessage: Message | undefined;
       },
@@ -49,7 +49,7 @@ export const MessageBrowserMachine = createMachine(
         | { type: "setPartition"; value: number | undefined }
         | { type: "setOffset"; value: number | undefined }
         | { type: "setTimestamp"; value: DateIsoString | undefined }
-        | { type: "setEpoch"; value: string | undefined }
+        | { type: "setEpoch"; value: number | undefined }
         | { type: "setLatest" }
         | { type: "setLimit"; value: number }
         | { type: "selectMessage"; message: Message }

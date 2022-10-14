@@ -19,11 +19,11 @@ type Category = "offset" | "timestamp" | "epoch" | "latest";
 export type FilterGroupProps = {
   isDisabled: boolean;
   offset: number | undefined;
-  epoch: string | undefined;
+  epoch: number | undefined;
   timestamp: DateIsoString | undefined;
   onOffsetChange: (value: number | undefined) => void;
   onTimestampChange: (value: DateIsoString | undefined) => void;
-  onEpochChange: (value: string | undefined) => void;
+  onEpochChange: (value: number | undefined) => void;
   onLatest: () => void;
 };
 export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
@@ -136,7 +136,8 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
             className="pf-u-flex-basis-auto pf-u-flex-grow-0 pf-u-w-initial"
             size={t("filter.epoch_placeholder").length}
             onChange={(value) => {
-              if (value !== "" && Number(value) >= 0) onEpochChange(value);
+              if (value !== "" && Number(value) >= 0)
+                onEpochChange(Number(value));
               else onEpochChange(undefined);
             }}
             value={epoch == undefined ? "" : epoch}
