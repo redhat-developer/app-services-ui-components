@@ -8,8 +8,6 @@ import {
   TextInput,
   ToolbarItem,
 } from "@patternfly/react-core";
-import { formatISO, parse, parseISO } from "date-fns";
-import { formatInTimeZone } from "date-fns-tz";
 
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
@@ -21,15 +19,17 @@ type Category = "offset" | "timestamp" | "epoch" | "latest";
 export type FilterGroupProps = {
   isDisabled: boolean;
   offset: number | undefined;
+  epoch: string | undefined;
   timestamp: DateIsoString | undefined;
   onOffsetChange: (value: number | undefined) => void;
   onTimestampChange: (value: DateIsoString | undefined) => void;
-  onEpochChange: (value: DateIsoString | undefined) => void;
+  onEpochChange: (value: string | undefined) => void;
   onLatest: () => void;
 };
 export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
   isDisabled,
   offset,
+  epoch,
   timestamp,
   onOffsetChange,
   onTimestampChange,
@@ -136,20 +136,10 @@ export const FilterGroup: VoidFunctionComponent<FilterGroupProps> = ({
             className="pf-u-flex-basis-auto pf-u-flex-grow-0 pf-u-w-initial"
             size={t("filter.epoch_placeholder").length}
             onChange={(value) => {
-              if (value !== "") {
-                const epoch = parseInt(value, 10);
-                const newDate = parse(`${epoch}`, "t", new Date());
-                const dateIso = formatISO(newDate);
-                if (dateIso) {
-                  onEpochChange(dateIso);
-                }
-              } else {
-                onEpochChange(undefined);
-              }
+              if (value !== "" && Number(value) >= 0) onEpochChange(value);
+              else onEpochChange(undefined);
             }}
-            value={
-              timestamp ? formatInTimeZone(parseISO(timestamp), "UTC", "t") : ""
-            }
+            value={epoch == undefined ? "" : epoch}
           />
         )}
       </InputGroup>
