@@ -116,6 +116,8 @@
   "empty_state_no_instances_body": "For help getting started, access the <0>quick start guide</0>",
   "empty_state_no_instances_create_instance": "$t(kafka:create_instance)",
   "empty_state_no_instances_title": "No Kafka instances",
+  "empty_state_no_results_found_body": "Adjust your filters and try again, or <0>clear all filters</0>.",
+  "empty_state_no_results_found_title": "No results found",
   "fields": {
     "createdAt": "Created",
     "name": "Name",
@@ -127,6 +129,7 @@
   "filter_by_client_id": "Filter by Client ID",
   "filter_by_owner": "Filter by owner",
   "filter_by_short_description": "Filter by short description",
+  "filter_by_status": "Filter by status",
   "ingress": "Ingress",
   "ingress_egress": "Ingress/Egress",
   "ingress_value": "up to 30 MiB/second each",
@@ -134,6 +137,8 @@
   "max_filter_message": "Maximum number of filters reached. Clear a filter before adding another.",
   "message_size": "Message size",
   "message_size_value": "up to 1 MiB",
+  "no_permission_to_change_owner": "Organization administrators and the Kafka instance owner can change the owner of an instance.",
+  "no_permission_to_delete_kafka": "Organization administrators and the Kafka instance owner can delete this instance.",
   "owner": "Owner",
   "owner_field_invalid_message": "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )",
   "partitions": "Partitions",
@@ -196,5 +201,6 @@
   "topic": {
     "topic": "Topic"
   },
-  "will_expire": "This trial instance will expire in <time>{{time}}</time>"
+  "will_expire": "This trial instance will expire in <time>{{time}}</time>",
+  "will_expire_short": "Expires in <time>{{time}}</time>"
 }
