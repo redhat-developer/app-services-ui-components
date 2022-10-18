@@ -23,6 +23,7 @@
   "empty_state_no_topics_body": "Data will appear shortly after you start using topics.",
   "empty_state_no_topics_create_topic": "Create topic",
   "empty_state_no_topics_title": "No topic data",
+  "filter-by-broker": "Filter by broker",
   "incoming_bytes": "Incoming bytes ({{topic}})",
   "incoming_bytes_all_topics": "Incoming bytes (all topics)",
   "kafka_instance_filter_by_time": "Filter $t(common:kafka) instance metrics by time range",

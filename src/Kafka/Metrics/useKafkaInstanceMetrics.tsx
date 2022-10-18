@@ -16,6 +16,8 @@ export function useKafkaInstanceMetrics() {
   const { service } = useContext(KafkaInstanceMetricsContext);
 
   const {
+    selectedBroker,
+    brokers,
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
@@ -44,6 +46,12 @@ export function useKafkaInstanceMetrics() {
     )
   );
 
+  const onBrokerChange = useCallback(
+    (broker: string | undefined) =>
+      service.send({ type: "selectBroker", broker }),
+    [service]
+  );
+
   const onDurationChange = useCallback(
     (duration: DurationOptions) =>
       service.send({ type: "selectDuration", duration }),
@@ -68,5 +76,8 @@ export function useKafkaInstanceMetrics() {
     duration,
     onDurationChange,
     onRefresh,
+    onBrokerChange,
+    selectedBroker,
+    brokers,
   };
 }

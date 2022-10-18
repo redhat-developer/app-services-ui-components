@@ -1,11 +1,7 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type {
-  BrokerFilter,
-  DurationOptions,
-  TimeSeriesMetrics,
-} from "../types";
+import type { DurationOptions, TimeSeriesMetrics } from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
@@ -78,8 +74,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
         isDisabled={backendUnavailable || isJustCreated || isLoading}
         isRefreshing={isRefreshing}
         onRefresh={onRefresh}
-        selectedBroker={undefined}
-        BrokerList={brokers}
+        selectedBroker={selectedBroker}
+        brokerList={brokers}
         onSetSelectedBroker={onSelectedBroker}
       />
       {(() => {

@@ -2,19 +2,12 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    setMetrics: "fetchSuccess";
-    incrementRetries: "fetchFail";
-    resetRetries: "refresh";
-    setDuration: "selectDuration";
-    setFetchTimestamp: "refresh" | "selectDuration";
-  };
   internalEvents: {
-    "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure": {
-      type: "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure";
-    };
     "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure": {
       type: "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure";
+    };
+    "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure": {
+      type: "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure";
     };
     "xstate.init": { type: "xstate.init" };
   };
@@ -30,39 +23,54 @@ export interface Typegen0 {
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    incrementRetries: "fetchFail";
+    resetRetries: "refresh";
+    setBroker: "selectBroker";
+    setDuration: "selectDuration";
+    setFetchTimestamp:
+      | "refresh"
+      | "selectBroker"
+      | "selectDuration"
+      | "xstate.init";
+    setMetrics: "fetchSuccess";
+  };
   eventsCausingServices: {
     api:
-      | "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure"
+      | "refresh"
+      | "selectBroker"
+      | "selectDuration"
       | "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure"
-      | "refresh";
+      | "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure"
+      | "xstate.init";
   };
   eventsCausingGuards: {
-    isJustCreated: "fetchSuccess";
     canRetryFetching:
-      | "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure"
-      | "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure";
+      | "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure"
+      | "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure";
+    isJustCreated: "fetchSuccess";
   };
   eventsCausingDelays: {};
   matchesStates:
-    | "initialLoading"
-    | "initialLoading.loading"
-    | "initialLoading.failure"
     | "callApi"
-    | "callApi.loading"
     | "callApi.failure"
+    | "callApi.loading"
     | "criticalFail"
+    | "initialLoading"
+    | "initialLoading.failure"
+    | "initialLoading.loading"
     | "justCreated"
-    | "withResponse"
     | "refreshing"
+    | "withResponse"
     | {
-        initialLoading?: "loading" | "failure";
-        callApi?: "loading" | "failure";
+        callApi?: "failure" | "loading";
+        initialLoading?: "failure" | "loading";
       };
   tags:
-    | "initialLoading"
-    | "loading"
     | "failed"
+    | "initialLoading"
     | "justCreated"
-    | "withResponse"
-    | "refreshing";
+    | "loading"
+    | "refreshing"
+    | "withResponse";
 }

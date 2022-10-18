@@ -37,8 +37,10 @@ export type KafkaInstanceMetricsMachineContext = {
 
   // from the UI elements
   duration: DurationOptions;
+  selectedBroker: string | undefined;
 
   // from the api
+  brokers: string[];
   usedDiskSpaceMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
@@ -61,11 +63,13 @@ export const KafkaInstanceMetricsMachine = createMachine(
         | { type: "refresh" }
         // from the UI elements
         | { type: "selectTopic"; topic: string | undefined }
-        | { type: "selectDuration"; duration: DurationOptions },
+        | { type: "selectDuration"; duration: DurationOptions }
+        | { type: "selectBroker"; broker: string | undefined },
     },
     id: "kafkaInstanceMetrics",
     context: {
       lastUpdated: undefined,
+      selectedBroker: undefined,
       duration: DurationOptions.Last1hour,
       usedDiskSpaceMetrics: {},
       clientConnectionsMetrics: {},
@@ -74,6 +78,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       connectionsLimit: undefined,
       connectionRateLimit: undefined,
       fetchFailures: 0,
+      brokers: [],
     },
     initial: "initialLoading",
     states: {
@@ -130,6 +135,10 @@ export const KafkaInstanceMetricsMachine = createMachine(
             actions: "setDuration",
             target: "callApi",
           },
+          selectBroker: {
+            actions: "setBroker",
+            target: "callApi",
+          },
         },
       },
       refreshing: {
@@ -166,8 +175,10 @@ export const KafkaInstanceMetricsMachine = createMachine(
           diskSpaceLimit,
           connectionsLimit,
           connectionRateLimit,
+          brokers,
         } = event;
         return {
+          brokers,
           usedDiskSpaceMetrics,
           clientConnectionsMetrics,
           connectionAttemptRateMetrics,
@@ -189,6 +200,9 @@ export const KafkaInstanceMetricsMachine = createMachine(
         clientConnectionsMetrics: {},
         connectionAttemptRateMetrics: {},
       })),
+      setBroker: assign({
+        selectedBroker: (_context, event) => event.broker,
+      }),
     },
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,

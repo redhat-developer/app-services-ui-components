@@ -16,7 +16,7 @@ import { ToolbarRefresh } from "./ToolbarRefresh";
 type ToolbarKafkaInstanceMetricProps = {
   title: string;
   selectedBroker: string | undefined;
-  BrokerList: string[];
+  brokerList: string[];
   isDisabled: boolean;
   duration: DurationOptions;
   onSetTimeDuration: (value: DurationOptions) => void;
@@ -33,7 +33,7 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
   onSetTimeDuration,
   onRefresh,
   selectedBroker,
-  BrokerList,
+  brokerList,
   onSetSelectedBroker,
 }) => {
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
         <ToolbarContent>
           <FilterByBroker
             selectedBroker={selectedBroker}
-            BrokerList={BrokerList}
+            brokerList={brokerList}
             onSetSelectedBroker={onSetSelectedBroker}
           />
           <FilterByTime

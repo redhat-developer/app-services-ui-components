@@ -26,6 +26,7 @@ export type GetTopicsMetricsResponse = {
 };
 
 export type GetKafkaInstanceMetricsResponse = {
+  brokers: string[];
   usedDiskSpaceMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;

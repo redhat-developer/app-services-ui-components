@@ -18,6 +18,7 @@ export const getKafkaInstanceMetrics = ({
 }) => {
   return fakeApi<GetKafkaInstanceMetricsResponse>(
     {
+      brokers: ["broker 1", "broker 2"],
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9, offset),
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1, offset),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1, offset),
