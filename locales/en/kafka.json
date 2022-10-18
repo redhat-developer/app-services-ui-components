@@ -145,10 +145,6 @@
   "owner_field_invalid_message": "Red Hat Login ID cannot contain spaces, national characters or the following special characters \" $ ^ < > | + % / ; : , * = ~ # ( )",
   "partitions": "Partitions",
   "partitions_value": "up to 500",
-  "refresh_description": "Reload contents",
-  "refresh-description": "",
-  "refreshing": "Getting data",
-  "refreshing_tooltip": "Data is currently refreshing",
   "select_filter_category": "Select filter category",
   "settings": {
     "connection_re_authentication_label": "Connection re-authentication",
