@@ -48,6 +48,7 @@ JustCreated.args = {
   getKafkaInstanceMetrics: () =>
     fakeApi(
       {
+        brokers: ["broker1", "broker2"],
         usedDiskSpaceMetrics: {},
         clientConnectionsMetrics: {},
         connectionAttemptRateMetrics: {},
@@ -288,6 +289,7 @@ SomeMissingMetricsButApiOk.args = {
   getMetricsKpi,
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
+      brokers: ["broker1", "broker2"],
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
       clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
@@ -333,6 +335,7 @@ LimitsReached.args = {
     }),
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
+      brokers: ["broker1", "broker2"],
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
       clientConnectionsMetrics: makeMetrics(duration, 60, 170, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 4, 130, 1),
