@@ -291,7 +291,15 @@ export const InstancesTable = <T extends KafkaInstance>({
         },
       ]}
       tools={[
-        <RefreshButton isRefreshing={isRefreshing} onClick={onRefresh} />,
+        <RefreshButton
+          tooltip={
+            isRefreshing
+              ? t("common:refreshing_tooltip")
+              : t("common:refresh_description")
+          }
+          isRefreshing={isRefreshing}
+          onClick={onRefresh}
+        />,
       ]}
       itemCount={itemCount}
       page={page}
