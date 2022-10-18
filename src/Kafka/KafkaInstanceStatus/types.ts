@@ -17,8 +17,8 @@ export type PopoverStatus =
 
 export const PopoverStatusOrder: PopoverStatus[] = [
   "pending",
-  "provisioning",
   "preparing",
+  "provisioning",
 ];
 
 export const KafkaToPopoverMapping: {

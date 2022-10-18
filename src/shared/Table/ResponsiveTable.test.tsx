@@ -20,15 +20,14 @@ describe("ResponsiveTable", () => {
     sampleData
       .flatMap((row) => row.slice(0, -1))
       .forEach((cell) => {
-        if (typeof cell === "string")
-          expect(comp.getByText(cell)).toBeInTheDocument();
+        expect(comp.getByText(cell)).toBeInTheDocument();
       });
     expect(comp.queryAllByTestId("row-selected")).toHaveLength(1);
     expect(comp.queryAllByTestId("row-deleted")).toHaveLength(1);
+    const actions = comp.queryAllByLabelText("Actions");
     expect(comp.queryAllByLabelText("Actions")).toHaveLength(
       sampleData.length - 1 /* deleted lines don't have actions */
     );
-    const actions = comp.queryAllByTestId("actions-for-row-0");
     userEvent.click(actions[0]);
     expect(clickSpy).not.toHaveBeenCalled();
     userEvent.click(comp.getByText(sampleData[0][0]));

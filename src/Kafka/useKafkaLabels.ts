@@ -1,15 +1,18 @@
 import { useTranslation } from "react-i18next";
-import type { CloudProvider, KafkaInstanceField } from "./types";
+import type { CloudProvider, KafkaInstanceField, Status } from "./types";
 
 export function useKafkaLabels() {
   const { t } = useTranslation("kafka");
 
-  const statuses: { [status: string]: string } = {
-    ready: t("statuses-filter.ready"),
-    failed: t("statuses-filter.failed"),
-    pending: t("statuses-filter.pending"),
-    creating: t("statuses-filter.creating"),
-    deleting: t("statuses-filter.deleting"),
+  const statuses: { [status in Status]: string } = {
+    ready: t("statuses.ready"),
+    degraded: t("statuses.degraded"),
+    accepted: t("statuses.accepted"),
+    provisioning: t("statuses.provisioning"),
+    preparing: t("statuses.preparing"),
+    deprovision: t("statuses.deprovision"),
+    deleting: t("statuses.deleting"),
+    suspended: t("statuses.suspended"),
   };
   const providers: { [status in CloudProvider]: string } = {
     aws: t("common:cloudProviders.aws"),
