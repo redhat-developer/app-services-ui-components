@@ -64,7 +64,7 @@
   "ready": "Ready",
   "refresh_button_label": "Refresh",
   "refresh_description": "Reload contents",
-  "refreshing": "Getting data",
+  "refresh": "Getting data",
   "refreshing_tooltip": "Data is currently refreshing",
   "region": "Region",
   "required": "Required",

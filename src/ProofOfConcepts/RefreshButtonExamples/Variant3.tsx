@@ -40,7 +40,7 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         style={{ color: "var(--pf-global--Color--200)" }}
       >
         {isRefreshing
-          ? t("common:refreshing")
+          ? t("common:refresh")
           : t("common:last-refresh") +
             " " +
             formatDistanceToNow(lastUpdated) +

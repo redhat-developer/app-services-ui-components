@@ -26,7 +26,7 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
         <RefreshButton
           tooltip={
             isRefreshing
-              ? t("common:refreshing")
+              ? t("common:refresh")
               : t("common:refresh_description") +
                 ":" +
                 "\n" +
