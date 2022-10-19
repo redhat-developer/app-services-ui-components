@@ -202,21 +202,27 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.connection"),
-                onClick: () => onConnection(row),
+                ...(row.status === "suspended"
+                  ? {
+                      isDisabled: true,
+                    }
+                  : {
+                      onClick: () => onConnection(row),
+                    }),
               },
               {
                 isSeparator: true,
               },
               {
                 title: t("table.actions.change-owner"),
-                ...(!changeOwnerEnabled
+                ...(!changeOwnerEnabled || row.status === "suspended"
                   ? {
                       isDisabled: true,
                       tooltipProps: {
                         position: "left",
                         content: t("kafka:no_permission_to_change_owner"),
                       },
-                      tooltip: true,
+                      tooltip: !changeOwnerEnabled ? true : false,
                       style: {
                         pointerEvents: "auto",
                         cursor: "default",
