@@ -1,5 +1,10 @@
 import { useTranslation } from "react-i18next";
-import type { CloudProvider, KafkaInstanceField, Status } from "./types";
+import type {
+  CloudProvider,
+  KafkaInstanceField,
+  SimplifiedStatus,
+  Status,
+} from "./types";
 
 export function useKafkaLabels() {
   const { t } = useTranslation("kafka");
@@ -13,6 +18,13 @@ export function useKafkaLabels() {
     deprovision: t("statuses.deprovision"),
     deleting: t("statuses.deleting"),
     suspended: t("statuses.suspended"),
+  };
+  const statusesSimplified: { [status in SimplifiedStatus]: string } = {
+    creating: t("statusesSimplified.creating"),
+    ready: t("statusesSimplified.ready"),
+    degraded: t("statusesSimplified.degraded"),
+    deleting: t("statusesSimplified.deleting"),
+    suspended: t("statusesSimplified.suspended"),
   };
   const providers: { [status in CloudProvider]: string } = {
     aws: t("common:cloudProviders.aws"),
@@ -45,6 +57,7 @@ export function useKafkaLabels() {
   return {
     fields,
     statuses,
+    statusesSimplified,
     providers,
   };
 }

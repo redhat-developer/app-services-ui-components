@@ -15,6 +15,7 @@ export const FilterCheckbox: VoidFunctionComponent<
     <Select
       variant={SelectVariant.checkbox}
       aria-label={label}
+      toggleAriaLabel={t("common:search_hint", { label })}
       onToggle={setIsOpen}
       onSelect={(_, value) => {
         onToggle(value);

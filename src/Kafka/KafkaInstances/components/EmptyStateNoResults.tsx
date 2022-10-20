@@ -20,7 +20,7 @@ export const EmptyStateNoResults: VoidFunctionComponent<
   return (
     <EmptyState variant={EmptyStateVariant.xs}>
       <EmptyStateIcon icon={SearchIcon} />
-      <Title headingLevel="h3" size="lg">
+      <Title headingLevel="h2" size="lg">
         {t("empty_state_no_results_found_title")}
       </Title>
       <EmptyStateBody>

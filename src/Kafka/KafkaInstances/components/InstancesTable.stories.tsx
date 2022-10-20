@@ -1,5 +1,4 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { instances } from "../storiesHelper";
 import { InstancesTable as InstancesTableComp } from "./InstancesTable";
 
 export default {
@@ -26,14 +25,6 @@ export const LoadingDataAfterFilteringShowsASkeleton = Template.bind({});
 LoadingDataAfterFilteringShowsASkeleton.args = {
   instances: undefined,
   names: ["foo"],
-};
-
-export const RefreshingSpinsTheButtonAndKeepsTheDataOnScreen = Template.bind(
-  {}
-);
-RefreshingSpinsTheButtonAndKeepsTheDataOnScreen.args = {
-  instances: instances,
-  isRefreshing: true,
 };
 
 export const NoInitialDataShowsTheRightEmptyState = Template.bind({});

@@ -8,9 +8,9 @@ import { parseISO } from "date-fns";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import type { TableViewProps } from "../../../shared";
-import { FormatDate, RefreshButton, TableView } from "../../../shared";
+import { FormatDate, TableView } from "../../../shared";
 import { KafkaInstanceStatus } from "../../KafkaInstanceStatus";
-import type { KafkaInstance, Status } from "../../types";
+import type { KafkaInstance, SimplifiedStatus } from "../../types";
 import { DeletingStatuses } from "../../types";
 import { useKafkaLabels } from "../../useKafkaLabels";
 import type { EmptyStateNoInstancesProps } from "./EmptyStateNoInstances";
@@ -33,8 +33,6 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   names: string[];
   owners: string[];
   statuses: string[];
-  isRefreshing: boolean;
-  onRefresh: () => void;
   onCreate: () => void;
   onSearchName: (value: string) => void;
   onRemoveNameChip: (value: string) => void;
@@ -42,8 +40,8 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   onSearchOwner: (value: string) => void;
   onRemoveOwnerChip: (value: string) => void;
   onRemoveOwnerChips: () => void;
-  onSearchStatus: (value: Status) => void;
-  onRemoveStatusChip: (value: Status) => void;
+  onSearchStatus: (value: SimplifiedStatus) => void;
+  onRemoveStatusChip: (value: SimplifiedStatus) => void;
   onRemoveStatusChips: () => void;
   onDetails: (row: T) => void;
   onConnection: (row: T) => void;
@@ -76,10 +74,8 @@ export const InstancesTable = <T extends KafkaInstance>({
   owners,
   statuses,
   getUrlForInstance,
-  isRefreshing,
   isRowSelected,
   isColumnSortable,
-  onRefresh,
   onPageChange,
   onDetails,
   onConnection,
@@ -277,7 +273,7 @@ export const InstancesTable = <T extends KafkaInstance>({
         [labels.fields.status]: {
           type: "checkbox",
           chips: statuses,
-          options: labels.statuses,
+          options: labels.statusesSimplified,
           onToggle: onSearchStatus,
           onRemoveChip: onRemoveStatusChip,
           onRemoveGroup: onRemoveStatusChips,
@@ -289,9 +285,6 @@ export const InstancesTable = <T extends KafkaInstance>({
           onClick: onCreate,
           isPrimary: true,
         },
-      ]}
-      tools={[
-        <RefreshButton isRefreshing={isRefreshing} onClick={onRefresh} />,
       ]}
       itemCount={itemCount}
       page={page}
