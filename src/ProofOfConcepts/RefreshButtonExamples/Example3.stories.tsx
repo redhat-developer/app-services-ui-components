@@ -20,7 +20,6 @@ import {
   columnLabels,
   columns,
   defaultActions,
-  deletingSign,
   sampleData,
 } from "../../shared/Table/storybookHelpers";
 import type { TableViewProps } from "./Example3";
@@ -100,8 +99,6 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
           ? ({ rowIndex }) => rowIndex === args.selectedRow! - 1
           : undefined
       }
-      isRowDeleted={({ row }) => row[5] === deletingSign}
-      {...eventsFromNames}
     >
       <EmptyState variant={EmptyStateVariant.large}>
         <EmptyStateIcon icon={InfoIcon} />
