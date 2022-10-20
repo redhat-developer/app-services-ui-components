@@ -10,6 +10,7 @@ export type RefreshButtonProps = {
   ariaLabel?: string;
   onClick: () => void;
 };
+
 export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   ariaLabel,
   onClick,
