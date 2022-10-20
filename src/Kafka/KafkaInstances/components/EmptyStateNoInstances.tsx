@@ -22,7 +22,7 @@ export const EmptyStateNoInstances: VoidFunctionComponent<
   return (
     <EmptyState variant={EmptyStateVariant.xs}>
       <EmptyStateIcon icon={PlusCircleIcon} />
-      <Title headingLevel="h3" size="lg">
+      <Title headingLevel="h2" size="lg">
         {t("empty_state_no_instances_title")}
       </Title>
       <EmptyStateBody>
