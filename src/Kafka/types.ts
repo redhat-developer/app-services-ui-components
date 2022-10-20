@@ -68,15 +68,25 @@ export const Statuses = [
   "suspended",
 ] as const;
 export type Status = typeof Statuses[number];
-export const ReadyStatuses: Status[] = ["ready"];
-export const CreatingStatuses: Status[] = [
+
+export const CreatingStatuses: readonly Status[] = [
   "accepted",
   "provisioning",
   "preparing",
 ];
-export const DegradedStatuses: Status[] = ["degraded"];
-export const DeletingStatuses: Status[] = ["deleting", "deprovision"];
-export const SuspendedStatuses: Status[] = ["suspended"];
+export const ReadyStatuses: readonly Status[] = ["ready"];
+export const DegradedStatuses: readonly Status[] = ["degraded"];
+export const SuspendedStatuses: readonly Status[] = ["suspended"];
+export const DeletingStatuses: readonly Status[] = ["deleting", "deprovision"];
+
+export const SimplifiedStatuses = {
+  creating: CreatingStatuses,
+  ready: ReadyStatuses,
+  degraded: DegradedStatuses,
+  suspended: SuspendedStatuses,
+  deleting: DeletingStatuses,
+} as const;
+export type SimplifiedStatus = keyof typeof SimplifiedStatuses;
 
 /**
  * A list of marketplaces where an instance can be billed to

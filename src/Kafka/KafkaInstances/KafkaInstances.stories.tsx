@@ -1,6 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../shared/storiesHelpers";
+import { SimplifiedStatuses } from "../types";
 import { KafkaInstances as KafkaInstancesComp } from "./KafkaInstances";
 import { instances } from "./storiesHelper";
 
@@ -38,7 +39,11 @@ const Template: ComponentStory<typeof KafkaInstancesComp> = (args) => {
             (query.owner.length > 0
               ? query.owner.find((o) => i.owner.includes(o))
               : true) &&
-            (query.status.length > 0 ? query.status.includes(i.status) : true)
+            (query.status.length > 0
+              ? query.status
+                  .flatMap((s) => SimplifiedStatuses[s])
+                  .includes(i.status)
+              : true)
           );
         });
         const data = allData.slice(page, perPage);

@@ -23,7 +23,7 @@
     "lint:style": "prettier --check src .storybook",
     "lint": "npm-run-all lint:*",
     "package": "npm run build",
-    "parse-i18n": "i18next 'src/**/*.tsx'",
+    "parse-i18n": "i18next 'src/**/*.tsx' 'src/**/*.ts'",
     "prepare": "npm run clean && npm run package && husky install",
     "storybook": "start-storybook -p 6006",
     "test-storybook": "test-storybook --maxWorkers=1",

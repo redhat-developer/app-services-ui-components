@@ -5,7 +5,7 @@ import {
   useSortableSearchParams,
   useURLSearchParamsChips,
 } from "../../shared";
-import type { KafkaInstance, Status } from "../types";
+import type { KafkaInstance, SimplifiedStatus } from "../types";
 import { useKafkaLabels } from "../useKafkaLabels";
 import type { InstancesTableProps } from "./components";
 import { InstancesTable } from "./components";
@@ -13,7 +13,7 @@ import { InstancesTable } from "./components";
 type Query = {
   name: string[];
   owner: string[];
-  status: Status[];
+  status: SimplifiedStatus[];
 };
 
 const SortableColumns = [
@@ -86,7 +86,7 @@ export const KafkaInstances = <T extends KafkaInstance>({
 
   const namesChips = useURLSearchParamsChips("names", resetPaginationQuery);
   const ownersChips = useURLSearchParamsChips("owners", resetPaginationQuery);
-  const statusesChips = useURLSearchParamsChips<Status>(
+  const statusesChips = useURLSearchParamsChips<SimplifiedStatus>(
     "statuses",
     resetPaginationQuery
   );
