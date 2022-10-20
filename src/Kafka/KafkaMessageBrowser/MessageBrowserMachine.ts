@@ -15,6 +15,7 @@ export type MessageApiResponse = {
     offset: number | undefined;
     timestamp: DateIsoString | undefined;
     limit: number | undefined;
+    epoch: number | undefined;
   };
 };
 
@@ -31,6 +32,7 @@ export const MessageBrowserMachine = createMachine(
         // optional input
         partition: number | undefined;
         offset: number | undefined;
+        epoch: number | undefined;
         timestamp: DateIsoString | undefined;
         selectedMessage: Message | undefined;
       },
@@ -47,7 +49,7 @@ export const MessageBrowserMachine = createMachine(
         | { type: "setPartition"; value: number | undefined }
         | { type: "setOffset"; value: number | undefined }
         | { type: "setTimestamp"; value: DateIsoString | undefined }
-        | { type: "setEpoch"; value: DateIsoString | undefined }
+        | { type: "setEpoch"; value: number | undefined }
         | { type: "setLatest" }
         | { type: "setLimit"; value: number }
         | { type: "selectMessage"; message: Message }
@@ -64,6 +66,7 @@ export const MessageBrowserMachine = createMachine(
       offset: undefined,
       timestamp: undefined,
       selectedMessage: undefined,
+      epoch: undefined,
     },
     states: {
       initialLoading: {
@@ -179,13 +182,14 @@ export const MessageBrowserMachine = createMachine(
               timestamp: context.timestamp,
               offset: context.offset,
               limit: context.limit,
+              epoch: context.epoch,
             },
           },
         })
       ),
       setPartition: assign((_, { value }) => ({ partition: value })),
       setEpoch: assign((_, { value }) => ({
-        timestamp: value,
+        epoch: value,
       })),
       setTimestamp: assign((_, { value }) => ({
         timestamp: value,
@@ -216,7 +220,8 @@ export const MessageBrowserMachine = createMachine(
         context.response?.filter.limit !== context.limit ||
         context.response?.filter.offset !== context.offset ||
         context.response?.filter.partition !== context.partition ||
-        context.response?.filter.timestamp !== context.timestamp,
+        context.response?.filter.timestamp !== context.timestamp ||
+        context.response?.filter.epoch !== context.epoch,
     },
   }
 );
