@@ -107,6 +107,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
       partition={state.context.partition}
       limit={state.context.limit}
       filterOffset={state.context.offset}
+      filterEpoch={state.context.epoch}
       filterTimestamp={state.context.timestamp}
       setPartition={(value: number | undefined) =>
         send({ type: "setPartition", value })
@@ -117,7 +118,7 @@ export const KafkaMessageBrowser: VoidFunctionComponent<
       setTimestamp={(value: DateIsoString | undefined) =>
         send({ type: "setTimestamp", value })
       }
-      setEpoch={(value: DateIsoString | undefined) =>
+      setEpoch={(value: number | undefined) =>
         send({ type: "setEpoch", value })
       }
       setLatest={() => send({ type: "setLatest" })}
@@ -142,11 +143,12 @@ export type KafkaMessageBrowserConnectedProps = {
   partition: number | undefined;
   limit: number;
   filterOffset: number | undefined;
+  filterEpoch: number | undefined;
   filterTimestamp: DateIsoString | undefined;
   setPartition: (value: number | undefined) => void;
   setOffset: (value: number | undefined) => void;
   setTimestamp: (value: DateIsoString | undefined) => void;
-  setEpoch: (value: DateIsoString | undefined) => void;
+  setEpoch: (value: number | undefined) => void;
   setLatest: () => void;
   setLimit: (value: number) => void;
   refresh: () => void;
@@ -165,6 +167,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
   partition,
   limit,
   filterOffset,
+  filterEpoch,
   filterTimestamp,
   setPartition,
   setOffset,
@@ -234,6 +237,7 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                       <FilterGroup
                         isDisabled={isRefreshing}
                         offset={filterOffset}
+                        epoch={filterEpoch}
                         timestamp={filterTimestamp}
                         onOffsetChange={setOffset}
                         onTimestampChange={setTimestamp}

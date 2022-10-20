@@ -2,17 +2,6 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    setMessages: "fetchSuccess";
-    setPartition: "setPartition";
-    setEpoch: "setEpoch";
-    setTimestamp: "setTimestamp";
-    setOffset: "setOffset";
-    setLatest: "setLatest";
-    setLimit: "setLimit";
-    selectMessage: "selectMessage";
-    deselectMessage: "deselectMessage" | "";
-  };
   internalEvents: {
     "": { type: "" };
     "xstate.init": { type: "xstate.init" };
@@ -28,25 +17,36 @@ export interface Typegen0 {
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    deselectMessage: "" | "deselectMessage";
+    selectMessage: "selectMessage";
+    setEpoch: "setEpoch";
+    setLatest: "setLatest";
+    setLimit: "setLimit";
+    setMessages: "fetchSuccess";
+    setOffset: "setOffset";
+    setPartition: "setPartition";
+    setTimestamp: "setTimestamp";
+  };
   eventsCausingServices: {
-    api: "refresh";
+    api: "refresh" | "xstate.init";
   };
   eventsCausingGuards: {
+    areFiltersChanged: "";
     noMessages: "";
     selectedMessageNotAvailable: "";
-    areFiltersChanged: "";
   };
   eventsCausingDelays: {};
   matchesStates:
-    | "initialLoading"
-    | "verifyMessages"
-    | "noData"
     | "error"
+    | "initialLoading"
+    | "noData"
     | "ready"
-    | "ready.pristine"
     | "ready.dirty"
+    | "ready.pristine"
     | "ready.shouldSearch"
     | "refreshing"
-    | { ready?: "pristine" | "dirty" | "shouldSearch" };
+    | "verifyMessages"
+    | { ready?: "dirty" | "pristine" | "shouldSearch" };
   tags: "dirty";
 }

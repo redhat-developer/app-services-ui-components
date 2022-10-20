@@ -190,7 +190,7 @@ describe("KafkaMessageBrowser", () => {
       limit: 10,
       partition: undefined,
       offset: undefined,
-      timestamp: "2022-04-22T14:29:43Z",
+      timestamp: undefined,
     });
 
     await waitFor(() => expect(filterGroup).not.toBeDisabled());
