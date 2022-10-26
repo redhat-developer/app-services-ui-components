@@ -8,14 +8,16 @@ import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 
 export type ManageAccessShortcutProps = {
-  onDelete: () => void;
+  onDelete: (row: number) => void;
   multipleShorctutPermissions?: boolean;
   instanceName: string;
+  row: number;
 };
 export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
   onDelete,
   multipleShorctutPermissions = true,
   instanceName,
+  row,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -49,12 +51,13 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
           <Td />
           <Td />
           <Td />
+          <Td />
           <Td>
             <Flex>
               <FlexItem>
                 <RemoveButton
                   variant="link"
-                  onClick={onDelete}
+                  onClick={() => onDelete(row)}
                   tooltip={"Delete"}
                 />
               </FlexItem>
@@ -66,9 +69,10 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
           <Td>
             <ResourceTypeLabel variant={"CLUSTER"} />{" "}
             <DisplayResourceName resourceType={"CLUSTER"} />{" "}
-            {t("is_kafka_instance", instanceName)}
+            {t("is_kafka_instance", { value: instanceName })}
           </Td>
 
+          <Td />
           <Td />
           <Td />
 

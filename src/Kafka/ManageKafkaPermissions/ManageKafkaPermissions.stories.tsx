@@ -1,10 +1,44 @@
 import { ManageKafkaPermissions } from "./ManageKafkaPermissions";
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
 import { PrincipalType } from "./types";
+import { useState } from "react";
+import {
+  PermissionsForAllAccounts,
+  PermissionsForSelectedAccount,
+} from "./components/ReviewPermissionsTable.stories";
+import { fakeApi } from "../../shared/storiesHelpers";
 
 export default {
   component: ManageKafkaPermissions,
   args: {
+    resourceNameOptions: (filter) =>
+      fakeApi<string[]>(
+        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+          v.includes(filter)
+        ),
+        100
+      ),
+    fetchConsumeTopicShortcutResourceName: (filter) =>
+      fakeApi<string[]>(
+        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+          v.includes(filter)
+        ),
+        100
+      ),
+    onFetchConsumeTopicShortcutTopicResourceNameOptions: (filter) =>
+      fakeApi<string[]>(
+        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+          v.includes(filter)
+        ),
+        100
+      ),
+    onFetchProduceTopicShortcutResourceNameOptions: (filter) =>
+      fakeApi<string[]>(
+        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+          v.includes(filter)
+        ),
+        100
+      ),
     accounts: [
       {
         id: "id",
@@ -43,6 +77,7 @@ export default {
       },
     ],
     kafkaName: "name-test",
+    selectedAcount: "",
   },
 } as ComponentMeta<typeof ManageKafkaPermissions>;
 
@@ -57,4 +92,25 @@ EmptyState.parameters = {
       story: `A user can select any value he wishes and it will be logged into the onChangeAccount state`,
     },
   },
+};
+
+export const InteractiveExample: ComponentStory<
+  typeof ManageKafkaPermissions
+> = (args) => {
+  const [selectedAccount, setSelectedAccount] = useState<string | undefined>(
+    undefined
+  );
+
+  return (
+    <ManageKafkaPermissions
+      {...args}
+      selectedAccount={selectedAccount}
+      onChangeSelectedAccount={setSelectedAccount}
+      existingAcls={
+        selectedAccount == "*"
+          ? PermissionsForAllAccounts
+          : PermissionsForSelectedAccount
+      }
+    />
+  );
 };

@@ -4,13 +4,17 @@
   "account_id_title": "Account",
   "account_id_typeahead_placeholder": "Select an account",
   "all_accounts_description": "Uses a wildcard (*) to assign permissions to all user and service accounts",
+  "all_accounts_help": "Review the list of existing permissions applied to all accounts within this Kafka instance. ",
   "all_accounts_service_account_group": "Service accounts",
   "all_accounts_title": "All accounts",
   "all_accounts_user_account_group": "User accounts",
+  "assign_permissions_all_description": "Assign permissions to all accounts",
+  "assign_permissions_description": "Assign permissions to the selected account ({{value}})",
+  "assign_permissions_title": "Assign permissions",
   "consumer_group": "Consumer group",
   "dialog_aria_label": "Manage access dialog",
   "dialog_title": "Manage access",
-  "is_kafka_instance": "is '{{value}}' ",
+  "is_kafka_instance": "is {{value}} ",
   "kafka_instance": "$t(common:kafka) instance",
   "no_results_found": "No results found",
   "operations": {
@@ -72,6 +76,8 @@
     "topic": "Topic",
     "transactional_id": "Transactional ID"
   },
+  "review_existing_title": "Review existing permissions",
+  "selected_account_help": "Review the list of existing permissions for the selected account. The list includes account-specific permissions and permissions applied to all accounts within this Kafka instance. Permissions labeled<1>All accounts</1> cannot be removed when an individual account ID is selected.",
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
   "table": {

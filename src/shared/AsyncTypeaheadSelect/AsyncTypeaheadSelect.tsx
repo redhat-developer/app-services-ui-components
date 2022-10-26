@@ -139,6 +139,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
+        width={170}
         onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
         onTypeaheadInputChanged={onTypeahead}

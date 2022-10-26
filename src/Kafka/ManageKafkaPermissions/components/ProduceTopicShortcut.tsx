@@ -9,14 +9,16 @@ import { ShortcutsTableHead } from "./ShortcutsTableHead";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 
 export type ProduceTopicShortcutProps = {
-  onChange: (value: string) => void;
+  onChange: (value: ResourcePrefixRuleValue) => void;
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;
   onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
-  onDelete: () => void;
+  onDelete: (row: number) => void;
   multipleShorctutPermissions?: boolean;
+  row: number;
+  setIsNameValid: (value: boolean) => void;
 };
 export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
   onChange,
@@ -26,7 +28,9 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
   resourceNameValue,
   submitted,
   onFetchResourceNameOptions,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  row,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -60,12 +64,13 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
           <Td />
           <Td />
           <Td />
+          <Td />
           <Td>
             <Flex>
               <FlexItem>
                 <RemoveButton
                   variant="link"
-                  onClick={onDelete}
+                  onClick={() => onDelete(row)}
                   tooltip={t("operations.delete")}
                 />
               </FlexItem>
@@ -80,6 +85,7 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
           onChangeResourceName={onChangeResourceName}
           onFetchResourceNameOptions={onFetchResourceNameOptions}
           submitted={submitted}
+          setIsNameValid={setIsNameValid}
         />
       </Tbody>
     </>

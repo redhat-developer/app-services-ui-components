@@ -6,6 +6,7 @@ import { ResourcePermission } from "./ResourcePermission";
 import type { ResourcePermissionValue } from "./ResourcePermission";
 import { ResourceOperation } from "./ResourceOperation";
 import type { ResourceOperationValue } from "./ResourceOperation";
+import { RemoveButton } from "../../../shared";
 export type KafkaInstanceManualPermissions = {
   resourceType: ResourceTypeValue | undefined;
   onChangeResourceType: (value: ResourceTypeValue | undefined) => void;
@@ -16,6 +17,8 @@ export type KafkaInstanceManualPermissions = {
   onChangeResourceOperation: (
     value: ResourceOperationValue | undefined
   ) => void;
+  row: number;
+  onDelete: (row: number) => void;
 };
 
 export const KafkaInstanceManualPermissions: React.FC<
@@ -28,12 +31,14 @@ export const KafkaInstanceManualPermissions: React.FC<
   onChangeResourceOperation,
   onChangeResourcePermission,
   onChangeResourceType,
+  row,
+  onDelete,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   return (
     <Tbody>
       <Tr>
-        <Td width={70}>
+        <Td width={60}>
           <ResourceType
             value={resourceType}
             onChangeValue={onChangeResourceType}
@@ -59,6 +64,13 @@ export const KafkaInstanceManualPermissions: React.FC<
               t("operations.describe"),
             ]}
             invalid={submitted && resourceOperation === undefined}
+          />
+        </Td>
+        <Td>
+          <RemoveButton
+            variant="link"
+            onClick={() => onDelete(row)}
+            tooltip={t("operations.delete")}
           />
         </Td>
       </Tr>

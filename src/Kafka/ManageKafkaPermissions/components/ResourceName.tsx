@@ -10,6 +10,7 @@ type ResourceNameProps = {
   submitted: boolean;
   resourceType: ResourceTypeValue | undefined;
   resourcePrefixRule: ResourcePrefixRuleValue;
+  setIsNameValid: (value: boolean) => void;
 };
 
 export const ResourceName: React.VFC<ResourceNameProps> = ({
@@ -19,6 +20,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
   resourceType,
   resourcePrefixRule,
   onFetchOptions,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const validationCheck = (
@@ -67,6 +69,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
       filter,
       isCreated
     );
+    setIsNameValid(validationMessage.isValid);
     return validationMessage;
   };
 

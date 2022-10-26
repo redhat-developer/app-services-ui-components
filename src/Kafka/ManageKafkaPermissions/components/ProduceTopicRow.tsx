@@ -6,13 +6,14 @@ import { ResourcePrefixRule } from "./ResourcePrefixRule";
 import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 
 export type ProduceTopicRowProps = {
-  onChange: (value: string) => void;
+  onChange: (value: ResourcePrefixRuleValue) => void;
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;
   onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
   isConsumeTopicShortcut?: boolean;
+  setIsNameValid: (value: boolean) => void;
 };
 export const ProduceTopicRow: React.FC<ProduceTopicRowProps> = ({
   onChange,
@@ -22,6 +23,7 @@ export const ProduceTopicRow: React.FC<ProduceTopicRowProps> = ({
   onFetchResourceNameOptions,
   submitted,
   isConsumeTopicShortcut,
+  setIsNameValid,
 }) => {
   return (
     <Tr style={{ borderBottom: isConsumeTopicShortcut ? "none" : "" }}>
@@ -46,12 +48,17 @@ export const ProduceTopicRow: React.FC<ProduceTopicRowProps> = ({
           submitted={submitted}
           resourceType={"topic"}
           resourcePrefixRule={prefixRuleValue}
+          setIsNameValid={setIsNameValid}
         />
       </Td>
       <Td>
         <PermissionOperationCell
           permission={"ALLOW"}
-          operation={["WRITE", "CREATE", "DESCRIBE"]}
+          operation={
+            isConsumeTopicShortcut
+              ? ["READ", "DESCRIBE"]
+              : ["WRITE", "CREATE", "DESCRIBE"]
+          }
         />
       </Td>
     </Tr>

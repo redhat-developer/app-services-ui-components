@@ -13,8 +13,8 @@ import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
 import { RemoveButton } from "../../../shared/RemoveButton";
 
 export type ConsumeTopicShortcutProps = {
-  onChangeConsumerResourcePrefixRule: (value: string) => void;
-  onChangeTopicResourcePrefixRule: (value: string) => void;
+  onChangeConsumerResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
+  onChangeTopicResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
   consumerPrefixRuleValue: ResourcePrefixRuleValue;
   topicPrefixRuleValue: ResourcePrefixRuleValue;
   consumerResourceNameValue: string | undefined;
@@ -25,7 +25,9 @@ export type ConsumeTopicShortcutProps = {
   onFetchTopicResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
   multipleShorctutPermissions?: boolean;
-  onDelete: () => void;
+  onDelete: (row: number) => void;
+  row: number;
+  setIsNameValid: (value: boolean) => void;
 };
 export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onChangeConsumerResourceName,
@@ -40,7 +42,9 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onFetchConsumerResourceNameOptions,
   onFetchTopicResourceNameOptions,
   onDelete,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  row,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -74,19 +78,21 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
           <Td />
           <Td />
           <Td />
-          <Td>
-            <Flex>
-              <FlexItem>
+          <Td />
+          <Flex>
+            <FlexItem>
+              <Td>
                 <RemoveButton
                   variant="link"
-                  onClick={onDelete}
+                  onClick={() => onDelete(row)}
                   tooltip={t("operations.delete")}
                 />
-              </FlexItem>
-            </Flex>
-          </Td>
+              </Td>
+            </FlexItem>
+          </Flex>
         </Tr>
         <ProduceTopicRow
+          setIsNameValid={setIsNameValid}
           isConsumeTopicShortcut={true}
           onChange={onChangeTopicResourcePrefixRule}
           prefixRuleValue={topicPrefixRuleValue}
@@ -116,13 +122,14 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
                 submitted={submitted}
                 resourceType={"topic"}
                 resourcePrefixRule={consumerPrefixRuleValue}
+                setIsNameValid={setIsNameValid}
               />
             }
           </Td>
           <Td>
             <PermissionOperationCell
               permission={"ALLOW"}
-              operation={["READ", "DESCRIBE"]}
+              operation={["READ"]}
             />
           </Td>
         </Tr>

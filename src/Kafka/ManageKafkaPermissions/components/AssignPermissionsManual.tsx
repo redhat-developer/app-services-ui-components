@@ -11,6 +11,7 @@ import type { ResourceTypeValue } from "./ResourceType";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 import { useTranslation } from "react-i18next";
 import { KafkaInstanceManualPermissions } from "./KafkaInstanceManualPermissions";
+import { RemoveButton } from "../../../shared";
 
 export type AssignPermissionsManualProps = {
   resourceType: ResourceTypeValue | undefined;
@@ -28,6 +29,9 @@ export type AssignPermissionsManualProps = {
     value: ResourceOperationValue | undefined
   ) => void;
   multipleShorctutPermissions?: boolean;
+  row: number;
+  onDelete: (row: number) => void;
+  setIsNameValid: (value: boolean) => void;
 };
 
 export const AssignPermissionsManual: React.FC<
@@ -45,7 +49,10 @@ export const AssignPermissionsManual: React.FC<
   resourceOperation,
   onChangeResourceOperation,
   onChangeResourcePermission,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  row,
+  onDelete,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation("manage-kafka-permissions");
   const resourceTypeOptions = () => {
@@ -79,6 +86,7 @@ export const AssignPermissionsManual: React.FC<
         ];
     }
   };
+
   return (
     <>
       {!multipleShorctutPermissions ? <ShortcutsTableHead /> : null}
@@ -91,6 +99,8 @@ export const AssignPermissionsManual: React.FC<
           onChangeResourceOperation={onChangeResourceOperation}
           onChangeResourcePermission={onChangeResourcePermission}
           onChangeResourceType={onChangeResourceType}
+          onDelete={onDelete}
+          row={row}
         />
       ) : (
         <Tbody>
@@ -116,6 +126,7 @@ export const AssignPermissionsManual: React.FC<
                 submitted={submitted}
                 resourceType={resourceType}
                 resourcePrefixRule={resourcePrefix}
+                setIsNameValid={setIsNameValid}
               />
             </Td>
             <Td>
@@ -132,6 +143,13 @@ export const AssignPermissionsManual: React.FC<
                 invalid={
                   submitted && resourceOperation === undefined ? true : false
                 }
+              />
+            </Td>
+            <Td>
+              <RemoveButton
+                variant="link"
+                onClick={() => onDelete(row)}
+                tooltip={t("operations.delete")}
               />
             </Td>
           </Tr>
