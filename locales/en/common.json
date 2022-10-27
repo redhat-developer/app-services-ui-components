@@ -20,6 +20,18 @@
   "complete": "Ready",
   "confirm_delete_modal_text": "<strong>{{name}}</strong> will be deleted.",
   "connection": "Connection",
+  "connectors": {
+    "amazon_chip": "Amazon",
+    "amazon_queue_service": "Amazon Simple Queue Service",
+    "amazon_redshift": "Amazon Redshift",
+    "big_data_chip": "Big Data",
+    "change_data_capture_chip": "Change data capture",
+    "postgresDB": "postgresDB",
+    "sink_chip": "Sink",
+    "source_chip": "Source",
+    "streaming_messaging_chip": "Streaming&messaging",
+    "verison": "Version: 1.0.1 Final"
+  },
   "copy_clipboard": "Copy to clipboard",
   "copy_clipboard_successfully": "Successfully copied to clipboard!",
   "created": "Created",
