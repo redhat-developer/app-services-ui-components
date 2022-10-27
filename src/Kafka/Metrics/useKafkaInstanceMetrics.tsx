@@ -2,7 +2,7 @@ import { useSelector } from "@xstate/react";
 import { useCallback, useContext } from "react";
 import { KafkaInstanceMetricsContext } from "./KafkaInstanceMetricsProvider";
 import type { KafkaInstanceMetricsMachineContext } from "./machines";
-import type { DurationOptions } from "./types";
+import type { BrokerFilter, DurationOptions } from "./types";
 
 type SeletorReturn = KafkaInstanceMetricsMachineContext & {
   isInitialLoading: boolean;
@@ -16,6 +16,7 @@ export function useKafkaInstanceMetrics() {
   const { service } = useContext(KafkaInstanceMetricsContext);
 
   const {
+    selectedToggle,
     selectedBroker,
     brokers,
     usedDiskSpaceMetrics,
@@ -60,6 +61,12 @@ export function useKafkaInstanceMetrics() {
 
   const onRefresh = useCallback(() => service.send("refresh"), [service]);
 
+  const onSelectToggle = useCallback(
+    (value: BrokerFilter | undefined) =>
+      service.send({ type: "selectToggle", value }),
+    [service]
+  );
+
   return {
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
@@ -79,5 +86,7 @@ export function useKafkaInstanceMetrics() {
     onBrokerChange,
     selectedBroker,
     brokers,
+    selectedToggle,
+    onSelectToggle,
   };
 }

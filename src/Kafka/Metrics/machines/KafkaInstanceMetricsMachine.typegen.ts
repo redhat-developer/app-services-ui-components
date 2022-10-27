@@ -34,6 +34,7 @@ export interface Typegen0 {
       | "selectDuration"
       | "xstate.init";
     setMetrics: "fetchSuccess";
+    setToggle: "selectToggle";
   };
   eventsCausingServices: {
     api:

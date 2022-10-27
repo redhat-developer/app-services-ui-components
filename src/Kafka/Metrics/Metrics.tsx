@@ -19,6 +19,7 @@ import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";
 import { PartitionCard } from "./components/PartitionCard";
 import { MetricsLagAlert } from "./components/MetricsLagAlert";
+import { BrokerFilter } from "./types";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
@@ -138,6 +139,8 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
     brokers,
     onBrokerChange,
     selectedBroker,
+    selectedToggle,
+    onSelectToggle,
   } = useKafkaInstanceMetrics();
 
   return (
@@ -160,6 +163,8 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
       brokers={brokers}
       selectedBroker={selectedBroker}
       onSelectedBroker={onBrokerChange}
+      selectToggle={selectedToggle}
+      onSelectedToggle={onSelectToggle}
     />
   );
 };

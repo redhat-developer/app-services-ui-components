@@ -30,7 +30,9 @@ export const FilterByBroker: VoidFunctionComponent<FilterByBrokerProps> = ({
   };
 
   const onBrokerSelect: SelectProps["onSelect"] = (_, broker) => {
-    onSetSelectedBroker(broker as string);
+    broker !== t("all_brokers")
+      ? onSetSelectedBroker(broker as string)
+      : onSetSelectedBroker(undefined);
     setIsBrokerSelectOpen(false);
   };
 

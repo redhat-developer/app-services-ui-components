@@ -1,7 +1,11 @@
 import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import type { DurationOptions, TimeSeriesMetrics } from "../types";
+import type {
+  BrokerFilter,
+  DurationOptions,
+  TimeSeriesMetrics,
+} from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
 import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
@@ -32,6 +36,8 @@ export type CardKafkaInstanceMetricsProps = {
   selectedBroker: string | undefined;
   onSelectedBroker: (broker: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
+  selectToggle: BrokerFilter | undefined;
+  onSelectedToggle: (value: BrokerFilter | undefined) => void;
 } & Omit<ToolbarRefreshProps, "ariaLabel"> &
   CardKafkaInstanceMetricsLimits;
 
@@ -61,6 +67,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
   onDurationChange,
   selectedBroker,
   onSelectedBroker,
+  selectToggle,
+  onSelectedToggle,
 }) => {
   const { t } = useTranslation("metrics");
 
@@ -105,9 +113,16 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   helperText={t("used_disk_space_help_text")}
                 />
                 <CardBody>
-                  <BrokerToggle value={"total"} onChange={() => false} />
+                  <BrokerToggle
+                    value={selectToggle}
+                    onChange={onSelectedToggle}
+                  />
                   <ChartLinearWithOptionalLimit
-                    chartName={t("used_disk_space")}
+                    chartName={
+                      selectedBroker
+                        ? selectedBroker
+                        : t("instance_chart_title")
+                    }
                     yLabel={t("axis-label-bytes")}
                     metrics={usedDiskMetrics}
                     duration={duration}

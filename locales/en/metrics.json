@@ -26,6 +26,7 @@
   "filter-by-broker": "Filter by broker",
   "incoming_bytes": "Incoming bytes ({{topic}})",
   "incoming_bytes_all_topics": "Incoming bytes (all topics)",
+  "instance_chart_title": "Instance",
   "kafka_instance_filter_by_time": "Filter $t(common:kafka) instance metrics by time range",
   "kafka_instance_metrics": "$t(common:kafka) instance metrics",
   "kafka_instance_refresh": "Refresh $t(common:kafka) instance metrics",

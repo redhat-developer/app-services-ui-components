@@ -16,6 +16,7 @@ export type KafkaInstanceMetricsProviderProps = {
   getKafkaInstanceMetrics: (options: {
     duration: DurationOptions;
     interval: number;
+    selectedBroker: string | undefined;
   }) => Promise<GetKafkaInstanceMetricsResponse>;
 };
 export const KafkaInstanceMetricsProvider: FunctionComponent<
@@ -28,6 +29,7 @@ export const KafkaInstanceMetricsProvider: FunctionComponent<
           api: (context) => {
             return (callback) => {
               getKafkaInstanceMetrics({
+                selectedBroker: context.selectedBroker,
                 duration: context.duration,
                 interval: timeIntervalsMapping[context.duration].interval,
               })

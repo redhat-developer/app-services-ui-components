@@ -1,5 +1,6 @@
 import { assign, createMachine } from "xstate";
 import type {
+  BrokerFilter,
   GetKafkaInstanceMetricsResponse,
   TimeSeriesMetrics,
 } from "../types";
@@ -38,6 +39,7 @@ export type KafkaInstanceMetricsMachineContext = {
   // from the UI elements
   duration: DurationOptions;
   selectedBroker: string | undefined;
+  selectedToggle: BrokerFilter | undefined;
 
   // from the api
   brokers: string[];
@@ -64,7 +66,8 @@ export const KafkaInstanceMetricsMachine = createMachine(
         // from the UI elements
         | { type: "selectTopic"; topic: string | undefined }
         | { type: "selectDuration"; duration: DurationOptions }
-        | { type: "selectBroker"; broker: string | undefined },
+        | { type: "selectBroker"; broker: string | undefined }
+        | { type: "selectToggle"; value: BrokerFilter | undefined },
     },
     id: "kafkaInstanceMetrics",
     context: {
@@ -79,6 +82,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       connectionRateLimit: undefined,
       fetchFailures: 0,
       brokers: [],
+      selectedToggle: "total",
     },
     initial: "initialLoading",
     states: {
@@ -138,6 +142,9 @@ export const KafkaInstanceMetricsMachine = createMachine(
           selectBroker: {
             actions: "setBroker",
             target: "callApi",
+          },
+          selectToggle: {
+            actions: "setToggle",
           },
         },
       },
@@ -203,6 +210,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       setBroker: assign({
         selectedBroker: (_context, event) => event.broker,
       }),
+      setToggle: assign((_, { value }) => ({ selectedToggle: value })),
     },
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,
