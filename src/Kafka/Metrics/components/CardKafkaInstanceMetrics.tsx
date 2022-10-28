@@ -116,6 +116,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   <BrokerToggle
                     value={selectToggle}
                     onChange={onSelectedToggle}
+                    selectedBroker={selectedBroker}
                   />
                   <ChartLinearWithOptionalLimit
                     chartName={

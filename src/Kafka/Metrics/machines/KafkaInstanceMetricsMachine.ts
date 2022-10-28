@@ -145,6 +145,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
           },
           selectToggle: {
             actions: "setToggle",
+            target: "callApi",
           },
         },
       },

@@ -6,11 +6,13 @@ import type { BrokerFilter } from "../types";
 export type BrokerToggleProps = {
   value: BrokerFilter | undefined;
   onChange: (value: BrokerFilter) => void;
+  selectedBroker: string | undefined;
 };
 
 export const BrokerToggle: VoidFunctionComponent<BrokerToggleProps> = ({
   value,
   onChange,
+  selectedBroker,
 }) => {
   const { t } = useTranslation("metrics");
 
@@ -20,14 +22,15 @@ export const BrokerToggle: VoidFunctionComponent<BrokerToggleProps> = ({
         text={t("broker_filter.total")}
         value="total"
         buttonId="total"
-        isSelected={value === "total"}
+        isSelected={value === "total" || selectedBroker === undefined}
         onChange={() => onChange("total")}
+        isDisabled={value === "perBroker" || selectedBroker !== undefined}
       />
       <ToggleGroupItem
         text={t("broker_filter.per_broker")}
         value="perBroker"
         buttonId="perBroker"
-        isSelected={value === "perBroker"}
+        isSelected={value === "perBroker" || selectedBroker !== undefined}
         onChange={() => onChange("perBroker")}
       />
     </ToggleGroup>
