@@ -22,9 +22,9 @@ export const BrokerToggle: VoidFunctionComponent<BrokerToggleProps> = ({
         text={t("broker_filter.total")}
         value="total"
         buttonId="total"
-        isSelected={value === "total" || selectedBroker === undefined}
+        isSelected={value === "total"}
         onChange={() => onChange("total")}
-        isDisabled={value === "perBroker" || selectedBroker !== undefined}
+        isDisabled={selectedBroker !== undefined}
       />
       <ToggleGroupItem
         text={t("broker_filter.per_broker")}
