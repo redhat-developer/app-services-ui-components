@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
+import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
@@ -54,42 +54,27 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
 
       <Tbody>
         <Tr style={{ borderBottom: "none" }}>
-          <Td>
-            <Flex>
-              <FlexItem>
-                <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_consume_topic")}
-                </Title>
-              </FlexItem>
-              <FlexItem>
-                <Popover
-                  headerContent={t(
-                    "permissions_dropdown.shortcut_consume_topic"
-                  )}
-                  bodyContent={t(
-                    "permissions_dropdown.shortcut_consume_topic_description"
-                  )}
-                >
-                  <OutlinedQuestionCircleIcon />
-                </Popover>
-              </FlexItem>
-            </Flex>
+          <Td colSpan={5}>
+            <Title headingLevel="h6">
+              {t("permissions_dropdown.shortcut_consume_topic")}{" "}
+              <Popover
+                headerContent={t("permissions_dropdown.shortcut_consume_topic")}
+                bodyContent={t(
+                  "permissions_dropdown.shortcut_consume_topic_description"
+                )}
+              >
+                <OutlinedQuestionCircleIcon />
+              </Popover>
+            </Title>
           </Td>
-          <Td />
-          <Td />
-          <Td />
-          <Td />
-          <Flex>
-            <FlexItem>
-              <Td>
-                <RemoveButton
-                  variant="link"
-                  onClick={() => onDelete(row)}
-                  tooltip={t("operations.delete")}
-                />
-              </Td>
-            </FlexItem>
-          </Flex>
+
+          <Td>
+            <RemoveButton
+              variant="link"
+              onClick={() => onDelete(row)}
+              tooltip={t("operations.delete")}
+            />
+          </Td>
         </Tr>
         <ProduceTopicRow
           setIsNameValid={setIsNameValid}

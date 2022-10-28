@@ -51,7 +51,7 @@ export const ResourcePermission: React.VFC<ResourcePermissionProps> = ({
       onToggle={onToggle}
       onSelect={onSelect}
       isOpen={isOpen}
-      width={250}
+      width={150}
       selections={value}
       menuAppendTo={"parent"}
     >

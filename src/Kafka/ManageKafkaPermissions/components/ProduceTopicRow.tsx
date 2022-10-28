@@ -51,7 +51,7 @@ export const ProduceTopicRow: React.FC<ProduceTopicRowProps> = ({
           setIsNameValid={setIsNameValid}
         />
       </Td>
-      <Td>
+      <Td colSpan={2}>
         <PermissionOperationCell
           permission={"ALLOW"}
           operation={

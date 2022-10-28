@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
+import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
 import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
@@ -27,53 +27,35 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
 
       <Tbody>
         <Tr style={{ borderBottom: "none" }}>
-          <Td>
-            <Flex>
-              <FlexItem>
-                <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_manage_access")}
-                </Title>
-              </FlexItem>
-              <FlexItem>
-                <Popover
-                  headerContent={t(
-                    "permissions_dropdown.shortcut_manage_access"
-                  )}
-                  bodyContent={t(
-                    "permissions_dropdown.shortcut_manage_access_description"
-                  )}
-                >
-                  <OutlinedQuestionCircleIcon />
-                </Popover>
-              </FlexItem>
-            </Flex>
+          <Td colSpan={5}>
+            <Title headingLevel="h6">
+              {t("permissions_dropdown.shortcut_manage_access")}{" "}
+              <Popover
+                headerContent={t("permissions_dropdown.shortcut_manage_access")}
+                bodyContent={t(
+                  "permissions_dropdown.shortcut_manage_access_description"
+                )}
+              >
+                <OutlinedQuestionCircleIcon />
+              </Popover>
+            </Title>
           </Td>
-          <Td />
-          <Td />
-          <Td />
-          <Td />
           <Td>
-            <Flex>
-              <FlexItem>
-                <RemoveButton
-                  variant="link"
-                  onClick={() => onDelete(row)}
-                  tooltip={"Delete"}
-                />
-              </FlexItem>
-            </Flex>
+            <RemoveButton
+              variant="link"
+              onClick={() => onDelete(row)}
+              tooltip={"Delete"}
+            />
           </Td>
         </Tr>
 
         <Tr>
-          <Td>
+          <Td colSpan={2}>
             <ResourceTypeLabel variant={"CLUSTER"} />{" "}
             <DisplayResourceName resourceType={"CLUSTER"} />{" "}
             {t("is_kafka_instance", { value: instanceName })}
           </Td>
 
-          <Td />
-          <Td />
           <Td />
 
           <Td>

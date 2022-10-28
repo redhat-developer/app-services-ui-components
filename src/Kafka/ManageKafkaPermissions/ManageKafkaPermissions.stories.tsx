@@ -81,19 +81,6 @@ export default {
   },
 } as ComponentMeta<typeof ManageKafkaPermissions>;
 
-const Template: ComponentStory<typeof ManageKafkaPermissions> = (args) => (
-  <ManageKafkaPermissions {...args} />
-);
-export const EmptyState = Template.bind({});
-EmptyState.args = {};
-EmptyState.parameters = {
-  docs: {
-    description: {
-      story: `A user can select any value he wishes and it will be logged into the onChangeAccount state`,
-    },
-  },
-};
-
 export const InteractiveExample: ComponentStory<
   typeof ManageKafkaPermissions
 > = (args) => {
