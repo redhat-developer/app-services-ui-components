@@ -7,7 +7,7 @@ import {
 } from "@patternfly/react-core";
 import { FilterIcon } from "@patternfly/react-icons";
 import type { VoidFunctionComponent } from "react";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export const EmptyStateNoTopicSelected: VoidFunctionComponent = () => {
   const { t } = useTranslation();
@@ -17,7 +17,13 @@ export const EmptyStateNoTopicSelected: VoidFunctionComponent = () => {
       <Title headingLevel="h3" size="lg">
         {t("metrics:empty_state_no_filter_title")}
       </Title>
-      <EmptyStateBody>{t("metrics:empty_state_no_filter_body")}</EmptyStateBody>
+      <EmptyStateBody>
+        <Trans
+          ns={"metrics"}
+          i18nKey={"empty_state_no_filter_body"}
+          components={{ bold: <strong /> }}
+        />
+      </EmptyStateBody>
     </EmptyState>
   );
 };
