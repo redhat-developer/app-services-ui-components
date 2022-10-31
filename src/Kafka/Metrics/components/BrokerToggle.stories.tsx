@@ -13,8 +13,8 @@ const Template: ComponentStory<typeof BrokerToggle> = (args) => (
   <BrokerToggle {...args} />
 );
 
-export const total = Template.bind({});
-total.args = {
+export const Total = Template.bind({});
+Total.args = {
   value: "total",
 };
 
