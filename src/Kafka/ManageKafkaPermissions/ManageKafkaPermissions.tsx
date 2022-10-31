@@ -261,7 +261,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                             value: selectedAccount,
                           })}
                     </Text>
-                    {newAcls && (
+                    {newAcls && newAcls?.length > 0 && (
                       <Text component={TextVariants.small}>
                         {t("all_fields_required")}
                       </Text>
