@@ -9,7 +9,7 @@ import { ResourceName } from "./ResourceName";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import { RemoveButton } from "../../../shared/RemoveButton";
 
 export type ConsumeTopicShortcutProps = {
@@ -63,7 +63,13 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
                   "permissions_dropdown.shortcut_consume_topic_description"
                 )}
               >
-                <OutlinedQuestionCircleIcon />
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
+                >
+                  <HelpIcon noVerticalAlign />
+                </button>
               </Popover>
             </Title>
           </Td>
@@ -72,7 +78,7 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
             <RemoveButton
               variant="link"
               onClick={() => onDelete(row)}
-              tooltip={t("operations.delete")}
+              tooltip={t("remove_permission_tooltip")}
             />
           </Td>
         </Tr>

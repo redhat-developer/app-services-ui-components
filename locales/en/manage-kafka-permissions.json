@@ -8,6 +8,7 @@
   "all_accounts_service_account_group": "Service accounts",
   "all_accounts_title": "All accounts",
   "all_accounts_user_account_group": "User accounts",
+  "all_fields_required": "All fields are required",
   "assign_permissions_all_description": "Assign permissions to all accounts",
   "assign_permissions_description": "Assign permissions to the selected account ({{value}})",
   "assign_permissions_title": "Assign permissions",
@@ -77,7 +78,7 @@
     "transactional_id": "Transactional ID"
   },
   "review_existing_title": "Review existing permissions",
-  "selected_account_help": "Review the list of existing permissions for the selected account. The list includes account-specific permissions and permissions applied to all accounts within this Kafka instance. Permissions labeled<1>All accounts</1> cannot be removed when an individual account ID is selected.",
+  "selected_account_help": "Review the list of existing permissions for the selected account. The list includes account-specific permissions and permissions applied to all accounts within this Kafka instance. Permissions labeled <1>All accounts</1> cannot be removed when an individual account ID is selected.",
   "step_1_submit_button": "Next",
   "step_2_submit_button": "Save",
   "table": {

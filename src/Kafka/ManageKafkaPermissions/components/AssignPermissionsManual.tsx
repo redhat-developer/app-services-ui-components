@@ -149,7 +149,7 @@ export const AssignPermissionsManual: React.FC<
               <RemoveButton
                 variant="link"
                 onClick={() => onDelete(row)}
-                tooltip={t("operations.delete")}
+                tooltip={t("remove_permission_tooltip")}
               />
             </Td>
           </Tr>

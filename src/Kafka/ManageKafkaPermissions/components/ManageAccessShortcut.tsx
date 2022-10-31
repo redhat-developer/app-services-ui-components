@@ -1,7 +1,7 @@
 import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { RemoveButton } from "../../../shared";
@@ -36,7 +36,13 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
                   "permissions_dropdown.shortcut_manage_access_description"
                 )}
               >
-                <OutlinedQuestionCircleIcon />
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
+                >
+                  <HelpIcon noVerticalAlign />
+                </button>
               </Popover>
             </Title>
           </Td>
@@ -44,7 +50,7 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
             <RemoveButton
               variant="link"
               onClick={() => onDelete(row)}
-              tooltip={"Delete"}
+              tooltip={t("remove_permission_tooltip")}
             />
           </Td>
         </Tr>

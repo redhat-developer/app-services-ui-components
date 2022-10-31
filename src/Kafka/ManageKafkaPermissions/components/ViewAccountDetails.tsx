@@ -1,11 +1,4 @@
-import {
-  FormGroup,
-  Popover,
-  Text,
-  TextContent,
-  TextVariants,
-} from "@patternfly/react-core";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { Text, TextContent, TextVariants } from "@patternfly/react-core";
 import { Trans, useTranslation } from "react-i18next";
 import type { AclBinding } from "../types";
 import { ReviewPermissionsTable } from "./ReviewPermissionsTable";
@@ -14,16 +7,6 @@ export type ViewAccountDetailsProps = {
   accountId: string | undefined;
   existingAcls: AclBinding[];
   onRemoveAcl: (index: number) => void;
-  /*
-    accounts: Account[];
-    isLoading: boolean;
-    initialOpen?: boolean;
-    onSelectServiceAccount: (value: string) => void;
-    onSelectWildcard: () => void;
-    onSelectUser: (value: string) => void;
-    onTypeUsername: (value: string) => void;
-    onClearSelection: () => void;
-    */
 };
 
 export const ViewAccountDetails: React.VFC<ViewAccountDetailsProps> = ({
@@ -31,7 +14,6 @@ export const ViewAccountDetails: React.VFC<ViewAccountDetailsProps> = ({
   existingAcls,
   onRemoveAcl,
 }) => {
-  console.log(existingAcls);
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const HelperText: React.FunctionComponent = () => {
     if (accountId === "*") {
@@ -49,31 +31,16 @@ export const ViewAccountDetails: React.VFC<ViewAccountDetailsProps> = ({
   };
   return (
     <>
-      <FormGroup
-        fieldId="account-name"
-        label={t("account_id_title")}
-        labelIcon={
-          <Popover bodyContent={t("account_id_help")}>
-            <OutlinedQuestionCircleIcon />
-          </Popover>
-        }
-        isRequired
-      >
-        {accountId === "*" ? t("all_accounts_title") : accountId}
-      </FormGroup>
-      <FormGroup>
-        <TextContent>
-          <Text component={TextVariants.h2}>{t("review_existing_title")}</Text>
-          <Text component={TextVariants.small}>
-            <HelperText />
-          </Text>
-        </TextContent>
-        <ReviewPermissionsTable
-          acls={existingAcls}
-          selectedAccountId={accountId ? accountId : ""}
-          onRemoveAcl={onRemoveAcl}
-        />
-      </FormGroup>
+      <TextContent>
+        <Text component={TextVariants.small}>
+          <HelperText />
+        </Text>
+      </TextContent>
+      <ReviewPermissionsTable
+        acls={existingAcls}
+        selectedAccountId={accountId ? accountId : ""}
+        onRemoveAcl={onRemoveAcl}
+      />
     </>
   );
 };

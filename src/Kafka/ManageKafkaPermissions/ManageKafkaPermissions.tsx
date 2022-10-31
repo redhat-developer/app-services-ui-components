@@ -9,7 +9,9 @@ import {
   Text,
   Badge,
   Alert,
+  Popover,
 } from "@patternfly/react-core";
+import { HelpIcon } from "@patternfly/react-icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AssignPermissions } from "./components/AssignPermissions";
@@ -56,7 +58,10 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   onFetchConsumeTopicShortcutTopicResourceNameOptions,
   onFetchProduceTopicShortcutResourceNameOptions,
 }) => {
-  const { t } = useTranslation(["manage-kafka-permissions"]);
+  const { t } = useTranslation([
+    "manage-kafka-permissions",
+    "create-kafka-instance",
+  ]);
   const escapeClosesModal = useRef<boolean>(true);
   const [
     isExpandedExistingPermissionSection,
@@ -195,6 +200,32 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
           />
         ) : (
           <>
+            <FormGroup
+              fieldId="account-name"
+              label={t("account_id_title")}
+              labelIcon={
+                <Popover bodyContent={t("account_id_help")}>
+                  <button
+                    type="button"
+                    onClick={(e) => e.preventDefault()}
+                    className="pf-c-form__group-label-help"
+                  >
+                    <HelpIcon noVerticalAlign />
+                  </button>
+                </Popover>
+              }
+            >
+              {selectedAccount === "*"
+                ? t("all_accounts_title")
+                : selectedAccount}
+            </FormGroup>
+            {(!canSave || !isNameValid) && submitted && (
+              <Alert
+                isInline
+                title={t("create-kafka-instance:form_errors.form_invalid")}
+                variant={"danger"}
+              />
+            )}
             <ExpandableSection
               isIndented={true}
               isExpanded={isExpandedExistingPermissionSection}
@@ -221,18 +252,8 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                 isExpanded={isExpandedAssignPermissionsSection}
                 onToggle={onChangeExpandedAssignPermissionsSection}
               >
-                {(!canSave || !isNameValid) && submitted && (
-                  <Alert
-                    isInline
-                    title={t("common:form_invalid_alert")}
-                    variant={"danger"}
-                  />
-                )}
                 <FormGroup>
                   <TextContent>
-                    <Text component={TextVariants.h2}>
-                      {t("assign_permissions_title")}
-                    </Text>
                     <Text component={TextVariants.small}>
                       {selectedAccount === "*"
                         ? t("assign_permissions_all_description")
@@ -240,6 +261,11 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                             value: selectedAccount,
                           })}
                     </Text>
+                    {newAcls && (
+                      <Text component={TextVariants.small}>
+                        {t("all_fields_required")}
+                      </Text>
+                    )}
                   </TextContent>
                 </FormGroup>
                 <AssignPermissions

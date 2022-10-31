@@ -1,7 +1,7 @@
 import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
@@ -49,7 +49,13 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
                   "permissions_dropdown.shortcut_produce_topic_description"
                 )}
               >
-                <OutlinedQuestionCircleIcon />
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
+                >
+                  <HelpIcon noVerticalAlign />
+                </button>
               </Popover>
             </Title>
           </Td>
@@ -57,7 +63,7 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
             <RemoveButton
               variant="link"
               onClick={() => onDelete(row)}
-              tooltip={t("operations.delete")}
+              tooltip={t("remove_permission_tooltip")}
             />
           </Td>
         </Tr>
