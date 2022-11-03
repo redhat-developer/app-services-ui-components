@@ -96,6 +96,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
               <button
                 aria-disabled="false"
+                aria-label="consume-topic-delete"
                 class="pf-c-button pf-m-link"
                 data-ouia-component-id="OUIA-Generated-Button-link-4"
                 data-ouia-component-type="PF4/Button"
@@ -604,6 +605,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
               <button
                 aria-disabled="false"
+                aria-label="consume-topic-delete"
                 class="pf-c-button pf-m-link"
                 data-ouia-component-id="OUIA-Generated-Button-link-3"
                 data-ouia-component-type="PF4/Button"
@@ -1077,6 +1079,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
             >
               <button
                 aria-disabled="false"
+                aria-label="consume-topic-delete"
                 class="pf-c-button pf-m-link"
                 data-ouia-component-id="OUIA-Generated-Button-link-2"
                 data-ouia-component-type="PF4/Button"
@@ -1550,6 +1553,7 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
             >
               <button
                 aria-disabled="false"
+                aria-label="consume-topic-delete"
                 class="pf-c-button pf-m-link"
                 data-ouia-component-id="OUIA-Generated-Button-link-1"
                 data-ouia-component-type="PF4/Button"

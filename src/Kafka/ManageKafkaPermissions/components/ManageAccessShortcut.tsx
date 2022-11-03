@@ -51,6 +51,7 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
               variant="link"
               onClick={() => onDelete(row)}
               tooltip={t("remove_permission_tooltip")}
+              ariaLabel={t("delete_access")}
             />
           </Td>
         </Tr>

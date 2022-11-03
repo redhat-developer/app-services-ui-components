@@ -63,7 +63,6 @@ describe("Manage Kafka Permissions Dialog", () => {
     expect(onRemoveAcls).toBeCalledTimes(1);
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
-    // userEvent.click(await comp.findByText("Add permission"));
     userEvent.click(comp.getByRole("menuitem", { name: "Add permission" }));
     const resource = comp.getAllByText("Resource");
     const permission = comp.getAllByText("Permission");
@@ -130,8 +129,10 @@ describe("Manage Kafka Permissions Dialog", () => {
     expect(await comp.findByText("User accounts")).toBeInTheDocument();
     expect(await comp.findByText("All accounts")).toBeInTheDocument();
     expect(await comp.findByRole("button", { name: "Next" })).toBeDisabled();
+    //Select "All accounts"
     userEvent.click(await comp.findByText("All accounts"));
     userEvent.click(await comp.findByLabelText("Next"));
+
     const allAccounts = await comp.findAllByText("All accounts");
     expect(allAccounts[0]).toBeInTheDocument();
     expect(allAccounts[1]).toBeInTheDocument();
@@ -152,11 +153,13 @@ describe("Manage Kafka Permissions Dialog", () => {
     expect(await comp.findByText("Resource")).toBeInTheDocument();
     expect(await comp.findByText("Permission")).toBeInTheDocument();
 
+    //Select assign manual permissions
     userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
       await comp.findByRole("menuitem", { name: "Add permission" })
     );
+    //Table header should be visible
     const resource = await comp.findAllByText("Resource");
     const permission = await comp.findAllByText("Permission");
     expect(resource[0]).toBeInTheDocument();
@@ -164,7 +167,7 @@ describe("Manage Kafka Permissions Dialog", () => {
     expect(permission[0]).toBeInTheDocument();
     expect(permission[1]).toBeInTheDocument();
     await waitForPopper();
-
+    //Add consume from a topic permission
     userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -172,6 +175,7 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
       })
     );
+    //Add multiple permissions to consume from a topic
     userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -180,21 +184,7 @@ describe("Manage Kafka Permissions Dialog", () => {
       })
     );
 
-    userEvent.click(comp.getByLabelText("Select"));
-    await waitForPopper();
-    userEvent.click(
-      await comp.findByRole("menuitem", {
-        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
-      })
-    );
-    userEvent.click(comp.getByLabelText("Select"));
-    await waitForPopper();
-    userEvent.click(
-      await comp.findByRole("menuitem", {
-        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
-      })
-    );
-
+    //Add permissions for manage access
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -202,6 +192,7 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Manage access Provides access to add and remove permissions on this Kafka instance",
       })
     );
+    //Add multiple permissions for managing access
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -209,7 +200,7 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Manage access Provides access to add and remove permissions on this Kafka instance",
       })
     );
-
+    //Add permissions for producing a topic
     userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -217,6 +208,7 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
       })
     );
+    //Add multiple permissions for producing a topic
     userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -224,6 +216,19 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
       })
     );
-    userEvent.click(await comp.findByText("Assign permissions"));
+    userEvent.click(comp.getByRole("button", { name: "Save" }));
+    expect(onSave).not.toHaveBeenCalled();
+    //Delete permissions
+    userEvent.click(comp.getByLabelText("manual-permission-delete"));
+    const consumerTopic = comp.getAllByLabelText("consume-topic-delete");
+    userEvent.click(consumerTopic[0]);
+    userEvent.click(consumerTopic[1]);
+    const produceTopic = comp.getAllByLabelText("produce-topic-delete");
+    userEvent.click(produceTopic[0]);
+    userEvent.click(produceTopic[1]);
+    const manageAccess = comp.getAllByLabelText("manage-access-delete");
+    userEvent.click(manageAccess[0]);
+    userEvent.click(comp.getByRole("button", { name: "Save" }));
+    expect(onSave).toBeCalledTimes(1);
   });
 });

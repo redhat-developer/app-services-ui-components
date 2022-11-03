@@ -64,6 +64,7 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
               variant="link"
               onClick={() => onDelete(row)}
               tooltip={t("remove_permission_tooltip")}
+              ariaLabel={t("delete_producer")}
             />
           </Td>
         </Tr>
