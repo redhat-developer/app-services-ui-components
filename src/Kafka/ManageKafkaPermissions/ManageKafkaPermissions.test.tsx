@@ -5,7 +5,7 @@ import { render, waitForI18n, waitForPopper, within } from "../../test-utils";
 const { InteractiveExample } = composeStories(stories);
 
 describe("Manage Kafka Permissions Dialog", () => {
-  it("should render a select with validation message for invalid topic name", async () => {
+  it("should render an acl modal for a service account", async () => {
     const onCancel = jest.fn();
     const onSave = jest.fn();
     const onRemoveAcls = jest.fn();
@@ -108,5 +108,119 @@ describe("Manage Kafka Permissions Dialog", () => {
         name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
       })
     );
+  });
+  it("should render an acl modal for all accounts", async () => {
+    const onCancel = jest.fn();
+    const onSave = jest.fn();
+    const onRemoveAcls = jest.fn();
+    const comp = render(
+      <InteractiveExample
+        onCancel={onCancel}
+        onSave={onSave}
+        onRemoveAcls={onRemoveAcls}
+      />
+    );
+    await waitForI18n(comp);
+    userEvent.click(await comp.findByLabelText("Account"));
+    await waitForPopper();
+
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByText("Service accounts")).toBeInTheDocument();
+    expect(comp.getByText("User accounts")).toBeInTheDocument();
+    expect(comp.getByText("All accounts")).toBeInTheDocument();
+    expect(comp.getByRole("button", { name: "Next" })).toBeDisabled();
+    userEvent.click(await comp.findByText("All accounts"));
+    userEvent.click(await comp.findByLabelText("Next"));
+    const allAccounts = comp.getAllByText("All accounts");
+    expect(allAccounts[0]).toBeInTheDocument();
+    expect(allAccounts[1]).toBeInTheDocument();
+    expect(allAccounts[2]).toBeInTheDocument();
+    expect(allAccounts[3]).toBeInTheDocument();
+    expect(allAccounts[4]).toBeInTheDocument();
+    expect(allAccounts[5]).toBeInTheDocument();
+    expect(allAccounts[6]).toBeInTheDocument();
+    expect(
+      comp.getByText(
+        "Review the list of existing permissions applied to all accounts within this Kafka instance."
+      )
+    ).toBeInTheDocument();
+    expect(
+      comp.getByText("Assign permissions to all accounts")
+    ).toBeInTheDocument();
+    expect(comp.queryByText("All fields are required")).not.toBeInTheDocument();
+    expect(comp.getByText("Resource")).toBeInTheDocument();
+    expect(comp.getByText("Permission")).toBeInTheDocument();
+
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(comp.getByRole("menuitem", { name: "Add permission" }));
+    const resource = comp.getAllByText("Resource");
+    const permission = comp.getAllByText("Permission");
+    expect(resource[0]).toBeInTheDocument();
+    expect(resource[1]).toBeInTheDocument();
+    expect(permission[0]).toBeInTheDocument();
+    expect(permission[1]).toBeInTheDocument();
+    await waitForPopper();
+
+    userEvent.click(await comp.findByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      await comp.findByRole("menuitem", {
+        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
+      })
+    );
+    userEvent.click(await comp.findByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      await comp.findByRole("menuitem", {
+        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
+      })
+    );
+
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
+      })
+    );
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
+      })
+    );
+
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Manage access Provides access to add and remove permissions on this Kafka instance",
+      })
+    );
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Manage access Provides access to add and remove permissions on this Kafka instance",
+      })
+    );
+
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
+      })
+    );
+    userEvent.click(comp.getByLabelText("Select"));
+    await waitForPopper();
+    userEvent.click(
+      comp.getByRole("menuitem", {
+        name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
+      })
+    );
+    userEvent.click(comp.getByText("Assign permissions"));
   });
 });

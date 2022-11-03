@@ -150,6 +150,7 @@ export const AssignPermissionsManual: React.FC<
                 variant="link"
                 onClick={() => onDelete(row)}
                 tooltip={t("remove_permission_tooltip")}
+                ariaLabel={t("manual_delete")}
               />
             </Td>
           </Tr>

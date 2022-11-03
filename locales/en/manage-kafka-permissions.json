@@ -18,6 +18,7 @@
   "dialog_title": "Manage access",
   "is_kafka_instance": "is {{value}} ",
   "kafka_instance": "$t(common:kafka) instance",
+  "manual_delete": "manual-permission-delete",
   "no_results_found": "No results found",
   "operations": {
     "all": "All",

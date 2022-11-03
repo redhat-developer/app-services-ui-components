@@ -33,12 +33,6 @@ const Template: ComponentStory<typeof ResourceName> = (args) => (
 export const InvalidTopicName = Template.bind({});
 InvalidTopicName.args = { resourceType: "topic" };
 
-InvalidTopicName.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
-  await userEvent.click(await canvas.findByText('Use ".."'));
-};
-
 InvalidTopicName.parameters = {
   docs: {
     description: {
