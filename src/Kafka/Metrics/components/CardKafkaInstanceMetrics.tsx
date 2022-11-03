@@ -1,9 +1,18 @@
-import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  Divider,
+  Toolbar,
+  ToolbarContent,
+  ToolbarItem,
+} from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type {
   BrokerFilter,
   DurationOptions,
+  PartitionBytesMetric,
   TimeSeriesMetrics,
 } from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
@@ -15,6 +24,8 @@ import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import type { ToolbarRefreshProps } from "./ToolbarRefresh";
 import { BrokerToggle } from "./BrokerToggle";
+import { ChartPartitionSizePerBroker } from "./ChartPartitionSizePerBroker";
+import { FilterByPartition } from "./FilterByPartition";
 
 export type CardKafkaInstanceMetricsLimits = {
   diskSpaceLimit: number;
@@ -38,6 +49,8 @@ export type CardKafkaInstanceMetricsProps = {
   onDurationChange: (duration: DurationOptions) => void;
   selectToggle: BrokerFilter | undefined;
   onSelectedToggle: (value: BrokerFilter | undefined) => void;
+  partitions: string[];
+  bytesPerPartitions: PartitionBytesMetric;
 } & Omit<ToolbarRefreshProps, "ariaLabel"> &
   CardKafkaInstanceMetricsLimits;
 
@@ -69,6 +82,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
   onSelectedBroker,
   selectToggle,
   onSelectedToggle,
+  partitions,
+  bytesPerPartitions,
 }) => {
   const { t } = useTranslation("metrics");
 
@@ -131,6 +146,32 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     usageLimit={diskSpaceLimit}
                     isLoading={isLoading}
                     emptyState={<EmptyStateNoMetricsData />}
+                  />
+                </CardBody>
+                <Divider />
+                <ChartTitle
+                  title={t("topic_partition_size")}
+                  helperText={t("")}
+                />
+                <CardBody>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <FilterByPartition
+                        selectedpartition={undefined}
+                        partitionList={partitions}
+                        onSetSelectedPartition={function (
+                          value: string | undefined
+                        ): void {
+                          throw new Error("Function not implemented.");
+                        }}
+                      />
+                    </ToolbarContent>
+                  </Toolbar>
+                  <ChartPartitionSizePerBroker
+                    partitions={bytesPerPartitions}
+                    broker={selectedBroker}
+                    duration={duration}
+                    isLoading={isLoading}
                   />
                 </CardBody>
                 <Divider />

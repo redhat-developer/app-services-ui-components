@@ -2,6 +2,7 @@ import { assign, createMachine } from "xstate";
 import type {
   BrokerFilter,
   GetKafkaInstanceMetricsResponse,
+  PartitionBytesMetric,
   TimeSeriesMetrics,
 } from "../types";
 import { DurationOptions } from "../types";
@@ -43,9 +44,11 @@ export type KafkaInstanceMetricsMachineContext = {
 
   // from the api
   brokers: string[];
+  partitions: string[];
   usedDiskSpaceMetrics: TimeSeriesMetrics;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
+  bytesPerPartitionMetrics: PartitionBytesMetric;
   diskSpaceLimit: number | undefined;
   connectionsLimit: number | undefined;
   connectionRateLimit: number | undefined;
@@ -75,6 +78,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       selectedBroker: undefined,
       duration: DurationOptions.Last1hour,
       usedDiskSpaceMetrics: {},
+      bytesPerPartitionMetrics: {},
       clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: {},
       diskSpaceLimit: undefined,
@@ -82,6 +86,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       connectionRateLimit: undefined,
       fetchFailures: 0,
       brokers: [],
+      partitions: [],
       selectedToggle: "total",
     },
     initial: "initialLoading",
@@ -178,21 +183,25 @@ export const KafkaInstanceMetricsMachine = createMachine(
       setMetrics: assign((_, event) => {
         const {
           usedDiskSpaceMetrics,
+          bytesPerPartitionMetrics,
           clientConnectionsMetrics,
           connectionAttemptRateMetrics,
           diskSpaceLimit,
           connectionsLimit,
           connectionRateLimit,
           brokers,
+          partitions,
         } = event;
         return {
           brokers,
           usedDiskSpaceMetrics,
+          bytesPerPartitionMetrics,
           clientConnectionsMetrics,
           connectionAttemptRateMetrics,
           diskSpaceLimit: diskSpaceLimit * 1024 ** 3, // convert it to GiB
           connectionsLimit,
           connectionRateLimit,
+          partitions,
         };
       }),
       incrementRetries: assign({
@@ -205,6 +214,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       setDuration: assign((_context, event) => ({
         duration: event.duration,
         usedDiskSpaceMetrics: {},
+        bytesPerPartitionMetrics: {},
         clientConnectionsMetrics: {},
         connectionAttemptRateMetrics: {},
       })),
@@ -220,7 +230,8 @@ export const KafkaInstanceMetricsMachine = createMachine(
           return (
             Object.keys(event.clientConnectionsMetrics).length > 0 ||
             Object.keys(event.connectionAttemptRateMetrics).length > 0 ||
-            Object.keys(event.usedDiskSpaceMetrics).length > 0
+            Object.keys(event.usedDiskSpaceMetrics).length > 0 ||
+            Object.keys(event.bytesPerPartitionMetrics).length > 0
           );
         }
         return false;

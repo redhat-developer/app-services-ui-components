@@ -2,17 +2,12 @@
 
 export interface Typegen0 {
   "@@xstate/typegen": true;
-  eventsCausingActions: {
-    setMetrics: "fetchSuccess";
-    incrementRetries: "fetchFail";
-    resetRetries: "refresh";
-  };
   internalEvents: {
-    "xstate.after(1000)#kpis.initialLoading.failure": {
-      type: "xstate.after(1000)#kpis.initialLoading.failure";
-    };
     "xstate.after(1000)#kpis.callApi.failure": {
       type: "xstate.after(1000)#kpis.callApi.failure";
+    };
+    "xstate.after(1000)#kpis.initialLoading.failure": {
+      type: "xstate.after(1000)#kpis.initialLoading.failure";
     };
     "xstate.init": { type: "xstate.init" };
   };
@@ -28,41 +23,47 @@ export interface Typegen0 {
     guards: never;
     delays: never;
   };
+  eventsCausingActions: {
+    incrementRetries: "fetchFail";
+    resetRetries: "refresh";
+    setMetrics: "fetchSuccess";
+  };
   eventsCausingServices: {
     api:
-      | "xstate.after(1000)#kpis.initialLoading.failure"
+      | "refresh"
       | "xstate.after(1000)#kpis.callApi.failure"
-      | "refresh";
+      | "xstate.after(1000)#kpis.initialLoading.failure"
+      | "xstate.init";
   };
   eventsCausingGuards: {
-    isJustCreated: "fetchSuccess";
     canRetryFetching:
-      | "xstate.after(1000)#kpis.initialLoading.failure"
-      | "xstate.after(1000)#kpis.callApi.failure";
+      | "xstate.after(1000)#kpis.callApi.failure"
+      | "xstate.after(1000)#kpis.initialLoading.failure";
+    isJustCreated: "fetchSuccess";
   };
   eventsCausingDelays: {};
   matchesStates:
-    | "initialLoading"
-    | "initialLoading.loading"
-    | "initialLoading.failure"
     | "callApi"
-    | "callApi.loading"
     | "callApi.failure"
+    | "callApi.loading"
     | "criticalFail"
+    | "initialLoading"
+    | "initialLoading.failure"
+    | "initialLoading.loading"
     | "justCreated"
     | "withResponse"
     | "withResponse.idle"
     | "withResponse.refreshing"
     | {
-        initialLoading?: "loading" | "failure";
-        callApi?: "loading" | "failure";
+        callApi?: "failure" | "loading";
+        initialLoading?: "failure" | "loading";
         withResponse?: "idle" | "refreshing";
       };
   tags:
-    | "initialLoading"
-    | "loading"
     | "failed"
+    | "initialLoading"
     | "justCreated"
-    | "withResponse"
-    | "refreshing";
+    | "loading"
+    | "refreshing"
+    | "withResponse";
 }

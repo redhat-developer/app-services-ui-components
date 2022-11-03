@@ -22,6 +22,7 @@ export function useKafkaInstanceMetrics() {
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
+    bytesPerPartitionMetrics,
     diskSpaceLimit,
     connectionsLimit,
     connectionRateLimit,
@@ -32,6 +33,7 @@ export function useKafkaInstanceMetrics() {
     isRefreshing,
     isFailed,
     isJustCreated,
+    partitions,
   } = useSelector<typeof service, SeletorReturn>(
     service,
     useCallback(
@@ -71,6 +73,7 @@ export function useKafkaInstanceMetrics() {
     usedDiskSpaceMetrics,
     clientConnectionsMetrics,
     connectionAttemptRateMetrics,
+    bytesPerPartitionMetrics,
     diskSpaceLimit,
     connectionsLimit,
     connectionRateLimit,
@@ -88,5 +91,6 @@ export function useKafkaInstanceMetrics() {
     brokers,
     selectedToggle,
     onSelectToggle,
+    partitions,
   };
 }

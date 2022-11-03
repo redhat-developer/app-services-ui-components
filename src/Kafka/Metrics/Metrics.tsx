@@ -140,6 +140,8 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
     selectedBroker,
     selectedToggle,
     onSelectToggle,
+    bytesPerPartitionMetrics,
+    partitions,
   } = useKafkaInstanceMetrics();
 
   return (
@@ -164,6 +166,8 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
       onSelectedBroker={onBrokerChange}
       selectToggle={selectedToggle}
       onSelectedToggle={onSelectToggle}
+      bytesPerPartitions={bytesPerPartitionMetrics}
+      partitions={partitions}
     />
   );
 };

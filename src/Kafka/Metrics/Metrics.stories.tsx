@@ -49,7 +49,9 @@ JustCreated.args = {
     fakeApi(
       {
         brokers: ["broker1", "broker2"],
+        partitions: ["partition1", "partition2", "partition3"],
         usedDiskSpaceMetrics: {},
+        bytesPerPartitionMetrics: {},
         clientConnectionsMetrics: {},
         connectionAttemptRateMetrics: {},
         connectionsLimit: 100,
@@ -290,7 +292,13 @@ SomeMissingMetricsButApiOk.args = {
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
       brokers: ["broker1", "broker2"],
+      partitions: ["partition1", "partition2", "partition3"],
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9),
+      bytesPerPartitionMetrics: {
+        "partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
+        "partition 2": makeMetrics(duration, 0, 4, 10 ** 7),
+        "partition 3": makeMetrics(duration, 0, 6, 10 ** 7),
+      },
       clientConnectionsMetrics: {},
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1),
       connectionsLimit: 100,
@@ -336,7 +344,13 @@ LimitsReached.args = {
   getKafkaInstanceMetrics: ({ duration }) =>
     fakeApi({
       brokers: ["broker1", "broker2"],
+      partitions: ["partition1", "partition2", "partition3"],
       usedDiskSpaceMetrics: makeMetrics(duration, 900, 1100, 10 ** 9),
+      bytesPerPartitionMetrics: {
+        "lorem partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
+        "lorem partition 2": makeMetrics(duration, 0, 4, 10 ** 7),
+        "lorem partition 3": makeMetrics(duration, 0, 6, 10 ** 7),
+      },
       clientConnectionsMetrics: makeMetrics(duration, 60, 170, 1),
       connectionAttemptRateMetrics: makeMetrics(duration, 4, 130, 1),
       connectionsLimit: 100,
