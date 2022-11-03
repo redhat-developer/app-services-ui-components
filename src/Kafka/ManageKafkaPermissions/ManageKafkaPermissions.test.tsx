@@ -125,14 +125,14 @@ describe("Manage Kafka Permissions Dialog", () => {
     userEvent.click(await comp.findByLabelText("Account"));
     await waitForPopper();
 
-    expect(comp.getByText("All accounts")).toBeInTheDocument();
-    expect(comp.getByText("Service accounts")).toBeInTheDocument();
-    expect(comp.getByText("User accounts")).toBeInTheDocument();
-    expect(comp.getByText("All accounts")).toBeInTheDocument();
-    expect(comp.getByRole("button", { name: "Next" })).toBeDisabled();
+    expect(await comp.findByText("All accounts")).toBeInTheDocument();
+    expect(await comp.findByText("Service accounts")).toBeInTheDocument();
+    expect(await comp.findByText("User accounts")).toBeInTheDocument();
+    expect(await comp.findByText("All accounts")).toBeInTheDocument();
+    expect(await comp.findByRole("button", { name: "Next" })).toBeDisabled();
     userEvent.click(await comp.findByText("All accounts"));
     userEvent.click(await comp.findByLabelText("Next"));
-    const allAccounts = comp.getAllByText("All accounts");
+    const allAccounts = await comp.findAllByText("All accounts");
     expect(allAccounts[0]).toBeInTheDocument();
     expect(allAccounts[1]).toBeInTheDocument();
     expect(allAccounts[2]).toBeInTheDocument();
@@ -146,17 +146,19 @@ describe("Manage Kafka Permissions Dialog", () => {
       )
     ).toBeInTheDocument();
     expect(
-      comp.getByText("Assign permissions to all accounts")
+      await comp.findByText("Assign permissions to all accounts")
     ).toBeInTheDocument();
     expect(comp.queryByText("All fields are required")).not.toBeInTheDocument();
-    expect(comp.getByText("Resource")).toBeInTheDocument();
-    expect(comp.getByText("Permission")).toBeInTheDocument();
+    expect(await comp.findByText("Resource")).toBeInTheDocument();
+    expect(await comp.findByText("Permission")).toBeInTheDocument();
 
-    userEvent.click(comp.getByLabelText("Select"));
+    userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
-    userEvent.click(comp.getByRole("menuitem", { name: "Add permission" }));
-    const resource = comp.getAllByText("Resource");
-    const permission = comp.getAllByText("Permission");
+    userEvent.click(
+      await comp.findByRole("menuitem", { name: "Add permission" })
+    );
+    const resource = await comp.findAllByText("Resource");
+    const permission = await comp.findAllByText("Permission");
     expect(resource[0]).toBeInTheDocument();
     expect(resource[1]).toBeInTheDocument();
     expect(permission[0]).toBeInTheDocument();
@@ -181,14 +183,14 @@ describe("Manage Kafka Permissions Dialog", () => {
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
       })
     );
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Consume from a topic Provides access to consume from one or more topics depending on topic and consumer group selection criteria",
       })
     );
@@ -196,32 +198,32 @@ describe("Manage Kafka Permissions Dialog", () => {
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Manage access Provides access to add and remove permissions on this Kafka instance",
       })
     );
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Manage access Provides access to add and remove permissions on this Kafka instance",
       })
     );
 
-    userEvent.click(comp.getByLabelText("Select"));
+    userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
       })
     );
-    userEvent.click(comp.getByLabelText("Select"));
+    userEvent.click(await comp.findByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
-      comp.getByRole("menuitem", {
+      await comp.findByRole("menuitem", {
         name: "Produce to a topic Provides access to produce to one or more topics depending on topic selection criteria",
       })
     );
-    userEvent.click(comp.getByText("Assign permissions"));
+    userEvent.click(await comp.findByText("Assign permissions"));
   });
 });
