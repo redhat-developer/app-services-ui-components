@@ -58,6 +58,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
               case "manual":
                 return (
                   <AssignPermissionsManual
+                    key={idx}
                     setIsNameValid={setIsNameValid}
                     resourceType={aclTemplate.resourceType}
                     onChangeResourceType={(value) =>
@@ -115,6 +116,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
               case "consume-topic":
                 return (
                   <ConsumeTopicShortcut
+                    key={idx}
                     setIsNameValid={setIsNameValid}
                     onChangeConsumerResourcePrefixRule={(value) =>
                       setAddedAcls(
@@ -177,6 +179,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
               case "produce-topic":
                 return (
                   <ProduceTopicShortcut
+                    key={idx}
                     setIsNameValid={setIsNameValid}
                     onChange={(value) =>
                       setAddedAcls(
@@ -209,6 +212,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
               case "manage-access":
                 return (
                   <ManageAccessShortcut
+                    key={idx}
                     row={idx}
                     instanceName={kafkaName}
                     onDelete={onDelete}

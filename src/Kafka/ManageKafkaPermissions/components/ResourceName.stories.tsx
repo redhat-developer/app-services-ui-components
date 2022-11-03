@@ -8,6 +8,7 @@ export default {
   component: ResourceName,
   args: {
     value: undefined,
+    setIsNameValid: (value) => value,
     onFetchOptions: (filter) =>
       fakeApi<string[]>(
         ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>

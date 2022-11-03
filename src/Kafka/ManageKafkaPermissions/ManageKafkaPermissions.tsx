@@ -153,6 +153,15 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const onChangeExpandedAssignPermissionsSection = (value: boolean) => {
     setIsExpandedAssignPermissionsSection(value);
   };
+  const isDisabled =
+    step == 1 && (selectedAccount === undefined || selectedAccount === "")
+      ? true
+      : step == 2 &&
+        ((submitted && (!canSave || !isNameValid)) ||
+          newAcls == undefined ||
+          newAcls.length < 1)
+      ? true
+      : false;
 
   return (
     <Modal
@@ -170,16 +179,20 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         <Button
           key={1}
           variant="primary"
-          isDisabled={
-            step == 1
-              ? selectedAccount === undefined || selectedAccount === ""
-              : (!canSave || !isNameValid) && submitted
-          }
+          isDisabled={isDisabled}
           onClick={onClickSubmit}
+          aria-label={
+            step == 1 ? t("step_1_submit_button") : t("step_2_submit_button")
+          }
         >
           {step === 1 ? t("step_1_submit_button") : t("step_2_submit_button")}
         </Button>,
-        <Button onClick={onCancel} key={2} variant="secondary">
+        <Button
+          onClick={onCancel}
+          key={2}
+          variant="secondary"
+          aria-label={t("common:cancel")}
+        >
           {t("common:cancel")}
         </Button>,
       ]}
@@ -209,6 +222,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                     type="button"
                     onClick={(e) => e.preventDefault()}
                     className="pf-c-form__group-label-help"
+                    aria-label={t("account_help")}
                   >
                     <HelpIcon noVerticalAlign />
                   </button>

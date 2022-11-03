@@ -91,7 +91,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     submitted && required
       ? setValidation({ isValid: false, message: t("common:required") })
       : setValidation({ isValid: true, message: undefined });
-    setIsOpen(false);
   };
 
   const isCreatable = !loading && validation && validation.isValid;
@@ -114,7 +113,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       ? t("common:required")
       : validation?.message;
   const onCreateOption = (value: string) => {
-    setIsOpen(false);
     setValidation(onValidationCheck(value, true));
   };
   return (
