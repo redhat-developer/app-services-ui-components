@@ -63,8 +63,10 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     resourceType={aclTemplate.resourceType}
                     onChangeResourceType={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return { ...resourceValues, resourceType: value };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? { ...resourceValues, resourceType: value }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -72,16 +74,20 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     resourcePrefix={aclTemplate.resourcePrefix}
                     onChangeResourcePrefix={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return { ...resourceValues, resourcePrefix: value };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? { ...resourceValues, resourcePrefix: value }
+                            : { ...resourceValues };
                         })
                       )
                     }
                     resourceName={aclTemplate.resourceName}
                     onChangeResource={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return { ...resourceValues, resourceName: value };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? { ...resourceValues, resourceName: value }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -89,22 +95,26 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     resourcePermission={aclTemplate.resourcePermission}
                     onChangeResourcePermission={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            resourcePermission: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                resourcePermission: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
                     resourceOperation={aclTemplate.resourceOperation}
                     onChangeResourceOperation={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            resourceOperation: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                resourceOperation: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -120,21 +130,25 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     setIsNameValid={setIsNameValid}
                     onChangeConsumerResourcePrefixRule={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            consumerResourcePrefixRule: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                consumerResourcePrefixRule: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
                     onChangeTopicResourcePrefixRule={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            topicResourcePrefixRule: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                topicResourcePrefixRule: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -146,21 +160,25 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     topicResourceNameValue={aclTemplate.topicResourceName}
                     onChangeConsumerResourceName={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            consumerResourceName: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                consumerResourceName: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
                     onChangeTopicResourceName={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            topicResourceName: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                topicResourceName: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -183,8 +201,10 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     setIsNameValid={setIsNameValid}
                     onChange={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return { ...resourceValues, prefixRuleValue: value };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? { ...resourceValues, prefixRuleValue: value }
+                            : { ...resourceValues };
                         })
                       )
                     }
@@ -192,11 +212,13 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                     resourceNameValue={aclTemplate.resourceNameValue}
                     onChangeResourceName={(value) =>
                       setAddedAcls(
-                        [...addedAcls].map((resourceValues) => {
-                          return {
-                            ...resourceValues,
-                            resourceNameValue: value,
-                          };
+                        [...addedAcls].map((resourceValues, row) => {
+                          return row === idx
+                            ? {
+                                ...resourceValues,
+                                resourceNameValue: value,
+                              }
+                            : { ...resourceValues };
                         })
                       )
                     }

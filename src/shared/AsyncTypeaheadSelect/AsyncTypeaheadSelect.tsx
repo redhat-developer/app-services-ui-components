@@ -76,7 +76,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
-    submitted && required
+    submitted && required && (value == "" || value == undefined)
       ? setValidation({ isValid: false, message: t("common:required") })
       : null;
     setIsOpen((isOpen) => {

@@ -229,6 +229,6 @@ describe("Manage Kafka Permissions Dialog", () => {
     const manageAccess = comp.getAllByLabelText("manage-access-delete");
     userEvent.click(manageAccess[0]);
     userEvent.click(comp.getByRole("button", { name: "Save" }));
-    expect(onSave).toBeCalledTimes(1);
+    expect(comp.getByText("All fields are required")).toBeInTheDocument();
   });
 });
