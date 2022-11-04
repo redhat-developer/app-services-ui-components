@@ -1,5 +1,4 @@
 import type { SelectProps } from "@patternfly/react-core";
-import { SelectGroup } from "@patternfly/react-core";
 import {
   Select,
   SelectOption,
@@ -9,16 +8,16 @@ import {
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import type { PartitionSelect } from "../types";
 
 type FilterByPartitionProps = {
-  selectedpartition: string | undefined;
-  partitionList: string[];
-  onSetSelectedPartition: (value: string | undefined) => void;
+  partitionValue: PartitionSelect;
+  onSetSelectedPartition: (value: PartitionSelect) => void;
 };
 
 export const FilterByPartition: VoidFunctionComponent<
   FilterByPartitionProps
-> = ({ selectedpartition, partitionList, onSetSelectedPartition }) => {
+> = ({ partitionValue, onSetSelectedPartition }) => {
   const { t } = useTranslation("metrics");
 
   const [ispartitionSelectOpen, setIspartitionSelectOpen] =
@@ -28,25 +27,23 @@ export const FilterByPartition: VoidFunctionComponent<
     setIspartitionSelectOpen(ispartitionSelectOpen);
   };
 
+  const partitionSelectOption: { [key in PartitionSelect]: string } = {
+    Top10: t("top10_partitions"),
+    Top20: t("top20_partitions"),
+  };
+
   const onBrokerSelect: SelectProps["onSelect"] = (_, partition) => {
-    partition !== t("top_partitions")
-      ? onSetSelectedPartition(partition as string)
-      : onSetSelectedPartition(undefined);
+    onSetSelectedPartition(partition as PartitionSelect);
     setIspartitionSelectOpen(false);
   };
 
-  const partitionOptions = (brokerList: string[]) => [
-    <SelectOption key={"partition-filter-0"} value={t("top_partitions")} />,
-    <SelectGroup label="Filter by partition" key="partitions-filter-group">
-      {brokerList.map((broker, index) => (
-        <SelectOption
-          key={`broker-filter-${index + 1}`}
-          value={broker}
-          title={broker}
-        />
-      ))}
-    </SelectGroup>,
-  ];
+  const partitionOptions = () => {
+    return Object.entries(partitionSelectOption).map(([value, label]) => (
+      <SelectOption key={value} value={value}>
+        {label}
+      </SelectOption>
+    ));
+  };
 
   return (
     <ToolbarItem>
@@ -55,12 +52,12 @@ export const FilterByPartition: VoidFunctionComponent<
         isOpen={ispartitionSelectOpen}
         onToggle={onBrokerToggle}
         onSelect={onBrokerSelect}
-        selections={selectedpartition || t("top_partitions")}
+        selections={partitionValue}
         position="left"
-        placeholderText={t("top_partitions")}
+        placeholderText={t("top10_partitions")}
         aria-label={t("filter-by-partitions")}
       >
-        {partitionOptions(partitionList)}
+        {partitionOptions()}
       </Select>
     </ToolbarItem>
   );

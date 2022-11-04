@@ -5,7 +5,6 @@ import {
   Divider,
   Toolbar,
   ToolbarContent,
-  ToolbarItem,
 } from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +12,7 @@ import type {
   BrokerFilter,
   DurationOptions,
   PartitionBytesMetric,
+  PartitionSelect,
   TimeSeriesMetrics,
 } from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
@@ -49,8 +49,9 @@ export type CardKafkaInstanceMetricsProps = {
   onDurationChange: (duration: DurationOptions) => void;
   selectToggle: BrokerFilter | undefined;
   onSelectedToggle: (value: BrokerFilter | undefined) => void;
-  partitions: string[];
   bytesPerPartitions: PartitionBytesMetric;
+  onSelectedPartition: (value: PartitionSelect) => void;
+  selectedPartition: PartitionSelect;
 } & Omit<ToolbarRefreshProps, "ariaLabel"> &
   CardKafkaInstanceMetricsLimits;
 
@@ -82,7 +83,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
   onSelectedBroker,
   selectToggle,
   onSelectedToggle,
-  partitions,
+  selectedPartition,
+  onSelectedPartition,
   bytesPerPartitions,
 }) => {
   const { t } = useTranslation("metrics");
@@ -157,13 +159,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   <Toolbar>
                     <ToolbarContent>
                       <FilterByPartition
-                        selectedpartition={undefined}
-                        partitionList={partitions}
-                        onSetSelectedPartition={function (
-                          value: string | undefined
-                        ): void {
-                          throw new Error("Function not implemented.");
-                        }}
+                        onSetSelectedPartition={onSelectedPartition}
+                        partitionValue={selectedPartition}
                       />
                     </ToolbarContent>
                   </Toolbar>

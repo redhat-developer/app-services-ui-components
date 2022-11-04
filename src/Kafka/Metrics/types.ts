@@ -28,6 +28,7 @@ export type GetTopicsMetricsResponse = {
 export type GetKafkaInstanceMetricsResponse = {
   brokers: string[];
   usedDiskSpaceMetrics: TimeSeriesMetrics;
+  bytesPerPartitionMetrics: PartitionBytesMetric;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
 } & CardKafkaInstanceMetricsLimits;
@@ -40,3 +41,5 @@ export type GetMetricsKpiResponse = {
 };
 
 export type BrokerFilter = "total" | "perBroker";
+
+export type PartitionSelect = "Top10" | "Top20";

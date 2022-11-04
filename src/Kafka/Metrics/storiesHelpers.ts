@@ -19,7 +19,6 @@ export const getKafkaInstanceMetrics = ({
   return fakeApi<GetKafkaInstanceMetricsResponse>(
     {
       brokers: ["broker 1", "broker 2"],
-      partitions: ["partition1", "partition2", "partitions3"],
       usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9, offset),
       bytesPerPartitionMetrics: {
         "partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
