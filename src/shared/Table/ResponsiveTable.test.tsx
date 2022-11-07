@@ -11,6 +11,7 @@ const {
   WithoutActions,
   NoResults,
   CustomActionTestId,
+  CustomOuiaIds,
 } = composeStories(stories);
 
 describe("ResponsiveTable", () => {
@@ -69,5 +70,19 @@ describe("ResponsiveTable", () => {
   it("can use a custom test id for actions", () => {
     const comp = render(<CustomActionTestId />);
     expect(comp.queryAllByTestId("my-action-row-0")).toHaveLength(1);
+  });
+
+  it("can use custom ouia ids for both table, and table rows elements", () => {
+    const comp = render(<CustomOuiaIds />);
+    expect(
+      comp.baseElement.querySelectorAll(
+        "[data-ouia-component-id='table-ouia-id']"
+      )
+    ).toHaveLength(1);
+    expect(
+      comp.baseElement.querySelectorAll(
+        "[data-ouia-component-id='table-row-0']"
+      )
+    ).toHaveLength(1);
   });
 });

@@ -62,6 +62,8 @@ export type ResponsiveTableProps<TRow, TCol> = {
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
   setActionCellOuiaId?: (props: RowProps<TRow>) => string;
+  setRowOuiaId?: (props: RowProps<TRow>) => string;
+  tableOuiaId?: string;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -80,6 +82,8 @@ export const ResponsiveTable = <TRow, TCol>({
   expectedLength = 3,
   onRowClick,
   setActionCellOuiaId,
+  setRowOuiaId,
+  tableOuiaId,
   children,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
@@ -179,6 +183,7 @@ export const ResponsiveTable = <TRow, TCol>({
       gridBreakPoint=""
       ref={ref}
       className={showColumns ? "" : "pf-m-grid"}
+      ouiaId={tableOuiaId}
     >
       <Thead>
         <Tr>{header}</Tr>
@@ -235,6 +240,7 @@ export const ResponsiveTable = <TRow, TCol>({
               isDeleted={deleted}
               isSelected={selected}
               onClick={onClick}
+              rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
               {cells}
               {action}
@@ -325,9 +331,10 @@ export type DeletableRowProps = {
   isSelected: boolean;
   isDeleted: boolean;
   onClick?: () => void;
+  rowOuiaId?: string;
 };
 export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
-  ({ isDeleted, isSelected, onClick, children }) => {
+  ({ isDeleted, isSelected, onClick, children, rowOuiaId }) => {
     return (
       <Tr
         isHoverable={!isDeleted && onClick !== undefined}
@@ -338,6 +345,7 @@ export const DeletableRow: FunctionComponent<DeletableRowProps> = memo(
             }
           }
         }}
+        ouiaId={rowOuiaId}
         isRowSelected={isSelected}
         className={isDeleted ? "mas--ResponsiveTable__Tr--deleted" : undefined}
         data-testid={[isSelected && "row-selected", isDeleted && "row-deleted"]
