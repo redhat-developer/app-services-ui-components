@@ -157,9 +157,10 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
     step == 1 && (selectedAccount === undefined || selectedAccount === "")
       ? true
       : step == 2 &&
-        ((submitted && (!canSave || !isNameValid)) ||
+        ((submitted && !canSave) ||
           newAcls == undefined ||
-          newAcls.length < 1)
+          newAcls.length < 1 ||
+          !isNameValid)
       ? true
       : false;
 
