@@ -26,6 +26,7 @@ const ResponsiveTableSampleType: VoidFunctionComponent<
   ResponsiveTableProps<SampleDataType, typeof columns[number]> & {
     hasActions?: boolean;
     hasCustomActionTestId?: boolean;
+    hasCustomOuiaIds?: boolean;
     isRowClickable?: boolean;
     isSortable?: boolean;
     sortAllColumns?: boolean;
@@ -42,6 +43,7 @@ export default {
     columns,
     hasActions: true,
     hasCustomActionTestId: false,
+    hasCustomOuiaIds: false,
     isRowClickable: true,
     isSortable: false,
     sortAllColumns: true,
@@ -104,6 +106,12 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => {
           ? ({ rowIndex }) => `my-action-row-${rowIndex}`
           : undefined
       }
+      setRowOuiaId={
+        args.hasCustomOuiaIds
+          ? ({ rowIndex }) => `table-row-${rowIndex}`
+          : undefined
+      }
+      tableOuiaId={args.hasCustomOuiaIds ? "table-ouia-id" : undefined}
     >
       <EmptyState variant={EmptyStateVariant.large}>
         <EmptyStateIcon icon={InfoIcon} />
@@ -150,6 +158,11 @@ NoResults.args = {
 export const CustomActionTestId = Template.bind({});
 CustomActionTestId.args = {
   hasCustomActionTestId: true,
+};
+
+export const CustomOuiaIds = Template.bind({});
+CustomOuiaIds.args = {
+  hasCustomOuiaIds: true,
 };
 
 export const Sortable = Template.bind({});
