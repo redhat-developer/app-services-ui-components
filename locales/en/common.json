@@ -30,7 +30,7 @@
     "sink_chip": "Sink",
     "source_chip": "Source",
     "streaming_messaging_chip": "Streaming&messaging",
-    "verison": "Version: 1.0.1 Final"
+    "version": "Version: 1.0.1 Final"
   },
   "copy_clipboard": "Copy to clipboard",
   "copy_clipboard_successfully": "Successfully copied to clipboard!",

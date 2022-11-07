@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 
-import { DataListSelectableRows } from "./connectors";
+import { ConnectorTypeListItem } from "./connectors";
 
 export default {
-  component: DataListSelectableRows,
+  component: ConnectorTypeListItem,
   args: {},
-} as ComponentMeta<typeof DataListSelectableRows>;
+} as ComponentMeta<typeof ConnectorTypeListItem>;
 
-const Template: ComponentStory<typeof DataListSelectableRows> = (args) => (
-  <DataListSelectableRows {...args} />
+const Template: ComponentStory<typeof ConnectorTypeListItem> = (args) => (
+  <ConnectorTypeListItem {...args} />
 );
 
-export const Story = Template.bind({});
-Story.args = {};
+export const connectors = Template.bind({});
+connectors.args = {};
