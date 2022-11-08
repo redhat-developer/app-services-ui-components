@@ -8,6 +8,7 @@
     "total": "Total"
   },
   "chart-popover-icon-screenreader-text": "Information about {{title}}",
+  "client_connection_alert": "Client connections are shown for all brokers",
   "client_connections": "Client connections",
   "client_connections_helper_text": "Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",
   "client_connections_y_axis": "Connections",
@@ -62,7 +63,7 @@
   "topic_incoming_message_rate_y_axis": "Messages/seconds",
   "topic_metrics": "Topic metrics",
   "topic_metrics_help_text": "Bytes incoming and outgoing are the total bytes for all topics or total bytes for a selected topic in the $t(common:kafka) instance. This metric enables you to assess data transfer in and out of your $t(common:kafka) instance. To modify incoming and outgoing bytes, you can adjust topic message size or other topic properties as needed.",
-  "topic_partition_size": "Topic partition size",
+  "topic_partition_size": "Partition size",
   "topic_size": "Topic size",
   "topic_size_help_text": "Topic size is the total size of the selected topic. This total size is the sum of the log sizes for all partitions in the topic. To reduce the topic size, you can decrease the retention time or the retention size, or modify the cleanup policy as needed.",
   "topic_size_popover_header": "Topic size",

@@ -32,7 +32,6 @@ export interface Typegen0 {
       | "refresh"
       | "selectBroker"
       | "selectDuration"
-      | "selectPartition"
       | "selectToggle"
       | "xstate.init";
     setMetrics: "fetchSuccess";
@@ -44,7 +43,6 @@ export interface Typegen0 {
       | "refresh"
       | "selectBroker"
       | "selectDuration"
-      | "selectPartition"
       | "selectToggle"
       | "xstate.after(1000)#kafkaInstanceMetrics.callApi.failure"
       | "xstate.after(1000)#kafkaInstanceMetrics.initialLoading.failure"

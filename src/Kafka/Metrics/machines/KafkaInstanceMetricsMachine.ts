@@ -157,7 +157,6 @@ export const KafkaInstanceMetricsMachine = createMachine(
           },
           selectPartition: {
             actions: "setPartition",
-            target: "callApi",
           },
         },
       },

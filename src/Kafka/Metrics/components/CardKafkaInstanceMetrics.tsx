@@ -1,8 +1,11 @@
 import {
+  Alert,
   Card,
   CardBody,
   CardTitle,
   Divider,
+  Grid,
+  GridItem,
   Toolbar,
   ToolbarContent,
 } from "@patternfly/react-core";
@@ -165,6 +168,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     broker={selectedBroker}
                     duration={duration}
                     isLoading={isLoading}
+                    selectedPartition={selectedPartition}
+                    emptyState={<EmptyStateNoMetricsData />}
                   />
                 </CardBody>
                 <Divider />
@@ -173,15 +178,26 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   helperText={t("client_connections_helper_text")}
                 />
                 <CardBody>
-                  <ChartLinearWithOptionalLimit
-                    chartName={t("client_connections")}
-                    yLabel={t("client_connections_y_axis")}
-                    metrics={clientConnectionsMetrics}
-                    duration={duration}
-                    usageLimit={connectionsLimit}
-                    isLoading={isLoading}
-                    emptyState={<EmptyStateNoMetricsData />}
-                  />
+                  <Grid hasGutter>
+                    <GridItem>
+                      <Alert
+                        variant="info"
+                        isInline
+                        title={t("client_connection_alert")}
+                      />
+                    </GridItem>
+                    <GridItem>
+                      <ChartLinearWithOptionalLimit
+                        chartName={t("client_connections")}
+                        yLabel={t("client_connections_y_axis")}
+                        metrics={clientConnectionsMetrics}
+                        duration={duration}
+                        usageLimit={connectionsLimit}
+                        isLoading={isLoading}
+                        emptyState={<EmptyStateNoMetricsData />}
+                      />
+                    </GridItem>
+                  </Grid>
                 </CardBody>
                 <Divider />
                 <ChartTitle

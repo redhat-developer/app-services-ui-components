@@ -12,10 +12,10 @@ import {
   chart_color_blue_300,
   chart_color_cyan_300,
 } from "@patternfly/react-tokens";
-import type { FunctionComponent } from "react";
+import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
-import type { PartitionBytesMetric } from "../types";
+import type { PartitionBytesMetric, PartitionSelect } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {
@@ -47,22 +47,32 @@ export type ChartPartitionSizePerBrokerProps = {
   broker: string | undefined;
   duration: number;
   isLoading: boolean;
+  emptyState: ReactElement;
+  selectedPartition: PartitionSelect;
 };
 export const ChartPartitionSizePerBroker: FunctionComponent<
   ChartPartitionSizePerBrokerProps
-> = ({ partitions, broker, duration, isLoading }) => {
+> = ({
+  partitions,
+  broker,
+  duration,
+  isLoading,
+  emptyState,
+  selectedPartition,
+}) => {
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
-  const itemsPerRow = width && width > 650 ? 6 : 3;
+  const itemsPerRow = width && width > 650 ? 20 : 10;
 
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
     broker,
-    duration
+    duration,
+    selectedPartition
   );
 
-  // const hasMetrics = Object.keys(partitions).length > 0;
+  const hasMetrics = Object.keys(partitions).length > 0;
 
   const showDate = shouldShowDate(duration);
 
@@ -72,6 +82,8 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
         switch (true) {
           case isLoading:
             return <ChartSkeletonLoader />;
+          case !hasMetrics:
+            return emptyState;
           default: {
             const labels: ChartVoronoiContainerProps["labels"] = ({ datum }) =>
               // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/restrict-template-expressions,@typescript-eslint/no-unsafe-argument
@@ -127,7 +139,8 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
 export function getChartData(
   partitions: PartitionBytesMetric,
   broker: string | undefined,
-  duration: number
+  duration: number,
+  selectedPartition: PartitionSelect
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
@@ -135,20 +148,38 @@ export function getChartData(
 } {
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
-  Object.entries(partitions).map(([partition, dataMap], index) => {
-    const name = broker ? `${broker}: ${partition}` : partition;
-    const color = colors[index];
-    legendData.push({
-      name,
-    });
-    const area: Array<PartitionChartData> = [];
 
-    Object.entries(dataMap).map(([timestamp, value]) => {
-      area.push({ name, x: parseInt(timestamp, 10), y: value });
-    });
-    chartData.push({ color, area });
-  });
+  selectedPartition === "Top10"
+    ? Object.entries(partitions)
+        .slice(0, 10)
+        .map(([partition, dataMap], index) => {
+          const name = partition;
+          const color = colors[index];
+          legendData.push({
+            name,
+          });
+          const area: Array<PartitionChartData> = [];
 
+          Object.entries(dataMap).map(([timestamp, value]) => {
+            area.push({ name, x: parseInt(timestamp, 10), y: value });
+          });
+          chartData.push({ color, area });
+        })
+    : Object.entries(partitions)
+        .slice(0, 20)
+        .map(([partition, dataMap], index) => {
+          const name = partition;
+          const color = colors[index];
+          legendData.push({
+            name,
+          });
+          const area: Array<PartitionChartData> = [];
+
+          Object.entries(dataMap).map(([timestamp, value]) => {
+            area.push({ name, x: parseInt(timestamp, 10), y: value });
+          });
+          chartData.push({ color, area });
+        });
   const allTimestamps = Array.from(
     new Set(Object.values(partitions).flatMap((m) => Object.keys(m)))
   );
