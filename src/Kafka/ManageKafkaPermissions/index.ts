@@ -1,1 +1,2 @@
-export * from "./components";
+export * from "./ManageKafkaPermissions";
+export * from "./types";

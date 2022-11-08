@@ -25,7 +25,7 @@ import {
   createEmptyProduceTopicAcl,
 } from "./types";
 
-type ManageKafkaPermissionsProps = {
+export type ManageKafkaPermissionsProps = {
   accounts: Account[];
   onCancel: () => void;
   kafkaName: string;
