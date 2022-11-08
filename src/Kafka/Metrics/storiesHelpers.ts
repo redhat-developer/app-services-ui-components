@@ -18,8 +18,13 @@ export const getKafkaInstanceMetrics = ({
 }) => {
   return fakeApi<GetKafkaInstanceMetricsResponse>(
     {
-      brokers: ["broker 1", "broker 2"],
-      usedDiskSpaceMetrics: makeMetrics(duration, 500, 999, 10 ** 9, offset),
+      brokers: ["broker 1", "broker 2", "broker3"],
+      usedDiskSpaceMetrics: {
+        total: makeMetrics(duration, 500, 999, 10 ** 9),
+        "broker 1": makeMetrics(duration, 200, 999, 10 ** 9),
+        "broker 2": makeMetrics(duration, 100, 999, 10 ** 9),
+        "broker 3": makeMetrics(duration, 400, 999, 10 ** 9),
+      },
       bytesPerPartitionMetrics: {
         "partition 1": makeMetrics(duration, 0, 2, 10 ** 7),
         "partition 2": makeMetrics(duration, 0, 4, 10 ** 7),
@@ -126,6 +131,7 @@ export const getTopicsMetricsWithDeletedTopicMetric = ({
         : {},
       bytesPerPartition: hasMetrics
         ? {
+            total: makeMetrics(duration, 0, 2, 10 ** 7, offset),
             "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
             "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
             "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),

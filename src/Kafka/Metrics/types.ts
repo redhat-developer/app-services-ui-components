@@ -1,7 +1,12 @@
 import type { CardKafkaInstanceMetricsLimits } from "./components";
 
 export type TimeSeriesMetrics = { [timestamp: number]: number };
-export type PartitionBytesMetric = { [partition: string]: TimeSeriesMetrics };
+export type PartitionBytesMetric = {
+  [partition: "total" | string]: TimeSeriesMetrics;
+};
+export type BrokerBytesMetric = {
+  [broker: "total" | string]: TimeSeriesMetrics;
+};
 
 export enum DurationOptions {
   Last5minutes = 5,
@@ -27,7 +32,7 @@ export type GetTopicsMetricsResponse = {
 
 export type GetKafkaInstanceMetricsResponse = {
   brokers: string[];
-  usedDiskSpaceMetrics: TimeSeriesMetrics;
+  usedDiskSpaceMetrics: BrokerBytesMetric;
   bytesPerPartitionMetrics: PartitionBytesMetric;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;

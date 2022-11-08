@@ -9,6 +9,7 @@ import {
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type {
+  BrokerBytesMetric,
   BrokerFilter,
   DurationOptions,
   PartitionBytesMetric,
@@ -20,12 +21,12 @@ import { ChartPopover } from "./ChartPopover";
 import { ChartLinearWithOptionalLimit } from "./ChartLinearWithOptionalLimit";
 import { EmptyStateMetricsUnavailable } from "./EmptyStateMetricsUnavailable";
 import { ToolbarKafkaInstanceMetric } from "./ToolbarKafkaInstanceMetric";
-import { formatBytes } from "./utils";
 import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import type { ToolbarRefreshProps } from "./ToolbarRefresh";
 import { BrokerToggle } from "./BrokerToggle";
 import { ChartPartitionSizePerBroker } from "./ChartPartitionSizePerBroker";
 import { FilterByPartition } from "./FilterByPartition";
+import { ChartUsedDiskSpace } from "./CardUsedDiskSpaceMetrics";
 
 export type CardKafkaInstanceMetricsLimits = {
   diskSpaceLimit: number;
@@ -35,7 +36,7 @@ export type CardKafkaInstanceMetricsLimits = {
 
 export type CardKafkaInstanceMetricsProps = {
   brokers: string[];
-  usedDiskMetrics: TimeSeriesMetrics;
+  usedDiskMetrics: BrokerBytesMetric;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
   duration: DurationOptions;
@@ -135,19 +136,14 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                     onChange={onSelectedToggle}
                     selectedBroker={selectedBroker}
                   />
-                  <ChartLinearWithOptionalLimit
-                    chartName={
-                      selectedBroker
-                        ? selectedBroker
-                        : t("instance_chart_title")
-                    }
-                    yLabel={t("axis-label-bytes")}
+                  <ChartUsedDiskSpace
                     metrics={usedDiskMetrics}
+                    broker={selectedBroker}
                     duration={duration}
-                    formatValue={formatBytes}
-                    usageLimit={diskSpaceLimit}
                     isLoading={isLoading}
                     emptyState={<EmptyStateNoMetricsData />}
+                    brokerToggle={selectToggle}
+                    usageLimit={diskSpaceLimit}
                   />
                 </CardBody>
                 <Divider />

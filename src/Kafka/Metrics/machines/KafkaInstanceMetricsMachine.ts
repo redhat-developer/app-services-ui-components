@@ -1,5 +1,6 @@
 import { assign, createMachine } from "xstate";
 import type {
+  BrokerBytesMetric,
   BrokerFilter,
   GetKafkaInstanceMetricsResponse,
   PartitionBytesMetric,
@@ -46,7 +47,7 @@ export type KafkaInstanceMetricsMachineContext = {
 
   // from the api
   brokers: string[];
-  usedDiskSpaceMetrics: TimeSeriesMetrics;
+  usedDiskSpaceMetrics: BrokerBytesMetric;
   clientConnectionsMetrics: TimeSeriesMetrics;
   connectionAttemptRateMetrics: TimeSeriesMetrics;
   bytesPerPartitionMetrics: PartitionBytesMetric;
