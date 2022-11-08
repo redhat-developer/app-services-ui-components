@@ -194,7 +194,7 @@ export function getChartData(
     Object.entries(metrics)
       .filter((metric) => metric[0] !== "total")
       .map(([metric, dataMap], index) => {
-        const name = broker ? `${broker}: ${metric}` : metric;
+        const name = metric;
 
         const color = colors[index];
         legendData.push({
