@@ -9,6 +9,7 @@ export default {
     usedDiskMetrics: {},
     connectionAttemptRateMetrics: {},
     clientConnectionsMetrics: {},
+    bytesPerPartitions: {},
     duration: DurationOptions.Last12hours,
     metricsDataUnavailable: false,
     isInitialLoading: false,
@@ -18,7 +19,8 @@ export default {
     diskSpaceLimit: 1000 * 1024 ** 3,
     connectionsLimit: 100,
     connectionRateLimit: 100,
-    brokers: ["Broker1", "Broker2"],
+    brokers: ["broker 1", "broker 2"],
+    selectedBroker: "broker 1",
   },
 } as ComponentMeta<typeof CardKafkaInstanceMetrics>;
 
@@ -43,12 +45,11 @@ JustCreated.args = {
 
 export const SampleData = Template.bind({});
 SampleData.args = {
-  usedDiskMetrics: makeMetrics(
-    DurationOptions.Last12hours,
-    0,
-    999 * 10 ** 9,
-    1
-  ),
+  usedDiskMetrics: {
+    total: makeMetrics(DurationOptions.Last12hours, 0, 999, 10 ** 9),
+    "broker 1": makeMetrics(DurationOptions.Last12hours, 200, 999, 10 ** 9),
+    "broker 2": makeMetrics(DurationOptions.Last12hours, 100, 999, 10 ** 9),
+  },
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     0,
@@ -65,7 +66,11 @@ SampleData.args = {
 
 export const OverLimits = Template.bind({});
 OverLimits.args = {
-  usedDiskMetrics: makeMetrics(DurationOptions.Last12hours, 90, 1250, 10 ** 9),
+  usedDiskMetrics: {
+    total: makeMetrics(DurationOptions.Last12hours, 90, 1250, 10 ** 9),
+    "broker 1": makeMetrics(DurationOptions.Last12hours, 200, 1400, 10 ** 9),
+    "broker 2": makeMetrics(DurationOptions.Last12hours, 100, 3000, 10 ** 9),
+  },
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     20,
