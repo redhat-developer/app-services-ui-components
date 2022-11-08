@@ -29,7 +29,7 @@ describe("CardKafkaInstanceMetrics", () => {
       comp.getByLabelText("Filter Kafka instance metrics by time range")
     ).toBeDisabled();
 
-    expect(comp.getAllByText("Loading content")).toHaveLength(3);
+    expect(comp.getAllByText("Loading content")).toHaveLength(4);
   });
 
   it("should properly a single spinner at initial load", async () => {
