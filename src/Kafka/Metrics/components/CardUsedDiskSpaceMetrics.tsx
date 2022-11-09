@@ -168,18 +168,7 @@ export function getChartData(
   const softLimit: Array<BrokerChartData> = [];
   const softLimitColor = chart_color_black_500.value;
 
-  if (brokerToggle && metrics[brokerToggle]) {
-    legendData.push({ name: "Instance" });
-
-    const area: Array<BrokerChartData> = [];
-
-    const color = chart_color_blue_300.value;
-
-    Object.entries(metrics[brokerToggle]).map(([timestamp, bytes]) => {
-      area.push({ name: "Instance", x: parseInt(timestamp, 10), y: bytes });
-    });
-    chartData.push({ color, softLimitColor, area, softLimit });
-  } else if (broker && metrics[broker]) {
+  if (broker && metrics[broker]) {
     legendData.push({ name: broker });
 
     const area: Array<BrokerChartData> = [];
@@ -188,6 +177,17 @@ export function getChartData(
 
     Object.entries(metrics[broker]).map(([timestamp, bytes]) => {
       area.push({ name: broker, x: parseInt(timestamp, 10), y: bytes });
+    });
+    chartData.push({ color, softLimitColor, area, softLimit });
+  } else if (brokerToggle && metrics[brokerToggle]) {
+    legendData.push({ name: "Instance" });
+
+    const area: Array<BrokerChartData> = [];
+
+    const color = chart_color_blue_300.value;
+
+    Object.entries(metrics[brokerToggle]).map(([timestamp, bytes]) => {
+      area.push({ name: "Instance", x: parseInt(timestamp, 10), y: bytes });
     });
     chartData.push({ color, softLimitColor, area, softLimit });
   } else {
