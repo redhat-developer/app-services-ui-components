@@ -1,7 +1,7 @@
-import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
+import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import type { ResourcePrefixRuleValue } from "./ResourcePrefixRule";
 import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
@@ -9,14 +9,16 @@ import { ShortcutsTableHead } from "./ShortcutsTableHead";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 
 export type ProduceTopicShortcutProps = {
-  onChange: (value: string) => void;
+  onChange: (value: ResourcePrefixRuleValue) => void;
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;
   onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
-  onDelete: () => void;
+  onDelete: (row: number) => void;
   multipleShorctutPermissions?: boolean;
+  row: number;
+  setIsNameValid: (value: boolean) => void;
 };
 export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
   onChange,
@@ -26,7 +28,9 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
   resourceNameValue,
   submitted,
   onFetchResourceNameOptions,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  row,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -36,40 +40,32 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
 
       <Tbody>
         <Tr style={{ borderBottom: "none" }}>
-          <Td>
-            <Flex>
-              <FlexItem>
-                <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_produce_topic")}
-                </Title>
-              </FlexItem>
-              <FlexItem>
-                <Popover
-                  headerContent={t(
-                    "permissions_dropdown.shortcut_produce_topic"
-                  )}
-                  bodyContent={t(
-                    "permissions_dropdown.shortcut_produce_topic_description"
-                  )}
+          <Td colSpan={5}>
+            <Title headingLevel="h6">
+              {t("permissions_dropdown.shortcut_produce_topic")}{" "}
+              <Popover
+                headerContent={t("permissions_dropdown.shortcut_produce_topic")}
+                bodyContent={t(
+                  "permissions_dropdown.shortcut_produce_topic_description"
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
                 >
-                  <OutlinedQuestionCircleIcon />
-                </Popover>
-              </FlexItem>
-            </Flex>
+                  <HelpIcon noVerticalAlign />
+                </button>
+              </Popover>
+            </Title>
           </Td>
-          <Td />
-          <Td />
-          <Td />
           <Td>
-            <Flex>
-              <FlexItem>
-                <RemoveButton
-                  variant="link"
-                  onClick={onDelete}
-                  tooltip={t("operations.delete")}
-                />
-              </FlexItem>
-            </Flex>
+            <RemoveButton
+              variant="link"
+              onClick={() => onDelete(row)}
+              tooltip={t("remove_permission_tooltip")}
+              ariaLabel={t("delete_producer")}
+            />
           </Td>
         </Tr>
 
@@ -80,6 +76,7 @@ export const ProduceTopicShortcut: React.FC<ProduceTopicShortcutProps> = ({
           onChangeResourceName={onChangeResourceName}
           onFetchResourceNameOptions={onFetchResourceNameOptions}
           submitted={submitted}
+          setIsNameValid={setIsNameValid}
         />
       </Tbody>
     </>

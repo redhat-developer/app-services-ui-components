@@ -1,4 +1,4 @@
-import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
+import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
@@ -9,12 +9,12 @@ import { ResourceName } from "./ResourceName";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { ProduceTopicRow } from "./ProduceTopicRow";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import { RemoveButton } from "../../../shared/RemoveButton";
 
 export type ConsumeTopicShortcutProps = {
-  onChangeConsumerResourcePrefixRule: (value: string) => void;
-  onChangeTopicResourcePrefixRule: (value: string) => void;
+  onChangeConsumerResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
+  onChangeTopicResourcePrefixRule: (value: ResourcePrefixRuleValue) => void;
   consumerPrefixRuleValue: ResourcePrefixRuleValue;
   topicPrefixRuleValue: ResourcePrefixRuleValue;
   consumerResourceNameValue: string | undefined;
@@ -25,7 +25,9 @@ export type ConsumeTopicShortcutProps = {
   onFetchTopicResourceNameOptions: (filter: string) => Promise<string[]>;
   submitted: boolean;
   multipleShorctutPermissions?: boolean;
-  onDelete: () => void;
+  onDelete: (row: number) => void;
+  row: number;
+  setIsNameValid: (value: boolean) => void;
 };
 export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onChangeConsumerResourceName,
@@ -40,7 +42,9 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
   onFetchConsumerResourceNameOptions,
   onFetchTopicResourceNameOptions,
   onDelete,
-  multipleShorctutPermissions = false,
+  multipleShorctutPermissions = true,
+  row,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -50,43 +54,37 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
 
       <Tbody>
         <Tr style={{ borderBottom: "none" }}>
-          <Td>
-            <Flex>
-              <FlexItem>
-                <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_consume_topic")}
-                </Title>
-              </FlexItem>
-              <FlexItem>
-                <Popover
-                  headerContent={t(
-                    "permissions_dropdown.shortcut_consume_topic"
-                  )}
-                  bodyContent={t(
-                    "permissions_dropdown.shortcut_consume_topic_description"
-                  )}
+          <Td colSpan={5}>
+            <Title headingLevel="h6">
+              {t("permissions_dropdown.shortcut_consume_topic")}{" "}
+              <Popover
+                headerContent={t("permissions_dropdown.shortcut_consume_topic")}
+                bodyContent={t(
+                  "permissions_dropdown.shortcut_consume_topic_description"
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
                 >
-                  <OutlinedQuestionCircleIcon />
-                </Popover>
-              </FlexItem>
-            </Flex>
+                  <HelpIcon noVerticalAlign />
+                </button>
+              </Popover>
+            </Title>
           </Td>
-          <Td />
-          <Td />
-          <Td />
+
           <Td>
-            <Flex>
-              <FlexItem>
-                <RemoveButton
-                  variant="link"
-                  onClick={onDelete}
-                  tooltip={t("operations.delete")}
-                />
-              </FlexItem>
-            </Flex>
+            <RemoveButton
+              variant="link"
+              onClick={() => onDelete(row)}
+              tooltip={t("remove_permission_tooltip")}
+              ariaLabel={t("delete_consumer")}
+            />
           </Td>
         </Tr>
         <ProduceTopicRow
+          setIsNameValid={setIsNameValid}
           isConsumeTopicShortcut={true}
           onChange={onChangeTopicResourcePrefixRule}
           prefixRuleValue={topicPrefixRuleValue}
@@ -116,13 +114,14 @@ export const ConsumeTopicShortcut: React.FC<ConsumeTopicShortcutProps> = ({
                 submitted={submitted}
                 resourceType={"topic"}
                 resourcePrefixRule={consumerPrefixRuleValue}
+                setIsNameValid={setIsNameValid}
               />
             }
           </Td>
           <Td>
             <PermissionOperationCell
               permission={"ALLOW"}
-              operation={["READ", "DESCRIBE"]}
+              operation={["READ"]}
             />
           </Td>
         </Tr>

@@ -4,7 +4,7 @@ import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ReviewPermissionsTable } from "./ReviewPermissionsTable";
 import type { AclBinding } from "../types";
 
-const permissionsForAllAccounts: AclBinding[] = [
+export const PermissionsForAllAccounts: AclBinding[] = [
   {
     resourceType: "CLUSTER",
     resourceName: "*",
@@ -55,7 +55,7 @@ const permissionsForAllAccounts: AclBinding[] = [
   },
 ];
 
-const permissionsForSelectedAccount: AclBinding[] = [
+export const PermissionsForSelectedAccount: AclBinding[] = [
   {
     resourceType: "CLUSTER",
     resourceName: "*",
@@ -133,13 +133,13 @@ const AclsReview: ComponentStory<typeof ReviewPermissionsTable> = ({
 
 export const _Example = AclsReview.bind({});
 _Example.args = {
-  acls: permissionsForAllAccounts,
+  acls: PermissionsForAllAccounts,
   selectedAccountId: "*",
 };
 
 export const AllAccountsCanDeleteAllAccounts = AclsReview.bind({});
 AllAccountsCanDeleteAllAccounts.args = {
-  acls: permissionsForAllAccounts,
+  acls: PermissionsForAllAccounts,
   selectedAccountId: "*",
 };
 AllAccountsCanDeleteAllAccounts.parameters = {
@@ -153,7 +153,7 @@ AllAccountsCanDeleteAllAccounts.parameters = {
 
 export const IndividualAccountCanDeleteOnlyOwnRules = AclsReview.bind({});
 IndividualAccountCanDeleteOnlyOwnRules.args = {
-  acls: permissionsForSelectedAccount,
+  acls: PermissionsForSelectedAccount,
   selectedAccountId: "test_kafka_devexp",
 };
 IndividualAccountCanDeleteOnlyOwnRules.parameters = {

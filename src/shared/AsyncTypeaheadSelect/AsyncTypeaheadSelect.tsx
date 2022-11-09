@@ -76,7 +76,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     onChange(value as string);
   };
   const onToggle = (newState: boolean) => {
-    submitted && required
+    submitted && required && (value == "" || value == undefined)
       ? setValidation({ isValid: false, message: t("common:required") })
       : null;
     setIsOpen((isOpen) => {
@@ -91,7 +91,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     submitted && required
       ? setValidation({ isValid: false, message: t("common:required") })
       : setValidation({ isValid: true, message: undefined });
-    setIsOpen(false);
   };
 
   const isCreatable = !loading && validation && validation.isValid;
@@ -114,7 +113,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       ? t("common:required")
       : validation?.message;
   const onCreateOption = (value: string) => {
-    setIsOpen(false);
     setValidation(onValidationCheck(value, true));
   };
   return (
@@ -139,6 +137,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
+        width={170}
         onCreateOption={onCreateOption}
         createText={t("resourcePrefix.create_text")}
         onTypeaheadInputChanged={onTypeahead}

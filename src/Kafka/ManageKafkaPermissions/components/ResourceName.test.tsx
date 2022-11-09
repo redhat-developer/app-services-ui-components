@@ -25,16 +25,11 @@ describe("Resource Name", () => {
     await waitForPopper();
     const inputValue = comp.getByDisplayValue("..");
     expect(inputValue).toBeInTheDocument();
-    const createText = await comp.findByText('Use ".."');
-    await waitForPopper();
-    expect(createText).toBeInTheDocument();
-    userEvent.click(await comp.findByText('Use ".."'));
-    await waitForPopper();
     const option = await comp.findByText(
       "A topic name must contain at least 3 periods (...) if periods are the only characters used."
     );
     expect(option).toBeInTheDocument();
-    expect(onChangeValue).toBeCalledTimes(1);
+    expect(onChangeValue).not.toHaveBeenCalled();
   });
   it("should render a select with validation message for invalid consumer group characters", async () => {
     const comp = render(<InvalidConsumerGroupCharacters />);

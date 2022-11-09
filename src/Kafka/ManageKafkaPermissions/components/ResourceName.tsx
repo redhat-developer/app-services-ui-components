@@ -10,6 +10,7 @@ type ResourceNameProps = {
   submitted: boolean;
   resourceType: ResourceTypeValue | undefined;
   resourcePrefixRule: ResourcePrefixRuleValue;
+  setIsNameValid: (value: boolean) => void;
 };
 
 export const ResourceName: React.VFC<ResourceNameProps> = ({
@@ -19,23 +20,19 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
   resourceType,
   resourcePrefixRule,
   onFetchOptions,
+  setIsNameValid,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const validationCheck = (
     resourceType: ResourceTypeValue | undefined,
     resourcePreixCondition: "Starts with" | "Is",
-    filter: string | undefined,
-    isCreated?: boolean
+    filter: string | undefined
   ) => {
     const regExp = new RegExp("^[0-9A-Za-z_.-]+$");
 
     if (filter === undefined || filter === "")
       return { isValid: true, message: undefined };
-    if (
-      resourcePreixCondition == "Is" &&
-      resourceType == "topic" &&
-      isCreated
-    ) {
+    if (resourcePreixCondition == "Is" && resourceType == "topic") {
       if (filter == "." || filter == "..")
         return {
           isValid: false,
@@ -60,13 +57,13 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
     return { isValid: true, message: undefined };
   };
 
-  const onValidation = (filter: string | undefined, isCreated?: boolean) => {
+  const onValidation = (filter: string | undefined) => {
     const validationMessage = validationCheck(
       resourceType,
       resourcePrefixRule,
-      filter,
-      isCreated
+      filter
     );
+    setIsNameValid(validationMessage.isValid);
     return validationMessage;
   };
 
@@ -75,8 +72,10 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
       id="resource-name"
       ariaLabel={
         resourcePrefixRule === "Is"
-          ? t("resourcePrefix.aria_label_name_is", { resourceType })
-          : t("resourcePrefix.aria_label_name_starts_with", { resourceType })
+          ? t("resourcePrefix.aria_label_name_is", { value: resourceType })
+          : t("resourcePrefix.aria_label_name_starts_with", {
+              value: resourceType,
+            })
       }
       value={value}
       placeholderText={
