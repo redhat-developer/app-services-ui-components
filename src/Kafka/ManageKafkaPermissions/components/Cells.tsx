@@ -138,6 +138,7 @@ export const PrincipalCell: VFC<PrincipalCellProps> = ({
           variant="link"
           tooltip={t("remove_permission_tooltip")}
           onClick={onRemoveAcl}
+          ariaLabel={t("operations.delete")}
         />
       )}
     </div>

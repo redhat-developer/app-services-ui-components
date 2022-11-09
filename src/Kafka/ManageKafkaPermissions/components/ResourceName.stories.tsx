@@ -8,6 +8,7 @@ export default {
   component: ResourceName,
   args: {
     value: undefined,
+    setIsNameValid: (value) => value,
     onFetchOptions: (filter) =>
       fakeApi<string[]>(
         ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
@@ -31,12 +32,6 @@ const Template: ComponentStory<typeof ResourceName> = (args) => (
 
 export const InvalidTopicName = Template.bind({});
 InvalidTopicName.args = { resourceType: "topic" };
-
-InvalidTopicName.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await userEvent.type(await canvas.findByPlaceholderText("Enter name"), "..");
-  await userEvent.click(await canvas.findByText('Use ".."'));
-};
 
 InvalidTopicName.parameters = {
   docs: {
