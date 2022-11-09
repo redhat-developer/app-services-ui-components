@@ -43,7 +43,7 @@ export type KafkaInstanceMetricsMachineContext = {
   duration: DurationOptions;
   selectedBroker: string | undefined;
   selectedToggle: BrokerFilter | undefined;
-  selectedPratition: PartitionSelect;
+  selectedPartition: PartitionSelect;
 
   // from the api
   brokers: string[];
@@ -90,7 +90,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
       fetchFailures: 0,
       brokers: [],
       selectedToggle: "total",
-      selectedPratition: "Top10",
+      selectedPartition: "Top10",
     },
     initial: "initialLoading",
     states: {
@@ -226,7 +226,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
         selectedBroker: (_context, event) => event.broker,
       }),
       setToggle: assign((_, { value }) => ({ selectedToggle: value })),
-      setPartition: assign((_, { value }) => ({ selectedPratition: value })),
+      setPartition: assign((_, { value }) => ({ selectedPartition: value })),
     },
     guards: {
       canRetryFetching: (context) => context.fetchFailures < MAX_RETRIES,

@@ -19,6 +19,7 @@ import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";
 import { PartitionCard } from "./components/PartitionCard";
 import { MetricsLagAlert } from "./components/MetricsLagAlert";
+import { PartitionSelect } from "./types";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
@@ -141,7 +142,7 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
     selectedToggle,
     onSelectToggle,
     bytesPerPartitionMetrics,
-    selectedPratition,
+    selectedPartition,
     onSelectPartition,
   } = useKafkaInstanceMetrics();
 
@@ -169,7 +170,7 @@ const ConnectedKafkaInstanceMetrics: VoidFunctionComponent = () => {
       onSelectedToggle={onSelectToggle}
       bytesPerPartitions={bytesPerPartitionMetrics}
       onSelectedPartition={onSelectPartition}
-      selectedPartition={selectedPratition}
+      selectedPartition={selectedPartition}
     />
   );
 };
@@ -194,9 +195,11 @@ const ConnectedTopicsMetrics: VoidFunctionComponent<
     bytesOutgoing,
     bytesPerPartition,
     incomingMessageRate,
+    selectedPartition,
     onDurationChange,
     onTopicChange,
     onRefresh,
+    onSelectPartition,
   } = useTopicsMetrics();
 
   return (
@@ -218,6 +221,8 @@ const ConnectedTopicsMetrics: VoidFunctionComponent<
       onSelectedTopic={onTopicChange}
       onDurationChange={onDurationChange}
       onCreateTopic={onCreateTopic}
+      onSelectedPartition={onSelectPartition}
+      selectedPartition={selectedPartition}
     />
   );
 };

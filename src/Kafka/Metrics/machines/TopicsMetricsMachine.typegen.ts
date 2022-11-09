@@ -33,6 +33,7 @@ export interface Typegen0 {
       | "selectTopic"
       | "xstate.init";
     setMetrics: "fetchSuccess";
+    setPartition: "selectPartition";
     setTopic: "selectTopic";
   };
   eventsCausingServices: {

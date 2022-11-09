@@ -151,7 +151,7 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                 </CardBody>
                 <Divider />
                 <ChartTitle
-                  title={t("topic_partition_size")}
+                  title={t("broker_partition_size")}
                   helperText={t("")}
                 />
                 <CardBody>

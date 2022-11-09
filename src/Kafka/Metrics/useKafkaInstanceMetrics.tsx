@@ -33,7 +33,7 @@ export function useKafkaInstanceMetrics() {
     isRefreshing,
     isFailed,
     isJustCreated,
-    selectedPratition,
+    selectedPartition,
   } = useSelector<typeof service, SeletorReturn>(
     service,
     useCallback(
@@ -98,6 +98,6 @@ export function useKafkaInstanceMetrics() {
     selectedToggle,
     onSelectToggle,
     onSelectPartition,
-    selectedPratition,
+    selectedPartition,
   };
 }

@@ -1,9 +1,17 @@
-import { Card, CardBody, CardTitle, Divider } from "@patternfly/react-core";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  Divider,
+  Toolbar,
+  ToolbarContent,
+} from "@patternfly/react-core";
 import type { FunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import type {
   DurationOptions,
   PartitionBytesMetric,
+  PartitionSelect,
   TimeSeriesMetrics,
 } from "../types";
 import { CardBodyLoading } from "./CardBodyLoading";
@@ -15,6 +23,7 @@ import { EmptyStateNoMetricsData } from "./EmptyStateNoMetricsData";
 import { EmptyStateNoMetricsDataForSelection } from "./EmptyStateNoMetricsDataForSelection";
 import { EmptyStateNoTopics } from "./EmptyStateNoTopics";
 import { EmptyStateNoTopicSelected } from "./EmptyStateNoTopicSelected";
+import { FilterByPartition } from "./FilterByPartition";
 import type { ToolbarRefreshProps } from "./ToolbarRefresh";
 import { ToolbarTopicsMetrics } from "./ToolbarTopicsMetrics";
 
@@ -33,6 +42,8 @@ type CardTopicsMetricsProps = {
   onCreateTopic: () => void;
   onSelectedTopic: (topic: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
+  onSelectedPartition: (value: PartitionSelect) => void;
+  selectedPartition: PartitionSelect;
 } & Omit<ToolbarRefreshProps, "ariaLabel">;
 
 export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
@@ -53,6 +64,8 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
   onRefresh,
   onSelectedTopic,
   onDurationChange,
+  selectedPartition,
+  onSelectedPartition,
 }) => {
   const { t } = useTranslation();
   const noTopics = topics.length === 0;
@@ -135,6 +148,14 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                 <Divider />
                 <PartitionSizeTitle />
                 <CardBody>
+                  <Toolbar>
+                    <ToolbarContent>
+                      <FilterByPartition
+                        onSetSelectedPartition={onSelectedPartition}
+                        partitionValue={selectedPartition}
+                      />
+                    </ToolbarContent>
+                  </Toolbar>
                   <ChartLogSizePerPartition
                     partitions={partitions}
                     topic={selectedTopic}
@@ -202,10 +223,10 @@ const PartitionSizeTitle: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t("metrics:topic_size")}{" "}
+      {t("metrics:topic_partition_size")}{" "}
       <ChartPopover
-        title={t("metrics:topic_size_popover_header")}
-        description={t("metrics:topic_size_help_text")}
+        title={t("metrics:topic_partition_size_popover_header")}
+        description={t("metrics:topic_partition_help_text")}
       />
     </CardTitle>
   );
