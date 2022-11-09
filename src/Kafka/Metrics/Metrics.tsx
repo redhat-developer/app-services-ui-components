@@ -19,7 +19,6 @@ import { useMetricsKpi } from "./useMetricsKpi";
 import { useTopicsMetrics } from "./useTopicsMetrics";
 import { PartitionCard } from "./components/PartitionCard";
 import { MetricsLagAlert } from "./components/MetricsLagAlert";
-import { PartitionSelect } from "./types";
 
 export type MetricsProps = {
   onCreateTopic: () => void;
