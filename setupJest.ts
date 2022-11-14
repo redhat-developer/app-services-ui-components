@@ -20,6 +20,9 @@ failOnConsole({
     if (/at Popover/g.test(errorMessage)) {
       return true;
     }
+    if (/at Tooltip/g.test(errorMessage)) {
+      return true;
+    }
     return false;
   },
 });

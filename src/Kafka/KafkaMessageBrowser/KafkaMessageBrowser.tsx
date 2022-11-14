@@ -266,6 +266,11 @@ export const KafkaMessageBrowserConnected: VoidFunctionComponent<
                     </ToolbarItem>
                     <ToolbarItem>
                       <RefreshButton
+                        tooltip={
+                          isRefreshing
+                            ? t("common:refreshing_tooltip")
+                            : t("common:refresh_description")
+                        }
                         onClick={refresh}
                         isRefreshing={isRefreshing}
                         isDisabled={requiresSearch}
