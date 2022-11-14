@@ -1,22 +1,24 @@
+import React from "react";
 import { ToolbarItem } from "@patternfly/react-core";
 import type { VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
-import { FormatDate, RefreshButton } from "../../../shared";
+import { RefreshButton } from "../../shared/RefreshButton/RefreshButton";
+import { formatDistanceToNow } from "date-fns";
 
-export type ToolbarRefreshProps = {
+export type RefreshButtonProps = {
   isRefreshing: boolean;
   lastUpdated: Date | undefined;
   ariaLabel: string;
   onRefresh: () => void;
 };
 
-export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
+export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   isRefreshing,
   lastUpdated = new Date(),
   ariaLabel,
   onRefresh,
 }) => {
-  const { t } = useTranslation(["metrics"]);
+  const { t } = useTranslation(["common"]);
 
   return (
     <>
@@ -24,8 +26,8 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
         <RefreshButton
           tooltip={
             isRefreshing
-              ? t("metrics:refreshing_tooltip")
-              : t("metrics:refresh_description")
+              ? t("common:refreshing_tooltip")
+              : t("common:refresh_description")
           }
           ariaLabel={ariaLabel}
           onClick={onRefresh}
@@ -33,21 +35,17 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
         />
       </ToolbarItem>
       <ToolbarItem
+        className="pf-u-font-size-xs"
         alignment={{ default: "alignRight" }}
         style={{ color: "var(--pf-global--Color--200)" }}
       >
-        <div className="pf-u-font-size-xs">
-          {isRefreshing ? (
-            t("metrics:refreshing")
-          ) : (
-            <>
-              {t("metrics:last-refresh")}
-              <br />
-              <FormatDate date={lastUpdated} format="distanceToNow" />
-              {t("metrics:last-refresh-distance")}
-            </>
-          )}
-        </div>
+        {isRefreshing
+          ? t("common:refreshing")
+          : t("common:last-refresh") +
+            " " +
+            formatDistanceToNow(lastUpdated) +
+            " " +
+            t("common:last-refresh-distance")}
       </ToolbarItem>
     </>
   );
