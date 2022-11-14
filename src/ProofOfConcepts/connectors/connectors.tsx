@@ -13,6 +13,7 @@ import {
 } from "@patternfly/react-core";
 import PlusCircleIcon from "@patternfly/react-icons/dist/esm/icons/plus-circle-icon";
 import OutlinedQuestionCircleIcon from "@patternfly/react-icons/dist/esm/icons/outlined-question-circle-icon";
+import { useTranslation } from "react-i18next";
 
 export const ConnectorTypeListItem: React.FunctionComponent = () => {
   const [selectedDataListItemId, setSelectedDataListItemId] =
@@ -28,6 +29,8 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
   ) => {
     setSelectedDataListItemId(id);
   };
+
+  const { t } = useTranslation();
 
   return (
     <DataList
@@ -54,7 +57,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              Amazon Simple Queue Service
+                              {t("common:connectors.amazon_queue_service")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -65,16 +68,20 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="blue">Source</Label>
-                          <Label>Amazon</Label>
-                          <Label>Streaming&Messaging</Label>
+                          <Label color="blue">
+                            {t("common:connectors.source_label")}
+                          </Label>
+                          <Label>{t("common:connectors.amazon_label")}</Label>
+                          <Label>
+                            {t("common:connectors.streaming_messaging_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
@@ -110,7 +117,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              Amazon Simple Queue Service
+                              {t("common:connectors.amazon_queue_service")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -118,16 +125,20 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="green">Sink</Label>
-                          <Label>Amazon</Label>
-                          <Label>Streaming&Messaging</Label>
+                          <Label color="green">
+                            {t("common:connectors.sink_label")}
+                          </Label>
+                          <Label>{t("common:connectors.amazon_label")}</Label>
+                          <Label>
+                            {t("common:connectors.streaming_messaging_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
@@ -163,7 +174,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              Slack
+                              {t("common:connectors.slack")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -171,15 +182,19 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="green">Sink</Label>
-                          <Label>Streaming&Messaging</Label>
+                          <Label color="green">
+                            {t("common:connectors.sink_label")}
+                          </Label>
+                          <Label>
+                            {t("common:connectors.streaming_messaging_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
@@ -215,7 +230,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              PostgresDB
+                              {t("common:connectors.postgresDB")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -223,15 +238,19 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="blue">Source</Label>
-                          <Label>Change data capture</Label>
+                          <Label color="blue">
+                            {t("common:connectors.source_label")}
+                          </Label>
+                          <Label>
+                            {t("common:connectors.change_data_capture_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
@@ -267,7 +286,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              Amazon Redshift
+                              {t("common:connectors.amazon_redshift")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -275,17 +294,21 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="blue">Source</Label>
-                          <Label>Amazon</Label>
-                          <Label>Big Data</Label>
-                          <Label>Streaming&Messaging</Label>
+                          <Label color="blue">
+                            {t("common:connectors.source_label")}
+                          </Label>
+                          <Label>{t("common:connectors.amazon_label")}</Label>
+                          <Label>{t("common:connectors.big_data_label")}</Label>
+                          <Label>
+                            {t("common:connectors.streaming_messaging_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
@@ -321,7 +344,7 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                               className="pf-u-font-weight-bold"
                               id="selectable-action-item1"
                             >
-                              Amazon Redshift
+                              {t("common:connectors.amazon_redshift")}
                             </strong>
                           </FlexItem>
                           <FlexItem>
@@ -329,17 +352,21 @@ export const ConnectorTypeListItem: React.FunctionComponent = () => {
                           </FlexItem>
                           <FlexItem>
                             <span className="pf-u-font-size-sm pf-u-color-400">
-                              Version: 1.0.1 Final
+                              {t("common:connectors.version")}
                             </span>
                           </FlexItem>
                         </Flex>
                       </FlexItem>
                       <FlexItem>
                         <LabelGroup numLabels="10">
-                          <Label color="green">Sink</Label>
-                          <Label>Amazon</Label>
-                          <Label>Big Data</Label>
-                          <Label>Streaming&Messaging</Label>
+                          <Label color="green">
+                            {t("common:connectors.sink_label")}
+                          </Label>
+                          <Label>{t("common:connectors.amazon_label")}</Label>
+                          <Label>{t("common:connectors.big_data_label")}</Label>
+                          <Label>
+                            {t("common:connectors.streaming_messaging_label")}
+                          </Label>
                         </LabelGroup>
                       </FlexItem>
                     </Flex>
