@@ -18,7 +18,6 @@ import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
 import type { BrokerBytesMetric, BrokerFilter } from "../types";
-import { BrokerToggle } from "./BrokerToggle";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {

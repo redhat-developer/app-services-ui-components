@@ -26,7 +26,7 @@
   "empty_state_no_topics_create_topic": "Create topic",
   "empty_state_no_topics_title": "No topic data",
   "filter-by-broker": "Filter by broker",
-  "filter-by-partitions": "",
+  "filter-by-partitions": "Filter by partition",
   "incoming_bytes": "Incoming bytes ({{topic}})",
   "incoming_bytes_all_topics": "Incoming bytes (all topics)",
   "instance_chart_title": "Instance",

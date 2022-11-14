@@ -49,6 +49,7 @@ export const ToolbarKafkaInstanceMetric: FunctionComponent<
             selectedBroker={selectedBroker}
             brokerList={brokerList}
             onSetSelectedBroker={onSetSelectedBroker}
+            disableToolbar={isDisabled}
           />
           <FilterByTime
             ariaLabel={t("metrics:kafka_instance_filter_by_time")}

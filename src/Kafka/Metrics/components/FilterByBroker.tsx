@@ -14,12 +14,14 @@ type FilterByBrokerProps = {
   selectedBroker: string | undefined;
   brokerList: string[];
   onSetSelectedBroker: (value: string | undefined) => void;
+  disableToolbar: boolean;
 };
 
 export const FilterByBroker: VoidFunctionComponent<FilterByBrokerProps> = ({
   selectedBroker,
   brokerList,
   onSetSelectedBroker,
+  disableToolbar,
 }) => {
   const { t } = useTranslation("metrics");
 
@@ -49,6 +51,8 @@ export const FilterByBroker: VoidFunctionComponent<FilterByBrokerProps> = ({
     </SelectGroup>,
   ];
 
+  const isDisabled = disableToolbar || brokerList.length === 0;
+
   return (
     <ToolbarItem>
       <Select
@@ -60,6 +64,7 @@ export const FilterByBroker: VoidFunctionComponent<FilterByBrokerProps> = ({
         position="left"
         placeholderText={t("all_brokers")}
         aria-label={t("filter-by-broker")}
+        isDisabled={isDisabled}
       >
         {brokerOptions(brokerList)}
       </Select>
