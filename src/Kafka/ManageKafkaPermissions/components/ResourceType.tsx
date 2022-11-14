@@ -64,7 +64,7 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
         id={"resource-type-select"}
         aria-label={
           value != undefined
-            ? t("resourceTypes.resource_type_selected", { value })
+            ? t("resourceTypes.resource_type_selected", { value: value })
             : t("resourceTypes.resource_type")
         }
         data-testid="acls-resource-type-select"

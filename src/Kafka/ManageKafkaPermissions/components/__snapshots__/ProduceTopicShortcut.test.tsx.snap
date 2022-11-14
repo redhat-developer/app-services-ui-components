@@ -12,7 +12,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
       style=""
     >
       <thead
-        class="pf-m-nowrap"
+        class=""
       >
         <tr
           class=""
@@ -38,6 +38,12 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
           >
             Permission
           </th>
+          <th
+            class=""
+          />
+          <th
+            class=""
+          />
         </tr>
       </thead>
       <tbody
@@ -52,83 +58,61 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
         >
           <td
             class=""
+            colspan="5"
           >
-            <div
-              class="pf-l-flex"
+            <h6
+              class="pf-c-title pf-m-md"
+              data-ouia-component-id="OUIA-Generated-Title-2"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
             >
-              <div
-                class=""
-              >
-                <h6
-                  class="pf-c-title pf-m-md"
-                  data-ouia-component-id="OUIA-Generated-Title-2"
-                  data-ouia-component-type="PF4/Title"
-                  data-ouia-safe="true"
-                >
-                  Produce to a topic
-                </h6>
-              </div>
-              <div
-                class=""
+              Produce to a topic
+               
+              <button
+                class="pf-c-form__group-label-help"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
                   role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 512 512"
+                  viewBox="0 0 1024 1024"
                   width="1em"
                 >
                   <path
-                    d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"
+                    d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
                   />
                 </svg>
-              </div>
-            </div>
+              </button>
+            </h6>
           </td>
           <td
             class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
           >
-            <div
-              class="pf-l-flex"
+            <button
+              aria-disabled="false"
+              aria-label="produce-topic-delete"
+              class="pf-c-button pf-m-link"
+              data-ouia-component-id="OUIA-Generated-Button-link-2"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
             >
-              <div
-                class=""
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 448 512"
+                width="1em"
               >
-                <button
-                  aria-disabled="false"
-                  class="pf-c-button pf-m-link"
-                  data-ouia-component-id="OUIA-Generated-Button-link-2"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 448 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+                <path
+                  d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                />
+              </svg>
+            </button>
           </td>
         </tr>
         <tr
@@ -162,7 +146,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
               data-ouia-component-id="OUIA-Generated-Select-single-2"
               data-ouia-component-type="PF4/Select"
               data-ouia-safe="true"
-              style="width: 200px;"
+              style="width: 150px;"
             >
               <button
                 aria-expanded="false"
@@ -217,6 +201,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-2"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
+                  style="width: 170px;"
                 >
                   <div
                     class="pf-c-select__toggle pf-m-typeahead"
@@ -225,7 +210,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                       class="pf-c-select__toggle-wrapper"
                     >
                       <input
-                        aria-label="{{value}} name"
+                        aria-label="topic name"
                         autocomplete="off"
                         class="pf-c-form-control pf-c-select__toggle-typeahead"
                         id="pf-select-toggle-id-3-select-typeahead"
@@ -267,6 +252,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
           </td>
           <td
             class=""
+            colspan="2"
           >
             <div
               class="pf-c-label-group"
@@ -362,7 +348,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
       style=""
     >
       <thead
-        class="pf-m-nowrap"
+        class=""
       >
         <tr
           class=""
@@ -388,6 +374,12 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
           >
             Permission
           </th>
+          <th
+            class=""
+          />
+          <th
+            class=""
+          />
         </tr>
       </thead>
       <tbody
@@ -402,83 +394,61 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
         >
           <td
             class=""
+            colspan="5"
           >
-            <div
-              class="pf-l-flex"
+            <h6
+              class="pf-c-title pf-m-md"
+              data-ouia-component-id="OUIA-Generated-Title-3"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
             >
-              <div
-                class=""
-              >
-                <h6
-                  class="pf-c-title pf-m-md"
-                  data-ouia-component-id="OUIA-Generated-Title-3"
-                  data-ouia-component-type="PF4/Title"
-                  data-ouia-safe="true"
-                >
-                  Produce to a topic
-                </h6>
-              </div>
-              <div
-                class=""
+              Produce to a topic
+               
+              <button
+                class="pf-c-form__group-label-help"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
                   role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 512 512"
+                  viewBox="0 0 1024 1024"
                   width="1em"
                 >
                   <path
-                    d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"
+                    d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
                   />
                 </svg>
-              </div>
-            </div>
+              </button>
+            </h6>
           </td>
           <td
             class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
           >
-            <div
-              class="pf-l-flex"
+            <button
+              aria-disabled="false"
+              aria-label="produce-topic-delete"
+              class="pf-c-button pf-m-link"
+              data-ouia-component-id="OUIA-Generated-Button-link-3"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
             >
-              <div
-                class=""
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 448 512"
+                width="1em"
               >
-                <button
-                  aria-disabled="false"
-                  class="pf-c-button pf-m-link"
-                  data-ouia-component-id="OUIA-Generated-Button-link-3"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 448 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+                <path
+                  d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                />
+              </svg>
+            </button>
           </td>
         </tr>
         <tr
@@ -512,7 +482,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
               data-ouia-component-id="OUIA-Generated-Select-single-3"
               data-ouia-component-type="PF4/Select"
               data-ouia-safe="true"
-              style="width: 200px;"
+              style="width: 150px;"
             >
               <button
                 aria-expanded="false"
@@ -567,6 +537,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
+                  style="width: 170px;"
                 >
                   <div
                     class="pf-c-select__toggle pf-m-typeahead"
@@ -575,7 +546,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                       class="pf-c-select__toggle-wrapper"
                     >
                       <input
-                        aria-label="{{value}} prefix"
+                        aria-label="topic prefix"
                         autocomplete="off"
                         class="pf-c-form-control pf-c-select__toggle-typeahead"
                         id="pf-select-toggle-id-5-select-typeahead"
@@ -617,6 +588,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
           </td>
           <td
             class=""
+            colspan="2"
           >
             <div
               class="pf-c-label-group"
@@ -723,83 +695,61 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
         >
           <td
             class=""
+            colspan="5"
           >
-            <div
-              class="pf-l-flex"
+            <h6
+              class="pf-c-title pf-m-md"
+              data-ouia-component-id="OUIA-Generated-Title-1"
+              data-ouia-component-type="PF4/Title"
+              data-ouia-safe="true"
             >
-              <div
-                class=""
-              >
-                <h6
-                  class="pf-c-title pf-m-md"
-                  data-ouia-component-id="OUIA-Generated-Title-1"
-                  data-ouia-component-type="PF4/Title"
-                  data-ouia-safe="true"
-                >
-                  Produce to a topic
-                </h6>
-              </div>
-              <div
-                class=""
+              Produce to a topic
+               
+              <button
+                class="pf-c-form__group-label-help"
+                type="button"
               >
                 <svg
                   aria-hidden="true"
                   fill="currentColor"
                   height="1em"
                   role="img"
-                  style="vertical-align: -0.125em;"
-                  viewBox="0 0 512 512"
+                  viewBox="0 0 1024 1024"
                   width="1em"
                 >
                   <path
-                    d="M256 8C119.043 8 8 119.083 8 256c0 136.997 111.043 248 248 248s248-111.003 248-248C504 119.083 392.957 8 256 8zm0 448c-110.532 0-200-89.431-200-200 0-110.495 89.472-200 200-200 110.491 0 200 89.471 200 200 0 110.53-89.431 200-200 200zm107.244-255.2c0 67.052-72.421 68.084-72.421 92.863V300c0 6.627-5.373 12-12 12h-45.647c-6.627 0-12-5.373-12-12v-8.659c0-35.745 27.1-50.034 47.579-61.516 17.561-9.845 28.324-16.541 28.324-29.579 0-17.246-21.999-28.693-39.784-28.693-23.189 0-33.894 10.977-48.942 29.969-4.057 5.12-11.46 6.071-16.666 2.124l-27.824-21.098c-5.107-3.872-6.251-11.066-2.644-16.363C184.846 131.491 214.94 112 261.794 112c49.071 0 101.45 38.304 101.45 88.8zM298 368c0 23.159-18.841 42-42 42s-42-18.841-42-42 18.841-42 42-42 42 18.841 42 42z"
+                    d="M521.3,576 C627.5,576 713.7,502 713.7,413.7 C713.7,325.4 627.6,253.6 521.3,253.6 C366,253.6 334.5,337.7 329.2,407.2 C329.2,414.3 335.2,416 343.5,416 L445,416 C450.5,416 458,415.5 460.8,406.5 C460.8,362.6 582.9,357.1 582.9,413.6 C582.9,441.9 556.2,470.9 521.3,473 C486.4,475.1 447.3,479.8 447.3,521.7 L447.3,553.8 C447.3,570.8 456.1,576 472,576 C487.9,576 521.3,576 521.3,576 M575.3,751.3 L575.3,655.3 C575.313862,651.055109 573.620137,646.982962 570.6,644 C567.638831,640.947672 563.552355,639.247987 559.3,639.29884 L463.3,639.29884 C459.055109,639.286138 454.982962,640.979863 452,644 C448.947672,646.961169 447.247987,651.047645 447.29884,655.3 L447.29884,751.3 C447.286138,755.544891 448.979863,759.617038 452,762.6 C454.961169,765.652328 459.047645,767.352013 463.3,767.30116 L559.3,767.30116 C563.544891,767.313862 567.617038,765.620137 570.6,762.6 C573.659349,759.643612 575.360354,755.553963 575.3,751.3 M512,896 C300.2,896 128,723.9 128,512 C128,300.3 300.2,128 512,128 C723.8,128 896,300.2 896,512 C896,723.8 723.7,896 512,896 M512.1,0 C229.7,0 0,229.8 0,512 C0,794.2 229.8,1024 512.1,1024 C794.4,1024 1024,794.3 1024,512 C1024,229.7 794.4,0 512.1,0"
                   />
                 </svg>
-              </div>
-            </div>
+              </button>
+            </h6>
           </td>
           <td
             class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
-          />
-          <td
-            class=""
           >
-            <div
-              class="pf-l-flex"
+            <button
+              aria-disabled="false"
+              aria-label="produce-topic-delete"
+              class="pf-c-button pf-m-link"
+              data-ouia-component-id="OUIA-Generated-Button-link-1"
+              data-ouia-component-type="PF4/Button"
+              data-ouia-safe="true"
+              type="button"
             >
-              <div
-                class=""
+              <svg
+                aria-hidden="true"
+                fill="currentColor"
+                height="1em"
+                role="img"
+                style="vertical-align: -0.125em;"
+                viewBox="0 0 448 512"
+                width="1em"
               >
-                <button
-                  aria-disabled="false"
-                  class="pf-c-button pf-m-link"
-                  data-ouia-component-id="OUIA-Generated-Button-link-1"
-                  data-ouia-component-type="PF4/Button"
-                  data-ouia-safe="true"
-                  type="button"
-                >
-                  <svg
-                    aria-hidden="true"
-                    fill="currentColor"
-                    height="1em"
-                    role="img"
-                    style="vertical-align: -0.125em;"
-                    viewBox="0 0 448 512"
-                    width="1em"
-                  >
-                    <path
-                      d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
+                <path
+                  d="M432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16zM53.2 467a48 48 0 0 0 47.9 45h245.8a48 48 0 0 0 47.9-45L416 128H32z"
+                />
+              </svg>
+            </button>
           </td>
         </tr>
         <tr
@@ -833,7 +783,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
               data-ouia-component-id="OUIA-Generated-Select-single-1"
               data-ouia-component-type="PF4/Select"
               data-ouia-safe="true"
-              style="width: 200px;"
+              style="width: 150px;"
             >
               <button
                 aria-expanded="false"
@@ -888,6 +838,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
+                  style="width: 170px;"
                 >
                   <div
                     class="pf-c-select__toggle pf-m-typeahead"
@@ -896,7 +847,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                       class="pf-c-select__toggle-wrapper"
                     >
                       <input
-                        aria-label="{{value}} prefix"
+                        aria-label="topic prefix"
                         autocomplete="off"
                         class="pf-c-form-control pf-c-select__toggle-typeahead"
                         id="pf-select-toggle-id-1-select-typeahead"
@@ -938,6 +889,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
           </td>
           <td
             class=""
+            colspan="2"
           >
             <div
               class="pf-c-label-group"

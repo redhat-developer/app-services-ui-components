@@ -1,21 +1,23 @@
-import { Flex, FlexItem, Popover, Title } from "@patternfly/react-core";
+import { Popover, Title } from "@patternfly/react-core";
 import { Tbody, Td, Tr } from "@patternfly/react-table";
 import { useTranslation } from "react-i18next";
-import { OutlinedQuestionCircleIcon } from "@patternfly/react-icons";
+import { HelpIcon } from "@patternfly/react-icons";
 import { ResourceTypeLabel } from "./ResourceTypeLabel";
 import { DisplayResourceName, PermissionOperationCell } from "./Cells";
 import { RemoveButton } from "../../../shared";
 import { ShortcutsTableHead } from "./ShortcutsTableHead";
 
 export type ManageAccessShortcutProps = {
-  onDelete: () => void;
+  onDelete: (row: number) => void;
   multipleShorctutPermissions?: boolean;
   instanceName: string;
+  row: number;
 };
 export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
   onDelete,
   multipleShorctutPermissions = true,
   instanceName,
+  row,
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
@@ -25,51 +27,42 @@ export const ManageAccessShortcut: React.FC<ManageAccessShortcutProps> = ({
 
       <Tbody>
         <Tr style={{ borderBottom: "none" }}>
-          <Td>
-            <Flex>
-              <FlexItem>
-                <Title headingLevel="h6">
-                  {t("permissions_dropdown.shortcut_manage_access")}
-                </Title>
-              </FlexItem>
-              <FlexItem>
-                <Popover
-                  headerContent={t(
-                    "permissions_dropdown.shortcut_manage_access"
-                  )}
-                  bodyContent={t(
-                    "permissions_dropdown.shortcut_manage_access_description"
-                  )}
+          <Td colSpan={5}>
+            <Title headingLevel="h6">
+              {t("permissions_dropdown.shortcut_manage_access")}{" "}
+              <Popover
+                headerContent={t("permissions_dropdown.shortcut_manage_access")}
+                bodyContent={t(
+                  "permissions_dropdown.shortcut_manage_access_description"
+                )}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => e.preventDefault()}
+                  className="pf-c-form__group-label-help"
                 >
-                  <OutlinedQuestionCircleIcon />
-                </Popover>
-              </FlexItem>
-            </Flex>
+                  <HelpIcon noVerticalAlign />
+                </button>
+              </Popover>
+            </Title>
           </Td>
-          <Td />
-          <Td />
-          <Td />
           <Td>
-            <Flex>
-              <FlexItem>
-                <RemoveButton
-                  variant="link"
-                  onClick={onDelete}
-                  tooltip={"Delete"}
-                />
-              </FlexItem>
-            </Flex>
+            <RemoveButton
+              variant="link"
+              onClick={() => onDelete(row)}
+              tooltip={t("remove_permission_tooltip")}
+              ariaLabel={t("delete_access")}
+            />
           </Td>
         </Tr>
 
         <Tr>
-          <Td>
+          <Td colSpan={2}>
             <ResourceTypeLabel variant={"CLUSTER"} />{" "}
             <DisplayResourceName resourceType={"CLUSTER"} />{" "}
-            {t("is_kafka_instance", instanceName)}
+            {t("is_kafka_instance", { value: instanceName })}
           </Td>
 
-          <Td />
           <Td />
 
           <Td>

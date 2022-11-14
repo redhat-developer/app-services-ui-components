@@ -60,7 +60,7 @@ export const ResourcePrefixRule: React.VFC<ResourcePrefixRuleProps> = ({
       onToggle={onToggle}
       onSelect={onSelect}
       isOpen={isOpen}
-      width={200}
+      width={150}
       selections={value}
       menuAppendTo={"parent"}
     >
