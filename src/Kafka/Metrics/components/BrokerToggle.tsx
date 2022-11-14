@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { BrokerFilter } from "../types";
 
 export type BrokerToggleProps = {
-  value: BrokerFilter | undefined;
+  value: BrokerFilter;
   onChange: (value: BrokerFilter) => void;
   selectedBroker: string | undefined;
 };

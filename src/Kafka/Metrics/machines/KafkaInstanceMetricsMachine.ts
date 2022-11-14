@@ -42,7 +42,7 @@ export type KafkaInstanceMetricsMachineContext = {
   // from the UI elements
   duration: DurationOptions;
   selectedBroker: string | undefined;
-  selectedToggle: BrokerFilter | undefined;
+  selectedToggle: BrokerFilter;
   selectedPartition: PartitionSelect;
 
   // from the api
@@ -72,7 +72,7 @@ export const KafkaInstanceMetricsMachine = createMachine(
         | { type: "selectTopic"; topic: string | undefined }
         | { type: "selectDuration"; duration: DurationOptions }
         | { type: "selectBroker"; broker: string | undefined }
-        | { type: "selectToggle"; value: BrokerFilter | undefined }
+        | { type: "selectToggle"; value: BrokerFilter }
         | { type: "selectPartition"; value: PartitionSelect },
     },
     id: "kafkaInstanceMetrics",

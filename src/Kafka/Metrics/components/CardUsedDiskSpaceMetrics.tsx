@@ -18,6 +18,7 @@ import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
 import type { BrokerBytesMetric, BrokerFilter } from "../types";
+import { BrokerToggle } from "./BrokerToggle";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {
@@ -52,7 +53,7 @@ export type ChartUsedDiskSpaceProps = {
   duration: number;
   isLoading: boolean;
   emptyState: ReactElement;
-  brokerToggle: BrokerFilter | undefined;
+  brokerToggle: BrokerFilter;
   usageLimit?: number;
 };
 export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
@@ -155,7 +156,7 @@ export function getChartData(
   metrics: BrokerBytesMetric,
   broker: string | undefined,
   duration: number,
-  brokerToggle: BrokerFilter | undefined,
+  brokerToggle: BrokerFilter,
   limitLabel: string,
   usageLimit?: number
 ): {
@@ -175,18 +176,17 @@ export function getChartData(
 
     const color = chart_color_blue_300.value;
 
-    Object.entries(metrics[broker]).map(([timestamp, bytes]) => {
+    Object.entries(metrics[broker]).forEach(([timestamp, bytes]) => {
       area.push({ name: broker, x: parseInt(timestamp, 10), y: bytes });
     });
     chartData.push({ color, softLimitColor, area, softLimit });
-  } else if (brokerToggle && metrics[brokerToggle]) {
+  } else if (brokerToggle === "total") {
     legendData.push({ name: "Instance" });
-
     const area: Array<BrokerChartData> = [];
 
     const color = chart_color_blue_300.value;
 
-    Object.entries(metrics[brokerToggle]).map(([timestamp, bytes]) => {
+    Object.entries(metrics[brokerToggle]).forEach(([timestamp, bytes]) => {
       area.push({ name: "Instance", x: parseInt(timestamp, 10), y: bytes });
     });
     chartData.push({ color, softLimitColor, area, softLimit });
@@ -202,7 +202,7 @@ export function getChartData(
         });
         const area: Array<BrokerChartData> = [];
 
-        Object.entries(dataMap).map(([timestamp, value]) => {
+        Object.entries(dataMap).forEach(([timestamp, value]) => {
           area.push({ name, x: parseInt(timestamp, 10), y: value });
         });
         chartData.push({ color, softLimitColor, area, softLimit });

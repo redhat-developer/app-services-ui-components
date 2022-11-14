@@ -51,8 +51,8 @@ export type CardKafkaInstanceMetricsProps = {
   selectedBroker: string | undefined;
   onSelectedBroker: (broker: string | undefined) => void;
   onDurationChange: (duration: DurationOptions) => void;
-  selectToggle: BrokerFilter | undefined;
-  onSelectedToggle: (value: BrokerFilter | undefined) => void;
+  selectToggle: BrokerFilter;
+  onSelectedToggle: (value: BrokerFilter) => void;
   bytesPerPartitions: PartitionBytesMetric;
   onSelectedPartition: (value: PartitionSelect) => void;
   selectedPartition: PartitionSelect;
@@ -151,8 +151,8 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                 </CardBody>
                 <Divider />
                 <ChartTitle
-                  title={t("broker_partition_size")}
-                  helperText={t("")}
+                  title={t("partition_size")}
+                  helperText={t("broker_partition_size_help_text")}
                 />
                 <CardBody>
                   <Toolbar>

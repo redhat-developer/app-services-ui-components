@@ -64,8 +64,7 @@ export function useKafkaInstanceMetrics() {
   const onRefresh = useCallback(() => service.send("refresh"), [service]);
 
   const onSelectToggle = useCallback(
-    (value: BrokerFilter | undefined) =>
-      service.send({ type: "selectToggle", value }),
+    (value: BrokerFilter) => service.send({ type: "selectToggle", value }),
     [service]
   );
 

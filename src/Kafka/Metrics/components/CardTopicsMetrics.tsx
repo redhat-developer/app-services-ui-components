@@ -223,10 +223,10 @@ const PartitionSizeTitle: FunctionComponent = () => {
   const { t } = useTranslation();
   return (
     <CardTitle component="h3">
-      {t("metrics:topic_partition_size")}{" "}
+      {t("metrics:partition_size")}{" "}
       <ChartPopover
         title={t("metrics:topic_partition_size_popover_header")}
-        description={t("metrics:topic_partition_help_text")}
+        description={t("metrics:topic_partition_size_help_text")}
       />
     </CardTitle>
   );
