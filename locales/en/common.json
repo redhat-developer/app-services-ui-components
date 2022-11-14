@@ -27,8 +27,8 @@
     "big_data_label": "Big Data",
     "change_data_capture_label": "Change data capture",
     "postgresDB": "postgresDB",
-    "slack": "Slack",
     "sink_label": "Sink",
+    "slack": "Slack",
     "source_label": "Source",
     "streaming_messaging_label": "Streaming&messaging",
     "version": "Version: 1.0.1 Final"
