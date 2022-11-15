@@ -21,8 +21,8 @@ export type ConsumeTopicShortcutProps = {
   topicResourceNameValue: string | undefined;
   onChangeConsumerResourceName: (value: string | undefined) => void;
   onChangeTopicResourceName: (value: string | undefined) => void;
-  onFetchConsumerResourceNameOptions: (filter: string) => Promise<string[]>;
-  onFetchTopicResourceNameOptions: (filter: string) => Promise<string[]>;
+  onFetchConsumerResourceNameOptions: (filter: string) => string[];
+  onFetchTopicResourceNameOptions: (filter: string) => string[];
   submitted: boolean;
   multipleShorctutPermissions?: boolean;
   onDelete: (row: number) => void;

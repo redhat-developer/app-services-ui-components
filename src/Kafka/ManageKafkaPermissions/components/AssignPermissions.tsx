@@ -10,18 +10,9 @@ import { ShortcutsTableHead } from "./ShortcutsTableHead";
 
 export type AssignPermissionsProps = {
   submitted: boolean;
-  resourceNameOptions: (filter: string) => Promise<string[]>;
   onDelete: (index: number) => void;
-  fetchConsumeTopicShortcutResourceName: (filter: string) => Promise<string[]>;
-  onFetchConsumeTopicShortcutTopicResourceNameOptions: (
-    filter: string
-  ) => Promise<string[]>;
-  onFetchProduceTopicShortcutResourceNameOptions: (
-    filter: string
-  ) => Promise<string[]>;
-  fetchConsumeTopicShortcutTopicResourceNameOptions: (
-    filter: string
-  ) => Promise<string[]>;
+  topicNameOptions: (filter: string) => string[];
+  consumerGroupNameOptions: (filter: string) => string[];
   addedAcls?: AddAclType[];
   onAddManualPermissions: () => void;
   onAddProduceTopicShortcut: () => void;
@@ -33,12 +24,10 @@ export type AssignPermissionsProps = {
 };
 
 export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
-  resourceNameOptions,
   submitted,
   onDelete,
-  fetchConsumeTopicShortcutResourceName,
-  onFetchConsumeTopicShortcutTopicResourceNameOptions,
-  onFetchProduceTopicShortcutResourceNameOptions,
+  topicNameOptions,
+  consumerGroupNameOptions,
   onAddManualPermissions,
   onAddProduceTopicShortcut,
   onConsumeTopicShortcut,
@@ -91,7 +80,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                         })
                       )
                     }
-                    onFetchResourceNameOptions={resourceNameOptions}
+                    onFetchResourceNameOptions={topicNameOptions}
                     resourcePermission={aclTemplate.resourcePermission}
                     onChangeResourcePermission={(value) =>
                       setAddedAcls(
@@ -183,11 +172,9 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                       )
                     }
                     onFetchConsumerResourceNameOptions={
-                      fetchConsumeTopicShortcutResourceName
+                      consumerGroupNameOptions
                     }
-                    onFetchTopicResourceNameOptions={
-                      onFetchConsumeTopicShortcutTopicResourceNameOptions
-                    }
+                    onFetchTopicResourceNameOptions={topicNameOptions}
                     submitted={submitted}
                     onDelete={onDelete}
                     row={idx}
@@ -222,9 +209,7 @@ export const AssignPermissions: React.VFC<AssignPermissionsProps> = ({
                         })
                       )
                     }
-                    onFetchResourceNameOptions={
-                      onFetchProduceTopicShortcutResourceNameOptions
-                    }
+                    onFetchResourceNameOptions={topicNameOptions}
                     submitted={submitted}
                     onDelete={onDelete}
                     row={idx}

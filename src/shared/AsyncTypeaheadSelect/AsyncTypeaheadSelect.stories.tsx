@@ -2,21 +2,18 @@ import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { AsyncTypeaheadSelect } from "./AsyncTypeaheadSelect";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";
-import { fakeApi } from "../storiesHelpers";
 
 export default {
   component: AsyncTypeaheadSelect,
   args: {
     id: "sample",
+    onFetchOptions: (filter: string) => {
+      return ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+        v.includes(filter)
+      );
+    },
     value: undefined,
     ariaLabel: "my aria label",
-    onFetchOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
     onValidationCheck: () => ({ isValid: true, message: undefined }),
     placeholderText: "Enter name",
   },
@@ -54,23 +51,6 @@ PlaceHolderVariation.parameters = {
   docs: {
     description: {
       story: `A variation of the async typeahead with a different placholder`,
-    },
-  },
-};
-
-export const LoadingSuggestions = Template.bind({});
-LoadingSuggestions.args = {
-  onFetchOptions: () => new Promise(() => false),
-};
-
-LoadingSuggestions.play = async ({ canvasElement }) => {
-  const canvas = within(canvasElement);
-  await userEvent.click(await canvas.findByPlaceholderText("Enter name"));
-};
-LoadingSuggestions.parameters = {
-  docs: {
-    description: {
-      story: `A user clicks on the async typeahead. Until the list of suggestions is ready to be dispayed, a spinner shows `,
     },
   },
 };

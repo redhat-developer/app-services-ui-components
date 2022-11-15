@@ -21,7 +21,7 @@ export type AssignPermissionsManualProps = {
   onChangeResourcePrefix: (value: ResourcePrefixRuleValue) => void;
   resourceName: string | undefined;
   onChangeResource: (value: string | undefined) => void;
-  onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
+  onFetchResourceNameOptions: (filter: string) => string[];
   resourcePermission: ResourcePermissionValue;
   onChangeResourcePermission: (value: ResourcePermissionValue) => void;
   resourceOperation: ResourceOperationValue | undefined;
