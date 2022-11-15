@@ -1,19 +1,17 @@
 import { TableComposable } from "@patternfly/react-table";
 import { Form } from "@patternfly/react-core";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { fakeApi } from "../../../shared/storiesHelpers";
 import { AssignPermissionsManual } from "./AssignPermissionsManual";
 
 export default {
   component: AssignPermissionsManual,
   args: {
-    onFetchResourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
+    onFetchResourceNameOptions: (filter: string) => {
+      return ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
+        v.includes(filter)
+      );
+    },
+
     resourceType: undefined,
     submitted: false,
     resourcePrefix: "Is",

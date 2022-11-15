@@ -7,7 +7,8 @@ import {
   ValidatedOptions,
 } from "@patternfly/react-core";
 import type { VFC } from "react";
-import { useRef, useState } from "react";
+import { useRef } from "react";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export type Validation = {
@@ -21,7 +22,7 @@ export type AsyncTypeaheadSelectProps = {
   ariaLabel: string;
   placeholderText: string;
   onChange: (value: string | undefined) => void;
-  onFetchOptions: (filter: string) => Promise<string[]>;
+  onFetchOptions: (filter: string) => string[];
   onValidationCheck: (
     filterValue: string | undefined,
     isCreated?: boolean
@@ -43,37 +44,33 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
-    []
+    onFetchOptions("")
   );
   const [validation, setValidation] = useState<Validation | undefined>();
   const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
-
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
   const onTypeahead = (filter: string | undefined) => {
-    setFilterValue(filter);
-    function doFetch() {
-      onFetchOptions(filter || "")
-        .then(setTypeAheadSuggestions)
-        .finally(() => setLoading(false));
-    }
-    setLoading(true);
-    if (filter !== undefined) {
-      setValidation(onValidationCheck(filter));
-      setTypeAheadSuggestions([]);
+    setValidation(onValidationCheck(filter));
+    function fetchSuggestions() {
+      filter != undefined
+        ? setTypeAheadSuggestions(onFetchOptions(filter))
+        : setTypeAheadSuggestions(onFetchOptions(""));
     }
     if (fetchTimeout.current) {
       clearTimeout(fetchTimeout.current);
       fetchTimeout.current = undefined;
     }
-    fetchTimeout.current = setTimeout(doFetch, 300);
+    fetchTimeout.current = setTimeout(fetchSuggestions, 300);
   };
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
+    setValidation(onValidationCheck(value as string));
     onChange(value as string);
+    onToggle(false);
+    setFilterValue(value as string);
   };
   const onToggle = (newState: boolean) => {
     submitted && required && (value == "" || value == undefined)
@@ -81,7 +78,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       : null;
     setIsOpen((isOpen) => {
       if (isOpen !== newState && newState === true) {
-        onTypeahead(undefined);
+        onChange(undefined);
       }
       return newState;
     });
@@ -93,7 +90,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       : setValidation({ isValid: true, message: undefined });
   };
 
-  const isCreatable = !loading && validation && validation.isValid;
+  //const isCreatable = validation && validation.isValid;
 
   const formGroupValidated =
     submitted &&
@@ -112,9 +109,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     (filterValue === undefined || filterValue === "")
       ? t("common:required")
       : validation?.message;
-  const onCreateOption = (value: string) => {
-    setValidation(onValidationCheck(value, true));
-  };
+
   return (
     <FormGroup
       validated={formGroupValidated}
@@ -131,20 +126,18 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         onClear={clearSelection}
         selections={value}
         isOpen={validation && !validation.isValid ? false : isOpen}
-        loadingVariant={loading ? "spinner" : undefined}
         placeholderText={placeholderText}
-        isCreatable={isCreatable}
+        onTypeaheadInputChanged={onTypeahead}
+        isCreatable={true}
         menuAppendTo="parent"
         validated={formGroupValidated}
         maxHeight={400}
         width={170}
-        onCreateOption={onCreateOption}
-        createText={t("resourcePrefix.create_text")}
-        onTypeaheadInputChanged={onTypeahead}
         onFilter={() => undefined}
+        createText={t("resourcePrefix.create_text")}
       >
         {typeAheadSuggestions.map((value, index) => (
-          <SelectOption key={index} value={value} isDisabled={loading}>
+          <SelectOption key={index} value={value}>
             {value}
           </SelectOption>
         ))}

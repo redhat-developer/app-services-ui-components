@@ -34,14 +34,8 @@ export type ManageKafkaPermissionsProps = {
   onRemoveAcls: (index: number) => void;
   selectedAccount: string | undefined;
   onChangeSelectedAccount: (value: string | undefined) => void;
-  resourceNameOptions: (filter: string) => Promise<string[]>;
-  fetchConsumeTopicShortcutResourceName: (filter: string) => Promise<string[]>;
-  onFetchConsumeTopicShortcutTopicResourceNameOptions: (
-    filter: string
-  ) => Promise<string[]>;
-  onFetchProduceTopicShortcutResourceNameOptions: (
-    filter: string
-  ) => Promise<string[]>;
+  topicNameOptions: (filter: string) => string[];
+  consumerGroupNameOptions: (filter: string) => string[];
 };
 
 export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
@@ -53,10 +47,8 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   onSave,
   selectedAccount,
   onChangeSelectedAccount,
-  resourceNameOptions,
-  fetchConsumeTopicShortcutResourceName,
-  onFetchConsumeTopicShortcutTopicResourceNameOptions,
-  onFetchProduceTopicShortcutResourceNameOptions,
+  topicNameOptions,
+  consumerGroupNameOptions,
 }) => {
   const { t } = useTranslation([
     "manage-kafka-permissions",
@@ -291,19 +283,8 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                   onConsumeTopicShortcut={onConsumeTopicShortcut}
                   onManageAccessShortcut={onManageAccessShortcut}
                   onDelete={onDeleteNewAcl}
-                  resourceNameOptions={resourceNameOptions}
-                  fetchConsumeTopicShortcutResourceName={
-                    fetchConsumeTopicShortcutResourceName
-                  }
-                  onFetchConsumeTopicShortcutTopicResourceNameOptions={
-                    onFetchConsumeTopicShortcutTopicResourceNameOptions
-                  }
-                  onFetchProduceTopicShortcutResourceNameOptions={
-                    onFetchProduceTopicShortcutResourceNameOptions
-                  }
-                  fetchConsumeTopicShortcutTopicResourceNameOptions={
-                    onFetchConsumeTopicShortcutTopicResourceNameOptions
-                  }
+                  topicNameOptions={topicNameOptions}
+                  consumerGroupNameOptions={consumerGroupNameOptions}
                   addedAcls={newAcls}
                   kafkaName={kafkaName}
                   setAddedAcls={setNewAcls}

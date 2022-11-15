@@ -6,39 +6,20 @@ import {
   PermissionsForAllAccounts,
   PermissionsForSelectedAccount,
 } from "./components/ReviewPermissionsTable.stories";
-import { fakeApi } from "../../shared/storiesHelpers";
-
 export default {
   component: ManageKafkaPermissions,
   args: {
-    resourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
-    fetchConsumeTopicShortcutResourceName: (filter) =>
-      fakeApi<string[]>(
-        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
-    onFetchConsumeTopicShortcutTopicResourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
-    onFetchProduceTopicShortcutResourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
+    topicNameOptions: (filter: string) => {
+      return ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+        v.includes(filter)
+      );
+    },
+    consumerGroupNameOptions: (filter: string) => {
+      return ["foo", "bar", "baz", `random ${Math.random()}`].filter((v) =>
+        v.includes(filter)
+      );
+    },
+
     accounts: [
       {
         id: "id",
