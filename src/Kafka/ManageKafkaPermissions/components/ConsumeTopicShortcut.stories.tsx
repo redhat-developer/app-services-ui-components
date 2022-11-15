@@ -1,26 +1,24 @@
 import { TableComposable } from "@patternfly/react-table";
 import { Form } from "@patternfly/react-core";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
-import { fakeApi } from "../../../shared/storiesHelpers";
 import { ConsumeTopicShortcut } from "./ConsumeTopicShortcut";
 
 export default {
   component: ConsumeTopicShortcut,
   args: {
-    onFetchConsumerResourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo-consumer", "test", "my-consumer", "random-consumer-name"].filter(
-          (v) => v.includes(filter)
-        ),
-        100
-      ),
-    onFetchTopicResourceNameOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
+    onFetchConsumerResourceNameOptions: (filter: string) => {
+      return [
+        "foo-consumer",
+        "test",
+        "my-consumer",
+        "random-consumer-name",
+      ].filter((v) => v.includes(filter));
+    },
+    onFetchTopicResourceNameOptions: (filter: string) => {
+      return ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
+        v.includes(filter)
+      );
+    },
     topicPrefixRuleValue: "Starts with",
     consumerPrefixRuleValue: "Starts with",
     submitted: false,

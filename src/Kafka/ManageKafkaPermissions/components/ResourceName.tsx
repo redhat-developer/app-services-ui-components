@@ -6,7 +6,7 @@ import { AsyncTypeaheadSelect } from "../../../shared";
 type ResourceNameProps = {
   value: string | undefined;
   onChangeValue: (value: string | undefined) => void;
-  onFetchOptions: (filter: string) => Promise<string[]>;
+  onFetchOptions: (filter: string) => string[];
   submitted: boolean;
   resourceType: ResourceTypeValue | undefined;
   resourcePrefixRule: ResourcePrefixRuleValue;

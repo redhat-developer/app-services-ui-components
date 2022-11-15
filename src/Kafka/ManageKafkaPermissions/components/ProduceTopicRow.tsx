@@ -10,7 +10,7 @@ export type ProduceTopicRowProps = {
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;
-  onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
+  onFetchResourceNameOptions: (filter: string) => string[];
   submitted: boolean;
   isConsumeTopicShortcut?: boolean;
   setIsNameValid: (value: boolean) => void;
