@@ -128,6 +128,7 @@ export const InstancesTable = <T extends KafkaInstance>({
                           {row.name}
                         </Link>
                       )}
+                      isInline
                       isDisabled={DeletingStatuses.includes(row["status"])}
                       onClick={() => onInstanceLinkClick(row)}
                     />
