@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import type { RetentionSizeUnits, RetentionTimeUnits } from "../types";
 
 export type NewTopic = {
   name: string;
@@ -16,17 +17,6 @@ export type NewTopic = {
   isMultiAZ: boolean;
 };
 
-export enum RetentionTimeUnits {
-  MILLISECOND = "milliseconds",
-  SECOND = "seconds",
-  MINUTE = "minutes",
-  HOUR = "hours",
-  DAY = "days",
-  WEEK = "weeks",
-  CUSTOM = "custom",
-  UNLIMITED = "unlimited",
-}
-
 export enum CustomRetentionTimeUnits {
   MILLISECOND = "milliseconds",
   SECOND = "seconds",
@@ -34,16 +24,6 @@ export enum CustomRetentionTimeUnits {
   HOUR = "hours",
   DAY = "days",
   WEEK = "weeks",
-}
-
-export enum RetentionSizeUnits {
-  BYTE = "bytes",
-  KIBIBYTE = "kibibytes",
-  MEBIBYTE = "mebibytes",
-  GIBIBYTE = "gibibytes",
-  TEBIBYTE = "tebibytes",
-  CUSTOM = "custom",
-  UNLIMITED = "unlimited",
 }
 
 export type SelectOptions = {

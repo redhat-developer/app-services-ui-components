@@ -139,3 +139,24 @@ export type KafkaInstance = {
   billing: "prepaid" | MarketplaceSubscription | undefined;
 };
 export type KafkaInstanceField = keyof KafkaInstance;
+
+export enum RetentionTimeUnits {
+  MILLISECOND = "milliseconds",
+  SECOND = "seconds",
+  MINUTE = "minutes",
+  HOUR = "hours",
+  DAY = "days",
+  WEEK = "weeks",
+  CUSTOM = "custom",
+  UNLIMITED = "unlimited",
+}
+
+export enum RetentionSizeUnits {
+  BYTE = "bytes",
+  KIBIBYTE = "kibibytes",
+  MEBIBYTE = "mebibytes",
+  GIBIBYTE = "gibibytes",
+  TEBIBYTE = "tebibytes",
+  CUSTOM = "custom",
+  UNLIMITED = "unlimited",
+}
