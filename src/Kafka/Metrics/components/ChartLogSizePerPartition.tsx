@@ -63,7 +63,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
-  const itemsPerRow = width && width > 650 ? 6 : 3;
+  const itemsPerRow = width && width > 650 ? 10 : 20;
 
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
