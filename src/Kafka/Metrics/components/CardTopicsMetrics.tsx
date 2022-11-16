@@ -162,6 +162,7 @@ export const CardTopicsMetrics: FunctionComponent<CardTopicsMetricsProps> = ({
                     duration={duration}
                     isLoading={isLoading}
                     emptyState={chartEmptyState}
+                    selectedPartition={selectedPartition}
                   />
                 </CardBody>
               </>

@@ -153,7 +153,7 @@ export function getChartData(
     ? Object.entries(partitions)
         .slice(0, 10)
         .map(([partition, dataMap], index) => {
-          const name = broker ? `${broker}-${partition}` : partition;
+          const name = broker ? `${broker},${partition}` : partition;
           const color = colors[index];
           legendData.push({
             name,

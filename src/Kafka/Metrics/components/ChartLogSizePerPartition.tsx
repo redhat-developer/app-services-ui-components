@@ -15,7 +15,7 @@ import {
 import type { FunctionComponent, ReactElement } from "react";
 import { useTranslation } from "react-i18next";
 import { chartHeight, chartPadding } from "../consts";
-import type { PartitionBytesMetric } from "../types";
+import type { PartitionBytesMetric, PartitionSelect } from "../types";
 import { ChartSkeletonLoader } from "./ChartSkeletonLoader";
 import { useChartWidth } from "./useChartWidth";
 import {
@@ -48,10 +48,18 @@ export type ChartLogSizePerPartitionProps = {
   duration: number;
   isLoading: boolean;
   emptyState: ReactElement;
+  selectedPartition: PartitionSelect;
 };
 export const ChartLogSizePerPartition: FunctionComponent<
   ChartLogSizePerPartitionProps
-> = ({ partitions, topic, duration, isLoading, emptyState }) => {
+> = ({
+  partitions,
+  topic,
+  duration,
+  isLoading,
+  emptyState,
+  selectedPartition,
+}) => {
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
@@ -60,7 +68,8 @@ export const ChartLogSizePerPartition: FunctionComponent<
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
     topic,
-    duration
+    duration,
+    selectedPartition
   );
 
   const hasMetrics = Object.keys(partitions).length > 0;
@@ -130,7 +139,8 @@ export const ChartLogSizePerPartition: FunctionComponent<
 export function getChartData(
   partitions: PartitionBytesMetric,
   topic: string | undefined,
-  duration: number
+  duration: number,
+  selectedPartition: PartitionSelect
 ): {
   legendData: Array<LegendData>;
   chartData: Array<ChartData>;
@@ -138,19 +148,37 @@ export function getChartData(
 } {
   const legendData: Array<LegendData> = [];
   const chartData: Array<ChartData> = [];
-  Object.entries(partitions).map(([partition, dataMap], index) => {
-    const name = topic ? `${topic}: ${partition}` : partition;
-    const color = colors[index];
-    legendData.push({
-      name,
-    });
-    const area: Array<PartitionChartData> = [];
+  selectedPartition === "Top10"
+    ? Object.entries(partitions)
+        .slice(0, 10)
+        .map(([partition, dataMap], index) => {
+          const name = topic ? `${topic}/${partition}` : partition;
+          const color = colors[index];
+          legendData.push({
+            name,
+          });
+          const area: Array<PartitionChartData> = [];
 
-    Object.entries(dataMap).map(([timestamp, value]) => {
-      area.push({ name, x: parseInt(timestamp, 10), y: value });
-    });
-    chartData.push({ color, area });
-  });
+          Object.entries(dataMap).map(([timestamp, value]) => {
+            area.push({ name, x: parseInt(timestamp, 10), y: value });
+          });
+          chartData.push({ color, area });
+        })
+    : Object.entries(partitions)
+        .slice(0, 20)
+        .map(([partition, dataMap], index) => {
+          const name = topic ? `${topic}/${partition}` : partition;
+          const color = colors[index];
+          legendData.push({
+            name,
+          });
+          const area: Array<PartitionChartData> = [];
+
+          Object.entries(dataMap).map(([timestamp, value]) => {
+            area.push({ name, x: parseInt(timestamp, 10), y: value });
+          });
+          chartData.push({ color, area });
+        });
 
   const allTimestamps = Array.from(
     new Set(Object.values(partitions).flatMap((m) => Object.keys(m)))

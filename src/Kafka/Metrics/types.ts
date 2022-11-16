@@ -2,7 +2,7 @@ import type { CardKafkaInstanceMetricsLimits } from "./components";
 
 export type TimeSeriesMetrics = { [timestamp: number]: number };
 export type PartitionBytesMetric = {
-  [partition: "total" | string]: TimeSeriesMetrics;
+  [partition: string]: TimeSeriesMetrics;
 };
 export type BrokerBytesMetric = {
   [broker: "total" | string]: TimeSeriesMetrics;

@@ -8,6 +8,7 @@ import type {
 } from "./types";
 
 export const getKafkaInstanceMetrics = ({
+  selectedBroker,
   duration,
   offset,
   waitLengthMs,
@@ -15,6 +16,7 @@ export const getKafkaInstanceMetrics = ({
   duration: DurationOptions;
   offset?: number;
   waitLengthMs?: number;
+  selectedBroker?: string;
 }) => {
   return fakeApi<GetKafkaInstanceMetricsResponse>(
     {
@@ -24,19 +26,28 @@ export const getKafkaInstanceMetrics = ({
         "broker 1": makeMetrics(duration, 200, 999, 10 ** 9),
         "broker 2": makeMetrics(duration, 100, 999, 10 ** 9),
       },
-      bytesPerPartitionMetrics: {
-        p1: makeMetrics(duration, 0, 2, 10 ** 7),
-        p2: makeMetrics(duration, 0, 4, 10 ** 7),
-        p3: makeMetrics(duration, 0, 6, 10 ** 7),
-        p4: makeMetrics(duration, 0, 3, 10 ** 7),
-        p5: makeMetrics(duration, 0, 1, 10 ** 7),
-        p6: makeMetrics(duration, 0, 14, 10 ** 7),
-        p7: makeMetrics(duration, 0, 6, 10 ** 7),
-        p8: makeMetrics(duration, 0, 12, 10 ** 7),
-        p9: makeMetrics(duration, 0, 10, 10 ** 7),
-        p10: makeMetrics(duration, 0, 8, 10 ** 7),
-        p11: makeMetrics(duration, 0, 8, 10 ** 7),
-      },
+      bytesPerPartitionMetrics: selectedBroker
+        ? {
+            0: makeMetrics(duration, 0, 2, 10 ** 7),
+            1: makeMetrics(duration, 0, 4, 10 ** 7),
+            2: makeMetrics(duration, 0, 6, 10 ** 7),
+            3: makeMetrics(duration, 0, 3, 10 ** 7),
+            4: makeMetrics(duration, 0, 1, 10 ** 7),
+            5: makeMetrics(duration, 0, 14, 10 ** 7),
+            6: makeMetrics(duration, 0, 6, 10 ** 7),
+            7: makeMetrics(duration, 0, 12, 10 ** 7),
+            8: makeMetrics(duration, 0, 10, 10 ** 7),
+            9: makeMetrics(duration, 0, 8, 10 ** 7),
+            10: makeMetrics(duration, 0, 8, 10 ** 7),
+          }
+        : {
+            "broker 1, topic1/0": makeMetrics(duration, 0, 2, 10 ** 7),
+            "broker 1, topic1/1": makeMetrics(duration, 0, 4, 10 ** 7),
+            "broker 2, topic1/2": makeMetrics(duration, 0, 6, 10 ** 7),
+            "broker 3, topic2/0": makeMetrics(duration, 0, 3, 10 ** 7),
+            "broker 2, topic2/1": makeMetrics(duration, 0, 1, 10 ** 7),
+            "broker 3, topic1/4": makeMetrics(duration, 0, 14, 10 ** 7),
+          },
       clientConnectionsMetrics: makeMetrics(duration, 0, 100, 1, offset),
       connectionAttemptRateMetrics: makeMetrics(duration, 0, 100, 1, offset),
       connectionsLimit: 100,
@@ -95,9 +106,15 @@ export const getTopicsMetrics = ({
       incomingMessageRate: makeMetrics(duration, 3, 8, 10, offset),
       bytesPerPartition: selectedTopic
         ? {
-            "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-            "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-            "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+            "0": makeMetrics(duration, 0, 2, 10 ** 7, offset),
+            "1": makeMetrics(duration, 0, 4, 10 ** 7, offset),
+            "2": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+            "3": makeMetrics(duration, 0, 8, 10 ** 7, offset),
+            "4": makeMetrics(duration, 0, 12, 10 ** 7, offset),
+            "5": makeMetrics(duration, 0, 20, 10 ** 7, offset),
+            "6": makeMetrics(duration, 0, 18, 10 ** 7, offset),
+            "7": makeMetrics(duration, 0, 13, 10 ** 7, offset),
+            "8": makeMetrics(duration, 0, 12, 10 ** 7, offset),
           }
         : {},
     },
@@ -138,10 +155,15 @@ export const getTopicsMetricsWithDeletedTopicMetric = ({
         : {},
       bytesPerPartition: hasMetrics
         ? {
-            total: makeMetrics(duration, 0, 2, 10 ** 7, offset),
-            "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-            "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-            "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+            "0": makeMetrics(duration, 0, 2, 10 ** 7, offset),
+            "1": makeMetrics(duration, 0, 4, 10 ** 7, offset),
+            "2": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+            "3": makeMetrics(duration, 0, 8, 10 ** 7, offset),
+            "4": makeMetrics(duration, 0, 12, 10 ** 7, offset),
+            "5": makeMetrics(duration, 0, 20, 10 ** 7, offset),
+            "6": makeMetrics(duration, 0, 18, 10 ** 7, offset),
+            "7": makeMetrics(duration, 0, 13, 10 ** 7, offset),
+            "8": makeMetrics(duration, 0, 12, 10 ** 7, offset),
           }
         : {},
     },
@@ -180,9 +202,15 @@ export const getTopicsMetricsOneTopic = ({
       ),
       incomingMessageRate: makeMetrics(duration, 3, 8, 10, offset),
       bytesPerPartition: {
-        "partition 1": makeMetrics(duration, 0, 2, 10 ** 7, offset),
-        "partition 2": makeMetrics(duration, 0, 4, 10 ** 7, offset),
-        "partition 3": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+        "0": makeMetrics(duration, 0, 2, 10 ** 7, offset),
+        "1": makeMetrics(duration, 0, 4, 10 ** 7, offset),
+        "2": makeMetrics(duration, 0, 6, 10 ** 7, offset),
+        "3": makeMetrics(duration, 0, 8, 10 ** 7, offset),
+        "4": makeMetrics(duration, 0, 12, 10 ** 7, offset),
+        "5": makeMetrics(duration, 0, 20, 10 ** 7, offset),
+        "6": makeMetrics(duration, 0, 18, 10 ** 7, offset),
+        "7": makeMetrics(duration, 0, 13, 10 ** 7, offset),
+        "8": makeMetrics(duration, 0, 12, 10 ** 7, offset),
       },
     },
     waitLengthMs
