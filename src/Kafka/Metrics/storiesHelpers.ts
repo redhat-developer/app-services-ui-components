@@ -28,17 +28,17 @@ export const getKafkaInstanceMetrics = ({
       },
       bytesPerPartitionMetrics: selectedBroker
         ? {
-            0: makeMetrics(duration, 0, 2, 10 ** 7),
-            1: makeMetrics(duration, 0, 4, 10 ** 7),
-            2: makeMetrics(duration, 0, 6, 10 ** 7),
-            3: makeMetrics(duration, 0, 3, 10 ** 7),
-            4: makeMetrics(duration, 0, 1, 10 ** 7),
-            5: makeMetrics(duration, 0, 14, 10 ** 7),
-            6: makeMetrics(duration, 0, 6, 10 ** 7),
-            7: makeMetrics(duration, 0, 12, 10 ** 7),
-            8: makeMetrics(duration, 0, 10, 10 ** 7),
-            9: makeMetrics(duration, 0, 8, 10 ** 7),
-            10: makeMetrics(duration, 0, 8, 10 ** 7),
+            "0": makeMetrics(duration, 0, 2, 10 ** 7),
+            "1": makeMetrics(duration, 0, 4, 10 ** 7),
+            "2": makeMetrics(duration, 0, 6, 10 ** 7),
+            "3": makeMetrics(duration, 0, 3, 10 ** 7),
+            "4": makeMetrics(duration, 0, 1, 10 ** 7),
+            "5": makeMetrics(duration, 0, 14, 10 ** 7),
+            "6": makeMetrics(duration, 0, 6, 10 ** 7),
+            "7": makeMetrics(duration, 0, 12, 10 ** 7),
+            "8": makeMetrics(duration, 0, 10, 10 ** 7),
+            "9": makeMetrics(duration, 0, 8, 10 ** 7),
+            "10": makeMetrics(duration, 0, 8, 10 ** 7),
           }
         : {
             "broker 1, topic1/0": makeMetrics(duration, 0, 2, 10 ** 7),
