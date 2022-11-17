@@ -75,7 +75,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
   const showDate = shouldShowDate(duration);
 
   return (
-    <div ref={containerRef} style={{ height: "400px" }}>
+    <div ref={containerRef} style={{ height: "500px" }}>
       {(() => {
         switch (true) {
           case isLoading:

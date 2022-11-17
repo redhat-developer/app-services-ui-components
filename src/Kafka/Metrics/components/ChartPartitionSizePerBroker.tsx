@@ -75,7 +75,7 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
   const showDate = shouldShowDate(duration);
 
   return (
-    <div ref={containerRef} style={{ height: "400px" }}>
+    <div ref={containerRef} style={{ height: "515px" }}>
       {(() => {
         switch (true) {
           case isLoading:
