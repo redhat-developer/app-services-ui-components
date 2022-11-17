@@ -20,11 +20,22 @@ export const getKafkaInstanceMetrics = ({
 }) => {
   return fakeApi<GetKafkaInstanceMetricsResponse>(
     {
-      brokers: ["broker 1", "broker 2"],
+      brokers: [
+        "broker 1",
+        "broker 2",
+        "broker 3",
+        "broker 4",
+        "broker 5",
+        "broker 6",
+      ],
       usedDiskSpaceMetrics: {
         total: makeMetrics(duration, 500, 999, 10 ** 9),
         "broker 1": makeMetrics(duration, 200, 999, 10 ** 9),
         "broker 2": makeMetrics(duration, 100, 999, 10 ** 9),
+        "broker 3": makeMetrics(duration, 400, 999, 10 ** 9),
+        "broker 4": makeMetrics(duration, 700, 999, 10 ** 9),
+        "broker 5": makeMetrics(duration, 300, 999, 10 ** 9),
+        "broker 6": makeMetrics(duration, 900, 999, 10 ** 9),
       },
       bytesPerPartitionMetrics: selectedBroker
         ? {

@@ -16,10 +16,8 @@ export const BrokerToggle: VoidFunctionComponent<BrokerToggleProps> = ({
 }) => {
   const { t } = useTranslation("metrics");
 
-  const disableAllToggle = selectedBroker !== undefined;
-
   return (
-    <ToggleGroup areAllGroupsDisabled={disableAllToggle}>
+    <ToggleGroup>
       <ToggleGroupItem
         text={t("broker_filter.total")}
         value="total"
