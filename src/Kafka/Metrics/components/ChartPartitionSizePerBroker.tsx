@@ -99,12 +99,7 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
                 legendPosition="bottom-left"
                 legendComponent={<ChartLegend data={legendData} />}
                 height={chartHeight}
-                padding={{
-                  bottom: 110,
-                  left: 120,
-                  right: 20,
-                  top: 10,
-                }}
+                padding={chartPadding}
                 themeColor={ChartThemeColor.multiOrdered}
                 width={width}
                 legendAllowWrap={true}
