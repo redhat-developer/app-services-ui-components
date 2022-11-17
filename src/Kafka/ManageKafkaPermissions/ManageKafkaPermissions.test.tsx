@@ -6,7 +6,6 @@ const { InteractiveExample } = composeStories(stories);
 
 describe("Manage Kafka Permissions Dialog", () => {
   it("should render an acl modal for a service account", async () => {
-    jest.setTimeout(10000);
     const onCancel = jest.fn();
     const onSave = jest.fn();
     const onRemoveAcls = jest.fn();
