@@ -50,6 +50,9 @@ export const getKafkaInstanceMetrics = ({
             "8": makeMetrics(duration, 0, 10, 10 ** 7),
             "9": makeMetrics(duration, 0, 8, 10 ** 7),
             "10": makeMetrics(duration, 0, 8, 10 ** 7),
+            "11": makeMetrics(duration, 0, 14, 10 ** 7),
+            "12": makeMetrics(duration, 0, 19, 10 ** 7),
+            "13": makeMetrics(duration, 0, 22, 10 ** 7),
           }
         : {
             "broker 1, topic1/0": makeMetrics(duration, 0, 2, 10 ** 7),
@@ -125,7 +128,13 @@ export const getTopicsMetrics = ({
             "5": makeMetrics(duration, 0, 20, 10 ** 7, offset),
             "6": makeMetrics(duration, 0, 18, 10 ** 7, offset),
             "7": makeMetrics(duration, 0, 13, 10 ** 7, offset),
-            "8": makeMetrics(duration, 0, 12, 10 ** 7, offset),
+            "8": makeMetrics(duration, 0, 7, 10 ** 7, offset),
+            "9": makeMetrics(duration, 0, 5, 10 ** 7, offset),
+            "10": makeMetrics(duration, 0, 24, 10 ** 7, offset),
+            "11": makeMetrics(duration, 0, 29, 10 ** 7, offset),
+            "12": makeMetrics(duration, 0, 23, 10 ** 7, offset),
+            "13": makeMetrics(duration, 0, 32, 10 ** 7, offset),
+            "14": makeMetrics(duration, 0, 32, 10 ** 7, offset),
           }
         : {},
     },

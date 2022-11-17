@@ -63,8 +63,6 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
-  const itemsPerRow = width && width > 650 ? 20 : 10;
-
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
     broker,
@@ -77,7 +75,7 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
   const showDate = shouldShowDate(duration);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ height: "400px" }}>
       {(() => {
         switch (true) {
           case isLoading:
@@ -99,11 +97,14 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
                   />
                 }
                 legendPosition="bottom-left"
-                legendComponent={
-                  <ChartLegend data={legendData} itemsPerRow={itemsPerRow} />
-                }
+                legendComponent={<ChartLegend data={legendData} />}
                 height={chartHeight}
-                padding={chartPadding}
+                padding={{
+                  bottom: 110,
+                  left: 120,
+                  right: 20,
+                  top: 10,
+                }}
                 themeColor={ChartThemeColor.multiOrdered}
                 width={width}
                 legendAllowWrap={true}

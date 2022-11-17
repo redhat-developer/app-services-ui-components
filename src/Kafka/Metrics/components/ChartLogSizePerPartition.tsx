@@ -63,8 +63,6 @@ export const ChartLogSizePerPartition: FunctionComponent<
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
-  const itemsPerRow = width && width > 650 ? 10 : 20;
-
   const { chartData, legendData, tickValues } = getChartData(
     partitions,
     topic,
@@ -77,7 +75,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
   const showDate = shouldShowDate(duration);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ height: "400px" }}>
       {(() => {
         switch (true) {
           case isLoading:
@@ -99,9 +97,7 @@ export const ChartLogSizePerPartition: FunctionComponent<
                   />
                 }
                 legendPosition="bottom-left"
-                legendComponent={
-                  <ChartLegend data={legendData} itemsPerRow={itemsPerRow} />
-                }
+                legendComponent={<ChartLegend data={legendData} />}
                 height={chartHeight}
                 padding={chartPadding}
                 themeColor={ChartThemeColor.multiOrdered}
