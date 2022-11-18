@@ -1,8 +1,5 @@
-import type {
-  ChartVoronoiContainerProps} from "@patternfly/react-charts";
-import {
-  ChartLine
-} from "@patternfly/react-charts";
+import type { ChartVoronoiContainerProps } from "@patternfly/react-charts";
+import { ChartLine } from "@patternfly/react-charts";
 import {
   Chart,
   ChartAxis,
