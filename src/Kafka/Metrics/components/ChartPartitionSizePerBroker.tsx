@@ -1,7 +1,10 @@
-import type { ChartVoronoiContainerProps } from "@patternfly/react-charts";
+import type {
+  ChartVoronoiContainerProps} from "@patternfly/react-charts";
+import {
+  ChartLine
+} from "@patternfly/react-charts";
 import {
   Chart,
-  ChartArea,
   ChartAxis,
   ChartGroup,
   ChartLegend,
@@ -120,7 +123,7 @@ export const ChartPartitionSizePerBroker: FunctionComponent<
                 />
                 <ChartGroup>
                   {chartData.map((value, index) => (
-                    <ChartArea key={`chart-area-${index}`} data={value.area} />
+                    <ChartLine key={`chart-area-${index}`} data={value.area} />
                   ))}
                 </ChartGroup>
               </Chart>
@@ -149,7 +152,7 @@ export function getChartData(
     ? Object.entries(partitions)
         .slice(0, 10)
         .map(([partition, dataMap], index) => {
-          const name = broker ? `${broker}/${partition}` : partition;
+          const name = broker ? `${broker}, ${partition}` : partition;
           const color = colors[index];
           legendData.push({
             name,
