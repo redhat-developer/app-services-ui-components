@@ -64,6 +64,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
         onChange={setValue}
         onKeyPress={onKeyPress}
         ref={inputRef}
+        iconVariant={"search"}
       />
       <Button
         isDisabled={!canSearch}
