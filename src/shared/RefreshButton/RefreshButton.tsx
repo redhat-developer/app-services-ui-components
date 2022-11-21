@@ -19,16 +19,11 @@ export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
 }) => {
   const { t } = useTranslation("common");
 
+  const defaultTooltip = isRefreshing
+    ? t("refreshing_tooltip")
+    : t("refresh_description");
   return (
-    <Tooltip
-      content={
-        tooltip
-          ? tooltip
-          : isRefreshing
-          ? t("refreshing_tooltip")
-          : t("refresh_description")
-      }
-    >
+    <Tooltip content={tooltip || defaultTooltip}>
       <Button
         className="pf-m-hoverable"
         style={{ color: "var(--pf-global--Color--200)" }}
