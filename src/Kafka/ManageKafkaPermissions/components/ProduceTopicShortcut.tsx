@@ -13,7 +13,7 @@ export type ProduceTopicShortcutProps = {
   prefixRuleValue: ResourcePrefixRuleValue;
   resourceNameValue: string | undefined;
   onChangeResourceName: (value: string | undefined) => void;
-  onFetchResourceNameOptions: (filter: string) => Promise<string[]>;
+  onFetchResourceNameOptions: (filter: string) => string[];
   submitted: boolean;
   onDelete: (row: number) => void;
   multipleShorctutPermissions?: boolean;

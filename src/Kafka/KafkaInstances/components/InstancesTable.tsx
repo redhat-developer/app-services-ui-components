@@ -52,6 +52,7 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   onClickConnectionTabLink: (row: T) => void;
   onClickSupportLink: () => void;
   onInstanceLinkClick: (row: T) => void;
+  canHaveInstanceLink: (row: T) => boolean;
 } & Pick<
   TableViewProps<T, typeof Columns[number]>,
   | "itemCount"
@@ -98,6 +99,7 @@ export const InstancesTable = <T extends KafkaInstance>({
   onRemoveStatusChip,
   onRemoveStatusChips,
   onClearAllFilters,
+  canHaveInstanceLink,
 }: InstancesTableProps<T>) => {
   const { t } = useTranslation("kafka");
   const labels = useKafkaLabels();
@@ -115,6 +117,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       )}
       renderCell={({ column, row, Td, key }) => {
         const timeCreatedDate = parseISO(row.createdAt);
+        const instanceLinkDisable = canHaveInstanceLink(row);
         return (
           <Td key={key} dataLabel={labels.fields[column]}>
             {(() => {
@@ -128,7 +131,8 @@ export const InstancesTable = <T extends KafkaInstance>({
                           {row.name}
                         </Link>
                       )}
-                      isDisabled={DeletingStatuses.includes(row["status"])}
+                      isInline
+                      isDisabled={instanceLinkDisable}
                       onClick={() => onInstanceLinkClick(row)}
                     />
                   );

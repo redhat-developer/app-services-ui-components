@@ -1,7 +1,11 @@
 import { action } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../shared/storiesHelpers";
-import { SimplifiedStatuses } from "../types";
+import {
+  CreatingStatuses,
+  DeletingStatuses,
+  SimplifiedStatuses,
+} from "../types";
 import { KafkaInstances as KafkaInstancesComp } from "./KafkaInstances";
 import { instances } from "./storiesHelper";
 
@@ -14,6 +18,9 @@ export default {
     isRowSelected: () => false,
     canChangeOwner: (row) => row.owner === "baz-owner",
     canDelete: (row) => row.owner === "baz-owner",
+    canHaveInstanceLink: (row) =>
+      DeletingStatuses.includes(row["status"]) ||
+      CreatingStatuses.includes(row["status"]),
   },
 } as ComponentMeta<typeof KafkaInstancesComp>;
 

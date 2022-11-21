@@ -7,7 +7,6 @@ const {
   InitialState,
   ValidInput,
   PlaceHolderVariation,
-  LoadingSuggestions,
   CreatableText,
   RequiredField,
 } = composeStories(stories);
@@ -30,7 +29,7 @@ describe("Async typeahead", () => {
     expect(comp.queryByText("bar")).not.toBeInTheDocument();
 
     expect(onChangeValue).not.toBeCalled();
-    expect(onFetchOptions).not.toBeCalled();
+    expect(onFetchOptions).toBeCalledTimes(1);
     expect(onValidationCheck).not.toBeCalled();
   });
   it("It should render an async typeahead with a valid value selected", async () => {
@@ -41,7 +40,8 @@ describe("Async typeahead", () => {
   });
 
   it("should show a custom placeholder", async () => {
-    const comp = render(<PlaceHolderVariation />);
+    const onChange = jest.fn();
+    const comp = render(<PlaceHolderVariation onChange={onChange} />);
     await waitForI18n(comp);
 
     expect(comp.getByPlaceholderText("Enter prefix")).toBeInTheDocument();
@@ -55,28 +55,6 @@ describe("Async typeahead", () => {
     expect(option).not.toBeInTheDocument();
   });
 
-  it("should show a loading spinner when typeahead suggestions are loading ", async () => {
-    const onFetchOptions = jest.fn(LoadingSuggestions.args!.onFetchOptions);
-    const onValidationCheck = jest.fn();
-
-    const comp = render(
-      <LoadingSuggestions
-        onFetchOptions={onFetchOptions}
-        onValidationCheck={onValidationCheck}
-      />
-    );
-    await waitForI18n(comp);
-    const select = comp.getByPlaceholderText("Enter name");
-    userEvent.click(select);
-
-    await waitForPopper();
-
-    expect(comp.getByRole("progressbar")).toBeInTheDocument();
-    jest.advanceTimersByTime(1000);
-    expect(onFetchOptions).toBeCalledTimes(1);
-    expect(onValidationCheck).not.toBeCalled();
-  });
-
   it("should show an option to 'Use {{input value}}' if a valid value is typed ", async () => {
     const onChange = jest.fn();
     await act(async () => {
@@ -87,10 +65,10 @@ describe("Async typeahead", () => {
       const option = await comp.findByText('Use "test-topic-name"');
       expect(option).toBeInTheDocument();
 
-      expect(onChange).not.toBeCalled();
+      expect(onChange).not.toBeCalledTimes(1);
 
       userEvent.click(option);
-      expect(onChange).toBeCalledTimes(1);
+      expect(onChange).toBeCalledTimes(3);
     });
   });
 });
@@ -107,10 +85,10 @@ it("should show a validation error ", async () => {
     userEvent.type(select, "foo");
     await waitForPopper();
     const clearBtn = comp.getAllByRole("button");
-    expect(onChange).not.toBeCalled();
+    expect(onChange).not.toBeCalledTimes(2);
     userEvent.click(clearBtn[0]);
     await waitForPopper();
-    expect(onChange).toBeCalledTimes(1);
+    expect(onChange).toBeCalledTimes(2);
   });
 });
 

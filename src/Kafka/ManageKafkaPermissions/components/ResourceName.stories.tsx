@@ -2,20 +2,17 @@ import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { ResourceName } from "./ResourceName";
 import { Form } from "@patternfly/react-core";
 import { userEvent, within } from "@storybook/testing-library";
-import { fakeApi } from "../../../shared/storiesHelpers";
 
 export default {
   component: ResourceName,
   args: {
     value: undefined,
     setIsNameValid: (value) => value,
-    onFetchOptions: (filter) =>
-      fakeApi<string[]>(
-        ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
-          v.includes(filter)
-        ),
-        100
-      ),
+    onFetchOptions: (filter: string) => {
+      return ["foo-topic", "test", "my-test", "random-topic-name"].filter((v) =>
+        v.includes(filter)
+      );
+    },
     submitted: false,
     resourcePrefixRule: "Is",
     resourceType: "topic",
