@@ -146,7 +146,7 @@ describe("Manage Kafka Permissions Dialog", () => {
       )
     ).toBeInTheDocument();
     expect(
-      await comp.findByText("Assign permissions to all accounts")
+      await comp.findByText("Assign permissions to all accounts.")
     ).toBeInTheDocument();
     expect(comp.queryByText("All fields are required")).not.toBeInTheDocument();
     expect(await comp.findByText("Resource")).toBeInTheDocument();
@@ -228,6 +228,6 @@ describe("Manage Kafka Permissions Dialog", () => {
     const manageAccess = comp.getAllByLabelText("manage-access-delete");
     userEvent.click(manageAccess[0]);
     userEvent.click(comp.getByRole("button", { name: "Save" }));
-    expect(comp.getByText("All fields are required")).toBeInTheDocument();
+    expect(comp.getByText("All fields are required.")).toBeInTheDocument();
   });
 });

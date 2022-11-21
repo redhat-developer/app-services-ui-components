@@ -49,7 +49,7 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
           const isDeleteEnabled =
             selectedAccountId === "*" ||
             principal === `User:${selectedAccountId}` ||
-            principal === `User:*`;
+            principal != `User:*`;
           const isAllAccounts = principal === "User:*";
 
           return (

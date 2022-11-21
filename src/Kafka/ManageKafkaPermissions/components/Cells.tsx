@@ -93,7 +93,7 @@ export const PermissionOperationCell: VFC<PermissionOperationCellProps> = ({
     ALTER_CONFIGS: t("operations.alter_configs"),
   };
   return (
-    <LabelGroup>
+    <LabelGroup numLabels={4}>
       {permission && (
         <Label
           variant="outline"
@@ -129,7 +129,7 @@ export const PrincipalCell: VFC<PrincipalCellProps> = ({
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
   return (
-    <div className="pf-u-display-flex pf-u-justify-content-space-between pf-u-justify-content-flex-end-on-lg">
+    <div className="pf-u-display-flex pf-u-justify-content-space-between pf-u-justify-content-flex-end-on-lg pf-u-align-items-center">
       {isAllAccounts && (
         <Label variant="outline">{t("table.all_accounts")}</Label>
       )}
