@@ -22,11 +22,6 @@ export const ToolbarRefresh: VoidFunctionComponent<ToolbarRefreshProps> = ({
     <>
       <ToolbarItem>
         <RefreshButton
-          tooltip={
-            isRefreshing
-              ? t("metrics:refreshing_tooltip")
-              : t("metrics:refresh_description")
-          }
           ariaLabel={ariaLabel}
           onClick={onRefresh}
           isRefreshing={isRefreshing}

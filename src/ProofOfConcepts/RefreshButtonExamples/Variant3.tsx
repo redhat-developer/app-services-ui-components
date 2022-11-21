@@ -24,11 +24,6 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
     <>
       <ToolbarItem>
         <RefreshButton
-          tooltip={
-            isRefreshing
-              ? t("common:refreshing_tooltip")
-              : t("common:refresh_description")
-          }
           ariaLabel={ariaLabel}
           onClick={onRefresh}
           isRefreshing={isRefreshing}

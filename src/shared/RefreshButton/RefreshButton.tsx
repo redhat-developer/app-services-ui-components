@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 export type RefreshButtonProps = {
   isDisabled?: boolean;
-  tooltip: string;
+  tooltip?: string;
   isRefreshing: boolean;
   ariaLabel?: string;
   onClick: () => void;
@@ -18,8 +18,17 @@ export const RefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   isRefreshing,
 }) => {
   const { t } = useTranslation("common");
+
   return (
-    <Tooltip content={tooltip}>
+    <Tooltip
+      content={
+        tooltip
+          ? tooltip
+          : isRefreshing
+          ? t("refreshing_tooltip")
+          : t("refresh_description")
+      }
+    >
       <Button
         className="pf-m-hoverable"
         style={{ color: "var(--pf-global--Color--200)" }}

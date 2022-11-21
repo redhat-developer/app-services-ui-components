@@ -10,6 +10,7 @@ export type RefreshButtonProps = {
   lastUpdated: Date | undefined;
   ariaLabel: string;
   onRefresh: () => void;
+  tooltip: string;
 };
 
 export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
@@ -17,6 +18,7 @@ export const POCRefreshButton: VoidFunctionComponent<RefreshButtonProps> = ({
   lastUpdated = new Date(),
   ariaLabel,
   onRefresh,
+  tooltip,
 }) => {
   const { t } = useTranslation(["common"]);
 
