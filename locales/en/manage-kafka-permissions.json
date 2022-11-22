@@ -11,7 +11,7 @@
   "all_accounts_user_account_group": "User accounts",
   "all_fields_required": "All fields are required.",
   "assign_permissions_all_description": "Assign permissions to all accounts.",
-  "assign_permissions_description": "Assign permissions to the selected account ({{value}})",
+  "assign_permissions_description": "Assign permissions to the selected account ({{value}}).",
   "assign_permissions_title": "Assign permissions",
   "consumer_group": "Consumer group",
   "delete_access": "manage-access-delete",
