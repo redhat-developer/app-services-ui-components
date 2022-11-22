@@ -52,8 +52,8 @@ const Template: ComponentStory<typeof KafkaInstancesComp> = (args) => {
               : true) &&
             (query.status.length > 0
               ? query.status
-                .flatMap((s) => SimplifiedStatuses[s])
-                .includes(i.status)
+                  .flatMap((s) => SimplifiedStatuses[s])
+                  .includes(i.status)
               : true)
           );
         });

@@ -53,6 +53,7 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   onClickSupportLink: () => void;
   onInstanceLinkClick: (row: T) => void;
   canHaveInstanceLink: (row: T) => boolean;
+  canOpenConnection: (row: T) => boolean;
 } & Pick<
   TableViewProps<T, typeof Columns[number]>,
   | "itemCount"
@@ -100,6 +101,7 @@ export const InstancesTable = <T extends KafkaInstance>({
   onRemoveStatusChips,
   onClearAllFilters,
   canHaveInstanceLink,
+  canOpenConnection,
 }: InstancesTableProps<T>) => {
   const { t } = useTranslation("kafka");
   const labels = useKafkaLabels();
@@ -186,6 +188,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       renderActions={({ row, ActionsColumn }) => {
         const changeOwnerEnabled = canChangeOwner(row);
         const deleteEnabled = canDelete(row);
+        const openConnectionEnabled = canOpenConnection(row);
         return (
           <ActionsColumn
             items={[
@@ -202,48 +205,52 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.connection"),
-                onClick: () => onConnection(row),
+                ...(!openConnectionEnabled
+                  ? {
+                      isDisabled: true,
+                    }
+                  : { onClick: () => onConnection(row) }),
               },
               {
                 isSeparator: true,
               },
               {
                 title: t("table.actions.change-owner"),
-                ...(!changeOwnerEnabled
+                ...(changeOwnerEnabled
                   ? {
-                    isDisabled: true,
-                    tooltipProps: {
-                      position: "left",
-                      content: t("kafka:no_permission_to_change_owner"),
-                    },
-                    tooltip: true,
-                    style: {
-                      pointerEvents: "auto",
-                      cursor: "default",
-                    },
-                  }
+                      isDisabled: true,
+                      tooltipProps: {
+                        position: "left",
+                        content: t("kafka:no_permission_to_change_owner"),
+                      },
+                      tooltip: true,
+                      style: {
+                        pointerEvents: "auto",
+                        cursor: "default",
+                      },
+                    }
                   : {
-                    onClick: () => onChangeOwner(row),
-                  }),
+                      onClick: () => onChangeOwner(row),
+                    }),
               },
               {
                 title: t("table.actions.delete"),
                 ...(!deleteEnabled
                   ? {
-                    isDisabled: true,
-                    tooltipProps: {
-                      position: "left",
-                      content: t("kafka:no_permission_to_delete_kafka"),
-                    },
-                    tooltip: true,
-                    style: {
-                      pointerEvents: "auto",
-                      cursor: "default",
-                    },
-                  }
+                      isDisabled: true,
+                      tooltipProps: {
+                        position: "left",
+                        content: t("kafka:no_permission_to_delete_kafka"),
+                      },
+                      tooltip: true,
+                      style: {
+                        pointerEvents: "auto",
+                        cursor: "default",
+                      },
+                    }
                   : {
-                    onClick: () => onDelete(row),
-                  }),
+                      onClick: () => onDelete(row),
+                    }),
                 onClick: () => onDelete(row),
               },
             ]}
