@@ -75,17 +75,11 @@ describe("Manage Kafka Permissions Dialog", () => {
     userEvent.click(comp.getByLabelText("consumer-group name"));
     userEvent.type(await comp.findByPlaceholderText("Enter name"), "foo");
     await waitForPopper();
-    userEvent.click(await comp.findByRole("option", { name: "foo" }));
-    await waitForPopper();
-    expect(await comp.findByDisplayValue("foo")).toBeInTheDocument();
     userEvent.click(comp.getByRole("button", { name: "Save" }));
     expect(onSave).not.toHaveBeenCalled();
     expect(comp.getByRole("button", { name: "Save" })).toBeDisabled();
     userEvent.type(await comp.findByPlaceholderText("Enter name"), "$");
-    const option = await comp.findByText(
-      "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
-    );
-    expect(option).toBeInTheDocument();
+    await waitForPopper();
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
