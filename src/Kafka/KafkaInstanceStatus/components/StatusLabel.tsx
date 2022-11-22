@@ -15,7 +15,7 @@ import {
 } from "@patternfly/react-icons";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import type { Status} from "../../types";
+import type { Status } from "../../types";
 import { ResumingStatuses, SuspendingStatuses } from "../../types";
 import {
   CreatingStatuses,

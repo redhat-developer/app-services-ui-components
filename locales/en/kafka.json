@@ -203,7 +203,9 @@
     "degraded": "Degraded",
     "deleting": "Deleting",
     "ready": "Ready",
-    "suspended": "Suspended"
+    "resuming": "Resuming",
+    "suspended": "Suspended",
+    "suspending": "Suspending"
   },
   "storage": "Storage",
   "storage_value": "up to 1000 GiB",
