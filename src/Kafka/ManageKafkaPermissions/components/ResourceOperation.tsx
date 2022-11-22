@@ -73,7 +73,7 @@ export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
         placeholderText={t("operations.placeholder_text")}
         validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
         selections={value}
-        menuAppendTo={"parent"}
+        menuAppendTo={document.body}
         isFlipEnabled={true}
       >
         {makeOptions()}
