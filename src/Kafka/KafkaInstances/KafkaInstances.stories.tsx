@@ -5,6 +5,7 @@ import {
   CreatingStatuses,
   DeletingStatuses,
   SimplifiedStatuses,
+  SuspendedStatuses,
 } from "../types";
 import { KafkaInstances as KafkaInstancesComp } from "./KafkaInstances";
 import { instances } from "./storiesHelper";
@@ -16,11 +17,14 @@ export default {
   args: {
     getUrlForInstance: (row) => `/${row.id}`,
     isRowSelected: () => false,
-    canChangeOwner: (row) => row.owner === "baz-owner",
+    canChangeOwner: (row) =>
+      row.owner === "baz-owner" || row.status === "suspended",
+    canOpenConnection: (row) => row.status !== "suspended",
     canDelete: (row) => row.owner === "baz-owner",
     canHaveInstanceLink: (row) =>
       DeletingStatuses.includes(row["status"]) ||
-      CreatingStatuses.includes(row["status"]),
+      CreatingStatuses.includes(row["status"]) ||
+      SuspendedStatuses.includes(row["status"]),
   },
 } as ComponentMeta<typeof KafkaInstancesComp>;
 

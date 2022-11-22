@@ -53,6 +53,7 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   onClickSupportLink: () => void;
   onInstanceLinkClick: (row: T) => void;
   canHaveInstanceLink: (row: T) => boolean;
+  canOpenConnection: (row: T) => boolean;
 } & Pick<
   TableViewProps<T, typeof Columns[number]>,
   | "itemCount"
@@ -100,6 +101,7 @@ export const InstancesTable = <T extends KafkaInstance>({
   onRemoveStatusChips,
   onClearAllFilters,
   canHaveInstanceLink,
+  canOpenConnection,
 }: InstancesTableProps<T>) => {
   const { t } = useTranslation("kafka");
   const labels = useKafkaLabels();
@@ -186,6 +188,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       renderActions={({ row, ActionsColumn }) => {
         const changeOwnerEnabled = canChangeOwner(row);
         const deleteEnabled = canDelete(row);
+        const changeConnectionEnabled = canOpenConnection(row);
         return (
           <ActionsColumn
             items={[
@@ -202,7 +205,7 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.connection"),
-                ...(row.status === "suspended"
+                ...(!changeConnectionEnabled
                   ? {
                       isDisabled: true,
                     }
@@ -215,14 +218,14 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.change-owner"),
-                ...(!changeOwnerEnabled || row.status === "suspended"
+                ...(changeOwnerEnabled
                   ? {
                       isDisabled: true,
                       tooltipProps: {
                         position: "left",
                         content: t("kafka:no_permission_to_change_owner"),
                       },
-                      tooltip: !changeOwnerEnabled ? true : false,
+                      tooltip: changeConnectionEnabled,
                       style: {
                         pointerEvents: "auto",
                         cursor: "default",
