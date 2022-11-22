@@ -53,7 +53,7 @@ export const ResourcePermission: React.VFC<ResourcePermissionProps> = ({
       isOpen={isOpen}
       width={150}
       selections={value}
-      menuAppendTo={"parent"}
+      menuAppendTo={document.body}
     >
       {makeOptions()}
     </Select>

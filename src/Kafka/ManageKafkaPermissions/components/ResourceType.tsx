@@ -76,7 +76,7 @@ export const ResourceType: React.VFC<ResourceTypeProps> = ({
         placeholderText={t("resourceTypes.placeholder_text")}
         validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
         selections={value}
-        menuAppendTo={"parent"}
+        menuAppendTo={document.body}
       >
         {makeOptions()}
       </Select>
