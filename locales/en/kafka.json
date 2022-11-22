@@ -187,7 +187,9 @@
     "preparing": "Preparing",
     "provisioning": "Provisioning",
     "ready": "Ready",
-    "suspended": "Suspended"
+    "resuming": "Resuming",
+    "suspended": "Suspended",
+    "suspending": "Suspending"
   },
   "statuses-filter": {
     "creating": "Creation pending",

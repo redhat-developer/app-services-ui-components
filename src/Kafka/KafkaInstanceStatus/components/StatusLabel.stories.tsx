@@ -45,6 +45,12 @@ export const AllStatutesAtOnce = () => (
     <pre>Suspend</pre>
     <StatusLabel value={"suspended"} />
     <br />
+    <pre>Suspending</pre>
+    <StatusLabel value={"suspending"} />
+    <br />
+    <pre>Resuming</pre>
+    <StatusLabel value={"resuming"} />
+    <br />
   </>
 );
 
@@ -153,6 +159,30 @@ suspended.parameters = {
   docs: {
     description: {
       story: "The Kafka instance is suspended",
+    },
+  },
+};
+
+export const suspending = Template.bind({});
+suspending.args = {
+  value: "suspending",
+};
+suspending.parameters = {
+  docs: {
+    description: {
+      story: "The Kafka instance is suspending",
+    },
+  },
+};
+
+export const resuming = Template.bind({});
+resuming.args = {
+  value: "resuming",
+};
+resuming.parameters = {
+  docs: {
+    description: {
+      story: "The Kafka instance is resuming",
     },
   },
 };

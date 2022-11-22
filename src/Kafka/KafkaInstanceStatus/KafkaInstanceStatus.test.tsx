@@ -152,7 +152,7 @@ describe("KafkaInstanceStatus", () => {
     await tree.findByText("Deleting");
   });
 
-  it("Deprovision/Deleting", async () => {
+  it("Ready", async () => {
     const onClickConnectionTabLink = jest.fn();
     const onClickSupportLink = jest.fn();
     const createdAt = new Date();
@@ -201,5 +201,39 @@ describe("KafkaInstanceStatus", () => {
     );
     await waitForI18n(tree);
     await tree.findByText("Suspended");
+  });
+
+  it("Suspending", async () => {
+    const onClickConnectionTabLink = jest.fn();
+    const onClickSupportLink = jest.fn();
+    const createdAt = new Date();
+
+    const tree = render(
+      <KafkaInstanceStatus
+        onClickConnectionTabLink={onClickConnectionTabLink}
+        onClickSupportLink={onClickSupportLink}
+        status={"suspending"}
+        createdAt={createdAt}
+      />
+    );
+    await waitForI18n(tree);
+    await tree.findByText("Suspending");
+  });
+
+  it("Resuming", async () => {
+    const onClickConnectionTabLink = jest.fn();
+    const onClickSupportLink = jest.fn();
+    const createdAt = new Date();
+
+    const tree = render(
+      <KafkaInstanceStatus
+        onClickConnectionTabLink={onClickConnectionTabLink}
+        onClickSupportLink={onClickSupportLink}
+        status={"resuming"}
+        createdAt={createdAt}
+      />
+    );
+    await waitForI18n(tree);
+    await tree.findByText("Resuming");
   });
 });

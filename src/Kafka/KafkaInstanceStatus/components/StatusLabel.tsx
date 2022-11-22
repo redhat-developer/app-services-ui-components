@@ -15,7 +15,8 @@ import {
 } from "@patternfly/react-icons";
 import { forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import type { Status } from "../../types";
+import type { Status} from "../../types";
+import { ResumingStatuses, SuspendingStatuses } from "../../types";
 import {
   CreatingStatuses,
   DegradedStatuses,
@@ -140,10 +141,10 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
           </div>
         );
 
-      case DeletingStatuses.includes(value):
+      case SuspendingStatuses.includes(value):
         return (
           <div>
-            <p className="mas-m-deleting"> {t("statuses.deleting")}</p>
+            <p className="mas-m-deleting"> {t("statuses.suspending")}</p>
           </div>
         );
       case SuspendedStatuses.includes(value):
@@ -159,6 +160,23 @@ export const StatusLabel = forwardRef<HTMLButtonElement, StatusLabelProps>(
                 </Button>
               </SplitItem>
             </Split>
+          </div>
+        );
+      case ResumingStatuses.includes(value):
+        return (
+          <div>
+            <Split hasGutter className="mas-c-status">
+              <SplitItem>
+                <Spinner size="md" />
+              </SplitItem>
+              <SplitItem>{t("statuses.resuming")}</SplitItem>
+            </Split>
+          </div>
+        );
+      case DeletingStatuses.includes(value):
+        return (
+          <div>
+            <p className="mas-m-deleting"> {t("statuses.deleting")}</p>
           </div>
         );
       default:
