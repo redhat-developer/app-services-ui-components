@@ -12,11 +12,14 @@ const Template: ComponentStory<typeof RefreshButton> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  tooltip: "Reload contents",
+};
 
 export const Refreshing = Template.bind({});
 Refreshing.args = {
   isRefreshing: true,
+  tooltip: "Data is currently refreshing",
 };
 
 export const Disabled = Template.bind({});
