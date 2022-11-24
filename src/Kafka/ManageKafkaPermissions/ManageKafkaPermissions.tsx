@@ -190,7 +190,11 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         </Button>,
       ]}
     >
-      <Form>
+      <Form
+        onKeyPress={(event) => {
+          event.key === "Enter" && event.preventDefault();
+        }}
+      >
         <FormGroup
           fieldId="kafka-instance-name"
           label={t("kafka_instance")}

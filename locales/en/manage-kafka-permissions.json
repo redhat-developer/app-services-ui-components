@@ -23,6 +23,7 @@
   "kafka_instance": "$t(common:kafka) instance",
   "manual_delete": "manual-permission-delete",
   "no_results_found": "No results found",
+  "review_permissions_table": "Review existing permissions table",
   "operations": {
     "all": "All",
     "alter": "Alter",

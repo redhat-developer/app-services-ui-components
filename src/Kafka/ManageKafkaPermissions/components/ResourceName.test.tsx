@@ -29,7 +29,7 @@ describe("Resource Name", () => {
       "A topic name must contain at least 3 periods (...) if periods are the only characters used."
     );
     expect(option).toBeInTheDocument();
-    expect(onChangeValue).toHaveBeenCalledTimes(2);
+    expect(onChangeValue).not.toHaveBeenCalled();
   });
   it("should render a select with validation message for invalid consumer group characters", async () => {
     const onChange = jest.fn();

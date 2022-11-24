@@ -28,7 +28,10 @@ export const ReviewPermissionsTable: VFC<ReviewPermissionsTableProps> = ({
   const { t } = useTranslation(["manage-kafka-permissions"]);
 
   return (
-    <TableComposable variant={TableVariant.compact}>
+    <TableComposable
+      variant={TableVariant.compact}
+      aria-label={t("review_permissions_table")}
+    >
       <Thead noWrap>
         <Tr>
           <Th width={60}>{t("table.resource_column_title")}</Th>

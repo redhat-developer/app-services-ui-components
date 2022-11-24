@@ -68,7 +68,7 @@ describe("Async typeahead", () => {
       expect(onChange).not.toBeCalledTimes(1);
 
       userEvent.click(option);
-      expect(onChange).toBeCalledTimes(3);
+      expect(onChange).toBeCalledTimes(1);
     });
   });
 });
@@ -88,7 +88,7 @@ it("should show a validation error ", async () => {
     expect(onChange).not.toBeCalledTimes(2);
     userEvent.click(clearBtn[0]);
     await waitForPopper();
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 });
 

@@ -47,12 +47,15 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
     onFetchOptions("")
   );
-  const [validation, setValidation] = useState<Validation | undefined>();
+  const [validation, setValidation] = useState<Validation | undefined>(
+    undefined
+  );
   const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
   const onTypeahead = (filter: string | undefined) => {
+    setFilterValue(filter);
     setValidation(onValidationCheck(filter));
     function fetchSuggestions() {
       filter != undefined
@@ -70,18 +73,9 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     setValidation(onValidationCheck(value as string));
     onChange(value as string);
     onToggle(false);
-    setFilterValue(value as string);
   };
   const onToggle = (newState: boolean) => {
-    submitted && required && (value == "" || value == undefined)
-      ? setValidation({ isValid: false, message: t("common:required") })
-      : null;
-    setIsOpen((isOpen) => {
-      if (isOpen !== newState && newState === true) {
-        onChange(undefined);
-      }
-      return newState;
-    });
+    setIsOpen(newState);
   };
   const clearSelection = () => {
     onChange(undefined);
@@ -90,30 +84,25 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       : setValidation({ isValid: true, message: undefined });
   };
 
-  //const isCreatable = validation && validation.isValid;
-
-  const formGroupValidated =
-    submitted &&
-    required &&
-    (value === undefined || value === "") &&
-    (filterValue === undefined || filterValue === "")
-      ? ValidatedOptions.error
-      : validation && !validation.isValid
-      ? ValidatedOptions.error
-      : ValidatedOptions.default;
-
-  const formGroupValidatedText =
-    submitted &&
-    required &&
-    (value === undefined || value === "") &&
-    (filterValue === undefined || filterValue === "")
-      ? t("common:required")
-      : validation?.message;
+  const formValidation =
+    validation?.isValid || validation == undefined
+      ? ValidatedOptions.default
+      : ValidatedOptions.error;
 
   return (
     <FormGroup
-      validated={formGroupValidated}
-      helperTextInvalid={formGroupValidatedText}
+      validated={
+        submitted &&
+        (((filterValue == "" || filterValue == undefined) && value == "") ||
+          value == undefined)
+          ? ValidatedOptions.error
+          : formValidation
+      }
+      helperTextInvalid={
+        submitted && (filterValue == "" || filterValue == undefined)
+          ? t("common:required")
+          : validation?.message
+      }
       fieldId={id}
     >
       <Select
@@ -130,7 +119,13 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         onTypeaheadInputChanged={onTypeahead}
         isCreatable={true}
         menuAppendTo={document.body}
-        validated={formGroupValidated}
+        validated={
+          submitted &&
+          (((filterValue == "" || filterValue == undefined) && value == "") ||
+            value == undefined)
+            ? ValidatedOptions.error
+            : formValidation
+        }
         maxHeight={400}
         width={170}
         onFilter={() => undefined}
