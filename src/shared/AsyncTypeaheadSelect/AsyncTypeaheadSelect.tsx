@@ -99,7 +99,8 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
           : formValidation
       }
       helperTextInvalid={
-        submitted && (filterValue == "" || filterValue == undefined)
+        submitted &&
+        (filterValue == "" || filterValue == undefined || value == undefined)
           ? t("common:required")
           : validation?.message
       }
