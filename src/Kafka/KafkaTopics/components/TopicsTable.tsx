@@ -116,12 +116,12 @@ export const TopicsTable = <T extends KafkaTopic>({
         <ActionsColumn
           items={[
             {
-              title: t("table.actions.delete"),
-              onClick: () => onDelete(row),
-            },
-            {
               title: t("table.actions.edit"),
               onClick: () => onEdit(row),
+            },
+            {
+              title: t("table.actions.delete"),
+              onClick: () => onDelete(row),
             },
           ]}
         />

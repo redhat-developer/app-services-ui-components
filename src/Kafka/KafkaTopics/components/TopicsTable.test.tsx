@@ -9,10 +9,18 @@ describe("Topics table", () => {
   it("has working actions", async () => {
     const onDelete = jest.fn();
     const onEdit = jest.fn();
+    const onCreateTopic = jest.fn();
     const comp = render(
-      <KafkaTopicsTable onDelete={onDelete} onEdit={onEdit} />
+      <KafkaTopicsTable
+        onDelete={onDelete}
+        onEdit={onEdit}
+        onCreateTopic={onCreateTopic}
+      />
     );
     await waitForI18n(comp);
+
+    userEvent.click(comp.getByText("Create topic"));
+    expect(onCreateTopic).toBeCalledTimes(1);
 
     const firstRow = comp.getAllByRole("row")[1];
 
