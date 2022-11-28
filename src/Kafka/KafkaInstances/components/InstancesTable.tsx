@@ -10,12 +10,7 @@ import { Link } from "react-router-dom";
 import type { TableViewProps } from "../../../shared";
 import { FormatDate, TableView } from "../../../shared";
 import { KafkaInstanceStatus } from "../../KafkaInstanceStatus";
-import type {
-  KafkaInstance,
-  SimplifiedStatus} from "../../types";
-import {
-  SuspendedStatuses,
-} from "../../types";
+import type { KafkaInstance, SimplifiedStatus } from "../../types";
 import { DeletingStatuses } from "../../types";
 import { useKafkaLabels } from "../../useKafkaLabels";
 import type { EmptyStateNoInstancesProps } from "./EmptyStateNoInstances";
