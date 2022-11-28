@@ -4,8 +4,10 @@ import { fakeApi } from "../../shared/storiesHelpers";
 import {
   CreatingStatuses,
   DeletingStatuses,
+  ResumingStatuses,
   SimplifiedStatuses,
   SuspendedStatuses,
+  SuspendingStatuses,
 } from "../types";
 import { KafkaInstances as KafkaInstancesComp } from "./KafkaInstances";
 import { instances } from "./storiesHelper";
@@ -24,7 +26,9 @@ export default {
     canHaveInstanceLink: (row) =>
       DeletingStatuses.includes(row["status"]) ||
       CreatingStatuses.includes(row["status"]) ||
-      SuspendedStatuses.includes(row["status"]),
+      SuspendedStatuses.includes(row["status"]) ||
+      SuspendingStatuses.includes(row["status"]) ||
+      ResumingStatuses.includes(row["status"]),
   },
 } as ComponentMeta<typeof KafkaInstancesComp>;
 
