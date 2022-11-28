@@ -10,7 +10,12 @@ import { Link } from "react-router-dom";
 import type { TableViewProps } from "../../../shared";
 import { FormatDate, TableView } from "../../../shared";
 import { KafkaInstanceStatus } from "../../KafkaInstanceStatus";
-import type { KafkaInstance, SimplifiedStatus } from "../../types";
+import type {
+  KafkaInstance,
+  SimplifiedStatus} from "../../types";
+import {
+  SuspendedStatuses,
+} from "../../types";
 import { DeletingStatuses } from "../../types";
 import { useKafkaLabels } from "../../useKafkaLabels";
 import type { EmptyStateNoInstancesProps } from "./EmptyStateNoInstances";
@@ -119,7 +124,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       )}
       renderCell={({ column, row, Td, key }) => {
         const timeCreatedDate = parseISO(row.createdAt);
-        const instanceLinkDisable = canHaveInstanceLink(row);
+        const instanceLinkEnable = canHaveInstanceLink(row);
         return (
           <Td key={key} dataLabel={labels.fields[column]}>
             {(() => {
@@ -134,7 +139,8 @@ export const InstancesTable = <T extends KafkaInstance>({
                         </Link>
                       )}
                       isInline
-                      isDisabled={instanceLinkDisable}
+                      isAriaDisabled={!instanceLinkEnable}
+                      isDisabled={!instanceLinkEnable}
                       onClick={() => onInstanceLinkClick(row)}
                     />
                   );
