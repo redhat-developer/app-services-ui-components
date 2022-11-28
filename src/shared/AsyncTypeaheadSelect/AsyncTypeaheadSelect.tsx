@@ -128,7 +128,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         }
         maxHeight={400}
         width={170}
-        onFilter={() => undefined}
         createText={t("resourcePrefix.create_text")}
       >
         {typeAheadSuggestions.map((value, index) => (

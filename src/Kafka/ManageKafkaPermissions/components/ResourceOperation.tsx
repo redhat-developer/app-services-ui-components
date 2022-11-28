@@ -74,7 +74,6 @@ export const ResourceOperation: React.VFC<ResourceOperationProps> = ({
         validated={invalid ? ValidatedOptions.error : ValidatedOptions.default}
         selections={value}
         menuAppendTo={document.body}
-        isFlipEnabled={true}
       >
         {makeOptions()}
       </Select>
