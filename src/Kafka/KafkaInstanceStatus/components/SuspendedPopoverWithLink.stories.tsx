@@ -1,18 +1,18 @@
 import type { ComponentStory, ComponentMeta } from "@storybook/react";
-import { SuspendedPopover1 } from "./SuspendedPopover1";
+import { SuspendedPopoverWithLink } from "./SuspendedPopoverWithLink";
 import { Button, ButtonVariant } from "@patternfly/react-core";
 
 export default {
-  component: SuspendedPopover1,
+  component: SuspendedPopoverWithLink,
   args: {},
   parameters: {
     backgrounds: {
       default: "Background color 100",
     },
   },
-} as ComponentMeta<typeof SuspendedPopover1>;
+} as ComponentMeta<typeof SuspendedPopoverWithLink>;
 
-const Template: ComponentStory<typeof SuspendedPopover1> = (
+const Template: ComponentStory<typeof SuspendedPopoverWithLink> = (
   args,
   { viewMode }
 ) => {
@@ -22,9 +22,9 @@ const Template: ComponentStory<typeof SuspendedPopover1> = (
       style={{ textAlign: "center", paddingTop: inDocs ? 0 : 250 }}
       {...args}
     >
-      <SuspendedPopover1>
+      <SuspendedPopoverWithLink>
         <Button variant={ButtonVariant.link}>{"Suspended"}</Button>
-      </SuspendedPopover1>
+      </SuspendedPopoverWithLink>
     </div>
   );
 };

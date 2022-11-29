@@ -13,7 +13,7 @@ export default {
     getUrlForInstance: (row) => `/${row.id}`,
     isRowSelected: () => false,
     canChangeOwner: (row) =>
-      row.owner === "baz-owner" || row.status === "suspended",
+      row.owner === "baz-owner" && row.status !== "suspended",
     canOpenConnection: (row) => row.status !== "suspended",
     canDelete: (row) => row.owner === "baz-owner",
     canHaveInstanceLink: (row) => ReadyStatuses.includes(row["status"]),

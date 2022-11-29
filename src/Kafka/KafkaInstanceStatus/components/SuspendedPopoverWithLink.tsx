@@ -1,3 +1,5 @@
+//use this component when the link to the external documention is ready
+
 import { Popover, TextContent } from "@patternfly/react-core";
 import type { RefObject, VoidFunctionComponent } from "react";
 import { ExclamationTriangleIcon } from "@patternfly/react-icons";
@@ -5,13 +7,13 @@ import { useTranslation } from "react-i18next";
 import { ExternalLink } from "../../../shared";
 import type { PopoverProps } from "@patternfly/react-core";
 
-export type SuspendedPopover1Props = {
+export type SuspendedPopoverWithLinkProps = {
   children?: PopoverProps["children"];
   reference?: RefObject<HTMLButtonElement>;
 };
 
-export const SuspendedPopover1: VoidFunctionComponent<
-  SuspendedPopover1Props
+export const SuspendedPopoverWithLink: VoidFunctionComponent<
+  SuspendedPopoverWithLinkProps
 > = ({ children, reference }) => {
   const { t } = useTranslation("kafka");
   return (

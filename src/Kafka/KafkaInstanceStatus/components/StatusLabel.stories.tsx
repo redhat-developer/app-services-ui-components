@@ -151,11 +151,11 @@ Degraded.parameters = {
   },
 };
 
-export const suspended = Template.bind({});
-suspended.args = {
+export const Suspended = Template.bind({});
+Suspended.args = {
   value: "suspended",
 };
-suspended.parameters = {
+Suspended.parameters = {
   docs: {
     description: {
       story: "The Kafka instance is suspended",
@@ -163,26 +163,26 @@ suspended.parameters = {
   },
 };
 
-export const suspending = Template.bind({});
-suspending.args = {
+export const Suspending = Template.bind({});
+Suspending.args = {
   value: "suspending",
 };
-suspending.parameters = {
+Suspending.parameters = {
   docs: {
     description: {
-      story: "The Kafka instance is suspending",
+      story: "The Kafka instance is in the process of suspending",
     },
   },
 };
 
-export const resuming = Template.bind({});
-resuming.args = {
+export const Resuming = Template.bind({});
+Resuming.args = {
   value: "resuming",
 };
-resuming.parameters = {
+Resuming.parameters = {
   docs: {
     description: {
-      story: "The Kafka instance is resuming",
+      story: "The Kafka instance is in the process of resuming",
     },
   },
 };

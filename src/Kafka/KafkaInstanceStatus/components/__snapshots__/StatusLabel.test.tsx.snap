@@ -1133,7 +1133,7 @@ exports[`Renders Ready story 1`] = `
 </body>
 `;
 
-exports[`Renders resuming story 1`] = `
+exports[`Renders Resuming story 1`] = `
 <body>
   <div>
     <div>
@@ -1178,7 +1178,7 @@ exports[`Renders resuming story 1`] = `
 </body>
 `;
 
-exports[`Renders suspended story 1`] = `
+exports[`Renders Suspended story 1`] = `
 <body>
   <div>
     <div>
@@ -1230,7 +1230,7 @@ exports[`Renders suspended story 1`] = `
 </body>
 `;
 
-exports[`Renders suspending story 1`] = `
+exports[`Renders Suspending story 1`] = `
 <body>
   <div>
     <div>

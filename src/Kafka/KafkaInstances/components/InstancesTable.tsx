@@ -217,7 +217,7 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.change-owner"),
-                ...(changeOwnerEnabled
+                ...(!changeOwnerEnabled
                   ? {
                       isDisabled: true,
                       tooltipProps: {
