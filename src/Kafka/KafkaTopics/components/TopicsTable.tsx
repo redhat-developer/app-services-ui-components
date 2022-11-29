@@ -87,7 +87,12 @@ export const TopicsTable = <T extends KafkaTopic>({
                     <Button
                       variant="link"
                       component={(props) => (
-                        <Link to={getUrlFortopic(row)} {...props}>
+                        <Link
+                          to={getUrlFortopic(row)}
+                          {...props}
+                          data-testid="tableTopics-linkTopic"
+                          data-ouia-component-id="table-link"
+                        >
                           {row.topic_name}
                         </Link>
                       )}
