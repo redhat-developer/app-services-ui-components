@@ -24,6 +24,10 @@ describe("Topics table", () => {
 
     const firstRow = comp.getAllByRole("row")[1];
 
+    expect(within(firstRow).getByRole("link")).toHaveAttribute(
+      "data-ouia-component-id",
+      "table-link"
+    );
     const btnExpand = within(firstRow).getByRole("button");
     fireEvent.click(btnExpand);
     userEvent.click(comp.getByText("Delete topic"));
