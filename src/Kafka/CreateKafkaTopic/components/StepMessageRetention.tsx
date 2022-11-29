@@ -13,10 +13,9 @@ import {
 } from "@patternfly/react-core";
 import {
   retentionSizeSelectOptions,
-  RetentionSizeUnits,
   retentionTimeSelectOptions,
-  RetentionTimeUnits,
 } from "../types";
+import { RetentionSizeUnits, RetentionTimeUnits } from "../../types";
 import type { NewTopic } from "../types";
 import { CustomRetentionMessage } from "./CustomRetentionMessage";
 import { CustomRetentionSize } from "./CustomRetentionSize";

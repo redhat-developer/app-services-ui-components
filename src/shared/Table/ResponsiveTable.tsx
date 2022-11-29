@@ -1,6 +1,7 @@
 import { Skeleton } from "@patternfly/react-core";
 import type {
   ActionsColumnProps,
+  TableVariant,
   TdProps,
   ThProps,
 } from "@patternfly/react-table";
@@ -64,6 +65,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   setActionCellOuiaId?: (props: RowProps<TRow>) => string;
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
+  variant?: TableVariant;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -85,6 +87,7 @@ export const ResponsiveTable = <TRow, TCol>({
   setRowOuiaId,
   tableOuiaId,
   children,
+  variant,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -184,6 +187,7 @@ export const ResponsiveTable = <TRow, TCol>({
       ref={ref}
       className={showColumns ? "" : "pf-m-grid"}
       ouiaId={tableOuiaId}
+      variant={variant}
     >
       <Thead>
         <Tr>{header}</Tr>

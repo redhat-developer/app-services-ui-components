@@ -19,9 +19,8 @@ import { CustomRetentionSize } from "./CustomRetentionSize";
 import {
   retentionTimeSelectOptions,
   retentionSizeSelectOptions,
-  RetentionTimeUnits,
-  RetentionSizeUnits,
 } from "../types";
+import { RetentionSizeUnits, RetentionTimeUnits } from "../../types";
 import { useValidateTopic } from "../types";
 import type { NewTopic } from "../types";
 
