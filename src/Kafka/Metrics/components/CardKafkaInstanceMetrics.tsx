@@ -180,11 +180,13 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                 <CardBody>
                   <Grid hasGutter>
                     <GridItem>
-                      <Alert
-                        variant="info"
-                        isInline
-                        title={t("client_connection_alert")}
-                      />
+                      {selectedBroker ? (
+                        <Alert
+                          variant="info"
+                          isInline
+                          title={t("client_connection_alert")}
+                        />
+                      ) : null}
                     </GridItem>
                     <GridItem>
                       <ChartLinearWithOptionalLimit
@@ -205,15 +207,28 @@ export const CardKafkaInstanceMetrics: FunctionComponent<
                   helperText={t("connection_attempt_rate_help_text")}
                 />
                 <CardBody>
-                  <ChartLinearWithOptionalLimit
-                    chartName={t("connection_attempt_rate")}
-                    yLabel={t("connection_attempt_rate_yaxis")}
-                    metrics={connectionAttemptRateMetrics}
-                    duration={duration}
-                    usageLimit={connectionRateLimit}
-                    isLoading={isLoading}
-                    emptyState={<EmptyStateNoMetricsData />}
-                  />
+                  <Grid hasGutter>
+                    <GridItem>
+                      {selectedBroker ? (
+                        <Alert
+                          variant="info"
+                          isInline
+                          title={t("connection_attempt_rate_alert")}
+                        />
+                      ) : null}
+                    </GridItem>
+                    <GridItem>
+                      <ChartLinearWithOptionalLimit
+                        chartName={t("connection_attempt_rate")}
+                        yLabel={t("connection_attempt_rate_yaxis")}
+                        metrics={connectionAttemptRateMetrics}
+                        duration={duration}
+                        usageLimit={connectionRateLimit}
+                        isLoading={isLoading}
+                        emptyState={<EmptyStateNoMetricsData />}
+                      />
+                    </GridItem>
+                  </Grid>
                 </CardBody>
               </>
             );

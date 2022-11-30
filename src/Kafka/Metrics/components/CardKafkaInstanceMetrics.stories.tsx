@@ -20,7 +20,6 @@ export default {
     connectionsLimit: 100,
     connectionRateLimit: 100,
     brokers: ["broker 1", "broker 2"],
-    selectedBroker: "broker 1",
   },
 } as ComponentMeta<typeof CardKafkaInstanceMetrics>;
 
@@ -50,6 +49,14 @@ SampleData.args = {
     "broker 1": makeMetrics(DurationOptions.Last12hours, 200, 999, 10 ** 9),
     "broker 2": makeMetrics(DurationOptions.Last12hours, 100, 999, 10 ** 9),
   },
+  bytesPerPartitions: {
+    "topic1/0": makeMetrics(DurationOptions.Last12hours, 0, 32, 10 ** 7),
+    "topic1/1": makeMetrics(DurationOptions.Last12hours, 0, 31, 10 ** 7),
+    "topic1/2": makeMetrics(DurationOptions.Last12hours, 0, 28, 10 ** 7),
+    "topic2/3": makeMetrics(DurationOptions.Last12hours, 0, 25, 10 ** 7),
+    "topic2/4": makeMetrics(DurationOptions.Last12hours, 0, 22, 10 ** 7),
+    "topic2/5": makeMetrics(DurationOptions.Last12hours, 0, 21, 10 ** 7),
+  },
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     0,
@@ -71,10 +78,48 @@ OverLimits.args = {
     "broker 1": makeMetrics(DurationOptions.Last12hours, 200, 1400, 10 ** 9),
     "broker 2": makeMetrics(DurationOptions.Last12hours, 100, 3000, 10 ** 9),
   },
+  bytesPerPartitions: {
+    "topic1/0": makeMetrics(DurationOptions.Last12hours, 0, 32, 10 ** 7),
+    "topic1/1": makeMetrics(DurationOptions.Last12hours, 0, 31, 10 ** 7),
+    "topic1/2": makeMetrics(DurationOptions.Last12hours, 0, 28, 10 ** 7),
+    "topic2/3": makeMetrics(DurationOptions.Last12hours, 0, 25, 10 ** 7),
+    "topic2/4": makeMetrics(DurationOptions.Last12hours, 0, 22, 10 ** 7),
+    "topic2/5": makeMetrics(DurationOptions.Last12hours, 0, 21, 10 ** 7),
+  },
   connectionAttemptRateMetrics: makeMetrics(
     DurationOptions.Last12hours,
     20,
     120,
+    1
+  ),
+  clientConnectionsMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    50,
+    250,
+    1
+  ),
+};
+
+export const DisplayAlertWhenBrokerIsSelected = Template.bind({});
+DisplayAlertWhenBrokerIsSelected.args = {
+  selectedBroker: "broker 1",
+  usedDiskMetrics: {
+    total: makeMetrics(DurationOptions.Last12hours, 0, 999, 10 ** 9),
+    "broker 1": makeMetrics(DurationOptions.Last12hours, 200, 999, 10 ** 9),
+    "broker 2": makeMetrics(DurationOptions.Last12hours, 100, 999, 10 ** 9),
+  },
+  bytesPerPartitions: {
+    "topic1/0": makeMetrics(DurationOptions.Last12hours, 0, 32, 10 ** 7),
+    "topic1/1": makeMetrics(DurationOptions.Last12hours, 0, 31, 10 ** 7),
+    "topic1/2": makeMetrics(DurationOptions.Last12hours, 0, 28, 10 ** 7),
+    "topic2/3": makeMetrics(DurationOptions.Last12hours, 0, 25, 10 ** 7),
+    "topic2/4": makeMetrics(DurationOptions.Last12hours, 0, 22, 10 ** 7),
+    "topic2/5": makeMetrics(DurationOptions.Last12hours, 0, 21, 10 ** 7),
+  },
+  connectionAttemptRateMetrics: makeMetrics(
+    DurationOptions.Last12hours,
+    0,
+    100,
     1
   ),
   clientConnectionsMetrics: makeMetrics(

@@ -14,6 +14,7 @@
   "client_connections_helper_text": "Client connections are the total connections across all clients over time. Clients can make multiple connections to multiple brokers in the Kafka instance. This metric enables you to review client activity in the instance and to assess available connections relative to the limit.",
   "client_connections_y_axis": "Connections",
   "connection_attempt_rate": "Connection attempt rate",
+  "connection_attempt_rate_alert": "Connection attempt rate are shown for all brokers",
   "connection_attempt_rate_help_text": "Connection attempt rate is the number of attempted client connections per second for the Kafka instance over time. This metric enables you to review client activity spikes in the instance and to assess available connections per second relative to the limit.",
   "connection_attempt_rate_yaxis": "Connections/second",
   "empty_state_no_data_body": "We’re setting up your monitoring instance. Your metrics will appear shortly.",

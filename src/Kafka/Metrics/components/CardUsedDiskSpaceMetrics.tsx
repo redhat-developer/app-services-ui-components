@@ -44,6 +44,10 @@ type BrokerChartData = {
 
 type LegendData = {
   name: string;
+  symbol?: {
+    fill?: string;
+    type?: string;
+  };
 };
 
 export type ChartUsedDiskSpaceProps = {
@@ -67,8 +71,6 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
   const { t } = useTranslation();
   const [containerRef, width] = useChartWidth();
 
-  const itemsPerRow = width && width > 650 ? 6 : 3;
-
   const { chartData, legendData, tickValues } = getChartData(
     metrics,
     broker,
@@ -83,7 +85,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
   const showDate = shouldShowDate(duration);
 
   return (
-    <div ref={containerRef}>
+    <div ref={containerRef} style={{ height: "400px" }}>
       {(() => {
         switch (true) {
           case isLoading:
@@ -105,9 +107,7 @@ export const ChartUsedDiskSpace: FunctionComponent<ChartUsedDiskSpaceProps> = ({
                   />
                 }
                 legendPosition="bottom-left"
-                legendComponent={
-                  <ChartLegend data={legendData} itemsPerRow={itemsPerRow} />
-                }
+                legendComponent={<ChartLegend data={legendData} />}
                 height={chartHeight}
                 padding={chartPadding}
                 themeColor={ChartThemeColor.multiOrdered}
@@ -163,28 +163,32 @@ export function getChartData(
   chartData: Array<ChartData>;
   tickValues: number[];
 } {
-  const legendData: Array<LegendData> = [];
+  const legendData = [
+    usageLimit
+      ? {
+          name: limitLabel,
+          symbol: { fill: chart_color_black_500.value, type: "threshold" },
+        }
+      : undefined,
+  ].filter((d) => !!d) as Array<LegendData>;
+
   const chartData: Array<ChartData> = [];
   const softLimit: Array<BrokerChartData> = [];
   const softLimitColor = chart_color_black_500.value;
 
   if (broker && metrics[broker]) {
-    legendData.push({ name: broker });
-
     const area: Array<BrokerChartData> = [];
-
     const color = chart_color_blue_300.value;
-
+    legendData.push({ name: broker, symbol: { fill: color } });
     Object.entries(metrics[broker]).forEach(([timestamp, bytes]) => {
       area.push({ name: broker, x: parseInt(timestamp, 10), y: bytes });
     });
     chartData.push({ color, softLimitColor, area, softLimit });
   } else if (brokerToggle === "total") {
-    legendData.push({ name: "Instance" });
     const area: Array<BrokerChartData> = [];
 
     const color = chart_color_blue_300.value;
-
+    legendData.push({ name: "Instance", symbol: { fill: color } });
     Object.entries(metrics[brokerToggle]).forEach(([timestamp, bytes]) => {
       area.push({ name: "Instance", x: parseInt(timestamp, 10), y: bytes });
     });
@@ -196,9 +200,7 @@ export function getChartData(
         const name = metric;
 
         const color = colors[index];
-        legendData.push({
-          name,
-        });
+        legendData.push({ name });
         const area: Array<BrokerChartData> = [];
 
         Object.entries(dataMap).forEach(([timestamp, value]) => {
