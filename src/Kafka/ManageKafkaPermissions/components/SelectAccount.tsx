@@ -56,11 +56,12 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   ];
 
   function makeOptions(filter = "") {
-    const filterRegExp = new RegExp(filter, "i");
     const filteredAccounts =
       filter !== ""
-        ? accounts.filter((principal) =>
-            filterRegExp.test(principal.displayName)
+        ? accounts.filter(
+            (principal) =>
+              principal.displayName.includes(filter) ||
+              principal.id.includes(filter)
           )
         : accounts;
 
