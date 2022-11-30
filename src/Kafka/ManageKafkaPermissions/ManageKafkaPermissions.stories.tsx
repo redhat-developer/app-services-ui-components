@@ -56,6 +56,11 @@ export default {
         displayName: "sa90-4ktvf-posu",
         principalType: PrincipalType.ServiceAccount,
       },
+      {
+        id: "id2",
+        displayName: "displayName2",
+        principalType: PrincipalType.ServiceAccount,
+      },
     ],
     kafkaName: "name-test",
     selectedAcount: "",
