@@ -9,6 +9,7 @@ describe("Instances Table", () => {
   it("Instance link click based on row status", async () => {
     const onCreateKafka = jest.fn();
     const onInstanceLinkClick = jest.fn();
+
     const comp = render(
       <InstancesTable
         onCreate={onCreateKafka}
@@ -31,5 +32,9 @@ describe("Instances Table", () => {
     expect(within(instanceLinkEnable).getByText("baz")).toBeEnabled();
     userEvent.click(within(instanceLinkEnable).getByText("baz"));
     expect(onInstanceLinkClick).toHaveBeenCalledTimes(1);
+
+    userEvent.click(
+      within(instanceLinkEnable).getByRole("button", { name: "Actions" })
+    );
   });
 });
