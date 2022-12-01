@@ -9,3 +9,4 @@ export * from "./ServiceAccount";
 export * from "./ConsumerGroups";
 export * from "./Settings";
 export * from "./types";
+export * from "./KafkaTopics";
