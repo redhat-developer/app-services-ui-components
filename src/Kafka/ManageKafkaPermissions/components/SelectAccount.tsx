@@ -165,7 +165,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         validated={validated}
         createText={t("resourcePrefix.create_text")}
         isGrouped={true}
-        maxHeight={400}
         onCreateOption={() => {
           setIsOpen(false);
           setIsDirty(false);

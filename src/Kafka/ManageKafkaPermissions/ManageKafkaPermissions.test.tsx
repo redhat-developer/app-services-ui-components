@@ -59,7 +59,40 @@ describe("Manage Kafka Permissions Dialog", () => {
     ).not.toBeInTheDocument();
     const deleteIcon = await comp.findAllByLabelText("Delete");
     userEvent.click(deleteIcon[0]);
-    expect(onRemoveAcls).toBeCalledTimes(1);
+    expect(await comp.findByRole("button", { name: "Save" })).toBeEnabled();
+    userEvent.click(await comp.findByLabelText("Cancel"));
+    await waitForPopper();
+    expect(await comp.findByText("Discard changes?")).toBeInTheDocument();
+    expect(
+      await comp.findByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).toBeInTheDocument();
+    expect(await comp.findByText("Discard changes")).toBeInTheDocument();
+    expect(await comp.findByText("Resume editing")).toBeInTheDocument();
+    //userEvent.click(await comp.findByText("Discard changes"));
+    //expect(onCancel).toBeCalled()
+    userEvent.click(await comp.findByText("Resume editing"));
+    expect(comp.queryByText("Discard changes?")).not.toBeInTheDocument();
+    expect(
+      comp.queryByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).not.toBeInTheDocument();
+    expect(comp.queryByText("Discard changes")).not.toBeInTheDocument();
+    expect(comp.queryByText("Resume editing")).not.toBeInTheDocument();
+    userEvent.click(await comp.findByLabelText("Cancel"));
+    userEvent.click(await comp.findByText("Discard changes"));
+    expect(comp.queryByText("Discard changes?")).not.toBeInTheDocument();
+    expect(
+      comp.queryByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).not.toBeInTheDocument();
+    expect(comp.queryByText("Discard changes")).not.toBeInTheDocument();
+    expect(comp.queryByText("Resume editing")).not.toBeInTheDocument();
+    expect(onCancel).toBeCalled();
+
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(comp.getByRole("menuitem", { name: "Add permission" }));

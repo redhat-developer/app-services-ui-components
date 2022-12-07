@@ -73,11 +73,18 @@ export const InteractiveExample: ComponentStory<
   const [selectedAccount, setSelectedAccount] = useState<string | undefined>(
     undefined
   );
+  const [isAclDeleted, setIsAclDeleted] = useState<boolean>(false);
+
+  const onRemoveAcls = () => {
+    setIsAclDeleted(true);
+  };
 
   return (
     <ManageKafkaPermissions
       {...args}
+      isAclDeleted={isAclDeleted}
       selectedAccount={selectedAccount}
+      onRemoveAcls={onRemoveAcls}
       onChangeSelectedAccount={setSelectedAccount}
       existingAcls={
         selectedAccount == "*"
