@@ -32,9 +32,5 @@ describe("Instances Table", () => {
     expect(within(instanceLinkEnable).getByText("baz")).toBeEnabled();
     userEvent.click(within(instanceLinkEnable).getByText("baz"));
     expect(onInstanceLinkClick).toHaveBeenCalledTimes(1);
-
-    userEvent.click(
-      within(instanceLinkEnable).getByRole("button", { name: "Actions" })
-    );
   });
 });
