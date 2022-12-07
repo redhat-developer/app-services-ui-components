@@ -8,7 +8,8 @@ import {
   SelectVariant,
 } from "@patternfly/react-core";
 import type { SelectProps, NumberInputProps } from "@patternfly/react-core";
-import type { NewTopic, RetentionTimeUnits, SelectOptions } from "../types";
+import type { NewTopic, SelectOptions } from "../types";
+import type { RetentionTimeUnits } from "../../types";
 
 export type CustomRetentionMessageProps = NumberInputProps &
   SelectProps & {
