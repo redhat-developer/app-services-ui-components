@@ -102,7 +102,7 @@
     "react-router-dom": "5.2.1",
     "regenerator-runtime": "0.13.9",
     "rimraf": "3.0.2",
-    "rollup": "2.77.0",
+    "rollup": "3.7.0",
     "rollup-plugin-auto-external": "2.0.0",
     "rollup-plugin-postcss": "4.0.2",
     "rollup-plugin-swc3": "0.3.0",
