@@ -1,52 +1,61 @@
-import { useState, useCallback, useRef, useEffect } from "react";
-import type { SortDirection } from "../../shared";
-import { TopicsTable } from "./components";
-import type { TopicsTableProps } from "./components";
-import type { KafkaTopic, KafkaTopicField } from "./types";
-import {
-  usePaginationSearchParams,
-  useSortableSearchParams,
-  useURLSearchParamsChips,
-} from "../../shared";
 import { useTranslation } from "react-i18next";
+import type { TableViewProps } from "../../shared";
+import { TableView } from "../../shared";
+import type { KafkaTopic, KafkaTopicField } from "./types";
+import type { EmptyStateNoTopicProps } from "./components";
+import { EmptyStateNoTopic } from "./components";
+import { EmptyStateNoResults } from "../../shared";
+import { TableVariant } from "@patternfly/react-table";
+import { Button } from "@patternfly/react-core";
+import { Link } from "react-router-dom";
+import { formattedRetentionSize, formattedRetentionTime } from "./types";
 
-type Query = {
-  names: string[];
-};
-const SortableColumns = [
+const Columns: KafkaTopicField[] = [
+  "topic_name",
   "partitions",
   "retention_time",
   "retention_size",
-] as const;
+];
 
 export type KafkaTopicsProps<T extends KafkaTopic> = {
-  getTopics: (
-    page: number,
-    perPage: number,
-    query: Query,
-    sort: typeof SortableColumns[number] | null,
-    sortDirection: SortDirection
-  ) => Promise<{
-    topics: T[];
-    count: number;
-  }>;
-} & Omit<
-  TopicsTableProps<T>,
-  | "topics"
+  topics: Array<T> | undefined;
+  getUrlFortopic: (row: T) => string;
+  onDelete: (row: T) => void;
+  onEdit: (row: T) => void;
+  topicName: string[];
+  onSearchTopic: (value: string) => void;
+  onRemoveTopicChip: (value: string) => void;
+  onRemoveTopicChips: () => void;
+  onTopicLinkClick: (row: T) => void;
+} & Pick<
+  TableViewProps<T, typeof Columns[number]>,
   | "itemCount"
   | "page"
   | "perPage"
   | "onPageChange"
-  | "topicName"
+  | "isRowSelected"
+  | "isColumnSortable"
   | "onClearAllFilters"
-  | "onRemoveTopicChip"
-  | "onRemoveTopicChips"
-  | "onSearchTopic"
->;
+> &
+  EmptyStateNoTopicProps;
 
 export const KafkaTopics = <T extends KafkaTopic>({
-  getTopics,
-  ...props
+  topics,
+  onDelete,
+  onEdit,
+  isColumnSortable,
+  itemCount,
+  onSearchTopic,
+  topicName,
+  onClearAllFilters,
+  onCreateTopic,
+  page,
+  perPage,
+  onPageChange,
+  onRemoveTopicChip,
+  onRemoveTopicChips,
+  getUrlFortopic,
+  onTopicLinkClick,
 }: KafkaTopicsProps<T>) => {
   const { t } = useTranslation("topic");
 
@@ -57,84 +66,98 @@ export const KafkaTopics = <T extends KafkaTopic>({
     retention_size: t("retention_size"),
   };
 
-  const [topics, setTopics] = useState<T[] | undefined>(undefined);
-
-  const [count, setCount] = useState<number | undefined>(undefined);
-
-  const { page, perPage, setPagination, setPaginationQuery } =
-    usePaginationSearchParams();
-
-  const resetPaginationQuery = useCallback(
-    () => setPaginationQuery(1, perPage),
-    [perPage, setPaginationQuery]
-  );
-
-  const namesChips = useURLSearchParamsChips("topicName", resetPaginationQuery);
-
-  const [isColumnSortable, sort, sortDirection] = useSortableSearchParams(
-    SortableColumns,
-    labels,
-    null,
-    "asc"
-  );
-
-  const previousFetchArgs = useRef([
-    page,
-    perPage,
-    {
-      names: namesChips.chips,
-    },
-    sort,
-    sortDirection,
-  ] as const);
-
-  const onClearAllFilters = useCallback(() => {
-    setTopics(undefined);
-    namesChips.clearChained(setPaginationQuery(1, perPage), true);
-  }, [namesChips, perPage, setPaginationQuery]);
-
-  const fetchData = useCallback(() => {
-    const fetchArgs = [
-      page,
-      perPage,
-      {
-        names: namesChips.chips,
-      },
-      sort,
-      sortDirection,
-    ] as const;
-    if (
-      JSON.stringify(fetchArgs) !== JSON.stringify(previousFetchArgs.current)
-    ) {
-      setTopics(undefined);
-    }
-    previousFetchArgs.current = fetchArgs;
-    return getTopics(...fetchArgs)
-      .then(({ topics, count }) => {
-        setTopics(topics);
-        setCount(count);
-      })
-      .catch((e) => console.error(e));
-  }, [getTopics, namesChips.chips, page, perPage, sort, sortDirection]);
-
-  useEffect(() => {
-    void fetchData();
-  }, [fetchData]);
-
+  const isFiltered = topicName.length > 0;
   return (
-    <TopicsTable
-      topics={topics}
-      itemCount={count}
-      topicName={namesChips.chips}
-      page={page}
-      perPage={perPage}
+    <TableView
+      variant={TableVariant.compact}
+      tableOuiaId={"card-table"}
+      ariaLabel={t("topic_list_table")}
+      data={topics}
+      columns={Columns}
+      renderHeader={({ column, Th, key }) => (
+        <Th key={key}>{labels[column]}</Th>
+      )}
+      renderCell={({ column, row, Td, key }) => {
+        return (
+          <Td key={key} dataLabel={labels[column]}>
+            {(() => {
+              switch (column) {
+                case "topic_name":
+                  return (
+                    <Button
+                      variant="link"
+                      component={(props) => (
+                        <Link
+                          to={getUrlFortopic(row)}
+                          {...props}
+                          data-testid="tableTopics-linkTopic"
+                          data-ouia-component-id="table-link"
+                        >
+                          {row.topic_name}
+                        </Link>
+                      )}
+                      onClick={() => onTopicLinkClick(row)}
+                      isInline
+                    />
+                  );
+                case "partitions":
+                  return row.partitions;
+                case "retention_time":
+                  return formattedRetentionTime(
+                    row.retention_time ? parseInt(row.retention_time, 10) : 0
+                  );
+                case "retention_size":
+                  return formattedRetentionSize(
+                    row.retention_size ? parseInt(row.retention_size, 10) : 0
+                  );
+                default:
+                  return row[column];
+              }
+            })()}
+          </Td>
+        );
+      }}
+      renderActions={({ row, ActionsColumn }) => (
+        <ActionsColumn
+          items={[
+            {
+              title: t("table.actions.edit"),
+              onClick: () => onEdit(row),
+            },
+            {
+              title: t("table.actions.delete"),
+              onClick: () => onDelete(row),
+            },
+          ]}
+        />
+      )}
       isColumnSortable={isColumnSortable}
-      onPageChange={setPagination}
-      onSearchTopic={namesChips.add}
-      onRemoveTopicChip={namesChips.remove}
-      onRemoveTopicChips={namesChips.clear}
+      filters={{
+        [labels.topic_name]: {
+          type: "search",
+          chips: topicName,
+          onSearch: onSearchTopic,
+          onRemoveChip: onRemoveTopicChip,
+          onRemoveGroup: onRemoveTopicChips,
+          validate: (value: string) => !/["$^<>|+%/;:,\s*=~#()]/.test(value),
+          errorMessage: t("input_field_invalid_message"),
+        },
+      }}
+      actions={[
+        {
+          label: t("create_topic"),
+          onClick: onCreateTopic,
+          isPrimary: true,
+        },
+      ]}
+      itemCount={itemCount}
+      page={page}
+      onPageChange={onPageChange}
+      perPage={perPage}
+      isFiltered={isFiltered}
       onClearAllFilters={onClearAllFilters}
-      {...props}
-    />
+      emptyStateNoData={<EmptyStateNoTopic onCreateTopic={onCreateTopic} />}
+      emptyStateNoResults={<EmptyStateNoResults />}
+    ></TableView>
   );
 };
