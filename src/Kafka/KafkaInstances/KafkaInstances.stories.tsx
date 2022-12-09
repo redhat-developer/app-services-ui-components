@@ -1,11 +1,7 @@
 import { action } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { fakeApi } from "../../shared/storiesHelpers";
-import {
-  CreatingStatuses,
-  DeletingStatuses,
-  SimplifiedStatuses,
-} from "../types";
+import { ReadyStatuses, SimplifiedStatuses } from "../types";
 import { KafkaInstances as KafkaInstancesComp } from "./KafkaInstances";
 import { instances } from "./storiesHelper";
 
@@ -16,11 +12,11 @@ export default {
   args: {
     getUrlForInstance: (row) => `/${row.id}`,
     isRowSelected: () => false,
-    canChangeOwner: (row) => row.owner === "baz-owner",
+    canChangeOwner: (row) =>
+      row.owner === "baz-owner" && row.status !== "suspended",
+    canOpenConnection: (row) => row.status !== "suspended",
     canDelete: (row) => row.owner === "baz-owner",
-    canHaveInstanceLink: (row) =>
-      DeletingStatuses.includes(row["status"]) ||
-      CreatingStatuses.includes(row["status"]),
+    canHaveInstanceLink: (row) => ReadyStatuses.includes(row["status"]),
   },
 } as ComponentMeta<typeof KafkaInstancesComp>;
 

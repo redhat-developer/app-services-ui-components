@@ -53,6 +53,7 @@ export type InstancesTableProps<T extends KafkaInstance> = {
   onClickSupportLink: () => void;
   onInstanceLinkClick: (row: T) => void;
   canHaveInstanceLink: (row: T) => boolean;
+  canOpenConnection: (row: T) => boolean;
 } & Pick<
   TableViewProps<T, typeof Columns[number]>,
   | "itemCount"
@@ -100,6 +101,7 @@ export const InstancesTable = <T extends KafkaInstance>({
   onRemoveStatusChips,
   onClearAllFilters,
   canHaveInstanceLink,
+  canOpenConnection,
 }: InstancesTableProps<T>) => {
   const { t } = useTranslation("kafka");
   const labels = useKafkaLabels();
@@ -117,7 +119,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       )}
       renderCell={({ column, row, Td, key }) => {
         const timeCreatedDate = parseISO(row.createdAt);
-        const instanceLinkDisable = canHaveInstanceLink(row);
+        const instanceLinkEnable = canHaveInstanceLink(row);
         return (
           <Td key={key} dataLabel={labels.fields[column]}>
             {(() => {
@@ -132,7 +134,8 @@ export const InstancesTable = <T extends KafkaInstance>({
                         </Link>
                       )}
                       isInline
-                      isDisabled={instanceLinkDisable}
+                      isAriaDisabled={!instanceLinkEnable}
+                      isDisabled={!instanceLinkEnable}
                       onClick={() => onInstanceLinkClick(row)}
                     />
                   );
@@ -186,6 +189,7 @@ export const InstancesTable = <T extends KafkaInstance>({
       renderActions={({ row, ActionsColumn }) => {
         const changeOwnerEnabled = canChangeOwner(row);
         const deleteEnabled = canDelete(row);
+        const openConnectionEnabled = canOpenConnection(row);
         return (
           <ActionsColumn
             items={[
@@ -202,7 +206,11 @@ export const InstancesTable = <T extends KafkaInstance>({
               },
               {
                 title: t("table.actions.connection"),
-                onClick: () => onConnection(row),
+                ...(!openConnectionEnabled
+                  ? {
+                      isDisabled: true,
+                    }
+                  : { onClick: () => onConnection(row) }),
               },
               {
                 isSeparator: true,

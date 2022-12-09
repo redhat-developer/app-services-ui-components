@@ -66,6 +66,8 @@ export const Statuses = [
   "deprovision",
   "deleting",
   "suspended",
+  "suspending",
+  "resuming",
 ] as const;
 export type Status = typeof Statuses[number];
 
@@ -76,8 +78,10 @@ export const CreatingStatuses: readonly Status[] = [
 ];
 export const ReadyStatuses: readonly Status[] = ["ready"];
 export const DegradedStatuses: readonly Status[] = ["degraded"];
+export const SuspendingStatuses: readonly Status[] = ["suspending"];
 export const SuspendedStatuses: readonly Status[] = ["suspended"];
 export const DeletingStatuses: readonly Status[] = ["deleting", "deprovision"];
+export const ResumingStatuses: readonly Status[] = ["resuming"];
 
 export const SimplifiedStatuses = {
   creating: CreatingStatuses,
@@ -85,6 +89,8 @@ export const SimplifiedStatuses = {
   degraded: DegradedStatuses,
   suspended: SuspendedStatuses,
   deleting: DeletingStatuses,
+  resuming: ResumingStatuses,
+  suspending: SuspendingStatuses,
 } as const;
 export type SimplifiedStatus = keyof typeof SimplifiedStatuses;
 
