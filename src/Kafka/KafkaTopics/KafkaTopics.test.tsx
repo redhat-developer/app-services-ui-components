@@ -1,7 +1,7 @@
 import { fireEvent, userEvent, within } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
-import { render, waitForI18n } from "../../../test-utils";
-import * as stories from "./TopicsTable.stories";
+import { render, waitForI18n } from "../../test-utils";
+import * as stories from "./kafkaTopics.stories";
 
 const { KafkaTopicsTable } = composeStories(stories);
 
