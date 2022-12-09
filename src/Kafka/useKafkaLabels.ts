@@ -18,6 +18,8 @@ export function useKafkaLabels() {
     deprovision: t("statuses.deprovision"),
     deleting: t("statuses.deleting"),
     suspended: t("statuses.suspended"),
+    suspending: t("statuses.suspending"),
+    resuming: t("statuses.resuming"),
   };
   const statusesSimplified: { [status in SimplifiedStatus]: string } = {
     creating: t("statusesSimplified.creating"),
@@ -25,6 +27,8 @@ export function useKafkaLabels() {
     degraded: t("statusesSimplified.degraded"),
     deleting: t("statusesSimplified.deleting"),
     suspended: t("statusesSimplified.suspended"),
+    suspending: t("statusesSimplified.suspending"),
+    resuming: t("statusesSimplified.resuming"),
   };
   const providers: { [status in CloudProvider]: string } = {
     aws: t("common:cloudProviders.aws"),

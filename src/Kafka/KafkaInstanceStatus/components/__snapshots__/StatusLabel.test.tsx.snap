@@ -607,6 +607,61 @@ exports[`Renders AllStatutesAtOnce story 1`] = `
     <br
       style=""
     />
+    <pre
+      style=""
+    >
+      Suspending
+    </pre>
+    <div>
+      <p
+        class="mas-m-deleting"
+      >
+         
+        Suspending
+      </p>
+    </div>
+    <br
+      style=""
+    />
+    <pre
+      style=""
+    >
+      Resuming
+    </pre>
+    <div>
+      <div
+        class="pf-l-split pf-m-gutter mas-c-status"
+      >
+        <div
+          class="pf-l-split__item"
+        >
+          <span
+            aria-label="Contents"
+            aria-valuetext="Loading..."
+            class="pf-c-spinner pf-m-md"
+            role="progressbar"
+          >
+            <span
+              class="pf-c-spinner__clipper"
+            />
+            <span
+              class="pf-c-spinner__lead-ball"
+            />
+            <span
+              class="pf-c-spinner__tail-ball"
+            />
+          </span>
+        </div>
+        <div
+          class="pf-l-split__item"
+        >
+          Resuming
+        </div>
+      </div>
+    </div>
+    <br
+      style=""
+    />
   </div>
   <div>
     <ul
@@ -1078,7 +1133,52 @@ exports[`Renders Ready story 1`] = `
 </body>
 `;
 
-exports[`Renders suspended story 1`] = `
+exports[`Renders Resuming story 1`] = `
+<body>
+  <div>
+    <div>
+      <div
+        class="pf-l-split pf-m-gutter mas-c-status"
+      >
+        <div
+          class="pf-l-split__item"
+        >
+          <span
+            aria-label="Contents"
+            aria-valuetext="Loading..."
+            class="pf-c-spinner pf-m-md"
+            role="progressbar"
+          >
+            <span
+              class="pf-c-spinner__clipper"
+            />
+            <span
+              class="pf-c-spinner__lead-ball"
+            />
+            <span
+              class="pf-c-spinner__tail-ball"
+            />
+          </span>
+        </div>
+        <div
+          class="pf-l-split__item"
+        >
+          Resuming
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
+</body>
+`;
+
+exports[`Renders Suspended story 1`] = `
 <body>
   <div>
     <div>
@@ -1118,6 +1218,28 @@ exports[`Renders suspended story 1`] = `
           </button>
         </div>
       </div>
+    </div>
+  </div>
+  <div>
+    <ul
+      aria-atomic="false"
+      aria-live="polite"
+      class="pf-c-alert-group pf-m-toast"
+    />
+  </div>
+</body>
+`;
+
+exports[`Renders Suspending story 1`] = `
+<body>
+  <div>
+    <div>
+      <p
+        class="mas-m-deleting"
+      >
+         
+        Suspending
+      </p>
     </div>
   </div>
   <div>

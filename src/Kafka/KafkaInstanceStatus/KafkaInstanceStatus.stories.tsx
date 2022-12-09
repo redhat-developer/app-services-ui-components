@@ -83,3 +83,13 @@ export const Suspended = Template.bind({});
 Suspended.args = {
   status: "suspended",
 };
+
+export const Suspending = Template.bind({});
+Suspending.args = {
+  status: "suspending",
+};
+
+export const Resuming = Template.bind({});
+Resuming.args = {
+  status: "resuming",
+};
