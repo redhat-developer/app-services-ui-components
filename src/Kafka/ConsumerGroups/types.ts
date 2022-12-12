@@ -16,11 +16,13 @@ export type ConsumerGroupState =
   | "PreparingRebalance"
   | "Unknown";
 
-export interface ConsumerGroup {
+export type ConsumerGroup = {
   consumerGroupId: string;
   activeMembers: number;
   partitionsWithLag: number;
   state: ConsumerGroupState;
-}
+};
+
+export type ConsumerGroupField = keyof ConsumerGroup;
 
 export type OffsetValue = "absolute" | "latest" | "earliest";
