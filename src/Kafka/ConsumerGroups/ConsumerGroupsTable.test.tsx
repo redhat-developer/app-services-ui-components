@@ -1,7 +1,7 @@
 import { fireEvent, userEvent, within } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
-import { render, waitForI18n } from "../../../test-utils";
-import * as stories from "./ConsumerGroupTable.stories";
+import { render, waitForI18n } from "../../test-utils";
+import * as stories from "./ConsumerGroupsTable.stories";
 
 const { DefaultConsumerGroupTable } = composeStories(stories);
 
@@ -20,53 +20,6 @@ describe("Consumer group table", () => {
     expect(await comp.findByText("Reset offset")).toBeInTheDocument();
   });
 
-  it("Consumer group table sorted in ascending order based on consumer group id", async () => {
-    const comp = render(<DefaultConsumerGroupTable />);
-
-    await waitForI18n(comp);
-
-    userEvent.click(await comp.findByText("Consumer group ID"));
-
-    const firstRow = comp.getAllByRole("row")[1];
-    const secondRow = comp.getAllByRole("row")[2];
-
-    expect(within(firstRow).getByText("consumer-123")).toBeInTheDocument();
-    expect(within(firstRow).getByText(1)).toBeInTheDocument();
-    expect(within(firstRow).getByText(2)).toBeInTheDocument();
-    expect(
-      within(firstRow).getByText("Completing rebalance")
-    ).toBeInTheDocument();
-
-    expect(within(secondRow).getByText("consumer-233")).toBeInTheDocument();
-    expect(within(secondRow).getByText(2)).toBeInTheDocument();
-    expect(within(secondRow).getByText(3)).toBeInTheDocument();
-    expect(within(secondRow).getByText("Stable")).toBeInTheDocument();
-  });
-
-  it("Consumer group table sorted in descending order based on consumer group id", async () => {
-    const comp = render(<DefaultConsumerGroupTable />);
-    await waitForI18n(comp);
-
-    userEvent.click(await comp.findByText("Consumer group ID"));
-    userEvent.click(await comp.findByText("Consumer group ID"));
-
-    const firstRow = comp.getAllByRole("row")[1];
-
-    const secondRow = comp.getAllByRole("row")[2];
-
-    expect(within(firstRow).getByText("consumer-233")).toBeInTheDocument();
-    expect(within(firstRow).getByText(2)).toBeInTheDocument();
-    expect(within(firstRow).getByText(3)).toBeInTheDocument();
-    expect(within(firstRow).getByText("Stable")).toBeInTheDocument();
-
-    expect(within(secondRow).getByText("consumer-123")).toBeInTheDocument();
-    expect(within(secondRow).getByText(1)).toBeInTheDocument();
-    expect(within(secondRow).getByText(2)).toBeInTheDocument();
-    expect(
-      within(secondRow).getByText("Completing rebalance")
-    ).toBeInTheDocument();
-  });
-
   it("on click action on the kebab menu", async () => {
     const onDelete = jest.fn();
     const onClickPartitionoffset = jest.fn();
@@ -74,9 +27,9 @@ describe("Consumer group table", () => {
 
     const comp = render(
       <DefaultConsumerGroupTable
-        onClickDeleteModal={onDelete}
-        onClickPartitionoffset={onClickPartitionoffset}
-        onClickResetoffset={onClickResetoffset}
+        onDelete={onDelete}
+        onViewPartition={onClickPartitionoffset}
+        onViewResetOffset={onClickResetoffset}
       />
     );
     await waitForI18n(comp);
