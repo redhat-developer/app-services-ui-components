@@ -1,3 +1,4 @@
+import useChrome from "@redhat-cloud-services/frontend-components/useChrome";
 import {
   Bullseye,
   Button,
@@ -272,6 +273,13 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     mode: RHodsClusterAddonMode;
   }>({ clusters: [], mode: RHodsClusterAddonMode.Detecting });
 
+  const { analytics } = useChrome() as {
+    analytics: { track: (event: string) => void };
+  };
+  const track = (e: string) => {
+    analytics ? analytics.track(e) : console.warn("analytics not found: ", e);
+  };
+
   const modalActions = {
     [RHodsClusterAddonMode.Detecting]: [],
     [RHodsClusterAddonMode.Install]: [
@@ -280,6 +288,9 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         key="install"
         component="a"
         data-testid="install-RHODS-button"
+        onClick={() => {
+          track("rhods-modal-install-click");
+        }}
         href={INSTALL_ADDON_HREF.replace(
           "{subscriptionID}",
           selectedCluster?.id || ""
@@ -288,7 +299,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         {t("installClusterAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          track("rhods-modal-install-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -302,6 +316,9 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         key="install"
         component="a"
         data-testid="upgrade-RHODS-button"
+        onClick={() => {
+          track("rhods-modal-upgrade-click");
+        }}
         href={
           upgradeStrategy === UpgradeStrategy.Create
             ? CREATE_CLUSTER_HREF
@@ -316,7 +333,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
           : t("upgradeAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          track("rhods-modal-upgrade-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -327,6 +347,9 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     [RHodsClusterAddonMode.Create]: [
       <Button
         component="a"
+        onClick={() => {
+          track("rhods-modal-create-cluster-click");
+        }}
         href={CREATE_CLUSTER_HREF}
         variant="primary"
         key="install"
@@ -334,7 +357,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         {t("createClusterAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          track("rhods-modal-create-cluster-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -376,6 +402,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
   }, [loadClusters]);
 
   const handleInstallModalOpen = () => {
+    track("rhods-hero-install-click");
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getData();
     setIsModalOpen(true);
