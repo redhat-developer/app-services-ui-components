@@ -80,17 +80,23 @@ export const InteractiveExample: ComponentStory<
   };
 
   return (
-    <ManageKafkaPermissions
-      {...args}
-      isAclDeleted={isAclDeleted}
-      selectedAccount={selectedAccount}
-      onRemoveAcls={onRemoveAcls}
-      onChangeSelectedAccount={setSelectedAccount}
-      existingAcls={
-        selectedAccount == "*"
-          ? PermissionsForAllAccounts
-          : PermissionsForSelectedAccount
-      }
-    />
+    <div
+      id="modal-scroll"
+      style={{ transform: "scale(1)", minHeight: 850, height: "100%" }}
+    >
+      <ManageKafkaPermissions
+        {...args}
+        isAclDeleted={isAclDeleted}
+        selectedAccount={selectedAccount}
+        onRemoveAcls={onRemoveAcls}
+        onChangeSelectedAccount={setSelectedAccount}
+        existingAcls={
+          selectedAccount == "*"
+            ? PermissionsForAllAccounts
+            : PermissionsForSelectedAccount
+        }
+        id={"modal-scroll"}
+      />
+    </div>
   );
 };

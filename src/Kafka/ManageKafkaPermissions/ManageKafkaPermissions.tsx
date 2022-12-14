@@ -38,6 +38,7 @@ export type ManageKafkaPermissionsProps = {
   topicNameOptions: (filter: string) => string[];
   consumerGroupNameOptions: (filter: string) => string[];
   isAclDeleted?: boolean;
+  id?: string;
 };
 
 export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
@@ -52,11 +53,13 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   topicNameOptions,
   consumerGroupNameOptions,
   isAclDeleted,
+  id,
 }) => {
   const { t } = useTranslation([
     "manage-kafka-permissions",
     "create-kafka-instance",
   ]);
+
   const escapeClosesModal = useRef<boolean>(true);
   const [
     isExpandedExistingPermissionSection,
@@ -188,6 +191,9 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
       aria-describedby="modal-message"
       onClose={onClose}
       onEscapePress={onEscapePress}
+      appendTo={() =>
+        id ? document.getElementById(id) || document.body : document.body
+      }
       actions={[
         <Button
           key={1}
@@ -215,11 +221,14 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         closeModal={closePreCancelModal}
         resumeEditing={resumeEditingPermissions}
       />
-      <Form
-        onKeyPress={(event) => {
-          event.key === "Enter" && event.preventDefault();
-        }}
-      >
+      <Form>
+        <FormGroup
+          fieldId="kafka-instance-name"
+          label={t("kafka_instance")}
+          id="modal-message"
+        >
+          {kafkaName}
+        </FormGroup>
         {step == 1 ? (
           <SelectAccount
             value={selectedAccount}

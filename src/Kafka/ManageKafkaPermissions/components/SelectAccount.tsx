@@ -45,12 +45,20 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   };
 
   const noServiceAccounts = [
-    <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+    <SelectOption
+      isNoResultsOption={true}
+      isDisabled={true}
+      key={t("no_results_found")}
+    >
       {t("no_results_found")}
     </SelectOption>,
   ];
   const noUserAccounts = [
-    <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+    <SelectOption
+      isNoResultsOption={true}
+      isDisabled={true}
+      key={"no_user_accounts"}
+    >
       {t("no_results_found")}
     </SelectOption>,
   ];
@@ -101,8 +109,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     return [
       <SelectGroup key="all_accounts_group">
         <SelectOption
-          key="*"
-          value="*"
+          key={t("all_accounts_title")}
+          value={t("all_accounts_title")}
           description={t("all_accounts_description")}
         >
           {t("all_accounts_title")}
@@ -118,7 +126,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           ? serviceAccountOptions
           : noServiceAccounts}
       </SelectGroup>,
-      <Divider key="user_account_divider" />,
+      <Divider key="user_account_divider2" />,
       <SelectGroup
         label={t("all_accounts_user_account_group")}
         key="user_accounts_group"
@@ -147,7 +155,11 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       buttonAriaLabel={t("account_id_aria")}
       isRequired={true}
       validated={validated}
+      handleKeyPress={true}
     >
+      <span id={"grouped-typeahead-select-id"} hidden>
+        Select an account
+      </span>
       <Select
         id={"account-id"}
         data-testid="acls-select-account"
@@ -160,11 +172,11 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onFilter={(_, value) => makeOptions(value)}
         isOpen={isOpen}
         placeholderText={t("account_id_typeahead_placeholder")}
-        isCreatable={true}
+        isCreatable
         menuAppendTo="parent"
         validated={validated}
         createText={t("resourcePrefix.create_text")}
-        isGrouped={true}
+        isGrouped
         onCreateOption={() => {
           setIsOpen(false);
           setIsDirty(false);

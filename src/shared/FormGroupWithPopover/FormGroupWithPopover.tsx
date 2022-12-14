@@ -13,6 +13,7 @@ export type FormGroupWithPopoverProps = {
   helperText?: ReactNode;
   helperTextInvalid?: ReactNode;
   isRequired?: boolean;
+  handleKeyPress?: boolean;
 };
 
 export const FormGroupWithPopover: FC<FormGroupWithPopoverProps> = ({
@@ -26,6 +27,7 @@ export const FormGroupWithPopover: FC<FormGroupWithPopoverProps> = ({
   helperText,
   helperTextInvalid,
   isRequired,
+  handleKeyPress,
 }) => {
   const { t } = useTranslation("common");
 
@@ -37,6 +39,11 @@ export const FormGroupWithPopover: FC<FormGroupWithPopoverProps> = ({
       helperText={helperText}
       helperTextInvalid={helperTextInvalid || t("required")}
       isRequired={isRequired}
+      onKeyPress={(event) => {
+        handleKeyPress
+          ? event.key === "Enter" && event.preventDefault()
+          : undefined;
+      }}
       labelIcon={
         <Popover
           headerContent={<div>{labelHead}</div>}

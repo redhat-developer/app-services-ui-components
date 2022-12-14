@@ -44,9 +44,6 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
-    onFetchOptions("")
-  );
   const [validation, setValidation] = useState<Validation | undefined>(
     undefined
   );
@@ -57,16 +54,10 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   const onTypeahead = (filter: string | undefined) => {
     setFilterValue(filter);
     setValidation(onValidationCheck(filter));
-    function fetchSuggestions() {
-      filter != undefined
-        ? setTypeAheadSuggestions(onFetchOptions(filter))
-        : setTypeAheadSuggestions(onFetchOptions(""));
-    }
     if (fetchTimeout.current) {
       clearTimeout(fetchTimeout.current);
       fetchTimeout.current = undefined;
     }
-    fetchTimeout.current = setTimeout(fetchSuggestions, 300);
   };
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {
@@ -78,6 +69,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     setIsOpen(newState);
   };
   const clearSelection = () => {
+    setIsOpen(false);
     onChange(undefined);
     submitted && required
       ? setValidation({ isValid: false, message: t("common:required") })
@@ -89,8 +81,19 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
       ? ValidatedOptions.default
       : ValidatedOptions.error;
 
+  const onFilter = (filter = "") => {
+    const options =
+      filter != undefined ? onFetchOptions(filter) : onFetchOptions("");
+    return options.map((value, index) => (
+      <SelectOption key={index} value={value}>
+        {value}
+      </SelectOption>
+    ));
+  };
+
   return (
     <FormGroup
+      onKeyPress={(event) => event.key === "Enter" && event.preventDefault()}
       validated={
         submitted &&
         (((filterValue == "" || filterValue == undefined) && value == "") ||
@@ -118,6 +121,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         isOpen={validation && !validation.isValid ? false : isOpen}
         placeholderText={placeholderText}
         onTypeaheadInputChanged={onTypeahead}
+        onFilter={(_, value) => onFilter(value)}
         isCreatable={true}
         menuAppendTo={document.body}
         validated={
@@ -131,11 +135,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         width={170}
         createText={t("resourcePrefix.create_text")}
       >
-        {typeAheadSuggestions.map((value, index) => (
-          <SelectOption key={index} value={value}>
-            {value}
-          </SelectOption>
-        ))}
+        {onFilter()}
       </Select>
     </FormGroup>
   );
