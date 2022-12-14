@@ -7,7 +7,6 @@
   "dataTransfer": "Data transfer",
   "dataTransfer_price": "$0.09 / GB",
   "firstStreamingUnit": "1 streaming unit",
-  "googleCloudProviderDescription": "Coming Soon",
   "googleCloudProviderTitle": "Google Cloud Platform",
   "heroDescription": "Red Hat OpenShift Streams for Apache $t(common:kafka) is a managed cloud service that provides a streamlined developer experience for building, deploying, and scaling real-time applications in hybrid-cloud environments. The combination of seamless operations across distributed microservices, large data transfer volumes, and managed operations allows teams to focus on core competencies, accelerate application velocity and reduce operational cost.",
   "heroTagline": "Fully hosted and managed service for stream-based applications",

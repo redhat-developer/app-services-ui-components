@@ -286,12 +286,6 @@ export const KafkaPageV3: FunctionComponent = () => {
                       <Title headingLevel="h2" className={"pf-u-pt-sm"}>
                         {t("googleCloudProviderTitle")}
                       </Title>
-                      <Text
-                        component={TextVariants.p}
-                        className={"pf-u-color-200"}
-                      >
-                        {t("googleCloudProviderDescription")}
-                      </Text>
                     </SplitItem>
                   </Split>
                 </FlexItem>
