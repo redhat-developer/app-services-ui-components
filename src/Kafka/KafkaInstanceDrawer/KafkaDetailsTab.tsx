@@ -9,7 +9,7 @@ import {
 import type { ReactChild, VoidFunctionComponent } from "react";
 import { useTranslation } from "react-i18next";
 import { FormatDate } from "../../shared";
-import type { MarketplaceSubscription } from "../types";
+import type { CloudProvider, MarketplaceSubscription } from "../types";
 import type { InstanceType } from "../utils";
 import { DetailsTabAlert } from "./components/DetailsTabAlert";
 
@@ -35,6 +35,7 @@ export type KafkaDetailsTabProps = {
   messageSize: number | undefined;
   billing: "prepaid" | MarketplaceSubscription | undefined;
   kafkaVersion: string;
+  cloudProvider: CloudProvider;
 };
 
 export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
@@ -55,6 +56,7 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
   messageSize,
   billing,
   kafkaVersion,
+  cloudProvider,
 }) => {
   const { t } = useTranslation("kafka");
 
@@ -159,7 +161,16 @@ export const KafkaDetailsTab: VoidFunctionComponent<KafkaDetailsTabProps> = ({
           )}
           {renderTextListItem(
             t("common:cloud_provider"),
-            t("common:cloudProviders.aws")
+            (() => {
+              switch (cloudProvider) {
+                case "aws":
+                  return t("common:cloudProviders.aws");
+                case "gcp":
+                  return t("common:cloudProviders.gcp");
+                case "azure":
+                  return t("common:cloudProviders.azure");
+              }
+            })()
           )}
           {renderTextListItem(t("common:region"), region)}
           {renderTextListItem(
