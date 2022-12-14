@@ -1,1 +1,1 @@
-export * from "./TopicsTable";
+export * from "./EmptyStateNoTopic";

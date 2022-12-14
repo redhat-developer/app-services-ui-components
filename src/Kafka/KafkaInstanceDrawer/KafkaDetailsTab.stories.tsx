@@ -30,6 +30,7 @@ export default {
     messageSize: 1,
     billing: "prepaid",
     kafkaVersion: "3.0.1",
+    cloudProvider: "gcp",
   },
   argTypes: {
     billing: {
