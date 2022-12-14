@@ -6,7 +6,6 @@ import type { EmptyStateNoTopicProps } from "./components";
 import { EmptyStateNoTopic } from "./components";
 import { EmptyStateNoResults } from "../../shared";
 import { TableVariant } from "@patternfly/react-table";
-import { Button } from "@patternfly/react-core";
 import { Link } from "react-router-dom";
 import { formattedRetentionSize, formattedRetentionTime } from "./types";
 
@@ -55,7 +54,6 @@ export const KafkaTopics = <T extends KafkaTopic>({
   onRemoveTopicChip,
   onRemoveTopicChips,
   getUrlFortopic,
-  onTopicLinkClick,
 }: KafkaTopicsProps<T>) => {
   const { t } = useTranslation("topic");
 
@@ -84,21 +82,13 @@ export const KafkaTopics = <T extends KafkaTopic>({
               switch (column) {
                 case "topic_name":
                   return (
-                    <Button
-                      variant="link"
-                      component={(props) => (
-                        <Link
-                          to={getUrlFortopic(row)}
-                          {...props}
-                          data-testid="tableTopics-linkTopic"
-                          data-ouia-component-id="table-link"
-                        >
-                          {row.topic_name}
-                        </Link>
-                      )}
-                      onClick={() => onTopicLinkClick(row)}
-                      isInline
-                    />
+                    <Link
+                      to={getUrlFortopic(row)}
+                      data-testid="tableTopics-linkTopic"
+                      data-ouia-component-id="table-link"
+                    >
+                      {row.topic_name}
+                    </Link>
                   );
                 case "partitions":
                   return row.partitions;
