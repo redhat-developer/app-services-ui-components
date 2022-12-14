@@ -19,8 +19,17 @@ const Template: ComponentStory<
   VoidFunctionComponent<{ loadClusters: string }>
 > = ({ loadClusters, ...args }) => {
   const loadClustersInternal = clusterResponseOptions[loadClusters];
+  const trackClickInternal = (e: string) => {
+    console.log("trackClick", e);
+  };
   console.log({ args, loadClusters });
-  return <DataSciencePageComp {...args} loadClusters={loadClustersInternal} />;
+  return (
+    <DataSciencePageComp
+      {...args}
+      loadClusters={loadClustersInternal}
+      trackClick={trackClickInternal}
+    />
+  );
 };
 
 export const DataSciencePage = Template.bind({});

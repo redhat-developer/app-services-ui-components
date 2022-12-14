@@ -52,9 +52,14 @@ function loadNoClusters() {
   return Promise.resolve(noClustersResponse);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+function trackClick() {}
+
 describe("DataSciencePage", () => {
   it("renders", async () => {
-    const comp = render(<DataSciencePage loadClusters={loadNoClusters} />);
+    const comp = render(
+      <DataSciencePage loadClusters={loadNoClusters} trackClick={trackClick} />
+    );
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
 
@@ -64,7 +69,10 @@ describe("DataSciencePage", () => {
 
   test("should open and close modal", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -88,7 +96,10 @@ describe("DataSciencePage", () => {
 
   test("should open modal in install mode", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -108,7 +119,10 @@ describe("DataSciencePage", () => {
 
   test("should select cluster to which install RHODS addon", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -134,7 +148,10 @@ describe("DataSciencePage", () => {
 
   test("should select cluster to upgrade", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadUpgradeableClusters} />
+      <DataSciencePage
+        loadClusters={loadUpgradeableClusters}
+        trackClick={trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -160,7 +177,10 @@ describe("DataSciencePage", () => {
 
   test("change action in upgreadable modal flow", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadUpgradeableClusters} />
+      <DataSciencePage
+        loadClusters={loadUpgradeableClusters}
+        trackClick={trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -185,7 +205,9 @@ describe("DataSciencePage", () => {
   });
 
   test("open modal in create mode", async () => {
-    const comp = render(<DataSciencePage loadClusters={loadNoClusters} />);
+    const comp = render(
+      <DataSciencePage loadClusters={loadNoClusters} trackClick={trackClick} />
+    );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
     // click on install button to open modal
