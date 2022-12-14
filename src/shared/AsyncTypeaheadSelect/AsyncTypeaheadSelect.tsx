@@ -48,16 +48,23 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     undefined
   );
   const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
+  const [, setTypeAheadSuggestions] = useState<string[]>(onFetchOptions(""));
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
   const onTypeahead = (filter: string | undefined) => {
     setFilterValue(filter);
     setValidation(onValidationCheck(filter));
+    function fetchSuggestions() {
+      filter != undefined
+        ? setTypeAheadSuggestions(onFetchOptions(filter))
+        : setTypeAheadSuggestions(onFetchOptions(""));
+    }
     if (fetchTimeout.current) {
       clearTimeout(fetchTimeout.current);
       fetchTimeout.current = undefined;
     }
+    fetchTimeout.current = setTimeout(fetchSuggestions, 300);
   };
 
   const onSelect: SelectProps["onSelect"] = (_, value) => {

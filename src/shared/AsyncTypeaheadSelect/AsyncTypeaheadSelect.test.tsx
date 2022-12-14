@@ -29,7 +29,7 @@ describe("Async typeahead", () => {
     expect(comp.queryByText("bar")).not.toBeInTheDocument();
 
     expect(onChangeValue).not.toBeCalled();
-    expect(onFetchOptions).toBeCalledTimes(1);
+    expect(onFetchOptions).toBeCalledTimes(2);
     expect(onValidationCheck).not.toBeCalled();
   });
   it("It should render an async typeahead with a valid value selected", async () => {

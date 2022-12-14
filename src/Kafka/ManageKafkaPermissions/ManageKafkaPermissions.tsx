@@ -253,7 +253,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                 </Popover>
               }
             >
-              {selectedAccount === "*"
+              {selectedAccount === "All accounts"
                 ? t("all_accounts_title")
                 : selectedAccount}
             </FormGroup>
@@ -293,7 +293,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                 <FormGroup>
                   <TextContent>
                     <Text component={TextVariants.small}>
-                      {selectedAccount === "*"
+                      {selectedAccount === "All accounts"
                         ? t("assign_permissions_all_description")
                         : t("assign_permissions_description", {
                             value: selectedAccount,

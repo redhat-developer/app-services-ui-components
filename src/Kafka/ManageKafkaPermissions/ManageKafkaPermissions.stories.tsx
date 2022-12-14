@@ -91,7 +91,7 @@ export const InteractiveExample: ComponentStory<
         onRemoveAcls={onRemoveAcls}
         onChangeSelectedAccount={setSelectedAccount}
         existingAcls={
-          selectedAccount == "*"
+          selectedAccount == "All accounts"
             ? PermissionsForAllAccounts
             : PermissionsForSelectedAccount
         }
