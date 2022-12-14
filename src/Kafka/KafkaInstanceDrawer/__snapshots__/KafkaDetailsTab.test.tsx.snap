@@ -187,7 +187,7 @@ exports[`Details Tab renders standard instance 1`] = `
             class=""
             data-pf-content="true"
           >
-            Amazon Web Services
+            Google Cloud Platform
           </dd>
           <dt
             class=""
