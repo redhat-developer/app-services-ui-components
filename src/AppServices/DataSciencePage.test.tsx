@@ -52,13 +52,34 @@ function loadNoClusters() {
   return Promise.resolve(noClustersResponse);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-function trackClick() {}
+class AnalyticsTester {
+  expectedIndex = 0;
+  expectedValues: string[];
+
+  constructor(expectedValues: string[]) {
+    this.expectedValues = expectedValues;
+  }
+
+  trackClick = (e: string) => {
+    const expectedValue = this.expectedValues[this.expectedIndex++];
+    if (expectedValue) {
+      expect(e).toBe(expectedValue);
+    }
+  };
+}
+
+const trackClickConstructor = (arr: string[]) => {
+  const analyticsTester = new AnalyticsTester(arr);
+  return analyticsTester.trackClick;
+};
 
 describe("DataSciencePage", () => {
   it("renders", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadNoClusters} trackClick={trackClick} />
+      <DataSciencePage
+        loadClusters={loadNoClusters}
+        trackClick={trackClickConstructor([])}
+      />
     );
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
@@ -71,7 +92,7 @@ describe("DataSciencePage", () => {
     const comp = render(
       <DataSciencePage
         loadClusters={loadInstallableClusters}
-        trackClick={trackClick}
+        trackClick={trackClickConstructor([])}
       />
     );
     await waitForI18n(comp);
@@ -98,7 +119,7 @@ describe("DataSciencePage", () => {
     const comp = render(
       <DataSciencePage
         loadClusters={loadInstallableClusters}
-        trackClick={trackClick}
+        trackClick={trackClickConstructor([])}
       />
     );
     await waitForI18n(comp);
@@ -121,7 +142,7 @@ describe("DataSciencePage", () => {
     const comp = render(
       <DataSciencePage
         loadClusters={loadInstallableClusters}
-        trackClick={trackClick}
+        trackClick={trackClickConstructor([])}
       />
     );
     await waitForI18n(comp);
@@ -150,7 +171,7 @@ describe("DataSciencePage", () => {
     const comp = render(
       <DataSciencePage
         loadClusters={loadUpgradeableClusters}
-        trackClick={trackClick}
+        trackClick={trackClickConstructor([])}
       />
     );
     await waitForI18n(comp);
@@ -179,7 +200,7 @@ describe("DataSciencePage", () => {
     const comp = render(
       <DataSciencePage
         loadClusters={loadUpgradeableClusters}
-        trackClick={trackClick}
+        trackClick={trackClickConstructor([])}
       />
     );
     await waitForI18n(comp);
@@ -206,7 +227,10 @@ describe("DataSciencePage", () => {
 
   test("open modal in create mode", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadNoClusters} trackClick={trackClick} />
+      <DataSciencePage
+        loadClusters={loadNoClusters}
+        trackClick={trackClickConstructor([])}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -217,5 +241,55 @@ describe("DataSciencePage", () => {
 
     const modal = screen.queryByTestId("data-science-modal");
     expect(modal).toMatchSnapshot();
+  });
+
+  test("should track open and cancel", async () => {
+    const trackClickTextValues = [
+      "rhods-hero-install-click",
+      "rhods-modal-install-cancel",
+    ];
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={trackClickConstructor(trackClickTextValues)}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // clock cancel button
+    await waitFor(() => {
+      fireEvent.click(comp.getByTestId("install-RHODS-cancel"));
+    });
+  });
+
+  test("should track open and install", async () => {
+    const trackClickTextValues = [
+      "rhods-hero-install-click",
+      "rhods-modal-install-click",
+    ];
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={trackClickConstructor(trackClickTextValues)}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // clock cancel button
+    await waitFor(() => {
+      fireEvent.click(comp.getByTestId("install-RHODS-button"));
+    });
   });
 });

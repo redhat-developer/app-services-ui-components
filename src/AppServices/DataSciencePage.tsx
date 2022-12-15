@@ -410,7 +410,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     <>
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          trackClick("rhods-modal-close");
+          return setIsModalOpen(false);
+        }}
         variant="medium"
         data-testid="data-science-modal"
         actions={modalActions[mode]}
