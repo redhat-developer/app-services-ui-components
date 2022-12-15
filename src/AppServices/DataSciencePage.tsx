@@ -341,6 +341,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     [RHodsClusterAddonMode.Create]: [
       <Button
         component="a"
+        data-testid="create-RHODS-button"
         onClick={() => {
           trackClick("rhods-modal-create-cluster-click");
         }}
