@@ -221,7 +221,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         closeModal={closePreCancelModal}
         resumeEditing={resumeEditingPermissions}
       />
-      <Form>
+      <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup
           fieldId="kafka-instance-name"
           label={t("kafka_instance")}

@@ -155,11 +155,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       buttonAriaLabel={t("account_id_aria")}
       isRequired={true}
       validated={validated}
-      handleKeyPress={true}
     >
-      <span id={"grouped-typeahead-select-id"} hidden>
-        Select an account
-      </span>
       <Select
         id={"account-id"}
         data-testid="acls-select-account"
