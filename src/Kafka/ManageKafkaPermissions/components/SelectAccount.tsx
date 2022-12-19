@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { Account } from "../types";
 import { PrincipalType } from "../types";
 import type { SelectProps } from "@patternfly/react-core";
+import { FormGroup, Popover } from "@patternfly/react-core";
 import {
   Divider,
   Select,
@@ -12,7 +13,7 @@ import {
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { FormGroupWithPopover } from "../../../shared";
+import { HelpIcon } from "@patternfly/react-icons";
 
 export type SelectAccountProps = {
   value: string | undefined;
@@ -147,14 +148,24 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     : ValidatedOptions.default;
 
   return (
-    <FormGroupWithPopover
-      labelHead={t("account_id_title")}
-      fieldId="account-id"
-      fieldLabel={t("account_id_title")}
-      labelBody={t("account_id_help")}
-      buttonAriaLabel={t("account_id_aria")}
-      isRequired={true}
+    <FormGroup
+      fieldId="account-name"
       validated={validated}
+      helperTextInvalid={t("common:required")}
+      isRequired
+      label={t("account_id_title")}
+      labelIcon={
+        <Popover bodyContent={t("account_id_help")}>
+          <button
+            type="button"
+            onClick={(e) => e.preventDefault()}
+            className="pf-c-form__group-label-help"
+            aria-label={t("account_help")}
+          >
+            <HelpIcon noVerticalAlign />
+          </button>
+        </Popover>
+      }
     >
       <Select
         id={"account-id"}
@@ -180,6 +191,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       >
         {makeOptions()}
       </Select>
-    </FormGroupWithPopover>
+    </FormGroup>
   );
 };
