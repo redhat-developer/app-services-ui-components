@@ -21,7 +21,7 @@ export type ConsumerGroup = {
   activeMembers: number;
   partitionsWithLag: number;
   state: ConsumerGroupState;
-  consumers: Consumer[];
+  consumers?: Consumer[];
 };
 
 export type ConsumerGroupField = Exclude<keyof ConsumerGroup, "consumers">;

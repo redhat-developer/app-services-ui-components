@@ -107,6 +107,7 @@ export const ConsumerGroupResetOffset: FunctionComponent<
       aria-describedby="modal-message"
       disableFocusTrap={disableFocusTrap}
       appendTo={appendTo}
+      onClose={onClickClose}
       position="top"
       actions={[
         <Button
