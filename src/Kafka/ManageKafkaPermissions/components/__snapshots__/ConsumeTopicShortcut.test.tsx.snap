@@ -200,7 +200,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-7"
                     data-ouia-component-type="PF4/Select"
@@ -208,6 +207,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -395,7 +395,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-8"
                     data-ouia-component-type="PF4/Select"
@@ -403,6 +402,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -709,7 +709,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-5"
                     data-ouia-component-type="PF4/Select"
@@ -717,6 +716,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -904,7 +904,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-6"
                     data-ouia-component-type="PF4/Select"
@@ -912,6 +911,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -1183,7 +1183,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                     data-ouia-component-type="PF4/Select"
@@ -1191,6 +1190,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -1378,7 +1378,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-4"
                     data-ouia-component-type="PF4/Select"
@@ -1386,6 +1385,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -1657,7 +1657,6 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     aria-invalid="false"
                     class="pf-c-select pf-m-invalid"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
@@ -1666,6 +1665,7 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
@@ -1876,7 +1876,6 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                   class="pf-c-form__group-control"
                 >
                   <div
-                    aria-describedby="resource-name"
                     aria-invalid="false"
                     class="pf-c-select pf-m-invalid"
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-2"
@@ -1885,6 +1884,7 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                     style="width: 170px;"
                   >
                     <div
+                      aria-describedby="resource-name"
                       class="pf-c-select__toggle pf-m-typeahead"
                     >
                       <div
