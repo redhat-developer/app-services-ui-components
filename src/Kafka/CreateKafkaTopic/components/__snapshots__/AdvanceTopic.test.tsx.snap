@@ -7,7 +7,7 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
       class="pf-c-divider kafka-ui--divider--FlexShrink"
     />
     <section
-      aria-label="advance_topic_creation"
+      aria-label="Advance topic creation"
       class="pf-c-page__main-section pf-m-light pf-m-overflow-scroll"
       tabindex="0"
     >
@@ -150,7 +150,7 @@ exports[`Create advance topic should render an advanced topic creation page 1`] 
               class="pf-c-sidebar__content"
             >
               <div
-                aria-label="advance_creation_page"
+                aria-label="Advance topic creation form"
                 class="pf-c-page__main-group pf-m-overflow-scroll"
                 id="topic-detail-view"
                 tabindex="0"
