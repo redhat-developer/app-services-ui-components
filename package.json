@@ -50,7 +50,7 @@
     "@patternfly/react-icons": "4.93.3",
     "@patternfly/react-table": "4.112.6",
     "@rhoas/app-services-ui-shared": "0.16.4",
-    "@rollup/plugin-json": "5.0.0",
+    "@rollup/plugin-json": "6.0.0",
     "@rollup/plugin-replace": "5.0.0",
     "@storybook/addon-a11y": "6.5.9",
     "@storybook/addon-actions": "6.5.9",
