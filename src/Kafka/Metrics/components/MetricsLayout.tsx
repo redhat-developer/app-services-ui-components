@@ -1,5 +1,6 @@
 import { Grid, GridItem, PageSection } from "@patternfly/react-core";
 import type { ReactElement, FunctionComponent } from "react";
+import { useTranslation } from "react-i18next";
 
 type MetricsLayoutProps = {
   metricsLagAlert: ReactElement;
@@ -17,8 +18,9 @@ export const MetricsLayout: FunctionComponent<MetricsLayoutProps> = ({
   diskSpaceMetrics,
   topicMetrics,
 }) => {
+  const { t } = useTranslation(["metrics"]);
   return (
-    <PageSection hasOverflowScroll={true}>
+    <PageSection hasOverflowScroll={true} aria-label={t("metrics_view")}>
       <Grid hasGutter>
         <GridItem>{metricsLagAlert}</GridItem>
         <GridItem sm={4}>{topicsKpi}</GridItem>
