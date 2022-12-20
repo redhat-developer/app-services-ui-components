@@ -21,8 +21,9 @@ export type ConsumerGroup = {
   activeMembers: number;
   partitionsWithLag: number;
   state: ConsumerGroupState;
+  consumers: Consumer[];
 };
 
-export type ConsumerGroupField = keyof ConsumerGroup;
+export type ConsumerGroupField = Exclude<keyof ConsumerGroup, "consumers">;
 
 export type OffsetValue = "absolute" | "latest" | "earliest";
