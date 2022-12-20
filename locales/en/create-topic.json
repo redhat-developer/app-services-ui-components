@@ -1,5 +1,8 @@
 {
+  "advance_creation_page": "Advance topic creation form",
+  "advance_topic_creation": "Advance topic creation",
   "already_exists": "{{name}} already exists. Try a different name",
+  "basic_topic_creation": "Basic topic creation",
   "bytes_size": " {{value}} bytes ",
   "bytes_to_gibibyte": "{{bytes}} bytes ({{gibibyte}} gibibyte)",
   "bytes_to_kibibytes": "{{bytes}} bytes ({{kibibytes}} kibibytes)",
