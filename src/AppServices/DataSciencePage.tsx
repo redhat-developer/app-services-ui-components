@@ -19,17 +19,17 @@ import {
   Title,
   TitleSizes,
 } from "@patternfly/react-core";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RhodsMlTechnology } from "../images";
+import { ExternalLink } from "../shared";
 import {
   MarketingPageHero,
   MarketingPageSection,
   MarketingPageVideoCard,
 } from "./components";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons";
-import { useState, useCallback } from "react";
-import type { VoidFunctionComponent } from "react";
-import { ExternalLink } from "../shared";
 
 export type ClusterObject = {
   /**
@@ -58,6 +58,7 @@ export enum RHodsClusterAddonMode {
 
 export type DataSciencePageProps = {
   loadClusters: () => Promise<ClustersResponse>;
+  trackClick: (e: string, properties?: unknown) => void;
 };
 
 type HandleSelectCluster = (cluster: ClusterObject) => void;
@@ -258,6 +259,7 @@ const ClusterModalContent: VoidFunctionComponent<ClusterModalContentProps> = ({
 
 export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
   loadClusters,
+  trackClick,
 }) => {
   const { t } = useTranslation("datascienceoverview");
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -280,6 +282,9 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         key="install"
         component="a"
         data-testid="install-RHODS-button"
+        onClick={() => {
+          trackClick("rhods-modal-install-click");
+        }}
         href={INSTALL_ADDON_HREF.replace(
           "{subscriptionID}",
           selectedCluster?.id || ""
@@ -288,7 +293,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         {t("installClusterAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          trackClick("rhods-modal-install-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -302,6 +310,9 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         key="install"
         component="a"
         data-testid="upgrade-RHODS-button"
+        onClick={() => {
+          trackClick("rhods-modal-upgrade-click");
+        }}
         href={
           upgradeStrategy === UpgradeStrategy.Create
             ? CREATE_CLUSTER_HREF
@@ -316,7 +327,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
           : t("upgradeAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          trackClick("rhods-modal-upgrade-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -327,6 +341,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     [RHodsClusterAddonMode.Create]: [
       <Button
         component="a"
+        data-testid="create-RHODS-button"
+        onClick={() => {
+          trackClick("rhods-modal-create-cluster-click");
+        }}
         href={CREATE_CLUSTER_HREF}
         variant="primary"
         key="install"
@@ -334,7 +352,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
         {t("createClusterAction")}
       </Button>,
       <Button
-        onClick={() => setIsModalOpen(false)}
+        onClick={() => {
+          trackClick("rhods-modal-create-cluster-cancel");
+          return setIsModalOpen(false);
+        }}
         key="cancel"
         variant="secondary"
         data-testid="install-RHODS-cancel"
@@ -376,8 +397,8 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
   }, [loadClusters]);
 
   const handleInstallModalOpen = () => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getData();
+    trackClick("rhods-hero-install-click");
+    void getData();
     setIsModalOpen(true);
   };
 
@@ -389,7 +410,10 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
     <>
       <Modal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          trackClick("rhods-modal-close");
+          return setIsModalOpen(false);
+        }}
         variant="medium"
         data-testid="data-science-modal"
         actions={modalActions[mode]}

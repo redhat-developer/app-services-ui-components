@@ -66,4 +66,9 @@ export const argTypes = {
     control: "radio",
     options: clusterResponseTypes,
   },
+  trackClick: {
+    table: {
+      disable: true,
+    },
+  },
 };
