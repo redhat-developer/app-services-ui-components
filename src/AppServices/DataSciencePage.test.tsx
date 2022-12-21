@@ -52,9 +52,30 @@ function loadNoClusters() {
   return Promise.resolve(noClustersResponse);
 }
 
+class AnalyticsTester {
+  expectedIndex = 0;
+  expectedValues: string[];
+
+  constructor(expectedValues: string[]) {
+    this.expectedValues = expectedValues;
+  }
+
+  trackClick = (e: string) => {
+    const expectedValue = this.expectedValues[this.expectedIndex++];
+    if (expectedValue) {
+      expect(e).toBe(expectedValue);
+    }
+  };
+}
+
 describe("DataSciencePage", () => {
   it("renders", async () => {
-    const comp = render(<DataSciencePage loadClusters={loadNoClusters} />);
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadNoClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
+    );
     await waitForI18n(comp);
     expect(comp.baseElement).toMatchSnapshot();
 
@@ -64,7 +85,10 @@ describe("DataSciencePage", () => {
 
   test("should open and close modal", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -78,7 +102,7 @@ describe("DataSciencePage", () => {
     });
     expect(screen.queryByTestId("data-science-modal")).toBeInTheDocument();
 
-    // clock cancel button
+    // click cancel button
     await waitFor(() => {
       fireEvent.click(comp.getByTestId("install-RHODS-cancel"));
     });
@@ -88,7 +112,10 @@ describe("DataSciencePage", () => {
 
   test("should open modal in install mode", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -108,7 +135,10 @@ describe("DataSciencePage", () => {
 
   test("should select cluster to which install RHODS addon", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadInstallableClusters} />
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -134,7 +164,10 @@ describe("DataSciencePage", () => {
 
   test("should select cluster to upgrade", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadUpgradeableClusters} />
+      <DataSciencePage
+        loadClusters={loadUpgradeableClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -160,7 +193,10 @@ describe("DataSciencePage", () => {
 
   test("change action in upgreadable modal flow", async () => {
     const comp = render(
-      <DataSciencePage loadClusters={loadUpgradeableClusters} />
+      <DataSciencePage
+        loadClusters={loadUpgradeableClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
     );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
@@ -185,7 +221,12 @@ describe("DataSciencePage", () => {
   });
 
   test("open modal in create mode", async () => {
-    const comp = render(<DataSciencePage loadClusters={loadNoClusters} />);
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadNoClusters}
+        trackClick={new AnalyticsTester([]).trackClick}
+      />
+    );
     await waitForI18n(comp);
     const installBtn = comp.getByTestId("hero-buttonInstall");
     // click on install button to open modal
@@ -195,5 +236,121 @@ describe("DataSciencePage", () => {
 
     const modal = screen.queryByTestId("data-science-modal");
     expect(modal).toMatchSnapshot();
+  });
+
+  test("should track open and close", async () => {
+    const analyticsTester = new AnalyticsTester([
+      "rhods-hero-install-click",
+      "rhods-modal-close",
+    ]);
+
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={analyticsTester.trackClick}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // click close button
+    const modal = screen.queryByTestId("data-science-modal");
+    const closeButton = modal?.parentNode?.querySelector("[aria-label=Close]");
+    if (closeButton) {
+      await waitFor(() => {
+        fireEvent.click(closeButton);
+      });
+    }
+
+    // tracked all clicks
+    expect(analyticsTester.expectedIndex).toBe(2);
+  });
+
+  test("should track open and cancel in install mode", async () => {
+    const analyticsTester = new AnalyticsTester([
+      "rhods-hero-install-click",
+      "rhods-modal-install-cancel",
+    ]);
+
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadInstallableClusters}
+        trackClick={analyticsTester.trackClick}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // click cancel button
+    await waitFor(() => {
+      fireEvent.click(comp.getByTestId("install-RHODS-cancel"));
+    });
+
+    // tracked all clicks
+    expect(analyticsTester.expectedIndex).toBe(2);
+  });
+
+  test("should track open and cancel in upgrade mode", async () => {
+    const analyticsTester = new AnalyticsTester([
+      "rhods-hero-install-click",
+      "rhods-modal-upgrade-cancel",
+    ]);
+
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadUpgradeableClusters}
+        trackClick={analyticsTester.trackClick}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // click cancel button
+    await waitFor(() => {
+      fireEvent.click(comp.getByTestId("install-RHODS-cancel"));
+    });
+
+    expect(analyticsTester.expectedIndex).toBe(2);
+  });
+
+  test("should track open and cancel in create mode", async () => {
+    const analyticsTester = new AnalyticsTester([
+      "rhods-hero-install-click",
+      "rhods-modal-create-cluster-cancel",
+    ]);
+
+    const comp = render(
+      <DataSciencePage
+        loadClusters={loadNoClusters}
+        trackClick={analyticsTester.trackClick}
+      />
+    );
+    await waitForI18n(comp);
+    const installBtn = comp.getByTestId("hero-buttonInstall");
+    // click on install button to open modal
+    await waitFor(() => {
+      fireEvent.click(installBtn);
+    });
+
+    // click cancel button
+    await waitFor(() => {
+      fireEvent.click(comp.getByTestId("install-RHODS-cancel"));
+    });
+
+    expect(analyticsTester.expectedIndex).toBe(2);
   });
 });
