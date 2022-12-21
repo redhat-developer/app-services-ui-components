@@ -19,17 +19,17 @@ import {
   Title,
   TitleSizes,
 } from "@patternfly/react-core";
+import { ExternalLinkAltIcon } from "@patternfly/react-icons";
+import type { VoidFunctionComponent } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { RhodsMlTechnology } from "../images";
+import { ExternalLink } from "../shared";
 import {
   MarketingPageHero,
   MarketingPageSection,
   MarketingPageVideoCard,
 } from "./components";
-import { ExternalLinkAltIcon } from "@patternfly/react-icons";
-import { useState, useCallback } from "react";
-import type { VoidFunctionComponent } from "react";
-import { ExternalLink } from "../shared";
 
 export type ClusterObject = {
   /**
@@ -398,8 +398,7 @@ export const DataSciencePage: VoidFunctionComponent<DataSciencePageProps> = ({
 
   const handleInstallModalOpen = () => {
     trackClick("rhods-hero-install-click");
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getData();
+    void getData();
     setIsModalOpen(true);
   };
 

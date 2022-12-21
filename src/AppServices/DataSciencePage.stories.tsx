@@ -1,3 +1,4 @@
+import { action } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import type { VoidFunctionComponent } from "react";
 import { DataSciencePage as DataSciencePageComp } from "./DataSciencePage";
@@ -6,6 +7,8 @@ import {
   clusterResponseOptions,
   clusterResponseTypes,
 } from "./Stories/storiesHelpers";
+
+const actionTracking = action("trackClick");
 
 export default {
   component: DataSciencePageComp,
@@ -20,7 +23,7 @@ const Template: ComponentStory<
 > = ({ loadClusters, ...args }) => {
   const loadClustersInternal = clusterResponseOptions[loadClusters];
   const trackClickInternal = (e: string) => {
-    console.log("trackClick", e);
+    actionTracking(e);
   };
   console.log({ args, loadClusters });
   return (
