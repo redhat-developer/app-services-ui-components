@@ -30,7 +30,7 @@ export const ResourceTypeLabel: VFC<SolidLabelProps> = ({ variant }) => {
   const { labelColor, content } = getVariant() || {};
 
   return (
-    <Label color={labelColor} className={`mas-m-solid`}>
+    <Label isCompact color={labelColor} className={`mas-m-solid`}>
       {content}
     </Label>
   );

@@ -92,31 +92,30 @@ export const PermissionsDropdown: VoidFunctionComponent<
     setIsOpen(open);
   }, []);
 
-  const handleSelect: MenuProps["onSelect"] = useCallback(
-    (_event, itemId) => {
-      setIsOpen(false);
-      switch (itemId) {
-        case "add_permission":
-          onAddPermission();
-          break;
-        case "shortcut_consume_topic":
-          onShortcutConsumeTopic();
-          break;
-        case "shortcut_produce_topic":
-          onShortcutProduceTopic();
-          break;
-        case "shortcut_manage_access":
-          onShortcutManageAccess();
-          break;
-      }
-    },
-    [
-      onAddPermission,
-      onShortcutConsumeTopic,
-      onShortcutManageAccess,
-      onShortcutProduceTopic,
-    ]
-  );
+  const handleSelect: MenuProps["onSelect"] = (_event, itemId) => {
+    setIsOpen(false);
+    switch (itemId) {
+      case "add_permission":
+        onAddPermission();
+        break;
+      case "shortcut_consume_topic":
+        onShortcutConsumeTopic();
+        break;
+      case "shortcut_produce_topic":
+        onShortcutProduceTopic();
+        break;
+      case "shortcut_manage_access":
+        onShortcutManageAccess();
+        break;
+    }
+  };
+
+  const onActionClick = (
+    event: ReactMouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    onAddPermission();
+  };
 
   const menu = (
     <Menu onSelect={handleSelect} key="acls-menu" ref={menuRef}>
@@ -173,7 +172,7 @@ export const PermissionsDropdown: VoidFunctionComponent<
             <DropdownToggleAction
               key="cog-action"
               aria-label={t("permissions_dropdown.add_permission")}
-              onClick={onAddPermission}
+              onClick={onActionClick}
             >
               {t("permissions_dropdown.add_permission")}
             </DropdownToggleAction>,

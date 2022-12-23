@@ -16,7 +16,7 @@ export const ViewAccountDetails: React.VFC<ViewAccountDetailsProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const HelperText: React.FunctionComponent = () => {
-    if (accountId === "*") {
+    if (accountId === "All accounts") {
       return t("all_accounts_help");
     }
     return (

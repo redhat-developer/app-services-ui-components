@@ -29,7 +29,7 @@ describe("Async typeahead", () => {
     expect(comp.queryByText("bar")).not.toBeInTheDocument();
 
     expect(onChangeValue).not.toBeCalled();
-    expect(onFetchOptions).toBeCalledTimes(1);
+    expect(onFetchOptions).toBeCalledTimes(2);
     expect(onValidationCheck).not.toBeCalled();
   });
   it("It should render an async typeahead with a valid value selected", async () => {
@@ -68,7 +68,7 @@ describe("Async typeahead", () => {
       expect(onChange).not.toBeCalledTimes(1);
 
       userEvent.click(option);
-      expect(onChange).toBeCalledTimes(3);
+      expect(onChange).toBeCalledTimes(1);
     });
   });
 });
@@ -88,7 +88,7 @@ it("should show a validation error ", async () => {
     expect(onChange).not.toBeCalledTimes(2);
     userEvent.click(clearBtn[0]);
     await waitForPopper();
-    expect(onChange).toBeCalledTimes(2);
+    expect(onChange).toBeCalledTimes(1);
   });
 });
 

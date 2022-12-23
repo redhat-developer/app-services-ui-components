@@ -30,7 +30,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
   ) => {
     const regExp = new RegExp("^[0-9A-Za-z_.-]+$");
 
-    if (filter === undefined || filter === "")
+    if (filter === undefined || filter === "" || filter == "*")
       return { isValid: true, message: undefined };
     if (resourcePreixCondition == "Is" && resourceType == "topic") {
       if (filter == "." || filter == "..")
