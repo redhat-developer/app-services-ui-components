@@ -30,7 +30,7 @@ export type ManageKafkaPermissionsProps = {
   accounts: Account[];
   onCancel: () => void;
   kafkaName: string;
-  onSave: (acls: AddAclType[] | undefined) => void;
+  onSave: (acls: AddAclType[] | undefined) => Promise<void>;
   existingAcls: AclBinding[];
   onRemoveAcls: (index: number) => void;
   selectedAccount: string | undefined;
@@ -109,7 +109,8 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
       setSubmitted(true);
       const isAclValid = checkValidation();
       isAclValid && onSave(newAcls);
-    } else if (isAclDeleted) onSave(newAcls);
+    } else if (!newAcls || (newAcls.length < 1 && isAclDeleted))
+      void onSave(undefined);
   };
 
   const onAddManualPermissions = () => {
