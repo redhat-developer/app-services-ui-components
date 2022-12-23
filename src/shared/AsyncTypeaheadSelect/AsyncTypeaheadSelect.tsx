@@ -44,15 +44,16 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
 }) => {
   const { t } = useTranslation(["manage-kafka-permissions"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [typeAheadSuggestions, setTypeAheadSuggestions] = useState<string[]>(
-    onFetchOptions("")
+  const [validation, setValidation] = useState<Validation | undefined>(
+    undefined
   );
-  const [validation, setValidation] = useState<Validation | undefined>();
   const [filterValue, setFilterValue] = useState<string | undefined>(undefined);
+  const [, setTypeAheadSuggestions] = useState<string[]>(onFetchOptions(""));
   const fetchTimeout = useRef<ReturnType<typeof setTimeout> | undefined>(
     undefined
   );
   const onTypeahead = (filter: string | undefined) => {
+    setFilterValue(filter);
     setValidation(onValidationCheck(filter));
     function fetchSuggestions() {
       filter != undefined
@@ -70,50 +71,49 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
     setValidation(onValidationCheck(value as string));
     onChange(value as string);
     onToggle(false);
-    setFilterValue(value as string);
   };
   const onToggle = (newState: boolean) => {
-    submitted && required && (value == "" || value == undefined)
-      ? setValidation({ isValid: false, message: t("common:required") })
-      : null;
-    setIsOpen((isOpen) => {
-      if (isOpen !== newState && newState === true) {
-        onChange(undefined);
-      }
-      return newState;
-    });
+    setIsOpen(newState);
   };
   const clearSelection = () => {
+    setIsOpen(false);
     onChange(undefined);
     submitted && required
       ? setValidation({ isValid: false, message: t("common:required") })
       : setValidation({ isValid: true, message: undefined });
   };
 
-  //const isCreatable = validation && validation.isValid;
+  const formValidation =
+    validation?.isValid || validation == undefined
+      ? ValidatedOptions.default
+      : ValidatedOptions.error;
 
-  const formGroupValidated =
-    submitted &&
-    required &&
-    (value === undefined || value === "") &&
-    (filterValue === undefined || filterValue === "")
-      ? ValidatedOptions.error
-      : validation && !validation.isValid
-      ? ValidatedOptions.error
-      : ValidatedOptions.default;
-
-  const formGroupValidatedText =
-    submitted &&
-    required &&
-    (value === undefined || value === "") &&
-    (filterValue === undefined || filterValue === "")
-      ? t("common:required")
-      : validation?.message;
+  const onFilter = (filter = "") => {
+    const options =
+      filter != undefined ? onFetchOptions(filter) : onFetchOptions("");
+    return options.map((value, index) => (
+      <SelectOption key={index} value={value}>
+        {value}
+      </SelectOption>
+    ));
+  };
 
   return (
     <FormGroup
-      validated={formGroupValidated}
-      helperTextInvalid={formGroupValidatedText}
+      onKeyPress={(event) => event.key === "Enter" && event.preventDefault()}
+      validated={
+        submitted &&
+        (((filterValue == "" || filterValue == undefined) && value == "") ||
+          value == undefined)
+          ? ValidatedOptions.error
+          : formValidation
+      }
+      helperTextInvalid={
+        submitted &&
+        (filterValue == "" || filterValue == undefined || value == undefined)
+          ? t("common:required")
+          : validation?.message
+      }
       fieldId={id}
     >
       <Select
@@ -128,19 +128,21 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         isOpen={validation && !validation.isValid ? false : isOpen}
         placeholderText={placeholderText}
         onTypeaheadInputChanged={onTypeahead}
+        onFilter={(_, value) => onFilter(value)}
         isCreatable={true}
-        menuAppendTo="parent"
-        validated={formGroupValidated}
+        menuAppendTo={document.body}
+        validated={
+          submitted &&
+          (((filterValue == "" || filterValue == undefined) && value == "") ||
+            value == undefined)
+            ? ValidatedOptions.error
+            : formValidation
+        }
         maxHeight={400}
         width={170}
-        onFilter={() => undefined}
         createText={t("resourcePrefix.create_text")}
       >
-        {typeAheadSuggestions.map((value, index) => (
-          <SelectOption key={index} value={value}>
-            {value}
-          </SelectOption>
-        ))}
+        {onFilter()}
       </Select>
     </FormGroup>
   );

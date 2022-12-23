@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { Account } from "../types";
 import { PrincipalType } from "../types";
 import type { SelectProps } from "@patternfly/react-core";
+import { FormGroup, Popover } from "@patternfly/react-core";
 import {
   Divider,
   Select,
@@ -12,7 +13,7 @@ import {
   SelectVariant,
   ValidatedOptions,
 } from "@patternfly/react-core";
-import { FormGroupWithPopover } from "../../../shared";
+import { HelpIcon } from "@patternfly/react-icons";
 
 export type SelectAccountProps = {
   value: string | undefined;
@@ -45,22 +46,31 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
   };
 
   const noServiceAccounts = [
-    <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+    <SelectOption
+      isNoResultsOption={true}
+      isDisabled={true}
+      key={t("no_results_found")}
+    >
       {t("no_results_found")}
     </SelectOption>,
   ];
   const noUserAccounts = [
-    <SelectOption isNoResultsOption={true} isDisabled={true} key={1}>
+    <SelectOption
+      isNoResultsOption={true}
+      isDisabled={true}
+      key={"no_user_accounts"}
+    >
       {t("no_results_found")}
     </SelectOption>,
   ];
 
   function makeOptions(filter = "") {
-    const filterRegExp = new RegExp(filter, "i");
     const filteredAccounts =
       filter !== ""
-        ? accounts.filter((principal) =>
-            filterRegExp.test(principal.displayName)
+        ? accounts.filter(
+            (principal) =>
+              principal.displayName.includes(filter) ||
+              principal.id.includes(filter)
           )
         : accounts;
 
@@ -100,8 +110,8 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     return [
       <SelectGroup key="all_accounts_group">
         <SelectOption
-          key="*"
-          value="*"
+          key={t("all_accounts_title")}
+          value={t("all_accounts_title")}
           description={t("all_accounts_description")}
         >
           {t("all_accounts_title")}
@@ -117,7 +127,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
           ? serviceAccountOptions
           : noServiceAccounts}
       </SelectGroup>,
-      <Divider key="user_account_divider" />,
+      <Divider key="user_account_divider2" />,
       <SelectGroup
         label={t("all_accounts_user_account_group")}
         key="user_accounts_group"
@@ -138,14 +148,24 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
     : ValidatedOptions.default;
 
   return (
-    <FormGroupWithPopover
-      labelHead={t("account_id_title")}
-      fieldId="account-id"
-      fieldLabel={t("account_id_title")}
-      labelBody={t("account_id_help")}
-      buttonAriaLabel={t("account_id_aria")}
-      isRequired={true}
+    <FormGroup
+      fieldId="account-name"
       validated={validated}
+      helperTextInvalid={t("common:required")}
+      isRequired
+      label={t("account_id_title")}
+      labelIcon={
+        <Popover bodyContent={t("account_id_help")}>
+          <button
+            type="button"
+            onClick={(e) => e.preventDefault()}
+            className="pf-c-form__group-label-help"
+            aria-label={t("account_help")}
+          >
+            <HelpIcon noVerticalAlign />
+          </button>
+        </Popover>
+      }
     >
       <Select
         id={"account-id"}
@@ -159,12 +179,11 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         onFilter={(_, value) => makeOptions(value)}
         isOpen={isOpen}
         placeholderText={t("account_id_typeahead_placeholder")}
-        isCreatable={true}
+        isCreatable
         menuAppendTo="parent"
         validated={validated}
         createText={t("resourcePrefix.create_text")}
-        isGrouped={true}
-        maxHeight={400}
+        isGrouped
         onCreateOption={() => {
           setIsOpen(false);
           setIsDirty(false);
@@ -172,6 +191,6 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       >
         {makeOptions()}
       </Select>
-    </FormGroupWithPopover>
+    </FormGroup>
   );
 };

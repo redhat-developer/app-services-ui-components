@@ -130,7 +130,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
                
               <span
-                class="pf-c-label pf-m-blue mas-m-solid"
+                class="pf-c-label pf-m-blue pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -325,7 +325,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
                
               <span
-                class="pf-c-label pf-m-green mas-m-solid"
+                class="pf-c-label pf-m-green pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -639,7 +639,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
                
               <span
-                class="pf-c-label pf-m-blue mas-m-solid"
+                class="pf-c-label pf-m-blue pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -834,7 +834,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
             >
                
               <span
-                class="pf-c-label pf-m-green mas-m-solid"
+                class="pf-c-label pf-m-green pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -1113,7 +1113,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
             >
                
               <span
-                class="pf-c-label pf-m-blue mas-m-solid"
+                class="pf-c-label pf-m-blue pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -1308,7 +1308,7 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
             >
                
               <span
-                class="pf-c-label pf-m-green mas-m-solid"
+                class="pf-c-label pf-m-green pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -1587,7 +1587,7 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
             >
                
               <span
-                class="pf-c-label pf-m-blue mas-m-solid"
+                class="pf-c-label pf-m-blue pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"
@@ -1806,7 +1806,7 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
             >
                
               <span
-                class="pf-c-label pf-m-green mas-m-solid"
+                class="pf-c-label pf-m-green pf-m-compact mas-m-solid"
               >
                 <span
                   class="pf-c-label__content"

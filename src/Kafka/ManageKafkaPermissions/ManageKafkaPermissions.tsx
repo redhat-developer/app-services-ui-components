@@ -15,6 +15,7 @@ import { HelpIcon } from "@patternfly/react-icons";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { AssignPermissions } from "./components/AssignPermissions";
+import { PreCancelModal } from "./components/PreCancelModal";
 import { SelectAccount } from "./components/SelectAccount";
 import { ViewAccountDetails } from "./components/ViewAccountDetails";
 import type { Account, AclBinding, AddAclType } from "./types";
@@ -36,6 +37,8 @@ export type ManageKafkaPermissionsProps = {
   onChangeSelectedAccount: (value: string | undefined) => void;
   topicNameOptions: (filter: string) => string[];
   consumerGroupNameOptions: (filter: string) => string[];
+  isAclDeleted?: boolean;
+  id?: string;
 };
 
 export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
@@ -49,11 +52,14 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   onChangeSelectedAccount,
   topicNameOptions,
   consumerGroupNameOptions,
+  isAclDeleted,
+  id,
 }) => {
   const { t } = useTranslation([
     "manage-kafka-permissions",
     "create-kafka-instance",
   ]);
+
   const escapeClosesModal = useRef<boolean>(true);
   const [
     isExpandedExistingPermissionSection,
@@ -66,6 +72,8 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const [isNameValid, setIsNameValid] = useState<boolean>(true);
   const [canSave, setCanSave] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
+  const [isOpenPreCancelModal, setIsOpenPreCancelModal] =
+    useState<boolean>(false);
   const [step, setStep] = useState<number>(1);
   const [newAcls, setNewAcls] = useState<AddAclType[]>();
 
@@ -145,17 +153,32 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const onChangeExpandedAssignPermissionsSection = (value: boolean) => {
     setIsExpandedAssignPermissionsSection(value);
   };
+
   const isDisabled =
     step == 1 && (selectedAccount === undefined || selectedAccount === "")
       ? true
       : step == 2 &&
         ((submitted && !canSave) ||
-          newAcls == undefined ||
-          newAcls.length < 1 ||
+          ((newAcls == undefined || newAcls.length < 1) && !isAclDeleted) ||
           !isNameValid)
       ? true
       : false;
+  const onClose = () => {
+    step == 1
+      ? onCancel()
+      : step == 2 && (!isDisabled || (newAcls && newAcls?.length > 0))
+      ? setIsOpenPreCancelModal(true)
+      : onCancel();
+  };
 
+  const closePreCancelModal = () => {
+    setIsOpenPreCancelModal(false);
+    onCancel();
+  };
+
+  const resumeEditingPermissions = () => {
+    setIsOpenPreCancelModal(false);
+  };
   return (
     <Modal
       id="manage-permissions-modal"
@@ -166,8 +189,11 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
       title={t("dialog_title")}
       showClose={true}
       aria-describedby="modal-message"
-      onClose={onCancel}
+      onClose={onClose}
       onEscapePress={onEscapePress}
+      appendTo={() =>
+        id ? document.getElementById(id) || document.body : document.body
+      }
       actions={[
         <Button
           key={1}
@@ -181,7 +207,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
           {step === 1 ? t("step_1_submit_button") : t("step_2_submit_button")}
         </Button>,
         <Button
-          onClick={onCancel}
+          onClick={onClose}
           key={2}
           variant="secondary"
           aria-label={t("common:cancel")}
@@ -190,7 +216,12 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
         </Button>,
       ]}
     >
-      <Form>
+      <PreCancelModal
+        isOpen={isOpenPreCancelModal}
+        closeModal={closePreCancelModal}
+        resumeEditing={resumeEditingPermissions}
+      />
+      <Form onSubmit={(e) => e.preventDefault()}>
         <FormGroup
           fieldId="kafka-instance-name"
           label={t("kafka_instance")}
@@ -222,7 +253,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                 </Popover>
               }
             >
-              {selectedAccount === "*"
+              {selectedAccount === "All accounts"
                 ? t("all_accounts_title")
                 : selectedAccount}
             </FormGroup>
@@ -262,7 +293,7 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
                 <FormGroup>
                   <TextContent>
                     <Text component={TextVariants.small}>
-                      {selectedAccount === "*"
+                      {selectedAccount === "All accounts"
                         ? t("assign_permissions_all_description")
                         : t("assign_permissions_description", {
                             value: selectedAccount,

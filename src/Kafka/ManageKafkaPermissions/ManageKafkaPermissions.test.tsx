@@ -60,7 +60,40 @@ describe("Manage Kafka Permissions Dialog", () => {
     ).not.toBeInTheDocument();
     const deleteIcon = await comp.findAllByLabelText("Delete");
     userEvent.click(deleteIcon[0]);
-    expect(onRemoveAcls).toBeCalledTimes(1);
+    expect(await comp.findByRole("button", { name: "Save" })).toBeEnabled();
+    userEvent.click(await comp.findByLabelText("Cancel"));
+    await waitForPopper();
+    expect(await comp.findByText("Discard changes?")).toBeInTheDocument();
+    expect(
+      await comp.findByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).toBeInTheDocument();
+    expect(await comp.findByText("Discard changes")).toBeInTheDocument();
+    expect(await comp.findByText("Resume editing")).toBeInTheDocument();
+    //userEvent.click(await comp.findByText("Discard changes"));
+    //expect(onCancel).toBeCalled()
+    userEvent.click(await comp.findByText("Resume editing"));
+    expect(comp.queryByText("Discard changes?")).not.toBeInTheDocument();
+    expect(
+      comp.queryByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).not.toBeInTheDocument();
+    expect(comp.queryByText("Discard changes")).not.toBeInTheDocument();
+    expect(comp.queryByText("Resume editing")).not.toBeInTheDocument();
+    userEvent.click(await comp.findByLabelText("Cancel"));
+    userEvent.click(await comp.findByText("Discard changes"));
+    expect(comp.queryByText("Discard changes?")).not.toBeInTheDocument();
+    expect(
+      comp.queryByText(
+        "Any changes you made to access permissions will be lost."
+      )
+    ).not.toBeInTheDocument();
+    expect(comp.queryByText("Discard changes")).not.toBeInTheDocument();
+    expect(comp.queryByText("Resume editing")).not.toBeInTheDocument();
+    expect(onCancel).toBeCalled();
+
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(comp.getByRole("menuitem", { name: "Add permission" }));
@@ -76,17 +109,11 @@ describe("Manage Kafka Permissions Dialog", () => {
     userEvent.click(comp.getByLabelText("consumer-group name"));
     userEvent.type(await comp.findByPlaceholderText("Enter name"), "foo");
     await waitForPopper();
-    userEvent.click(await comp.findByRole("option", { name: "foo" }));
-    await waitForPopper();
-    expect(await comp.findByDisplayValue("foo")).toBeInTheDocument();
     userEvent.click(comp.getByRole("button", { name: "Save" }));
     expect(onSave).not.toHaveBeenCalled();
     expect(comp.getByRole("button", { name: "Save" })).toBeDisabled();
     userEvent.type(await comp.findByPlaceholderText("Enter name"), "$");
-    const option = await comp.findByText(
-      "Valid characters in a consumer group ID include letters (Aa–Zz), numbers, underscores ( _ ), and hyphens ( - )."
-    );
-    expect(option).toBeInTheDocument();
+    await waitForPopper();
     userEvent.click(comp.getByLabelText("Select"));
     await waitForPopper();
     userEvent.click(
@@ -147,7 +174,7 @@ describe("Manage Kafka Permissions Dialog", () => {
       )
     ).toBeInTheDocument();
     expect(
-      await comp.findByText("Assign permissions to all accounts")
+      await comp.findByText("Assign permissions to all accounts.")
     ).toBeInTheDocument();
     expect(comp.queryByText("All fields are required")).not.toBeInTheDocument();
     expect(await comp.findByText("Resource")).toBeInTheDocument();
@@ -229,6 +256,6 @@ describe("Manage Kafka Permissions Dialog", () => {
     const manageAccess = comp.getAllByLabelText("manage-access-delete");
     userEvent.click(manageAccess[0]);
     userEvent.click(comp.getByRole("button", { name: "Save" }));
-    expect(comp.getByText("All fields are required")).toBeInTheDocument();
+    expect(comp.getByText("All fields are required.")).toBeInTheDocument();
   });
 });
