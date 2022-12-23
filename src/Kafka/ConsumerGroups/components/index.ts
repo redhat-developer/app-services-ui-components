@@ -6,3 +6,7 @@ export * from "./ConsumerGroupState";
 export * from "./ConsumerGroupToolbar";
 export * from "./ConsumerGroupEmptyState";
 export * from "./ConsumerGroupResetOffset";
+export * from "./ConsumerGroupDrawer";
+export * from "./DeleteConsumerGroup";
+export * from "./OffsetSelect";
+export * from "./TopicSelect";
