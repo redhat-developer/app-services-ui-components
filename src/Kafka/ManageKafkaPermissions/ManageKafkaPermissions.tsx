@@ -30,14 +30,14 @@ export type ManageKafkaPermissionsProps = {
   accounts: Account[];
   onCancel: () => void;
   kafkaName: string;
-  onSave: (acls: AddAclType[]) => void;
+  onSave: (acls: AddAclType[] | undefined) => void;
   existingAcls: AclBinding[];
   onRemoveAcls: (index: number) => void;
   selectedAccount: string | undefined;
   onChangeSelectedAccount: (value: string | undefined) => void;
   topicNameOptions: (filter: string) => string[];
   consumerGroupNameOptions: (filter: string) => string[];
-  isAclDeleted?: boolean;
+  isAclDeleted: boolean;
   id?: string;
 };
 
@@ -80,7 +80,11 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
   const checkValidation = useCallback(() => {
     if (newAcls) {
       const isRowInvalid = newAcls?.map((value) =>
-        Object.values(value).includes(undefined)
+        value.type == "manual" &&
+        value.resourceType == "kafka-instance" &&
+        value.resourceOperation != undefined
+          ? false
+          : Object.values(value).includes(undefined)
       );
       isRowInvalid.includes(true) ? setCanSave(false) : setCanSave(true);
       if (canSave == true && isNameValid) return true;
@@ -101,11 +105,11 @@ export const ManageKafkaPermissions: React.FC<ManageKafkaPermissionsProps> = ({
 
   const onClickSubmit = () => {
     if (step == 1) setStep(2);
-    else if (newAcls) {
+    else if (newAcls && newAcls?.length > 0) {
       setSubmitted(true);
       const isAclValid = checkValidation();
       isAclValid && onSave(newAcls);
-    }
+    } else if (isAclDeleted) onSave(newAcls);
   };
 
   const onAddManualPermissions = () => {
