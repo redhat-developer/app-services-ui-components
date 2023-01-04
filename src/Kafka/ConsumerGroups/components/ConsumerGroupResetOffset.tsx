@@ -46,7 +46,6 @@ export type ConsumerGroupResetOffsetProps = {
   onChangeOffsetValue: (value: OffsetValue) => void;
   confirmCheckboxChecked: boolean;
   onConfirmationChange: (value: boolean) => void;
-  SelectAllConsumer: (consumer: ConsumerRow[]) => void;
   onSelectAll: (isSelected: boolean) => void;
   onSelectRow: (index: number, isSelected: boolean) => void;
   disableFocusTrap?: boolean;
