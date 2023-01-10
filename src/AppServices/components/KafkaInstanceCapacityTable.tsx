@@ -41,8 +41,8 @@ export const KafkaInstanceCapacityTable: FunctionComponent = () => {
     },
     {
       name: "Client connections",
-      firstStreamingUnit: "up to 3000",
-      secondStreamingUnit: "up to 6000",
+      firstStreamingUnit: "up to 9000",
+      secondStreamingUnit: "up to 18000",
     },
     {
       name: "Connection rate (connections/second)",
