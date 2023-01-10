@@ -592,13 +592,13 @@ exports[`KafkaPage renders 1`] = `
                       class=""
                       data-label="1 streaming unit"
                     >
-                      up to 3000
+                      up to 9000
                     </td>
                     <td
                       class=""
                       data-label="2 streaming units"
                     >
-                      up to 6000
+                      up to 18000
                     </td>
                   </tr>
                   <tr
