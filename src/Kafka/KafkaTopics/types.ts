@@ -1,10 +1,10 @@
 import { RetentionSizeUnits, RetentionTimeUnits } from "../types";
 
 export type KafkaTopic = {
-  topic_name: string;
+  name: string;
   partitions: number;
-  retention_time: string;
-  retention_size: string;
+  "retention.ms": string;
+  "retention.bytes": string;
 };
 
 export type KafkaTopicField = keyof KafkaTopic;
