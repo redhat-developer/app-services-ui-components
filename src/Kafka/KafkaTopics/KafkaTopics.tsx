@@ -18,7 +18,7 @@ const Columns: KafkaTopicField[] = [
 ];
 
 export type KafkaTopicsProps<T extends KafkaTopic> = {
-  topics: Array<T> | undefined;
+  topics: Array<T> | undefined | null;
   getUrlFortopic: (row: T) => string;
   onDelete: (row: T) => void;
   onEdit: (row: T) => void;

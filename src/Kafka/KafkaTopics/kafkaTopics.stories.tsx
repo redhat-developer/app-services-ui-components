@@ -44,3 +44,13 @@ NoTopics.args = {
   topics: [],
   topicName: ["boo", "foo"],
 };
+
+export const FirstLoadShowsSpinner = Template.bind({});
+FirstLoadShowsSpinner.args = {
+  topics: null,
+};
+
+export const kafkaTopicsTableLoadingSpinner = Template.bind({});
+kafkaTopicsTableLoadingSpinner.args = {
+  topics: undefined,
+};
