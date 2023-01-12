@@ -170,6 +170,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
       <Select
         id={"account-id"}
         data-testid="acls-select-account"
+        className="kafka-ui--select--limit-height"
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel={t("account_id_title")}
         onToggle={onToggle}
