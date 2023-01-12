@@ -8,12 +8,13 @@ import { EmptyStateNoResults } from "../../shared";
 import { TableVariant } from "@patternfly/react-table";
 import { Link } from "react-router-dom";
 import { formattedRetentionSize, formattedRetentionTime } from "./types";
+import { useTopicLabels } from "./useTopicLabels";
 
 const Columns: KafkaTopicField[] = [
-  "topic_name",
+  "name",
   "partitions",
-  "retention_time",
-  "retention_size",
+  "retention.ms",
+  "retention.bytes",
 ];
 
 export type KafkaTopicsProps<T extends KafkaTopic> = {
@@ -57,12 +58,7 @@ export const KafkaTopics = <T extends KafkaTopic>({
 }: KafkaTopicsProps<T>) => {
   const { t } = useTranslation("topic");
 
-  const labels: { [field in KafkaTopicField]: string } = {
-    topic_name: t("topic_name"),
-    partitions: t("partitions"),
-    retention_time: t("retention_time"),
-    retention_size: t("retention_size"),
-  };
+  const labels = useTopicLabels();
 
   const isFiltered = topicName.length > 0;
   return (
@@ -73,32 +69,34 @@ export const KafkaTopics = <T extends KafkaTopic>({
       data={topics}
       columns={Columns}
       renderHeader={({ column, Th, key }) => (
-        <Th key={key}>{labels[column]}</Th>
+        <Th key={key}>{labels.fields[column]}</Th>
       )}
       renderCell={({ column, row, Td, key }) => {
         return (
-          <Td key={key} dataLabel={labels[column]}>
+          <Td key={key} dataLabel={labels.fields[column]}>
             {(() => {
               switch (column) {
-                case "topic_name":
+                case "name":
                   return (
                     <Link
                       to={getUrlFortopic(row)}
                       data-testid="tableTopics-linkTopic"
                       data-ouia-component-id="table-link"
                     >
-                      {row.topic_name}
+                      {row.name}
                     </Link>
                   );
                 case "partitions":
                   return row.partitions;
-                case "retention_time":
+                case "retention.ms":
                   return formattedRetentionTime(
-                    row.retention_time ? parseInt(row.retention_time, 10) : 0
+                    row["retention.ms"] ? parseInt(row["retention.ms"], 10) : 0
                   );
-                case "retention_size":
+                case "retention.bytes":
                   return formattedRetentionSize(
-                    row.retention_size ? parseInt(row.retention_size, 10) : 0
+                    row["retention.bytes"]
+                      ? parseInt(row["retention.bytes"], 10)
+                      : 0
                   );
                 default:
                   return row[column];
@@ -123,7 +121,7 @@ export const KafkaTopics = <T extends KafkaTopic>({
       )}
       isColumnSortable={isColumnSortable}
       filters={{
-        [labels.topic_name]: {
+        [labels.fields.name]: {
           type: "search",
           chips: topicName,
           onSearch: onSearchTopic,
