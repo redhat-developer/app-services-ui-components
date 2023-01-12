@@ -173,6 +173,7 @@ export const SelectAccount: React.VFC<SelectAccountProps> = ({
         className="kafka-ui--select--limit-height"
         variant={SelectVariant.typeahead}
         typeAheadAriaLabel={t("account_id_title")}
+        maxHeight={400}
         onToggle={onToggle}
         onSelect={onSelect}
         onClear={clearSelection}
