@@ -7,6 +7,11 @@ export default {
   args: {
     value: "java",
   },
+  parameters: {
+    backgrounds: {
+      default: "Background color 100",
+    },
+  },
 } as ComponentMeta<typeof KafkaSampleCode>;
 
 const Template: ComponentStory<typeof KafkaSampleCode> = (args) => (
@@ -26,6 +31,6 @@ QuarkusSampleCode.args = {
 };
 
 export const SpringbootSampleCode = Template.bind({});
-QuarkusSampleCode.args = {
+SpringbootSampleCode.args = {
   value: "springboot",
 };
