@@ -88,6 +88,7 @@ export const ResourceName: React.VFC<ResourceNameProps> = ({
       submitted={submitted}
       onFetchOptions={onFetchOptions}
       onValidationCheck={onValidation}
+      createText={t("resourcePrefix.create_text")}
     />
   );
 };

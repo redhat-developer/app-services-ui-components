@@ -16,6 +16,7 @@ export default {
     ariaLabel: "my aria label",
     onValidationCheck: () => ({ isValid: true, message: undefined }),
     placeholderText: "Enter name",
+    createText: "Use",
   },
 } as ComponentMeta<typeof AsyncTypeaheadSelect>;
 
