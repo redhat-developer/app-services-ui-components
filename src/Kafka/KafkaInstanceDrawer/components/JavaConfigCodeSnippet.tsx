@@ -6,7 +6,7 @@ import {
   ExpandableSection,
   ExpandableSectionToggle,
 } from "@patternfly/react-core";
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import type { VoidFunctionComponent } from "react";
 import { useCopyClipBoard } from "./useCopyClipBoard";
 

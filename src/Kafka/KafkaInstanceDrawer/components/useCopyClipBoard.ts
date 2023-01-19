@@ -3,7 +3,7 @@ import { useState } from "react";
 export function useCopyClipBoard() {
   const [copied, setCopied] = useState<boolean>(false);
 
-  const clipboardCopyFunc = (event: any, text: string) => {
+  const clipboardCopyFunc = (_event: any, text: string) => {
     navigator.clipboard
       .writeText(text.toString())
       .then(() => {
