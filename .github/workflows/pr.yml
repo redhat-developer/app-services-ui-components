@@ -8,5 +8,5 @@ jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
     with:
-      node-version: 18.13.0
+      node-version: 16.6.2
 
