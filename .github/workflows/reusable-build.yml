@@ -85,7 +85,7 @@ jobs:
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
-          node-version: 18.13.0
+          node-version: 16.6.2
 
         #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
