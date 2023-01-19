@@ -9,27 +9,30 @@ import { Trans, useTranslation } from "react-i18next";
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
 import type { ClientType } from "./types";
+import { SampleCodeSnippet } from "./components";
 import {
-  JavaConfigCodeSnippet,
-  PythonConfigCodeSnippet,
-  QuarkusConfigCodeSnippet,
-  SpringBootConfigCodeSnippet,
-  JavaProducerCodeSnippet,
-  PythonProducerCodeSnippet,
-  QuarkusProducerCodeSnippet,
-  SpringBootProducerCodeSnippet,
-  SpringBootListenerCodeSnippet,
-  SpringBootConsumerConfig,
-  SpringBootConsumerExample,
-  JavaConsumerCodeSnippet,
-  PythonConsumerCodeSnippet,
-  QuarkusConsumerCodeSnippet,
-} from "./components";
+  javaConfig,
+  javaConsumer,
+  javaProducer,
+  pythonConfig,
+  pythonConsumer,
+  pythonProducer,
+  quarkusConfig,
+  quarkusConsumer,
+  quarkusProducer,
+  springBootConfig,
+  springBootConsumerConfig,
+  springBootConsumerExample,
+  springBootListener,
+  springBootProducer,
+} from "./CodeSnippets";
 
 export const KafkaSampleCode: VoidFunctionComponent = () => {
   const { t } = useTranslation("kafka");
 
   const [clientSelect, setClientSelect] = useState<ClientType>("java");
+
+  console.log(javaConfig.length);
 
   return (
     <div className="mas--details__drawer--tab-content">
@@ -80,13 +83,37 @@ export const KafkaSampleCode: VoidFunctionComponent = () => {
         {(() => {
           switch (clientSelect) {
             case "java":
-              return <JavaConfigCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={javaConfig}
+                  codeBlockCode={javaConfig.substring(0, 300)}
+                  expandableCode={javaConfig.substring(300)}
+                />
+              );
             case "python":
-              return <PythonConfigCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={pythonConfig}
+                  codeBlockCode={pythonConfig.substring(0, 300)}
+                  expandableCode={pythonConfig.substring(300)}
+                />
+              );
             case "quarkus":
-              return <QuarkusConfigCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={quarkusConfig}
+                  codeBlockCode={quarkusConfig.substring(0, 300)}
+                  expandableCode={quarkusConfig.substring(300)}
+                />
+              );
             case "springboot":
-              return <SpringBootConfigCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={springBootConfig}
+                  codeBlockCode={springBootConfig.substring(0, 300)}
+                  expandableCode={springBootConfig.substring(300)}
+                />
+              );
             default:
               return null;
           }
@@ -109,13 +136,37 @@ export const KafkaSampleCode: VoidFunctionComponent = () => {
         {(() => {
           switch (clientSelect) {
             case "java":
-              return <JavaProducerCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={javaProducer}
+                  codeBlockCode={javaProducer.substring(0, 300)}
+                  expandableCode={javaProducer.substring(300)}
+                />
+              );
             case "python":
-              return <PythonProducerCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={pythonProducer}
+                  codeBlockCode={pythonProducer.substring(0, 300)}
+                  expandableCode={pythonProducer.substring(300)}
+                />
+              );
             case "quarkus":
-              return <QuarkusProducerCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={quarkusProducer}
+                  codeBlockCode={quarkusProducer.substring(0, 300)}
+                  expandableCode={quarkusProducer.substring(300)}
+                />
+              );
             case "springboot":
-              return <SpringBootProducerCodeSnippet />;
+              return (
+                <SampleCodeSnippet
+                  copyCode={springBootProducer}
+                  codeBlockCode={springBootProducer.substring(0, 300)}
+                  expandableCode={springBootProducer.substring(300)}
+                />
+              );
             default:
               return null;
           }
@@ -134,21 +185,33 @@ export const KafkaSampleCode: VoidFunctionComponent = () => {
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_consumer_configuration_description")}
             </Text>
-            <SpringBootConsumerConfig />
+            <SampleCodeSnippet
+              copyCode={springBootConsumerConfig}
+              codeBlockCode={springBootConsumerConfig.substring(0, 300)}
+              expandableCode={springBootConsumerConfig.substring(300)}
+            />
             <Text component={TextVariants.h4} className="pf-u-mt-xl">
               {t("sample_code.spring_boot_listener")}
             </Text>
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_listener_description")}
             </Text>
-            <SpringBootListenerCodeSnippet />
+            <SampleCodeSnippet
+              copyCode={springBootListener}
+              codeBlockCode={springBootListener.substring(0, 300)}
+              expandableCode={springBootListener.substring(300)}
+            />
             <Text component={TextVariants.h4} className="pf-u-mt-xl">
               {t("sample_code.spring_boot_consumer")}
             </Text>
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_consumer_description")}
             </Text>
-            <SpringBootConsumerExample />
+            <SampleCodeSnippet
+              copyCode={springBootConsumerExample}
+              codeBlockCode={springBootConsumerExample.substring(0, 300)}
+              expandableCode={springBootConsumerExample.substring(300)}
+            />
           </>
         ) : (
           <>
@@ -164,11 +227,29 @@ export const KafkaSampleCode: VoidFunctionComponent = () => {
             {(() => {
               switch (clientSelect) {
                 case "java":
-                  return <JavaConsumerCodeSnippet />;
+                  return (
+                    <SampleCodeSnippet
+                      copyCode={javaConsumer}
+                      codeBlockCode={javaConsumer.substring(0, 300)}
+                      expandableCode={javaConsumer.substring(300)}
+                    />
+                  );
                 case "python":
-                  return <PythonConsumerCodeSnippet />;
+                  return (
+                    <SampleCodeSnippet
+                      copyCode={pythonConsumer}
+                      codeBlockCode={pythonConsumer.substring(0, 300)}
+                      expandableCode={pythonConsumer.substring(300)}
+                    />
+                  );
                 case "quarkus":
-                  return <QuarkusConsumerCodeSnippet />;
+                  return (
+                    <SampleCodeSnippet
+                      copyCode={quarkusConsumer}
+                      codeBlockCode={quarkusConsumer.substring(0, 300)}
+                      expandableCode={quarkusConsumer.substring(300)}
+                    />
+                  );
                 default:
                   return null;
               }
