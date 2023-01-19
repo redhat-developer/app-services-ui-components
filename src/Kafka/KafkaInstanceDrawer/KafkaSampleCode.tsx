@@ -4,49 +4,32 @@ import {
   Text,
   ToggleGroup,
   ToggleGroupItem,
-  CodeBlock,
-  CodeBlockAction,
-  ClipboardCopyButton,
-  CodeBlockCode,
 } from "@patternfly/react-core";
 import { Trans, useTranslation } from "react-i18next";
 import type { VoidFunctionComponent } from "react";
 import { useState } from "react";
 import type { ClientType } from "./types";
-import { SampleCodeSelect } from "./components/SampleCodeSelect";
+import {
+  JavaConfigCodeSnippet,
+  PythonConfigCodeSnippet,
+  QuarkusConfigCodeSnippet,
+  SpringBootConfigCodeSnippet,
+  JavaProducerCodeSnippet,
+  PythonProducerCodeSnippet,
+  QuarkusProducerCodeSnippet,
+  SpringBootProducerCodeSnippet,
+  SpringBootListenerCodeSnippet,
+  SpringBootConsumerConfig,
+  SpringBootConsumerExample,
+  JavaConsumerCodeSnippet,
+  PythonConsumerCodeSnippet,
+  QuarkusConsumerCodeSnippet,
+} from "./components";
 
-export type KafkaSampleCodeProps = {
-  value: ClientType;
-  onChange: (value: ClientType) => void;
-};
-
-export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
-  value,
-  onChange,
-}) => {
+export const KafkaSampleCode: VoidFunctionComponent = () => {
   const { t } = useTranslation("kafka");
 
-  const [copied, setCopied] = useState(false);
-
-  const onClick = () => {
-    setCopied(true);
-  };
-
-  const actions = (
-    <CodeBlockAction>
-      <ClipboardCopyButton
-        id="basic-copy-button"
-        textId="code-content"
-        aria-label="Copy to clipboard"
-        exitDelay={600}
-        maxWidth="110px"
-        variant="plain"
-        onClick={onClick}
-      >
-        {copied ? "Successfully copied to clipboard!" : "Copy to clipboard"}
-      </ClipboardCopyButton>
-    </CodeBlockAction>
-  );
+  const [clientSelect, setClientSelect] = useState<ClientType>("java");
 
   return (
     <div className="mas--details__drawer--tab-content">
@@ -60,29 +43,29 @@ export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
             text={t("sample_code.clients.java")}
             value="java"
             buttonId="java"
-            isSelected={value === "java"}
-            onChange={() => onChange("java")}
+            isSelected={clientSelect === "java"}
+            onChange={() => setClientSelect("java")}
           />
           <ToggleGroupItem
             text={t("sample_code.clients.python")}
             value="python"
             buttonId="python"
-            isSelected={value === "python"}
-            onChange={() => onChange("python")}
+            isSelected={clientSelect === "python"}
+            onChange={() => setClientSelect("python")}
           />
           <ToggleGroupItem
             text={t("sample_code.clients.quarkus")}
             value="quarkus"
             buttonId="quarkus"
-            isSelected={value === "quarkus"}
-            onChange={() => onChange("quarkus")}
+            isSelected={clientSelect === "quarkus"}
+            onChange={() => setClientSelect("quarkus")}
           />
           <ToggleGroupItem
             text={t("sample_code.clients.spring_boot")}
             value="springboot"
             buttonId="springboot"
-            isSelected={value === "springboot"}
-            onChange={() => onChange("springboot")}
+            isSelected={clientSelect === "springboot"}
+            onChange={() => setClientSelect("springboot")}
           />
         </ToggleGroup>
         <Text component={TextVariants.h3} className="pf-u-mt-xl">
@@ -94,11 +77,20 @@ export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
         <Text component={TextVariants.small}>
           {t("sample_code.bracket_text")}
         </Text>
-        <CodeBlock actions={actions}>
-          <CodeBlockCode>
-            <SampleCodeSelect client={value} codeSnippet={"config"} />
-          </CodeBlockCode>
-        </CodeBlock>
+        {(() => {
+          switch (clientSelect) {
+            case "java":
+              return <JavaConfigCodeSnippet />;
+            case "python":
+              return <PythonConfigCodeSnippet />;
+            case "quarkus":
+              return <QuarkusConfigCodeSnippet />;
+            case "springboot":
+              return <SpringBootConfigCodeSnippet />;
+            default:
+              return null;
+          }
+        })()}
         <Text component={TextVariants.h3} className="pf-u-mt-xl">
           {t("sample_code.sample_producer_code")}
         </Text>
@@ -107,22 +99,31 @@ export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
             ns={"kafka"}
             i18nKey={"sample_code.sample_producer_code_description"}
             values={{
-              client_type: value,
+              client_type: clientSelect,
             }}
           />
         </Text>
         <Text component={TextVariants.small}>
           {t("sample_code.bracket_text")}
         </Text>
-        <CodeBlock actions={actions}>
-          <CodeBlockCode>
-            <SampleCodeSelect client={value} codeSnippet={"producer"} />
-          </CodeBlockCode>
-        </CodeBlock>
+        {(() => {
+          switch (clientSelect) {
+            case "java":
+              return <JavaProducerCodeSnippet />;
+            case "python":
+              return <PythonProducerCodeSnippet />;
+            case "quarkus":
+              return <QuarkusProducerCodeSnippet />;
+            case "springboot":
+              return <SpringBootProducerCodeSnippet />;
+            default:
+              return null;
+          }
+        })()}
         <Text component={TextVariants.h3} className="pf-u-mt-xl">
           {t("sample_code.sample_consumer_code")}
         </Text>
-        {value === "springboot" ? (
+        {clientSelect === "springboot" ? (
           <>
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_sample_consumer_code_description")}
@@ -133,45 +134,21 @@ export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_consumer_configuration_description")}
             </Text>
-            <CodeBlock actions={actions}>
-              <CodeBlockCode id="code-content">
-                <SampleCodeSelect
-                  client={value}
-                  codeSnippet={"consumer"}
-                  springBootConsumer={"consumerConfig"}
-                />
-              </CodeBlockCode>
-            </CodeBlock>
+            <SpringBootConsumerConfig />
             <Text component={TextVariants.h4} className="pf-u-mt-xl">
               {t("sample_code.spring_boot_listener")}
             </Text>
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_listener_description")}
             </Text>
-            <CodeBlock actions={actions}>
-              <CodeBlockCode id="code-content">
-                <SampleCodeSelect
-                  client={value}
-                  codeSnippet={"consumer"}
-                  springBootConsumer={"listener"}
-                />
-              </CodeBlockCode>
-            </CodeBlock>
+            <SpringBootListenerCodeSnippet />
             <Text component={TextVariants.h4} className="pf-u-mt-xl">
               {t("sample_code.spring_boot_consumer")}
             </Text>
             <Text component={TextVariants.small}>
               {t("sample_code.spring_boot_consumer_description")}
             </Text>
-            <CodeBlock actions={actions}>
-              <CodeBlockCode id="code-content">
-                <SampleCodeSelect
-                  client={value}
-                  codeSnippet={"consumer"}
-                  springBootConsumer={"consumer"}
-                />
-              </CodeBlockCode>
-            </CodeBlock>
+            <SpringBootConsumerExample />
           </>
         ) : (
           <>
@@ -180,15 +157,22 @@ export const KafkaSampleCode: VoidFunctionComponent<KafkaSampleCodeProps> = ({
                 ns={"kafka"}
                 i18nKey={"sample_code.sample_consumer_code_description"}
                 values={{
-                  client_type: value,
+                  client_type: clientSelect,
                 }}
               />
             </Text>
-            <CodeBlock actions={actions}>
-              <CodeBlockCode id="code-content">
-                <SampleCodeSelect client={value} codeSnippet={"consumer"} />
-              </CodeBlockCode>
-            </CodeBlock>
+            {(() => {
+              switch (clientSelect) {
+                case "java":
+                  return <JavaConsumerCodeSnippet />;
+                case "python":
+                  return <PythonConsumerCodeSnippet />;
+                case "quarkus":
+                  return <QuarkusConsumerCodeSnippet />;
+                default:
+                  return null;
+              }
+            })()}
           </>
         )}
       </TextContent>
