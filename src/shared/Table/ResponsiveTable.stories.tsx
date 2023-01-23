@@ -9,6 +9,7 @@ import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
 import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 import type { SampleDataType } from "./storybookHelpers";
@@ -20,7 +21,7 @@ import {
 } from "./storybookHelpers";
 import { useSortableSearchParams } from "./useSortableSearchParams";
 
-const eventsFromNames = actions("onRowClick");
+const eventsFromNames = actions("onRowClick", "onCheckRow");
 
 const ResponsiveTableSampleType: VoidFunctionComponent<
   ResponsiveTableProps<SampleDataType, typeof columns[number]> & {
@@ -31,6 +32,7 @@ const ResponsiveTableSampleType: VoidFunctionComponent<
     isSortable?: boolean;
     sortAllColumns?: boolean;
     selectedRow?: number;
+    isCheckable?: boolean;
   }
 > = (props) => <ResponsiveTable {...props} />;
 
@@ -101,6 +103,8 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => {
       isRowDeleted={({ row }) => row[5] === "deleting"}
       isColumnSortable={args.isSortable ? isColumnSortable : undefined}
       onRowClick={args.onRowClick || eventsFromNames["onRowClick"]}
+      onCheckRow={args.onCheckRow || eventsFromNames["onCheckRow"]}
+      checkedRows={[]}
       setActionCellOuiaId={
         args.hasCustomActionTestId
           ? ({ rowIndex }) => `my-action-row-${rowIndex}`
@@ -174,4 +178,30 @@ export const PartiallySortable = Template.bind({});
 PartiallySortable.args = {
   isSortable: true,
   sortAllColumns: false,
+};
+export const SelectableWithCheckboxes = Template.bind({});
+SelectableWithCheckboxes.args = {
+  isCheckable: true,
+};
+
+export const InteractiveCheckableRows: ComponentStory<
+  typeof ResponsiveTableSampleType
+> = (args) => {
+  const [checkedRows, setCheckedRows] = useState<number[]>([]);
+  return (
+    <ResponsiveTable
+      {...args}
+      onCheckRow={setCheckedRows}
+      isCheckable={true}
+      checkedRows={checkedRows}
+      renderHeader={({ column, Th, key }) => (
+        <Th key={key}>{columnLabels[column]}</Th>
+      )}
+      renderCell={({ column, row, colIndex, Td, key }) => (
+        <Td key={key} dataLabel={columnLabels[column]}>
+          {row[colIndex]}
+        </Td>
+      )}
+    />
+  );
 };

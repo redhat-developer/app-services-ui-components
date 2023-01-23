@@ -66,6 +66,9 @@ export type ResponsiveTableProps<TRow, TCol> = {
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
   variant?: TableVariant;
+  isCheckable?: boolean;
+  checkedRows?: number[];
+  onCheckRow?: (index: number[]) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -88,6 +91,9 @@ export const ResponsiveTable = <TRow, TCol>({
   tableOuiaId,
   children,
   variant,
+  isCheckable = false,
+  onCheckRow,
+  checkedRows,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -163,6 +169,9 @@ export const ResponsiveTable = <TRow, TCol>({
               columnWidth={minimumColumnWidth}
               canHide={canColumnBeHidden(index)}
               {...props}
+              isCheckable={isCheckable}
+              checkedRows={checkedRows}
+              onCheckRow={onCheckRow}
               ref={ref}
             >
               {children}
@@ -173,7 +182,14 @@ export const ResponsiveTable = <TRow, TCol>({
       Td.displayName = "ResponsiveTdCurried";
       return Td;
     },
-    [canColumnBeHidden, minimumColumnWidth, width]
+    [
+      canColumnBeHidden,
+      minimumColumnWidth,
+      width,
+      isCheckable,
+      checkedRows,
+      onCheckRow,
+    ]
   );
   const TdList = useMemo(
     () => columns.map((_, index) => getTd(index)),
@@ -227,6 +243,9 @@ export const ResponsiveTable = <TRow, TCol>({
               position={columns.length}
               tableWidth={width}
               columnWidth={minimumColumnWidth}
+              isCheckable={isCheckable}
+              checkedRows={checkedRows}
+              onCheckRow={onCheckRow}
               canHide={false}
               isActionCell={true}
               data-testid={
@@ -301,6 +320,9 @@ export type ResponsiveTdProps = {
   tableWidth: number;
   columnWidth: number;
   canHide: boolean;
+  isCheckable?: boolean;
+  checkedRows?: number[];
+  onCheckRow?: (index: number[]) => void;
 } & Omit<TdProps, "ref">;
 export const ResponsiveTd = memo(
   forwardRef<HTMLTableCellElement, ResponsiveTdProps>((props, ref) => {
@@ -311,17 +333,35 @@ export const ResponsiveTd = memo(
       canHide,
       className = "",
       children,
+      isCheckable = false,
+      checkedRows,
+      onCheckRow,
       ...otherProps
     } = props;
+    //const [checkedRows, setCheckedRows] = useState<number[]>([]);
     const responsiveClass =
       canHide && tableWidth < columnWidth * (position + 1)
         ? "pf-m-hidden"
         : "pf-m-visible";
-
     return (
       <Td
         ref={ref}
         className={`${responsiveClass} ${className}`}
+        select={
+          isCheckable && checkedRows && position == 0 && onCheckRow
+            ? {
+                rowIndex: position,
+                onSelect: (_event, isSelected) => {
+                  onCheckRow(
+                    isSelected
+                      ? [...checkedRows, position]
+                      : checkedRows.filter((idx) => idx !== position)
+                  );
+                },
+                isSelected: checkedRows.includes(position),
+              }
+            : undefined
+        }
         {...otherProps}
       >
         {children}
