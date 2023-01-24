@@ -247,7 +247,6 @@ export const OverviewPageV3: FunctionComponent<OverviewPageV3Props> = ({
                     <Label color="blue">
                       {t("overview-v3:applicationService")}
                     </Label>
-                    <Label>{t("overview-v3:servicePreview")}</Label>
                   </LabelGroup>
                 </StackItem>
                 <StackItem>{t("overview-v3:rhocMainText")}</StackItem>
