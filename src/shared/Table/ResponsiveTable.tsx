@@ -14,6 +14,7 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
+import type { ThSelectType } from "@patternfly/react-table/dist/esm/components/Table/base";
 import type {
   FunctionComponent,
   PropsWithChildren,
@@ -66,9 +67,8 @@ export type ResponsiveTableProps<TRow, TCol> = {
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
   variant?: TableVariant;
-  isCheckable?: boolean;
-  checkedRows?: number[];
-  onCheckRow?: (index: number[]) => void;
+  isChecked: boolean;
+  onCheck: (isSelecting: boolean) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -91,9 +91,9 @@ export const ResponsiveTable = <TRow, TCol>({
   tableOuiaId,
   children,
   variant,
-  isCheckable = false,
-  onCheckRow,
-  checkedRows,
+  //checkRow,
+  isChecked,
+  onCheck,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -168,10 +168,9 @@ export const ResponsiveTable = <TRow, TCol>({
               tableWidth={width}
               columnWidth={minimumColumnWidth}
               canHide={canColumnBeHidden(index)}
+              isChecked={index == 0 ? isChecked : undefined}
+              onCheck={onCheck}
               {...props}
-              isCheckable={isCheckable}
-              checkedRows={checkedRows}
-              onCheckRow={onCheckRow}
               ref={ref}
             >
               {children}
@@ -182,14 +181,7 @@ export const ResponsiveTable = <TRow, TCol>({
       Td.displayName = "ResponsiveTdCurried";
       return Td;
     },
-    [
-      canColumnBeHidden,
-      minimumColumnWidth,
-      width,
-      isCheckable,
-      checkedRows,
-      onCheckRow,
-    ]
+    [canColumnBeHidden, isChecked, minimumColumnWidth, onCheck, width]
   );
   const TdList = useMemo(
     () => columns.map((_, index) => getTd(index)),
@@ -243,9 +235,6 @@ export const ResponsiveTable = <TRow, TCol>({
               position={columns.length}
               tableWidth={width}
               columnWidth={minimumColumnWidth}
-              isCheckable={isCheckable}
-              checkedRows={checkedRows}
-              onCheckRow={onCheckRow}
               canHide={false}
               isActionCell={true}
               data-testid={
@@ -285,6 +274,7 @@ export type ResponsiveThProps = {
   tableWidth: number;
   columnWidth: number;
   canHide: boolean;
+  checkCol?: ThSelectType;
 } & Omit<ThProps, "ref">;
 export const ResponsiveTh = memo(
   forwardRef<HTMLTableCellElement, ResponsiveThProps>((props, ref) => {
@@ -295,6 +285,7 @@ export const ResponsiveTh = memo(
       canHide,
       className = "",
       children,
+      checkCol,
       ...otherProps
     } = props;
     const responsiveClass =
@@ -306,6 +297,7 @@ export const ResponsiveTh = memo(
       <Th
         ref={ref}
         className={`${responsiveClass} ${className}`}
+        select={checkCol}
         {...otherProps}
       >
         {children}
@@ -320,9 +312,8 @@ export type ResponsiveTdProps = {
   tableWidth: number;
   columnWidth: number;
   canHide: boolean;
-  isCheckable?: boolean;
-  checkedRows?: number[];
-  onCheckRow?: (index: number[]) => void;
+  isChecked?: boolean;
+  onCheck?: (isSelecting: boolean) => void;
 } & Omit<TdProps, "ref">;
 export const ResponsiveTd = memo(
   forwardRef<HTMLTableCellElement, ResponsiveTdProps>((props, ref) => {
@@ -333,32 +324,26 @@ export const ResponsiveTd = memo(
       canHide,
       className = "",
       children,
-      isCheckable = false,
-      checkedRows,
-      onCheckRow,
+      isChecked,
+      onCheck,
       ...otherProps
     } = props;
-    //const [checkedRows, setCheckedRows] = useState<number[]>([]);
     const responsiveClass =
       canHide && tableWidth < columnWidth * (position + 1)
         ? "pf-m-hidden"
         : "pf-m-visible";
+
     return (
       <Td
         ref={ref}
         className={`${responsiveClass} ${className}`}
         select={
-          isCheckable && checkedRows && position == 0 && onCheckRow
+          isChecked != undefined
             ? {
                 rowIndex: position,
-                onSelect: (_event, isSelected) => {
-                  onCheckRow(
-                    isSelected
-                      ? [...checkedRows, position]
-                      : checkedRows.filter((idx) => idx !== position)
-                  );
-                },
-                isSelected: checkedRows.includes(position),
+                isSelected: isChecked,
+                onSelect: (_, isSelecting) =>
+                  onCheck ? onCheck(isSelecting) : undefined,
               }
             : undefined
         }
