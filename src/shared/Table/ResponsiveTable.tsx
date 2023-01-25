@@ -68,7 +68,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   tableOuiaId?: string;
   variant?: TableVariant;
   isChecked: boolean;
-  onCheck: (isSelecting: boolean) => void;
+  onCheck: (isSelecting: boolean, rowIndex: number) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -168,8 +168,7 @@ export const ResponsiveTable = <TRow, TCol>({
               tableWidth={width}
               columnWidth={minimumColumnWidth}
               canHide={canColumnBeHidden(index)}
-              isChecked={index == 0 ? isChecked : undefined}
-              onCheck={onCheck}
+              isChecked={isChecked}
               {...props}
               ref={ref}
             >
@@ -181,7 +180,7 @@ export const ResponsiveTable = <TRow, TCol>({
       Td.displayName = "ResponsiveTdCurried";
       return Td;
     },
-    [canColumnBeHidden, isChecked, minimumColumnWidth, onCheck, width]
+    [canColumnBeHidden, isChecked, minimumColumnWidth, width]
   );
   const TdList = useMemo(
     () => columns.map((_, index) => getTd(index)),
@@ -198,7 +197,10 @@ export const ResponsiveTable = <TRow, TCol>({
       variant={variant}
     >
       <Thead>
-        <Tr>{header}</Tr>
+        <Tr>
+          {isChecked !== undefined && <Th></Th>}
+          {header}
+        </Tr>
       </Thead>
       <Tbody>
         {data === undefined && (
@@ -254,6 +256,17 @@ export const ResponsiveTable = <TRow, TCol>({
               onClick={onClick}
               rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
+              {isChecked !== undefined && (
+                <Td
+                  select={{
+                    rowIndex,
+                    isSelected: isChecked,
+                    onSelect: (_event, isSelecting, rowIndex) => {
+                      onCheck(isSelecting, rowIndex);
+                    },
+                  }}
+                />
+              )}
               {cells}
               {action}
             </DeletableRow>
@@ -337,7 +350,7 @@ export const ResponsiveTd = memo(
       <Td
         ref={ref}
         className={`${responsiveClass} ${className}`}
-        select={
+        /* select={
           isChecked != undefined
             ? {
                 rowIndex: position,
@@ -346,7 +359,7 @@ export const ResponsiveTd = memo(
                   onCheck ? onCheck(isSelecting) : undefined,
               }
             : undefined
-        }
+        }*/
         {...otherProps}
       >
         {children}

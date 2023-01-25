@@ -183,5 +183,37 @@ PartiallySortable.args = {
 export const SelectableWithCheckboxes = Template.bind({});
 SelectableWithCheckboxes.args = {
   isChecked: true,
-  columns: ["select", ...columns],
+};
+
+export const InteractiveExample: ComponentStory<
+  typeof ResponsiveTableSampleType
+> = (args) => {
+  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [checkedRows, setCheckedRows] = useState<number[]>([]);
+
+  const onCheck = (isSelecting: boolean, rowIndex: number) => {
+    setCheckedRows(
+      isSelecting
+        ? [...checkedRows, rowIndex]
+        : checkedRows.filter((row) => row !== rowIndex)
+    );
+    //We need to set this value for each row, this will change the value for the entire table
+    setIsChecked(isSelecting);
+  };
+
+  return (
+    <ResponsiveTable
+      {...args}
+      isChecked={isChecked}
+      onCheck={onCheck}
+      renderHeader={({ column, Th, key }) => (
+        <Th key={key}>{columnLabels[column]}</Th>
+      )}
+      renderCell={({ column, row, colIndex, Td, key }) => (
+        <Td key={key} dataLabel={columnLabels[column]}>
+          {row[colIndex]}
+        </Td>
+      )}
+    />
+  );
 };
