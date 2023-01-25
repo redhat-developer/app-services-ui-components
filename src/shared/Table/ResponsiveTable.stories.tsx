@@ -66,7 +66,6 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => {
       ? args.columns
       : [args.columns[0], args.columns[3]],
     {
-      "": "",
       name: "Name",
       cloudProvider: "Cloud Provider",
       owner: "Owner",
@@ -181,32 +180,8 @@ PartiallySortable.args = {
   sortAllColumns: false,
 };
 
-export const InteractiveCheckableRows: ComponentStory<
-  typeof ResponsiveTableSampleType
-> = (args) => {
-  const [checkedRows, setCheckedRows] = useState<number[]>([]);
-  const [isChecked, setIsChecked] = useState<boolean>(false);
-
-  const onCheck = (isSelecting: boolean) => {
-    setCheckedRows(
-      isSelecting ? [...checkedRows, 0] : checkedRows.filter((row) => row !== 0)
-    );
-    setIsChecked(isSelecting);
-  };
-
-  return (
-    <ResponsiveTable
-      {...args}
-      renderHeader={({ column, Th, key }) => (
-        <Th key={key}>{columnLabels[column]}</Th>
-      )}
-      renderCell={({ column, row, colIndex, Td, key }) => (
-        <Td key={key} dataLabel={columnLabels[column]}>
-          {row[colIndex]}
-        </Td>
-      )}
-      onCheck={onCheck}
-      isChecked={isChecked}
-    />
-  );
+export const SelectableWithCheckboxes = Template.bind({});
+SelectableWithCheckboxes.args = {
+  isChecked: true,
+  columns: ["select", ...columns],
 };

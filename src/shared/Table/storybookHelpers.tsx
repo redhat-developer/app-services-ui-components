@@ -10,7 +10,6 @@ import type { ChipFilterProps } from "../TableToolbar";
 import { sampleSearchFilter } from "../TableToolbar/ChipFilter/storybookHelpers";
 
 export const columns = [
-  "",
   "name",
   "owner",
   "timeCreated",
@@ -20,7 +19,6 @@ export const columns = [
 ] as const;
 
 export const columnLabels: { [key in typeof columns[number]]: string } = {
-  "": "",
   name: "Name",
   owner: "Owner",
   timeCreated: "Time created",
@@ -29,18 +27,9 @@ export const columnLabels: { [key in typeof columns[number]]: string } = {
   status: "Status",
 };
 
-export type SampleDataType = [
-  string,
-  string,
-  string,
-  string,
-  string,
-  string,
-  string
-];
+export type SampleDataType = [string, string, string, string, string, string];
 export const sampleData: Array<SampleDataType> = [
   [
-    "",
     "kafka-test-instance",
     "username",
     "about 1 hours ago",
@@ -49,7 +38,6 @@ export const sampleData: Array<SampleDataType> = [
     "pending",
   ],
   [
-    "",
     "kafka-test-instance-2",
     "username2",
     "about 2 hours ago",
@@ -58,7 +46,6 @@ export const sampleData: Array<SampleDataType> = [
     "pending",
   ],
   [
-    "",
     "kafka-test-instance-3",
     "username3",
     "about 3 hours ago",
@@ -67,7 +54,6 @@ export const sampleData: Array<SampleDataType> = [
     "ready",
   ],
   [
-    "",
     "kafka-test-instance-4",
     "username4",
     "about 4 hours ago",
@@ -76,7 +62,6 @@ export const sampleData: Array<SampleDataType> = [
     "deleting",
   ],
   [
-    "",
     "kafka-test-instance-5",
     "username5",
     "about 5 hours ago",
