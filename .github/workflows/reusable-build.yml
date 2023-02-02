@@ -35,17 +35,17 @@ jobs:
       - name: Generate coverage report
         uses: codecov/codecov-action@v3
 
-  test-storybook:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: ./.github/actions/cache-restore
-        id: cache-node-modules
-        with:
-          node-version: ${{ inputs.node-version }}
-      - name: Run the test suite
-        run: npm run test-storybook:ci
+#  test-storybook:
+#    needs: setup
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: ./.github/actions/cache-restore
+#        id: cache-node-modules
+#        with:
+#          node-version: ${{ inputs.node-version }}
+#      - name: Run the test suite
+#        run: npm run test-storybook:ci
 
   lint-and-format:
     needs: setup
@@ -85,13 +85,17 @@ jobs:
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
-          node-version: 16.6.2
+          node-version: 16.19.0
 
         #👇 Adds Chromatic as a step in the workflow
       - uses: chromaui/action@v1
+        id: chromatic
         # Options required for Chromatic's GitHub Action
         with:
           #👇 Chromatic projectToken, see https://storybook.js.org/tutorials/intro-to-storybook/react/en/deploy/ to obtain it
           projectToken: 233963c78c8a
           token: ${{ secrets.GITHUB_TOKEN }}
           exitOnceUploaded: true
+
+      - name: Test the deployed Storybook
+        run: npm run test-storybook -- --url ${{ steps.chromatic.outputs.storybookUrl }}

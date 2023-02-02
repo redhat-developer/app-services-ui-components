@@ -29,6 +29,7 @@ export type AsyncTypeaheadSelectProps = {
   ) => Validation;
   submitted?: boolean;
   required?: boolean;
+  createText?: string;
 };
 
 export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
@@ -41,8 +42,9 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   onValidationCheck,
   submitted,
   required,
+  createText,
 }) => {
-  const { t } = useTranslation(["manage-kafka-permissions"]);
+  const { t } = useTranslation(["common"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [validation, setValidation] = useState<Validation | undefined>(
     undefined
@@ -140,7 +142,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         }
         maxHeight={400}
         width={170}
-        createText={t("resourcePrefix.create_text")}
+        createText={createText}
       >
         {onFilter()}
       </Select>

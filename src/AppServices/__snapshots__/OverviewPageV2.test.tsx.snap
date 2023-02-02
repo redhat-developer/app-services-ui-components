@@ -505,19 +505,6 @@ exports[`OverviewPage renders 1`] = `
                             </span>
                           </span>
                         </li>
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Service Preview
-                            </span>
-                          </span>
-                        </li>
                       </ul>
                     </div>
                   </div>

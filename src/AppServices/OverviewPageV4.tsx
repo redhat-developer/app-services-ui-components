@@ -299,7 +299,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
                     <Label color="blue">
                       {t("overview-v4:applicationService")}
                     </Label>
-                    <Label>{t("overview-v4:servicePreview")}</Label>
                   </LabelGroup>
                 </StackItem>
                 <StackItem>{t("overview-v4:rhocMainText")}</StackItem>

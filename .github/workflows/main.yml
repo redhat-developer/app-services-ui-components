@@ -7,7 +7,7 @@ jobs:
   build:
     uses: ./.github/workflows/reusable-build.yml
     with:
-      node-version: 16.6.2
+      node-version: 18.13.0
 
   release:
     name: Semantic Release
@@ -21,7 +21,7 @@ jobs:
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
-          node-version: 16.6.2
+          node-version: 18.13.0
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
@@ -37,7 +37,7 @@ jobs:
       - uses: ./.github/actions/cache-restore
         id: cache-node-modules
         with:
-          node-version: 16.6.2
+          node-version: 16.19.0
 
       - name: Build storybook
         run: |
