@@ -126,51 +126,6 @@ exports[`OverviewPage renders 1`] = `
                 class="pf-l-stack pf-m-gutter"
               >
                 <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-blue"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Application service
-                            </span>
-                          </span>
-                        </li>
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Service Preview
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div
                   class="pf-l-stack__item"
                 >
                   API Designer provides application developers with a visual editor to create, import, edit, and manage API definitions and event schemas.
@@ -236,38 +191,6 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
-                <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-blue"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Application service
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
                 <div
                   class="pf-l-stack__item"
                 >
@@ -379,51 +302,6 @@ exports[`OverviewPage renders 1`] = `
                 class="pf-l-stack pf-m-gutter"
               >
                 <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-blue"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Application service
-                            </span>
-                          </span>
-                        </li>
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-green"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Data service
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div
                   class="pf-l-stack__item"
                 >
                   Streams for Apache Kafka enables IT development teams to capture, process, and stream real-time data across hybrid cloud environments.
@@ -490,38 +368,6 @@ exports[`OverviewPage renders 1`] = `
                 class="pf-l-stack pf-m-gutter"
               >
                 <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-blue"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Application service
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div
                   class="pf-l-stack__item"
                 >
                   Service Registry provides a metadata layer for developers and applications to publish, discover and evolve schema definitions and API designs.
@@ -587,38 +433,6 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
-                <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-blue"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Application service
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
                 <div
                   class="pf-l-stack__item"
                 >
@@ -714,51 +528,6 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
-                <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-green"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Data service
-                            </span>
-                          </span>
-                        </li>
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Service Preview
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
                 <div
                   class="pf-l-stack__item"
                 >
@@ -870,51 +639,6 @@ exports[`OverviewPage renders 1`] = `
               <div
                 class="pf-l-stack pf-m-gutter"
               >
-                <div
-                  class="pf-l-stack__item pf-u-mb-lg"
-                >
-                  <div
-                    class="pf-c-label-group"
-                  >
-                    <div
-                      class="pf-c-label-group__main"
-                    >
-                      
-                      <ul
-                        aria-label="Label group category"
-                        class="pf-c-label-group__list"
-                        role="list"
-                      >
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label pf-m-green"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Data service
-                            </span>
-                          </span>
-                        </li>
-                        <li
-                          class="pf-c-label-group__list-item"
-                        >
-                          <span
-                            class="pf-c-label"
-                          >
-                            <span
-                              class="pf-c-label__content"
-                            >
-                              Field trial
-                            </span>
-                          </span>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
                 <div
                   class="pf-l-stack__item"
                 >
