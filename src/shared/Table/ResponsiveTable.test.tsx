@@ -1,7 +1,8 @@
-import { userEvent } from "@storybook/testing-library";
+import { userEvent, within } from "@storybook/testing-library";
 import { composeStories } from "@storybook/testing-react";
 import { render } from "../../test-utils";
 import * as stories from "./ResponsiveTable.stories";
+const { InteractiveCheckedRowExample } = composeStories(stories);
 import { sampleData } from "./storybookHelpers";
 
 const {
@@ -84,5 +85,14 @@ describe("ResponsiveTable", () => {
         "[data-ouia-component-id='table-row-0']"
       )
     ).toHaveLength(1);
+  });
+  it("should show checkbox for each row", () => {
+    const comp = render(<InteractiveCheckedRowExample />);
+    const firstRow = comp.getAllByRole("row")[1];
+    const btnExpand = within(firstRow).getByRole("checkbox");
+    userEvent.click(btnExpand);
+    expect(btnExpand).toBeChecked();
+    userEvent.click(btnExpand);
+    expect(btnExpand).not.toBeChecked();
   });
 });
