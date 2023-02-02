@@ -178,7 +178,7 @@ PartiallySortable.args = {
   sortAllColumns: false,
 };
 
-export const InteractiveExample: ComponentStory<
+export const InteractiveCheckedRowExample: ComponentStory<
   typeof ResponsiveTableSampleType
 > = (args) => {
   const [checkedRows, setCheckedRows] = useState<number[]>([]);
