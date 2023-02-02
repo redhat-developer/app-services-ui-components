@@ -186,7 +186,14 @@ export const InteractiveCheckedRowExample: ComponentStory<
   const isRowChecked = (rowIndex: number) => {
     return checkedRows.includes(rowIndex);
   };
-
+  const areAllRowsSelected = () => {
+    return checkedRows.length === sampleData.length;
+  };
+  const allIndexes = sampleData.map((_, index) => index);
+  const onBulkSelect = (isSelectng: boolean) => {
+    if (isSelectng) setCheckedRows(allIndexes);
+    else setCheckedRows([]);
+  };
   const onCheck = (isSelecting: boolean, rowIndex: number) => {
     if (rowIndex != undefined) {
       setCheckedRows(
@@ -201,6 +208,8 @@ export const InteractiveCheckedRowExample: ComponentStory<
       {...args}
       isRowChecked={isRowChecked}
       onCheck={onCheck}
+      areAllRowsChecked={areAllRowsSelected}
+      onBulkSelect={onBulkSelect}
       renderHeader={({ column, Th, key }) => (
         <Th key={key}>{columnLabels[column]}</Th>
       )}

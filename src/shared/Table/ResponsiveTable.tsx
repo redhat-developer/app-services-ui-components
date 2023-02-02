@@ -69,6 +69,8 @@ export type ResponsiveTableProps<TRow, TCol> = {
   tableOuiaId?: string;
   variant?: TableVariant;
   onCheck?: (isSelecting: boolean, rowIndex: number) => void;
+  areAllRowsChecked?: () => boolean;
+  onBulkSelect?: (isSelected: boolean) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -93,6 +95,8 @@ export const ResponsiveTable = <TRow, TCol>({
   children,
   variant,
   onCheck,
+  areAllRowsChecked,
+  onBulkSelect,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -185,6 +189,8 @@ export const ResponsiveTable = <TRow, TCol>({
     [columns, getTd]
   );
 
+  const allChecked = areAllRowsChecked != undefined && areAllRowsChecked();
+
   return (
     <TableComposable
       aria-label={ariaLabel}
@@ -196,7 +202,16 @@ export const ResponsiveTable = <TRow, TCol>({
     >
       <Thead>
         <Tr>
-          {isRowChecked !== undefined && <Th></Th>}
+          {onBulkSelect !== undefined && (
+            <Th
+              select={{
+                isSelected: allChecked,
+                onSelect: (_event, isSelecting) => {
+                  onBulkSelect(isSelecting);
+                },
+              }}
+            ></Th>
+          )}
           {header}
         </Tr>
       </Thead>
