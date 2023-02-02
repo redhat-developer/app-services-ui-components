@@ -8,8 +8,6 @@ import {
   CardHeaderMain,
   CardTitle,
   Grid,
-  Label,
-  LabelGroup,
   Stack,
   StackItem,
   Title,
@@ -96,14 +94,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="blue">
-                      {t("overview-v4:applicationService")}
-                    </Label>
-                    <Label>{t("overview-v4:servicePreview")}</Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhoapidesignerMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhoapidesignerSecondaryText")}
@@ -145,13 +135,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="blue">
-                      {t("overview-v4:applicationService")}
-                    </Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhoamMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhoamSecondaryText")}{" "}
@@ -202,14 +185,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="blue">
-                      {t("overview-v4:applicationService")}
-                    </Label>
-                    <Label color="green">{t("overview-v4:dataService")}</Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhosakMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhosakSecondaryText")}
@@ -246,13 +221,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="blue">
-                      {t("overview-v4:applicationService")}
-                    </Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhosrMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhosrSecondaryText")}
@@ -294,13 +262,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="blue">
-                      {t("overview-v4:applicationService")}
-                    </Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhocMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhocSecondaryText")}{" "}
@@ -349,12 +310,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="green">{t("overview:dataService")}</Label>
-                    <Label>{t("overview-v4:servicePreview")}</Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:dbaasMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:dbaasSecondaryText")}{" "}
@@ -406,12 +361,6 @@ export const OverviewPageV4: FunctionComponent<OverviewPageV4Props> = ({
             </CardTitle>
             <CardBody>
               <Stack hasGutter>
-                <StackItem className="pf-u-mb-lg">
-                  <LabelGroup>
-                    <Label color="green">{t("overview-v4:dataService")}</Label>
-                    <Label>{t("overview-v4:fieldTrial")}</Label>
-                  </LabelGroup>
-                </StackItem>
                 <StackItem>{t("overview-v4:rhodsMainText")}</StackItem>
                 <StackItem className="pf-u-color-200">
                   {t("overview-v4:rhodsSecondaryText")}{" "}
