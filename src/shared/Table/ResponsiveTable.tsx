@@ -61,14 +61,14 @@ export type ResponsiveTableProps<TRow, TCol> = {
   ) => (ResponsiveThProps["sort"] & { label: string }) | undefined;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
+  isRowChecked?: (rowIndex: number) => boolean;
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
   setActionCellOuiaId?: (props: RowProps<TRow>) => string;
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
   variant?: TableVariant;
-  isChecked: boolean;
-  onCheck: (isSelecting: boolean, rowIndex: number) => void;
+  onCheck?: (isSelecting: boolean, rowIndex: number) => void;
 };
 
 type RowProps<TRow> = { row: TRow; rowIndex: number };
@@ -84,6 +84,7 @@ export const ResponsiveTable = <TRow, TCol>({
   isColumnSortable,
   isRowDeleted,
   isRowSelected,
+  isRowChecked,
   expectedLength = 3,
   onRowClick,
   setActionCellOuiaId,
@@ -91,8 +92,6 @@ export const ResponsiveTable = <TRow, TCol>({
   tableOuiaId,
   children,
   variant,
-  //checkRow,
-  isChecked,
   onCheck,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
@@ -168,7 +167,6 @@ export const ResponsiveTable = <TRow, TCol>({
               tableWidth={width}
               columnWidth={minimumColumnWidth}
               canHide={canColumnBeHidden(index)}
-              isChecked={isChecked}
               {...props}
               ref={ref}
             >
@@ -180,7 +178,7 @@ export const ResponsiveTable = <TRow, TCol>({
       Td.displayName = "ResponsiveTdCurried";
       return Td;
     },
-    [canColumnBeHidden, isChecked, minimumColumnWidth, width]
+    [canColumnBeHidden, minimumColumnWidth, width]
   );
   const TdList = useMemo(
     () => columns.map((_, index) => getTd(index)),
@@ -198,7 +196,7 @@ export const ResponsiveTable = <TRow, TCol>({
     >
       <Thead>
         <Tr>
-          {isChecked !== undefined && <Th></Th>}
+          {isRowChecked !== undefined && <Th></Th>}
           {header}
         </Tr>
       </Thead>
@@ -216,6 +214,8 @@ export const ResponsiveTable = <TRow, TCol>({
           const selected =
             isRowSelected !== undefined &&
             isRowSelected({ row: row, rowIndex });
+
+          const checked = isRowChecked != undefined && isRowChecked(rowIndex);
 
           const onClick =
             !deleted && onRowClick
@@ -256,13 +256,13 @@ export const ResponsiveTable = <TRow, TCol>({
               onClick={onClick}
               rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
-              {isChecked !== undefined && (
+              {isRowChecked !== undefined && (
                 <Td
                   select={{
                     rowIndex,
-                    isSelected: isChecked,
+                    isSelected: checked,
                     onSelect: (_event, isSelecting, rowIndex) => {
-                      onCheck(isSelecting, rowIndex);
+                      onCheck && onCheck(isSelecting, rowIndex);
                     },
                   }}
                 />
@@ -325,8 +325,6 @@ export type ResponsiveTdProps = {
   tableWidth: number;
   columnWidth: number;
   canHide: boolean;
-  isChecked?: boolean;
-  onCheck?: (isSelecting: boolean) => void;
 } & Omit<TdProps, "ref">;
 export const ResponsiveTd = memo(
   forwardRef<HTMLTableCellElement, ResponsiveTdProps>((props, ref) => {
@@ -337,8 +335,6 @@ export const ResponsiveTd = memo(
       canHide,
       className = "",
       children,
-      isChecked,
-      onCheck,
       ...otherProps
     } = props;
     const responsiveClass =
@@ -350,16 +346,6 @@ export const ResponsiveTd = memo(
       <Td
         ref={ref}
         className={`${responsiveClass} ${className}`}
-        /* select={
-          isChecked != undefined
-            ? {
-                rowIndex: position,
-                isSelected: isChecked,
-                onSelect: (_, isSelecting) =>
-                  onCheck ? onCheck(isSelecting) : undefined,
-              }
-            : undefined
-        }*/
         {...otherProps}
       >
         {children}

@@ -103,8 +103,6 @@ const Template: ComponentStory<typeof ResponsiveTableSampleType> = (args) => {
       isRowDeleted={({ row }) => row[5] === "deleting"}
       isColumnSortable={args.isSortable ? isColumnSortable : undefined}
       onRowClick={args.onRowClick || eventsFromNames["onRowClick"]}
-      //onCheckRow={args.onCheckRow || eventsFromNames["onCheckRow"]}
-      //checkedRows={[]}
       setActionCellOuiaId={
         args.hasCustomActionTestId
           ? ({ rowIndex }) => `my-action-row-${rowIndex}`
@@ -180,31 +178,28 @@ PartiallySortable.args = {
   sortAllColumns: false,
 };
 
-export const SelectableWithCheckboxes = Template.bind({});
-SelectableWithCheckboxes.args = {
-  isChecked: true,
-};
-
 export const InteractiveExample: ComponentStory<
   typeof ResponsiveTableSampleType
 > = (args) => {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
   const [checkedRows, setCheckedRows] = useState<number[]>([]);
 
-  const onCheck = (isSelecting: boolean, rowIndex: number) => {
-    setCheckedRows(
-      isSelecting
-        ? [...checkedRows, rowIndex]
-        : checkedRows.filter((row) => row !== rowIndex)
-    );
-    //We need to set this value for each row, this will change the value for the entire table
-    setIsChecked(isSelecting);
+  const isRowChecked = (rowIndex: number) => {
+    return checkedRows.includes(rowIndex);
   };
 
+  const onCheck = (isSelecting: boolean, rowIndex: number) => {
+    if (rowIndex != undefined) {
+      setCheckedRows(
+        isSelecting
+          ? [...checkedRows, rowIndex]
+          : checkedRows.filter((row) => row !== rowIndex)
+      );
+    }
+  };
   return (
     <ResponsiveTable
       {...args}
-      isChecked={isChecked}
+      isRowChecked={isRowChecked}
       onCheck={onCheck}
       renderHeader={({ column, Th, key }) => (
         <Th key={key}>{columnLabels[column]}</Th>
