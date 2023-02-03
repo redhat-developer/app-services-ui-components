@@ -61,7 +61,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   ) => (ResponsiveThProps["sort"] & { label: string }) | undefined;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
-  isRowChecked?: (rowIndex: number) => boolean;
+  isRowChecked?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
   setActionCellOuiaId?: (props: RowProps<TRow>) => string;
@@ -70,10 +70,10 @@ export type ResponsiveTableProps<TRow, TCol> = {
   variant?: TableVariant;
   onCheck?: (isSelecting: boolean, rowIndex: number) => void;
   areAllRowsChecked?: () => boolean;
-  onBulkSelect?: (isSelected: boolean) => void;
+  onBulkCheck?: (isSelected: boolean) => void;
 };
 
-type RowProps<TRow> = { row: TRow; rowIndex: number };
+export type RowProps<TRow> = { row: TRow; rowIndex: number };
 
 export const ResponsiveTable = <TRow, TCol>({
   ariaLabel,
@@ -96,7 +96,7 @@ export const ResponsiveTable = <TRow, TCol>({
   variant,
   onCheck,
   areAllRowsChecked,
-  onBulkSelect,
+  onBulkCheck,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -191,6 +191,29 @@ export const ResponsiveTable = <TRow, TCol>({
 
   const allChecked = areAllRowsChecked != undefined && areAllRowsChecked();
 
+  const isBulkCheckPropsValid = () => {
+    if (onBulkCheck != undefined && areAllRowsChecked != undefined) return true;
+    else if (
+      (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
+      (onBulkCheck == undefined && areAllRowsChecked != undefined)
+    )
+      console.warn(`Not all props for checkbox have been defined`);
+    return false;
+  };
+
+  const isRowCheckPropsValid = () => {
+    if (isRowChecked != undefined && onCheck != undefined) return true;
+    else if (
+      (isRowChecked != undefined && onCheck == undefined) ||
+      (isRowChecked == undefined && onCheck != undefined)
+    )
+      console.warn(`Not all props for checkbox have been defined`);
+    return false;
+  };
+
+  const bulkCheckPropsValidation = isBulkCheckPropsValid();
+  const rowCheckPropsValidation = isRowCheckPropsValid();
+
   return (
     <TableComposable
       aria-label={ariaLabel}
@@ -202,14 +225,18 @@ export const ResponsiveTable = <TRow, TCol>({
     >
       <Thead>
         <Tr>
-          {onBulkSelect !== undefined && (
+          {rowCheckPropsValidation == true && (
             <Th
-              select={{
-                isSelected: allChecked,
-                onSelect: (_event, isSelecting) => {
-                  onBulkSelect(isSelecting);
-                },
-              }}
+              select={
+                bulkCheckPropsValidation == true
+                  ? {
+                      isSelected: allChecked,
+                      onSelect: (_event, isSelecting) => {
+                        onBulkCheck && onBulkCheck(isSelecting);
+                      },
+                    }
+                  : undefined
+              }
             ></Th>
           )}
           {header}
@@ -230,7 +257,8 @@ export const ResponsiveTable = <TRow, TCol>({
             isRowSelected !== undefined &&
             isRowSelected({ row: row, rowIndex });
 
-          const checked = isRowChecked != undefined && isRowChecked(rowIndex);
+          const checked =
+            isRowChecked != undefined && isRowChecked({ row: row, rowIndex });
 
           const onClick =
             !deleted && onRowClick
@@ -271,7 +299,7 @@ export const ResponsiveTable = <TRow, TCol>({
               onClick={onClick}
               rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
-              {isRowChecked !== undefined && (
+              {rowCheckPropsValidation == true && (
                 <Td
                   select={{
                     rowIndex,
