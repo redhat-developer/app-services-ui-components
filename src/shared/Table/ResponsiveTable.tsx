@@ -197,7 +197,7 @@ export const ResponsiveTable = <TRow, TCol>({
       (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
       (onBulkCheck == undefined && areAllRowsChecked != undefined)
     )
-      console.warn(`Not all props for checkbox have been defined`);
+      throw new Error("Not all props for checkbox have been defined");
     return false;
   };
 
@@ -207,7 +207,7 @@ export const ResponsiveTable = <TRow, TCol>({
       (isRowChecked != undefined && onCheck == undefined) ||
       (isRowChecked == undefined && onCheck != undefined)
     )
-      console.warn(`Not all props for checkbox have been defined`);
+      throw new Error("Not all props for checkbox have been defined");
     return false;
   };
 
