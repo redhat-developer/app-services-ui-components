@@ -192,22 +192,39 @@ export const ResponsiveTable = <TRow, TCol>({
   const allChecked = areAllRowsChecked != undefined && areAllRowsChecked();
 
   const isBulkCheckPropsValid = () => {
-    if (onBulkCheck != undefined && areAllRowsChecked != undefined) return true;
-    else if (
-      (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
-      (onBulkCheck == undefined && areAllRowsChecked != undefined)
-    )
-      throw new Error("Not all props for checkbox have been defined");
+    try {
+      if (onBulkCheck != undefined && areAllRowsChecked != undefined)
+        return true;
+      else if (
+        (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
+        (onBulkCheck == undefined && areAllRowsChecked != undefined)
+      )
+        throw new Error(
+          `${
+            onBulkCheck == undefined ? `onBulkCheck` : `areAllRowsChecked`
+          } for bullk check rows is not defined`
+        );
+    } catch (e) {
+      console.error(e);
+    }
     return false;
   };
 
   const isRowCheckPropsValid = () => {
-    if (isRowChecked != undefined && onCheck != undefined) return true;
-    else if (
-      (isRowChecked != undefined && onCheck == undefined) ||
-      (isRowChecked == undefined && onCheck != undefined)
-    )
-      throw new Error("Not all props for checkbox have been defined");
+    try {
+      if (isRowChecked != undefined && onCheck != undefined) return true;
+      else if (
+        (isRowChecked != undefined && onCheck == undefined) ||
+        (isRowChecked == undefined && onCheck != undefined)
+      )
+        throw new Error(
+          `${
+            isRowChecked == undefined ? `isRowChecked` : `onCheck`
+          } for check rows is not defined`
+        );
+    } catch (e) {
+      console.error(e);
+    }
     return false;
   };
 
