@@ -21,7 +21,7 @@ import {
 } from "./storybookHelpers";
 import { useSortableSearchParams } from "./useSortableSearchParams";
 
-const eventsFromNames = actions("onRowClick", "onCheckRow");
+const eventsFromNames = actions("onRowClick");
 
 const ResponsiveTableSampleType: VoidFunctionComponent<
   ResponsiveTableProps<SampleDataType, typeof columns[number]> & {
