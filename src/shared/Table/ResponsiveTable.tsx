@@ -192,44 +192,28 @@ export const ResponsiveTable = <TRow, TCol>({
   const allChecked = areAllRowsChecked != undefined && areAllRowsChecked();
 
   const isBulkCheckPropsValid = () => {
-    try {
-      if (onBulkCheck != undefined && areAllRowsChecked != undefined)
-        return true;
-      else if (
-        (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
-        (onBulkCheck == undefined && areAllRowsChecked != undefined)
-      )
-        throw new Error(
-          `${
-            onBulkCheck == undefined ? `onBulkCheck` : `areAllRowsChecked`
-          } for bullk check rows is not defined`
-        );
-    } catch (e) {
-      console.error(e);
-    }
-    return false;
+    if (
+      (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
+      (onBulkCheck == undefined && areAllRowsChecked != undefined)
+    )
+      throw new Error(
+        `${
+          onBulkCheck == undefined ? `onBulkCheck` : `areAllRowsChecked`
+        } for bullk check rows is not defined`
+      );
   };
 
   const isRowCheckPropsValid = () => {
-    try {
-      if (isRowChecked != undefined && onCheck != undefined) return true;
-      else if (
-        (isRowChecked != undefined && onCheck == undefined) ||
-        (isRowChecked == undefined && onCheck != undefined)
-      )
-        throw new Error(
-          `${
-            isRowChecked == undefined ? `isRowChecked` : `onCheck`
-          } for check rows is not defined`
-        );
-    } catch (e) {
-      console.error(e);
-    }
-    return false;
+    if (
+      (isRowChecked != undefined && onCheck == undefined) ||
+      (isRowChecked == undefined && onCheck != undefined)
+    )
+      throw new Error(
+        `${
+          isRowChecked == undefined ? `isRowChecked` : `onCheck`
+        } for check rows is not defined`
+      );
   };
-
-  const bulkCheckPropsValidation = isBulkCheckPropsValid();
-  const rowCheckPropsValidation = isRowCheckPropsValid();
 
   return (
     <TableComposable
@@ -241,11 +225,13 @@ export const ResponsiveTable = <TRow, TCol>({
       variant={variant}
     >
       <Thead>
+        {isBulkCheckPropsValid()}
+        {isRowCheckPropsValid()}
         <Tr>
-          {rowCheckPropsValidation == true && (
+          {onCheck != undefined && isRowChecked != undefined && (
             <Th
               select={
-                bulkCheckPropsValidation == true
+                allChecked != undefined && onBulkCheck != undefined
                   ? {
                       isSelected: allChecked,
                       onSelect: (_event, isSelecting) => {
@@ -316,7 +302,7 @@ export const ResponsiveTable = <TRow, TCol>({
               onClick={onClick}
               rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
-              {rowCheckPropsValidation == true && (
+              {onCheck != undefined && isRowChecked != undefined && (
                 <Td
                   select={{
                     rowIndex,
