@@ -6,13 +6,12 @@ import { ConsumerGroupEmptyState, ConsumerGroupStateLabel } from "./components";
 import { EmptyStateNoResults } from "../../shared";
 import { TableVariant } from "@patternfly/react-table";
 import type { ConsumerGroup, ConsumerGroupField } from "./types";
+type SubUnion<T, U extends T> = U;
 
-const Columns: ConsumerGroupField[] = [
-  "consumerGroupId",
-  "activeMembers",
-  "partitionsWithLag",
-  "state",
-];
+const Columns: SubUnion<
+  ConsumerGroupField,
+  "activeMembers" | "consumerGroupId" | "partitionsWithLag" | "state"
+>[] = ["consumerGroupId", "activeMembers", "partitionsWithLag", "state"];
 
 export type ConsumerGroupTableProps<T extends ConsumerGroup> = {
   consumers: Array<T> | undefined;
@@ -52,7 +51,7 @@ export const ConsumerGroupsTable = <T extends ConsumerGroup>({
 }: ConsumerGroupTableProps<T>) => {
   const { t } = useTranslation("kafka");
 
-  const labels: { [field in ConsumerGroupField]: string } = {
+  const labels: { [field in typeof Columns[number]]: string } = {
     consumerGroupId: t("consumerGroup.consumer_group_id"),
     activeMembers: t("consumerGroup.active_members"),
     partitionsWithLag: t("consumerGroup.partitions_with_lag"),

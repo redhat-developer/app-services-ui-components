@@ -14,6 +14,7 @@ import {
   Thead,
   Tr,
 } from "@patternfly/react-table";
+import type { ThSelectType } from "@patternfly/react-table/dist/esm/components/Table/base";
 import type {
   FunctionComponent,
   PropsWithChildren,
@@ -60,15 +61,19 @@ export type ResponsiveTableProps<TRow, TCol> = {
   ) => (ResponsiveThProps["sort"] & { label: string }) | undefined;
   isRowDeleted?: (props: RowProps<TRow>) => boolean;
   isRowSelected?: (props: RowProps<TRow>) => boolean;
+  isRowChecked?: (props: RowProps<TRow>) => boolean;
   expectedLength?: number;
   onRowClick?: (props: RowProps<TRow>) => void;
   setActionCellOuiaId?: (props: RowProps<TRow>) => string;
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
   variant?: TableVariant;
+  onCheck?: (isSelecting: boolean, rowIndex: number) => void;
+  areAllRowsChecked?: () => boolean;
+  onBulkCheck?: (isSelected: boolean) => void;
 };
 
-type RowProps<TRow> = { row: TRow; rowIndex: number };
+export type RowProps<TRow> = { row: TRow; rowIndex: number };
 
 export const ResponsiveTable = <TRow, TCol>({
   ariaLabel,
@@ -81,6 +86,7 @@ export const ResponsiveTable = <TRow, TCol>({
   isColumnSortable,
   isRowDeleted,
   isRowSelected,
+  isRowChecked,
   expectedLength = 3,
   onRowClick,
   setActionCellOuiaId,
@@ -88,6 +94,9 @@ export const ResponsiveTable = <TRow, TCol>({
   tableOuiaId,
   children,
   variant,
+  onCheck,
+  areAllRowsChecked,
+  onBulkCheck,
 }: PropsWithChildren<ResponsiveTableProps<TRow, TCol>>) => {
   const [width, setWidth] = useState(1000);
   let animationHandle: number;
@@ -180,6 +189,32 @@ export const ResponsiveTable = <TRow, TCol>({
     [columns, getTd]
   );
 
+  const allChecked = areAllRowsChecked != undefined && areAllRowsChecked();
+
+  const isBulkCheckPropsValid = () => {
+    if (
+      (onBulkCheck != undefined && areAllRowsChecked == undefined) ||
+      (onBulkCheck == undefined && areAllRowsChecked != undefined)
+    )
+      throw new Error(
+        `${
+          onBulkCheck == undefined ? `onBulkCheck` : `areAllRowsChecked`
+        } for bullk check rows is not defined`
+      );
+  };
+
+  const isRowCheckPropsValid = () => {
+    if (
+      (isRowChecked != undefined && onCheck == undefined) ||
+      (isRowChecked == undefined && onCheck != undefined)
+    )
+      throw new Error(
+        `${
+          isRowChecked == undefined ? `isRowChecked` : `onCheck`
+        } for check rows is not defined`
+      );
+  };
+
   return (
     <TableComposable
       aria-label={ariaLabel}
@@ -190,7 +225,25 @@ export const ResponsiveTable = <TRow, TCol>({
       variant={variant}
     >
       <Thead>
-        <Tr>{header}</Tr>
+        {isBulkCheckPropsValid()}
+        {isRowCheckPropsValid()}
+        <Tr>
+          {onCheck != undefined && isRowChecked != undefined && (
+            <Th
+              select={
+                allChecked != undefined && onBulkCheck != undefined
+                  ? {
+                      isSelected: allChecked,
+                      onSelect: (_event, isSelecting) => {
+                        onBulkCheck && onBulkCheck(isSelecting);
+                      },
+                    }
+                  : undefined
+              }
+            ></Th>
+          )}
+          {header}
+        </Tr>
       </Thead>
       <Tbody>
         {data === undefined && (
@@ -206,6 +259,9 @@ export const ResponsiveTable = <TRow, TCol>({
           const selected =
             isRowSelected !== undefined &&
             isRowSelected({ row: row, rowIndex });
+
+          const checked =
+            isRowChecked != undefined && isRowChecked({ row: row, rowIndex });
 
           const onClick =
             !deleted && onRowClick
@@ -246,6 +302,17 @@ export const ResponsiveTable = <TRow, TCol>({
               onClick={onClick}
               rowOuiaId={setRowOuiaId?.({ row, rowIndex })}
             >
+              {onCheck != undefined && isRowChecked != undefined && (
+                <Td
+                  select={{
+                    rowIndex,
+                    isSelected: checked,
+                    onSelect: (_event, isSelecting, rowIndex) => {
+                      onCheck && onCheck(isSelecting, rowIndex);
+                    },
+                  }}
+                />
+              )}
               {cells}
               {action}
             </DeletableRow>
@@ -266,6 +333,7 @@ export type ResponsiveThProps = {
   tableWidth: number;
   columnWidth: number;
   canHide: boolean;
+  checkCol?: ThSelectType;
 } & Omit<ThProps, "ref">;
 export const ResponsiveTh = memo(
   forwardRef<HTMLTableCellElement, ResponsiveThProps>((props, ref) => {
@@ -276,6 +344,7 @@ export const ResponsiveTh = memo(
       canHide,
       className = "",
       children,
+      checkCol,
       ...otherProps
     } = props;
     const responsiveClass =
@@ -287,6 +356,7 @@ export const ResponsiveTh = memo(
       <Th
         ref={ref}
         className={`${responsiveClass} ${className}`}
+        select={checkCol}
         {...otherProps}
       >
         {children}

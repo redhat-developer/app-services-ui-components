@@ -87,6 +87,8 @@ const Template: ComponentStory<typeof TableViewSampleType> = (args) => {
           : undefined
       }
       isRowDeleted={({ row }) => row[5] === "deleting"}
+      onCheck={undefined}
+      onBulkCheck={undefined}
       {...eventsFromNames}
     />
   );
