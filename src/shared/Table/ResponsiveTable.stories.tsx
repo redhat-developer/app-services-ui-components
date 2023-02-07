@@ -9,6 +9,7 @@ import { InfoIcon } from "@patternfly/react-icons";
 import { actions } from "@storybook/addon-actions";
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import type { VoidFunctionComponent } from "react";
+import { useState } from "react";
 import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 import type { SampleDataType } from "./storybookHelpers";
@@ -31,6 +32,7 @@ const ResponsiveTableSampleType: VoidFunctionComponent<
     isSortable?: boolean;
     sortAllColumns?: boolean;
     selectedRow?: number;
+    isCheckable?: boolean;
   }
 > = (props) => <ResponsiveTable {...props} />;
 
@@ -174,4 +176,45 @@ export const PartiallySortable = Template.bind({});
 PartiallySortable.args = {
   isSortable: true,
   sortAllColumns: false,
+};
+
+export const InteractiveCheckedRowExample: ComponentStory<
+  typeof ResponsiveTableSampleType
+> = (args) => {
+  const [checkedRows, setCheckedRows] = useState<number[]>([]);
+
+  const areAllRowsSelected = () => {
+    return checkedRows.length === sampleData.length;
+  };
+  const allIndexes = sampleData.map((_, index) => index);
+  const onBulkCheck = (isSelectng: boolean) => {
+    if (isSelectng) setCheckedRows(allIndexes);
+    else setCheckedRows([]);
+  };
+  const onCheck = (isSelecting: boolean, rowIndex: number) => {
+    if (rowIndex != undefined) {
+      setCheckedRows(
+        isSelecting
+          ? [...checkedRows, rowIndex]
+          : checkedRows.filter((row) => row !== rowIndex)
+      );
+    }
+  };
+  return (
+    <ResponsiveTable
+      {...args}
+      isRowChecked={({ rowIndex }) => checkedRows.includes(rowIndex)}
+      onCheck={onCheck}
+      areAllRowsChecked={areAllRowsSelected}
+      onBulkCheck={onBulkCheck}
+      renderHeader={({ column, Th, key }) => (
+        <Th key={key}>{columnLabels[column]}</Th>
+      )}
+      renderCell={({ column, row, colIndex, Td, key }) => (
+        <Td key={key} dataLabel={columnLabels[column]}>
+          {row[colIndex]}
+        </Td>
+      )}
+    />
+  );
 };
