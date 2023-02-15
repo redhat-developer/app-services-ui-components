@@ -1,10 +1,16 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerPanelBody,
+  DrawerPanelContent,
+} from "@patternfly/react-core";
 
 import { ConnectorDrawerMessageStatistics } from "./ConnectorDrawerMessageStatistics";
 
 export default {
-  title: "POC-Connectors Message Drawer/Varient 3 Example",
+  title: "POC-Connectors Message Drawer/Variant 1 Example",
   component: ConnectorDrawerMessageStatistics,
   args: {},
   parameters: {
@@ -12,6 +18,21 @@ export default {
       default: "white",
     },
   },
+  decorators: [
+    (Story) => (
+      <Drawer isExpanded={true}>
+        <DrawerContent
+          panelContent={
+            <DrawerPanelContent>
+              <DrawerPanelBody>
+                <Story />
+              </DrawerPanelBody>
+            </DrawerPanelContent>
+          }
+        />
+      </Drawer>
+    ),
+  ],
 } as ComponentMeta<typeof ConnectorDrawerMessageStatistics>;
 
 const Template: ComponentStory<typeof ConnectorDrawerMessageStatistics> = (

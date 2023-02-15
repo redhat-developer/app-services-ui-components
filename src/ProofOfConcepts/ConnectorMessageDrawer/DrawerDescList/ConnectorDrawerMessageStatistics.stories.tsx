@@ -1,6 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
-import { Drawer, DrawerContent } from "@patternfly/react-core";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerPanelBody,
+  DrawerPanelContent,
+} from "@patternfly/react-core";
 
 import { ConnectorDrawerMessageStatistics } from "./ConnectorDrawerMessageStatistics";
 
@@ -15,11 +20,17 @@ export default {
   },
   decorators: [
     (Story) => (
-      <div>
-        <Drawer className={"SomeObviousWordToFind"} isExpanded={true}>
-          <DrawerContent panelContent={<Story />} />
-        </Drawer>
-      </div>
+      <Drawer isExpanded={true}>
+        <DrawerContent
+          panelContent={
+            <DrawerPanelContent>
+              <DrawerPanelBody>
+                <Story />
+              </DrawerPanelBody>
+            </DrawerPanelContent>
+          }
+        />
+      </Drawer>
     ),
   ],
 } as ComponentMeta<typeof ConnectorDrawerMessageStatistics>;
