@@ -49,7 +49,7 @@ describe("TableView", () => {
 
   it("renders a kebab in the toolbar", () => {
     const comp = render(<KebabAndButtonToolbarVisible />);
-    expect(comp.getByTestId("kebab-action")).toBeInTheDocument();
+    expect(comp.getByTestId("kebab-dropdown")).toBeInTheDocument();
   });
 
   it("renders a button in the toolbar", () => {
