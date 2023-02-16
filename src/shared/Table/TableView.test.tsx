@@ -5,11 +5,13 @@ import * as stories from "./TableView.stories";
 
 const {
   Example,
+  KebabToolbarVisible,
   FirstLoadShowsSpinner,
   NoInitialDataShowsRightEmptyState,
   LoadingDataAfterFilteringShowsASkeletonAndNoPagination,
   NoResultsForFilterShowsRightEmptyState,
   SinglePageShowsNoPaginationControl,
+  KebabActionButtonVisible,
 } = composeStories(stories);
 
 describe("TableView", () => {
@@ -43,6 +45,16 @@ describe("TableView", () => {
         "Empty state to show when the initial loading returns no data"
       )
     ).toBeInTheDocument();
+  });
+
+  it("renders a kebab in the toolbar", () => {
+    const comp = render(<KebabToolbarVisible />);
+    expect(comp.getByTestId("kebab-action")).toBeInTheDocument();
+  });
+
+  it("renders a button in the toolbar", () => {
+    const comp = render(<KebabActionButtonVisible />);
+    expect(comp.getByText("Create instance")).toBeInTheDocument();
   });
 
   it("shows a skeleton loader with undefined data but with a known item count", async () => {

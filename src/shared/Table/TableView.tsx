@@ -34,10 +34,18 @@ import { ChipFilter } from "../TableToolbar";
 import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 
+export type ActionDropdownItemsType = {
+  value: string;
+  isDisabled: boolean;
+  onClick: () => void;
+};
+
 export type ToolbarAction = {
   label: string;
   isPrimary: boolean;
   onClick: () => void;
+  hasKebabToolbarAction?: boolean; //Tells us if the action item is a kebab dropdown
+  dropdownItems?: ActionDropdownItemsType[];
 };
 
 export const DEFAULT_PERPAGE = 20;
@@ -56,6 +64,7 @@ export type TableViewProps<TRow, TCol> = {
   data: ResponsiveTableProps<TRow, TCol>["data"] | null;
   emptyStateNoData: ReactElement;
   emptyStateNoResults: ReactElement;
+  isToolbarKebabActionVisible?: boolean; //Boolean to decide if we want to show kebab action items
 } & Omit<ResponsiveTableProps<TRow, TCol>, "data">;
 export const TableView = <TRow, TCol>({
   toolbarBreakpoint = "lg",
@@ -73,6 +82,7 @@ export const TableView = <TRow, TCol>({
   isFiltered,
   emptyStateNoData,
   emptyStateNoResults,
+  isToolbarKebabActionVisible,
   ...tableProps
 }: TableViewProps<TRow, TCol>) => {
   const [isSortOpen, toggleIsSortOpen] = useState(false);
@@ -198,37 +208,52 @@ export const TableView = <TRow, TCol>({
               <OverflowMenuContent isPersistent>
                 <OverflowMenuGroup isPersistent groupType="button">
                   <OverflowMenuItem>
-                    {actions.map((a, idx) => (
-                      <Button
-                        key={idx}
-                        variant={a.isPrimary ? "primary" : undefined}
-                        onClick={a.onClick}
-                      >
-                        {a.label}
-                      </Button>
-                    ))}
+                    {actions.map(
+                      (a, idx) =>
+                        !a.hasKebabToolbarAction && (
+                          <Button
+                            key={idx}
+                            variant={a.isPrimary ? "primary" : undefined}
+                            onClick={a.onClick}
+                          >
+                            {a.label}
+                          </Button>
+                        )
+                    )}
                   </OverflowMenuItem>
                 </OverflowMenuGroup>
               </OverflowMenuContent>
-              <OverflowMenuControl>
-                <Dropdown
-                  isPlain
-                  toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
-                  isOpen={isActionsOpen}
-                  dropdownItems={actions.map((a, idx) => (
-                    <OverflowMenuDropdownItem
-                      key={idx}
-                      onClick={() => {
-                        a.onClick();
-                        toggleIsActionsOpen(false);
-                      }}
-                    >
-                      {a.label}
-                    </OverflowMenuDropdownItem>
-                  ))}
-                  isFlipEnabled
-                  menuAppendTo="parent"
-                />
+              <OverflowMenuControl
+                hasAdditionalOptions={isToolbarKebabActionVisible}
+              >
+                {actions.map(
+                  (a, idx) =>
+                    a.hasKebabToolbarAction &&
+                    a.dropdownItems && (
+                      <Dropdown
+                        data-testid={a.label}
+                        key={idx}
+                        isPlain
+                        toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
+                        isOpen={isActionsOpen}
+                        dropdownItems={a.dropdownItems.map((item, id) => (
+                          <OverflowMenuDropdownItem
+                            key={id}
+                            isDisabled={item.isDisabled}
+                            onClick={() => {
+                              item.onClick();
+                              toggleIsActionsOpen(false);
+                            }}
+                          >
+                            {item.value}
+                          </OverflowMenuDropdownItem>
+                        ))}
+                        isFlipEnabled
+                        menuAppendTo="parent"
+                      />
+                    )
+                )}
+                )
               </OverflowMenuControl>
             </OverflowMenu>
           )}

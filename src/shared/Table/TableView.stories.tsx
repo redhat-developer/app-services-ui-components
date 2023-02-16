@@ -97,6 +97,50 @@ Example.args = {
   data: sampleData,
 };
 
+export const KebabToolbarVisible = Template.bind({});
+KebabToolbarVisible.args = {
+  data: sampleData,
+  isToolbarKebabActionVisible: true,
+  actions: [
+    {
+      hasKebabToolbarAction: true,
+      label: "kebab-action",
+      isPrimary: true,
+      onClick: () => {
+        return;
+      },
+      dropdownItems: [
+        {
+          value: "first action",
+          isDisabled: false,
+          onClick: () => {
+            return;
+          },
+        },
+        {
+          value: "second action",
+          isDisabled: true,
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    },
+  ],
+};
+export const KebabActionButtonVisible = Template.bind({});
+KebabActionButtonVisible.args = {
+  data: sampleData,
+  actions: [
+    {
+      label: "Create instance",
+      isPrimary: true,
+      onClick: () => {
+        return;
+      },
+    },
+  ],
+};
 export const FirstLoadShowsSpinner = Template.bind({});
 FirstLoadShowsSpinner.args = {
   data: null,
