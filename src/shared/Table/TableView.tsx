@@ -130,10 +130,7 @@ export const TableView = <TRow, TCol>({
         {a.label}
       </OverflowMenuDropdownItem>
     ));
-    if (buttonActions != undefined && kebabActionItems != undefined)
-      return buttonActions.concat(kebabActionItems);
-    else if (buttonActions != undefined) return buttonActions;
-    return kebabActionItems;
+    return [...(buttonActions || []), ...(kebabActionItems || [])];
   };
 
   const dropdownItems = transformDropdownItems();
