@@ -11,7 +11,7 @@ const {
   LoadingDataAfterFilteringShowsASkeletonAndNoPagination,
   NoResultsForFilterShowsRightEmptyState,
   SinglePageShowsNoPaginationControl,
-  KebabActionButtonVisible,
+  ToolbarActionButtonVisible,
 } = composeStories(stories);
 
 describe("TableView", () => {
@@ -53,7 +53,7 @@ describe("TableView", () => {
   });
 
   it("renders a button in the toolbar", () => {
-    const comp = render(<KebabActionButtonVisible />);
+    const comp = render(<ToolbarActionButtonVisible />);
     expect(comp.getByText("Create instance")).toBeInTheDocument();
   });
 

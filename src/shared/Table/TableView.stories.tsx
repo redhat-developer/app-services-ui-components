@@ -128,8 +128,8 @@ KebabToolbarVisible.args = {
     },
   ],
 };
-export const KebabActionButtonVisible = Template.bind({});
-KebabActionButtonVisible.args = {
+export const ToolbarActionButtonVisible = Template.bind({});
+ToolbarActionButtonVisible.args = {
   data: sampleData,
   actions: [
     {
