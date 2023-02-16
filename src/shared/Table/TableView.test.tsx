@@ -5,7 +5,7 @@ import * as stories from "./TableView.stories";
 
 const {
   Example,
-  KebabToolbarVisible,
+  KebabAndButtonToolbarVisible,
   FirstLoadShowsSpinner,
   NoInitialDataShowsRightEmptyState,
   LoadingDataAfterFilteringShowsASkeletonAndNoPagination,
@@ -48,7 +48,7 @@ describe("TableView", () => {
   });
 
   it("renders a kebab in the toolbar", () => {
-    const comp = render(<KebabToolbarVisible />);
+    const comp = render(<KebabAndButtonToolbarVisible />);
     expect(comp.getByTestId("kebab-action")).toBeInTheDocument();
   });
 

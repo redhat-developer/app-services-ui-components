@@ -44,7 +44,6 @@ export type ToolbarAction = {
   label: string;
   isPrimary: boolean;
   onClick: () => void;
-  hasKebabToolbarAction?: boolean; //Tells us if the action item is a kebab dropdown
   dropdownItems?: ActionDropdownItemsType[];
 };
 
@@ -64,7 +63,6 @@ export type TableViewProps<TRow, TCol> = {
   data: ResponsiveTableProps<TRow, TCol>["data"] | null;
   emptyStateNoData: ReactElement;
   emptyStateNoResults: ReactElement;
-  isToolbarKebabActionVisible?: boolean; //Boolean to decide if we want to show kebab action items
 } & Omit<ResponsiveTableProps<TRow, TCol>, "data">;
 export const TableView = <TRow, TCol>({
   toolbarBreakpoint = "lg",
@@ -82,7 +80,6 @@ export const TableView = <TRow, TCol>({
   isFiltered,
   emptyStateNoData,
   emptyStateNoResults,
-  isToolbarKebabActionVisible,
   ...tableProps
 }: TableViewProps<TRow, TCol>) => {
   const [isSortOpen, toggleIsSortOpen] = useState(false);
@@ -210,7 +207,7 @@ export const TableView = <TRow, TCol>({
                   <OverflowMenuItem>
                     {actions.map(
                       (a, idx) =>
-                        !a.hasKebabToolbarAction && (
+                        !a.dropdownItems && (
                           <Button
                             key={idx}
                             variant={a.isPrimary ? "primary" : undefined}
@@ -224,11 +221,10 @@ export const TableView = <TRow, TCol>({
                 </OverflowMenuGroup>
               </OverflowMenuContent>
               <OverflowMenuControl
-                hasAdditionalOptions={isToolbarKebabActionVisible}
+                hasAdditionalOptions={actions.some((a) => a.dropdownItems)}
               >
                 {actions.map(
                   (a, idx) =>
-                    a.hasKebabToolbarAction &&
                     a.dropdownItems && (
                       <Dropdown
                         data-testid={a.label}
