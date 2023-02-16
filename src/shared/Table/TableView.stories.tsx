@@ -99,6 +99,69 @@ Example.args = {
   data: sampleData,
 };
 
+export const KebabAndButtonToolbarVisible = Template.bind({});
+KebabAndButtonToolbarVisible.args = {
+  data: sampleData,
+  kebabActions: [
+    {
+      label: "First action",
+      isDisabled: false,
+      onClick: () => {
+        return;
+      },
+    },
+    {
+      label: "second action",
+      isDisabled: true,
+      onClick: () => {
+        return;
+      },
+    },
+  ],
+  actions: [
+    {
+      label: "Create instance",
+      isPrimary: true,
+      onClick: () => {
+        return;
+      },
+    },
+  ],
+};
+
+export const OnlyToolbarKebabActionVisible = Template.bind({});
+OnlyToolbarKebabActionVisible.args = {
+  data: sampleData,
+  kebabActions: [
+    {
+      label: "First action",
+      isDisabled: false,
+      onClick: () => {
+        return;
+      },
+    },
+    {
+      label: "second action",
+      isDisabled: true,
+      onClick: () => {
+        return;
+      },
+    },
+  ],
+};
+export const ToolbarActionButtonVisible = Template.bind({});
+ToolbarActionButtonVisible.args = {
+  data: sampleData,
+  actions: [
+    {
+      label: "Create instance",
+      isPrimary: true,
+      onClick: () => {
+        return;
+      },
+    },
+  ],
+};
 export const FirstLoadShowsSpinner = Template.bind({});
 FirstLoadShowsSpinner.args = {
   data: null,

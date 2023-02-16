@@ -34,6 +34,12 @@ import { ChipFilter } from "../TableToolbar";
 import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 
+export type KebabActionsType = {
+  label: string;
+  isDisabled: boolean;
+  onClick: () => void;
+};
+
 export type ToolbarAction = {
   label: string;
   isPrimary: boolean;
@@ -56,6 +62,7 @@ export type TableViewProps<TRow, TCol> = {
   data: ResponsiveTableProps<TRow, TCol>["data"] | null;
   emptyStateNoData: ReactElement;
   emptyStateNoResults: ReactElement;
+  kebabActions?: KebabActionsType[];
 } & Omit<ResponsiveTableProps<TRow, TCol>, "data">;
 export const TableView = <TRow, TCol>({
   toolbarBreakpoint = "lg",
@@ -73,6 +80,7 @@ export const TableView = <TRow, TCol>({
   isFiltered,
   emptyStateNoData,
   emptyStateNoResults,
+  kebabActions,
   ...tableProps
 }: TableViewProps<TRow, TCol>) => {
   const [isSortOpen, toggleIsSortOpen] = useState(false);
@@ -96,6 +104,36 @@ export const TableView = <TRow, TCol>({
   if (data?.length === 0 && !isFiltered) {
     return emptyStateNoData;
   }
+
+  const transformDropdownItems = () => {
+    const buttonActions = actions?.map((a, id) => (
+      <OverflowMenuDropdownItem
+        key={id}
+        onClick={() => {
+          a.onClick;
+          toggleIsActionsOpen(false);
+        }}
+        isShared
+      >
+        {a.label}
+      </OverflowMenuDropdownItem>
+    ));
+    const kebabActionItems = kebabActions?.map((a, id) => (
+      <OverflowMenuDropdownItem
+        key={id}
+        onClick={() => {
+          a.onClick;
+          toggleIsActionsOpen(false);
+        }}
+        isDisabled={a.isDisabled}
+      >
+        {a.label}
+      </OverflowMenuDropdownItem>
+    ));
+    return [...(buttonActions || []), ...(kebabActionItems || [])];
+  };
+
+  const dropdownItems = transformDropdownItems();
   return (
     <OuterScrollContainer className={"pf-u-h-100"}>
       <Toolbar
@@ -198,34 +236,28 @@ export const TableView = <TRow, TCol>({
               <OverflowMenuContent isPersistent>
                 <OverflowMenuGroup isPersistent groupType="button">
                   <OverflowMenuItem>
-                    {actions.map((a, idx) => (
-                      <Button
-                        key={idx}
-                        variant={a.isPrimary ? "primary" : undefined}
-                        onClick={a.onClick}
-                      >
-                        {a.label}
-                      </Button>
-                    ))}
+                    {actions &&
+                      actions.map((a, idx) => (
+                        <Button
+                          key={idx}
+                          variant={a.isPrimary ? "primary" : undefined}
+                          onClick={a.onClick}
+                        >
+                          {a.label}
+                        </Button>
+                      ))}
                   </OverflowMenuItem>
                 </OverflowMenuGroup>
               </OverflowMenuContent>
-              <OverflowMenuControl>
+              <OverflowMenuControl
+                hasAdditionalOptions={kebabActions ? true : false}
+              >
                 <Dropdown
+                  data-testid={"kebab-dropdown"}
                   isPlain
                   toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
                   isOpen={isActionsOpen}
-                  dropdownItems={actions.map((a, idx) => (
-                    <OverflowMenuDropdownItem
-                      key={idx}
-                      onClick={() => {
-                        a.onClick();
-                        toggleIsActionsOpen(false);
-                      }}
-                    >
-                      {a.label}
-                    </OverflowMenuDropdownItem>
-                  ))}
+                  dropdownItems={dropdownItems}
                   isFlipEnabled
                   menuAppendTo="parent"
                 />
