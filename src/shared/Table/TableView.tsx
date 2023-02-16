@@ -110,7 +110,7 @@ export const TableView = <TRow, TCol>({
       <OverflowMenuDropdownItem
         key={id}
         onClick={() => {
-          a.onClick;
+          a.onClick();
           toggleIsActionsOpen(false);
         }}
         isShared
@@ -120,9 +120,9 @@ export const TableView = <TRow, TCol>({
     ));
     const kebabActionItems = kebabActions?.map((a, id) => (
       <OverflowMenuDropdownItem
-        key={id}
+        key={`kebab-${id}`}
         onClick={() => {
-          a.onClick;
+          a.onClick();
           toggleIsActionsOpen(false);
         }}
         isDisabled={a.isDisabled}
@@ -231,39 +231,37 @@ export const TableView = <TRow, TCol>({
           {filters && <ChipFilter breakpoint={breakpoint} filters={filters} />}
 
           {/* responsive action buttons, fallback on a dropdown on small viewports */}
-          {actions && (
-            <OverflowMenu breakpoint={breakpoint}>
-              <OverflowMenuContent isPersistent>
-                <OverflowMenuGroup isPersistent groupType="button">
-                  <OverflowMenuItem>
-                    {actions &&
-                      actions.map((a, idx) => (
-                        <Button
-                          key={idx}
-                          variant={a.isPrimary ? "primary" : undefined}
-                          onClick={a.onClick}
-                        >
-                          {a.label}
-                        </Button>
-                      ))}
-                  </OverflowMenuItem>
-                </OverflowMenuGroup>
-              </OverflowMenuContent>
-              <OverflowMenuControl
-                hasAdditionalOptions={kebabActions ? true : false}
-              >
-                <Dropdown
-                  data-testid={"kebab-dropdown"}
-                  isPlain
-                  toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
-                  isOpen={isActionsOpen}
-                  dropdownItems={dropdownItems}
-                  isFlipEnabled
-                  menuAppendTo="parent"
-                />
-              </OverflowMenuControl>
-            </OverflowMenu>
-          )}
+          <OverflowMenu breakpoint={breakpoint}>
+            <OverflowMenuContent isPersistent>
+              <OverflowMenuGroup isPersistent groupType="button">
+                <OverflowMenuItem>
+                  {actions &&
+                    actions.map((a, idx) => (
+                      <Button
+                        key={idx}
+                        variant={a.isPrimary ? "primary" : undefined}
+                        onClick={a.onClick}
+                      >
+                        {a.label}
+                      </Button>
+                    ))}
+                </OverflowMenuItem>
+              </OverflowMenuGroup>
+            </OverflowMenuContent>
+            <OverflowMenuControl
+              hasAdditionalOptions={kebabActions ? true : false}
+            >
+              <Dropdown
+                data-testid={"kebab-dropdown"}
+                isPlain
+                toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
+                isOpen={isActionsOpen}
+                dropdownItems={dropdownItems}
+                isFlipEnabled
+                menuAppendTo="parent"
+              />
+            </OverflowMenuControl>
+          </OverflowMenu>
 
           {/* icon buttons */}
           {tools && (
