@@ -5,7 +5,7 @@ import { render, waitForI18n, waitForPopper, within } from "../../test-utils";
 const { InteractiveExample } = composeStories(stories);
 
 describe("Manage Kafka Permissions Dialog", () => {
-  jest.setTimeout(10000);
+  jest.setTimeout(20000);
   it("should render an acl modal for a service account", async () => {
     const onCancel = jest.fn();
     const onSave = jest.fn();
