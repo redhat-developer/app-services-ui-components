@@ -35,7 +35,7 @@ import type { ResponsiveTableProps } from "./ResponsiveTable";
 import { ResponsiveTable } from "./ResponsiveTable";
 
 export type KebabActionsType = {
-  value: string;
+  label: string;
   isDisabled: boolean;
   onClick: () => void;
 };
@@ -104,6 +104,39 @@ export const TableView = <TRow, TCol>({
   if (data?.length === 0 && !isFiltered) {
     return emptyStateNoData;
   }
+
+  const transformDropdownItems = () => {
+    const buttonActions = actions?.map((a, id) => (
+      <OverflowMenuDropdownItem
+        key={id}
+        onClick={() => {
+          a.onClick;
+          toggleIsActionsOpen(false);
+        }}
+        isShared
+      >
+        {a.label}
+      </OverflowMenuDropdownItem>
+    ));
+    const kebabActionItems = kebabActions?.map((a, id) => (
+      <OverflowMenuDropdownItem
+        key={id}
+        onClick={() => {
+          a.onClick;
+          toggleIsActionsOpen(false);
+        }}
+        isDisabled={a.isDisabled}
+      >
+        {a.label}
+      </OverflowMenuDropdownItem>
+    ));
+    if (buttonActions != undefined && kebabActionItems != undefined)
+      return buttonActions.concat(kebabActionItems);
+    else if (buttonActions != undefined) return buttonActions;
+    return kebabActionItems;
+  };
+
+  const dropdownItems = transformDropdownItems();
   return (
     <OuterScrollContainer className={"pf-u-h-100"}>
       <Toolbar
@@ -227,18 +260,7 @@ export const TableView = <TRow, TCol>({
                 isPlain
                 toggle={<KebabToggle onToggle={toggleIsActionsOpen} />}
                 isOpen={isActionsOpen}
-                dropdownItems={kebabActions?.map((item, idx) => (
-                  <OverflowMenuDropdownItem
-                    key={idx}
-                    isDisabled={item.isDisabled}
-                    onClick={() => {
-                      item.onClick();
-                      toggleIsActionsOpen(false);
-                    }}
-                  >
-                    {item.value}
-                  </OverflowMenuDropdownItem>
-                ))}
+                dropdownItems={dropdownItems}
                 isFlipEnabled
                 menuAppendTo="parent"
               />

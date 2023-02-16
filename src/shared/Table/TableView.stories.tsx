@@ -102,14 +102,14 @@ KebabAndButtonToolbarVisible.args = {
   data: sampleData,
   kebabActions: [
     {
-      value: "First action",
+      label: "First action",
       isDisabled: false,
       onClick: () => {
         return;
       },
     },
     {
-      value: "second action",
+      label: "second action",
       isDisabled: true,
       onClick: () => {
         return;
@@ -132,14 +132,14 @@ OnlyToolbarKebabActionVisible.args = {
   data: sampleData,
   kebabActions: [
     {
-      value: "First action",
+      label: "First action",
       isDisabled: false,
       onClick: () => {
         return;
       },
     },
     {
-      value: "second action",
+      label: "second action",
       isDisabled: true,
       onClick: () => {
         return;
