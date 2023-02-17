@@ -20,10 +20,13 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
+import {
+  global_success_color_100,
+  global_danger_color_100,
+} from "@patternfly/react-tokens";
+
 import { ExclamationIcon } from "@patternfly/react-icons";
 import CheckIcon from "@patternfly/react-icons/dist/esm/icons/check-icon";
-
-import "./ConnectorDrawer.css";
 
 export const ConnectorDrawerMessageStatistics = () => {
   return (
@@ -51,7 +54,7 @@ export const ConnectorDrawerMessageStatistics = () => {
                   <Flex>
                     <FlexItem>1600 sent</FlexItem>
                     <FlexItem>
-                      <CheckIcon className="pf-u-icon-color-green" />
+                      <CheckIcon color={global_success_color_100.value} />
                     </FlexItem>
                   </Flex>
                 </Title>
@@ -65,7 +68,7 @@ export const ConnectorDrawerMessageStatistics = () => {
                   <Flex>
                     <FlexItem>12 not sent</FlexItem>
                     <FlexItem>
-                      <ExclamationIcon className="pf-u-icon-color-red" />
+                      <ExclamationIcon color={global_danger_color_100.value} />
                     </FlexItem>
                   </Flex>
                 </Title>
