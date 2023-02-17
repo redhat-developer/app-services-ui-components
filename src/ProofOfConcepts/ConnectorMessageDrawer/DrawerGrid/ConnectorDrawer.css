@@ -1,31 +1,3 @@
-.connector-drawer__header-text {
-  margin-bottom: 0 !important;
-}
-.connector-drawer__header-title {
-  margin-top: 0 !important;
-}
-.connector-drawer__tab-content {
-  padding-top: var(--pf-global--spacer--lg);
-  padding-bottom: var(--pf-global--spacer--lg);
-}
-
-.pf-u-icon-color-green {
-  color: var(--pf-global--success-color--100);
-}
-
-.pf-u-icon-color-red {
-  color: var(--pf-global--danger-color--100);
-}
-
-.pf-c-card__body.sent-spacing {
-  padding-left: var(--pf-global--spacer--md);
-}
-
 .pf-c-card__footer.processed-messages-info {
-  color: var(--pf-global--Color--200);
   padding-left: var(--pf-global--spacer--md);
-}
-
-.pf-c-alert.alert-spacing {
-  padding-top: 50% !important;
 }

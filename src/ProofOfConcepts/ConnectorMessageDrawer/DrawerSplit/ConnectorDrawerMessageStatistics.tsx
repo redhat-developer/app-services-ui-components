@@ -20,8 +20,12 @@ import {
   Split,
   SplitItem,
 } from "@patternfly/react-core";
-import { ExclamationIcon } from "@patternfly/react-icons";
+import {
+  global_success_color_100,
+  global_danger_color_100,
+} from "@patternfly/react-tokens";
 
+import { ExclamationIcon } from "@patternfly/react-icons";
 import CheckIcon from "@patternfly/react-icons/dist/esm/icons/check-icon";
 
 import "./ConnectorDrawer.css";
@@ -45,15 +49,14 @@ export const ConnectorDrawerMessageStatistics = () => {
               Processed messages
             </Title>
           </CardTitle>
-          {/** split, grid, --desc list */}
-          <CardBody className="sent-spacing">
+          <CardBody>
             <Split>
               <SplitItem isFilled>
-                <CheckIcon className="pf-u-icon-color-green" />
+                <CheckIcon color={global_success_color_100.value} />
                 1600 sent
               </SplitItem>
-              <SplitItem>
-                <ExclamationIcon className="pf-u-icon-color-red" />
+              <SplitItem isFilled>
+                <ExclamationIcon color={global_danger_color_100.value} />
                 12 not sent
               </SplitItem>
             </Split>
