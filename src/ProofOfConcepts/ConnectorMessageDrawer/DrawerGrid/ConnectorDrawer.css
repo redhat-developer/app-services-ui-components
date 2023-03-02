@@ -1,3 +1,7 @@
 .pf-c-card__footer.processed-messages-info {
   padding-left: var(--pf-global--spacer--md);
 }
+
+.text-color {
+  color: var(--pf-global--warning-color--100);
+}

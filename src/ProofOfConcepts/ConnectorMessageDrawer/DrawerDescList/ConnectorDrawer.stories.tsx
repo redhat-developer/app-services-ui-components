@@ -7,17 +7,17 @@ import {
   DrawerPanelContent,
 } from "@patternfly/react-core";
 
-import { ConnectorDrawerMessageStatistics } from "./ConnectorDrawerMessageStatistics";
+import { ConnectorDrawer } from "./ConnectorDrawer";
 
 export default {
-  title: "POC-Connectors Message Drawer/Variant 6 Example",
-  component: ConnectorDrawerMessageStatistics,
+  title: "POC-Connectors Message Drawer/Description List Full Example",
+  component: ConnectorDrawer,
+  args: { sent: "1600", notSent: "12" },
   parameters: {
     backgrounds: {
       default: "white",
     },
   },
-  args: {},
   decorators: [
     (Story) => (
       <Drawer isExpanded={true}>
@@ -33,11 +33,11 @@ export default {
       </Drawer>
     ),
   ],
-} as ComponentMeta<typeof ConnectorDrawerMessageStatistics>;
+} as ComponentMeta<typeof ConnectorDrawer>;
 
-const Template: ComponentStory<typeof ConnectorDrawerMessageStatistics> = (
-  args
-) => <ConnectorDrawerMessageStatistics />;
+const Template: ComponentStory<typeof ConnectorDrawer> = (args) => (
+  <ConnectorDrawer {...args} />
+);
 
 export const Story = Template.bind({});
 Story.args = {};
