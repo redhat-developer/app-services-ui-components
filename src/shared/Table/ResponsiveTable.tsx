@@ -68,7 +68,7 @@ export type ResponsiveTableProps<TRow, TCol> = {
   setRowOuiaId?: (props: RowProps<TRow>) => string;
   tableOuiaId?: string;
   variant?: TableVariant;
-  onCheck?: (isSelecting: boolean, rowIndex: number) => void;
+  onCheck?: (isSelecting: boolean, row: RowProps<TRow>) => void;
   areAllRowsChecked?: () => boolean;
   onBulkCheck?: (isSelected: boolean) => void;
 };
@@ -308,7 +308,7 @@ export const ResponsiveTable = <TRow, TCol>({
                     rowIndex,
                     isSelected: checked,
                     onSelect: (_event, isSelecting, rowIndex) => {
-                      onCheck && onCheck(isSelecting, rowIndex);
+                      onCheck && onCheck(isSelecting, { row, rowIndex });
                     },
                   }}
                 />
