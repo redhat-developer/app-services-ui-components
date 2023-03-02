@@ -29,7 +29,14 @@ import {
 import { ExclamationIcon } from "@patternfly/react-icons";
 import CheckIcon from "@patternfly/react-icons/dist/esm/icons/check-icon";
 
-export const ConnectorDrawerMessageStatistics = () => {
+export type ConnectorDrawerMessageStatisticsProps = {
+  sent: string;
+  notSent: string;
+};
+
+export const ConnectorDrawerMessageStatistics: FunctionComponent<
+  ConnectorDrawerMessageStatisticsProps
+> = ({ sent, notSent }) => {
   return (
     <Flex direction={{ default: "column" }}>
       <FlexItem>
@@ -52,7 +59,7 @@ export const ConnectorDrawerMessageStatistics = () => {
             <Card>
               <CardTitle>
                 <Title headingLevel="h3" size={TitleSizes["lg"]}>
-                  1600 sent
+                  {sent} sent
                 </Title>
               </CardTitle>
               <CardBody>
@@ -64,7 +71,7 @@ export const ConnectorDrawerMessageStatistics = () => {
             <Card>
               <CardTitle>
                 <Title headingLevel="h3" size={TitleSizes["lg"]}>
-                  12 not sent
+                  {notSent} not sent
                 </Title>
               </CardTitle>
               <CardBody>
@@ -81,13 +88,13 @@ export const ConnectorDrawerMessageStatistics = () => {
           </Text>
           <TextList component={TextListVariants.dl}>
             <TextListItem component={TextListItemVariants.dt}>
-              Error handling method
+              <Text component={TextVariants.h3}>Error handling method</Text>
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               Dead letter queue
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Dead letter queue topic
+              <Text component={TextVariants.h3}>Dead letter queue topic</Text>
             </TextListItem>
             <TextListItem
               className="pf-u-link-color"

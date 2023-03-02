@@ -8,11 +8,13 @@ import {
   Divider,
   Flex,
   FlexItem,
+  Text,
   TextContent,
   TextList,
   TextListVariants,
   TextListItem,
   TextListItemVariants,
+  TextVariants,
   Title,
   TitleSizes,
   CardTitle,
@@ -29,7 +31,14 @@ import CheckIcon from "@patternfly/react-icons/dist/esm/icons/check-icon";
 
 import "./ConnectorDrawer.css";
 
-export const ConnectorDrawerMessageStatistics = () => {
+export type ConnectorDrawerMessageStatisticsProps = {
+  sent: string;
+  notSent: string;
+};
+
+export const ConnectorDrawerMessageStatistics: FunctionComponent<
+  ConnectorDrawerMessageStatisticsProps
+> = ({ sent, notSent }) => {
   return (
     <Flex direction={{ default: "column" }}>
       <FlexItem>
@@ -41,7 +50,6 @@ export const ConnectorDrawerMessageStatistics = () => {
           }
         />
       </FlexItem>
-      {/** size={TitleSizes['lg'] */}
       <FlexItem>
         <Title headingLevel="h3">Processed messages</Title>
       </FlexItem>
@@ -52,11 +60,11 @@ export const ConnectorDrawerMessageStatistics = () => {
               <Split>
                 <SplitItem isFilled>
                   <CheckIcon color={global_success_color_100.value} />
-                  1600 sent
+                  {sent} sent
                 </SplitItem>
                 <SplitItem isFilled>
                   <ExclamationIcon color={global_danger_color_100.value} />
-                  12 not sent
+                  {notSent} not sent
                 </SplitItem>
               </Split>
             </Title>
@@ -70,13 +78,13 @@ export const ConnectorDrawerMessageStatistics = () => {
         <TextContent>
           <TextList component={TextListVariants.dl}>
             <TextListItem component={TextListItemVariants.dt}>
-              Error handling method
+              <Text component={TextVariants.h3}>Error handling method</Text>
             </TextListItem>
             <TextListItem component={TextListItemVariants.dd}>
               Dead letter queue
             </TextListItem>
             <TextListItem component={TextListItemVariants.dt}>
-              Dead letter queue topic
+              <Text component={TextVariants.h3}>Dead letter queue topic</Text>
             </TextListItem>
             <TextListItem
               className="pf-u-link-color"

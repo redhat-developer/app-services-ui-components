@@ -1,10 +1,3 @@
-{
-  /**  add content, remove some spacing classes, remove color icon classes, 
-make heading ourside similar relationship to below content
-, have numbers bigger then processed message
-, try different kind of content in layout
-,ifilled on bith split example*/
-}
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import React from "react";
 import {
@@ -14,12 +7,12 @@ import {
   DrawerPanelContent,
 } from "@patternfly/react-core";
 
-import { ConnectorDrawerMessageStatistics } from "./ConnectorDrawerMessageStatistics";
+import { ConnectorDrawer } from "./ConnectorDrawer";
 
 export default {
-  title: "POC-Connectors Message Drawer/Description List Example",
-  component: ConnectorDrawerMessageStatistics,
-  args: {},
+  title: "POC-Connectors Message Drawer/Variant 4 Full Example",
+  component: ConnectorDrawer,
+  args: { sent: "1600", notSent: "12" },
   parameters: {
     backgrounds: {
       default: "white",
@@ -40,11 +33,11 @@ export default {
       </Drawer>
     ),
   ],
-} as ComponentMeta<typeof ConnectorDrawerMessageStatistics>;
+} as ComponentMeta<typeof ConnectorDrawer>;
 
-const Template: ComponentStory<typeof ConnectorDrawerMessageStatistics> = (
-  args
-) => <ConnectorDrawerMessageStatistics />;
+const Template: ComponentStory<typeof ConnectorDrawer> = (args) => (
+  <ConnectorDrawer {...args} />
+);
 
 export const Story = Template.bind({});
 Story.args = {};
