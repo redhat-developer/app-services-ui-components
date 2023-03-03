@@ -191,12 +191,12 @@ export const InteractiveCheckedRowExample: ComponentStory<
     if (isSelectng) setCheckedRows(allIndexes);
     else setCheckedRows([]);
   };
-  const onCheck = (isSelecting: boolean, rowIndex: number) => {
-    if (rowIndex != undefined) {
+  const onCheck = (row: { rowIndex: number }, isSelecting: boolean) => {
+    if (row.rowIndex != undefined) {
       setCheckedRows(
         isSelecting
-          ? [...checkedRows, rowIndex]
-          : checkedRows.filter((row) => row !== rowIndex)
+          ? [...checkedRows, row.rowIndex]
+          : checkedRows.filter((i) => i !== row.rowIndex)
       );
     }
   };
