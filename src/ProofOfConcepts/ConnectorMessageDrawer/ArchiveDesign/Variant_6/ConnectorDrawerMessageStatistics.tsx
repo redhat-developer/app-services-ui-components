@@ -39,15 +39,6 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
   return (
     <Flex direction={{ default: "column" }}>
       <FlexItem>
-        <Alert
-          variant="warning"
-          isInline
-          title={
-            "These numbers reflect the messages in the last 23 hours 37 minutes"
-          }
-        />
-      </FlexItem>
-      <FlexItem>
         <Title headingLevel="h3">Processed messages</Title>
       </FlexItem>
 
@@ -58,10 +49,10 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
               <CardTitle>
                 <Title headingLevel="h3" size={TitleSizes["lg"]}>
                   <Flex>
-                    <FlexItem>{sent} sent</FlexItem>
                     <FlexItem>
                       <CheckIcon color={global_success_color_100.value} />
                     </FlexItem>
+                    <FlexItem>{sent} sent</FlexItem>
                   </Flex>
                 </Title>
               </CardTitle>
@@ -72,10 +63,10 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
               <CardTitle>
                 <Title headingLevel="h3" size={TitleSizes["lg"]}>
                   <Flex>
-                    <FlexItem>{notSent} not sent</FlexItem>
                     <FlexItem>
                       <ExclamationIcon color={global_danger_color_100.value} />
                     </FlexItem>
+                    <FlexItem>{notSent} not sent</FlexItem>
                   </Flex>
                 </Title>
               </CardTitle>
