@@ -2,25 +2,27 @@ import React from "react";
 import { FunctionComponent } from "react";
 
 import {
-  Alert,
   Card,
   CardBody,
   CardFooter,
+  CardTitle,
+  DescriptionList,
+  DescriptionListTerm,
+  DescriptionListGroup,
+  DescriptionListDescription,
   Divider,
   Flex,
   FlexItem,
+  Grid,
+  GridItem,
+  Split,
+  SplitItem,
   Text,
   TextContent,
-  TextList,
-  TextListVariants,
   TextListItem,
   TextListItemVariants,
   TextVariants,
   Title,
-  TitleSizes,
-  CardTitle,
-  Split,
-  SplitItem,
 } from "@patternfly/react-core";
 import {
   global_success_color_100,
@@ -43,72 +45,58 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
   return (
     <Flex direction={{ default: "column" }}>
       <FlexItem>
-        <Alert
-          variant="warning"
-          isInline
-          title={
-            "These numbers reflect the messages in the last 23 hours 37 minutes"
-          }
-        />
-      </FlexItem>
-      <FlexItem>
         <Card>
           <CardTitle>
-            <Title headingLevel="h3" size={TitleSizes["lg"]}>
-              Processed messages
-            </Title>
+            <Title headingLevel="h4">Processed messages</Title>
           </CardTitle>
           <CardBody>
             <Split>
               <SplitItem isFilled>
-                <TextContent>
-                  <Flex direction={{ default: "row" }}>
-                    <TextListItem component={TextListItemVariants.dt}>
-                      <CheckIcon color={global_success_color_100.value} />
-                      {sent}
-                    </TextListItem>
-                    &nbsp;sent
-                  </Flex>
-                </TextContent>
+                <Flex direction={{ default: "row" }}>
+                  <FlexItem>
+                    <CheckIcon color={global_success_color_100.value} />
+                  </FlexItem>
+                  <FlexItem className="pf-u-font-size-2xl">
+                    {sent}&nbsp;sent
+                  </FlexItem>
+                </Flex>
               </SplitItem>
               <SplitItem isFilled>
-                <TextContent>
-                  <Flex direction={{ default: "row" }}>
-                    <TextListItem component={TextListItemVariants.dt}>
-                      <ExclamationIcon color={global_danger_color_100.value} />
-                      {notSent}
-                    </TextListItem>
+                <Flex direction={{ default: "row" }}>
+                  <FlexItem>
+                    <ExclamationIcon color={global_danger_color_100.value} />
+                  </FlexItem>
+                  <FlexItem className="pf-u-font-size-2xl">
+                    {notSent}
                     &nbsp;not sent
-                  </Flex>
-                </TextContent>
+                  </FlexItem>
+                </Flex>
               </SplitItem>
             </Split>
           </CardBody>
-          <CardFooter className="processed-messages-info">
-            These numbers reflect the messages processed in the last 24 hours
+          <CardFooter>
+            <TextContent>
+              <Text component={TextVariants.small}>
+                These numbers reflect the messages processed in the last 24
+                hours.
+              </Text>
+            </TextContent>
           </CardFooter>
         </Card>
       </FlexItem>
       <FlexItem>
-        <TextContent>
-          <TextList component={TextListVariants.dl}>
-            <TextListItem component={TextListItemVariants.dt}>
-              <Text component={TextVariants.h3}>Error handling method</Text>
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
+        <DescriptionList isHorizontal>
+          <DescriptionListGroup>
+            <DescriptionListTerm>Error handling method</DescriptionListTerm>
+            <DescriptionListDescription>
               Dead letter queue
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              <Text component={TextVariants.h3}>Dead letter queue topic</Text>
-            </TextListItem>
-            <TextListItem
-              className="pf-u-link-color"
-              component={TextListItemVariants.dd}
-            >
+            </DescriptionListDescription>
+            <DescriptionListTerm>Dead letter queue topic</DescriptionListTerm>
+            <DescriptionListDescription className="pf-u-link-color">
               my-topic-2
-            </TextListItem>
-          </TextList>
-        </TextContent>
+            </DescriptionListDescription>
+          </DescriptionListGroup>
+        </DescriptionList>
       </FlexItem>
       <FlexItem>
         <Divider />

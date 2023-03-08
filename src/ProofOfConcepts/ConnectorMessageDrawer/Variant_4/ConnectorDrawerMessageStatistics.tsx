@@ -2,26 +2,21 @@ import React from "react";
 import { FunctionComponent } from "react";
 
 import {
-  Alert,
   Card,
   CardBody,
   CardFooter,
+  DescriptionList,
+  DescriptionListGroup,
+  DescriptionListDescription,
+  DescriptionListTerm,
   Divider,
   Flex,
   FlexItem,
   Text,
   TextContent,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants,
   TextVariants,
   Title,
   TitleSizes,
-  DescriptionList,
-  DescriptionListGroup,
-  DescriptionListDescription,
-  DescriptionListTerm,
 } from "@patternfly/react-core";
 import {
   global_success_color_100,
@@ -44,27 +39,20 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
   return (
     <Flex direction={{ default: "column" }}>
       <FlexItem>
-        <Alert
-          variant="warning"
-          isInline
-          title={
-            "These numbers reflect the messages in the last 23 hours 37 minutes"
-          }
-        />
-      </FlexItem>
-      <FlexItem>
         <Card>
           <CardBody>
             <DescriptionList columnModifier={{ default: "2Col" }}>
               <DescriptionListGroup>
                 <DescriptionListTerm>
-                  <Title headingLevel="h3" size={TitleSizes["lg"]}>
-                    Messages sent
-                  </Title>
+                  <Title headingLevel="h4">Messages sent</Title>
                 </DescriptionListTerm>
                 <DescriptionListDescription>
-                  <CheckIcon color={global_success_color_100.value} />
-                  {sent}
+                  <Flex direction={{ default: "row" }}>
+                    <FlexItem>
+                      <CheckIcon color={global_success_color_100.value} />
+                    </FlexItem>
+                    <FlexItem className="pf-u-font-size-2xl">{sent}</FlexItem>
+                  </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
               <DescriptionListGroup>
@@ -74,37 +62,41 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
                   </Title>
                 </DescriptionListTerm>
                 <DescriptionListDescription>
-                  <ExclamationIcon color={global_danger_color_100.value} />
-                  {notSent}
+                  <Flex direction={{ default: "row" }}>
+                    <FlexItem>
+                      <ExclamationIcon color={global_danger_color_100.value} />
+                    </FlexItem>
+                    <FlexItem className="pf-u-font-size-2xl">
+                      {notSent}
+                    </FlexItem>
+                  </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
             </DescriptionList>
           </CardBody>
-          <CardFooter className="grey-text">
-            These numbers reflect the messages processed in the last 24 hours.
+          <CardFooter>
+            <TextContent>
+              <Text component={TextVariants.small}>
+                These numbers reflect the messages processed in the last 24
+                hours.
+              </Text>
+            </TextContent>
           </CardFooter>
         </Card>
       </FlexItem>
       <FlexItem>
-        <TextContent>
-          <TextList component={TextListVariants.dl}>
-            <TextListItem component={TextListItemVariants.dt}>
-              <Text component={TextVariants.h3}>Error handling method</Text>
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dd}>
+        <DescriptionList isHorizontal>
+          <DescriptionListGroup>
+            <DescriptionListTerm>Error handling method</DescriptionListTerm>
+            <DescriptionListDescription>
               Dead letter queue
-            </TextListItem>
-            <TextListItem component={TextListItemVariants.dt}>
-              <Text component={TextVariants.h3}>Dead letter queue topic</Text>
-            </TextListItem>
-            <TextListItem
-              className="pf-u-link-color"
-              component={TextListItemVariants.dd}
-            >
+            </DescriptionListDescription>
+            <DescriptionListTerm>Dead letter queue topic</DescriptionListTerm>
+            <DescriptionListDescription className="pf-u-link-color">
               my-topic-2
-            </TextListItem>
-          </TextList>
-        </TextContent>
+            </DescriptionListDescription>
+          </DescriptionListGroup>
+        </DescriptionList>
       </FlexItem>
       <FlexItem>
         <Divider />

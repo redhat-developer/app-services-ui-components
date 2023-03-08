@@ -2,19 +2,17 @@ import React from "react";
 import { FunctionComponent } from "react";
 
 import {
+  DescriptionList,
+  DescriptionListTerm,
+  DescriptionListGroup,
+  DescriptionListDescription,
   Flex,
   FlexItem,
-  Grid,
-  GridItem,
   Tab,
   Tabs,
   TabTitleText,
   Text,
   TextContent,
-  TextList,
-  TextListVariants,
-  TextListItem,
-  TextListItemVariants,
   TextVariants,
 } from "@patternfly/react-core";
 import {
@@ -49,50 +47,38 @@ export const ConnectorDrawer: FunctionComponent<ConnectorDrawerProps> = ({
         <Tab eventKey={0} title={<TabTitleText>Details</TabTitleText>}>
           <ConnectorDrawerMessageStatistics sent={sent} notSent={notSent} />
           <FlexItem>
-            <TextContent>
-              <TextList component={TextListVariants.dl}>
-                <TextListItem component={TextListItemVariants.dt}>
-                  <Text component={TextVariants.h3}>Connector</Text>
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dd}>
+            <DescriptionList isHorizontal>
+              <DescriptionListGroup>
+                <DescriptionListTerm>Connector</DescriptionListTerm>
+                <DescriptionListDescription>
                   4980-9c9c-48285f163
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dt}>
-                  <Text component={TextVariants.h3}>Connector ID</Text>
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dd}>
+                </DescriptionListDescription>
+                <DescriptionListTerm>Connector ID</DescriptionListTerm>
+                <DescriptionListDescription>
                   ccp6jj6qe20inajk5090
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dt}>
-                  <Text component={TextVariants.h3}>Bootstrap server</Text>
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dd}>
+                </DescriptionListDescription>
+                <DescriptionListTerm>Bootstrap server</DescriptionListTerm>
+                <DescriptionListDescription>
                   cestay-ins-ccor--pa-bavtg--g-
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dt}>
-                  <Text component={TextVariants.h3}>Kafka instance</Text>
-                </TextListItem>
-                <TextListItem
-                  className="pf-u-link-color"
-                  component={TextListItemVariants.dd}
-                >
+                </DescriptionListDescription>
+                <DescriptionListTerm>Kafka instance</DescriptionListTerm>
+                <DescriptionListDescription className="pf-u-link-color">
                   MK-instance-test
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dt}>
-                  <Text component={TextVariants.h3}>Namespace</Text>
-                </TextListItem>
-                <TextListItem component={TextListItemVariants.dd}>
+                </DescriptionListDescription>
+                <DescriptionListTerm>Namespace</DescriptionListTerm>
+                <DescriptionListDescription>
                   Redhat-eval-namespace
-                </TextListItem>
-                <TextListItem
-                  component={TextListItemVariants.dd}
-                  className="text-color"
-                >
-                  <OutlinedClockIcon color={global_warning_color_100.value} />
-                  Expire in 23 hours 37 minutes
-                </TextListItem>
-              </TextList>
-            </TextContent>
+                  <TextContent>
+                    <Text className="text-color">
+                      <OutlinedClockIcon
+                        color={global_warning_color_100.value}
+                      />
+                      Expire in 23 hours 37 minutes
+                    </Text>
+                  </TextContent>
+                </DescriptionListDescription>
+              </DescriptionListGroup>
+            </DescriptionList>
           </FlexItem>
         </Tab>
       </Tabs>
