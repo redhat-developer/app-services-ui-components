@@ -47,25 +47,30 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
             <DescriptionList columnModifier={{ default: "2Col" }}>
               <DescriptionListGroup>
                 <DescriptionListTerm>Sent</DescriptionListTerm>
+                {/** displaysize in description list will be better use then utilites classes, but throwing errors for some reason */}
                 <DescriptionListDescription>
-                  <Flex direction={{ default: "row" }}>
+                  <Flex
+                    className="pf-u-font-size-2xl"
+                    direction={{ default: "row" }}
+                  >
                     <FlexItem>
                       <CheckIcon color={global_success_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-font-size-2xl">{sent}</FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{sent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
               <DescriptionListGroup>
                 <DescriptionListTerm>Not sent</DescriptionListTerm>
                 <DescriptionListDescription>
-                  <Flex direction={{ default: "row" }}>
+                  <Flex
+                    className="pf-u-font-size-2xl"
+                    direction={{ default: "row" }}
+                  >
                     <FlexItem>
                       <ExclamationIcon color={global_danger_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-font-size-2xl">
-                      {notSent}
-                    </FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{notSent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>

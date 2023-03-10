@@ -15,8 +15,6 @@ import {
   Text,
   TextContent,
   TextVariants,
-  Title,
-  TitleSizes,
 } from "@patternfly/react-core";
 import {
   global_success_color_100,
@@ -43,32 +41,31 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
           <CardBody>
             <DescriptionList columnModifier={{ default: "2Col" }}>
               <DescriptionListGroup>
-                <DescriptionListTerm>
-                  <Title headingLevel="h4">Messages sent</Title>
-                </DescriptionListTerm>
+                <DescriptionListTerm>Messages sent</DescriptionListTerm>
                 <DescriptionListDescription>
-                  <Flex direction={{ default: "row" }}>
+                  <Flex
+                    className="pf-u-font-size-2xl"
+                    direction={{ default: "row" }}
+                  >
                     <FlexItem>
                       <CheckIcon color={global_success_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-font-size-2xl">{sent}</FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{sent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
               <DescriptionListGroup>
-                <DescriptionListTerm>
-                  <Title headingLevel="h3" size={TitleSizes["lg"]}>
-                    Messages not sent
-                  </Title>
-                </DescriptionListTerm>
+                <DescriptionListTerm>Messages not sent</DescriptionListTerm>
+                {/** displaysize in description list will be better use then utilites classes, but throwing errors for some reason */}
                 <DescriptionListDescription>
-                  <Flex direction={{ default: "row" }}>
+                  <Flex
+                    className="pf-u-font-size-2xl"
+                    direction={{ default: "row" }}
+                  >
                     <FlexItem>
                       <ExclamationIcon color={global_danger_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-font-size-2xl">
-                      {notSent}
-                    </FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{notSent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
