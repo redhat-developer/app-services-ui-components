@@ -52,21 +52,28 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
           <CardBody>
             <Split>
               <SplitItem isFilled>
-                <Flex direction={{ default: "row" }}>
+                {/** displaysize in description list will be better use then utilites classes, but throwing errors for some reason */}
+                <Flex
+                  className="pf-u-font-size-2xl"
+                  direction={{ default: "row" }}
+                >
                   <FlexItem>
                     <CheckIcon color={global_success_color_100.value} />
                   </FlexItem>
-                  <FlexItem className="pf-u-font-size-2xl">
+                  <FlexItem className="pf-u-flex-wrap">
                     {sent}&nbsp;sent
                   </FlexItem>
                 </Flex>
               </SplitItem>
               <SplitItem isFilled>
-                <Flex direction={{ default: "row" }}>
+                <Flex
+                  className="pf-u-font-size-2xl"
+                  direction={{ default: "row" }}
+                >
                   <FlexItem>
                     <ExclamationIcon color={global_danger_color_100.value} />
                   </FlexItem>
-                  <FlexItem className="pf-u-font-size-2xl">
+                  <FlexItem className="pf-u-flex-wrap">
                     {notSent}
                     &nbsp;not sent
                   </FlexItem>
