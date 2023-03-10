@@ -60,7 +60,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
                   <FlexItem>
                     <CheckIcon color={global_success_color_100.value} />
                   </FlexItem>
-                  <FlexItem className="pf-u-flex-wrap">
+                  <FlexItem className="pf-u-flex-nowrap">
                     {sent}&nbsp;sent
                   </FlexItem>
                 </Flex>
@@ -73,7 +73,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
                   <FlexItem>
                     <ExclamationIcon color={global_danger_color_100.value} />
                   </FlexItem>
-                  <FlexItem className="pf-u-flex-wrap">
+                  <FlexItem className="pf-u-flex-nowrap">
                     {notSent}
                     &nbsp;not sent
                   </FlexItem>
