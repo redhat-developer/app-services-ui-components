@@ -39,7 +39,17 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
       <FlexItem>
         <Card>
           <CardBody>
-            <DescriptionList columnModifier={{ default: "2Col" }}>
+            <DescriptionList
+              horizontalTermWidthModifier={{
+                default: "12ch",
+                sm: "15ch",
+                md: "20ch",
+                lg: "28ch",
+                xl: "30ch",
+                "2xl": "35ch",
+              }}
+              columnModifier={{ default: "2Col" }}
+            >
               <DescriptionListGroup>
                 <DescriptionListTerm>Messages sent</DescriptionListTerm>
                 <DescriptionListDescription>
@@ -50,7 +60,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
                     <FlexItem>
                       <CheckIcon color={global_success_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-flex-nowrap">{sent}</FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{sent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
@@ -65,7 +75,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
                     <FlexItem>
                       <ExclamationIcon color={global_danger_color_100.value} />
                     </FlexItem>
-                    <FlexItem className="pf-u-flex-nowrap">{notSent}</FlexItem>
+                    <FlexItem className="pf-u-flex-wrap">{notSent}</FlexItem>
                   </Flex>
                 </DescriptionListDescription>
               </DescriptionListGroup>
