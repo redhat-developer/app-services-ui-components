@@ -196,6 +196,7 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                 class="pf-c-form__group-control"
               >
                 <div
+                  aria-describedby="resource-name"
                   class="pf-c-select"
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-2"
                   data-ouia-component-type="PF4/Select"
@@ -203,7 +204,6 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                   style="width: 170px;"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select__toggle pf-m-typeahead"
                   >
                     <div
@@ -532,6 +532,7 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                 class="pf-c-form__group-control"
               >
                 <div
+                  aria-describedby="resource-name"
                   class="pf-c-select"
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                   data-ouia-component-type="PF4/Select"
@@ -539,7 +540,6 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                   style="width: 170px;"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select__toggle pf-m-typeahead"
                   >
                     <div
@@ -833,6 +833,7 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                 class="pf-c-form__group-control"
               >
                 <div
+                  aria-describedby="resource-name"
                   class="pf-c-select"
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                   data-ouia-component-type="PF4/Select"
@@ -840,7 +841,6 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                   style="width: 170px;"
                 >
                   <div
-                    aria-describedby="resource-name"
                     class="pf-c-select__toggle pf-m-typeahead"
                   >
                     <div

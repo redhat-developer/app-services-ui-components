@@ -362,7 +362,7 @@ exports[`OverviewPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-3"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-2"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="hero-buttonTryKafka"
@@ -440,7 +440,7 @@ exports[`OverviewPage renders 1`] = `
           </article>
           <article
             class="pf-c-card"
-            data-ouia-component-id="OUIA-Generated-Card-5"
+            data-ouia-component-id="OUIA-Generated-Card-4"
             data-ouia-component-type="PF4/Card"
             data-ouia-safe="true"
             id=""
@@ -536,7 +536,7 @@ exports[`OverviewPage renders 1`] = `
               <a
                 aria-disabled="false"
                 class="pf-c-button pf-m-secondary"
-                data-ouia-component-id="OUIA-Generated-Button-secondary-5"
+                data-ouia-component-id="OUIA-Generated-Button-secondary-3"
                 data-ouia-component-type="PF4/Button"
                 data-ouia-safe="true"
                 data-testid="cardRHODS-buttonCTA"
