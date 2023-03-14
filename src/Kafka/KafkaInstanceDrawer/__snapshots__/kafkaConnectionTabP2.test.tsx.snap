@@ -38,8 +38,6 @@ exports[`ConnectionTab renders 1`] = `
         </small>
         <div
           class="pf-c-clipboard-copy"
-          data-ouia-component-type="PF4/ClipboardCopy"
-          data-ouia-safe="true"
           data-testid="drawerStreams-copyBootstrapURL"
         >
           <div
@@ -239,8 +237,6 @@ exports[`ConnectionTab renders 1`] = `
               </strong>
               <div
                 class="pf-c-clipboard-copy"
-                data-ouia-component-type="PF4/ClipboardCopy"
-                data-ouia-safe="true"
               >
                 <div
                   class="pf-c-clipboard-copy__group"
@@ -329,8 +325,6 @@ exports[`ConnectionTab renders 1`] = `
               </strong>
               <div
                 class="pf-c-clipboard-copy"
-                data-ouia-component-type="PF4/ClipboardCopy"
-                data-ouia-safe="true"
               >
                 <div
                   class="pf-c-clipboard-copy__group"
@@ -459,8 +453,6 @@ exports[`ConnectionTab renders 1`] = `
         </strong>
         <div
           class="pf-c-clipboard-copy"
-          data-ouia-component-type="PF4/ClipboardCopy"
-          data-ouia-safe="true"
         >
           <div
             class="pf-c-clipboard-copy__group"
