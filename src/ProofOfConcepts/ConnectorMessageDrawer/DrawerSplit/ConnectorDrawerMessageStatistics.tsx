@@ -54,6 +54,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
               <SplitItem isFilled>
                 {/** displaysize in description list will be better use then utilites classes, but throwing errors for some reason */}
                 <Flex
+                  spaceItems={{ default: "spaceItemsSm" }}
                   className="pf-u-font-size-2xl"
                   direction={{ default: "row" }}
                 >
@@ -67,6 +68,7 @@ export const ConnectorDrawerMessageStatistics: FunctionComponent<
               </SplitItem>
               <SplitItem isFilled>
                 <Flex
+                  spaceItems={{ default: "spaceItemsSm" }}
                   className="pf-u-font-size-2xl"
                   direction={{ default: "row" }}
                 >
