@@ -30,6 +30,9 @@ export type AsyncTypeaheadSelectProps = {
   submitted?: boolean;
   required?: boolean;
   createText?: string;
+  isInputValuePersisted?: boolean;
+  isInputFilterPersisted?: boolean;
+  width?: number;
 };
 
 export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
@@ -43,6 +46,9 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
   submitted,
   required,
   createText,
+  isInputValuePersisted = false,
+  isInputFilterPersisted = false,
+  width,
 }) => {
   const { t } = useTranslation(["common"]);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -133,6 +139,8 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
         onFilter={(_, value) => onFilter(value)}
         isCreatable={true}
         menuAppendTo={document.body}
+        isInputFilterPersisted={isInputFilterPersisted}
+        isInputValuePersisted={isInputValuePersisted}
         validated={
           submitted &&
           (((filterValue == "" || filterValue == undefined) && value == "") ||
@@ -141,7 +149,7 @@ export const AsyncTypeaheadSelect: VFC<AsyncTypeaheadSelectProps> = ({
             : formValidation
         }
         maxHeight={400}
-        width={170}
+        width={width}
         createText={createText}
       >
         {onFilter()}

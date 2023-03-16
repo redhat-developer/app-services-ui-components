@@ -204,7 +204,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-7"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -399,7 +398,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-8"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -713,7 +711,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-5"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -908,7 +905,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table an
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-6"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -1187,7 +1183,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -1382,7 +1377,6 @@ exports[`Consume Topic shortcut permissions should render a permissions table wi
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-4"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -1662,7 +1656,6 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
@@ -1881,7 +1874,6 @@ exports[`Consume Topic shortcut permissions should render a shortcut permissions
                     data-ouia-component-id="OUIA-Generated-Select-typeahead-2"
                     data-ouia-component-type="PF4/Select"
                     data-ouia-safe="true"
-                    style="width: 170px;"
                   >
                     <div
                       aria-describedby="resource-name"
