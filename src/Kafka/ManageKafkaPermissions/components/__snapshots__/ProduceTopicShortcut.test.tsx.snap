@@ -200,7 +200,6 @@ exports[`Produce topic shortcut should render a shortcuts table with prefix rule
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-2"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
-                  style="width: 170px;"
                 >
                   <div
                     aria-describedby="resource-name"
@@ -536,7 +535,6 @@ exports[`Produce topic shortcut should render a shortcuts table with table heade
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-3"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
-                  style="width: 170px;"
                 >
                   <div
                     aria-describedby="resource-name"
@@ -837,7 +835,6 @@ exports[`Produce topic shortcut should render a shortcuts table without a header
                   data-ouia-component-id="OUIA-Generated-Select-typeahead-1"
                   data-ouia-component-type="PF4/Select"
                   data-ouia-safe="true"
-                  style="width: 170px;"
                 >
                   <div
                     aria-describedby="resource-name"
