@@ -63,6 +63,8 @@ export type TableViewProps<TRow, TCol> = {
   emptyStateNoData: ReactElement;
   emptyStateNoResults: ReactElement;
   kebabActions?: KebabActionsType[];
+  toolbarAriaLabel?: string;
+  toolbarKebabAriaLabel?: string;
 } & Omit<ResponsiveTableProps<TRow, TCol>, "data">;
 export const TableView = <TRow, TCol>({
   toolbarBreakpoint = "lg",
@@ -76,6 +78,8 @@ export const TableView = <TRow, TCol>({
   isColumnSortable,
   onPageChange,
   onClearAllFilters,
+  toolbarAriaLabel,
+  toolbarKebabAriaLabel,
 
   isFiltered,
   emptyStateNoData,
@@ -139,6 +143,7 @@ export const TableView = <TRow, TCol>({
       <Toolbar
         clearAllFilters={onClearAllFilters}
         collapseListedFiltersBreakpoint={toolbarBreakpoint}
+        aria-label={toolbarAriaLabel}
       >
         <ToolbarContent>
           {/* sort control for small viewports */}
@@ -259,6 +264,7 @@ export const TableView = <TRow, TCol>({
                 dropdownItems={dropdownItems}
                 isFlipEnabled
                 menuAppendTo="parent"
+                aria-label={toolbarKebabAriaLabel}
               />
             </OverflowMenuControl>
           </OverflowMenu>
