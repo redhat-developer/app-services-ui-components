@@ -102,8 +102,8 @@ Example.args = {
 export const KebabAndButtonToolbarVisible = Template.bind({});
 KebabAndButtonToolbarVisible.args = {
   data: sampleData,
-  toolbarKebabOuiaId: "kebab-dropdown-toolbar",
-  toolbarOuiaId: "table-toolbar",
+  toolbarKebabOuiaId: "instance-kebab-toolbar",
+  toolbarOuiaId: "instance-table-toolbar",
   kebabActions: [
     {
       label: "First action",
