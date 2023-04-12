@@ -247,7 +247,7 @@ export const DeleteModalConfirmation: VoidFunctionComponent<
       break;
   }
   return (
-    <Form>
+    <Form onSubmit={(e) => e.preventDefault()}>
       <FormGroup
         label={
           <Trans
