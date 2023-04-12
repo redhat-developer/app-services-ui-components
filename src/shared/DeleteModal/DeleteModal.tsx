@@ -204,6 +204,7 @@ export const DeleteModalConnected: FunctionComponent<DeleteModalProps> = ({
         <ModalBoxBody>
           <DeleteModalConfirmation
             requiredConfirmationValue={confirmationValue}
+            onDelete={onDelete}
           />
         </ModalBoxBody>
       )}
@@ -216,13 +217,15 @@ type DeleteModalConfirmationProps = {
    * The value the user must type to enable the delete button.
    */
   requiredConfirmationValue: string;
+  onDelete: () => void;
 };
 export const DeleteModalConfirmation: VoidFunctionComponent<
   DeleteModalConfirmationProps
-> = ({ requiredConfirmationValue }) => {
+> = ({ requiredConfirmationValue, onDelete }) => {
   const { t } = useTranslation();
   const [value, setValue] = useState("");
-  const { isDeleting, setDeleteEnabled } = useContext(ModalContext);
+  const { isDeleting, setDeleteEnabled, isDeleteEnabled } =
+    useContext(ModalContext);
 
   const onChange = useCallback(
     (value: string) => {
@@ -247,7 +250,14 @@ export const DeleteModalConfirmation: VoidFunctionComponent<
       break;
   }
   return (
-    <Form onSubmit={(e) => e.preventDefault()}>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        if (isDeleteEnabled) {
+          onDelete();
+        }
+      }}
+    >
       <FormGroup
         label={
           <Trans
