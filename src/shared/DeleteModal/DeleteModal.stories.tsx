@@ -301,7 +301,10 @@ CustomConfirmationPlacement.args = {
     <div>
       <p>You are deleting something.</p>
       <p>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️</p>
-      <DeleteModalConfirmation requiredConfirmationValue="digit this" />
+      <DeleteModalConfirmation
+        requiredConfirmationValue="digit this"
+        onDelete={() => console.log("clicked on Delete buuton")}
+      />
       <p>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️</p>
       <p>This goes after the confirmation</p>
     </div>
@@ -329,7 +332,11 @@ CustomConfirmationPlacementWithAutomaticSpacing.args = {
   children: [
     <p key={0}>You are deleting something.</p>,
     <p key={1}>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️</p>,
-    <DeleteModalConfirmation key={2} requiredConfirmationValue="digit this" />,
+    <DeleteModalConfirmation
+      key={2}
+      requiredConfirmationValue="digit this"
+      onDelete={() => console.log("clicked on Delete buuton")}
+    />,
     <p key={3}>⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️</p>,
     <p key={4}>This goes after the confirmation</p>,
   ],
