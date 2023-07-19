@@ -244,7 +244,7 @@ export const TableView = <TRow, TCol>({
                     actions.map((a, idx) => (
                       <Button
                         key={idx}
-                        variant={a.isPrimary ? "primary" : undefined}
+                        variant={a.isPrimary ? "primary" : "secondary"}
                         onClick={a.onClick}
                       >
                         {a.label}
