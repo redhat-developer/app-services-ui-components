@@ -241,9 +241,8 @@ export const TableView = <TRow, TCol>({
               <OverflowMenuGroup isPersistent groupType="button">
                 {actions &&
                   actions.map((a, idx) => (
-                    <OverflowMenuItem>
+                    <OverflowMenuItem key={idx}>
                       <Button
-                        key={idx}
                         variant={a.isPrimary ? "primary" : undefined}
                         onClick={a.onClick}
                       >
