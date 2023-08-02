@@ -243,7 +243,7 @@ export const TableView = <TRow, TCol>({
                   actions.map((a, idx) => (
                     <OverflowMenuItem key={idx}>
                       <Button
-                        variant={a.isPrimary ? "primary" : undefined}
+                        variant={a.isPrimary ? "primary" : "secondary"}
                         onClick={a.onClick}
                       >
                         {a.label}
