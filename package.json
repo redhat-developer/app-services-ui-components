@@ -77,7 +77,7 @@
     "@typescript-eslint/eslint-plugin": "5.36.0",
     "@typescript-eslint/parser": "5.36.0",
     "@web/rollup-plugin-import-meta-assets": "1.0.7",
-    "@xstate/inspect": "0.7.0",
+    "@xstate/inspect": "0.8.0",
     "chromatic": "6.7.0",
     "concurrently": "8.0.1",
     "eslint": "8.20.0",
@@ -112,7 +112,7 @@
   },
   "dependencies": {
     "@swc/helpers": "0.4.3",
-    "@xstate/react": "3.0.0",
+    "@xstate/react": "3.2.2",
     "byte-size": "8.1.0",
     "classnames": "2.3.1",
     "convert": "^4.6.2",
@@ -122,7 +122,7 @@
     "react-i18next": "11.18.1",
     "tslib": "2.4.0",
     "use-resize-observer": "9.0.2",
-    "xstate": "4.32.1"
+    "xstate": "4.38.3"
   },
   "peerDependencies": {
     "@patternfly/patternfly": "^4.222.4",
