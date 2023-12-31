@@ -33,7 +33,7 @@ jobs:
       - name: Run the test suite
         run: npm run test -- --coverage
       - name: Generate coverage report
-        uses: codecov/codecov-action@d9f34f8cd5cb3b3eb79b3e4b5dae3a16df499a70 #v3
+        uses: codecov/codecov-action@eaaf4bedf32dbdc6b720b63067d99c4d77d6047d # v3
 
 #  test-storybook:
 #    needs: setup
@@ -88,7 +88,7 @@ jobs:
           node-version: 16.19.0
 
         #👇 Adds Chromatic as a step in the workflow
-      - uses: chromaui/action@d5ecbf7522dc237c97ef746e40e9100e653bd0bf #v1
+      - uses: chromaui/action@80bf5911f28005ed208f15b7268843b79ca0e23a # v1
         id: chromatic
         # Options required for Chromatic's GitHub Action
         with:
