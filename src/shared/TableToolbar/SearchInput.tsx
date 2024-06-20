@@ -55,6 +55,7 @@ export const SearchInput: VoidFunctionComponent<SearchInputProps> = ({
         name="search"
         id="search"
         type="search"
+        iconVariant={"search"}
         aria-label={placeholder}
         placeholder={placeholder}
         validated={
